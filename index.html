@@ -3,10 +3,63 @@
 <head>
 
 <link rel="icon" type="image/svg+xml" href="Assets/favicon.svg">
+  
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Fauzan Widianto",
+    "jobTitle": "Business Operations & ERP Analyst",
+    "description": "Business Operations & ERP Analyst specializing in operational analytics, ERP systems (Odoo, SAP), reporting automation, profitability analysis, and executive dashboards.",
+    "url": "https://fwidianto.github.io",
+    "image": "https://fwidianto.github.io/Assets/Profile%20Picture.jpeg",
+    "email": "fauzan.widianto41@gmail.com",
+    "sameAs": [
+      "https://linkedin.com/in/fauzanw19",
+      "https://github.com/fwidianto"
+    ],
+    "knowsAbout": [
+      "Odoo ERP",
+      "SAP ERP",
+      "SQL",
+      "Python",
+      "Business Intelligence",
+      "Data Analytics",
+      "Process Automation",
+      "Looker Studio",
+      "Google Apps Script"
+    ],
+    "workExample": {
+      "@type": "CreativeWork",
+      "name": "ERP Migration Support",
+      "description": "Supported migration from legacy systems to Odoo ERP while improving reporting visibility and workflow efficiency."
+    }
+  }
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Fauzan Widianto | Portfolio</title>
+  <title>Fauzan Widianto | Business Operations & ERP Analyst</title>
+  <meta name="description" content="Business Operations & ERP Analyst specializing in operational analytics, ERP systems (Odoo, SAP), reporting automation, profitability analysis, and executive dashboards. 6+ years experience in manufacturing and engineering industries.">
+  <meta name="author" content="Fauzan Widianto">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fwidianto.github.io/">
+  <meta property="og:title" content="Fauzan Widianto | Business Operations & ERP Analyst">
+  <meta property="og:description" content="Business Operations & ERP Analyst specializing in operational analytics, ERP systems, reporting automation, and executive dashboards.">
+  <meta property="og:image" content="https://fwidianto.github.io/Assets/Profile%20Picture.jpeg">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fauzan Widianto | Business Operations & ERP Analyst">
+  <meta name="twitter:description" content="Business Operations & ERP Analyst specializing in operational analytics, ERP systems, reporting automation, and executive dashboards.">
+  <meta name="twitter:image" content="https://fwidianto.github.io/Assets/Profile%20Picture.jpeg">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://fwidianto.github.io/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,25 +72,27 @@
 </head>
 
 <body>
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- NAVBAR -->
 
-<nav>
+<nav role="navigation" aria-label="Main navigation">
   <div class="container nav-container">
 
-    <a href="index.html" class="logo">
+    <a href="index.html" class="logo" aria-label="Home - Fauzan Widianto Portfolio">
       FW.
     </a>
 
-    <div class="nav-links">
+    <div class="nav-links" role="menubar">
 
-      <div class="dropdown">
-        <a href="#" class="dropbtn">Projects ▾</a>
+      <div class="dropdown" role="none">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false" role="menuitem">Projects ▾</button>
 
-        <div class="dropdown-content">
-          <a href="Projects/Investment Dashboard.html">📊 Investment Dashboard</a>
-          <a href="Projects/WebScrapping.html">🧾 HS Code Automation</a>
-          <a href="https://lasta.pythonanywhere.com/" target="_blank">🧠 AI ERP Dashboard</a>
+        <div class="dropdown-content" role="menu" aria-label="Projects submenu">
+          <a href="Projects/Investment Dashboard.html" role="menuitem">📊 Investment Dashboard</a>
+          <a href="Projects/WebScrapping.html" role="menuitem">🧾 HS Code Automation</a>
+          <a href="https://lasta.pythonanywhere.com/" target="_blank" role="menuitem">🧠 AI ERP Dashboard</a>
         </div>
       </div>
 
@@ -48,7 +103,7 @@
 
   <!-- HERO -->
 
-  <section class="hero">
+  <section id="main-content" class="hero">
 
     <div class="container hero-grid">
 
@@ -59,7 +114,7 @@
         </div>
 
         <h1>
-          Connecting Data and Operations for Better Decision
+          Connecting Data and Operations for Better Decisions
         </h1>
 
         <p>
@@ -336,7 +391,7 @@
 
           <img
             src="Assets/Odoo.png"
-            alt="Odoo ERP"
+            alt="Odoo ERP system dashboard showing business operations modules"
             class="project-image"
           />
         
@@ -369,7 +424,7 @@
 
           <img
             src="Assets/Profitability.png"
-            alt="Profit"
+            alt="Profitability analysis dashboard showing financial metrics and projections"
             class="project-image"
           />
         
@@ -403,7 +458,7 @@
 
           <img
             src="Assets/Data Studio.png"
-            alt="Data Studio"
+            alt="Google Looker Data Studio dashboard with interactive charts and data visualizations"
             class="project-image"
           />
         
@@ -463,7 +518,7 @@
           LinkedIn
         </a>
 
-        <a href="https://github.com/" target="_blank" class="btn btn-secondary">
+        <a href="https://github.com/fwidianto" target="_blank" class="btn btn-secondary">
           GitHub
         </a>
 
