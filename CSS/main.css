@@ -90,7 +90,12 @@
 
   /* Main button */
   .dropbtn {
+    appearance: none;
+    background: transparent;
+    border: 0;
     color: #dbeafe;
+    cursor: pointer;
+    font: inherit;
     text-decoration: none;
     padding: 10px 14px;
     display: inline-block;
@@ -136,6 +141,7 @@
 
   .nav-links {
     display: flex;
+    align-items: center;
     gap: 32px;
   }
 
