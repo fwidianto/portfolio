@@ -9,91 +9,48 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="../../CSS/main.css">
-
-  <style>
-    .redirect-container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
-    .redirect-card {
-      background: linear-gradient(145deg, #111827, #1f2937);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 28px;
-      padding: 60px;
-      max-width: 600px;
-    }
-    .redirect-icon {
-      font-size: 64px;
-      margin-bottom: 30px;
-    }
-    h1 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
-    p {
-      color: #9ca3af;
-      margin-bottom: 30px;
-      font-size: 18px;
-    }
-    .btn {
-      padding: 16px 32px;
-      border-radius: 14px;
-      font-weight: 600;
-      display: inline-block;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    .btn-primary {
-      background: #3b82f6;
-      color: white;
-    }
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      background: #2563eb;
-    }
-  </style>
+  <link rel="stylesheet" href="../../CSS/project.css?v=20260626-ui">
 </head>
 
 <body>
-
-  <!-- NAVBAR -->
   <nav>
     <div class="container nav-container">
       <a href="../../index.html" class="logo">FW.</a>
       <div class="nav-links">
-        <a href="../../index.html">Home</a>
-        <div class="dropdown">
-          <a href="#" class="dropbtn">Projects ▾</a>
+        <a class="nav-item" href="../../index.html">Home</a>
+        <div class="dropdown nav-item">
+          <button type="button" class="dropbtn">Projects &#9662;</button>
           <div class="dropdown-content">
-            <a href="../Investment Dashboard.html">📊 Investment Dashboard</a>
-            <a href="https://lasta.pythonanywhere.com/" target="_blank">🧠 AI ERP Dashboard</a>
-            <a href="../WebScrapping.html">🧾 HS Code Automation</a>
+            <a href="../Odoo-ERP-Analytics.html">Odoo ERP Analytics</a>
+            <a href="https://lasta.pythonanywhere.com/" target="_blank" rel="noopener noreferrer">AI ERP Dashboard</a>
+            <a href="../Business-Reporting-Automation.html">Business Reporting Automation</a>
+            <a href="../PersonalOS-AI-Handoff.html">PersonalOS / AI Handoff</a>
+            <a href="../WebScrapping.html">HS Code Automation</a>
+            <a href="../Investment Dashboard.html">Investment Dashboard</a>
           </div>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- REDIRECT MESSAGE -->
-  <section class="redirect-container">
+  <main class="redirect-container">
     <div class="redirect-card">
-      <div class="redirect-icon">🚀</div>
-      <h1>Redirecting to Portfolio...</h1>
-      <p>You're being redirected to my interactive portfolio on PythonAnywhere.</p>
-      <a href="https://lasta.pythonanywhere.com/" class="btn btn-primary">
-        Click here if not redirected
-      </a>
+      <div class="redirect-icon">-&gt;</div>
+      <h1>Redirecting to the AI ERP Dashboard</h1>
+      <p>
+        You're being redirected to the public demo on PythonAnywhere.
+        If the redirect does not happen, use the button below.
+      </p>
+      <div class="redirect-actions">
+        <a href="https://lasta.pythonanywhere.com/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          Open demo
+        </a>
+        <a href="../../index.html#projects" class="btn btn-secondary">
+          Back to portfolio
+        </a>
+      </div>
     </div>
-  </section>
-
+  </main>
 </body>
 </html>
