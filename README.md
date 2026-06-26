@@ -75,3 +75,7 @@ The site is static and GitHub Pages friendly. No build step is required.
 ## Roadmap
 
 The refresh plan for this repository is tracked in [docs/portfolio-refresh/ROADMAP.md](docs/portfolio-refresh/ROADMAP.md).
+
+## Analytics Setup
+
+Analytics and search verification placeholders are documented in [docs/portfolio-refresh/ANALYTICS_SETUP.md](docs/portfolio-refresh/ANALYTICS_SETUP.md). The snippets stay disabled until real IDs are provided.
