@@ -1,6 +1,6 @@
 # Fauzan Widianto Portfolio
 
-Personal portfolio website showcasing professional experience as a Business Operations & ERP Analyst with expertise in operational analytics, ERP systems, reporting automation, and executive dashboards.
+Personal portfolio website showcasing operations, data, and ERP analytics work with BI, automation, and AI-assisted delivery.
 
 ## 🚀 Live Site
 
@@ -25,10 +25,11 @@ Visit the portfolio at: [fwidianto.github.io](https://fwidianto.github.io)
 
 This portfolio website serves as a professional showcase for Fauzan Widianto's work in:
 
-- **ERP Systems**: Odoo & SAP implementation and optimization
-- **Business Analytics**: Dashboard development, profitability analysis, KPI tracking
-- **Process Automation**: Workflow optimization, reporting automation, API integrations
-- **Operational Governance**: Cost control, performance monitoring, executive reporting
+- **Operations & Data Analytics**: Operational reporting, profitability analysis, KPI tracking
+- **ERP Analytics**: Odoo ERP analytics, traceability, and reporting layers
+- **Automation**: Workflow optimization, reporting automation, API integrations
+- **AI-Assisted Delivery**: Codex/OpenHands-supported implementation and rapid iteration
+- **Business Control**: Cost control, performance monitoring, executive reporting
 
 ### Target Audience
 
@@ -54,28 +55,32 @@ This portfolio website serves as a professional showcase for Fauzan Widianto's w
 
 ### Featured Projects
 
-#### 1. Investment Analytics Dashboard
+#### 1. Odoo ERP Analytics & Traceability
+- Odoo PostgreSQL analytics and traceability layer
+- Supports reporting-ready ERP data modeling and business review
+- Focus on operational visibility and data consistency
+- **Tech**: Odoo, PostgreSQL, SQL, analytics workflows
+
+#### 2. AI ERP Dashboard
+- Flask-based web app with analytics and AI-advisor support
+- Customer, product, and supplier insights
+- Sales and inventory visualization
+- Data quality monitoring and SQL query interface
+- **Tech**: Python, Flask, Pandas, SQL
+
+#### 3. Investment Analytics Dashboard
 - Real-time market monitoring via TradingView widgets
 - AI-powered market commentary and portfolio allocation
-- Central bank rate monitoring
-- Market news aggregation
+- Central bank rate monitoring and market news aggregation
 - Embedded Looker Studio dashboard
 - **Tech**: Google Sheets, Looker Studio, Apps Script, Chart.js
 
-#### 2. HS Code Trade Compliance Automation
+#### 4. HS Code Trade Compliance Automation
 - Automated tariff and import licensing data extraction
 - Browser automation using Playwright
 - Data extraction from Indonesia's National Single Window (INSW) portal
 - Excel and JSON output generation
 - **Tech**: Python, Playwright, OpenPyXL, Regex
-
-#### 3. AI-ERP Intelligence Dashboard
-- Flask-based web application with AI advisor capabilities
-- Customer, product, and supplier analytics
-- Sales and inventory data visualization
-- Data quality monitoring
-- SQL query interface
-- **Tech**: Python, Flask, Pandas, Faker (sample data)
 
 ### Technical Highlights
 
