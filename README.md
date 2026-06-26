@@ -38,24 +38,24 @@ Focus areas:
 
 ```text
 portofolio/
-├── index.html
-├── README.md
-├── Assets/
-├── CSS/
-│   ├── main.css
-│   └── project.css
-├── Projects/
-│   ├── Odoo-ERP-Analytics.html
-│   ├── Business-Reporting-Automation.html
-│   ├── PersonalOS-AI-Handoff.html
-│   ├── WebScrapping.html
-│   ├── Investment Dashboard.html
-│   ├── AI-ERP-IntelligenceDashboard/
-│   │   └── index.html
-│   └── hs-code-automation/
-└── docs/
-    └── portfolio-refresh/
-        └── ROADMAP.md
+|-- index.html
+|-- README.md
+|-- Assets/
+|-- CSS/
+|   |-- main.css
+|   `-- project.css
+|-- Projects/
+|   |-- Odoo-ERP-Analytics.html
+|   |-- Business-Reporting-Automation.html
+|   |-- PersonalOS-AI-Handoff.html
+|   |-- WebScrapping.html
+|   |-- Investment Dashboard.html
+|   |-- AI-ERP-IntelligenceDashboard/
+|   |   `-- index.html
+|   `-- hs-code-automation/
+`-- docs/
+    `-- portfolio-refresh/
+        `-- ROADMAP.md
 ```
 
 ## Local Preview

@@ -29,7 +29,7 @@ Preferred themes:
 - Business process improvement
 - AI-assisted development using Codex, OpenHands, and ChatGPT
 
-## Phase 1 — Audit and Content Accuracy
+## Phase 1 - Audit and Content Accuracy
 
 Model: GPT-5.4 mini  
 Effort: Medium
@@ -59,7 +59,7 @@ Effort: Medium
 - README and homepage tell the same story.
 - No private data is exposed.
 
-## Phase 2 — Project Structure and Detail Pages
+## Phase 2 - Project Structure and Detail Pages
 
 Model: GPT-5.4 mini  
 Effort: High
@@ -98,7 +98,7 @@ Effort: High
 - Project pages support the analytics, BI, operations, ERP reporting, and transformation direction.
 - No confidential data or private PersonalOS content is published.
 
-## Phase 3 — UI / UX Polish
+## Phase 3 - UI / UX Polish
 
 Model: GPT-5.4 mini  
 Effort: High
@@ -128,7 +128,7 @@ Effort: High
 - Project cards are scannable.
 - No unnecessary framework or heavy redesign is added.
 
-## Phase 4 — Analytics, Visitor Tracking, and Search Visibility
+## Phase 4 - Analytics, Visitor Tracking, and Search Visibility
 
 Model: GPT-5.4 mini  
 Effort: Medium
@@ -161,7 +161,7 @@ Effort: Medium
 - No broken scripts.
 - No analytics added to unfinished or private pages by mistake.
 
-## Phase 5 — Final Review Before Merge
+## Phase 5 - Final Review Before Merge
 
 Model: GPT-5.4 or GPT-5.5 if available  
 Effort: Medium or High
@@ -196,7 +196,7 @@ Effort: Medium or High
 - No confidential information is exposed.
 - User approves before merge.
 
-## Phase 6 — Merge and Post-Merge Check
+## Phase 6 - Merge and Post-Merge Check
 
 Model: GPT-5.4 or GPT-5.5  
 Effort: Medium
