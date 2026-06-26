@@ -16,7 +16,7 @@ Do not use these tools to collect private data, form submissions, internal ERP r
 
 Location:
 
-- [index.html](/C:/Users/fauza/Documents/Codex/2026-06-26/we-are-working-on-the-public/portofolio/index.html)
+- [index.html](../../index.html)
 
 Replace:
 
@@ -32,7 +32,7 @@ Enable by:
 
 Location:
 
-- [index.html](/C:/Users/fauza/Documents/Codex/2026-06-26/we-are-working-on-the-public/portofolio/index.html)
+- [index.html](../../index.html)
 
 Replace:
 
@@ -48,7 +48,7 @@ Enable by:
 
 Location:
 
-- [index.html](/C:/Users/fauza/Documents/Codex/2026-06-26/we-are-working-on-the-public/portofolio/index.html)
+- [index.html](../../index.html)
 
 Replace:
 
@@ -63,7 +63,7 @@ Enable by:
 
 Location:
 
-- [index.html](/C:/Users/fauza/Documents/Codex/2026-06-26/we-are-working-on-the-public/portofolio/index.html)
+- [index.html](../../index.html)
 
 Replace:
 
