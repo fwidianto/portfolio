@@ -55,32 +55,43 @@ This portfolio website serves as a professional showcase for Fauzan Widianto's w
 
 ### Featured Projects
 
-#### 1. Odoo ERP Analytics & Traceability
-- Odoo PostgreSQL analytics and traceability layer
-- Supports reporting-ready ERP data modeling and business review
-- Focus on operational visibility and data consistency
-- **Tech**: Odoo, PostgreSQL, SQL, analytics workflows
+#### 1. Odoo ERP Analytics Platform
+- SQL analytics layer on Odoo PostgreSQL data
+- Reporting, traceability, and profitability review support
+- Sales, purchasing, and inventory visibility
+- **Tech**: Odoo, PostgreSQL, SQL
 
-#### 2. AI ERP Dashboard
-- Flask-based web app with analytics and AI-advisor support
-- Customer, product, and supplier insights
-- Sales and inventory visualization
-- Data quality monitoring and SQL query interface
-- **Tech**: Python, Flask, Pandas, SQL
+#### 2. AI ERP Intelligence Dashboard
+- Flask-based demo with ERP-style sample data
+- SQL query interface and table browsing
+- Analytics dashboard and decision-support views
+- **Tech**: Python, Flask, SQL, Pandas
 
-#### 3. Investment Analytics Dashboard
-- Real-time market monitoring via TradingView widgets
-- AI-powered market commentary and portfolio allocation
-- Central bank rate monitoring and market news aggregation
-- Embedded Looker Studio dashboard
-- **Tech**: Google Sheets, Looker Studio, Apps Script, Chart.js
+#### 3. Business Reporting Automation
+- Excel, Google Sheets, Apps Script, VBA, UiPath, and Looker Studio workflows
+- Reporting refresh and business review automation
+- Management-ready outputs from recurring data tasks
+- **Tech**: Excel, Google Sheets, Apps Script, VBA, UiPath, Looker Studio
 
-#### 4. HS Code Trade Compliance Automation
+#### 4. PersonalOS / AI Handoff Workflow
+- Private Markdown-based knowledge and workflow system
+- Career planning, project documentation, and reusable prompts
+- Documentation-driven AI-assisted development
+- **Tech**: Markdown, AI handoff workflow, documentation system
+
+#### 5. HS Code Trade Compliance Automation
 - Automated tariff and import licensing data extraction
 - Browser automation using Playwright
 - Data extraction from Indonesia's National Single Window (INSW) portal
 - Excel and JSON output generation
 - **Tech**: Python, Playwright, OpenPyXL, Regex
+
+#### 6. Investment Analytics Dashboard
+- Real-time market monitoring via TradingView widgets
+- AI-powered market commentary and portfolio allocation
+- Central bank rate monitoring and market news aggregation
+- Embedded Looker Studio dashboard
+- **Tech**: Google Sheets, Looker Studio, Apps Script, Chart.js
 
 ### Technical Highlights
 
@@ -145,6 +156,9 @@ fwidianto.github.io/
 │   ├── main.css                  # Main site styles
 │   └── project.css               # Project page styles
 ├── Projects/                     # Sub-projects
+│   ├── Odoo-ERP-Analytics.html   # Odoo ERP analytics overview
+│   ├── Business-Reporting-Automation.html  # Reporting automation overview
+│   ├── PersonalOS-AI-Handoff.html # Private workflow concept summary
 │   ├── Investment Dashboard.html # Investment analytics
 │   ├── WebScrapping.html         # HS Code automation docs
 │   ├── JS/                       # JavaScript files
