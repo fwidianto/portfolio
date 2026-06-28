@@ -17,6 +17,9 @@ Use sources in this order:
 3. `SOURCE_EXPERIENCE.md` — career narrative, experience timeline, education summary, and recruiter-facing story.
 4. `SOURCE_PROJECTS.md` — project inventory, project-card copy, project-detail content, and confidentiality boundaries.
 5. `CONTENT_IMPLEMENTATION_NOTES.md` — practical web-app implementation notes and Codex prompt seed.
+6. `PROJECT_TEMPLATE.md` — standard structure for every major portfolio project.
+7. `UI_UX_DIRECTION.md` — visual design, layout, responsiveness, and recruiter-facing UX guidance.
+8. `CODEX_WORKFLOW.md` — safe Codex workflow, branch rules, and implementation guardrails.
 
 ---
 
@@ -28,7 +31,10 @@ Use sources in this order:
 | `docs/portfolio-refresh/SOURCE_PROFILE.md` | Profile and positioning source | Homepage hero, About section, recruiter summary, tone |
 | `docs/portfolio-refresh/SOURCE_EXPERIENCE.md` | Experience source | Experience timeline, career story, education summary |
 | `docs/portfolio-refresh/SOURCE_PROJECTS.md` | Project source | Project cards, detail pages, project ordering, business value |
-| `docs/portfolio-refresh/CONTENT_IMPLEMENTATION_NOTES.md` | Implementation guidance | Page structure, project template, future Codex prompt |
+| `docs/portfolio-refresh/CONTENT_IMPLEMENTATION_NOTES.md` | Implementation guidance | Page structure, implementation notes, future Codex prompt |
+| `docs/portfolio-refresh/PROJECT_TEMPLATE.md` | Project documentation standard | Project cards, project detail pages, consistent case-study structure |
+| `docs/portfolio-refresh/UI_UX_DIRECTION.md` | UI/UX guidance | Homepage layout, visual hierarchy, responsive design, modern polish |
+| `docs/portfolio-refresh/CODEX_WORKFLOW.md` | Codex implementation guide | Safe working process, reading order, branch rule, definition of done |
 
 ---
 
@@ -49,14 +55,7 @@ The source files intentionally summarize private PersonalOS material into public
 
 The portfolio repository is public-facing or intended for public deployment. Treat all source material as filtered guidance, not as permission to publish private details.
 
-Do not publish:
-
-- Private PersonalOS raw notes
-- Job application tracker details
-- Internal ERP records or screenshots
-- Customer, supplier, or employee names from internal systems
-- Confidential company financials
-- Credentials, tokens, API keys, or private URLs
+Do not publish private raw notes, job-search records, internal business records, real internal-party names, confidential financial details, secrets, or private links.
 
 Use sanitized, generalized, or sample data when demonstrating project work.
 
@@ -66,7 +65,18 @@ Use sanitized, generalized, or sample data when demonstrating project work.
 
 The portfolio should position Fauzan as:
 
-> A Business Systems & Operations Analytics professional who connects business operations, ERP data, dashboards, automation, and AI-assisted workflows to improve visibility and decision making.
+> A Data & Business Analytics professional with operations experience, business insight focus, dashboard/reporting capability, ERP process understanding, and AI-assisted workflow exposure.
+
+Emphasize:
+
+- Data analysis and business insights
+- Dashboard and reporting workflows
+- Operations and business process understanding
+- ERP/reporting experience from Odoo, SAP, and related operational systems
+- Profitability, cost, procurement, inventory, sales, and service-process analysis
+- Automation and workflow improvement
+- AI-assisted workflows using tools such as ChatGPT, Codex, and OpenHands
+- Practical business problem solving
 
 Do not over-position him as:
 
@@ -95,5 +105,5 @@ Do not merge or push directly to `main` unless explicitly instructed and reviewe
 For future sessions, use this instruction:
 
 ```text
-Read `docs/portfolio-refresh/SOURCES.md` first. Then use the linked portfolio refresh source files as the project source of truth. Stay on branch `portfolio-refresh-plan`. Improve the portfolio without exposing private or confidential information and without over-positioning Fauzan as a pure software developer.
+Read `docs/portfolio-refresh/SOURCES.md` first. Then use the linked portfolio refresh source files as the project source of truth. Stay on branch `portfolio-refresh-plan`. Improve the portfolio for analyst-related job hunting without exposing private or confidential information and without over-positioning Fauzan as a pure software developer.
 ```
