@@ -12,6 +12,22 @@ All development, commits, and testing should happen on:
 
 `portfolio-refresh-plan`
 
+## Project Sources
+
+Read `docs/portfolio-refresh/SOURCES.md` first before making portfolio content or structure changes.
+
+Official source files for this refresh:
+
+1. `docs/portfolio-refresh/SOURCES.md` — source index and reading order.
+2. `docs/portfolio-refresh/SOURCE_PROFILE.md` — professional positioning and profile copy.
+3. `docs/portfolio-refresh/SOURCE_EXPERIENCE.md` — career narrative, education, and timeline source.
+4. `docs/portfolio-refresh/SOURCE_PROJECTS.md` — project inventory and public-safe project content.
+5. `docs/portfolio-refresh/CONTENT_IMPLEMENTATION_NOTES.md` — implementation guidance and Codex prompt seed.
+
+These files were distilled from `fwidianto/personal-OS`, PersonalOS canonical knowledge-base files, ChatGPT memory, and the existing portfolio roadmap. They should be treated as the current source layer for this portfolio refresh.
+
+Do not publish private PersonalOS raw notes, job application details, internal ERP records, sensitive company data, credentials, tokens, or private URLs.
+
 ## Portfolio Positioning
 
 The portfolio should position Fauzan Widianto as a Business Operations / Data / ERP Analytics professional who uses SQL, Python, automation, dashboards, ERP data, and AI-assisted development to solve business problems.
@@ -228,11 +244,13 @@ Effort: Medium
 Future Codex prompts should reference this file as the source of truth:
 
 ```text
-Use `docs/portfolio-refresh/ROADMAP.md` as the portfolio refresh source of truth.
+Read `docs/portfolio-refresh/SOURCES.md` first.
+Use the linked portfolio refresh source files as the project source of truth.
 Continue only on the current phase.
 Stay on branch `portfolio-refresh-plan`.
 Do not switch to `main`.
 Do not push to `main`.
 Do not merge.
 Commit and push only to `portfolio-refresh-plan` unless explicitly instructed otherwise.
+Do not publish private PersonalOS content or confidential company information.
 ```
