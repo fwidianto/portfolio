@@ -425,9 +425,9 @@
                     <a href="#" class="dropbtn">External ▾</a>
                     <div class="dropdown-content">
                         {% for project in nav_projects %}
-                        <a href="{{ project.url }}" target="_blank">{{ project.icon }} {{ project.name }}</a>
+                        <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer">{{ project.icon }} {{ project.name }}</a>
                         {% endfor %}
-                        <a href="{{ github_pages_url }}" target="_blank">🌐 Main Portfolio</a>
+                        <a href="{{ github_pages_url }}" target="_blank" rel="noopener noreferrer">🌐 Main Portfolio</a>
                     </div>
                 </div>
                 
@@ -446,8 +446,8 @@
         <div class="container">
             <p>© 2026 Fauzan Widianto — Interactive Portfolio</p>
             <p style="margin-top: 10px; font-size: 14px;">
-                <a href="{{ github_pages_url }}" target="_blank">GitHub Pages</a> | 
-                <a href="https://linkedin.com/in/fauzanw19" target="_blank">LinkedIn</a>
+                <a href="{{ github_pages_url }}" target="_blank" rel="noopener noreferrer">GitHub Pages</a> |
+                <a href="https://linkedin.com/in/fauzanw19" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </p>
         </div>
     </footer>

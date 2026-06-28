@@ -1,6 +1,6 @@
 # Portfolio Flask App
 
-Supporting interactive portfolio application for Fauzan Widianto - Business Operations & ERP Analyst.
+Supporting interactive portfolio application for Fauzan Widianto - Data & Business Analytics Professional.
 
 The primary public portfolio lives at [fwidianto.github.io/portofolio](https://fwidianto.github.io/portofolio/).
 
@@ -76,6 +76,6 @@ This app redirects to supporting portfolio pages and demos:
 
 ## Author
 
-**Fauzan Widianto**  
-Business Operations & ERP Analyst  
+**Fauzan Widianto**
+Data & Business Analytics Professional
 [fauzan.widianto41@gmail.com](mailto:fauzan.widianto41@gmail.com)
