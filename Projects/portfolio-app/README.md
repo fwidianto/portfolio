@@ -1,6 +1,8 @@
 # Portfolio Flask App
 
-Interactive portfolio web application for Fauzan Widianto - Business Operations & ERP Analyst.
+Supporting interactive portfolio application for Fauzan Widianto - Business Operations & ERP Analyst.
+
+The primary public portfolio lives at [fwidianto.github.io/portofolio](https://fwidianto.github.io/portofolio/).
 
 This Flask application runs on PythonAnywhere and serves as an interactive portfolio with navigation to external projects hosted on GitHub Pages.
 
@@ -49,28 +51,28 @@ Then visit `http://localhost:5000`
 
 ## File Structure
 
-```
+```text
 portfolio-app/
-├── app.py              # Main Flask application
-├── requirements.txt     # Python dependencies
-├── README.md           # This file
-└── templates/
-    ├── base.html       # Base template with navigation
-    ├── home.html       # Home page
-    ├── about.html      # About page
-    ├── experience.html # Experience timeline
-    ├── skills.html     # Skills page
-    ├── projects.html   # Projects showcase
-    ├── contact.html    # Contact page
-    └── error.html      # Error page
+|-- app.py              # Main Flask application
+|-- requirements.txt     # Python dependencies
+|-- README.md           # This file
+`-- templates/
+    |-- base.html       # Base template with navigation
+    |-- home.html       # Home page
+    |-- about.html      # About page
+    |-- experience.html # Experience timeline
+    |-- skills.html     # Skills page
+    |-- projects.html   # Projects showcase
+    |-- contact.html    # Contact page
+    `-- error.html      # Error page
 ```
 
 ## Integration with GitHub Pages
 
-This app redirects to external projects:
-- `/investment-dashboard` → GitHub Pages Investment Dashboard
-- `/hs-code-automation` → GitHub Pages HS Code Automation
-- `/erp-dashboard` → Existing PythonAnywhere ERP Dashboard
+This app redirects to supporting portfolio pages and demos:
+- `/investment-dashboard` -> GitHub Pages Investment Dashboard
+- `/hs-code-automation` -> GitHub Pages HS Code Automation
+- `/erp-dashboard` -> Existing PythonAnywhere ERP Dashboard
 
 ## Author
 

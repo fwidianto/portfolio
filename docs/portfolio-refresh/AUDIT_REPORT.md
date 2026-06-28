@@ -85,7 +85,7 @@ Notes:
 4. The HS Code repository link on `Projects/WebScrapping.html` now points to the current repository path under `fwidianto/portofolio`.
 5. The Odoo analytics page intentionally links to `dashboard-odoo`, which appears to be a separate repository rather than this portfolio repo.
 6. The AI ERP dashboard redirect page and documentation intentionally link to `AI-Projects`, which also appears to be a separate repository.
-7. The homepage metadata still points to `https://fwidianto.github.io`, while the live portfolio currently resolves at `https://fwidianto.github.io/portofolio/`. That mismatch should be reviewed before relying on the root URL in public metadata.
+7. The homepage metadata previously used the old root GitHub Pages location; the refreshed branch now uses the repo-path portfolio URL at `https://fwidianto.github.io/portofolio/`.
 
 ## 7. Confidentiality and Public-Safety Risks
 

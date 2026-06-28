@@ -6,7 +6,7 @@ Repository: `fwidianto/portofolio`
 
 Working branch: `portfolio-refresh-plan`
 
-The repo is public and appears to power the public portfolio site at `https://fwidianto.github.io`.
+The repo is public and powers the public portfolio site at `https://fwidianto.github.io/portofolio/`.
 
 Do not work directly on `main`. Keep changes on a feature branch until reviewed.
 

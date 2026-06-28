@@ -4,7 +4,7 @@ Personal portfolio website for operations, data, and ERP analytics work with BI,
 
 ## Live Site
 
-Visit the portfolio at [fwidianto.github.io](https://fwidianto.github.io).
+Visit the portfolio at [fwidianto.github.io/portofolio](https://fwidianto.github.io/portofolio/).
 
 ## Positioning
 
@@ -34,6 +34,14 @@ Focus areas:
 - [Investment Analytics Dashboard](Projects/Investment%20Dashboard.html)
   - Market monitoring and allocation tracking using Google Sheets, Looker Studio, and TradingView.
 
+## Project Inventory
+
+| Category | Items | Notes |
+| --- | --- | --- |
+| Recruiter-facing case studies | Odoo ERP Analytics Platform, Business Reporting Automation, PersonalOS / AI Handoff Workflow, HS Code Trade Compliance Automation, Investment Analytics Dashboard | Public-safe portfolio pages that explain business problem, tools, and value. |
+| Live demo | AI ERP Intelligence Dashboard | External PythonAnywhere demo with sample ERP-style data and SQL browsing. |
+| Supporting artifacts | `Projects/portfolio-app`, `Projects/AI-ERP-IntelligenceDashboard/docs`, `Projects/hs-code-automation` | Supporting code, docs, and helper material for the portfolio story. |
+
 ## Project Structure
 
 ```text
@@ -45,14 +53,15 @@ portofolio/
 |   |-- main.css
 |   `-- project.css
 |-- Projects/
-|   |-- Odoo-ERP-Analytics.html
+|   |-- Odoo-ERP-Analytics.html        # recruiter-facing case study
 |   |-- Business-Reporting-Automation.html
 |   |-- PersonalOS-AI-Handoff.html
 |   |-- WebScrapping.html
 |   |-- Investment Dashboard.html
-|   |-- AI-ERP-IntelligenceDashboard/
+|   |-- AI-ERP-IntelligenceDashboard/  # public demo support
 |   |   `-- index.html
-|   `-- hs-code-automation/
+|   |-- portfolio-app/                 # supporting Flask app
+|   `-- hs-code-automation/            # supporting source folder
 `-- docs/
     `-- portfolio-refresh/
         `-- ROADMAP.md
