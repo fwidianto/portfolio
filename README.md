@@ -19,7 +19,7 @@ Focus areas:
 - Operations, profitability, and commercial analysis
 - ERP process understanding through Odoo and SAP-related work
 - Profitability analysis and business control
-- Reporting automation with spreadsheets and scripts
+- Reporting automation with SQL, Python, spreadsheets, and scripts
 - AI-assisted delivery with Codex and OpenHands
 
 ## Featured Projects
