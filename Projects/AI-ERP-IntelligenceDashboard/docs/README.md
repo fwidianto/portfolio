@@ -1,6 +1,8 @@
 # ERP Analytics Platform - Data Explorer
 
-A professional web interface for browsing, searching, filtering, validating, and inspecting ERP data.
+A professional web interface for browsing, searching, filtering, validating, and inspecting ERP-style demo data.
+
+Public-safety note: this documentation describes generated sample data for a fictional distribution company. It does not include real customer, supplier, invoice, order, credential, server, or internal ERP records.
 
 ---
 
