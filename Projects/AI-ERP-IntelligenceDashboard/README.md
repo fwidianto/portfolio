@@ -2,7 +2,7 @@
 
 ## AI-Powered Business Intelligence & Decision Support System
 
-A comprehensive ERP analytics platform for a fictional distribution company. Features data exploration, executive dashboards, and an AI-powered decision support system.
+A public-safe ERP-style analytics dashboard demo for a fictional distribution company. Features sample-data exploration, executive dashboards, and an AI-assisted decision-support workflow.
 
 ---
 

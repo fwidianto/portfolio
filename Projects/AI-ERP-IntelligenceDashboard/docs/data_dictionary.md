@@ -2,7 +2,9 @@
 
 ## Overview
 
-This document describes all tables in the ERP Analytics database, their fields, data types, and relationships.
+This document describes all tables in the ERP Analytics demo database, their fields, data types, and relationships.
+
+Public-safety note: the schema and examples use generated sample data for a fictional distribution company. They are not real customer, supplier, invoice, order, credential, server, or internal ERP records.
 
 ---
 
