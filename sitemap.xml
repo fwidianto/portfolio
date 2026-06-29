@@ -1,20 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://fwidianto.github.io/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <loc>https://fwidianto.github.io/portofolio/</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://fwidianto.github.io/Projects/Investment%20Dashboard.html</loc>
-    <lastmod>2026-06-22</lastmod>
+    <loc>https://fwidianto.github.io/portofolio/Projects/Odoo-ERP-Analytics.html</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fwidianto.github.io/Projects/WebScrapping.html</loc>
-    <lastmod>2026-06-22</lastmod>
+    <loc>https://fwidianto.github.io/portofolio/Projects/AI-ERP-IntelligenceDashboard/index.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fwidianto.github.io/portofolio/Projects/Business-Reporting-Automation.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fwidianto.github.io/portofolio/Projects/PersonalOS-AI-Handoff.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fwidianto.github.io/portofolio/Projects/WebScrapping.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fwidianto.github.io/portofolio/Projects/Investment%20Dashboard.html</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
