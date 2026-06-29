@@ -1,48 +1,58 @@
 # Analytics and Search Setup
 
 Repository: `fwidianto/portofolio`  
-Branch: `portfolio-refresh-plan`
+Branch: `portfolio-analytics-setup`
 
 ## Purpose
 
-This site is prepared for analytics and search verification, but all tracking snippets remain disabled until real IDs are available.
+This site now includes active GA4 and Microsoft Clarity snippets on the public HTML pages, plus search verification meta tags on `index.html`.
 
 Use analytics only for aggregate portfolio traffic and UX improvement.
 Do not use these tools to collect private data, form submissions, internal ERP records, credentials, application tracker details, or personal notes.
 
-## Where to Add Real IDs
+## Implemented Setup
 
 ### Google Analytics 4
 
 Location:
 
 - [index.html](../../index.html)
+- Public project pages:
+  - [Projects/Odoo-ERP-Analytics.html](../../Projects/Odoo-ERP-Analytics.html)
+  - [Projects/Business-Reporting-Automation.html](../../Projects/Business-Reporting-Automation.html)
+  - [Projects/PersonalOS-AI-Handoff.html](../../Projects/PersonalOS-AI-Handoff.html)
+  - [Projects/WebScrapping.html](../../Projects/WebScrapping.html)
+  - [Projects/Investment Dashboard.html](../../Projects/Investment%20Dashboard.html)
+  - [Projects/AI-ERP-IntelligenceDashboard/index.html](../../Projects/AI-ERP-IntelligenceDashboard/index.html)
 
-Replace:
+Measurement ID:
 
-- `G-XXXXXXXXXX`
+- `G-FL42QH3WV0`
 
-Enable by:
+Status:
 
-- Uncommenting the GA4 snippet in the `<head>` of `index.html`
-- Replacing the placeholder with the real GA4 Measurement ID
-- Copying the same activated snippet into each public HTML page if sitewide tracking is wanted
+- Active on every public HTML page listed above.
 
 ### Microsoft Clarity
 
 Location:
 
 - [index.html](../../index.html)
+- Public project pages:
+  - [Projects/Odoo-ERP-Analytics.html](../../Projects/Odoo-ERP-Analytics.html)
+  - [Projects/Business-Reporting-Automation.html](../../Projects/Business-Reporting-Automation.html)
+  - [Projects/PersonalOS-AI-Handoff.html](../../Projects/PersonalOS-AI-Handoff.html)
+  - [Projects/WebScrapping.html](../../Projects/WebScrapping.html)
+  - [Projects/Investment Dashboard.html](../../Projects/Investment%20Dashboard.html)
+  - [Projects/AI-ERP-IntelligenceDashboard/index.html](../../Projects/AI-ERP-IntelligenceDashboard/index.html)
 
-Replace:
+Project ID:
 
-- `CLARITY_PROJECT_ID`
+- `xefdu66wh2`
 
-Enable by:
+Status:
 
-- Uncommenting the Clarity snippet in the `<head>` of `index.html`
-- Replacing the placeholder with the real Clarity Project ID
-- Copying the same activated snippet into each public HTML page if sitewide tracking is wanted
+- Active on every public HTML page listed above.
 
 ### Google Search Console Verification
 
@@ -50,14 +60,13 @@ Location:
 
 - [index.html](../../index.html)
 
-Replace:
+Verification code:
 
-- `GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE`
+- `jSIDdNHz-HZ84iFP4SQ_WUtW2MqDBLWjtbrRyUp5x-c`
 
-Enable by:
+Status:
 
-- Uncommenting the meta tag in the `<head>` of `index.html`
-- Replacing the placeholder with the real verification code
+- Added to `index.html` only.
 
 ### Bing Webmaster Tools Verification
 
@@ -65,20 +74,20 @@ Location:
 
 - [index.html](../../index.html)
 
-Replace:
+Verification code:
 
-- `BING_WEBMASTER_VERIFICATION_CODE`
+- `7759ABEAEF11249B93D941572154C86B`
 
-Enable by:
+Status:
 
-- Uncommenting the meta tag in the `<head>` of `index.html`
-- Replacing the placeholder with the real verification code
+- Added to `index.html` only.
 
 ## Current Status
 
-- All placeholders are commented out.
-- No active analytics or verification scripts run with fake IDs.
-- Tracking is intentionally disabled until real IDs are supplied.
+- GA4 and Microsoft Clarity are active on the public HTML pages listed above.
+- Search Console and Bing verification tags are active on `index.html` only.
+- No placeholder IDs remain in the tracked files.
+- No duplicate GA4 or Clarity snippets were introduced.
 
 ## Verification Later
 
@@ -93,4 +102,4 @@ After real IDs are added, verify the setup with:
 
 - Keep analytics limited to public portfolio usage.
 - Do not add form collection or personal-data collection unless that is explicitly planned and documented.
-- If sitewide GA4 or Clarity is desired later, add the activated snippet to every public HTML page, not just `index.html`.
+- Do not expose private PersonalOS notes, internal ERP data, credentials, tokens, or application tracker details.
