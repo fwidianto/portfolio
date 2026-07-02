@@ -52,6 +52,36 @@ Use this template for every future update.
 
 ---
 
+## 2026-07-02 - Hero and Snapshot Refactored to Light Case Study Style
+
+### Changed Sections
+- Hero / Project Summary
+- Project Snapshot
+
+### Reason
+- Aligned the Odoo page first screen with the homepage and shared case-study design system.
+- Replaced the dark SaaS-style hero with a light, warm, business-focused case-study hero.
+- Moved AI away from the main hero tags and positioned it only as workflow support.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- Lower sections are intentionally left mostly unchanged for later refactor phases.
+- Next refactor should focus on Section 3 Problem / Context and the first visual proof section.
+
+---
+
 ## 2026-07-02 - Shared CSS Linked on Odoo Page
 
 ### Changed Sections
