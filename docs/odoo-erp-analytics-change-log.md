@@ -43,6 +43,39 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - CTA and Confidentiality Section Refactored
+
+### Changed Sections
+- CTA / Confidentiality
+- Page refresh / cache-busting
+
+### Reason
+- Converted the closing CTA and confidentiality note into the shared case-study structure.
+- Improved button spacing and mobile readability.
+- Made the final section feel more polished and aligned with the homepage style.
+- Added a harmless HTML version comment and CSS query refresh to help GitHub Pages serve the latest page.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot or operational data was added.
+- No confidential data was added.
+- No fake metrics were added.
+- After this, perform a full page review from top to bottom.
+
+---
+
 ## 2026-07-02 - Skills Demonstrated Refactored to Shared Case Cards
 
 ### Changed Sections
