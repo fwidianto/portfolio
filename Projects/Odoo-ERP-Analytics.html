@@ -205,6 +205,60 @@
       width: 44px;
     }
 
+    #output-evidence .case-table-wrap {
+      overflow-x: auto;
+    }
+
+    #output-evidence .case-table--output-evidence {
+      min-width: 1120px;
+      table-layout: auto;
+    }
+
+    #output-evidence .case-table--output-evidence th:first-child,
+    #output-evidence .case-table--output-evidence td:first-child {
+      color: var(--text);
+      font-weight: 700;
+      min-width: 126px;
+      white-space: nowrap;
+    }
+
+    #output-evidence .case-table--output-evidence th:nth-child(2),
+    #output-evidence .case-table--output-evidence td:nth-child(2),
+    #output-evidence .case-table--output-evidence th:nth-child(3),
+    #output-evidence .case-table--output-evidence td:nth-child(3),
+    #output-evidence .case-table--output-evidence th:nth-child(4),
+    #output-evidence .case-table--output-evidence td:nth-child(4),
+    #output-evidence .case-table--output-evidence th:nth-child(5),
+    #output-evidence .case-table--output-evidence td:nth-child(5),
+    #output-evidence .case-table--output-evidence th:nth-child(6),
+    #output-evidence .case-table--output-evidence td:nth-child(6) {
+      white-space: nowrap;
+    }
+
+    #output-evidence .case-table--output-evidence th:nth-child(2),
+    #output-evidence .case-table--output-evidence td:nth-child(2) {
+      min-width: 145px;
+    }
+
+    #output-evidence .case-table--output-evidence th:nth-child(3),
+    #output-evidence .case-table--output-evidence td:nth-child(3),
+    #output-evidence .case-table--output-evidence th:nth-child(4),
+    #output-evidence .case-table--output-evidence td:nth-child(4),
+    #output-evidence .case-table--output-evidence th:nth-child(5),
+    #output-evidence .case-table--output-evidence td:nth-child(5) {
+      min-width: 120px;
+    }
+
+    #output-evidence .case-table--output-evidence th:nth-child(6),
+    #output-evidence .case-table--output-evidence td:nth-child(6) {
+      min-width: 180px;
+    }
+
+    #output-evidence .case-table--output-evidence th:nth-child(7),
+    #output-evidence .case-table--output-evidence td:nth-child(7) {
+      min-width: 280px;
+    }
+
     .module-grid,
     .proof-grid {
       display: grid;
@@ -554,7 +608,7 @@
     </div>
   </section>
 
-  <!-- output-evidence-version: 20260702-v2 -->
+  <!-- output-evidence-version: 20260702-v3-width -->
   <section class="case-section" id="output-evidence">
     <div class="case-container">
       <div class="case-section-header">
@@ -566,7 +620,7 @@
       </div>
 
       <div class="case-table-wrap">
-        <table class="case-table">
+        <table class="case-table case-table--output-evidence">
           <thead>
             <tr>
               <th>Order Ref</th>
