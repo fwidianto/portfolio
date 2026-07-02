@@ -554,6 +554,84 @@
     </div>
   </section>
 
+  <section class="case-section" id="output-evidence">
+    <div class="case-container">
+      <div class="case-section-header">
+        <div class="case-eyebrow">OUTPUT EVIDENCE</div>
+        <h2 class="case-subheading">Example of review-ready operational reporting output</h2>
+        <p class="case-lead">
+          The dashboard output is designed to turn ERP transaction logic into a reviewable table that supports order tracking, fulfillment review, invoicing visibility, payment follow-up, and profitability signals without requiring users to inspect raw ERP records one by one.
+        </p>
+      </div>
+
+      <div class="case-table-wrap">
+        <table class="case-table">
+          <thead>
+            <tr>
+              <th>Order Ref</th>
+              <th>Source Type</th>
+              <th>Delivery</th>
+              <th>Invoicing</th>
+              <th>Payment</th>
+              <th>Profitability Signal</th>
+              <th>Review Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SO-24-0142</td>
+              <td>From Stock</td>
+              <td>Delivered</td>
+              <td>Fully Invoiced</td>
+              <td>Paid</td>
+              <td><span class="case-status-badge">Healthy</span></td>
+              <td>Routine order, no exception follow-up.</td>
+            </tr>
+            <tr>
+              <td>SO-24-0179</td>
+              <td>Manufacturing</td>
+              <td>In Progress</td>
+              <td>Pending</td>
+              <td>Not Due</td>
+              <td><span class="case-status-badge">Watchlist</span></td>
+              <td>Production and delivery progress under monitoring.</td>
+            </tr>
+            <tr>
+              <td>SO-24-0208</td>
+              <td>Internal Order</td>
+              <td>Partially Ready</td>
+              <td>Partial</td>
+              <td>Outstanding</td>
+              <td><span class="case-status-badge">Needs Review</span></td>
+              <td>Linked procurement and invoice follow-up required.</td>
+            </tr>
+            <tr>
+              <td>SO-24-0241</td>
+              <td>Purchase</td>
+              <td>Waiting Material</td>
+              <td>Not Invoiced</td>
+              <td>Not Due</td>
+              <td><span class="case-status-badge">Supplier Follow-up</span></td>
+              <td>Material availability affects delivery readiness.</td>
+            </tr>
+            <tr>
+              <td>IO-24-0086</td>
+              <td>Internal Order</td>
+              <td>Delivery Pending</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td><span class="case-status-badge">Operational Follow-up</span></td>
+              <td>Check stock movement and fulfillment status.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="case-caption">
+        Sample data is fully anonymized and recreated for portfolio explanation. It does not represent real customers, suppliers, order values, invoice values, or profitability figures.
+      </p>
+    </div>
+  </section>
+
   <section class="case-section">
     <div class="container">
       <div class="section-kicker">What the dashboard supports</div>
