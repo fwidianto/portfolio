@@ -43,6 +43,39 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Business Value Section Refactored with Visual Support
+
+### Changed Sections
+- Before vs After / Business Value
+- Business value visual support strip
+
+### Reason
+- Converted the business value section into the shared case-study structure.
+- Added a small visual support strip to show the movement from manual checking to structured review visibility.
+- Improved visual consistency with the updated Odoo page sections.
+- Kept the section focused on operational review value without using unverified quantitative claims.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot or operational data was added.
+- No confidential data was added.
+- No fake metrics or unverified improvement numbers were added.
+- The next refactor should focus on Skills Demonstrated.
+
+---
+
 ## 2026-07-02 - Dashboard Modules Refactored to Shared Case Cards
 
 ### Changed Sections
