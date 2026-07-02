@@ -52,6 +52,37 @@ Use this template for every future update.
 
 ---
 
+## 2026-07-02 - Approach Workflow Refactored to Shared Case Study Cards
+
+### Changed Sections
+- Approach / Workflow
+
+### Reason
+- Converted the workflow explanation into the shared case-study structure.
+- Reduced old page-specific process-card styling.
+- Made the section more consistent with the homepage-aligned Odoo page direction.
+- Kept AI positioned as workflow support rather than the main project identity.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot, architecture diagram, or reporting table was added.
+- The existing flow map was preserved for now.
+- Next refactor should focus on replacing or redesigning the flow map into the planned Architecture Diagram section.
+
+---
+
 ## 2026-07-02 - Problem Context and Visual Proof Placeholder Refactored
 
 ### Changed Sections
@@ -139,7 +170,7 @@ Use this template for every future update.
 ### Notes
 - The live page may not visually change much yet because existing page-specific CSS still controls most Odoo sections.
 - Next update should refactor only the Hero / Project Summary and Project Snapshot sections to use the shared case-study CSS.
-- Page-specific Odoo CSS should be reduced gradually.
+- Page-specific CSS should be reduced gradually.
 
 ---
 
