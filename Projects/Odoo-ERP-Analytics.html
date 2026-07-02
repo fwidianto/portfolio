@@ -4,8 +4,8 @@
   <link rel="icon" href="../Assets/favicon.svg">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fauzan Widianto | Odoo ERP Analytics Platform</title>
-  <meta name="description" content="Public-safe overview of a SQL analytics layer on Odoo PostgreSQL data for operational reporting, traceability, profitability review, and dashboard-ready business analysis.">
+  <title>Fauzan Widianto | Odoo ERP Analytics Case Study</title>
+  <meta name="description" content="Public-safe case study on turning Odoo ERP transaction data into management-ready operational visibility across order flow, procurement, delivery, invoicing, payment, and profitability review.">
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FL42QH3WV0"></script>
@@ -13,7 +13,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-FL42QH3WV0');
   </script>
 
@@ -29,8 +28,307 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="../CSS/project.css?v=20260629-warm">
+
+  <style>
+    .case-hero {
+      padding: 150px 0 80px;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(59,130,246,0.20), transparent 32%),
+        radial-gradient(circle at 80% 20%, rgba(20,184,166,0.14), transparent 30%),
+        linear-gradient(180deg, rgba(15,23,42,0.95), rgba(11,15,25,1));
+    }
+
+    .case-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .case-eyebrow {
+      color: #60a5fa;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .case-hero h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.05;
+      margin-bottom: 24px;
+      max-width: 980px;
+    }
+
+    .case-hero p {
+      color: #cbd5e1;
+      font-size: 18px;
+      max-width: 800px;
+      margin-bottom: 28px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      border: 1px solid rgba(96,165,250,0.22);
+      background: rgba(15,23,42,0.72);
+      color: #dbeafe;
+      padding: 9px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hero-panel {
+      background: rgba(17,24,39,0.84);
+      border: 1px solid rgba(148,163,184,0.16);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 28px 80px rgba(0,0,0,0.34);
+    }
+
+    .panel-title {
+      color: #f8fafc;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .snapshot-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .snapshot-item {
+      border-left: 3px solid #3b82f6;
+      padding-left: 14px;
+    }
+
+    .snapshot-label {
+      color: #94a3b8;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .snapshot-value {
+      color: #f8fafc;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .case-section {
+      padding: 78px 0;
+    }
+
+    .section-kicker {
+      color: #60a5fa;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .section-heading {
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .section-lead {
+      color: #cbd5e1;
+      font-size: 18px;
+      max-width: 880px;
+      margin-bottom: 34px;
+    }
+
+    .story-card {
+      background: linear-gradient(145deg, rgba(17,24,39,0.98), rgba(15,23,42,0.98));
+      border: 1px solid rgba(148,163,184,0.14);
+      border-radius: 28px;
+      padding: 36px;
+      box-shadow: 0 22px 70px rgba(0,0,0,0.25);
+    }
+
+    .story-card p {
+      color: #cbd5e1;
+      font-size: 17px;
+      margin-bottom: 16px;
+    }
+
+    .story-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .process-grid,
+    .module-grid,
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .process-card,
+    .module-card,
+    .proof-card {
+      background: #111827;
+      border: 1px solid rgba(148,163,184,0.12);
+      border-radius: 22px;
+      padding: 24px;
+    }
+
+    .process-number {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: rgba(59,130,246,0.14);
+      color: #93c5fd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .process-card h3,
+    .module-card h3,
+    .proof-card h3 {
+      margin-bottom: 12px;
+      font-size: 21px;
+    }
+
+    .process-card p,
+    .module-card p,
+    .proof-card p {
+      color: #94a3b8;
+    }
+
+    .flow-map {
+      background: #0f172a;
+      border: 1px solid rgba(148,163,184,0.14);
+      border-radius: 28px;
+      padding: 28px;
+      margin-top: 28px;
+      overflow-x: auto;
+    }
+
+    .flow-row {
+      min-width: 860px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .flow-step {
+      position: relative;
+      background: rgba(17,24,39,0.92);
+      border: 1px solid rgba(96,165,250,0.18);
+      border-radius: 18px;
+      padding: 18px 14px;
+      text-align: center;
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #60a5fa;
+      font-weight: 700;
+    }
+
+    .flow-step strong {
+      display: block;
+      color: #f8fafc;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .flow-step span {
+      color: #94a3b8;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .comparison-card {
+      background: #111827;
+      border: 1px solid rgba(148,163,184,0.12);
+      border-radius: 24px;
+      padding: 28px;
+    }
+
+    .comparison-card h3 {
+      margin-bottom: 18px;
+    }
+
+    .comparison-card ul,
+    .proof-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .comparison-card li,
+    .proof-card li {
+      color: #cbd5e1;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(148,163,184,0.10);
+    }
+
+    .comparison-card li:last-child,
+    .proof-card li:last-child {
+      border-bottom: 0;
+    }
+
+    .cta-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(145deg, rgba(59,130,246,0.16), rgba(20,184,166,0.08));
+      border: 1px solid rgba(96,165,250,0.20);
+      border-radius: 28px;
+      padding: 30px;
+    }
+
+    .cta-card p {
+      color: #cbd5e1;
+      max-width: 720px;
+      margin: 0;
+    }
+
+    @media (max-width: 920px) {
+      .case-hero-grid,
+      .before-after {
+        grid-template-columns: 1fr;
+      }
+
+      .process-grid,
+      .module-grid,
+      .proof-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -44,9 +342,11 @@
           <div class="dropdown-content">
             <a href="Odoo-ERP-Analytics.html">Odoo ERP Analytics</a>
             <a href="https://lasta.pythonanywhere.com/" target="_blank" rel="noopener noreferrer">AI ERP Dashboard</a>
+            <!-- Temporarily hidden until ready to republish:
             <a href="Business-Reporting-Automation.html">Business Reporting Automation</a>
             <a href="PersonalOS-AI-Handoff.html">PersonalOS / AI Handoff</a>
             <a href="WebScrapping.html">HS Code Automation</a>
+            -->
             <a href="Investment Dashboard.html">Investment Dashboard</a>
           </div>
         </div>
@@ -54,121 +354,240 @@
     </div>
   </nav>
 
-  <section class="page-header">
-    <div class="container">
-      <div class="hero-subtitle">Featured Analytics & ERP Reporting Project</div>
-      <h1>Odoo ERP Analytics Platform</h1>
-      <p>
-        SQL analytics layer on Odoo PostgreSQL data for operational reporting,
-        traceability, profitability review, and dashboard-ready business analysis.
-      </p>
+  <section class="case-hero">
+    <div class="container case-hero-grid">
+      <div>
+        <div class="case-eyebrow">Featured ERP Analytics Case Study</div>
+        <h1>Turning Odoo ERP transactions into management-ready operational visibility</h1>
+        <p>
+          A public-safe case study on building an analytics layer for order flow, internal orders,
+          procurement, manufacturing, delivery, invoicing, payment tracking, and profitability review.
+        </p>
+        <div class="pill-row">
+          <div class="pill">Business Operations</div>
+          <div class="pill">ERP Analytics</div>
+          <div class="pill">PostgreSQL / SQL</div>
+          <div class="pill">Dashboard Design</div>
+          <div class="pill">AI-Assisted Development</div>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <div class="panel-title">Project snapshot</div>
+        <div class="snapshot-list">
+          <div class="snapshot-item">
+            <div class="snapshot-label">Role</div>
+            <div class="snapshot-value">ERP Owner / Business Analyst / Analytics Designer</div>
+          </div>
+          <div class="snapshot-item">
+            <div class="snapshot-label">Business Scope</div>
+            <div class="snapshot-value">Sales Order, Internal Order, Procurement, Manufacturing, Delivery, Invoice, Payment</div>
+          </div>
+          <div class="snapshot-item">
+            <div class="snapshot-label">Tools</div>
+            <div class="snapshot-value">Odoo 16, PostgreSQL, SQL, Python, HTML/CSS/JS, Codex</div>
+          </div>
+          <div class="snapshot-item">
+            <div class="snapshot-label">Focus</div>
+            <div class="snapshot-value">Traceability, profitability review, operational visibility, management reporting</div>
+          </div>
+        </div>
+      </aside>
     </div>
   </section>
 
-  <div class="container">
-    <div class="grid">
-      <div class="card span-4">
-        <h2>Overview</h2>
+  <section class="case-section">
+    <div class="container">
+      <div class="section-kicker">Why this project mattered</div>
+      <h2 class="section-heading">The issue was not just data. It was business visibility.</h2>
+      <div class="story-card">
         <p>
-          SQL analytics layer on Odoo PostgreSQL data for operational reporting,
-          traceability, profitability review, and dashboard-ready business analysis.
+          After ERP migration, standard Odoo reporting was useful but not enough to answer practical
+          management questions quickly. Operational review often required checking several ERP menus,
+          comparing transaction flows manually, and interpreting how sales, procurement, inventory,
+          production, invoicing, and payment records connected to each other.
         </p>
-      </div>
-
-      <div class="card span-4">
-        <h2>Problem</h2>
         <p>
-          Operational data is only useful when business teams can review it quickly across
-          sales, purchasing, inventory, and profitability without rebuilding reports.
+          The challenge was not only technical extraction. The real challenge was understanding how ERP
+          transactions represented actual business processes, identifying the source of truth, validating
+          business rules, and turning scattered operational records into dashboard-ready views.
         </p>
-      </div>
-
-      <div class="card span-4">
-        <h2>My Role</h2>
-        <p>
-          Defined the public-safe analytics structure, wrote supporting SQL logic,
-          and validated the reporting approach with an AI-assisted workflow.
-        </p>
-      </div>
-
-      <div class="card span-6">
-        <h2>Tools &amp; Technologies</h2>
-        <ul>
-          <li>Odoo</li>
-          <li>PostgreSQL</li>
-          <li>SQL</li>
-          <li>Business reporting</li>
-          <li>Operational analytics</li>
-        </ul>
-      </div>
-
-      <div class="card span-6">
-        <h2>Workflow / Approach</h2>
-        <p>
-          Odoo transaction data is organized into SQL-friendly analytical views that
-          support traceability, profitability review, and management reporting.
-        </p>
-      </div>
-
-      <div class="card span-12">
-        <h2>Key Features</h2>
-        <ul>
-          <li>Operational reporting for sales, purchasing, and inventory visibility</li>
-          <li>Traceability concepts for order flow and process review</li>
-          <li>Dashboard-ready summaries for management reporting</li>
-          <li>Cleaner handoff between ERP data and business analysis</li>
-        </ul>
-      </div>
-
-      <div class="card span-6">
-        <h2>Business / Analytical Value</h2>
-        <p>
-          Helps stakeholders review operational trends and profitability signals
-          without relying on manual spreadsheet reconstruction.
-        </p>
-      </div>
-
-      <div class="card span-6">
-        <h2>What This Demonstrates</h2>
-        <p>
-          Business analysis, SQL-based analytics, ERP process understanding, and
-          practical decision-support design.
-        </p>
-      </div>
-
-      <div class="card span-6">
-        <h2>Relevant Roles</h2>
-        <ul>
-          <li>Data Analyst</li>
-          <li>Business Analyst</li>
-          <li>BI Analyst</li>
-          <li>Operations Analyst</li>
-          <li>ERP Reporting Analyst</li>
-        </ul>
-      </div>
-
-      <div class="card span-6">
-        <h2>Limitations / Confidentiality</h2>
-        <p>
-          This page describes a public-safe analytics concept only. It does not expose
-          customer, supplier, invoice, order, database, server, credential, or internal
-          operational-record details.
-        </p>
-      </div>
-
-      <div class="card span-12">
-        <h2>Links</h2>
-        <ul>
-          <li><a class="news-link" href="https://github.com/fwidianto/dashboard-odoo" target="_blank" rel="noopener noreferrer">dashboard-odoo repository</a></li>
-          <li><a class="news-link" href="../index.html#projects">Back to featured projects</a></li>
-        </ul>
       </div>
     </div>
-  </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <div class="section-kicker">How I approached it</div>
+      <h2 class="section-heading">From business questions to validated analytics logic</h2>
+      <p class="section-lead">
+        I approached the project from the business process first, then translated that understanding into
+        data relationships, SQL logic, dashboard structure, and reviewable outputs.
+      </p>
+
+      <div class="process-grid">
+        <div class="process-card">
+          <div class="process-number">01</div>
+          <h3>Clarify the question</h3>
+          <p>Define what management needs to see: order status, source, fulfillment progress, billing, payment, and profitability signals.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-number">02</div>
+          <h3>Map the ERP flow</h3>
+          <p>Understand how transactions move across sales, internal orders, procurement, manufacturing, stock movement, and finance.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-number">03</div>
+          <h3>Validate source of truth</h3>
+          <p>Check field relationships, exceptions, custom fields, inconsistent records, and business meaning before presenting analytics.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-number">04</div>
+          <h3>Build analytics logic</h3>
+          <p>Use PostgreSQL and SQL to structure reporting views that summarize operational activity into reusable dashboard datasets.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-number">05</div>
+          <h3>Design dashboard views</h3>
+          <p>Organize information into familiar operational review views instead of overwhelming users with raw database complexity.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-number">06</div>
+          <h3>Review with business context</h3>
+          <p>Use AI-assisted development for speed, while keeping human judgment on business rules, data quality, and decision usefulness.</p>
+        </div>
+      </div>
+
+      <div class="flow-map" aria-label="ERP analytics flow">
+        <div class="flow-row">
+          <div class="flow-step"><strong>Sales Order</strong><span>Commercial demand and customer order reference</span></div>
+          <div class="flow-step"><strong>Source Review</strong><span>Stock, internal order, or manufacturing path</span></div>
+          <div class="flow-step"><strong>Procurement</strong><span>Purchase and material fulfillment visibility</span></div>
+          <div class="flow-step"><strong>Manufacturing</strong><span>Job / production process tracking</span></div>
+          <div class="flow-step"><strong>Delivery</strong><span>Fulfillment and delivery status review</span></div>
+          <div class="flow-step"><strong>Invoice &amp; Payment</strong><span>Billing and payment visibility</span></div>
+          <div class="flow-step"><strong>Profitability</strong><span>Management review and decision support</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <div class="section-kicker">What the dashboard supports</div>
+      <h2 class="section-heading">Dashboard modules built around real operational review needs</h2>
+      <div class="module-grid">
+        <div class="module-card">
+          <h3>Sales Order View</h3>
+          <p>Tracks order context, source type, fulfillment progress, invoicing status, payment visibility, and review status in one place.</p>
+        </div>
+        <div class="module-card">
+          <h3>Internal Order View</h3>
+          <p>Connects internal demand with procurement, manufacturing, stock movement, and fulfillment tracking.</p>
+        </div>
+        <div class="module-card">
+          <h3>Order Material Tracking</h3>
+          <p>Improves visibility from order requirement to purchase, stock movement, delivery readiness, and reporting follow-up.</p>
+        </div>
+        <div class="module-card">
+          <h3>Profitability Review</h3>
+          <p>Supports review of commercial and operational signals before management approval or business performance discussion.</p>
+        </div>
+        <div class="module-card">
+          <h3>Business Rule Validation</h3>
+          <p>Documents how ERP fields, custom references, statuses, and exceptions should be interpreted before becoming KPI logic.</p>
+        </div>
+        <div class="module-card">
+          <h3>Excel Export Workflow</h3>
+          <p>Keeps reporting familiar for users who still rely on spreadsheet review, while the data source stays more structured.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <div class="section-kicker">Business value</div>
+      <h2 class="section-heading">From manual checking to reusable operational visibility</h2>
+      <div class="before-after">
+        <div class="comparison-card">
+          <h3>Before</h3>
+          <ul>
+            <li>Manual checking across multiple ERP menus</li>
+            <li>Order, procurement, delivery, invoice, and payment information felt scattered</li>
+            <li>Traceability depended heavily on individual knowledge</li>
+            <li>Reporting required repeated spreadsheet reconstruction</li>
+            <li>Business rules and exceptions were difficult to review consistently</li>
+          </ul>
+        </div>
+        <div class="comparison-card">
+          <h3>After</h3>
+          <ul>
+            <li>Centralized dashboard views for operational review</li>
+            <li>Clearer connection across order flow and supporting transactions</li>
+            <li>Reusable SQL logic and dashboard-ready analytical structure</li>
+            <li>Faster review path for management reporting and follow-up</li>
+            <li>Better documentation of source-of-truth logic and data exceptions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <div class="section-kicker">What this demonstrates</div>
+      <h2 class="section-heading">The project is proof of business-systems analytics, not just dashboard making</h2>
+      <div class="proof-grid">
+        <div class="proof-card">
+          <h3>Business Analysis</h3>
+          <p>Translating operational questions into reporting logic, KPI structure, and dashboard-ready review flows.</p>
+        </div>
+        <div class="proof-card">
+          <h3>ERP Understanding</h3>
+          <p>Connecting sales, procurement, inventory, manufacturing, finance, and management review into one analytics story.</p>
+        </div>
+        <div class="proof-card">
+          <h3>Data Validation</h3>
+          <p>Reviewing source tables, custom fields, exceptions, transaction status, and business meaning before creating insights.</p>
+        </div>
+        <div class="proof-card">
+          <h3>Technical Translation</h3>
+          <p>Using SQL, PostgreSQL, Python, and frontend dashboard views to turn business logic into usable tools.</p>
+        </div>
+        <div class="proof-card">
+          <h3>AI-Assisted Delivery</h3>
+          <p>Directing AI tools to accelerate development while keeping business-rule judgment, validation, and final review human-led.</p>
+        </div>
+        <div class="proof-card">
+          <h3>Cross-Functional Thinking</h3>
+          <p>Designing visibility for people who need different views: operations, sales, procurement, finance, and management.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Public-safe portfolio version</h2>
+          <p>
+            This case study explains the project structure and thinking without exposing customer names, supplier names,
+            order numbers, invoice values, profitability figures, database credentials, server details, or confidential operational records.
+          </p>
+        </div>
+        <div class="pill-row">
+          <a class="pill" href="https://github.com/fwidianto/dashboard-odoo" target="_blank" rel="noopener noreferrer">View repository</a>
+          <a class="pill" href="../index.html#projects">Back to projects</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <div class="container">
-      Analytics and ERP reporting overview
+      Odoo ERP Analytics Case Study - Public-safe overview
     </div>
   </footer>
 </body>
