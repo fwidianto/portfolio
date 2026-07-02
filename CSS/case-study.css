@@ -437,36 +437,43 @@
   border: 1px solid var(--border);
   border-radius: 28px;
   box-shadow: var(--shadow-card);
-  padding: 28px;
+  padding: 38px;
 }
 
 .case-architecture-flow {
   display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(6, minmax(160px, 1fr));
-  overflow-x: auto;
-  padding-bottom: 4px;
+  gap: 22px;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  overflow: visible;
+  padding-bottom: 0;
 }
 
 .case-architecture-step {
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 20px;
-  min-height: 190px;
-  padding: 20px;
+  min-height: auto;
+  padding: 26px;
   position: relative;
 }
 
 .case-architecture-step:not(:last-child)::after {
-  content: "→";
+  display: none;
+}
+
+.architecture-step-icon {
+  align-items: center;
+  background: rgba(31, 77, 90, 0.09);
+  border: 1px solid rgba(31, 77, 90, 0.12);
+  border-radius: 16px;
   color: var(--accent);
-  font-size: 22px;
-  font-weight: 900;
-  position: absolute;
-  right: -14px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
+  display: inline-flex;
+  font-size: 18px;
+  font-weight: 800;
+  height: 42px;
+  justify-content: center;
+  margin-bottom: 18px;
+  width: 42px;
 }
 
 .case-architecture-step span {
@@ -482,15 +489,15 @@
 .case-architecture-step strong {
   color: var(--text);
   display: block;
-  font-size: 18px;
-  line-height: 1.28;
-  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 1.25;
+  margin-bottom: 12px;
 }
 
 .case-architecture-step p {
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.62;
+  font-size: 15px;
+  line-height: 1.65;
   margin: 0;
 }
 
@@ -647,11 +654,7 @@
 
 @media (max-width: 1100px) {
   .case-architecture-flow {
-    grid-template-columns: repeat(3, minmax(180px, 1fr));
-  }
-
-  .case-architecture-step:not(:last-child)::after {
-    display: none;
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
   }
 }
 
@@ -673,6 +676,10 @@
   }
 
   .case-snapshot-card {
+    padding: 28px;
+  }
+
+  .case-architecture {
     padding: 28px;
   }
 
@@ -729,5 +736,9 @@
 
   .case-architecture-flow {
     grid-template-columns: 1fr;
+  }
+
+  .case-architecture-step {
+    padding: 22px;
   }
 }
