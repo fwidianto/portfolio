@@ -43,6 +43,37 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Skills Demonstrated Refactored to Shared Case Cards
+
+### Changed Sections
+- Skills Demonstrated / What This Demonstrates
+
+### Reason
+- Converted the skills section into the shared case-study card structure.
+- Improved consistency with the updated Odoo page sections.
+- Made the section clearer for recruiters and business readers.
+- Kept AI positioned as delivery support rather than the main project identity.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot or operational data was added.
+- No confidential data was added.
+- The next refactor should focus on CTA / Confidentiality.
+
+---
+
 ## 2026-07-02 - Business Value Section Refactored with Visual Support
 
 ### Changed Sections
