@@ -43,6 +43,37 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Output Evidence Table Width Improved
+
+### Changed Sections
+- Output Evidence
+- Public-safe sample reporting table
+
+### Reason
+- Improved the Output Evidence table width so order references do not stack or wrap awkwardly.
+- Added section-specific table width rules while keeping the table horizontally scrollable on smaller screens.
+- Preserved the existing public-safe sample data and page design.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot or real operational data was added.
+- No section outside Output Evidence was refactored.
+- The HTML file should be verified after each future update.
+
+---
+
 ## 2026-07-02 - Output Evidence HTML Refresh Trigger
 
 ### Changed Sections
