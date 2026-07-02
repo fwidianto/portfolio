@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/project.css?v=20260629-warm">
-  <link rel="stylesheet" href="../CSS/case-study.css?v=20260702-arch-readable">
+  <link rel="stylesheet" href="../CSS/case-study.css?v=20260702-architecture-pipeline">
 
   <style>
     body {
@@ -121,34 +121,88 @@
       padding: 38px;
     }
 
-    #architecture-data-flow .case-architecture-flow {
-      gap: 22px;
-      grid-template-columns: repeat(3, minmax(260px, 1fr));
-      overflow: visible;
-      padding-bottom: 0;
+    .case-architecture-pipeline {
+      align-items: stretch;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
     }
 
-    #architecture-data-flow .case-architecture-step {
-      min-height: auto;
-      padding: 26px;
+    .case-architecture-stage {
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(243, 240, 233, 0.84));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow-card);
+      min-height: 100%;
+      padding: 30px;
     }
 
-    #architecture-data-flow .case-architecture-step:not(:last-child)::after {
-      display: none;
-    }
-
-    .architecture-step-icon {
+    .case-architecture-stage-label {
       align-items: center;
       background: rgba(31, 77, 90, 0.09);
       border: 1px solid rgba(31, 77, 90, 0.12);
-      border-radius: 16px;
+      border-radius: 999px;
       color: var(--accent);
       display: inline-flex;
-      font-size: 18px;
-      height: 42px;
-      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      line-height: 1;
       margin-bottom: 18px;
-      width: 42px;
+      padding: 9px 12px;
+      text-transform: uppercase;
+    }
+
+    .case-architecture-stage-title {
+      color: var(--text);
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin: 0 0 18px;
+    }
+
+    .case-architecture-stage-list {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .case-architecture-stage-list li {
+      align-items: flex-start;
+      color: var(--muted);
+      display: flex;
+      font-size: 15px;
+      line-height: 1.58;
+    }
+
+    .case-architecture-stage-list li::before {
+      background: var(--accent);
+      border-radius: 999px;
+      content: "";
+      flex: 0 0 auto;
+      height: 6px;
+      margin: 9px 10px 0 0;
+      opacity: 0.72;
+      width: 6px;
+    }
+
+    .case-architecture-connector {
+      align-items: center;
+      align-self: center;
+      background: rgba(31, 77, 90, 0.09);
+      border: 1px solid rgba(31, 77, 90, 0.12);
+      border-radius: 999px;
+      color: var(--accent);
+      display: inline-flex;
+      font-size: 22px;
+      font-weight: 900;
+      height: 44px;
+      justify-content: center;
+      width: 44px;
     }
 
     .module-grid,
@@ -233,8 +287,13 @@
     }
 
     @media (max-width: 1100px) {
-      #architecture-data-flow .case-architecture-flow {
-        grid-template-columns: repeat(2, minmax(260px, 1fr));
+      .case-architecture-pipeline {
+        grid-template-columns: 1fr;
+      }
+
+      .case-architecture-connector {
+        justify-self: center;
+        transform: rotate(90deg);
       }
     }
 
@@ -254,16 +313,16 @@
     }
 
     @media (max-width: 640px) {
-      #architecture-data-flow .case-architecture-flow {
-        grid-template-columns: 1fr;
-      }
-
       #architecture-data-flow .case-architecture {
         padding: 22px;
       }
 
-      #architecture-data-flow .case-architecture-step {
+      .case-architecture-stage {
         padding: 22px;
+      }
+
+      .case-architecture-stage-title {
+        font-size: 22px;
       }
     }
   </style>
@@ -449,47 +508,46 @@
         <div class="case-eyebrow">ARCHITECTURE / DATA FLOW</div>
         <h2 class="case-subheading">How ERP transactions become reviewable business visibility</h2>
         <p class="case-lead">
-          The dashboard starts from Odoo transaction records, then applies SQL extraction, business-rule validation, analytics views, and reporting outputs for management review and operational follow-up.
+          The dashboard starts from Odoo transaction records, then applies extraction, validation, analytics views, and reporting outputs for management review and operational follow-up.
         </p>
       </div>
 
-      <div class="case-architecture" aria-label="ERP analytics architecture diagram">
-        <div class="case-architecture-flow">
-          <div class="case-architecture-step">
-            <div class="architecture-step-icon" aria-hidden="true">01</div>
-            <span>Layer 01</span>
-            <strong>Odoo ERP Source</strong>
-            <p>Sales, internal orders, purchasing, manufacturing, inventory, invoices, and payments.</p>
+      <div class="case-architecture" aria-label="ERP analytics architecture pipeline">
+        <div class="case-architecture-pipeline">
+          <div class="case-architecture-stage">
+            <div class="case-architecture-stage-label">INPUT</div>
+            <h3 class="case-architecture-stage-title">ERP Source</h3>
+            <ul class="case-architecture-stage-list">
+              <li>Odoo transaction records</li>
+              <li>Sales, internal orders, purchasing</li>
+              <li>Manufacturing, inventory, invoices, payments</li>
+            </ul>
           </div>
-          <div class="case-architecture-step">
-            <div class="architecture-step-icon" aria-hidden="true">02</div>
-            <span>Layer 02</span>
-            <strong>PostgreSQL / SQL Extraction</strong>
-            <p>Read-only queries, company filtering, canceled-state exclusion, and reference mapping.</p>
+
+          <div class="case-architecture-connector" aria-hidden="true">→</div>
+
+          <div class="case-architecture-stage">
+            <div class="case-architecture-stage-label">PROCESSING</div>
+            <h3 class="case-architecture-stage-title">Data &amp; Logic Layer</h3>
+            <ul class="case-architecture-stage-list">
+              <li>PostgreSQL / SQL extraction</li>
+              <li>Company filtering and canceled-state exclusion</li>
+              <li>Source classification and relationship checks</li>
+              <li>Status logic, exceptions, and profitability signals</li>
+            </ul>
           </div>
-          <div class="case-architecture-step">
-            <div class="architecture-step-icon" aria-hidden="true">03</div>
-            <span>Layer 03</span>
-            <strong>Business Logic &amp; Validation</strong>
-            <p>Source classification, relationship checks, status logic, exception handling, and profitability signals.</p>
-          </div>
-          <div class="case-architecture-step">
-            <div class="architecture-step-icon" aria-hidden="true">04</div>
-            <span>Layer 04</span>
-            <strong>Analytics Views / Dashboard Data</strong>
-            <p>Sales Order View, Internal Order View, Material Tracking, and Invoice &amp; Payment View.</p>
-          </div>
-          <div class="case-architecture-step">
-            <div class="architecture-step-icon" aria-hidden="true">05</div>
-            <span>Layer 05</span>
-            <strong>Dashboard + Excel Export</strong>
-            <p>Searchable dashboards, filters, and spreadsheet-friendly export for familiar review workflows.</p>
-          </div>
-          <div class="case-architecture-step">
-            <div class="architecture-step-icon" aria-hidden="true">06</div>
-            <span>Layer 06</span>
-            <strong>Management Review / Follow-up</strong>
-            <p>Supports management review, follow-up actions, issue checks, and cross-functional coordination.</p>
+
+          <div class="case-architecture-connector" aria-hidden="true">→</div>
+
+          <div class="case-architecture-stage">
+            <div class="case-architecture-stage-label">OUTPUT</div>
+            <h3 class="case-architecture-stage-title">Review Visibility</h3>
+            <ul class="case-architecture-stage-list">
+              <li>Analytics views and dashboard data</li>
+              <li>Searchable dashboard and Excel export</li>
+              <li>Management review and operational follow-up</li>
+              <li>Cross-functional coordination</li>
+            </ul>
           </div>
         </div>
       </div>
