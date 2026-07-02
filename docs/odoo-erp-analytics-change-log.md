@@ -43,6 +43,37 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Output Evidence Sample Table Added
+
+### Changed Sections
+- Output Evidence
+- Public-safe sample reporting table
+
+### Reason
+- Added a public-safe sample table to show the kind of reporting output produced by the Odoo analytics project.
+- Provided concrete evidence of operational visibility without exposing real business data.
+- Created a bridge between the architecture explanation and the dashboard modules section.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot was added.
+- All sample rows are anonymized and recreated for portfolio explanation.
+- The next refactor should focus on Dashboard Modules / What the System Supports.
+
+---
+
 ## 2026-07-02 - Architecture Redesigned as Distinct Pipeline
 
 ### Changed Sections
