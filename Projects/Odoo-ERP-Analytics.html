@@ -37,104 +37,6 @@
       color: #0f172a;
     }
 
-    .odoo-hero {
-      padding: 150px 0 90px;
-      background:
-        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.22), transparent 30%),
-        radial-gradient(circle at 82% 20%, rgba(20, 184, 166, 0.18), transparent 28%),
-        linear-gradient(135deg, #0f172a 0%, #08152d 55%, #06101f 100%);
-      color: #f8fafc;
-    }
-
-    .odoo-hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-      gap: 48px;
-      align-items: center;
-    }
-
-    .odoo-eyebrow {
-      color: #93c5fd;
-      font-size: 13px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 800;
-      margin-bottom: 18px;
-    }
-
-    .odoo-hero h1 {
-      color: #ffffff;
-      font-size: clamp(42px, 6vw, 72px);
-      line-height: 1.03;
-      margin-bottom: 24px;
-      max-width: 980px;
-    }
-
-    .odoo-hero p {
-      color: #dbeafe;
-      font-size: 19px;
-      line-height: 1.8;
-      max-width: 820px;
-      margin-bottom: 28px;
-    }
-
-    .odoo-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .odoo-pill-row span {
-      border: 1px solid rgba(147, 197, 253, 0.32);
-      background: rgba(15, 23, 42, 0.48);
-      color: #eff6ff;
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .odoo-snapshot-card {
-      background: rgba(9, 19, 37, 0.78);
-      border: 1px solid rgba(148, 163, 184, 0.22);
-      border-radius: 28px;
-      padding: 30px;
-      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.28);
-    }
-
-    .snapshot-title {
-      color: #ffffff;
-      font-size: 15px;
-      font-weight: 800;
-      margin-bottom: 22px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .snapshot-item {
-      border-left: 3px solid #3b82f6;
-      padding-left: 14px;
-      margin-bottom: 18px;
-    }
-
-    .snapshot-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .snapshot-label {
-      color: #93a7c2;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 5px;
-    }
-
-    .snapshot-value {
-      color: #ffffff;
-      font-weight: 700;
-      line-height: 1.5;
-    }
-
     .case-section {
       padding: 78px 0;
     }
@@ -337,7 +239,6 @@
     }
 
     @media (max-width: 920px) {
-      .odoo-hero-grid,
       .before-after {
         grid-template-columns: 1fr;
       }
@@ -347,15 +248,11 @@
       .proof-grid {
         grid-template-columns: 1fr;
       }
-
-      .odoo-hero {
-        padding: 120px 0 70px;
-      }
     }
   </style>
 </head>
 
-<body>
+<body class="case-study-page">
   <nav>
     <div class="container nav-container">
       <a href="../index.html" class="logo">FW.</a>
@@ -378,42 +275,48 @@
     </div>
   </nav>
 
-  <section class="odoo-hero">
-    <div class="container odoo-hero-grid">
-      <div class="odoo-hero-copy">
-        <div class="odoo-eyebrow">Featured ERP Analytics Case Study</div>
-        <h1>Turning Odoo ERP Transactions into Management-Ready Operational Visibility</h1>
-        <p>
-          A public-safe case study on building an analytics layer for order flow,
-          internal orders, procurement, manufacturing, delivery, invoicing,
-          payment tracking, and profitability review.
+  <section class="case-hero" aria-labelledby="odoo-case-title">
+    <div class="case-container case-hero-grid">
+      <div>
+        <div class="case-eyebrow">ERP ANALYTICS CASE STUDY</div>
+        <h1 id="odoo-case-title" class="case-hero-title">Turning Odoo ERP Transactions into Management-Ready Operational Visibility</h1>
+        <p class="case-hero-copy">
+          A public-safe case study on building a reporting and analytics layer for order flow,
+          internal orders, procurement, manufacturing, delivery, invoicing, payment tracking,
+          and profitability review.
         </p>
-        <div class="odoo-pill-row">
-          <span>Business Operations</span>
-          <span>ERP Analytics</span>
-          <span>PostgreSQL / SQL</span>
-          <span>Dashboard Design</span>
-          <span>AI-Assisted Development</span>
+        <div class="case-tag-row" aria-label="Project focus areas">
+          <span class="case-tag">Business Operations</span>
+          <span class="case-tag">ERP Analytics</span>
+          <span class="case-tag">PostgreSQL / SQL</span>
+          <span class="case-tag">Dashboard &amp; Reporting</span>
+          <span class="case-tag">Process Visibility</span>
         </div>
       </div>
 
-      <aside class="odoo-snapshot-card">
-        <div class="snapshot-title">Project Snapshot</div>
-        <div class="snapshot-item">
-          <div class="snapshot-label">Role</div>
-          <div class="snapshot-value">ERP Owner / Business Analyst / Analytics Designer</div>
-        </div>
-        <div class="snapshot-item">
-          <div class="snapshot-label">Business Scope</div>
-          <div class="snapshot-value">Sales Order, Internal Order, Procurement, Manufacturing, Delivery, Invoice, Payment</div>
-        </div>
-        <div class="snapshot-item">
-          <div class="snapshot-label">Tools</div>
-          <div class="snapshot-value">Odoo 16, PostgreSQL, SQL, Python, HTML/CSS/JS, Codex</div>
-        </div>
-        <div class="snapshot-item">
-          <div class="snapshot-label">Focus</div>
-          <div class="snapshot-value">Traceability, profitability review, operational visibility, management reporting</div>
+      <aside class="case-snapshot-card" aria-label="Project snapshot">
+        <div class="case-snapshot-title">Project Snapshot</div>
+        <div class="case-snapshot-list">
+          <div class="case-snapshot-item">
+            <span class="case-snapshot-label">Role</span>
+            <span class="case-snapshot-value">ERP Owner / Business Analyst / Analytics Designer</span>
+          </div>
+          <div class="case-snapshot-item">
+            <span class="case-snapshot-label">Business Scope</span>
+            <span class="case-snapshot-value">Sales Order, Internal Order, Procurement, Manufacturing, Delivery, Invoice, Payment</span>
+          </div>
+          <div class="case-snapshot-item">
+            <span class="case-snapshot-label">Tools</span>
+            <span class="case-snapshot-value">Odoo 16, PostgreSQL, SQL, Python, HTML/CSS/JS</span>
+          </div>
+          <div class="case-snapshot-item">
+            <span class="case-snapshot-label">Focus</span>
+            <span class="case-snapshot-value">Traceability, profitability review, operational visibility, management reporting</span>
+          </div>
+          <div class="case-snapshot-item">
+            <span class="case-snapshot-label">Workflow Support</span>
+            <span class="case-snapshot-value">AI-supported iteration and documentation, with human-led validation</span>
+          </div>
         </div>
       </aside>
     </div>
