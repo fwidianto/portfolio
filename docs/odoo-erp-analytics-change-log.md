@@ -10,20 +10,11 @@ Applies to: `Projects/Odoo-ERP-Analytics.html`
 
 ## Purpose
 
-This file records meaningful updates to the Odoo ERP Analytics case study page.
-
-Every future update to `Projects/Odoo-ERP-Analytics.html` should be logged here after reviewing:
-
-1. `docs/portfolio-design-guide.md`
-2. `docs/odoo-erp-analytics-page-plan.md`
-
-The goal is to keep the page consistent, public-safe, aligned with the homepage design, and connected to the agreed case-study structure.
+This file records meaningful updates to the Odoo ERP Analytics case study page. Every future update to `Projects/Odoo-ERP-Analytics.html` should be logged here after reviewing the portfolio design guide and the Odoo page plan.
 
 ---
 
 ## Change Log Template
-
-Use this template for every future update.
 
 ```markdown
 ## YYYY-MM-DD - Short Update Name
@@ -49,6 +40,38 @@ Use this template for every future update.
 ### Notes
 - Any limitation, issue, or next improvement
 ```
+
+---
+
+## 2026-07-02 - Architecture Diagram Section Added
+
+### Changed Sections
+- Architecture / Data Flow
+- Existing flow map
+
+### Reason
+- Converted the temporary flow map into the planned architecture diagram section.
+- Made the ERP-to-dashboard logic clearer for business and analytics readers.
+- Used shared case-study architecture components for better visual consistency.
+- Separated process workflow from system/data architecture.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot or reporting table was added.
+- The architecture remains public-safe and simplified.
+- Next refactor should focus on Dashboard Modules / What the System Supports.
 
 ---
 
@@ -78,8 +101,8 @@ Use this template for every future update.
 
 ### Notes
 - No real screenshot, architecture diagram, or reporting table was added.
-- The existing flow map was preserved for now.
-- Next refactor should focus on replacing or redesigning the flow map into the planned Architecture Diagram section.
+- The existing flow map was preserved for that phase.
+- Next refactor was to replace the flow map with the planned Architecture Diagram section.
 
 ---
 
@@ -92,7 +115,7 @@ Use this template for every future update.
 ### Reason
 - Improved the business problem narrative using the shared case-study structure.
 - Added a controlled placeholder for future sanitized visual evidence.
-- Prepared the page for screenshot insertion without exposing confidential data.
+- Prepared the page for screenshot insertion without exposing sensitive business data.
 
 ### Files Edited
 - `Projects/Odoo-ERP-Analytics.html`
@@ -110,7 +133,7 @@ Use this template for every future update.
 ### Notes
 - No real screenshot was added in this update.
 - The placeholder should be replaced later with a sanitized dashboard screenshot or mock visual.
-- Next refactor should focus on the Approach / Workflow section and converting the process cards toward shared case-study components.
+- Next refactor was to focus on the Approach / Workflow section.
 
 ---
 
@@ -139,8 +162,7 @@ Use this template for every future update.
 - Yes
 
 ### Notes
-- Lower sections are intentionally left mostly unchanged for later refactor phases.
-- Next refactor should focus on Section 3 Problem / Context and the first visual proof section.
+- Lower sections were intentionally left mostly unchanged for later refactor phases.
 
 ---
 
@@ -151,8 +173,7 @@ Use this template for every future update.
 
 ### Reason
 - Linked the shared case-study stylesheet into the Odoo ERP Analytics page before starting visual refactor work.
-- This prepares the page to use reusable case-study components in future updates.
-- The update intentionally avoids changing layout, copy, or visual sections yet.
+- Prepared the page to use reusable case-study components in future updates.
 
 ### Files Edited
 - `Projects/Odoo-ERP-Analytics.html`
@@ -165,12 +186,10 @@ Use this template for every future update.
 - Yes
 
 ### Confidentiality Checked
-- Yes, no page content or confidential data was added.
+- Yes
 
 ### Notes
-- The live page may not visually change much yet because existing page-specific CSS still controls most Odoo sections.
-- Next update should refactor only the Hero / Project Summary and Project Snapshot sections to use the shared case-study CSS.
-- Page-specific CSS should be reduced gradually.
+- The live page did not visually change much at this step because existing page-specific CSS still controlled most Odoo sections.
 
 ---
 
@@ -182,8 +201,7 @@ Use this template for every future update.
 
 ### Reason
 - Created a reusable CSS foundation before refactoring the Odoo project page again.
-- This supports the approved direction that all project pages should gradually follow the same case-study structure and visual language.
-- The shared CSS follows the homepage-aligned warm consultant analytics style: light background, dark teal accent, white cards, soft borders, rounded corners, and calm spacing.
+- Supported the approved direction that project pages should gradually follow the same case-study structure and visual language.
 
 ### Files Edited
 - `CSS/case-study.css`
@@ -196,12 +214,10 @@ Use this template for every future update.
 - Yes
 
 ### Confidentiality Checked
-- Yes, no page content or confidential data was added.
+- Yes
 
 ### Notes
-- This update does not yet change the live Odoo HTML page.
-- Next update should link `CSS/case-study.css` into `Projects/Odoo-ERP-Analytics.html` and refactor only the Hero / Project Summary and Project Snapshot sections.
-- Page-specific CSS should be reduced gradually rather than replaced all at once.
+- This update did not change the live Odoo HTML page.
 
 ---
 
@@ -213,7 +229,6 @@ Use this template for every future update.
 ### Reason
 - Created a formal page plan and change log before continuing Odoo project page edits.
 - Established that future updates should follow the portfolio design guide and Odoo page plan.
-- Confirmed that the Odoo page should be light like the homepage, not a dark SaaS-style landing page.
 
 ### Files Edited
 - `docs/portfolio-design-guide.md`
@@ -231,8 +246,6 @@ Use this template for every future update.
 
 ### Notes
 - This entry records the documentation baseline.
-- The next HTML update should start by realigning the Odoo page hero with the homepage visual style.
-- The current Odoo page structure is better than before, but the visual style is not yet aligned enough with the homepage.
 
 ---
 
@@ -263,10 +276,8 @@ Use this template for every future update.
 - No, because the page plan did not exist yet.
 
 ### Confidentiality Checked
-- Yes, based on public-safe wording and no real operational data exposure.
+- Yes
 
 ### Notes
 - Keep useful structure and copy ideas from this version.
 - Do not continue using the dark hero as the final direction.
-- Refactor gradually using the approved page plan.
-- Next implementation should make the hero light, warm, and homepage-aligned.
