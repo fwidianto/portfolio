@@ -135,57 +135,6 @@
       color: #475569;
     }
 
-    .flow-map {
-      background: linear-gradient(180deg, #eef4fb 0%, #e7f0fa 100%);
-      border: 1px solid #d7e3f4;
-      border-radius: 28px;
-      padding: 28px;
-      margin-top: 28px;
-      overflow-x: auto;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    }
-
-    .flow-row {
-      min-width: 860px;
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 12px;
-      align-items: stretch;
-    }
-
-    .flow-step {
-      position: relative;
-      background: #ffffff;
-      border: 1px solid #dbe5f1;
-      border-radius: 18px;
-      padding: 18px 14px;
-      text-align: center;
-      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
-    }
-
-    .flow-step:not(:last-child)::after {
-      content: "→";
-      position: absolute;
-      right: -13px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #3b82f6;
-      font-weight: 800;
-    }
-
-    .flow-step strong {
-      display: block;
-      color: #0f172a;
-      margin-bottom: 6px;
-      font-size: 14px;
-    }
-
-    .flow-step span {
-      color: #64748b;
-      font-size: 12px;
-      line-height: 1.35;
-    }
-
     .before-after {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -363,7 +312,7 @@
         <div class="case-eyebrow">VISUAL PROOF</div>
         <h2 class="case-subheading">Public-safe dashboard preview will be added here</h2>
         <p class="case-lead">
-          This section is reserved for a sanitized dashboard or reporting screenshot. Real customer names, supplier names, order numbers, invoice values, profitability figures, database details, and private URLs must be removed before publication.
+          This section is reserved for a sanitized dashboard or reporting screenshot. Real customer names, supplier names, order numbers, invoice values, profitability figures, database details, and private links must be removed before publication.
         </p>
       </div>
 
@@ -425,16 +374,51 @@
           <p>Use AI-supported tools to speed up iteration while keeping human judgment on business rules, data quality, and decision usefulness.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="flow-map" aria-label="ERP analytics flow">
-        <div class="flow-row">
-          <div class="flow-step"><strong>Sales Order</strong><span>Commercial demand and customer order reference</span></div>
-          <div class="flow-step"><strong>Source Review</strong><span>Stock, internal order, or manufacturing path</span></div>
-          <div class="flow-step"><strong>Procurement</strong><span>Purchase and material fulfillment visibility</span></div>
-          <div class="flow-step"><strong>Manufacturing</strong><span>Job / production process tracking</span></div>
-          <div class="flow-step"><strong>Delivery</strong><span>Fulfillment and delivery status review</span></div>
-          <div class="flow-step"><strong>Invoice &amp; Payment</strong><span>Billing and payment visibility</span></div>
-          <div class="flow-step"><strong>Profitability</strong><span>Management review and decision support</span></div>
+  <section class="case-section case-section--soft" id="architecture-data-flow">
+    <div class="case-container">
+      <div class="case-section-header">
+        <div class="case-eyebrow">ARCHITECTURE / DATA FLOW</div>
+        <h2 class="case-subheading">How ERP transactions become reviewable business visibility</h2>
+        <p class="case-lead">
+          The dashboard structure starts from Odoo transaction records, then applies SQL extraction, business-rule validation, analytics views, and reporting outputs that support management review and operational follow-up.
+        </p>
+      </div>
+
+      <div class="case-architecture" aria-label="ERP analytics architecture diagram">
+        <div class="case-architecture-flow">
+          <div class="case-architecture-step">
+            <span>Layer 01</span>
+            <strong>Odoo ERP Source</strong>
+            <p>Sales orders, internal orders, purchase orders, manufacturing orders, stock movement, invoices, and payments.</p>
+          </div>
+          <div class="case-architecture-step">
+            <span>Layer 02</span>
+            <strong>PostgreSQL / SQL Extraction</strong>
+            <p>Read-only queries, company filter, canceled-state exclusion, and reference mapping.</p>
+          </div>
+          <div class="case-architecture-step">
+            <span>Layer 03</span>
+            <strong>Business Logic &amp; Validation Layer</strong>
+            <p>Source classification, SO/IO/JO relationship checks, status logic, exception handling, and profitability signals.</p>
+          </div>
+          <div class="case-architecture-step">
+            <span>Layer 04</span>
+            <strong>Analytics Views / Dashboard Data</strong>
+            <p>Sales Order View, Internal Order View, Material Tracking, Invoice &amp; Payment View.</p>
+          </div>
+          <div class="case-architecture-step">
+            <span>Layer 05</span>
+            <strong>Dashboard + Excel Export</strong>
+            <p>Web dashboard, searchable tables, filters, and spreadsheet-friendly export workflow.</p>
+          </div>
+          <div class="case-architecture-step">
+            <span>Layer 06</span>
+            <strong>Management Review / Operational Follow-up</strong>
+            <p>Supports management review, operational follow-up, issue investigation, and cross-functional coordination.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -542,7 +526,7 @@
           <h2>Public-safe portfolio version</h2>
           <p>
             This case study explains the project structure and thinking without exposing customer names, supplier names,
-            order numbers, invoice values, profitability figures, database credentials, server details, or confidential operational records.
+            order numbers, invoice values, profitability figures, database access details, server details, or confidential operational records.
           </p>
         </div>
         <div class="pill-row">
