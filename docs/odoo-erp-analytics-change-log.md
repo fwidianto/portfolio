@@ -43,6 +43,38 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Output Evidence HTML Refresh Trigger
+
+### Changed Sections
+- Output Evidence
+- GitHub Pages refresh
+
+### Reason
+- The repository already contained the Output Evidence section, but the live GitHub Pages page still showed the previous version.
+- The previous rebuild trigger only changed documentation, not the actual Odoo HTML file.
+- Added a harmless version comment to `Projects/Odoo-ERP-Analytics.html` to force the deployed HTML page to refresh.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No visible page content or design was changed.
+- No real screenshot or real operational data was added.
+- The goal of this update is deployment refresh, not visual refactor.
+- After deployment refresh, the live page should show Output Evidence between Architecture / Data Flow and Dashboard Modules.
+
+---
+
 ## 2026-07-02 - Pages Rebuild Triggered for Output Evidence
 
 ### Changed Sections
