@@ -43,6 +43,37 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Architecture Redesigned as Distinct Pipeline
+
+### Changed Sections
+- Architecture / Data Flow
+
+### Reason
+- The previous architecture layout looked too similar to the Approach / Workflow card grid.
+- Redesigned the section as a three-stage pipeline so it reads more like a system/data-flow diagram.
+- Improved distinction between workflow thinking and data architecture.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot or reporting table was added.
+- The section remains public-safe.
+- Pipeline styling was implemented in the Odoo page for this focused section update.
+- The next refactor should focus on Output Evidence: public-safe sample table or reporting table preview.
+
+---
+
 ## 2026-07-02 - Architecture Shared CSS Readability Fix
 
 ### Changed Sections
