@@ -52,6 +52,37 @@ Use this template for every future update.
 
 ---
 
+## 2026-07-02 - Problem Context and Visual Proof Placeholder Refactored
+
+### Changed Sections
+- Problem / Context
+- Visual Proof placeholder
+
+### Reason
+- Improved the business problem narrative using the shared case-study structure.
+- Added a controlled placeholder for future sanitized visual evidence.
+- Prepared the page for screenshot insertion without exposing confidential data.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot was added in this update.
+- The placeholder should be replaced later with a sanitized dashboard screenshot or mock visual.
+- Next refactor should focus on the Approach / Workflow section and converting the process cards toward shared case-study components.
+
+---
+
 ## 2026-07-02 - Hero and Snapshot Refactored to Light Case Study Style
 
 ### Changed Sections
