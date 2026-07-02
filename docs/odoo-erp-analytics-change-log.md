@@ -52,6 +52,36 @@ Use this template for every future update.
 
 ---
 
+## 2026-07-02 - Shared CSS Linked on Odoo Page
+
+### Changed Sections
+- HTML head / stylesheet links only
+
+### Reason
+- Linked the shared case-study stylesheet into the Odoo ERP Analytics page before starting visual refactor work.
+- This prepares the page to use reusable case-study components in future updates.
+- The update intentionally avoids changing layout, copy, or visual sections yet.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes, no page content or confidential data was added.
+
+### Notes
+- The live page may not visually change much yet because existing page-specific CSS still controls most Odoo sections.
+- Next update should refactor only the Hero / Project Summary and Project Snapshot sections to use the shared case-study CSS.
+- Page-specific Odoo CSS should be reduced gradually.
+
+---
+
 ## 2026-07-02 - Shared Case Study CSS Created
 
 ### Changed Sections
