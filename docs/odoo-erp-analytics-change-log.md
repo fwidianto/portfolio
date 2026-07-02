@@ -52,6 +52,37 @@ Use this template for every future update.
 
 ---
 
+## 2026-07-02 - Shared Case Study CSS Created
+
+### Changed Sections
+- Shared styling foundation
+- Case study reusable components
+
+### Reason
+- Created a reusable CSS foundation before refactoring the Odoo project page again.
+- This supports the approved direction that all project pages should gradually follow the same case-study structure and visual language.
+- The shared CSS follows the homepage-aligned warm consultant analytics style: light background, dark teal accent, white cards, soft borders, rounded corners, and calm spacing.
+
+### Files Edited
+- `CSS/case-study.css`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes, no page content or confidential data was added.
+
+### Notes
+- This update does not yet change the live Odoo HTML page.
+- Next update should link `CSS/case-study.css` into `Projects/Odoo-ERP-Analytics.html` and refactor only the Hero / Project Summary and Project Snapshot sections.
+- Page-specific CSS should be reduced gradually rather than replaced all at once.
+
+---
+
 ## 2026-07-02 - Planning Baseline Created
 
 ### Changed Sections
