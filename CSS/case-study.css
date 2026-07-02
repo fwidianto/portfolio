@@ -1,0 +1,733 @@
+/* ==========================================================
+   Shared Case Study CSS
+   Portfolio: Fauzan Widianto
+
+   Purpose:
+   - Provide reusable case-study components for project pages.
+   - Keep project pages visually aligned with the homepage.
+   - Follow docs/portfolio-design-guide.md and project page plans.
+
+   Design direction:
+   - Warm consultant analytics style.
+   - Light page body by default.
+   - Dark teal accent.
+   - White cards, soft borders, rounded corners, calm spacing.
+   - Dark panels only for limited visual emphasis.
+   ========================================================== */
+
+:root {
+  --bg: #fbfaf7;
+  --bg-soft: #f6f2ea;
+  --surface: #ffffff;
+  --surface-2: #f3f0e9;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --accent: #1f4d5a;
+  --accent-dark: #173b45;
+  --accent-2: #7c6f57;
+  --border: rgba(31, 41, 51, 0.12);
+  --shadow-soft: 0 18px 45px rgba(31, 41, 51, 0.08);
+  --shadow-card: 0 10px 28px rgba(31, 41, 51, 0.07);
+}
+
+/* ==========================================================
+   Page foundation
+   ========================================================== */
+
+.case-study-page {
+  background:
+    radial-gradient(circle at top left, rgba(31, 77, 90, 0.08), transparent 34rem),
+    linear-gradient(180deg, var(--bg), #f8f5ee 100%);
+  color: var(--text);
+}
+
+.case-container {
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.case-section {
+  padding: 96px 0;
+}
+
+.case-section--soft {
+  background: rgba(246, 242, 234, 0.72);
+}
+
+.case-section--compact {
+  padding: 64px 0;
+}
+
+.case-section-header {
+  max-width: 820px;
+  margin-bottom: 36px;
+}
+
+.case-section-header--center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.case-kicker,
+.case-eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.case-heading {
+  color: var(--text);
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  margin: 0 0 18px;
+}
+
+.case-subheading {
+  color: var(--text);
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+
+.case-lead {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 760px;
+}
+
+.case-section-header--center .case-lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==========================================================
+   Hero and project snapshot
+   ========================================================== */
+
+.case-hero {
+  min-height: 82vh;
+  display: flex;
+  align-items: center;
+  padding: 150px 0 92px;
+  position: relative;
+  overflow: hidden;
+}
+
+.case-hero::before {
+  content: "";
+  position: absolute;
+  width: 460px;
+  height: 460px;
+  top: 8%;
+  right: -140px;
+  border-radius: 50%;
+  background: rgba(31, 77, 90, 0.08);
+  pointer-events: none;
+}
+
+.case-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+  gap: 56px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.case-hero h1,
+.case-hero-title {
+  color: var(--text);
+  font-size: clamp(44px, 6vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+  margin: 0 0 24px;
+  max-width: 900px;
+}
+
+.case-hero-copy {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.78;
+  margin: 0 0 28px;
+  max-width: 760px;
+}
+
+.case-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.case-tag {
+  align-items: center;
+  background: rgba(31, 77, 90, 0.09);
+  border: 1px solid rgba(31, 77, 90, 0.12);
+  border-radius: 999px;
+  color: var(--accent);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 9px 14px;
+}
+
+.case-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.case-btn {
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  display: inline-flex;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  padding: 15px 24px;
+  text-decoration: none;
+  transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+}
+
+.case-btn:hover {
+  transform: translateY(-2px);
+}
+
+.case-btn--primary {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.case-btn--primary:hover {
+  background: var(--accent-dark);
+}
+
+.case-btn--secondary {
+  background: rgba(255, 255, 255, 0.68);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.case-btn--secondary:hover {
+  background: var(--surface);
+  border-color: rgba(31, 77, 90, 0.28);
+  color: var(--accent);
+}
+
+.case-snapshot-card {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(243, 240, 233, 0.92));
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow-soft);
+  padding: 34px;
+  position: relative;
+  overflow: hidden;
+}
+
+.case-snapshot-card::before {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  top: -120px;
+  right: -100px;
+  border-radius: 50%;
+  background: rgba(31, 77, 90, 0.08);
+}
+
+.case-snapshot-title {
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+  position: relative;
+}
+
+.case-snapshot-list {
+  display: grid;
+  gap: 16px;
+  position: relative;
+}
+
+.case-snapshot-item {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+}
+
+.case-snapshot-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.case-snapshot-label {
+  color: var(--accent);
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.case-snapshot-value {
+  color: var(--text);
+  display: block;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.55;
+}
+
+/* ==========================================================
+   Cards and grids
+   ========================================================== */
+
+.case-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.case-grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.case-grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.case-grid--auto {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.case-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.case-card:hover {
+  border-color: rgba(31, 77, 90, 0.22);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-3px);
+}
+
+.case-card h3 {
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+.case-card p {
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.72;
+  margin: 0;
+}
+
+.case-card-number {
+  align-items: center;
+  background: rgba(31, 77, 90, 0.09);
+  border: 1px solid rgba(31, 77, 90, 0.12);
+  border-radius: 999px;
+  color: var(--accent);
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 900;
+  height: 34px;
+  justify-content: center;
+  margin-bottom: 18px;
+  width: 56px;
+}
+
+/* ==========================================================
+   Visual proof and screenshot frames
+   ========================================================== */
+
+.case-visual-frame {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.case-visual-frame--dark {
+  background: #10252c;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.case-browser-bar {
+  align-items: center;
+  background: rgba(31, 77, 90, 0.06);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  padding: 14px 18px;
+}
+
+.case-visual-frame--dark .case-browser-bar {
+  background: rgba(255, 255, 255, 0.06);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.case-browser-dot {
+  background: rgba(31, 77, 90, 0.28);
+  border-radius: 999px;
+  display: block;
+  height: 10px;
+  width: 10px;
+}
+
+.case-visual-frame--dark .case-browser-dot {
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.case-visual-content {
+  padding: 24px;
+}
+
+.case-visual-frame img {
+  border-radius: 18px;
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.case-caption {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 14px 0 0;
+}
+
+.case-visual-frame--dark .case-caption {
+  color: rgba(248, 250, 252, 0.74);
+}
+
+/* ==========================================================
+   Architecture diagram
+   ========================================================== */
+
+.case-architecture {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+}
+
+.case-architecture-flow {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(6, minmax(160px, 1fr));
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.case-architecture-step {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  min-height: 190px;
+  padding: 20px;
+  position: relative;
+}
+
+.case-architecture-step:not(:last-child)::after {
+  content: "→";
+  color: var(--accent);
+  font-size: 22px;
+  font-weight: 900;
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.case-architecture-step span {
+  color: var(--accent);
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.case-architecture-step strong {
+  color: var(--text);
+  display: block;
+  font-size: 18px;
+  line-height: 1.28;
+  margin-bottom: 10px;
+}
+
+.case-architecture-step p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.62;
+  margin: 0;
+}
+
+/* ==========================================================
+   Tables and reporting outputs
+   ========================================================== */
+
+.case-table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+  overflow-x: auto;
+}
+
+.case-table {
+  border-collapse: collapse;
+  min-width: 900px;
+  width: 100%;
+}
+
+.case-table th,
+.case-table td {
+  border-bottom: 1px solid rgba(31, 41, 51, 0.09);
+  padding: 16px 18px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.case-table th {
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.case-table td {
+  color: #44505a;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+.case-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.case-status-badge {
+  align-items: center;
+  background: rgba(31, 77, 90, 0.08);
+  border: 1px solid rgba(31, 77, 90, 0.12);
+  border-radius: 999px;
+  color: var(--accent);
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+
+/* ==========================================================
+   Before / after and notes
+   ========================================================== */
+
+.case-comparison-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.case-comparison-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+}
+
+.case-comparison-card h3 {
+  color: var(--text);
+  font-size: 24px;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
+}
+
+.case-comparison-card ul,
+.case-note ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.case-comparison-card li,
+.case-note li {
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.65;
+  padding: 14px 0;
+}
+
+.case-comparison-card li:last-child,
+.case-note li:last-child {
+  border-bottom: 0;
+}
+
+.case-note {
+  background: rgba(31, 77, 90, 0.07);
+  border: 1px solid rgba(31, 77, 90, 0.14);
+  border-radius: 24px;
+  padding: 28px;
+}
+
+.case-note h3 {
+  color: var(--text);
+  margin: 0 0 12px;
+}
+
+.case-note p {
+  color: var(--muted);
+  line-height: 1.72;
+  margin: 0;
+}
+
+.case-cta {
+  align-items: center;
+  background:
+    linear-gradient(145deg, rgba(31, 77, 90, 0.96), rgba(124, 111, 87, 0.88));
+  border-radius: 28px;
+  color: #ffffff;
+  display: flex;
+  gap: 28px;
+  justify-content: space-between;
+  padding: 34px;
+}
+
+.case-cta h2,
+.case-cta h3 {
+  color: #ffffff;
+  margin: 0 0 10px;
+}
+
+.case-cta p {
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0;
+  max-width: 720px;
+}
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+
+@media (max-width: 1100px) {
+  .case-architecture-flow {
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+  }
+
+  .case-architecture-step:not(:last-child)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 920px) {
+  .case-section {
+    padding: 78px 0;
+  }
+
+  .case-hero {
+    min-height: auto;
+    padding: 136px 0 74px;
+  }
+
+  .case-hero-grid,
+  .case-grid--2,
+  .case-grid--3,
+  .case-comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-snapshot-card {
+    padding: 28px;
+  }
+
+  .case-cta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .case-container {
+    width: 92%;
+  }
+
+  .case-section {
+    padding: 64px 0;
+  }
+
+  .case-hero {
+    padding: 126px 0 64px;
+  }
+
+  .case-hero h1,
+  .case-hero-title {
+    font-size: 40px;
+  }
+
+  .case-heading {
+    font-size: 34px;
+  }
+
+  .case-lead,
+  .case-hero-copy {
+    font-size: 16px;
+  }
+
+  .case-actions,
+  .case-tag-row {
+    gap: 10px;
+  }
+
+  .case-btn {
+    width: 100%;
+  }
+
+  .case-card,
+  .case-comparison-card,
+  .case-note,
+  .case-architecture,
+  .case-visual-content,
+  .case-cta {
+    padding: 22px;
+  }
+
+  .case-architecture-flow {
+    grid-template-columns: 1fr;
+  }
+}
