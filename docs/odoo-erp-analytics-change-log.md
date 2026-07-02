@@ -43,6 +43,37 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Architecture Diagram Readability Improved
+
+### Changed Sections
+- Architecture / Data Flow
+
+### Reason
+- Improved readability and spacing of the architecture section.
+- Reduced text density and made the six-step flow easier to scan.
+- Improved responsiveness and visual breathing room, especially for smaller screens.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot or reporting table was added.
+- The content remains public-safe.
+- The main goal of this update is readability, not adding new sections.
+- Next refactor should focus on Output Evidence: public-safe sample table or reporting table preview.
+
+---
+
 ## 2026-07-02 - Architecture Diagram Section Added
 
 ### Changed Sections
