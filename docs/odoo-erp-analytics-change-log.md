@@ -43,6 +43,38 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Architecture Shared CSS Readability Fix
+
+### Changed Sections
+- Architecture / Data Flow
+- Shared architecture CSS
+
+### Reason
+- The live page still showed the old compressed 6-column architecture layout.
+- Moved the readability fix into `CSS/case-study.css` so the shared architecture component itself is roomier and responsive.
+- Added cache-busting to force the updated CSS to load.
+
+### Files Edited
+- `CSS/case-study.css`
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot or reporting table was added.
+- The main goal was to fix the actual live layout, not create a new section.
+- After GitHub Pages refreshes, the architecture should appear as a 3-column grid on wide screens and a stacked layout on smaller screens.
+
+---
+
 ## 2026-07-02 - Architecture Diagram Readability Improved
 
 ### Changed Sections
