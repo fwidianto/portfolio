@@ -43,6 +43,37 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Dashboard Modules Refactored to Shared Case Cards
+
+### Changed Sections
+- Dashboard Modules / What the System Supports
+
+### Reason
+- Converted the dashboard modules section into the shared case-study card structure.
+- Made the section more consistent with the homepage-aligned Odoo page direction.
+- Reduced reliance on old page-specific module styling.
+- Kept the modules focused on operational review needs rather than technical features only.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real screenshot or reporting table was added.
+- No confidential data was added.
+- The next refactor should focus on Before vs After or Skills Demonstrated.
+
+---
+
 ## 2026-07-02 - Output Evidence Table Width Improved
 
 ### Changed Sections
