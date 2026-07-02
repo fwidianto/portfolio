@@ -109,6 +109,48 @@
       text-align: center;
     }
 
+    #architecture-data-flow .case-section-header {
+      max-width: 900px;
+    }
+
+    #architecture-data-flow .case-lead {
+      max-width: 860px;
+    }
+
+    #architecture-data-flow .case-architecture {
+      padding: 38px;
+    }
+
+    #architecture-data-flow .case-architecture-flow {
+      gap: 22px;
+      grid-template-columns: repeat(3, minmax(260px, 1fr));
+      overflow: visible;
+      padding-bottom: 0;
+    }
+
+    #architecture-data-flow .case-architecture-step {
+      min-height: auto;
+      padding: 26px;
+    }
+
+    #architecture-data-flow .case-architecture-step:not(:last-child)::after {
+      display: none;
+    }
+
+    .architecture-step-icon {
+      align-items: center;
+      background: rgba(31, 77, 90, 0.09);
+      border: 1px solid rgba(31, 77, 90, 0.12);
+      border-radius: 16px;
+      color: var(--accent);
+      display: inline-flex;
+      font-size: 18px;
+      height: 42px;
+      justify-content: center;
+      margin-bottom: 18px;
+      width: 42px;
+    }
+
     .module-grid,
     .proof-grid {
       display: grid;
@@ -190,6 +232,12 @@
       border-color: #1e3a8a;
     }
 
+    @media (max-width: 1100px) {
+      #architecture-data-flow .case-architecture-flow {
+        grid-template-columns: repeat(2, minmax(260px, 1fr));
+      }
+    }
+
     @media (max-width: 920px) {
       .before-after {
         grid-template-columns: 1fr;
@@ -198,6 +246,24 @@
       .module-grid,
       .proof-grid {
         grid-template-columns: 1fr;
+      }
+
+      #architecture-data-flow .case-architecture {
+        padding: 28px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #architecture-data-flow .case-architecture-flow {
+        grid-template-columns: 1fr;
+      }
+
+      #architecture-data-flow .case-architecture {
+        padding: 22px;
+      }
+
+      #architecture-data-flow .case-architecture-step {
+        padding: 22px;
       }
     }
   </style>
@@ -383,41 +449,47 @@
         <div class="case-eyebrow">ARCHITECTURE / DATA FLOW</div>
         <h2 class="case-subheading">How ERP transactions become reviewable business visibility</h2>
         <p class="case-lead">
-          The dashboard structure starts from Odoo transaction records, then applies SQL extraction, business-rule validation, analytics views, and reporting outputs that support management review and operational follow-up.
+          The dashboard starts from Odoo transaction records, then applies SQL extraction, business-rule validation, analytics views, and reporting outputs for management review and operational follow-up.
         </p>
       </div>
 
       <div class="case-architecture" aria-label="ERP analytics architecture diagram">
         <div class="case-architecture-flow">
           <div class="case-architecture-step">
+            <div class="architecture-step-icon" aria-hidden="true">01</div>
             <span>Layer 01</span>
             <strong>Odoo ERP Source</strong>
-            <p>Sales orders, internal orders, purchase orders, manufacturing orders, stock movement, invoices, and payments.</p>
+            <p>Sales, internal orders, purchasing, manufacturing, inventory, invoices, and payments.</p>
           </div>
           <div class="case-architecture-step">
+            <div class="architecture-step-icon" aria-hidden="true">02</div>
             <span>Layer 02</span>
             <strong>PostgreSQL / SQL Extraction</strong>
-            <p>Read-only queries, company filter, canceled-state exclusion, and reference mapping.</p>
+            <p>Read-only queries, company filtering, canceled-state exclusion, and reference mapping.</p>
           </div>
           <div class="case-architecture-step">
+            <div class="architecture-step-icon" aria-hidden="true">03</div>
             <span>Layer 03</span>
-            <strong>Business Logic &amp; Validation Layer</strong>
-            <p>Source classification, SO/IO/JO relationship checks, status logic, exception handling, and profitability signals.</p>
+            <strong>Business Logic &amp; Validation</strong>
+            <p>Source classification, relationship checks, status logic, exception handling, and profitability signals.</p>
           </div>
           <div class="case-architecture-step">
+            <div class="architecture-step-icon" aria-hidden="true">04</div>
             <span>Layer 04</span>
             <strong>Analytics Views / Dashboard Data</strong>
-            <p>Sales Order View, Internal Order View, Material Tracking, Invoice &amp; Payment View.</p>
+            <p>Sales Order View, Internal Order View, Material Tracking, and Invoice &amp; Payment View.</p>
           </div>
           <div class="case-architecture-step">
+            <div class="architecture-step-icon" aria-hidden="true">05</div>
             <span>Layer 05</span>
             <strong>Dashboard + Excel Export</strong>
-            <p>Web dashboard, searchable tables, filters, and spreadsheet-friendly export workflow.</p>
+            <p>Searchable dashboards, filters, and spreadsheet-friendly export for familiar review workflows.</p>
           </div>
           <div class="case-architecture-step">
+            <div class="architecture-step-icon" aria-hidden="true">06</div>
             <span>Layer 06</span>
-            <strong>Management Review / Operational Follow-up</strong>
-            <p>Supports management review, operational follow-up, issue investigation, and cross-functional coordination.</p>
+            <strong>Management Review / Follow-up</strong>
+            <p>Supports management review, follow-up actions, issue checks, and cross-functional coordination.</p>
           </div>
         </div>
       </div>
