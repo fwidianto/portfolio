@@ -29,12 +29,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/project.css?v=20260629-warm">
-  <link rel="stylesheet" href="../CSS/case-study.css?v=20260703-review-signals-section">
+  <link rel="stylesheet" href="../CSS/case-study.css?v=20260703-built-section">
 
   <style>
     /* css-cleanup-version: 20260702-v1 */
     /* liveliness-polish-version: 20260702-v1 */
     /* review-signals-section-version: 20260703-v1 */
+    /* how-project-built-section-version: 20260703-v1 */
     body {
       background: #f7f9fc;
       color: #0f172a;
@@ -68,13 +69,17 @@
       padding: 18px;
     }
 
-    .case-story-step span {
+    .case-story-step span,
+    .case-insight-label,
+    .how-built-card span,
+    .how-built-layer-label {
       color: var(--accent);
       display: inline-block;
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 0.1em;
       margin-bottom: 10px;
+      text-transform: uppercase;
     }
 
     .case-story-step strong {
@@ -99,7 +104,8 @@
       opacity: 0.65;
     }
 
-    .case-insight-callout {
+    .case-insight-callout,
+    .how-built-note {
       background:
         linear-gradient(145deg, rgba(31, 77, 90, 0.1), rgba(255, 255, 255, 0.86));
       border: 1px solid rgba(31, 77, 90, 0.14);
@@ -109,17 +115,8 @@
       padding: 24px;
     }
 
-    .case-insight-label {
-      color: var(--accent);
-      display: block;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-
-    .case-insight-callout p {
+    .case-insight-callout p,
+    .how-built-note p {
       color: var(--text);
       font-size: 17px;
       font-weight: 650;
@@ -209,11 +206,13 @@
       line-height: 1.6;
     }
 
-    #architecture-data-flow .case-section-header {
+    #architecture-data-flow .case-section-header,
+    #how-project-built .case-section-header {
       max-width: 900px;
     }
 
-    #architecture-data-flow .case-lead {
+    #architecture-data-flow .case-lead,
+    #how-project-built .case-lead {
       max-width: 860px;
     }
 
@@ -228,7 +227,9 @@
       grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
     }
 
-    .case-architecture-stage {
+    .case-architecture-stage,
+    .how-built-card,
+    .how-built-layer {
       background:
         linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(243, 240, 233, 0.84));
       border: 1px solid var(--border);
@@ -254,7 +255,9 @@
       text-transform: uppercase;
     }
 
-    .case-architecture-stage-title {
+    .case-architecture-stage-title,
+    .how-built-card h3,
+    .how-built-layer h3 {
       color: var(--text);
       font-size: 24px;
       font-weight: 800;
@@ -263,7 +266,8 @@
       margin: 0 0 18px;
     }
 
-    .case-architecture-stage-list {
+    .case-architecture-stage-list,
+    .how-built-list {
       display: grid;
       gap: 10px;
       list-style: none;
@@ -271,7 +275,9 @@
       padding: 0;
     }
 
-    .case-architecture-stage-list li {
+    .case-architecture-stage-list li,
+    .how-built-list li,
+    .business-value-list li {
       align-items: flex-start;
       color: var(--muted);
       display: flex;
@@ -279,7 +285,9 @@
       line-height: 1.58;
     }
 
-    .case-architecture-stage-list li::before {
+    .case-architecture-stage-list li::before,
+    .how-built-list li::before,
+    .business-value-list li::before {
       background: var(--accent);
       border-radius: 999px;
       content: "";
@@ -303,6 +311,39 @@
       height: 44px;
       justify-content: center;
       width: 44px;
+    }
+
+    .how-built-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 30px;
+    }
+
+    .how-built-layer-stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .how-built-layer {
+      align-items: flex-start;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(170px, 0.36fr) minmax(0, 1fr);
+      padding: 22px 24px;
+    }
+
+    .how-built-layer h3 {
+      font-size: 19px;
+      margin: 0;
+    }
+
+    .how-built-layer p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+      margin: 0;
     }
 
     #output-evidence .case-table-wrap {
@@ -431,27 +472,14 @@
     }
 
     #business-value .business-value-list li {
-      align-items: flex-start;
-      color: var(--muted);
-      display: flex;
       font-size: 15.5px;
       line-height: 1.68;
     }
 
-    #business-value .business-value-list li::before {
-      background: var(--accent);
-      border-radius: 999px;
-      content: "";
-      flex: 0 0 auto;
-      height: 6px;
-      margin: 10px 11px 0 0;
-      opacity: 0.72;
-      width: 6px;
-    }
-
     @media (max-width: 1100px) {
       .case-story-spine,
-      .review-signals-grid {
+      .review-signals-grid,
+      .how-built-grid {
         grid-template-columns: 1fr;
       }
 
@@ -494,7 +522,8 @@
     @media (max-width: 640px) {
       .case-story-spine,
       .case-insight-callout,
-      .review-signals-note {
+      .review-signals-note,
+      .how-built-note {
         padding: 16px;
       }
 
@@ -506,11 +535,18 @@
         padding: 22px;
       }
 
-      .case-architecture-stage {
+      .case-architecture-stage,
+      .how-built-card,
+      .how-built-layer {
         padding: 22px;
       }
 
-      .case-architecture-stage-title {
+      .how-built-layer {
+        grid-template-columns: 1fr;
+      }
+
+      .case-architecture-stage-title,
+      .how-built-card h3 {
         font-size: 22px;
       }
 
@@ -784,8 +820,110 @@
     </div>
   </section>
 
+  <!-- how-project-built-section-version: 20260703-v1 -->
+  <section class="case-section" id="how-project-built">
+    <div class="case-container">
+      <div class="case-section-header">
+        <div class="case-eyebrow">HOW THE PROJECT WAS BUILT</div>
+        <h2 class="case-subheading">From ERP complexity to usable review logic</h2>
+        <p class="case-lead">
+          The project was built by translating real ERP workflow questions into source-data mapping, validation checks, dashboard logic, and public-safe portfolio evidence.
+        </p>
+      </div>
+
+      <div class="how-built-grid">
+        <div class="how-built-card">
+          <span>01 / Development Problems Found</span>
+          <h3>ERP relationships were not straightforward</h3>
+          <ul class="how-built-list">
+            <li>Standard reports did not answer management review questions directly.</li>
+            <li>Source-of-truth logic had to be validated before becoming dashboard logic.</li>
+            <li>SO, IO, PO, MO, DO, invoice, and payment links needed practical mapping.</li>
+            <li>Public portfolio evidence needed to stay sanitized and public-safe.</li>
+          </ul>
+        </div>
+
+        <div class="how-built-card">
+          <span>02 / Tools and Workflow</span>
+          <h3>Business questions were translated into reusable reporting logic</h3>
+          <ul class="how-built-list">
+            <li>Odoo 16 source data and PostgreSQL / SQL extraction.</li>
+            <li>Dashboard views and reporting outputs for operational review.</li>
+            <li>HTML, CSS, and JavaScript for the portfolio explanation layer.</li>
+            <li>GitHub documentation and AI-assisted iteration with human-led validation.</li>
+          </ul>
+        </div>
+
+        <div class="how-built-card">
+          <span>03 / Technical Architecture</span>
+          <h3>The architecture separates source data, logic, review, and public evidence</h3>
+          <ul class="how-built-list">
+            <li>ERP source layer for operational transaction records.</li>
+            <li>SQL / validation layer for filtering, status checks, and relationships.</li>
+            <li>Business-rule mapping layer for source path, exceptions, and review signals.</li>
+            <li>Dashboard / review layer and public-safe portfolio layer.</li>
+          </ul>
+        </div>
+
+        <div class="how-built-card">
+          <span>04 / Lessons Learned</span>
+          <h3>The dashboard only works when business meaning is validated first</h3>
+          <ul class="how-built-list">
+            <li>Dashboards require business-rule understanding, not only table extraction.</li>
+            <li>ERP migration can create reporting gaps that standard menus do not solve.</li>
+            <li>Exception signals are more useful than raw data alone.</li>
+            <li>AI helps speed development, but business judgment controls the final logic.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="how-built-layer-stack" aria-label="Technical architecture layers">
+        <div class="how-built-layer">
+          <div>
+            <span class="how-built-layer-label">Layer 1</span>
+            <h3>ERP source layer</h3>
+          </div>
+          <p>Odoo transaction records from sales, internal orders, procurement, manufacturing, inventory, invoices, and payments.</p>
+        </div>
+        <div class="how-built-layer">
+          <div>
+            <span class="how-built-layer-label">Layer 2</span>
+            <h3>SQL / validation layer</h3>
+          </div>
+          <p>Filtering, relationship checks, status interpretation, canceled-state exclusion, and source-of-truth validation.</p>
+        </div>
+        <div class="how-built-layer">
+          <div>
+            <span class="how-built-layer-label">Layer 3</span>
+            <h3>Business-rule mapping layer</h3>
+          </div>
+          <p>Mapping ERP fields and custom references into business-readable source paths, review categories, and exception signals.</p>
+        </div>
+        <div class="how-built-layer">
+          <div>
+            <span class="how-built-layer-label">Layer 4</span>
+            <h3>Dashboard / review layer</h3>
+          </div>
+          <p>Reusable dashboard views, review tables, and export-friendly outputs for management review and operational follow-up.</p>
+        </div>
+        <div class="how-built-layer">
+          <div>
+            <span class="how-built-layer-label">Layer 5</span>
+            <h3>Public-safe portfolio layer</h3>
+          </div>
+          <p>Sanitized visuals and recreated examples that explain the project without exposing confidential operational data.</p>
+        </div>
+      </div>
+
+      <div class="how-built-note">
+        <span class="case-insight-label">Technical judgment</span>
+        <p>This section is intentionally more technical than the homepage, but it keeps the focus on business-readable architecture: source data, validation logic, review views, and public-safe evidence.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- output-evidence-version: 20260702-v3-width -->
-  <section class="case-section" id="output-evidence">
+  <section class="case-section case-section--soft" id="output-evidence">
     <div class="case-container">
       <div class="case-section-header">
         <div class="case-eyebrow">OUTPUT EVIDENCE</div>
@@ -845,23 +983,11 @@
               <td><span class="case-status-badge">Supplier Follow-up</span></td>
               <td>Material availability affects delivery readiness.</td>
             </tr>
-            <tr>
-              <td>IO-24-0086</td>
-              <td>Internal Order</td>
-              <td>Delivery Pending</td>
-              <td>N/A</td>
-              <td>N/A</td>
-              <td><span class="case-status-badge">Operational Follow-up</span></td>
-              <td>Check stock movement and fulfillment status.</td>
-            </tr>
           </tbody>
         </table>
       </div>
-      <p class="case-caption">
-        Sample data is fully anonymized and recreated for portfolio explanation. It does not represent real customers, suppliers, order values, invoice values, or profitability figures.
-      </p>
 
-      <h3 class="case-preview-heading">Material &amp; amount tracking preview</h3>
+      <h3 class="case-preview-heading">Supporting public-safe material tracking preview</h3>
       <div class="case-visual-frame" aria-label="Public-safe Material and Amount Order Tracking dashboard preview">
         <div class="case-browser-bar" aria-hidden="true">
           <span class="case-browser-dot"></span>
@@ -871,13 +997,13 @@
         <div class="case-visual-content">
           <img src="../Assets/odoo-material-amount-tracking-public-safe.svg" alt="Public-safe Material and Amount Order Tracking dashboard preview with sanitized labels and recreated values">
           <p class="case-caption">
-            Public-safe dashboard preview showing structured material and amount tracking indicators for operational review. Labels and values are sanitized or recreated for portfolio explanation.
+            Public-safe Material and Amount Order Tracking preview. Displayed labels and values are sanitized or recreated for portfolio explanation.
           </p>
-          <div class="case-visual-guide" aria-label="What to look for in the Material and Amount Tracking preview">
-            <span class="case-guide-chip">Material amount review</span>
-            <span class="case-guide-chip">PR / PO progress</span>
-            <span class="case-guide-chip">Excess amount check</span>
-            <span class="case-guide-chip">Received &amp; invoiced ratio</span>
+          <div class="case-visual-guide" aria-label="What to look for in the material tracking preview">
+            <span class="case-guide-chip">Material requirement</span>
+            <span class="case-guide-chip">Purchase progress</span>
+            <span class="case-guide-chip">Receipt status</span>
+            <span class="case-guide-chip">Follow-up readiness</span>
           </div>
         </div>
       </div>
@@ -885,25 +1011,25 @@
   </section>
 
   <!-- review-signals-version: 20260703-v1 -->
-  <section class="case-section case-section--soft" id="review-signals">
+  <section class="case-section" id="review-signals">
     <div class="case-container">
       <div class="case-section-header">
         <div class="case-eyebrow">REVIEW SIGNALS / EXCEPTION INSIGHTS</div>
-        <h2 class="case-subheading">From ERP records to review signals</h2>
+        <h2 class="case-subheading">From records to review signals</h2>
         <p class="case-lead">
-          To make operational review faster, the dashboard groups filtered ERP rows into simple review signals. These signals help users distinguish normal records from items that may need delivery, invoice, procurement, source relationship, or material follow-up.
+          The dashboard groups filtered ERP rows into simple review indicators so users can distinguish normal records from items that may need delivery, invoice, procurement, source relationship, or material follow-up.
         </p>
       </div>
 
       <p class="review-signals-note">
-        The previews below use public-safe dashboard examples. Values and labels are sanitized or recreated for portfolio explanation and do not expose real customers, suppliers, order values, invoice values, payment records, or profitability data.
+        The screenshots below are public-safe recreated previews. They explain the logic of review categories without exposing real customer, supplier, order, invoice, payment, profitability, or internal operational records.
       </p>
 
       <div class="review-signals-grid">
         <article class="case-card review-signal-visual-card">
           <div>
             <h3>Sales Order Review Signals</h3>
-            <p>Groups filtered sales order rows into review categories such as Healthy, Watchlist, Needs Review, and Operational Follow-up.</p>
+            <p>Groups sales order rows into review categories for delayed delivery, invoice follow-up, source relationship checks, and operational follow-up.</p>
           </div>
           <div class="case-visual-frame" aria-label="Public-safe Sales Order Review Signals dashboard preview">
             <div class="case-browser-bar" aria-hidden="true">
@@ -978,7 +1104,7 @@
     </div>
   </section>
 
-  <section class="case-section" id="dashboard-modules">
+  <section class="case-section case-section--soft" id="dashboard-modules">
     <div class="case-container">
       <div class="case-section-header">
         <div class="case-eyebrow">DASHBOARD MODULES</div>
@@ -1017,7 +1143,7 @@
     </div>
   </section>
 
-  <section class="case-section case-section--soft" id="business-value">
+  <section class="case-section" id="business-value">
     <div class="case-container">
       <div class="case-section-header">
         <div class="case-eyebrow">BUSINESS VALUE</div>
@@ -1074,7 +1200,7 @@
     </div>
   </section>
 
-  <section class="case-section" id="skills-demonstrated">
+  <section class="case-section case-section--soft" id="skills-demonstrated">
     <div class="case-container">
       <div class="case-section-header">
         <div class="case-eyebrow">SKILLS DEMONSTRATED</div>
