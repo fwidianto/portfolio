@@ -29,11 +29,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/project.css?v=20260629-warm">
-  <link rel="stylesheet" href="../CSS/case-study.css?v=20260702-liveliness-polish">
+  <link rel="stylesheet" href="../CSS/case-study.css?v=20260703-review-signals-section">
 
   <style>
     /* css-cleanup-version: 20260702-v1 */
     /* liveliness-polish-version: 20260702-v1 */
+    /* review-signals-section-version: 20260703-v1 */
     body {
       background: #f7f9fc;
       color: #0f172a;
@@ -155,6 +156,57 @@
       font-weight: 750;
       line-height: 1;
       padding: 9px 12px;
+    }
+
+    .review-signals-note {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.7;
+      margin-top: 22px;
+      max-width: 980px;
+      padding: 20px 22px;
+    }
+
+    .review-signals-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 30px;
+    }
+
+    .review-signal-visual-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .review-signal-visual-card .case-visual-frame {
+      margin-top: 4px;
+    }
+
+    .review-signal-explainer-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      margin-top: 26px;
+    }
+
+    .review-signal-explainer-card {
+      padding: 20px;
+    }
+
+    .review-signal-explainer-card h3 {
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .review-signal-explainer-card p {
+      font-size: 14.5px;
+      line-height: 1.6;
     }
 
     #architecture-data-flow .case-section-header {
@@ -398,13 +450,18 @@
     }
 
     @media (max-width: 1100px) {
-      .case-story-spine {
+      .case-story-spine,
+      .review-signals-grid {
         grid-template-columns: 1fr;
       }
 
       .case-story-arrow {
         justify-self: center;
         transform: rotate(90deg);
+      }
+
+      .review-signal-explainer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .case-architecture-pipeline {
@@ -436,8 +493,13 @@
 
     @media (max-width: 640px) {
       .case-story-spine,
-      .case-insight-callout {
+      .case-insight-callout,
+      .review-signals-note {
         padding: 16px;
+      }
+
+      .review-signal-explainer-grid {
+        grid-template-columns: 1fr;
       }
 
       #architecture-data-flow .case-architecture {
@@ -817,6 +879,100 @@
             <span class="case-guide-chip">Excess amount check</span>
             <span class="case-guide-chip">Received &amp; invoiced ratio</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- review-signals-version: 20260703-v1 -->
+  <section class="case-section case-section--soft" id="review-signals">
+    <div class="case-container">
+      <div class="case-section-header">
+        <div class="case-eyebrow">REVIEW SIGNALS / EXCEPTION INSIGHTS</div>
+        <h2 class="case-subheading">From ERP records to review signals</h2>
+        <p class="case-lead">
+          To make operational review faster, the dashboard groups filtered ERP rows into simple review signals. These signals help users distinguish normal records from items that may need delivery, invoice, procurement, source relationship, or material follow-up.
+        </p>
+      </div>
+
+      <p class="review-signals-note">
+        The previews below use public-safe dashboard examples. Values and labels are sanitized or recreated for portfolio explanation and do not expose real customers, suppliers, order values, invoice values, payment records, or profitability data.
+      </p>
+
+      <div class="review-signals-grid">
+        <article class="case-card review-signal-visual-card">
+          <div>
+            <h3>Sales Order Review Signals</h3>
+            <p>Groups filtered sales order rows into review categories such as Healthy, Watchlist, Needs Review, and Operational Follow-up.</p>
+          </div>
+          <div class="case-visual-frame" aria-label="Public-safe Sales Order Review Signals dashboard preview">
+            <div class="case-browser-bar" aria-hidden="true">
+              <span class="case-browser-dot"></span>
+              <span class="case-browser-dot"></span>
+              <span class="case-browser-dot"></span>
+            </div>
+            <div class="case-visual-content">
+              <img src="../Assets/odoo-review-signals-sales-order-public-safe.svg" alt="Public-safe Sales Order Review Signals dashboard preview with sanitized review signal counts and detection cards">
+              <p class="case-caption">
+                Public-safe Sales Order Review Signals preview. Displayed values are sanitized or recreated for portfolio explanation.
+              </p>
+              <div class="case-visual-guide" aria-label="What to look for in the Sales Order Review Signals preview">
+                <span class="case-guide-chip">Delayed delivery</span>
+                <span class="case-guide-chip">Waiting invoice</span>
+                <span class="case-guide-chip">Source relationship check</span>
+                <span class="case-guide-chip">Operational follow-up</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-card review-signal-visual-card">
+          <div>
+            <h3>Material &amp; Procurement Review Signals</h3>
+            <p>Groups material and procurement rows into review categories for monitoring PO progress, receipt status, and procurement follow-up.</p>
+          </div>
+          <div class="case-visual-frame" aria-label="Public-safe Material and Procurement Review Signals dashboard preview">
+            <div class="case-browser-bar" aria-hidden="true">
+              <span class="case-browser-dot"></span>
+              <span class="case-browser-dot"></span>
+              <span class="case-browser-dot"></span>
+            </div>
+            <div class="case-visual-content">
+              <img src="../Assets/odoo-review-signals-material-procurement-public-safe.svg" alt="Public-safe Material and Procurement Review Signals dashboard preview with sanitized review signal counts and detection cards">
+              <p class="case-caption">
+                Public-safe Material and Procurement Review Signals preview. Displayed values are sanitized or recreated for portfolio explanation.
+              </p>
+              <div class="case-visual-guide" aria-label="What to look for in the Material and Procurement Review Signals preview">
+                <span class="case-guide-chip">ROP without PO</span>
+                <span class="case-guide-chip">PO not received</span>
+                <span class="case-guide-chip">Partially received</span>
+                <span class="case-guide-chip">Supplier follow-up</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="review-signal-explainer-grid" aria-label="Review Signal category explanation">
+        <div class="case-card review-signal-explainer-card">
+          <h3>Healthy</h3>
+          <p>Rows with no immediate follow-up detected from the exposed dashboard fields.</p>
+        </div>
+        <div class="case-card review-signal-explainer-card">
+          <h3>Watchlist</h3>
+          <p>Normal in-progress or context rows that should be monitored until complete.</p>
+        </div>
+        <div class="case-card review-signal-explainer-card">
+          <h3>Needs Review</h3>
+          <p>Rows with delayed, unclear, mismatched, or variance-related signals.</p>
+        </div>
+        <div class="case-card review-signal-explainer-card">
+          <h3>Supplier Follow-up</h3>
+          <p>Procurement or receipt progress that may need supplier-side follow-up.</p>
+        </div>
+        <div class="case-card review-signal-explainer-card">
+          <h3>Operational Follow-up</h3>
+          <p>Fulfillment, manufacturing, source path, or internal process follow-up.</p>
         </div>
       </div>
     </div>
