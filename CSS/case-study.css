@@ -649,6 +649,133 @@
 }
 
 /* ==========================================================
+   Odoo build logic map sense polish
+   ========================================================== */
+
+/* build-logic-map-sense-version: 20260703-v1 */
+#how-project-built .build-architecture-map {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(116px, 0.42fr) minmax(0, 1fr) !important;
+  grid-template-areas:
+    "source extract validation"
+    "recheck rules apply"
+    "review publish portfolio"
+    "feedback feedback feedback" !important;
+  gap: 16px !important;
+  min-height: auto !important;
+  padding: 20px !important;
+}
+
+#how-project-built .build-architecture-node {
+  position: relative !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  width: auto !important;
+}
+
+#how-project-built .build-architecture-node--source {
+  grid-area: source !important;
+}
+
+#how-project-built .build-architecture-node--validation {
+  grid-area: validation !important;
+}
+
+#how-project-built .build-architecture-node--rules {
+  grid-area: rules !important;
+}
+
+#how-project-built .build-architecture-node--review {
+  grid-area: review !important;
+}
+
+#how-project-built .build-architecture-node--portfolio {
+  grid-area: portfolio !important;
+}
+
+#how-project-built .build-architecture-connector {
+  align-items: center !important;
+  align-self: center !important;
+  background: rgba(31, 77, 90, 0.08) !important;
+  border: 1px dashed rgba(31, 77, 90, 0.22) !important;
+  border-radius: 999px !important;
+  color: var(--accent) !important;
+  display: inline-flex !important;
+  font-size: 0 !important;
+  font-weight: 850 !important;
+  height: auto !important;
+  justify-content: center !important;
+  line-height: 1.2 !important;
+  min-height: 42px !important;
+  padding: 10px 12px !important;
+  position: relative !important;
+  text-align: center !important;
+  transform: none !important;
+  width: auto !important;
+}
+
+#how-project-built .build-architecture-connector::before {
+  display: none !important;
+}
+
+#how-project-built .build-architecture-connector::after {
+  content: "";
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+#how-project-built .build-architecture-connector--source-validation {
+  grid-area: extract !important;
+}
+
+#how-project-built .build-architecture-connector--source-validation::after {
+  content: "Extract →";
+}
+
+#how-project-built .build-architecture-connector--validation-rules {
+  grid-area: apply !important;
+}
+
+#how-project-built .build-architecture-connector--validation-rules::after {
+  content: "Validate ↓";
+}
+
+#how-project-built .build-architecture-connector--source-rules {
+  grid-area: recheck !important;
+}
+
+#how-project-built .build-architecture-connector--source-rules::after {
+  content: "↖ Recheck source";
+}
+
+#how-project-built .build-architecture-connector--rules-review {
+  grid-area: feedback !important;
+}
+
+#how-project-built .build-architecture-connector--rules-review::after {
+  content: "Feedback loop: review signals refine business rules and source checks";
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+#how-project-built .build-architecture-connector--portfolio-review {
+  grid-area: publish !important;
+}
+
+#how-project-built .build-architecture-connector--portfolio-review::after {
+  content: "Sanitize →";
+}
+
+#how-project-built .build-architecture-connector--rules-portfolio {
+  display: none !important;
+}
+
+/* ==========================================================
    Responsive
    ========================================================== */
 
@@ -686,6 +813,27 @@
   .case-cta {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 760px) {
+  #how-project-built .build-architecture-map {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "source"
+      "extract"
+      "validation"
+      "apply"
+      "rules"
+      "recheck"
+      "review"
+      "publish"
+      "portfolio"
+      "feedback" !important;
+  }
+
+  #how-project-built .build-architecture-connector {
+    min-height: 36px !important;
   }
 }
 
