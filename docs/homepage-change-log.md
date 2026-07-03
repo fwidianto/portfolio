@@ -18,6 +18,40 @@ This file records meaningful homepage updates so the homepage development direct
 
 ---
 
+## 2026-07-03 - Hero Focus Accordion Removed
+
+### Changed Sections
+- Hero
+- Inline CSS
+- Homepage interaction / liveliness note
+
+### Reason
+- Removed the `Interactive focus` accordion because it was only expandable text and did not match the intended interactive direction.
+- Kept the hero positioning, buttons, profile card, and Phase 2 workflow / flagship Odoo structure intact.
+- Clarified that future homepage interaction should be more meaningful, visual, or navigational, such as project filter chips or a public-safe Odoo preview interaction.
+
+### Files Edited
+- `index.html`
+- `docs/homepage-lively-interaction-note.md`
+- `docs/homepage-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Homepage Improvement Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real operational data was added.
+- No confidential data was added.
+- No fake impact metrics were added.
+- The next interaction should help readers explore evidence or understand the portfolio more clearly, not simply expand hidden text.
+
+---
+
 ## 2026-07-03 - Homepage Phase 2 Structure Added
 
 ### Changed Sections
