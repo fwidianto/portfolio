@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1869" height="245" viewBox="0 0 1869 245" role="img" aria-label="Public-safe Material and Amount Order Tracking dashboard preview">
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.text{font-family:Inter,Arial,sans-serif;fill:#071827}.label{fill:#40566e;font-size:12px;font-weight:800}.value{fill:#071827;font-size:22px;font-weight:800}.value-accent{fill:#005f61;font-size:22px;font-weight:800}.card{fill:#fff;stroke:#cfd8e3;stroke-width:1}.card-accent{fill:#e8f6f4;stroke:#008b8b;stroke-width:1.2}.badge{fill:#e9f8f0;stroke:#94d3ad}.badge-text{fill:#047857;font-size:14px;font-weight:800}
+    </style>
+  </defs>
+  <rect class="bg" width="1869" height="245"/>
+  <g transform="translate(9 15)">
+    <rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">INTERNAL ORDER NUMBER</text><text class="value" x="17" y="59">1234567</text>
+    <g transform="translate(233 0)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">COMPANY</text><text class="value" x="17" y="59">PT. Maju Terdepan</text></g>
+    <g transform="translate(466 0)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">SALES ORDER LINK STATUS</text><rect class="badge" x="17" y="42" width="151" height="26" rx="13"/><text class="badge-text" x="29" y="60">Linked to Sales Order</text></g>
+    <g transform="translate(699 0)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">PRODUCT COUNT</text><text class="value" x="17" y="59">424</text></g>
+    <g transform="translate(932 0)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">INTERNAL ORDER AMOUNT</text><text class="value" x="17" y="59">Rp 13.4 Miliar</text></g>
+    <g transform="translate(1165 0)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">BOQ AMOUNT</text><text class="value" x="17" y="59">Rp 9.1 Miliar</text></g>
+    <g transform="translate(1398 0)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">BOQ GROSS PROFIT</text><text class="value" x="17" y="59">Rp 4.3 Miliar</text></g>
+    <g transform="translate(1631 0)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">BOQ GROSS PROFIT %</text><text class="value" x="17" y="59">32.11%</text></g>
+    <g transform="translate(0 116)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">PR AMOUNT</text><text class="value" x="17" y="59">Rp 6.43 Miliar</text></g>
+    <g transform="translate(233 116)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">PO AMOUNT</text><text class="value" x="17" y="59">Rp 5.93 Miliar</text></g>
+    <g transform="translate(466 116)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">PR EXCESS AMOUNT</text><text class="value" x="17" y="59">Rp 224 Juta</text></g>
+    <g transform="translate(699 116)"><rect class="card-accent" width="222" height="105" rx="8"/><text class="label" x="17" y="26">PO EXCESS AMOUNT</text><text class="value-accent" x="17" y="59">Rp 233 Juta</text></g>
+    <g transform="translate(932 116)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">PO RECEIVED RATIO</text><text class="value" x="17" y="59">26.75%</text></g>
+    <g transform="translate(1165 116)"><rect class="card" width="222" height="105" rx="8"/><text class="label" x="17" y="26">PO INVOICED RATIO</text><text class="value" x="17" y="59">18.50%</text></g>
+  </g>
+</svg>
