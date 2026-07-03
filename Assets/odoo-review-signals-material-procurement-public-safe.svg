@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1782" height="490" viewBox="0 0 1782 490" role="img" aria-labelledby="title desc">
+  <title id="title">Public-safe Material and Procurement Review Signals dashboard preview</title>
+  <desc id="desc">Recreated dashboard preview showing sanitized material and procurement Review Signals, mix bars, and detection cards.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7fafc}.panel{fill:#fff;stroke:#d5e0eb;stroke-width:1.2}.card{fill:#fbfdff;stroke:#d5e0eb;stroke-width:1.2}.info{fill:#f8fbfd;stroke:#d5e0eb;stroke-width:1.2}.title{font-family:Inter,Arial,sans-serif;font-size:18px;font-weight:800;fill:#0f172a}.sub{font-family:Inter,Arial,sans-serif;font-size:13px;fill:#334e68}.label{font-family:Inter,Arial,sans-serif;font-size:12px;font-weight:800;fill:#334e68;text-transform:uppercase}.body{font-family:Inter,Arial,sans-serif;font-size:13px;fill:#334e68}.value{font-family:Inter,Arial,sans-serif;font-size:27px;font-weight:850;fill:#06101f}.small{font-family:Inter,Arial,sans-serif;font-size:12px;font-weight:800;fill:#334e68}.track{fill:#eef3f6}.green{fill:#5b9b84}.amber{fill:#c58b1e}.red{fill:#bb5d5d}.steel{fill:#6d879e}.blue{fill:#7fa9bd}
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1782" height="490" rx="10"/>
+  <rect class="panel" x="6" y="6" width="1770" height="478" rx="8"/>
+  <text class="title" x="28" y="42">Review Signals</text>
+  <text class="sub" x="28" y="63">Material/procurement review grouping based on currently filtered rows.</text>
+
+  <g transform="translate(28,80)">
+    <rect class="card" x="0" y="0" width="338" height="76" rx="7"/><text class="label" x="13" y="26">HEALTHY</text><text class="value" x="13" y="57">42</text>
+    <rect class="card" x="350" y="0" width="338" height="76" rx="7"/><text class="label" x="363" y="26">WATCHLIST</text><text class="value" x="363" y="57">242</text>
+    <rect class="card" x="700" y="0" width="338" height="76" rx="7"/><text class="label" x="713" y="26">NEEDS REVIEW</text><text class="value" x="713" y="57">0</text>
+    <rect class="card" x="1050" y="0" width="338" height="76" rx="7"/><text class="label" x="1063" y="26">SUPPLIER FOLLOW-UP</text><text class="value" x="1063" y="57">140</text>
+    <rect class="card" x="1400" y="0" width="338" height="76" rx="7"/><text class="label" x="1413" y="26">OPERATIONAL FOLLOW-UP</text><text class="value" x="1413" y="57">0</text>
+  </g>
+
+  <rect class="info" x="28" y="170" width="1738" height="92" rx="7"/>
+  <text class="body" x="40" y="195"><tspan font-weight="800" fill="#06101f">Healthy:</tspan> PO material appears received. From Stock is not automatically Healthy because stock is not yet project-correlated.</text>
+  <text class="body" x="902" y="195"><tspan font-weight="800" fill="#06101f">Watchlist:</tspan> normal in-progress or context row, such as RKB only, PO above ROP due to MOQ, PO without ROP, Mixed UoM notice, or planned from stock.</text>
+  <text class="body" x="40" y="220"><tspan font-weight="800" fill="#06101f">Supplier Follow-up:</tspan> purchasing action likely needed, such as ROP without PO, PO Qty less than ROP, PO not received, or partially received.</text>
+  <text class="body" x="902" y="220"><tspan font-weight="800" fill="#06101f">Operational Follow-up:</tspan> process/context follow-up, such as Pre-SO Internal Order or non-product/service row.</text>
+  <text class="body" x="40" y="245"><tspan font-weight="800" fill="#06101f">Needs Review:</tspan> kept very limited; not used for normal RKB/ROP/PO differences.</text>
+  <text class="body" x="902" y="245">Rules are priority-based. The first matching higher-priority rule becomes the Review Signal.</text>
+
+  <g transform="translate(28,276)">
+    <rect class="card" x="0" y="0" width="730" height="215" rx="7"/>
+    <text class="small" x="13" y="25">Healthy</text><text class="small" x="712" y="25" text-anchor="end">42</text><rect class="track" x="13" y="34" width="704" height="8" rx="4"/><rect class="green" x="13" y="34" width="70" height="8" rx="4"/>
+    <text class="small" x="13" y="66">Watchlist</text><text class="small" x="712" y="66" text-anchor="end">242</text><rect class="track" x="13" y="75" width="704" height="8" rx="4"/><rect class="amber" x="13" y="75" width="400" height="8" rx="4"/>
+    <text class="small" x="13" y="107">Needs Review</text><text class="small" x="712" y="107" text-anchor="end">0</text><rect class="track" x="13" y="116" width="704" height="8" rx="4"/><rect class="red" x="13" y="116" width="12" height="8" rx="4"/>
+    <text class="small" x="13" y="148">Supplier Follow-up</text><text class="small" x="712" y="148" text-anchor="end">140</text><rect class="track" x="13" y="157" width="704" height="8" rx="4"/><rect class="steel" x="13" y="157" width="270" height="8" rx="4"/>
+    <text class="small" x="13" y="189">Operational Follow-up</text><text class="small" x="712" y="189" text-anchor="end">0</text><rect class="track" x="13" y="198" width="704" height="8" rx="4"/><rect class="blue" x="13" y="198" width="12" height="8" rx="4"/>
+
+    <g transform="translate(745,0)">
+      <rect class="card" x="0" y="0" width="190" height="95" rx="7"/><text class="label" x="12" y="28">ROP WITHOUT PO</text><text class="value" x="178" y="32" text-anchor="end">10</text><text class="body" x="12" y="60">Supplier follow-up:</text><text class="body" x="12" y="78">ROP exists but PO is not created yet.</text>
+      <rect class="card" x="200" y="0" width="190" height="95" rx="7"/><text class="label" x="212" y="28">PO QTY LESS THAN ROP</text><text class="value" x="378" y="32" text-anchor="end">16</text><text class="body" x="212" y="60">Supplier follow-up:</text><text class="body" x="212" y="78">ordered quantity is below ROP.</text>
+      <rect class="card" x="400" y="0" width="190" height="95" rx="7"/><text class="label" x="412" y="28">PO QTY ABOVE ROP</text><text class="value" x="578" y="32" text-anchor="end">17</text><text class="body" x="412" y="60">Notice: may be MOQ or</text><text class="body" x="412" y="78">supplier packaging.</text>
+      <rect class="card" x="600" y="0" width="190" height="95" rx="7"/><text class="label" x="612" y="28">PO NOT RECEIVED</text><text class="value" x="778" y="32" text-anchor="end">116</text><text class="body" x="612" y="60">Supplier follow-up:</text><text class="body" x="612" y="78">no receipt progress yet.</text>
+      <rect class="card" x="800" y="0" width="190" height="95" rx="7"/><text class="label" x="812" y="28">PARTIALLY RECEIVED</text><text class="value" x="978" y="32" text-anchor="end">13</text><text class="body" x="812" y="60">Supplier follow-up may be</text><text class="body" x="812" y="78">needed until fully received.</text>
+      <rect class="card" x="0" y="110" width="190" height="95" rx="7"/><text class="label" x="12" y="138">PO WITHOUT ROP</text><text class="value" x="178" y="142" text-anchor="end">3</text><text class="body" x="12" y="170">Notice: may be service,</text><text class="body" x="12" y="188">discount, or manual purchase.</text>
+      <rect class="card" x="200" y="110" width="190" height="95" rx="7"/><text class="label" x="212" y="138">MIXED UOM NOTICE</text><text class="value" x="378" y="142" text-anchor="end">0</text><text class="body" x="212" y="170">Prevention notice:</text><text class="body" x="212" y="188">company rule expects same UoM.</text>
+      <rect class="card" x="400" y="110" width="190" height="95" rx="7"/><text class="label" x="412" y="138">FROM STOCK PLAN</text><text class="value" x="578" y="142" text-anchor="end">0</text><text class="body" x="412" y="170">Notice: stock is not yet</text><text class="body" x="412" y="188">project-correlated.</text>
+      <rect class="card" x="600" y="110" width="190" height="95" rx="7"/><text class="label" x="612" y="138">RKB ONLY</text><text class="value" x="778" y="142" text-anchor="end">242</text><text class="body" x="612" y="170">Context row for contribution</text><text class="body" x="612" y="188">comparison and monitoring.</text>
+      <rect class="card" x="800" y="110" width="190" height="95" rx="7"/><text class="label" x="812" y="138">TRANSACTIONAL / NON-MATERIAL</text><text class="value" x="978" y="142" text-anchor="end">4</text><text class="body" x="812" y="170">Excluded from strict material</text><text class="body" x="812" y="188">readiness review.</text>
+    </g>
+  </g>
+</svg>
