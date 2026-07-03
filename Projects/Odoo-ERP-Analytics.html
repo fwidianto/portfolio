@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/project.css?v=20260629-warm">
-  <link rel="stylesheet" href="../CSS/case-study.css?v=20260703-built-section-redesign">
+  <link rel="stylesheet" href="../CSS/case-study.css?v=20260703-clean-translation-board">
 
   <style>
     /* css-cleanup-version: 20260702-v1 */
@@ -37,6 +37,7 @@
     /* review-signals-section-version: 20260703-v1 */
     /* how-project-built-section-version: 20260703-v1 */
     /* built-section-redesign-version: 20260703-v1 */
+    /* logic-translation-board-clean-html-version: 20260703-v1 */
     body {
       background: #f7f9fc;
       color: #0f172a;
@@ -72,8 +73,7 @@
 
     .case-story-step span,
     .case-insight-label,
-    .build-panel-label,
-    .build-architecture-node-kicker {
+    .build-panel-label {
       color: var(--accent);
       display: inline-block;
       font-size: 12px;
@@ -107,8 +107,7 @@
 
     .case-insight-callout,
     .build-learning-note {
-      background:
-        linear-gradient(145deg, rgba(31, 77, 90, 0.1), rgba(255, 255, 255, 0.86));
+      background: linear-gradient(145deg, rgba(31, 77, 90, 0.1), rgba(255, 255, 255, 0.86));
       border: 1px solid rgba(31, 77, 90, 0.14);
       border-radius: 24px;
       box-shadow: var(--shadow-card);
@@ -229,8 +228,7 @@
     }
 
     .case-architecture-stage {
-      background:
-        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(243, 240, 233, 0.84));
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(243, 240, 233, 0.84));
       border: 1px solid var(--border);
       border-radius: 24px;
       box-shadow: var(--shadow-card);
@@ -263,7 +261,8 @@
       margin: 0 0 18px;
     }
 
-    .case-architecture-stage-list {
+    .case-architecture-stage-list,
+    .business-value-list {
       display: grid;
       gap: 10px;
       list-style: none;
@@ -307,7 +306,6 @@
       width: 44px;
     }
 
-    /* built-section-redesign-version: 20260703-v1 */
     .build-journey-layout {
       align-items: stretch;
       display: grid;
@@ -317,7 +315,7 @@
     }
 
     .build-journey-panel,
-    .build-architecture-panel {
+    .logic-translation-panel {
       background: rgba(255, 255, 255, 0.78);
       border: 1px solid var(--border);
       border-radius: 30px;
@@ -328,7 +326,7 @@
     }
 
     .build-journey-panel::before,
-    .build-architecture-panel::before {
+    .logic-translation-panel::before {
       background: radial-gradient(circle, rgba(31, 77, 90, 0.12), transparent 65%);
       content: "";
       height: 220px;
@@ -340,7 +338,7 @@
     }
 
     .build-journey-panel > *,
-    .build-architecture-panel > * {
+    .logic-translation-panel > * {
       position: relative;
       z-index: 1;
     }
@@ -417,143 +415,78 @@
       margin: 0;
     }
 
-    .build-architecture-map {
-      background:
-        radial-gradient(circle at 50% 45%, rgba(31, 77, 90, 0.12), transparent 15rem),
-        rgba(246, 242, 234, 0.58);
+    .logic-translation-board {
+      background: rgba(246, 242, 234, 0.58);
       border: 1px solid rgba(31, 77, 90, 0.12);
       border-radius: 28px;
-      margin-top: 24px;
-      min-height: 430px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .build-architecture-node {
-      align-items: center;
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid rgba(31, 77, 90, 0.14);
-      border-radius: 22px;
-      box-shadow: 0 10px 26px rgba(31, 41, 51, 0.06);
       display: grid;
-      gap: 10px;
-      grid-template-columns: 44px minmax(0, 1fr);
-      padding: 14px;
-      position: absolute;
-      width: min(220px, 43%);
-      z-index: 2;
+      gap: 12px;
+      margin-top: 24px;
+      padding: 18px;
     }
 
-    .build-architecture-node-symbol {
-      align-items: center;
-      background: rgba(31, 77, 90, 0.09);
+    .logic-translation-header,
+    .logic-translation-row {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) 26px minmax(0, 1fr) 26px minmax(0, 1fr);
+    }
+
+    .logic-translation-header {
+      background: rgba(31, 77, 90, 0.08);
       border: 1px solid rgba(31, 77, 90, 0.12);
       border-radius: 16px;
       color: var(--accent);
-      display: inline-flex;
-      font-size: 20px;
+      font-size: 12px;
       font-weight: 900;
-      height: 44px;
-      justify-content: center;
-      width: 44px;
+      letter-spacing: 0.05em;
+      padding: 12px 14px;
+      text-transform: uppercase;
     }
 
-    .build-architecture-node h3 {
+    .logic-translation-header span:nth-child(1) { grid-column: 1; }
+    .logic-translation-header span:nth-child(2) { grid-column: 3; }
+    .logic-translation-header span:nth-child(3) { grid-column: 5; }
+
+    .logic-translation-row {
+      align-items: stretch;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(31, 77, 90, 0.12);
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(31, 41, 51, 0.05);
+      padding: 14px;
+    }
+
+    .logic-translation-cell {
+      align-content: start;
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .logic-translation-label {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .logic-translation-value {
       color: var(--text);
-      font-size: 16px;
-      line-height: 1.18;
-      margin: 0 0 4px;
+      font-size: 14.5px;
+      font-weight: 750;
+      line-height: 1.38;
     }
 
-    .build-architecture-node p {
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.4;
-      margin: 0;
-    }
-
-    .build-architecture-node--source {
-      left: 24px;
-      top: 28px;
-    }
-
-    .build-architecture-node--validation {
-      right: 24px;
-      top: 40px;
-    }
-
-    .build-architecture-node--rules {
-      left: 50%;
-      top: 48%;
-      transform: translate(-50%, -50%);
-      width: min(230px, 48%);
-    }
-
-    .build-architecture-node--review {
-      bottom: 34px;
-      left: 28px;
-    }
-
-    .build-architecture-node--portfolio {
-      bottom: 28px;
-      right: 24px;
-    }
-
-    .build-architecture-connector {
+    .logic-translation-arrow {
       align-items: center;
-      color: rgba(31, 77, 90, 0.72);
+      color: rgba(31, 77, 90, 0.66);
       display: inline-flex;
-      font-size: 26px;
+      font-size: 16px;
       font-weight: 900;
       justify-content: center;
-      position: absolute;
-      z-index: 1;
-    }
-
-    .build-architecture-connector::before {
-      background: rgba(31, 77, 90, 0.2);
-      border-radius: 999px;
-      content: "";
-      height: 2px;
-      position: absolute;
-      width: 100px;
-      z-index: -1;
-    }
-
-    .build-architecture-connector--source-validation {
-      left: 43%;
-      top: 86px;
-      transform: translateX(-50%);
-    }
-
-    .build-architecture-connector--validation-rules {
-      right: 31%;
-      top: 168px;
-      transform: rotate(42deg);
-    }
-
-    .build-architecture-connector--source-rules {
-      left: 31%;
-      top: 180px;
-      transform: rotate(-35deg);
-    }
-
-    .build-architecture-connector--rules-review {
-      bottom: 136px;
-      left: 33%;
-      transform: rotate(42deg);
-    }
-
-    .build-architecture-connector--rules-portfolio {
-      bottom: 132px;
-      right: 32%;
-      transform: rotate(-40deg);
-    }
-
-    .build-architecture-connector--portfolio-review {
-      bottom: 88px;
-      left: 50%;
-      transform: translateX(-50%);
     }
 
     #output-evidence .case-table-wrap {
@@ -673,19 +606,6 @@
       opacity: 0.68;
     }
 
-    #business-value .business-value-list {
-      display: grid;
-      gap: 12px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    #business-value .business-value-list li {
-      font-size: 15.5px;
-      line-height: 1.68;
-    }
-
     @media (max-width: 1100px) {
       .case-story-spine,
       .review-signals-grid,
@@ -730,25 +650,17 @@
     }
 
     @media (max-width: 760px) {
-      .build-architecture-map {
-        display: grid;
-        gap: 12px;
-        min-height: auto;
-        padding: 16px;
-      }
-
-      .build-architecture-node {
-        position: static;
-        width: 100%;
-      }
-
-      .build-architecture-node--rules {
-        transform: none;
-        width: 100%;
-      }
-
-      .build-architecture-connector {
+      .logic-translation-header {
         display: none;
+      }
+
+      .logic-translation-row {
+        grid-template-columns: 1fr;
+      }
+
+      .logic-translation-arrow {
+        min-height: 22px;
+        transform: rotate(90deg);
       }
     }
 
@@ -770,7 +682,7 @@
 
       .case-architecture-stage,
       .build-journey-panel,
-      .build-architecture-panel {
+      .logic-translation-panel {
         padding: 22px;
       }
 
@@ -885,9 +797,7 @@
       </div>
 
       <div class="case-card">
-        <p>
-          The work focused on turning scattered ERP transactions into validated, dashboard-ready views with clear source-of-truth logic.
-        </p>
+        <p>The work focused on turning scattered ERP transactions into validated, dashboard-ready views with clear source-of-truth logic.</p>
       </div>
 
       <div class="case-grid case-grid--3 context-card-grid">
@@ -944,16 +854,10 @@
       </div>
 
       <div class="case-visual-frame" aria-label="Public-safe Sales Order Traceability dashboard preview">
-        <div class="case-browser-bar" aria-hidden="true">
-          <span class="case-browser-dot"></span>
-          <span class="case-browser-dot"></span>
-          <span class="case-browser-dot"></span>
-        </div>
+        <div class="case-browser-bar" aria-hidden="true"><span class="case-browser-dot"></span><span class="case-browser-dot"></span><span class="case-browser-dot"></span></div>
         <div class="case-visual-content">
           <img src="../Assets/odoo-so-traceability-public-safe.svg" alt="Public-safe Sales Order Traceability dashboard preview with sanitized labels and recreated values">
-          <p class="case-caption">
-            Public-safe dashboard preview of the Sales Order Traceability view. Displayed labels and values are sanitized or recreated for portfolio explanation.
-          </p>
+          <p class="case-caption">Public-safe dashboard preview of the Sales Order Traceability view. Displayed labels and values are sanitized or recreated for portfolio explanation.</p>
           <div class="case-visual-guide" aria-label="What to look for in the Sales Order Traceability preview">
             <span class="case-guide-chip">Source status</span>
             <span class="case-guide-chip">Delivery progress</span>
@@ -970,42 +874,16 @@
       <div class="case-section-header">
         <div class="case-eyebrow">APPROACH / WORKFLOW</div>
         <h2 class="case-subheading">From business questions to validated analytics logic</h2>
-        <p class="case-lead">
-          I started from the business review need, then translated it into ERP relationships, SQL logic, dashboard structure, and reviewable outputs.
-        </p>
+        <p class="case-lead">I started from the business review need, then translated it into ERP relationships, SQL logic, dashboard structure, and reviewable outputs.</p>
       </div>
 
       <div class="case-grid case-grid--3">
-        <div class="case-card">
-          <div class="case-card-number">01</div>
-          <h3>Clarify the business question</h3>
-          <p>Start from review needs: status, source, fulfillment, billing, payment, and profitability signals.</p>
-        </div>
-        <div class="case-card">
-          <div class="case-card-number">02</div>
-          <h3>Map the ERP flow</h3>
-          <p>Trace how records connect across sales, internal orders, procurement, production, stock, and finance.</p>
-        </div>
-        <div class="case-card">
-          <div class="case-card-number">03</div>
-          <h3>Validate the source of truth</h3>
-          <p>Check fields, references, statuses, and exceptions before writing reporting logic.</p>
-        </div>
-        <div class="case-card">
-          <div class="case-card-number">04</div>
-          <h3>Build analytics logic</h3>
-          <p>Turn validated logic into PostgreSQL / SQL views for reusable dashboard datasets.</p>
-        </div>
-        <div class="case-card">
-          <div class="case-card-number">05</div>
-          <h3>Design dashboard views</h3>
-          <p>Present familiar review views instead of raw database complexity.</p>
-        </div>
-        <div class="case-card">
-          <div class="case-card-number">06</div>
-          <h3>Review with business context</h3>
-          <p>Use AI to speed iteration while keeping business-rule review human-led.</p>
-        </div>
+        <div class="case-card"><div class="case-card-number">01</div><h3>Clarify the business question</h3><p>Start from review needs: status, source, fulfillment, billing, payment, and profitability signals.</p></div>
+        <div class="case-card"><div class="case-card-number">02</div><h3>Map the ERP flow</h3><p>Trace how records connect across sales, internal orders, procurement, production, stock, and finance.</p></div>
+        <div class="case-card"><div class="case-card-number">03</div><h3>Validate the source of truth</h3><p>Check fields, references, statuses, and exceptions before writing reporting logic.</p></div>
+        <div class="case-card"><div class="case-card-number">04</div><h3>Build analytics logic</h3><p>Turn validated logic into PostgreSQL / SQL views for reusable dashboard datasets.</p></div>
+        <div class="case-card"><div class="case-card-number">05</div><h3>Design dashboard views</h3><p>Present familiar review views instead of raw database complexity.</p></div>
+        <div class="case-card"><div class="case-card-number">06</div><h3>Review with business context</h3><p>Use AI to speed iteration while keeping business-rule review human-led.</p></div>
       </div>
     </div>
   </section>
@@ -1015,9 +893,7 @@
       <div class="case-section-header">
         <div class="case-eyebrow">ARCHITECTURE / DATA FLOW</div>
         <h2 class="case-subheading">How ERP transactions become reviewable business visibility</h2>
-        <p class="case-lead">
-          The dashboard starts from Odoo transaction records, then applies extraction, validation, analytics views, and reporting outputs for management review and operational follow-up.
-        </p>
+        <p class="case-lead">The dashboard starts from Odoo transaction records, then applies extraction, validation, analytics views, and reporting outputs for management review and operational follow-up.</p>
       </div>
 
       <div class="case-architecture" aria-label="ERP analytics architecture pipeline">
@@ -1025,37 +901,19 @@
           <div class="case-architecture-stage">
             <div class="case-architecture-stage-label">INPUT</div>
             <h3 class="case-architecture-stage-title">ERP Source</h3>
-            <ul class="case-architecture-stage-list">
-              <li>Odoo transaction records</li>
-              <li>Sales, internal orders, purchasing</li>
-              <li>Manufacturing, inventory, invoices, payments</li>
-            </ul>
+            <ul class="case-architecture-stage-list"><li>Odoo transaction records</li><li>Sales, internal orders, purchasing</li><li>Manufacturing, inventory, invoices, payments</li></ul>
           </div>
-
           <div class="case-architecture-connector" aria-hidden="true">→</div>
-
           <div class="case-architecture-stage">
             <div class="case-architecture-stage-label">PROCESSING</div>
             <h3 class="case-architecture-stage-title">Data &amp; Logic Layer</h3>
-            <ul class="case-architecture-stage-list">
-              <li>PostgreSQL / SQL extraction</li>
-              <li>Company filtering and canceled-state exclusion</li>
-              <li>Source classification and relationship checks</li>
-              <li>Status logic, exceptions, and profitability signals</li>
-            </ul>
+            <ul class="case-architecture-stage-list"><li>PostgreSQL / SQL extraction</li><li>Company filtering and canceled-state exclusion</li><li>Source classification and relationship checks</li><li>Status logic, exceptions, and profitability signals</li></ul>
           </div>
-
           <div class="case-architecture-connector" aria-hidden="true">→</div>
-
           <div class="case-architecture-stage">
             <div class="case-architecture-stage-label">OUTPUT</div>
             <h3 class="case-architecture-stage-title">Review Visibility</h3>
-            <ul class="case-architecture-stage-list">
-              <li>Analytics views and dashboard data</li>
-              <li>Searchable dashboard and Excel export</li>
-              <li>Management review and operational follow-up</li>
-              <li>Cross-functional coordination</li>
-            </ul>
+            <ul class="case-architecture-stage-list"><li>Analytics views and dashboard data</li><li>Searchable dashboard and Excel export</li><li>Management review and operational follow-up</li><li>Cross-functional coordination</li></ul>
           </div>
         </div>
       </div>
@@ -1068,9 +926,7 @@
       <div class="case-section-header">
         <div class="case-eyebrow">HOW THE PROJECT WAS BUILT</div>
         <h2 class="case-subheading">From ERP complexity to usable review logic</h2>
-        <p class="case-lead">
-          This project was not only about building a dashboard. It required understanding process complexity, validating business rules, turning ERP relationships into review-ready logic, and preparing public-safe evidence.
-        </p>
+        <p class="case-lead">This project was not only about building a dashboard. It required understanding process complexity, validating business rules, turning ERP relationships into review-ready logic, and preparing public-safe evidence.</p>
       </div>
 
       <div class="build-journey-layout">
@@ -1080,454 +936,70 @@
           <p class="build-panel-copy">A guided path showing how the project moved from ERP complexity into practical review outputs.</p>
 
           <div class="build-journey-steps">
-            <div class="build-journey-step">
-              <div class="build-journey-number">01</div>
-              <div>
-                <h3>Messy ERP flow</h3>
-                <p>Sales, procurement, production, delivery, invoice, and payment records were connected in practice but difficult to review together.</p>
-              </div>
-            </div>
-
-            <div class="build-journey-step">
-              <div class="build-journey-number">02</div>
-              <div>
-                <h3>Source mapping</h3>
-                <p>The project mapped how SO, IO, PO, MO, DO, invoice, and payment records relate to each other.</p>
-              </div>
-            </div>
-
-            <div class="build-journey-step">
-              <div class="build-journey-number">03</div>
-              <div>
-                <h3>Business rule validation</h3>
-                <p>Statuses, references, custom fields, and exceptions needed interpretation before becoming reporting logic.</p>
-              </div>
-            </div>
-
-            <div class="build-journey-step">
-              <div class="build-journey-number">04</div>
-              <div>
-                <h3>Review logic</h3>
-                <p>Validated rules were translated into SQL views, dashboard outputs, and review signals.</p>
-              </div>
-            </div>
-
-            <div class="build-journey-step">
-              <div class="build-journey-number">05</div>
-              <div>
-                <h3>Public-safe evidence</h3>
-                <p>The portfolio version uses sanitized visuals and recreated examples to explain the work safely.</p>
-              </div>
-            </div>
+            <div class="build-journey-step"><div class="build-journey-number">01</div><div><h3>Messy ERP flow</h3><p>Sales, procurement, production, delivery, invoice, and payment records were connected in practice but difficult to review together.</p></div></div>
+            <div class="build-journey-step"><div class="build-journey-number">02</div><div><h3>Source mapping</h3><p>The project mapped how SO, IO, PO, MO, DO, invoice, and payment records relate to each other.</p></div></div>
+            <div class="build-journey-step"><div class="build-journey-number">03</div><div><h3>Business rule validation</h3><p>Statuses, references, custom fields, and exceptions needed interpretation before becoming reporting logic.</p></div></div>
+            <div class="build-journey-step"><div class="build-journey-number">04</div><div><h3>Review logic</h3><p>Validated rules were translated into SQL views, dashboard outputs, and review signals.</p></div></div>
+            <div class="build-journey-step"><div class="build-journey-number">05</div><div><h3>Public-safe evidence</h3><p>The portfolio version uses sanitized visuals and recreated examples to explain the work safely.</p></div></div>
           </div>
         </article>
 
-        <aside class="build-architecture-panel" aria-label="Dynamic Architecture and Logic Map">
-          <span class="build-panel-label">Dynamic Architecture / Logic Map</span>
-          <h3 class="build-panel-heading">How the logic connects</h3>
-          <p class="build-panel-copy">The layers are shown as a connected system because source data, validation, business rules, review views, and public-safe evidence influence each other.</p>
+        <aside class="logic-translation-panel" aria-label="Logic Translation Board">
+          <span class="build-panel-label">Logic Translation Board</span>
+          <h3 class="build-panel-heading">How raw ERP records became business-readable review outputs</h3>
+          <p class="build-panel-copy">A structured board showing how ERP records were interpreted into business meaning and then turned into review outputs.</p>
 
-          <div class="build-architecture-map" aria-label="Connected Odoo analytics architecture map">
-            <div class="build-architecture-connector build-architecture-connector--source-validation" aria-hidden="true">↔</div>
-            <div class="build-architecture-connector build-architecture-connector--validation-rules" aria-hidden="true">↘</div>
-            <div class="build-architecture-connector build-architecture-connector--source-rules" aria-hidden="true">↗</div>
-            <div class="build-architecture-connector build-architecture-connector--rules-review" aria-hidden="true">↙</div>
-            <div class="build-architecture-connector build-architecture-connector--rules-portfolio" aria-hidden="true">↘</div>
-            <div class="build-architecture-connector build-architecture-connector--portfolio-review" aria-hidden="true">↔</div>
+          <!-- logic-translation-board-clean-html-version: 20260703-v1 -->
+          <div class="logic-translation-board" aria-label="Logic Translation Board">
+            <div class="logic-translation-header" aria-hidden="true"><span>ERP Source / Record</span><span>Business Meaning</span><span>Review Output</span></div>
 
-            <div class="build-architecture-node build-architecture-node--source">
-              <div class="build-architecture-node-symbol" aria-hidden="true">▦</div>
-              <div>
-                <span class="build-architecture-node-kicker">Source</span>
-                <h3>ERP Sources</h3>
-                <p>Odoo transactions</p>
-              </div>
-            </div>
+            <div class="logic-translation-row"><div class="logic-translation-cell"><span class="logic-translation-label">ERP Source / Record</span><strong class="logic-translation-value">SO, IO, PO, MO</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Business Meaning</span><strong class="logic-translation-value">Source relationship and fulfillment path</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Review Output</span><strong class="logic-translation-value">Order traceability</strong></div></div>
 
-            <div class="build-architecture-node build-architecture-node--validation">
-              <div class="build-architecture-node-symbol" aria-hidden="true">⌕</div>
-              <div>
-                <span class="build-architecture-node-kicker">Check</span>
-                <h3>SQL &amp; Validation</h3>
-                <p>Filtering &amp; checks</p>
-              </div>
-            </div>
+            <div class="logic-translation-row"><div class="logic-translation-cell"><span class="logic-translation-label">ERP Source / Record</span><strong class="logic-translation-value">Delivery, invoice, payment</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Business Meaning</span><strong class="logic-translation-value">Operational and financial progress</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Review Output</span><strong class="logic-translation-value">Delivery, invoicing, and payment review status</strong></div></div>
 
-            <div class="build-architecture-node build-architecture-node--rules">
-              <div class="build-architecture-node-symbol" aria-hidden="true">◇</div>
-              <div>
-                <span class="build-architecture-node-kicker">Logic</span>
-                <h3>Business Rules</h3>
-                <p>Meaning &amp; exceptions</p>
-              </div>
-            </div>
+            <div class="logic-translation-row"><div class="logic-translation-cell"><span class="logic-translation-label">ERP Source / Record</span><strong class="logic-translation-value">Statuses, references, exceptions</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Business Meaning</span><strong class="logic-translation-value">Business-rule interpretation</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Review Output</span><strong class="logic-translation-value">Watchlist, needs review, or follow-up signal</strong></div></div>
 
-            <div class="build-architecture-node build-architecture-node--review">
-              <div class="build-architecture-node-symbol" aria-hidden="true">▤</div>
-              <div>
-                <span class="build-architecture-node-kicker">Output</span>
-                <h3>Review Views</h3>
-                <p>Dashboards &amp; exports</p>
-              </div>
-            </div>
-
-            <div class="build-architecture-node build-architecture-node--portfolio">
-              <div class="build-architecture-node-symbol" aria-hidden="true">◉</div>
-              <div>
-                <span class="build-architecture-node-kicker">Safe</span>
-                <h3>Public-Safe Portfolio</h3>
-                <p>Sanitized evidence</p>
-              </div>
-            </div>
+            <div class="logic-translation-row"><div class="logic-translation-cell"><span class="logic-translation-label">ERP Source / Record</span><strong class="logic-translation-value">Real internal records</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Business Meaning</span><strong class="logic-translation-value">Confidential operational data</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Review Output</span><strong class="logic-translation-value">Public-safe recreated evidence</strong></div></div>
           </div>
         </aside>
       </div>
 
-      <div class="build-learning-note">
-        <span class="case-insight-label">Technical judgment</span>
-        <p>The key work was not only extracting ERP data. The harder part was validating what each transaction meant in the business process before turning it into review logic.</p>
-      </div>
+      <div class="build-learning-note"><span class="case-insight-label">Technical judgment</span><p>The key work was not only extracting ERP data. The harder part was validating what each transaction meant in the business process before turning it into review logic.</p></div>
     </div>
   </section>
 
   <!-- output-evidence-version: 20260702-v3-width -->
   <section class="case-section case-section--soft" id="output-evidence">
     <div class="case-container">
-      <div class="case-section-header">
-        <div class="case-eyebrow">OUTPUT EVIDENCE</div>
-        <h2 class="case-subheading">Example of review-ready operational reporting output</h2>
-        <p class="case-lead">
-          The dashboard output is designed to turn ERP transaction logic into a reviewable table that supports order tracking, fulfillment review, invoicing visibility, payment follow-up, and profitability signals without requiring users to inspect raw ERP records one by one.
-        </p>
-      </div>
-
-      <div class="case-table-wrap">
-        <table class="case-table case-table--output-evidence">
-          <thead>
-            <tr>
-              <th>Order Ref</th>
-              <th>Source Type</th>
-              <th>Delivery</th>
-              <th>Invoicing</th>
-              <th>Payment</th>
-              <th>Profitability Signal</th>
-              <th>Review Note</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>SO-24-0142</td>
-              <td>From Stock</td>
-              <td>Delivered</td>
-              <td>Fully Invoiced</td>
-              <td>Paid</td>
-              <td><span class="case-status-badge">Healthy</span></td>
-              <td>Routine order, no exception follow-up.</td>
-            </tr>
-            <tr>
-              <td>SO-24-0179</td>
-              <td>Manufacturing</td>
-              <td>In Progress</td>
-              <td>Pending</td>
-              <td>Not Due</td>
-              <td><span class="case-status-badge">Watchlist</span></td>
-              <td>Production and delivery progress under monitoring.</td>
-            </tr>
-            <tr>
-              <td>SO-24-0208</td>
-              <td>Internal Order</td>
-              <td>Partially Ready</td>
-              <td>Partial</td>
-              <td>Outstanding</td>
-              <td><span class="case-status-badge">Needs Review</span></td>
-              <td>Linked procurement and invoice follow-up required.</td>
-            </tr>
-            <tr>
-              <td>SO-24-0241</td>
-              <td>Purchase</td>
-              <td>Waiting Material</td>
-              <td>Not Invoiced</td>
-              <td>Not Due</td>
-              <td><span class="case-status-badge">Supplier Follow-up</span></td>
-              <td>Material availability affects delivery readiness.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
+      <div class="case-section-header"><div class="case-eyebrow">OUTPUT EVIDENCE</div><h2 class="case-subheading">Example of review-ready operational reporting output</h2><p class="case-lead">The dashboard output is designed to turn ERP transaction logic into a reviewable table that supports order tracking, fulfillment review, invoicing visibility, payment follow-up, and profitability signals without requiring users to inspect raw ERP records one by one.</p></div>
+      <div class="case-table-wrap"><table class="case-table case-table--output-evidence"><thead><tr><th>Order Ref</th><th>Source Type</th><th>Delivery</th><th>Invoicing</th><th>Payment</th><th>Profitability Signal</th><th>Review Note</th></tr></thead><tbody><tr><td>SO-24-0142</td><td>From Stock</td><td>Delivered</td><td>Fully Invoiced</td><td>Paid</td><td><span class="case-status-badge">Healthy</span></td><td>Routine order, no exception follow-up.</td></tr><tr><td>SO-24-0179</td><td>Manufacturing</td><td>In Progress</td><td>Pending</td><td>Not Due</td><td><span class="case-status-badge">Watchlist</span></td><td>Production and delivery progress under monitoring.</td></tr><tr><td>SO-24-0208</td><td>Internal Order</td><td>Partially Ready</td><td>Partial</td><td>Outstanding</td><td><span class="case-status-badge">Needs Review</span></td><td>Linked procurement and invoice follow-up required.</td></tr><tr><td>SO-24-0241</td><td>Purchase</td><td>Waiting Material</td><td>Not Invoiced</td><td>Not Due</td><td><span class="case-status-badge">Supplier Follow-up</span></td><td>Material availability affects delivery readiness.</td></tr></tbody></table></div>
       <h3 class="case-preview-heading">Supporting public-safe material tracking preview</h3>
-      <div class="case-visual-frame" aria-label="Public-safe Material and Amount Order Tracking dashboard preview">
-        <div class="case-browser-bar" aria-hidden="true">
-          <span class="case-browser-dot"></span>
-          <span class="case-browser-dot"></span>
-          <span class="case-browser-dot"></span>
-        </div>
-        <div class="case-visual-content">
-          <img src="../Assets/odoo-material-amount-tracking-public-safe.svg" alt="Public-safe Material and Amount Order Tracking dashboard preview with sanitized labels and recreated values">
-          <p class="case-caption">
-            Public-safe Material and Amount Order Tracking preview. Displayed labels and values are sanitized or recreated for portfolio explanation.
-          </p>
-          <div class="case-visual-guide" aria-label="What to look for in the material tracking preview">
-            <span class="case-guide-chip">Material requirement</span>
-            <span class="case-guide-chip">Purchase progress</span>
-            <span class="case-guide-chip">Receipt status</span>
-            <span class="case-guide-chip">Follow-up readiness</span>
-          </div>
-        </div>
-      </div>
+      <div class="case-visual-frame" aria-label="Public-safe Material and Amount Order Tracking dashboard preview"><div class="case-browser-bar" aria-hidden="true"><span class="case-browser-dot"></span><span class="case-browser-dot"></span><span class="case-browser-dot"></span></div><div class="case-visual-content"><img src="../Assets/odoo-material-amount-tracking-public-safe.svg" alt="Public-safe Material and Amount Order Tracking dashboard preview with sanitized labels and recreated values"><p class="case-caption">Public-safe Material and Amount Order Tracking preview. Displayed labels and values are sanitized or recreated for portfolio explanation.</p><div class="case-visual-guide" aria-label="What to look for in the material tracking preview"><span class="case-guide-chip">Material requirement</span><span class="case-guide-chip">Purchase progress</span><span class="case-guide-chip">Receipt status</span><span class="case-guide-chip">Follow-up readiness</span></div></div></div>
     </div>
   </section>
 
   <!-- review-signals-version: 20260703-v1 -->
   <section class="case-section" id="review-signals">
     <div class="case-container">
-      <div class="case-section-header">
-        <div class="case-eyebrow">REVIEW SIGNALS / EXCEPTION INSIGHTS</div>
-        <h2 class="case-subheading">From records to review signals</h2>
-        <p class="case-lead">
-          The dashboard groups filtered ERP rows into simple review indicators so users can distinguish normal records from items that may need delivery, invoice, procurement, source relationship, or material follow-up.
-        </p>
-      </div>
-
-      <p class="review-signals-note">
-        The screenshots below are public-safe recreated previews. They explain the logic of review categories without exposing real customer, supplier, order, invoice, payment, profitability, or internal operational records.
-      </p>
-
+      <div class="case-section-header"><div class="case-eyebrow">REVIEW SIGNALS / EXCEPTION INSIGHTS</div><h2 class="case-subheading">From records to review signals</h2><p class="case-lead">The dashboard groups filtered ERP rows into simple review indicators so users can distinguish normal records from items that may need delivery, invoice, procurement, source relationship, or material follow-up.</p></div>
+      <p class="review-signals-note">The screenshots below are public-safe recreated previews. They explain the logic of review categories without exposing real customer, supplier, order, invoice, payment, profitability, or internal operational records.</p>
       <div class="review-signals-grid">
-        <article class="case-card review-signal-visual-card">
-          <div>
-            <h3>Sales Order Review Signals</h3>
-            <p>Groups sales order rows into review categories for delayed delivery, invoice follow-up, source relationship checks, and operational follow-up.</p>
-          </div>
-          <div class="case-visual-frame" aria-label="Public-safe Sales Order Review Signals dashboard preview">
-            <div class="case-browser-bar" aria-hidden="true">
-              <span class="case-browser-dot"></span>
-              <span class="case-browser-dot"></span>
-              <span class="case-browser-dot"></span>
-            </div>
-            <div class="case-visual-content">
-              <img src="../Assets/odoo-review-signals-sales-order-public-safe.svg" alt="Public-safe Sales Order Review Signals dashboard preview with sanitized review signal counts and detection cards">
-              <p class="case-caption">
-                Public-safe Sales Order Review Signals preview. Displayed values are sanitized or recreated for portfolio explanation.
-              </p>
-              <div class="case-visual-guide" aria-label="What to look for in the Sales Order Review Signals preview">
-                <span class="case-guide-chip">Delayed delivery</span>
-                <span class="case-guide-chip">Waiting invoice</span>
-                <span class="case-guide-chip">Source relationship check</span>
-                <span class="case-guide-chip">Operational follow-up</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="case-card review-signal-visual-card">
-          <div>
-            <h3>Material &amp; Procurement Review Signals</h3>
-            <p>Groups material and procurement rows into review categories for monitoring PO progress, receipt status, and procurement follow-up.</p>
-          </div>
-          <div class="case-visual-frame" aria-label="Public-safe Material and Procurement Review Signals dashboard preview">
-            <div class="case-browser-bar" aria-hidden="true">
-              <span class="case-browser-dot"></span>
-              <span class="case-browser-dot"></span>
-              <span class="case-browser-dot"></span>
-            </div>
-            <div class="case-visual-content">
-              <img src="../Assets/odoo-review-signals-material-procurement-public-safe.svg" alt="Public-safe Material and Procurement Review Signals dashboard preview with sanitized review signal counts and detection cards">
-              <p class="case-caption">
-                Public-safe Material and Procurement Review Signals preview. Displayed values are sanitized or recreated for portfolio explanation.
-              </p>
-              <div class="case-visual-guide" aria-label="What to look for in the Material and Procurement Review Signals preview">
-                <span class="case-guide-chip">ROP without PO</span>
-                <span class="case-guide-chip">PO not received</span>
-                <span class="case-guide-chip">Partially received</span>
-                <span class="case-guide-chip">Supplier follow-up</span>
-              </div>
-            </div>
-          </div>
-        </article>
+        <article class="case-card review-signal-visual-card"><div><h3>Sales Order Review Signals</h3><p>Groups sales order rows into review categories for delayed delivery, invoice follow-up, source relationship checks, and operational follow-up.</p></div><div class="case-visual-frame" aria-label="Public-safe Sales Order Review Signals dashboard preview"><div class="case-browser-bar" aria-hidden="true"><span class="case-browser-dot"></span><span class="case-browser-dot"></span><span class="case-browser-dot"></span></div><div class="case-visual-content"><img src="../Assets/odoo-review-signals-sales-order-public-safe.svg" alt="Public-safe Sales Order Review Signals dashboard preview with sanitized review signal counts and detection cards"><p class="case-caption">Public-safe Sales Order Review Signals preview. Displayed values are sanitized or recreated for portfolio explanation.</p><div class="case-visual-guide"><span class="case-guide-chip">Delayed delivery</span><span class="case-guide-chip">Waiting invoice</span><span class="case-guide-chip">Source relationship check</span><span class="case-guide-chip">Operational follow-up</span></div></div></div></article>
+        <article class="case-card review-signal-visual-card"><div><h3>Material &amp; Procurement Review Signals</h3><p>Groups material and procurement rows into review categories for monitoring PO progress, receipt status, and procurement follow-up.</p></div><div class="case-visual-frame" aria-label="Public-safe Material and Procurement Review Signals dashboard preview"><div class="case-browser-bar" aria-hidden="true"><span class="case-browser-dot"></span><span class="case-browser-dot"></span><span class="case-browser-dot"></span></div><div class="case-visual-content"><img src="../Assets/odoo-review-signals-material-procurement-public-safe.svg" alt="Public-safe Material and Procurement Review Signals dashboard preview with sanitized review signal counts and detection cards"><p class="case-caption">Public-safe Material and Procurement Review Signals preview. Displayed values are sanitized or recreated for portfolio explanation.</p><div class="case-visual-guide"><span class="case-guide-chip">ROP without PO</span><span class="case-guide-chip">PO not received</span><span class="case-guide-chip">Partially received</span><span class="case-guide-chip">Supplier follow-up</span></div></div></div></article>
       </div>
-
-      <div class="review-signal-explainer-grid" aria-label="Review Signal category explanation">
-        <div class="case-card review-signal-explainer-card">
-          <h3>Healthy</h3>
-          <p>Rows with no immediate follow-up detected from the exposed dashboard fields.</p>
-        </div>
-        <div class="case-card review-signal-explainer-card">
-          <h3>Watchlist</h3>
-          <p>Normal in-progress or context rows that should be monitored until complete.</p>
-        </div>
-        <div class="case-card review-signal-explainer-card">
-          <h3>Needs Review</h3>
-          <p>Rows with delayed, unclear, mismatched, or variance-related signals.</p>
-        </div>
-        <div class="case-card review-signal-explainer-card">
-          <h3>Supplier Follow-up</h3>
-          <p>Procurement or receipt progress that may need supplier-side follow-up.</p>
-        </div>
-        <div class="case-card review-signal-explainer-card">
-          <h3>Operational Follow-up</h3>
-          <p>Fulfillment, manufacturing, source path, or internal process follow-up.</p>
-        </div>
-      </div>
+      <div class="review-signal-explainer-grid"><div class="case-card review-signal-explainer-card"><h3>Healthy</h3><p>Rows with no immediate follow-up detected from the exposed dashboard fields.</p></div><div class="case-card review-signal-explainer-card"><h3>Watchlist</h3><p>Normal in-progress or context rows that should be monitored until complete.</p></div><div class="case-card review-signal-explainer-card"><h3>Needs Review</h3><p>Rows with delayed, unclear, mismatched, or variance-related signals.</p></div><div class="case-card review-signal-explainer-card"><h3>Supplier Follow-up</h3><p>Procurement or receipt progress that may need supplier-side follow-up.</p></div><div class="case-card review-signal-explainer-card"><h3>Operational Follow-up</h3><p>Fulfillment, manufacturing, source path, or internal process follow-up.</p></div></div>
     </div>
   </section>
 
-  <section class="case-section case-section--soft" id="dashboard-modules">
-    <div class="case-container">
-      <div class="case-section-header">
-        <div class="case-eyebrow">DASHBOARD MODULES</div>
-        <h2 class="case-subheading">What the system supports for operational review</h2>
-        <p class="case-lead">
-          The dashboard groups familiar review needs so users can trace orders, materials, profitability signals, business rules, and spreadsheet-friendly outputs without reading raw tables.
-        </p>
-      </div>
+  <section class="case-section case-section--soft" id="dashboard-modules"><div class="case-container"><div class="case-section-header"><div class="case-eyebrow">DASHBOARD MODULES</div><h2 class="case-subheading">What the system supports for operational review</h2><p class="case-lead">The dashboard groups familiar review needs so users can trace orders, materials, profitability signals, business rules, and spreadsheet-friendly outputs without reading raw tables.</p></div><div class="case-grid case-grid--3"><div class="case-card"><h3>Sales Order View</h3><p>Shows order context, source, fulfillment, invoice, payment, and review status.</p></div><div class="case-card"><h3>Internal Order View</h3><p>Links internal demand to procurement, manufacturing, stock movement, and fulfillment.</p></div><div class="case-card"><h3>Order Material Tracking</h3><p>Tracks order needs through purchase, stock movement, delivery readiness, and follow-up.</p></div><div class="case-card"><h3>Profitability Review</h3><p>Supports commercial and operational signal review before approval or performance discussion.</p></div><div class="case-card"><h3>Business Rule Validation</h3><p>Clarifies how ERP fields, references, statuses, and exceptions become KPI logic.</p></div><div class="case-card"><h3>Excel Export Workflow</h3><p>Keeps spreadsheet review familiar while using a more structured data source.</p></div></div></div></section>
 
-      <div class="case-grid case-grid--3">
-        <div class="case-card">
-          <h3>Sales Order View</h3>
-          <p>Shows order context, source, fulfillment, invoice, payment, and review status.</p>
-        </div>
-        <div class="case-card">
-          <h3>Internal Order View</h3>
-          <p>Links internal demand to procurement, manufacturing, stock movement, and fulfillment.</p>
-        </div>
-        <div class="case-card">
-          <h3>Order Material Tracking</h3>
-          <p>Tracks order needs through purchase, stock movement, delivery readiness, and follow-up.</p>
-        </div>
-        <div class="case-card">
-          <h3>Profitability Review</h3>
-          <p>Supports commercial and operational signal review before approval or performance discussion.</p>
-        </div>
-        <div class="case-card">
-          <h3>Business Rule Validation</h3>
-          <p>Clarifies how ERP fields, references, statuses, and exceptions become KPI logic.</p>
-        </div>
-        <div class="case-card">
-          <h3>Excel Export Workflow</h3>
-          <p>Keeps spreadsheet review familiar while using a more structured data source.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="case-section" id="business-value"><div class="case-container"><div class="case-section-header"><div class="case-eyebrow">BUSINESS VALUE</div><h2 class="case-subheading">From manual checking to reusable operational visibility</h2><p class="case-lead">The project reduces repeated manual checking by turning scattered ERP records into reusable review views, helping management and operational teams understand what needs follow-up more quickly.</p></div><div class="business-value-strip"><div class="business-value-step"><span class="business-value-symbol" aria-hidden="true">⌕</span><span class="business-value-label">Manual checking</span></div><div class="business-value-arrow" aria-hidden="true">→</div><div class="business-value-step"><span class="business-value-symbol" aria-hidden="true">↔</span><span class="business-value-label">Scattered ERP records</span></div><div class="business-value-arrow" aria-hidden="true">→</div><div class="business-value-step"><span class="business-value-symbol" aria-hidden="true">▦</span><span class="business-value-label">Structured review views</span></div><div class="business-value-arrow" aria-hidden="true">→</div><div class="business-value-step"><span class="business-value-symbol" aria-hidden="true">✓</span><span class="business-value-label">Faster follow-up</span></div></div><div class="case-grid case-grid--2"><div class="case-card"><h3>Before</h3><ul class="business-value-list"><li>Manual checking across multiple ERP menus</li><li>Order, procurement, delivery, invoice, and payment information felt scattered</li><li>Traceability depended heavily on individual knowledge</li><li>Reporting required repeated spreadsheet reconstruction</li><li>Business rules and exceptions were difficult to review consistently</li></ul></div><div class="case-card"><h3>After</h3><ul class="business-value-list"><li>Centralized dashboard views for operational review</li><li>Clearer connection across order flow and supporting transactions</li><li>Reusable SQL logic and dashboard-ready analytical structure</li><li>Faster review path for management reporting and follow-up</li><li>Better documentation of source-of-truth logic and data exceptions</li></ul></div></div></div></section>
 
-  <section class="case-section" id="business-value">
-    <div class="case-container">
-      <div class="case-section-header">
-        <div class="case-eyebrow">BUSINESS VALUE</div>
-        <h2 class="case-subheading">From manual checking to reusable operational visibility</h2>
-        <p class="case-lead">
-          The project reduces repeated manual checking by turning scattered ERP records into reusable review views, helping management and operational teams understand what needs follow-up more quickly.
-        </p>
-      </div>
-
-      <div class="business-value-strip" aria-label="Business value flow from manual checking to faster follow-up">
-        <div class="business-value-step">
-          <span class="business-value-symbol" aria-hidden="true">⌕</span>
-          <span class="business-value-label">Manual checking</span>
-        </div>
-        <div class="business-value-arrow" aria-hidden="true">→</div>
-        <div class="business-value-step">
-          <span class="business-value-symbol" aria-hidden="true">↔</span>
-          <span class="business-value-label">Scattered ERP records</span>
-        </div>
-        <div class="business-value-arrow" aria-hidden="true">→</div>
-        <div class="business-value-step">
-          <span class="business-value-symbol" aria-hidden="true">▦</span>
-          <span class="business-value-label">Structured review views</span>
-        </div>
-        <div class="business-value-arrow" aria-hidden="true">→</div>
-        <div class="business-value-step">
-          <span class="business-value-symbol" aria-hidden="true">✓</span>
-          <span class="business-value-label">Faster follow-up</span>
-        </div>
-      </div>
-
-      <div class="case-grid case-grid--2">
-        <div class="case-card">
-          <h3>Before</h3>
-          <ul class="business-value-list">
-            <li>Manual checking across multiple ERP menus</li>
-            <li>Order, procurement, delivery, invoice, and payment information felt scattered</li>
-            <li>Traceability depended heavily on individual knowledge</li>
-            <li>Reporting required repeated spreadsheet reconstruction</li>
-            <li>Business rules and exceptions were difficult to review consistently</li>
-          </ul>
-        </div>
-        <div class="case-card">
-          <h3>After</h3>
-          <ul class="business-value-list">
-            <li>Centralized dashboard views for operational review</li>
-            <li>Clearer connection across order flow and supporting transactions</li>
-            <li>Reusable SQL logic and dashboard-ready analytical structure</li>
-            <li>Faster review path for management reporting and follow-up</li>
-            <li>Better documentation of source-of-truth logic and data exceptions</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="case-section case-section--soft" id="skills-demonstrated">
-    <div class="case-container">
-      <div class="case-section-header">
-        <div class="case-eyebrow">SKILLS DEMONSTRATED</div>
-        <h2 class="case-subheading">What this project demonstrates beyond dashboard building</h2>
-        <p class="case-lead">
-          The project combines process understanding, ERP logic, data validation, reporting design, and cross-functional review.
-        </p>
-      </div>
-
-      <div class="case-grid case-grid--3">
-        <div class="case-card">
-          <h3>Business Analysis</h3>
-          <p>Turned operational questions into reporting logic, KPI structure, and review flows.</p>
-        </div>
-        <div class="case-card">
-          <h3>ERP Understanding</h3>
-          <p>Connected sales, purchasing, inventory, manufacturing, finance, and management review.</p>
-        </div>
-        <div class="case-card">
-          <h3>Data Validation</h3>
-          <p>Checked tables, custom fields, statuses, exceptions, and business meaning before insights.</p>
-        </div>
-        <div class="case-card">
-          <h3>Technical Translation</h3>
-          <p>Used SQL, PostgreSQL, Python, and frontend views to make business logic usable.</p>
-        </div>
-        <div class="case-card">
-          <h3>AI-Assisted Delivery</h3>
-          <p>Used AI tools for faster iteration while keeping final judgment human-led.</p>
-        </div>
-        <div class="case-card">
-          <h3>Cross-Functional Thinking</h3>
-          <p>Designed views for operations, sales, procurement, finance, and management.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="case-section case-section--soft" id="skills-demonstrated"><div class="case-container"><div class="case-section-header"><div class="case-eyebrow">SKILLS DEMONSTRATED</div><h2 class="case-subheading">What this project demonstrates beyond dashboard building</h2><p class="case-lead">The project combines process understanding, ERP logic, data validation, reporting design, and cross-functional review.</p></div><div class="case-grid case-grid--3"><div class="case-card"><h3>Business Analysis</h3><p>Turned operational questions into reporting logic, KPI structure, and review flows.</p></div><div class="case-card"><h3>ERP Understanding</h3><p>Connected sales, purchasing, inventory, manufacturing, finance, and management review.</p></div><div class="case-card"><h3>Data Validation</h3><p>Checked tables, custom fields, statuses, exceptions, and business meaning before insights.</p></div><div class="case-card"><h3>Technical Translation</h3><p>Used SQL, PostgreSQL, Python, and frontend views to make business logic usable.</p></div><div class="case-card"><h3>AI-Assisted Delivery</h3><p>Used AI tools for faster iteration while keeping final judgment human-led.</p></div><div class="case-card"><h3>Cross-Functional Thinking</h3><p>Designed views for operations, sales, procurement, finance, and management.</p></div></div></div></section>
 
   <!-- cta-confidentiality-version: 20260702-v2 -->
-  <section class="case-section" id="cta-confidentiality">
-    <div class="case-container">
-      <div class="case-card">
-        <div class="case-eyebrow">PUBLIC-SAFE CASE STUDY</div>
-        <h2 class="case-subheading">A portfolio version designed to protect confidential operational data</h2>
-        <p class="case-lead">
-          This case study explains the project structure, business logic, and analytics approach without exposing customer names, supplier names, real order numbers, invoice values, profitability figures, database access details, server details, or confidential operational records.
-        </p>
-        <div class="case-actions">
-          <a class="case-btn case-btn--primary" href="https://github.com/fwidianto/dashboard-odoo" target="_blank" rel="noopener noreferrer">View repository</a>
-          <a class="case-btn case-btn--secondary" href="../index.html#projects">Back to projects</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="case-section" id="cta-confidentiality"><div class="case-container"><div class="case-card"><div class="case-eyebrow">PUBLIC-SAFE CASE STUDY</div><h2 class="case-subheading">A portfolio version designed to protect confidential operational data</h2><p class="case-lead">This case study explains the project structure, business logic, and analytics approach without exposing customer names, supplier names, real order numbers, invoice values, profitability figures, database access details, server details, or confidential operational records.</p><div class="case-actions"><a class="case-btn case-btn--primary" href="https://github.com/fwidianto/dashboard-odoo" target="_blank" rel="noopener noreferrer">View repository</a><a class="case-btn case-btn--secondary" href="../index.html#projects">Back to projects</a></div></div></div></section>
 
-  <footer>
-    <div class="container">
-      Odoo ERP Analytics Case Study - Public-safe overview
-    </div>
-  </footer>
+  <footer><div class="container">Odoo ERP Analytics Case Study - Public-safe overview</div></footer>
 </body>
 </html>
