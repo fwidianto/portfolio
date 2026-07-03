@@ -43,6 +43,42 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-03 - Logic Translation Board Clean HTML Rewrite
+
+### Changed Sections
+- How the Project Was Built
+- Inline page CSS
+
+### Reason
+- Replaced the CSS-hacked translation board with real HTML markup.
+- Improved readability and maintainability.
+- Made the board visually cleaner and more logical.
+- Kept the Build Journey unchanged.
+- Kept the section public-safe and business-readable.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No confidential operational data was added.
+- No real customer, supplier, order, invoice, payment, cost, margin, database, credential, or server data was added.
+- No fake metrics or audited impact claims were added.
+- The board now uses real visible HTML text instead of pseudo-content.
+- Mobile stacks each row vertically to avoid overflow.
+- This is a maintainability cleanup, not a full page redesign.
+
+---
+
 ## 2026-07-03 - Logic Map Replaced with Translation Board
 
 ### Changed Sections
