@@ -124,6 +124,22 @@ Phase 3 confirms that liveliness can come from clearer proof, hierarchy, and vis
 
 ---
 
+## Phase 4 decision
+
+Phase 4 added project filter chips for the supporting project cards.
+
+Implemented Phase 4 direction:
+
+- Added filter chips for All, ERP Analytics, Operations Visibility, Automation, Dashboard / Reporting, AI-Assisted Workflow, and Market Analytics.
+- Kept the flagship Odoo case study always visible as the main proof.
+- Made only the supporting project cards filterable.
+- Used lightweight inline JavaScript with no external dependency.
+- Kept all supporting project cards visible by default if JavaScript is unavailable.
+
+This is the preferred kind of homepage interaction because it helps readers navigate evidence by interest. It is useful, lightweight, and not decorative.
+
+---
+
 ## Future rule
 
 For future homepage updates, every interactive feature should answer this question:
