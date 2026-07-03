@@ -18,6 +18,44 @@ This file records meaningful homepage updates so the homepage development direct
 
 ---
 
+## 2026-07-03 - Homepage Phase 3 Visual Polish
+
+### Changed Sections
+- Hero
+- Projects
+- Flagship Odoo Case Study
+- Supporting project cards
+- Inline CSS / visual hierarchy
+
+### Reason
+- Added a compact visual proof strip in the hero to make the homepage feel more active without returning to text-only accordion interaction.
+- Improved the Featured Projects section with a short lead that explains the project hierarchy.
+- Polished the flagship Odoo block by replacing the plain bullet preview with a clearer case-study route from ERP records to review signals.
+- Made the general project cards feel like supporting examples after the flagship case study.
+- Added subtle hover polish to supporting project cards while keeping the page calm and business-focused.
+
+### Files Edited
+- `index.html`
+- `docs/homepage-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Homepage Improvement Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real operational data was added.
+- No confidential data was added.
+- No fake impact metrics were added.
+- No heavy JavaScript or decorative interaction was added.
+- The next phase can focus on a meaningful interaction such as project filter chips or an Odoo public-safe preview interaction.
+
+---
+
 ## 2026-07-03 - Hero Focus Accordion Removed
 
 ### Changed Sections
