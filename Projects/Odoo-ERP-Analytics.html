@@ -19,7 +19,7 @@
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      c[a]=c[a]||function(){c[a].q=c[a].q||[];c[a].q.push(arguments)};
       t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "xefdu66wh2");
@@ -29,9 +29,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/project.css?v=20260629-warm">
-  <link rel="stylesheet" href="../CSS/case-study.css?v=20260702-copy-tightening">
+  <link rel="stylesheet" href="../CSS/case-study.css?v=20260702-css-cleanup">
 
   <style>
+    /* css-cleanup-version: 20260702-v1 */
     body {
       background: #f7f9fc;
       color: #0f172a;
@@ -41,72 +42,8 @@
       padding: 78px 0;
     }
 
-    .section-kicker {
-      color: #2563eb;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 13px;
-      margin-bottom: 12px;
-    }
-
-    .section-heading {
-      font-size: clamp(30px, 4vw, 46px);
-      line-height: 1.15;
-      margin-bottom: 18px;
-      color: #0f172a;
-    }
-
-    .section-lead {
-      color: #475569;
-      font-size: 18px;
-      max-width: 880px;
-      margin-bottom: 34px;
-    }
-
-    .story-card,
-    .module-card,
-    .proof-card,
-    .comparison-card {
-      background: #ffffff;
-      border: 1px solid #dbe5f1;
-      border-radius: 24px;
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
-    }
-
-    .story-card {
-      padding: 36px;
-    }
-
-    .story-card p {
-      color: #334155;
-      font-size: 17px;
-      margin-bottom: 16px;
-    }
-
-    .story-card p:last-child {
-      margin-bottom: 0;
-    }
-
     .context-card-grid {
       margin-top: 24px;
-    }
-
-    .visual-placeholder-card {
-      align-items: center;
-      background:
-        linear-gradient(145deg, rgba(246, 242, 234, 0.92), rgba(255, 255, 255, 0.98));
-      border: 1px dashed rgba(31, 77, 90, 0.28);
-      border-radius: 20px;
-      color: var(--accent);
-      display: flex;
-      font-size: clamp(18px, 3vw, 28px);
-      font-weight: 800;
-      justify-content: center;
-      letter-spacing: -0.02em;
-      min-height: 280px;
-      padding: 28px;
-      text-align: center;
     }
 
     #architecture-data-flow .case-section-header {
@@ -349,87 +286,6 @@
       width: 6px;
     }
 
-    .module-grid,
-    .proof-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
-
-    .module-card,
-    .proof-card,
-    .comparison-card {
-      padding: 24px;
-    }
-
-    .module-card h3,
-    .proof-card h3,
-    .comparison-card h3 {
-      margin-bottom: 12px;
-      font-size: 21px;
-      color: #0f172a;
-    }
-
-    .module-card p,
-    .proof-card p {
-      color: #475569;
-    }
-
-    .before-after {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .comparison-card ul,
-    .proof-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .comparison-card li,
-    .proof-card li {
-      color: #334155;
-      padding: 12px 0;
-      border-bottom: 1px solid #e5edf5;
-    }
-
-    .comparison-card li:last-child,
-    .proof-card li:last-child {
-      border-bottom: 0;
-    }
-
-    .cta-card {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(145deg, #eff6ff, #edf7f4);
-      border: 1px solid #cfe0f4;
-      border-radius: 28px;
-      padding: 30px;
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
-    }
-
-    .cta-card h2 {
-      color: #0f172a;
-      margin-bottom: 8px;
-    }
-
-    .cta-card p {
-      color: #475569;
-      max-width: 720px;
-      margin: 0;
-    }
-
-    .cta-card .pill {
-      background: #1e3a8a;
-      color: #ffffff;
-      border-color: #1e3a8a;
-    }
-
     @media (max-width: 1100px) {
       .case-architecture-pipeline {
         grid-template-columns: 1fr;
@@ -453,15 +309,6 @@
     }
 
     @media (max-width: 920px) {
-      .before-after {
-        grid-template-columns: 1fr;
-      }
-
-      .module-grid,
-      .proof-grid {
-        grid-template-columns: 1fr;
-      }
-
       #architecture-data-flow .case-architecture {
         padding: 28px;
       }
