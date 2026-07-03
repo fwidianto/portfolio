@@ -1,0 +1,159 @@
+name: Cleanup Odoo Case CSS
+
+on:
+  push:
+    paths:
+      - '.github/workflows/cleanup-odoo-case-css.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove legacy Odoo map CSS
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          css_path = Path('CSS/case-study.css')
+          changelog_path = Path('docs/odoo-erp-analytics-change-log.md')
+          workflow_path = Path('.github/workflows/cleanup-odoo-case-css.yml')
+
+          css = css_path.read_text(encoding='utf-8')
+          start_marker = '/* ==========================================================\n   Odoo build logic translation board'
+          end_marker = '/* ==========================================================\n   Responsive'
+          start = css.index(start_marker)
+          end = css.index(end_marker, start)
+          clean_block = '''/* ==========================================================
+   Odoo build logic translation board
+   Technical cleanup: legacy node-map hacks removed.
+   ========================================================== */
+
+/* case-study-css-cleanup-version: 20260703-v1 */
+/* logic-translation-board-clean-html-version: 20260703-v1 */
+.logic-translation-board {
+  background: rgba(246, 242, 234, 0.58);
+  border: 1px solid rgba(31, 77, 90, 0.12);
+  border-radius: 28px;
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 18px;
+}
+
+.logic-translation-header,
+.logic-translation-row {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) 26px minmax(0, 1fr) 26px minmax(0, 1fr);
+}
+
+.logic-translation-header {
+  background: rgba(31, 77, 90, 0.08);
+  border: 1px solid rgba(31, 77, 90, 0.12);
+  border-radius: 16px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  padding: 12px 14px;
+  text-transform: uppercase;
+}
+
+.logic-translation-header span:nth-child(1) { grid-column: 1; }
+.logic-translation-header span:nth-child(2) { grid-column: 3; }
+.logic-translation-header span:nth-child(3) { grid-column: 5; }
+
+.logic-translation-row {
+  align-items: stretch;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(31, 77, 90, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(31, 41, 51, 0.05);
+  padding: 14px;
+}
+
+.logic-translation-cell {
+  align-content: start;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.logic-translation-label {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.logic-translation-value {
+  color: var(--text);
+  font-size: 14.5px;
+  font-weight: 750;
+  line-height: 1.38;
+}
+
+.logic-translation-arrow {
+  align-items: center;
+  color: rgba(31, 77, 90, 0.66);
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 900;
+  justify-content: center;
+}
+
+'''
+          css_path.write_text(css[:start] + clean_block + css[end:], encoding='utf-8')
+
+          changelog = changelog_path.read_text(encoding='utf-8')
+          entry = '''## 2026-07-03 - Technical Cleanup After Translation Board
+
+### Changed Sections
+- Shared case-study CSS
+- Odoo case study maintenance notes
+
+### Reason
+- Removed leftover CSS from the previous forced architecture-map and pseudo-content experiments.
+- Kept the clean HTML Logic Translation Board as the source of visible content.
+- Reduced maintenance noise in `CSS/case-study.css`.
+- Kept the visible Odoo case study structure unchanged.
+
+### Files Edited
+- `CSS/case-study.css`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No visible content was intentionally redesigned.
+- No confidential operational data was added.
+- No fake metrics or audited impact claims were added.
+- This was a technical cleanup pass after the Logic Translation Board rewrite.
+
+---
+
+'''
+          marker = '## 2026-07-03 - Logic Translation Board Clean HTML Rewrite'
+          changelog_path.write_text(changelog.replace(marker, entry + marker), encoding='utf-8')
+          workflow_path.unlink(missing_ok=True)
+          PY
+      - name: Commit cleanup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CSS/case-study.css docs/odoo-erp-analytics-change-log.md .github/workflows/cleanup-odoo-case-css.yml
+          git commit -m "Clean legacy Odoo case CSS" || exit 0
+          git push
