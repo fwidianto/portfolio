@@ -18,6 +18,45 @@ This file records meaningful homepage updates so the homepage development direct
 
 ---
 
+## 2026-07-03 - Homepage Phase 4 Project Filter Added
+
+### Changed Sections
+- Featured Projects
+- Supporting project cards
+- Project filter chips
+- Inline CSS / JavaScript
+
+### Reason
+- Added a meaningful interaction that helps visitors explore projects by focus.
+- Kept the flagship Odoo case study always visible.
+- Avoided text-only accordion interaction.
+- Kept interaction lightweight, useful, and recruiter-friendly.
+- Used small inline JavaScript only; no external dependency was added.
+
+### Files Edited
+- `index.html`
+- `docs/homepage-change-log.md`
+- `docs/homepage-lively-interaction-note.md`
+
+### Design Guide Checked
+- Yes
+
+### Homepage Improvement Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real operational data was added.
+- No confidential data was added.
+- No fake impact metrics were added.
+- The flagship Odoo case study remains visible for every filter state.
+- Supporting project cards remain visible by default when JavaScript is unavailable.
+- The next phase should focus on live QA, mobile behavior, and whether the filters feel useful on real screens.
+
+---
+
 ## 2026-07-03 - Homepage Phase 3 Visual Polish
 
 ### Changed Sections
