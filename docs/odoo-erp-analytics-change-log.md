@@ -43,6 +43,40 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Inline CSS Cleanup
+
+### Changed Sections
+- Inline page CSS
+- Page refresh / cache-busting
+
+### Reason
+- Removed unused old page-specific CSS left from earlier refactor phases.
+- Reduced maintenance noise in the Odoo case study page.
+- Kept active case-study, visual proof, output evidence, architecture, business value, and responsive styles intact.
+- Refreshed the CSS query string to help GitHub Pages serve the latest page version.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No content was changed.
+- No screenshots or visuals were added or removed.
+- No real operational data was added.
+- No confidential data was added.
+- The next step should be a final live-page visual review.
+
+---
+
 ## 2026-07-02 - Case Study Copy Tightened
 
 ### Changed Sections
