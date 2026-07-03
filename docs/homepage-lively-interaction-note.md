@@ -82,6 +82,23 @@ This gives the homepage a more active feel without requiring JavaScript or a hea
 
 ---
 
+## Phase 2 decision
+
+Phase 2 strengthened the homepage structure and added more guided movement without making the page flashy.
+
+Implemented Phase 2 direction:
+
+- Strengthened the `How I Work` section into a six-step workflow.
+- Added hoverable workflow cards to make the working logic more active and scannable.
+- Added a flagship Odoo ERP Analytics case study block before the general project grid.
+- Improved project hierarchy by making Odoo the main proof point while keeping other projects as supporting examples.
+- Kept interaction useful, not decorative.
+- Kept the tone warm, calm, business-focused, and public-safe.
+
+The Phase 2 interaction is intentionally simple: hoverable cards and guided proof blocks, not heavy JavaScript or carousel behavior.
+
+---
+
 ## Future rule
 
 For future homepage updates, every interactive feature should answer this question:
