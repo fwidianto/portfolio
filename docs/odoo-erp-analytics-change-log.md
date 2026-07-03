@@ -43,6 +43,40 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-03 - Logic Map Relationship Polish
+
+### Changed Sections
+- How the Project Was Built
+- Shared case-study CSS
+
+### Reason
+- The previous multi-direction architecture map looked dynamic, but the arrows did not clearly explain the relationship between nodes.
+- Reworked the map into a clearer relationship layout: ERP Sources → SQL & Validation → Business Rules → Review Views → Public-Safe Portfolio.
+- Added a meaningful feedback loop showing that review signals refine business rules and source checks.
+- Kept the design visual and compact while making the logic easier to understand.
+
+### Files Edited
+- `CSS/case-study.css`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No confidential operational data was added.
+- No private business records or real operational values were added.
+- No fake metrics or audited impact claims were added.
+- The mobile version stacks the same relationships vertically to avoid overflow.
+- This polish is a relationship-clarity fix, not a page redesign.
+
+---
+
 ## 2026-07-03 - Built Section Redesigned as Journey and Dynamic Architecture Map
 
 ### Changed Sections
