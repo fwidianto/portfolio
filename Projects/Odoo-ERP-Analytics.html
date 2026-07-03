@@ -29,10 +29,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/project.css?v=20260629-warm">
-  <link rel="stylesheet" href="../CSS/case-study.css?v=20260702-css-cleanup">
+  <link rel="stylesheet" href="../CSS/case-study.css?v=20260702-liveliness-polish">
 
   <style>
     /* css-cleanup-version: 20260702-v1 */
+    /* liveliness-polish-version: 20260702-v1 */
     body {
       background: #f7f9fc;
       color: #0f172a;
@@ -44,6 +45,116 @@
 
     .context-card-grid {
       margin-top: 24px;
+    }
+
+    .case-story-spine {
+      align-items: stretch;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      box-shadow: var(--shadow-card);
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      margin-top: 28px;
+      padding: 20px;
+    }
+
+    .case-story-step {
+      background: rgba(246, 242, 234, 0.76);
+      border: 1px solid rgba(31, 77, 90, 0.1);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .case-story-step span {
+      color: var(--accent);
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+
+    .case-story-step strong {
+      color: var(--text);
+      display: block;
+      font-size: 16px;
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+
+    .case-story-step p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .case-story-arrow {
+      align-self: center;
+      color: var(--accent);
+      font-weight: 900;
+      opacity: 0.65;
+    }
+
+    .case-insight-callout {
+      background:
+        linear-gradient(145deg, rgba(31, 77, 90, 0.1), rgba(255, 255, 255, 0.86));
+      border: 1px solid rgba(31, 77, 90, 0.14);
+      border-radius: 24px;
+      box-shadow: var(--shadow-card);
+      margin-top: 20px;
+      padding: 24px;
+    }
+
+    .case-insight-label {
+      color: var(--accent);
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .case-insight-callout p {
+      color: var(--text);
+      font-size: 17px;
+      font-weight: 650;
+      line-height: 1.65;
+      margin: 0;
+      max-width: 980px;
+    }
+
+    .case-visual-frame {
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .case-visual-frame:hover {
+      border-color: rgba(31, 77, 90, 0.22);
+      box-shadow: var(--shadow-soft);
+      transform: translateY(-3px);
+    }
+
+    .case-visual-guide {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .case-guide-chip {
+      align-items: center;
+      background: rgba(31, 77, 90, 0.08);
+      border: 1px solid rgba(31, 77, 90, 0.12);
+      border-radius: 999px;
+      color: var(--accent);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1;
+      padding: 9px 12px;
     }
 
     #architecture-data-flow .case-section-header {
@@ -287,6 +398,15 @@
     }
 
     @media (max-width: 1100px) {
+      .case-story-spine {
+        grid-template-columns: 1fr;
+      }
+
+      .case-story-arrow {
+        justify-self: center;
+        transform: rotate(90deg);
+      }
+
       .case-architecture-pipeline {
         grid-template-columns: 1fr;
       }
@@ -315,6 +435,11 @@
     }
 
     @media (max-width: 640px) {
+      .case-story-spine,
+      .case-insight-callout {
+        padding: 16px;
+      }
+
       #architecture-data-flow .case-architecture {
         padding: 22px;
       }
@@ -439,6 +564,31 @@
           <p>Fields, statuses, custom references, and exceptions had to be validated before becoming KPI logic.</p>
         </div>
       </div>
+
+      <div class="case-story-spine" aria-label="Project story flow">
+        <div class="case-story-step">
+          <span>01</span>
+          <strong>Scattered ERP records</strong>
+          <p>Review data lived across multiple transaction flows.</p>
+        </div>
+        <div class="case-story-arrow" aria-hidden="true">→</div>
+        <div class="case-story-step">
+          <span>02</span>
+          <strong>Business rules validated</strong>
+          <p>Fields, references, statuses, and exceptions were checked first.</p>
+        </div>
+        <div class="case-story-arrow" aria-hidden="true">→</div>
+        <div class="case-story-step">
+          <span>03</span>
+          <strong>Reusable review views</strong>
+          <p>Operational logic became dashboard-ready visibility.</p>
+        </div>
+      </div>
+
+      <div class="case-insight-callout">
+        <span class="case-insight-label">Key learning</span>
+        <p>The hard part was not only extracting data from Odoo. The harder part was understanding what each ERP transaction meant in the real business flow.</p>
+      </div>
     </div>
   </section>
 
@@ -464,6 +614,12 @@
           <p class="case-caption">
             Public-safe dashboard preview of the Sales Order Traceability view. Displayed labels and values are sanitized or recreated for portfolio explanation.
           </p>
+          <div class="case-visual-guide" aria-label="What to look for in the Sales Order Traceability preview">
+            <span class="case-guide-chip">Source status</span>
+            <span class="case-guide-chip">Delivery progress</span>
+            <span class="case-guide-chip">Invoice progress</span>
+            <span class="case-guide-chip">Operational exceptions</span>
+          </div>
         </div>
       </div>
     </div>
@@ -655,6 +811,12 @@
           <p class="case-caption">
             Public-safe dashboard preview showing structured material and amount tracking indicators for operational review. Labels and values are sanitized or recreated for portfolio explanation.
           </p>
+          <div class="case-visual-guide" aria-label="What to look for in the Material and Amount Tracking preview">
+            <span class="case-guide-chip">Material amount review</span>
+            <span class="case-guide-chip">PR / PO progress</span>
+            <span class="case-guide-chip">Excess amount check</span>
+            <span class="case-guide-chip">Received &amp; invoiced ratio</span>
+          </div>
         </div>
       </div>
     </div>
