@@ -43,6 +43,43 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Public-Safe Dashboard Visuals Added
+
+### Changed Sections
+- Visual Proof
+- Output Evidence
+- Page refresh / cache-busting
+
+### Reason
+- Replaced the Visual Proof placeholder with a public-safe Sales Order Traceability dashboard screenshot.
+- Added a supporting public-safe Material & Amount Order Tracking dashboard preview to Output Evidence.
+- Reduced text heaviness by adding visual proof while avoiding confidential data and unverified impact claims.
+- Refreshed the CSS query string to help GitHub Pages serve the latest page version.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+- `Assets/odoo-so-traceability-public-safe.svg`
+- `Assets/odoo-material-amount-tracking-public-safe.svg`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- Temporary test files under `docs/` were removed if present.
+- No real operational data was added.
+- No confidential data was added.
+- No fake metrics or unverified improvement numbers were added.
+- The visuals are used to reduce text heaviness and make the case study feel more alive.
+
+---
+
 ## 2026-07-02 - CTA and Confidentiality Section Refactored
 
 ### Changed Sections
