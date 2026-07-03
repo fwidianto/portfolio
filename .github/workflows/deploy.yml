@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "Projects/AI-ERP-IntelligenceDashboard/**"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
 jobs:
