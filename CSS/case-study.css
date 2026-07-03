@@ -649,130 +649,219 @@
 }
 
 /* ==========================================================
-   Odoo build logic map sense polish
+   Odoo build logic translation board
    ========================================================== */
 
-/* build-logic-map-sense-version: 20260703-v1 */
+/* logic-translation-board-version: 20260703-v1 */
+#how-project-built .build-architecture-panel .build-panel-label,
+#how-project-built .build-architecture-panel .build-panel-heading,
+#how-project-built .build-architecture-panel .build-panel-copy {
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+
+#how-project-built .build-architecture-panel .build-panel-label::after {
+  content: "Logic Translation Board";
+  color: var(--accent);
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+#how-project-built .build-architecture-panel .build-panel-heading::after {
+  content: "How ERP records became review logic";
+  color: var(--text);
+  display: block;
+  font-size: 22px;
+  font-weight: 850;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+
+#how-project-built .build-architecture-panel .build-panel-copy::after {
+  content: "A structured board showing how raw ERP records were interpreted into business meaning and review outputs.";
+  color: var(--muted);
+  display: block;
+  font-size: 15px;
+  line-height: 1.65;
+  margin: 0;
+}
+
 #how-project-built .build-architecture-map {
+  background: rgba(246, 242, 234, 0.58) !important;
+  border: 1px solid rgba(31, 77, 90, 0.12) !important;
+  border-radius: 28px !important;
   display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(116px, 0.42fr) minmax(0, 1fr) !important;
-  grid-template-areas:
-    "source extract validation"
-    "recheck rules apply"
-    "review publish portfolio"
-    "feedback feedback feedback" !important;
-  gap: 16px !important;
+  gap: 12px !important;
+  margin-top: 24px !important;
   min-height: auto !important;
-  padding: 20px !important;
+  overflow: visible !important;
+  padding: 18px !important;
+  position: relative !important;
+}
+
+#how-project-built .build-architecture-map::before {
+  background: rgba(31, 77, 90, 0.08);
+  border: 1px solid rgba(31, 77, 90, 0.12);
+  border-radius: 16px;
+  color: var(--accent);
+  content: "ERP Source / Record  →  Business Meaning  →  Review Output";
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  padding: 12px 14px;
+  text-transform: uppercase;
+}
+
+#how-project-built .build-architecture-connector {
+  display: none !important;
 }
 
 #how-project-built .build-architecture-node {
-  position: relative !important;
+  align-items: stretch !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid rgba(31, 77, 90, 0.12) !important;
+  border-radius: 18px !important;
   bottom: auto !important;
+  box-shadow: 0 8px 20px rgba(31, 41, 51, 0.05) !important;
+  display: grid !important;
+  gap: 10px !important;
+  grid-template-columns: minmax(0, 1fr) 26px minmax(0, 1fr) 26px minmax(0, 1fr) !important;
   left: auto !important;
+  padding: 14px !important;
+  position: relative !important;
   right: auto !important;
   top: auto !important;
   transform: none !important;
   width: auto !important;
 }
 
-#how-project-built .build-architecture-node--source {
-  grid-area: source !important;
-}
-
-#how-project-built .build-architecture-node--validation {
-  grid-area: validation !important;
-}
-
-#how-project-built .build-architecture-node--rules {
-  grid-area: rules !important;
-}
-
-#how-project-built .build-architecture-node--review {
-  grid-area: review !important;
-}
-
 #how-project-built .build-architecture-node--portfolio {
-  grid-area: portfolio !important;
+  display: none !important;
 }
 
-#how-project-built .build-architecture-connector {
-  align-items: center !important;
-  align-self: center !important;
-  background: rgba(31, 77, 90, 0.08) !important;
-  border: 1px dashed rgba(31, 77, 90, 0.22) !important;
-  border-radius: 999px !important;
-  color: var(--accent) !important;
-  display: inline-flex !important;
+#how-project-built .build-architecture-node::before,
+#how-project-built .build-architecture-node::after {
+  align-items: center;
+  color: rgba(31, 77, 90, 0.65);
+  content: "→";
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 900;
+  justify-content: center;
+}
+
+#how-project-built .build-architecture-node::before {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#how-project-built .build-architecture-node::after {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+#how-project-built .build-architecture-node-symbol,
+#how-project-built .build-architecture-node > div {
+  display: contents !important;
+}
+
+#how-project-built .build-architecture-node-symbol,
+#how-project-built .build-architecture-node-kicker,
+#how-project-built .build-architecture-node h3 {
+  align-items: center;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--text) !important;
+  display: flex !important;
   font-size: 0 !important;
-  font-weight: 850 !important;
+  font-weight: 760 !important;
   height: auto !important;
-  justify-content: center !important;
-  line-height: 1.2 !important;
-  min-height: 42px !important;
-  padding: 10px 12px !important;
-  position: relative !important;
-  text-align: center !important;
-  transform: none !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.35 !important;
+  margin: 0 !important;
+  padding: 0 !important;
   width: auto !important;
 }
 
-#how-project-built .build-architecture-connector::before {
+#how-project-built .build-architecture-node p {
   display: none !important;
 }
 
-#how-project-built .build-architecture-connector::after {
-  content: "";
-  font-size: 12px;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+#how-project-built .build-architecture-node-symbol {
+  grid-column: 1;
 }
 
-#how-project-built .build-architecture-connector--source-validation {
-  grid-area: extract !important;
+#how-project-built .build-architecture-node-kicker {
+  grid-column: 3;
+  text-transform: none !important;
 }
 
-#how-project-built .build-architecture-connector--source-validation::after {
-  content: "Extract →";
+#how-project-built .build-architecture-node h3 {
+  grid-column: 5;
 }
 
-#how-project-built .build-architecture-connector--validation-rules {
-  grid-area: apply !important;
+#how-project-built .build-architecture-node-symbol::after,
+#how-project-built .build-architecture-node-kicker::after,
+#how-project-built .build-architecture-node h3::after {
+  font-size: 14px;
 }
 
-#how-project-built .build-architecture-connector--validation-rules::after {
-  content: "Validate ↓";
+#how-project-built .build-architecture-node--source .build-architecture-node-symbol::after {
+  content: "SO, IO, PO, MO";
 }
 
-#how-project-built .build-architecture-connector--source-rules {
-  grid-area: recheck !important;
+#how-project-built .build-architecture-node--source .build-architecture-node-kicker::after {
+  content: "Source relationship and fulfillment path";
 }
 
-#how-project-built .build-architecture-connector--source-rules::after {
-  content: "↖ Recheck source";
+#how-project-built .build-architecture-node--source h3::after {
+  content: "Order traceability";
 }
 
-#how-project-built .build-architecture-connector--rules-review {
-  grid-area: feedback !important;
+#how-project-built .build-architecture-node--validation .build-architecture-node-symbol::after {
+  content: "Delivery, invoice, payment";
 }
 
-#how-project-built .build-architecture-connector--rules-review::after {
-  content: "Feedback loop: review signals refine business rules and source checks";
-  font-size: 12.5px;
-  letter-spacing: 0.02em;
-  text-transform: none;
+#how-project-built .build-architecture-node--validation .build-architecture-node-kicker::after {
+  content: "Operational and financial progress";
 }
 
-#how-project-built .build-architecture-connector--portfolio-review {
-  grid-area: publish !important;
+#how-project-built .build-architecture-node--validation h3::after {
+  content: "Delivery, invoicing, and payment status";
 }
 
-#how-project-built .build-architecture-connector--portfolio-review::after {
-  content: "Sanitize →";
+#how-project-built .build-architecture-node--rules .build-architecture-node-symbol::after {
+  content: "Statuses, references, exceptions";
 }
 
-#how-project-built .build-architecture-connector--rules-portfolio {
-  display: none !important;
+#how-project-built .build-architecture-node--rules .build-architecture-node-kicker::after {
+  content: "Business-rule interpretation";
+}
+
+#how-project-built .build-architecture-node--rules h3::after {
+  content: "Watchlist, needs review, or follow-up signal";
+}
+
+#how-project-built .build-architecture-node--review .build-architecture-node-symbol::after {
+  content: "Real internal records";
+}
+
+#how-project-built .build-architecture-node--review .build-architecture-node-kicker::after {
+  content: "Confidential operational data";
+}
+
+#how-project-built .build-architecture-node--review h3::after {
+  content: "Public-safe recreated evidence";
 }
 
 /* ==========================================================
@@ -817,23 +906,20 @@
 }
 
 @media (max-width: 760px) {
-  #how-project-built .build-architecture-map {
+  #how-project-built .build-architecture-node {
     grid-template-columns: 1fr !important;
-    grid-template-areas:
-      "source"
-      "extract"
-      "validation"
-      "apply"
-      "rules"
-      "recheck"
-      "review"
-      "publish"
-      "portfolio"
-      "feedback" !important;
   }
 
-  #how-project-built .build-architecture-connector {
-    min-height: 36px !important;
+  #how-project-built .build-architecture-node::before,
+  #how-project-built .build-architecture-node::after {
+    grid-column: 1;
+    min-height: 24px;
+  }
+
+  #how-project-built .build-architecture-node-symbol,
+  #how-project-built .build-architecture-node-kicker,
+  #how-project-built .build-architecture-node h3 {
+    grid-column: 1 !important;
   }
 }
 
