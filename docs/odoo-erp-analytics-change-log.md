@@ -43,6 +43,41 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-03 - Logic Map Replaced with Translation Board
+
+### Changed Sections
+- How the Project Was Built
+- Shared case-study CSS
+
+### Reason
+- The previous architecture map looked dynamic but did not clearly explain the business logic.
+- Replaced it with a Logic Translation Board that shows how ERP records become business meaning and review outputs.
+- Kept the section visual, but made it clearer and more business-readable.
+- Preserved the Build Journey because it still explains the project development flow well.
+
+### Files Edited
+- `CSS/case-study.css`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No confidential operational data was added.
+- No private business records or real operational values were added.
+- No fake metrics or audited impact claims were added.
+- The translation board uses four public-safe example rows to explain the logic transformation.
+- Mobile stacks each row vertically to avoid overflow.
+- This is a meaning-clarity fix, not a full page redesign.
+
+---
+
 ## 2026-07-03 - Logic Map Relationship Polish
 
 ### Changed Sections
