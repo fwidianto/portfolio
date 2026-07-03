@@ -18,6 +18,41 @@ This file records meaningful homepage updates so the homepage development direct
 
 ---
 
+## 2026-07-03 - Project Inventory Removed
+
+### Changed Sections
+- Project Inventory
+- Contact section position
+- Homepage structure / cleanup
+
+### Reason
+- Removed the Project Inventory section because it became redundant after the Featured Projects section was strengthened with a flagship Odoo case study, supporting project cards, and project filter chips.
+- Reduced internal file-list style content from the public homepage.
+- Kept the homepage focused on recruiter-facing evidence rather than repository inventory.
+- Preserved all important project links through the Featured Projects section and navigation.
+
+### Files Edited
+- `index.html`
+- `docs/homepage-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Homepage Improvement Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No real operational data was added.
+- No confidential data was added.
+- No fake impact metrics were added.
+- The homepage now flows from Featured Projects directly into Contact.
+- This is a simplification step, not a redesign or new feature.
+
+---
+
 ## 2026-07-03 - Homepage Phase 4 Project Filter Added
 
 ### Changed Sections
@@ -50,7 +85,7 @@ This file records meaningful homepage updates so the homepage development direct
 ### Notes
 - No real operational data was added.
 - No confidential data was added.
-- No fake impact metrics were added.
+- No fake impact metrics was added.
 - The flagship Odoo case study remains visible for every filter state.
 - Supporting project cards remain visible by default when JavaScript is unavailable.
 - The next phase should focus on live QA, mobile behavior, and whether the filters feel useful on real screens.
