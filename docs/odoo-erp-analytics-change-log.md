@@ -43,6 +43,43 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Case Study Copy Tightened
+
+### Changed Sections
+- Business Context
+- Approach / Workflow
+- Dashboard Modules
+- Skills Demonstrated
+- Page refresh / cache-busting
+
+### Reason
+- Reduced text heaviness after adding public-safe visuals.
+- Made the page easier to scan for recruiters and business readers.
+- Preserved the business systems analytics positioning.
+- Kept the content public-safe and avoided unverified impact claims.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No new screenshots or visuals were added.
+- No real operational data was added.
+- No confidential data was added.
+- No fake metrics or unverified improvement numbers were added.
+- The next step should be CSS cleanup if the page looks good after this pass.
+
+---
+
 ## 2026-07-02 - Public-Safe Dashboard Visuals Added
 
 ### Changed Sections
