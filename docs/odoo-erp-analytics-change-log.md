@@ -43,6 +43,39 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-03 - Technical Cleanup After Translation Board
+
+### Changed Sections
+- Shared case-study CSS
+- Odoo case study maintenance notes
+
+### Reason
+- Removed leftover CSS from previous forced architecture-map and pseudo-content experiments.
+- Kept the clean HTML Logic Translation Board as the source of visible content.
+- Reduced maintenance noise in `CSS/case-study.css`.
+- Kept the visible Odoo case study structure unchanged.
+
+### Files Edited
+- `CSS/case-study.css`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No visible content was intentionally redesigned.
+- No confidential operational data was added.
+- No fake metrics or audited impact claims were added.
+- This was a technical cleanup pass after the Logic Translation Board rewrite.
+
+---
+
 ## 2026-07-03 - Logic Translation Board Clean HTML Rewrite
 
 ### Changed Sections
