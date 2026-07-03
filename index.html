@@ -99,6 +99,7 @@
     /* homepage-hero-focus-removed-version: 20260703-v1 */
     /* homepage-phase-2-structure-version: 20260703-v1 */
     /* homepage-phase-3-visual-polish-version: 20260703-v1 */
+    /* homepage-phase-4-project-filter-version: 20260703-v1 */
     .section-lead {
       color: var(--muted, #6b7280);
       font-size: 18px;
@@ -334,6 +335,60 @@
       margin: 4px 0 18px;
     }
 
+    /* homepage-phase-4-project-filter-version: 20260703-v1 */
+    .project-filter-bar {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--border, rgba(31, 41, 51, 0.12));
+      border-radius: 24px;
+      box-shadow: 0 10px 26px rgba(31, 41, 51, 0.05);
+      margin: 0 0 24px;
+      padding: 18px;
+    }
+
+    .project-filter-label {
+      color: var(--text, #1f2933);
+      display: block;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .project-filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .project-filter-chip {
+      appearance: none;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border, rgba(31, 41, 51, 0.12));
+      border-radius: 999px;
+      color: var(--text, #1f2933);
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 750;
+      padding: 10px 14px;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    }
+
+    .project-filter-chip:hover,
+    .project-filter-chip:focus-visible {
+      border-color: rgba(31, 77, 90, 0.28);
+      transform: translateY(-1px);
+    }
+
+    .project-filter-chip.is-active {
+      background: var(--accent, #1f4d5a);
+      border-color: var(--accent, #1f4d5a);
+      color: #fff;
+    }
+
+    .project-card.is-hidden {
+      display: none;
+    }
+
     .project-card--supporting {
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     }
@@ -362,9 +417,14 @@
         margin-top: 22px;
       }
 
+      .project-filter-bar,
       .workflow-step,
       .flagship-case {
         padding: 22px;
+      }
+
+      .project-filter-chip {
+        width: 100%;
       }
 
       .flagship-case h3 {
@@ -698,9 +758,23 @@
         </div>
       </div>
 
+      <!-- homepage-phase-4-project-filter-version: 20260703-v1 -->
+      <div class="project-filter-bar" aria-label="Project filters">
+        <span class="project-filter-label">Explore supporting projects by focus</span>
+        <div class="project-filter-chips" role="group" aria-label="Filter supporting projects by focus">
+          <button type="button" class="project-filter-chip is-active" data-filter="All" aria-pressed="true">All</button>
+          <button type="button" class="project-filter-chip" data-filter="ERP Analytics" aria-pressed="false">ERP Analytics</button>
+          <button type="button" class="project-filter-chip" data-filter="Operations Visibility" aria-pressed="false">Operations Visibility</button>
+          <button type="button" class="project-filter-chip" data-filter="Automation" aria-pressed="false">Automation</button>
+          <button type="button" class="project-filter-chip" data-filter="Dashboard / Reporting" aria-pressed="false">Dashboard / Reporting</button>
+          <button type="button" class="project-filter-chip" data-filter="AI-Assisted Workflow" aria-pressed="false">AI-Assisted Workflow</button>
+          <button type="button" class="project-filter-chip" data-filter="Market Analytics" aria-pressed="false">Market Analytics</button>
+        </div>
+      </div>
+
       <span class="supporting-projects-label">Supporting project examples</span>
       <div class="projects-grid">
-        <div class="project-card project-card--supporting">
+        <div class="project-card project-card--supporting" data-categories="ERP Analytics|Operations Visibility|Dashboard / Reporting">
           <div class="project-top">
             <img src="Assets/Odoo.png" alt="Odoo ERP system dashboard showing business operations modules" class="project-image" />
           </div>
@@ -723,7 +797,7 @@
           </div>
         </div>
 
-        <div class="project-card project-card--supporting">
+        <div class="project-card project-card--supporting" data-categories="Automation|Dashboard / Reporting|AI-Assisted Workflow">
           <div class="project-top">
             <img src="Assets/Data Studio.png" alt="AI ERP intelligence dashboard preview" class="project-image" />
           </div>
@@ -746,7 +820,7 @@
           </div>
         </div>
 
-        <div class="project-card project-card--supporting">
+        <div class="project-card project-card--supporting" data-categories="Market Analytics|Dashboard / Reporting">
           <div class="project-top project-top--placeholder">
             <div class="project-placeholder">
               <div class="project-placeholder-kicker">Market data</div>
@@ -831,5 +905,35 @@
       &copy; 2026 Fauzan Widianto - Portfolio Website
     </div>
   </footer>
+
+  <script>
+    // homepage-phase-4-project-filter-version: 20260703-v1
+    document.addEventListener('DOMContentLoaded', function () {
+      const filterButtons = document.querySelectorAll('.project-filter-chip[data-filter]');
+      const projectCards = document.querySelectorAll('.project-card[data-categories]');
+
+      if (!filterButtons.length || !projectCards.length) {
+        return;
+      }
+
+      filterButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          const selectedFilter = button.dataset.filter;
+
+          filterButtons.forEach(function (item) {
+            const isActive = item === button;
+            item.classList.toggle('is-active', isActive);
+            item.setAttribute('aria-pressed', String(isActive));
+          });
+
+          projectCards.forEach(function (card) {
+            const categories = (card.dataset.categories || '').split('|');
+            const shouldShow = selectedFilter === 'All' || categories.includes(selectedFilter);
+            card.classList.toggle('is-hidden', !shouldShow);
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
