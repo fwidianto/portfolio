@@ -160,9 +160,217 @@
       text-transform: uppercase;
     }
 
+    /* homepage-phase-2-structure-version: 20260703-v1 */
+    .section-lead {
+      color: var(--muted, #6b7280);
+      font-size: 18px;
+      line-height: 1.75;
+      margin: -26px auto 34px;
+      max-width: 820px;
+      text-align: center;
+    }
+
+    .workflow-steps {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 30px;
+    }
+
+    .workflow-step {
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid var(--border, rgba(31, 41, 51, 0.12));
+      border-radius: 24px;
+      box-shadow: var(--shadow-card, 0 10px 28px rgba(31, 41, 51, 0.07));
+      min-height: 100%;
+      padding: 24px;
+      position: relative;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .workflow-step:hover,
+    .workflow-step:focus-within {
+      border-color: rgba(31, 77, 90, 0.22);
+      box-shadow: var(--shadow-soft, 0 18px 45px rgba(31, 41, 51, 0.08));
+      transform: translateY(-4px);
+    }
+
+    .workflow-step-number {
+      align-items: center;
+      background: rgba(31, 77, 90, 0.09);
+      border: 1px solid rgba(31, 77, 90, 0.12);
+      border-radius: 999px;
+      color: var(--accent, #1f4d5a);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 850;
+      height: 38px;
+      justify-content: center;
+      margin-bottom: 18px;
+      width: 38px;
+    }
+
+    .workflow-step h3 {
+      color: var(--text, #1f2933);
+      font-size: 20px;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .workflow-step p {
+      color: var(--muted, #6b7280);
+      font-size: 15.5px;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .workflow-step-meta {
+      color: var(--accent, #1f4d5a);
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin-top: 18px;
+      text-transform: uppercase;
+    }
+
+    .flagship-case {
+      background:
+        radial-gradient(circle at top left, rgba(31, 77, 90, 0.12), transparent 28rem),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(246, 242, 234, 0.92));
+      border: 1px solid var(--border, rgba(31, 41, 51, 0.12));
+      border-radius: 30px;
+      box-shadow: var(--shadow-soft, 0 18px 45px rgba(31, 41, 51, 0.08));
+      margin: 0 0 34px;
+      overflow: hidden;
+      padding: 34px;
+    }
+
+    .flagship-case-grid {
+      align-items: stretch;
+      display: grid;
+      gap: 28px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.8fr);
+    }
+
+    .flagship-kicker {
+      color: var(--accent, #1f4d5a);
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .flagship-case h3 {
+      color: var(--text, #1f2933);
+      font-size: 34px;
+      letter-spacing: -0.04em;
+      line-height: 1.16;
+      margin-bottom: 16px;
+    }
+
+    .flagship-case p {
+      color: var(--muted, #6b7280);
+      font-size: 16.5px;
+      line-height: 1.75;
+      margin-bottom: 22px;
+      max-width: 760px;
+    }
+
+    .flagship-proof-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .flagship-proof-chip {
+      background: rgba(31, 77, 90, 0.09);
+      border: 1px solid rgba(31, 77, 90, 0.12);
+      border-radius: 999px;
+      color: var(--accent, #1f4d5a);
+      font-size: 13px;
+      font-weight: 750;
+      padding: 9px 12px;
+    }
+
+    .flagship-preview-card {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--border, rgba(31, 41, 51, 0.12));
+      border-radius: 24px;
+      display: grid;
+      gap: 12px;
+      padding: 22px;
+    }
+
+    .flagship-preview-card span {
+      color: var(--accent, #1f4d5a);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .flagship-preview-card strong {
+      color: var(--text, #1f2933);
+      font-size: 19px;
+      line-height: 1.3;
+    }
+
+    .flagship-preview-card ul {
+      display: grid;
+      gap: 9px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .flagship-preview-card li {
+      color: var(--muted, #6b7280);
+      font-size: 14.5px;
+      line-height: 1.55;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .flagship-preview-card li::before {
+      background: var(--accent, #1f4d5a);
+      border-radius: 999px;
+      content: "";
+      height: 6px;
+      left: 0;
+      opacity: 0.7;
+      position: absolute;
+      top: 9px;
+      width: 6px;
+    }
+
+    @media (max-width: 980px) {
+      .workflow-steps,
+      .flagship-case-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 600px) {
       .hero-focus-item summary {
         align-items: flex-start;
+      }
+
+      .section-lead {
+        font-size: 16px;
+        margin-top: -18px;
+      }
+
+      .workflow-step,
+      .flagship-case {
+        padding: 22px;
+      }
+
+      .flagship-case h3 {
+        font-size: 27px;
       }
     }
   </style>
@@ -399,25 +607,56 @@
     </div>
   </section>
 
-  <!-- WORKFLOW -->
+  <!-- homepage-phase-2-structure-version: 20260703-v1 -->
   <section id="workflow">
     <div class="container">
       <h2 class="section-title">How I Work</h2>
+      <p class="section-lead">
+        I start from the business question, then map the process, validate the data meaning, and turn the logic into reporting outputs that support review and follow-up.
+      </p>
 
-      <div class="about-grid">
-        <div class="about-card">
-          <h3>Business First</h3>
-          <p class="muted">
-            I start from the business question: what needs to be reviewed, what is unclear, and what decisions or follow-up actions the report should support.
-          </p>
-        </div>
+      <div class="workflow-steps" aria-label="Six-step workflow from business question to review-ready visibility">
+        <article class="workflow-step">
+          <span class="workflow-step-number">01</span>
+          <h3>Understand the business question</h3>
+          <p>Clarify what management or operations needs to review, what is unclear, and what follow-up action the report should support.</p>
+          <span class="workflow-step-meta">Output: review question</span>
+        </article>
 
-        <div class="about-card">
-          <h3>Human-Led, Tool-Assisted</h3>
-          <p class="muted">
-            I use SQL, dashboards, spreadsheets, automation, Codex, and OpenHands to move faster, while keeping human review on business rules, data quality, and decision usefulness.
-          </p>
-        </div>
+        <article class="workflow-step">
+          <span class="workflow-step-number">02</span>
+          <h3>Map the process and source data</h3>
+          <p>Trace how records move through sales, operations, procurement, inventory, finance, and ERP fields.</p>
+          <span class="workflow-step-meta">Output: process map</span>
+        </article>
+
+        <article class="workflow-step">
+          <span class="workflow-step-number">03</span>
+          <h3>Validate business rules and exceptions</h3>
+          <p>Check field meaning, statuses, references, edge cases, and source-of-truth logic before creating KPIs.</p>
+          <span class="workflow-step-meta">Output: trusted logic</span>
+        </article>
+
+        <article class="workflow-step">
+          <span class="workflow-step-number">04</span>
+          <h3>Build reporting / dashboard logic</h3>
+          <p>Turn validated rules into SQL, dashboards, tables, exports, or automation workflows that business users can review.</p>
+          <span class="workflow-step-meta">Output: usable view</span>
+        </article>
+
+        <article class="workflow-step">
+          <span class="workflow-step-number">05</span>
+          <h3>Turn outputs into review-ready visibility</h3>
+          <p>Design the output so users can see status, traceability, review signals, and follow-up priorities clearly.</p>
+          <span class="workflow-step-meta">Output: management visibility</span>
+        </article>
+
+        <article class="workflow-step">
+          <span class="workflow-step-number">06</span>
+          <h3>Iterate with tools and human judgment</h3>
+          <p>Use AI-assisted tools, automation, and documentation to move faster while keeping final judgment on business meaning and data quality.</p>
+          <span class="workflow-step-meta">Output: practical improvement</span>
+        </article>
       </div>
     </div>
   </section>
@@ -427,6 +666,37 @@
     <div class="container">
       <h2 class="section-title">Featured Projects</h2>
 
+      <div class="flagship-case" aria-label="Flagship Odoo ERP Analytics case study">
+        <div class="flagship-case-grid">
+          <div class="flagship-case-content">
+            <span class="flagship-kicker">FLAGSHIP CASE STUDY</span>
+            <h3>Odoo ERP Analytics: from scattered transactions to review-ready visibility</h3>
+            <p>
+              A public-safe case study showing how ERP records were mapped, validated, and turned into dashboard views, output evidence, and review signals for operational follow-up.
+            </p>
+            <div class="flagship-proof-list" aria-label="Odoo case study proof points">
+              <span class="flagship-proof-chip">ERP Analytics</span>
+              <span class="flagship-proof-chip">Order Traceability</span>
+              <span class="flagship-proof-chip">Material Tracking</span>
+              <span class="flagship-proof-chip">Review Signals</span>
+              <span class="flagship-proof-chip">SQL / Dashboard Logic</span>
+              <span class="flagship-proof-chip">Public-Safe Case Study</span>
+            </div>
+            <a href="Projects/Odoo-ERP-Analytics.html" class="btn btn-primary">View Odoo Case Study</a>
+          </div>
+
+          <aside class="flagship-preview-card" aria-label="Public-safe Odoo case study preview summary">
+            <span>Public-safe preview</span>
+            <strong>What the case study proves</strong>
+            <ul>
+              <li>ERP records can be translated into management-ready review views.</li>
+              <li>Dashboard outputs can highlight traceability, material status, and follow-up logic.</li>
+              <li>Review Signals help explain what looks normal, what should be monitored, and what needs attention.</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+
       <div class="projects-grid">
         <div class="project-card">
           <div class="project-top">
@@ -435,7 +705,7 @@
           <div class="project-content">
             <h3>Odoo ERP Analytics Case Study</h3>
             <p class="muted">
-              Public-safe case study on turning Odoo ERP transactions into management-ready visibility, including order traceability, material tracking, review signals, and operational follow-up logic.
+              Public-safe ERP analytics case study covering order traceability, material tracking, review signals, and operational follow-up logic.
             </p>
             <ul class="project-points">
               <li><strong>Problem:</strong> ERP reporting needed clearer operational traceability.</li>
