@@ -43,6 +43,44 @@ This file records meaningful updates to the Odoo ERP Analytics case study page. 
 
 ---
 
+## 2026-07-02 - Liveliness Polish Added
+
+### Changed Sections
+- Business Context
+- Visual Proof
+- Output Evidence
+- Inline page CSS
+- Page refresh / cache-busting
+
+### Reason
+- Added a small story-flow strip to make the project feel more like a guided journey.
+- Added a concise key learning callout to make the case study feel more human and reflective.
+- Added visual guide chips below the dashboard previews so readers know what to look for.
+- Added subtle hover polish for visual frames without making the page flashy or SaaS-like.
+- Refreshed the CSS query string to help GitHub Pages serve the latest page version.
+
+### Files Edited
+- `Projects/Odoo-ERP-Analytics.html`
+- `docs/odoo-erp-analytics-change-log.md`
+
+### Design Guide Checked
+- Yes
+
+### Page Plan Checked
+- Yes
+
+### Confidentiality Checked
+- Yes
+
+### Notes
+- No new screenshots or visuals were added.
+- No real operational data was added.
+- No confidential data was added.
+- No fake metrics or unverified improvement numbers were added.
+- The goal was to make the page feel more lively, guided, and human while preserving the warm business-focused style.
+
+---
+
 ## 2026-07-02 - Inline CSS Cleanup
 
 ### Changed Sections
