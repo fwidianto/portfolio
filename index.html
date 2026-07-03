@@ -96,70 +96,7 @@
   <link rel="stylesheet" href="CSS/main.css?v=20260629-warm">
 
   <style>
-    /* homepage-phase-1-positioning-version: 20260703-v1 */
-    .hero-focus-panel {
-      display: grid;
-      gap: 12px;
-      margin: 28px 0 0;
-      max-width: 760px;
-    }
-
-    .hero-focus-item {
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid var(--border, rgba(31, 41, 51, 0.12));
-      border-radius: 18px;
-      box-shadow: 0 10px 26px rgba(31, 41, 51, 0.06);
-      overflow: hidden;
-    }
-
-    .hero-focus-item summary {
-      align-items: center;
-      color: var(--text, #1f2933);
-      cursor: pointer;
-      display: flex;
-      font-weight: 750;
-      gap: 10px;
-      justify-content: space-between;
-      list-style: none;
-      padding: 15px 18px;
-    }
-
-    .hero-focus-item summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .hero-focus-item summary::after {
-      color: var(--accent, #1f4d5a);
-      content: "+";
-      font-size: 20px;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .hero-focus-item[open] summary::after {
-      content: "−";
-    }
-
-    .hero-focus-item p {
-      border-top: 1px solid var(--border, rgba(31, 41, 51, 0.12));
-      color: var(--muted, #6b7280);
-      font-size: 15.5px;
-      line-height: 1.65;
-      margin: 0;
-      max-width: none;
-      padding: 0 18px 16px;
-    }
-
-    .hero-focus-kicker {
-      color: var(--accent, #1f4d5a);
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      margin-top: 30px;
-      text-transform: uppercase;
-    }
-
+    /* homepage-hero-focus-removed-version: 20260703-v1 */
     /* homepage-phase-2-structure-version: 20260703-v1 */
     .section-lead {
       color: var(--muted, #6b7280);
@@ -355,10 +292,6 @@
     }
 
     @media (max-width: 600px) {
-      .hero-focus-item summary {
-        align-items: flex-start;
-      }
-
       .section-lead {
         font-size: 16px;
         margin-top: -18px;
@@ -422,22 +355,6 @@
           <a href="Assets/Fauzan_Widianto_CV.pdf" class="btn btn-secondary" download>Download CV</a>
           <a href="https://github.com/fwidianto" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a href="https://linkedin.com/in/fauzanw19" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </div>
-
-        <span class="hero-focus-kicker">Interactive focus</span>
-        <div class="hero-focus-panel" aria-label="Interactive focus areas">
-          <details class="hero-focus-item" open>
-            <summary>Business question first</summary>
-            <p>Start from what management or operations needs to review: status, source, fulfillment, billing, payment, profitability, or follow-up risk.</p>
-          </details>
-          <details class="hero-focus-item">
-            <summary>ERP process and data logic</summary>
-            <p>Map how records move through sales, operations, procurement, inventory, finance, and ERP fields before turning them into reporting logic.</p>
-          </details>
-          <details class="hero-focus-item">
-            <summary>Review-ready visibility</summary>
-            <p>Turn scattered records into dashboards, tables, review signals, and outputs that help teams identify what looks normal and what needs attention.</p>
-          </details>
         </div>
       </div>
 
