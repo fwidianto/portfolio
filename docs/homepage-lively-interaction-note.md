@@ -108,6 +108,22 @@ The Phase 2 interaction is intentionally simple: hoverable cards and guided proo
 
 ---
 
+## Phase 3 decision
+
+Phase 3 focused on visual rhythm and hierarchy, not a new complex feature.
+
+Implemented Phase 3 direction:
+
+- Added a compact hero proof strip to make the hero feel more active without using text-only accordion interaction.
+- Improved the project section hierarchy by explaining that the Odoo case study is the flagship proof and the remaining cards are supporting examples.
+- Replaced the flagship preview bullet list with a clearer case-study route from ERP records to review signals.
+- Added subtle supporting project-card hover polish.
+- Kept the interaction visual and guided, not noisy or decorative.
+
+Phase 3 confirms that liveliness can come from clearer proof, hierarchy, and visual rhythm before adding heavier interaction.
+
+---
+
 ## Future rule
 
 For future homepage updates, every interactive feature should answer this question:
