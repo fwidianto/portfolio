@@ -1,1 +1,0 @@
-temporary file created during connector check; safe to delete
