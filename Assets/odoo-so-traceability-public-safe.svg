@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1813" height="220" viewBox="0 0 1813 220" role="img" aria-label="Public-safe Sales Order Traceability dashboard preview">
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.text{font-family:Inter,Arial,sans-serif;fill:#071827}.muted{fill:#475569}.label{fill:#40566e;font-size:12px;font-weight:800;text-transform:uppercase}.value{fill:#071827;font-size:25px;font-weight:800}.title{fill:#071827;font-size:30px;font-weight:800}.sub{fill:#475569;font-size:14px}.card{fill:#fff;stroke:#cfd8e3;stroke-width:1}.active{stroke:#7fb4a8;stroke-width:1.5}.pill{fill:#e9f8f5;stroke:#8ac9bd}.bar-bg{fill:#e5ebef}.bar{fill:#0f766e}.nav{fill:#fff;stroke:#cfd8e3}.nav-active{fill:#e9f8f5;stroke:#8ac9bd}.nav-text{fill:#071827;font-size:13px;font-weight:700}.nav-active-text{fill:#006b5f;font-size:13px;font-weight:800}
+    </style>
+  </defs>
+  <rect class="bg" width="1813" height="220" rx="0"/>
+  <text class="text title" x="20" y="35">Sales Order Traceability</text>
+  <text class="sub" x="20" y="62">Sales Order -&gt; source -&gt; production -&gt; delivery progress -&gt; invoice progress</text>
+  <rect class="nav" x="1187" y="9" width="120" height="37" rx="8"/><text class="nav-text" x="1201" y="32">Internal Orders</text>
+  <rect class="nav-active" x="1316" y="9" width="106" height="37" rx="8"/><text class="nav-active-text" x="1333" y="32">Sales Orders</text>
+  <rect class="nav" x="1431" y="9" width="174" height="37" rx="8"/><text class="nav-text" x="1445" y="32">Order Material Tracking</text>
+  <rect class="nav" x="1614" y="9" width="72" height="37" rx="8"/><text class="nav-text" x="1629" y="32">Logout</text>
+  <rect class="nav" x="1695" y="9" width="38" height="37" rx="8"/><text class="nav-text" x="1710" y="32">R</text>
+  <g transform="translate(20 85)">
+    <rect class="card active" width="119" height="128" rx="8"/><text class="label" x="15" y="24">ACTIVE SO</text><text class="value" x="15" y="58">370</text>
+    <g transform="translate(128 0)"><rect class="card" width="119" height="128" rx="8"/><text class="label" x="15" y="24">DELIVERED SO</text><text class="value" x="15" y="58">280</text></g>
+    <g transform="translate(256 0)"><rect class="card" width="119" height="128" rx="8"/><text class="label" x="15" y="24">INVOICED SO</text><text class="value" x="15" y="58">265</text></g>
+    <g transform="translate(384 0)"><rect class="card" width="119" height="128" rx="8"/><text class="label" x="15" y="24">DELAYED</text><text class="label" x="15" y="38">DELIVERY</text><text class="value" x="15" y="72">32</text></g>
+    <g transform="translate(512 0)"><rect class="card" width="119" height="128" rx="8"/><text class="label" x="15" y="24">WAITING</text><text class="label" x="15" y="38">INVOICE</text><text class="value" x="15" y="72">8</text></g>
+    <g transform="translate(640 0)"><rect class="card" width="128" height="128" rx="8"/><text class="label" x="15" y="24">QTY DELIVERY</text><text class="value" x="15" y="58">46.4%</text><rect class="bar-bg" x="15" y="74" width="102" height="6" rx="3"/><rect class="bar" x="15" y="74" width="54" height="6" rx="3"/></g>
+    <g transform="translate(768 0)"><rect class="card" width="128" height="128" rx="8"/><text class="label" x="15" y="24">QTY INVOICE</text><text class="value" x="15" y="58">40.6%</text><rect class="bar-bg" x="15" y="74" width="102" height="6" rx="3"/><rect class="bar" x="15" y="74" width="48" height="6" rx="3"/></g>
+    <g transform="translate(896 0)"><rect class="card" width="128" height="128" rx="8"/><text class="label" x="15" y="24">AMOUNT DELIVERY</text><text class="value" x="15" y="58">45.5%</text><rect class="bar-bg" x="15" y="74" width="102" height="6" rx="3"/><rect class="bar" x="15" y="74" width="53" height="6" rx="3"/></g>
+    <g transform="translate(1024 0)"><rect class="card" width="128" height="128" rx="8"/><text class="label" x="15" y="24">AMOUNT INVOICE</text><text class="value" x="15" y="58">39.1%</text><rect class="bar-bg" x="15" y="74" width="102" height="6" rx="3"/><rect class="bar" x="15" y="74" width="45" height="6" rx="3"/></g>
+    <g transform="translate(1152 0)"><rect class="card" width="119" height="128" rx="8"/><text class="label" x="15" y="24">FROM</text><text class="label" x="15" y="38">INTERNAL</text><text class="label" x="15" y="52">ORDER</text><text class="value" x="15" y="86">80</text></g>
+    <g transform="translate(1280 0)"><rect class="card" width="119" height="128" rx="8"/><text class="label" x="15" y="24">FROM</text><text class="label" x="15" y="38">MANUFACTURE</text><text class="label" x="15" y="52">ORDER</text><text class="value" x="15" y="86">10</text></g>
+    <g transform="translate(1408 0)"><rect class="card" width="119" height="128" rx="8"/><text class="label" x="15" y="24">FROM STOCK</text><text class="value" x="15" y="58">10</text></g>
+    <g transform="translate(1536 0)"><rect class="card" width="119" height="128" rx="8"/><text class="label" x="15" y="24">FROM</text><text class="label" x="15" y="38">INTERNAL</text><text class="label" x="15" y="52">ORDER &amp;</text><text class="label" x="15" y="66">MANUFACTURE</text><text class="label" x="15" y="80">ORDER</text><text class="value" x="15" y="112">250</text></g>
+    <g transform="translate(1664 0)"><rect class="card" width="119" height="128" rx="8"/><text class="label" x="15" y="24">UNKNOWN</text><text class="label" x="15" y="38">SOURCE</text><text class="value" x="15" y="72">21</text></g>
+  </g>
+</svg>
