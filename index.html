@@ -142,6 +142,130 @@
       line-height: 1.4;
     }
 
+    .capability-graph {
+      background:
+        radial-gradient(circle at top right, rgba(31, 77, 90, 0.1), transparent 24rem),
+        linear-gradient(180deg, rgba(246, 242, 234, 0.72), rgba(255, 255, 255, 0.38));
+      border-bottom: 1px solid var(--border, rgba(31, 41, 51, 0.12));
+      border-top: 1px solid var(--border, rgba(31, 41, 51, 0.12));
+    }
+
+    .capability-graph__header {
+      margin: 0 auto 38px;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .capability-graph__eyebrow {
+      color: var(--accent, #1f4d5a);
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .capability-graph__title {
+      color: var(--text, #1f2933);
+      font-size: 40px;
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      overflow-wrap: break-word;
+    }
+
+    .capability-graph__intro {
+      color: var(--muted, #6b7280);
+      font-size: 17px;
+      line-height: 1.75;
+      margin: 0 auto;
+      max-width: 820px;
+    }
+
+    .capability-graph__flow {
+      align-items: stretch;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .capability-node {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border, rgba(31, 41, 51, 0.12));
+      border-radius: 22px;
+      box-shadow: var(--shadow-card, 0 10px 28px rgba(31, 41, 51, 0.07));
+      display: flex;
+      flex: 1 1 0;
+      flex-direction: column;
+      min-width: 0;
+      padding: 20px;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+    }
+
+    .capability-node:hover,
+    .capability-node:focus-within {
+      border-color: rgba(31, 77, 90, 0.22);
+      box-shadow: var(--shadow-soft, 0 18px 45px rgba(31, 41, 51, 0.08));
+      transform: translateY(-3px);
+    }
+
+    .capability-node--featured {
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(239, 246, 246, 0.9));
+      border-color: rgba(31, 77, 90, 0.32);
+      box-shadow: 0 18px 38px rgba(31, 77, 90, 0.12);
+    }
+
+    .capability-node h3 {
+      color: var(--text, #1f2933);
+      font-size: 18px;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .capability-node p {
+      color: var(--muted, #6b7280);
+      font-size: 14.5px;
+      line-height: 1.58;
+      margin: 0 0 16px;
+    }
+
+    .capability-node__evidence {
+      color: var(--accent, #1f4d5a);
+      display: block;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.04em;
+      line-height: 1.35;
+      margin-top: auto;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      text-transform: uppercase;
+    }
+
+    a.capability-node__evidence {
+      border-bottom: 1px solid rgba(31, 77, 90, 0.28);
+      transition: border-color 0.18s ease, color 0.18s ease;
+    }
+
+    a.capability-node__evidence:hover,
+    a.capability-node__evidence:focus-visible {
+      border-color: var(--accent, #1f4d5a);
+      color: var(--accent-dark, #173b45);
+    }
+
+    .capability-connector {
+      align-items: center;
+      color: var(--accent, #1f4d5a);
+      display: flex;
+      flex: 0 0 28px;
+      font-size: 22px;
+      font-weight: 800;
+      justify-content: center;
+      opacity: 0.72;
+    }
+
     .workflow-steps {
       display: grid;
       gap: 18px;
@@ -405,6 +529,40 @@
       .flagship-case-grid {
         grid-template-columns: 1fr;
       }
+
+      .capability-graph__flow {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr;
+        margin: 0 auto;
+        max-width: 680px;
+        width: 100%;
+      }
+
+      .capability-graph .container {
+        max-width: 680px;
+        width: calc(100% - 48px);
+      }
+
+      .capability-graph__header,
+      .capability-graph__flow {
+        max-width: 100%;
+      }
+
+      .capability-node {
+        max-width: 100%;
+        min-width: 0;
+      }
+
+      .capability-node h3,
+      .capability-node p {
+        overflow-wrap: anywhere;
+      }
+
+      .capability-connector {
+        min-height: 20px;
+        transform: rotate(90deg);
+      }
     }
 
     @media (max-width: 600px) {
@@ -415,6 +573,18 @@
 
       .hero-proof-strip {
         margin-top: 22px;
+      }
+
+      .capability-graph__title {
+        font-size: 31px;
+      }
+
+      .capability-graph__intro {
+        font-size: 15.5px;
+      }
+
+      .capability-node {
+        padding: 22px;
       }
 
       .project-filter-bar,
@@ -517,6 +687,75 @@
             <p>Dashboards, Reporting &amp; Review Logic</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITY GRAPH -->
+  <section id="capability-graph" class="capability-graph" aria-labelledby="capability-graph-title">
+    <div class="container">
+      <div class="capability-graph__header">
+        <span class="capability-graph__eyebrow">Capability Graph</span>
+        <h2 id="capability-graph-title" class="capability-graph__title">How my capabilities connect</h2>
+        <p class="capability-graph__intro">
+          This graph shows how my experiences compound: from engineering logic, to cost and business control, to manufacturing process understanding, ERP analytics, AI-assisted development, and portfolio storytelling.
+        </p>
+      </div>
+
+      <div class="capability-graph__flow" aria-label="Connected capability flow">
+        <article class="capability-node">
+          <h3>Engineering</h3>
+          <p>Structured thinking from systems, constraints, and cause-effect relationships.</p>
+          <span class="capability-node__evidence">Systems foundation</span>
+        </article>
+
+        <div class="capability-connector" aria-label="Engineering connects to Cost Control"><span aria-hidden="true">&rarr;</span></div>
+
+        <article class="capability-node">
+          <h3>Cost Control</h3>
+          <p>Turning operational activity into cost, margin, inventory, and profitability visibility.</p>
+          <span class="capability-node__evidence">Profitability and inventory review</span>
+        </article>
+
+        <div class="capability-connector" aria-label="Cost Control connects to Business Control"><span aria-hidden="true">&rarr;</span></div>
+
+        <article class="capability-node">
+          <h3>Business Control</h3>
+          <p>Connecting reports, pricing, operations, vendors, and management decisions.</p>
+          <span class="capability-node__evidence">Management reporting</span>
+        </article>
+
+        <div class="capability-connector" aria-label="Business Control connects to Manufacturing"><span aria-hidden="true">&rarr;</span></div>
+
+        <article class="capability-node">
+          <h3>Manufacturing</h3>
+          <p>Understanding the real process behind ERP transactions and operational data.</p>
+          <span class="capability-node__evidence">Operational process context</span>
+        </article>
+
+        <div class="capability-connector" aria-label="Manufacturing connects to ERP Analytics"><span aria-hidden="true">&rarr;</span></div>
+
+        <article class="capability-node capability-node--featured">
+          <h3>ERP Analytics</h3>
+          <p>Translating ERP activity into traceability, dashboards, and business insight.</p>
+          <a href="Projects/Odoo-ERP-Analytics.html" class="capability-node__evidence">Open Odoo ERP Analytics case study</a>
+        </article>
+
+        <div class="capability-connector" aria-label="ERP Analytics connects to AI-Assisted Development"><span aria-hidden="true">&rarr;</span></div>
+
+        <article class="capability-node">
+          <h3>AI-Assisted Development</h3>
+          <p>Using AI to accelerate implementation while keeping validation and judgment human.</p>
+          <span class="capability-node__evidence">Codex and documentation-driven workflow</span>
+        </article>
+
+        <div class="capability-connector" aria-label="AI-Assisted Development connects to Portfolio Experience"><span aria-hidden="true">&rarr;</span></div>
+
+        <article class="capability-node">
+          <h3>Portfolio Experience</h3>
+          <p>Turning capability, thinking, evidence, and learning into a living public system.</p>
+          <span class="capability-node__evidence">Living professional operating system</span>
+        </article>
       </div>
     </div>
   </section>
