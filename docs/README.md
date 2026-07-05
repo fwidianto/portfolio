@@ -41,9 +41,11 @@ The public positioning is **Business Systems Designer**. The portfolio should sh
 | Overall philosophy | [core/portfolio-design-philosophy.md](core/portfolio-design-philosophy.md) |
 | Long-term 2030 direction | [core/portfolio-vision-2030.md](core/portfolio-vision-2030.md) |
 | ChatGPT + Codex workflow | [core/portfolio-development-workflow.md](core/portfolio-development-workflow.md) |
+| ChatGPT + Codex tool division | [core/chatgpt-codex-tool-division.md](core/chatgpt-codex-tool-division.md) |
 | Portfolio working principles | [core/portfolio-working-principles.md](core/portfolio-working-principles.md) |
 | Homepage experience | [homepage/homepage-experience-blueprint.md](homepage/homepage-experience-blueprint.md) |
-| Capability Graph | [homepage/homepage-capability-graph.md](homepage/homepage-capability-graph.md) |
+| Capability Graph concept | [homepage/homepage-capability-graph.md](homepage/homepage-capability-graph.md) |
+| Capability Graph feature specification | [homepage/homepage-capability-graph-feature-spec.md](homepage/homepage-capability-graph-feature-spec.md) |
 | Thinking Lab | [homepage/homepage-thinking-lab.md](homepage/homepage-thinking-lab.md) |
 | Currently Building section | [homepage/homepage-currently-building.md](homepage/homepage-currently-building.md) |
 | Flagship case study routing | [homepage/homepage-flagship-case-study.md](homepage/homepage-flagship-case-study.md) |
