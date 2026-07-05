@@ -2,9 +2,9 @@
 
 Status: Active source folder
 
-This folder contains the portfolio constitution: philosophy, long-term direction, development workflow, and working principles.
+This folder contains the portfolio constitution: philosophy, long-term direction, development workflow, working principles, and tool-division guidance.
 
-Read these documents before changing homepage strategy, case-study structure, public positioning, or implementation plans.
+Read these documents before changing homepage strategy, case-study structure, public positioning, implementation plans, or AI-assisted workflow rules.
 
 ## Documents
 
@@ -14,6 +14,7 @@ Read these documents before changing homepage strategy, case-study structure, pu
 | [portfolio-vision-2030.md](portfolio-vision-2030.md) | Long-term direction for the portfolio as a public professional operating system. |
 | [portfolio-development-workflow.md](portfolio-development-workflow.md) | Preferred ChatGPT -> Codex workflow for future portfolio work. |
 | [portfolio-working-principles.md](portfolio-working-principles.md) | Working traits the portfolio should reveal through evidence. |
+| [chatgpt-codex-tool-division.md](chatgpt-codex-tool-division.md) | Long-term guide for using ChatGPT for reasoning-heavy work and Codex for repository-heavy execution. |
 
 ## When to Read This Folder
 
@@ -22,6 +23,7 @@ Read these documents before changing homepage strategy, case-study structure, pu
 - Before changing professional positioning.
 - Before adding new visual metaphors or interactive concepts.
 - Before asking Codex to modify UI.
+- Before deciding whether ChatGPT or Codex should handle a task.
 
 ## What Should Not Go Here
 
