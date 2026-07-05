@@ -13,6 +13,7 @@ The homepage should act as the public interface of the portfolio philosophy defi
 | [homepage-experience-blueprint.md](homepage-experience-blueprint.md) | Overall homepage journey and section order. |
 | [homepage-capability-graph.md](homepage-capability-graph.md) | Capability Graph concept and content model. |
 | [homepage-capability-graph-feature-spec.md](homepage-capability-graph-feature-spec.md) | Feature specification for the future Capability Graph section. |
+| [homepage-capability-growth-curve-v7-implementation-brief.md](homepage-capability-growth-curve-v7-implementation-brief.md) | Approved v7 implementation brief for replacing the stacked Capability Graph with the growth curve. |
 | [homepage-thinking-lab.md](homepage-thinking-lab.md) | Thinking Lab concept for current questions and explorations. |
 | [homepage-currently-building.md](homepage-currently-building.md) | Future section that shows the portfolio is alive. |
 | [homepage-flagship-case-study.md](homepage-flagship-case-study.md) | Homepage routing toward the Odoo ERP Analytics case study. |
