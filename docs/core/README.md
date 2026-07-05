@@ -1,114 +1,34 @@
 # Portfolio Core
 
-Status: Active  
-Purpose: Core reference for long-term portfolio development
+Status: Active source folder
 
----
+This folder contains the portfolio constitution: philosophy, long-term direction, development workflow, and working principles.
 
-## Why This Folder Exists
+Read these documents before changing homepage strategy, case-study structure, public positioning, or implementation plans.
 
-This folder contains the core documents that guide the portfolio beyond individual pages, sections, or visual experiments.
+## Documents
 
-The portfolio should not become a loose collection of project pages. It should become a coherent professional system that helps visitors understand how Fauzan thinks, learns, builds, and explains business systems.
+| File | Purpose |
+| --- | --- |
+| [portfolio-design-philosophy.md](portfolio-design-philosophy.md) | Main philosophy: visitor discovery, business before software, story before technology, AI as accelerator. |
+| [portfolio-vision-2030.md](portfolio-vision-2030.md) | Long-term direction for the portfolio as a public professional operating system. |
+| [portfolio-development-workflow.md](portfolio-development-workflow.md) | Preferred ChatGPT -> Codex workflow for future portfolio work. |
+| [portfolio-working-principles.md](portfolio-working-principles.md) | Working traits the portfolio should reveal through evidence. |
 
-Every major homepage update, case study update, or new portfolio feature should reference these documents before implementation.
+## When to Read This Folder
 
----
+- Before implementing a homepage feature.
+- Before writing or restructuring a case study.
+- Before changing professional positioning.
+- Before adding new visual metaphors or interactive concepts.
+- Before asking Codex to modify UI.
 
-## Read in This Order
+## What Should Not Go Here
 
-1. `portfolio-vision-2030.md`  
-   Defines the long-term direction of the portfolio.
+- Page-specific implementation notes.
+- Changelogs.
+- Visual QA reports.
+- Raw project inventories.
+- Temporary brainstorms.
 
-2. `portfolio-design-philosophy.md`  
-   Defines how the portfolio should communicate through experience, discovery, and business-first storytelling.
-
-3. `portfolio-development-workflow.md`  
-   Defines the workflow to follow before implementing new sections or features.
-
-4. `portfolio-working-principles.md`  
-   Defines the personal working patterns the portfolio should reflect.
-
-5. `homepage-experience-blueprint.md`  
-   Defines what visitors should feel, understand, and remember on the homepage.
-
-6. `../homepage/homepage-capability-graph.md`  
-   Defines the planned homepage Capability Graph section.
-
-7. `../homepage/homepage-thinking-lab.md`  
-   Defines the planned Thinking Lab section.
-
----
-
-## Core Idea
-
-The portfolio should help visitors understand how Fauzan thinks.
-
-Not only what he has built.
-
----
-
-## Development Principle
-
-Do not start with HTML or CSS.
-
-Start with:
-
-```text
-Observation
-↓
-Visitor question
-↓
-Desired emotion
-↓
-Story
-↓
-Content
-↓
-Visual metaphor
-↓
-Interaction
-↓
-Prototype
-↓
-Implementation
-↓
-QA
-```
-
----
-
-## Long-Term Direction
-
-The portfolio should evolve into a living professional operating system.
-
-It should document:
-
-- How curiosity becomes capability
-- How capability becomes practical business systems
-- How systems become evidence
-- How human judgment works with AI-assisted development
-- How the portfolio itself continues to evolve
-
----
-
-## What This Folder Prevents
-
-This folder should help avoid:
-
-- Random feature additions
-- Repeating the same planning discussion
-- Overlapping documentation without clear purpose
-- Making AI the main identity
-- Making the portfolio too developer-heavy
-- Adding visuals that look good but do not explain anything
-
----
-
-## Guiding Question
-
-Before adding anything new, ask:
-
-> Does this help visitors discover how Fauzan thinks?
-
-If not, reconsider it.
+Use [../homepage/](../homepage/README.md), [../design/](../design/README.md), or [../case-studies/](../case-studies/README.md) for those responsibilities.

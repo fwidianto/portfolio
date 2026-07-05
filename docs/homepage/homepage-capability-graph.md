@@ -1,351 +1,87 @@
 # Homepage Capability Graph
 
-Status: Concept approved, not yet implemented  
-Purpose: Homepage identity section  
-Related core documents:  
-- `../core/portfolio-vision-2030.md`  
-- `../core/portfolio-design-philosophy.md`  
-- `../core/portfolio-working-principles.md`
+Status: Active source of truth
 
----
+This document defines the Capability Graph concept for the homepage. It replaces the older Learning Graph direction.
 
-## Purpose
+## Definition
 
-The Capability Graph explains why Fauzan is able to solve the kinds of business problems shown throughout the portfolio.
+The Capability Graph is:
 
-Internally, this idea started as the Learning Graph.
+- not a timeline,
+- not a skill chart,
+- not a progress bar,
+- not a career ladder,
+- not a visual resume.
 
-Publicly, it may appear as a Learning Journey.
+It is a map of accumulated capability. It should show how earlier experience compounds into current business-system thinking.
 
-Conceptually, it is a Capability Graph.
+## Core Idea
 
-The objective is not to show everything Fauzan knows.
+The graph should help visitors see that Fauzan's value is not a disconnected set of tools or projects.
 
-The objective is to show how curiosity, business problems, and accumulated capabilities connect.
+The main capability chain is:
 
----
+```text
+Engineering
+-> Cost Control
+-> Business Control
+-> Manufacturing
+-> ERP Analytics
+-> AI-Assisted Development
+-> Portfolio Experience
+```
 
-## Core Philosophy
-
-Knowledge does not replace previous knowledge.
-
-Knowledge compounds.
-
-Every capability remains active and becomes the foundation for newer capabilities.
-
-Instead of showing a career ladder, the homepage should show a growing system.
-
----
-
-## Design Principle
-
-The graph should answer three questions.
-
-1. Where did this capability first come from?  
-   Show the first learning year.
-
-2. Why was it learned?  
-   Show the business problem or curiosity question.
-
-3. Where is it still used today?  
-   Show current connections.
-
-The first learning year is historical context.
-
-The capability itself never expires.
-
----
+Years can exist as metadata, but chronology should not dominate. Connections matter more than dates.
 
 ## Capability Nodes
 
-### Engineering Foundation
+Each node should communicate:
 
-Started: 2015
+- what business context was learned,
+- what kind of system understanding was developed,
+- what evidence or project can support it,
+- how it connects to the next capability.
 
-Question:
-
-> How do complex systems work?
-
-Learned:
-
-- Systems thinking
-- Root cause analysis
-- Analytical discipline
-
-Still supports:
-
-- Cost Control
-- ERP Analytics
-- Business Analysis
-- AI Workflow
-
-Relationship:
-
-Engineering thinking became the foundation for every later capability.
-
----
-
-### Cost Control
-
-Started: 2019
-
-Question:
-
-> Why are costs different from expectations?
-
-Learned:
-
-- SAP ECC
-- Cost visibility
-- Inventory analysis
-- Profitability review
-
-Still supports:
-
-- Business Control
-- Manufacturing
-- ERP Analytics
-- Dashboard design
-
-Relationship:
-
-Understanding operational numbers created the bridge between engineering and business.
-
----
-
-### Business Control
-
-Started: 2022
-
-Question:
-
-> What information actually helps management decide?
-
-Learned:
-
-- KPI development
-- Pricing
-- Cross-functional communication
-- Decision support
-
-Still supports:
-
-- ERP Analytics
-- Portfolio storytelling
-- Dashboard review
-
-Relationship:
-
-Business control transformed operational information into management visibility.
-
----
-
-### Manufacturing & Ownership
-
-Started: 2022
-
-Question:
-
-> What really happens behind operational reports?
-
-Learned:
-
-- Procurement
-- Production
-- Finance
-- Ownership
-
-Still supports:
-
-- ERP Analytics
-- Review Signals
-- Operational thinking
-
-Relationship:
-
-Owning operations made ERP relationships easier to understand.
-
----
-
-### ERP Transformation
-
-Started: 2024
-
-Question:
-
-> Why can't ERP answer management questions directly?
-
-Learned:
-
-- Odoo
-- SQL
-- PostgreSQL
-- Business-rule validation
-- Dashboard architecture
-
-Still supports:
-
-- AI-assisted development
-- Portfolio case studies
-- Review logic
-
-Relationship:
-
-ERP became the central connection between operations and analytics.
-
----
-
-### AI-Assisted Development
-
-Started: 2025
-
-Question:
-
-> How can AI accelerate development without replacing business judgment?
-
-Learned:
-
-- GitHub
-- Python
-- Documentation
-- HTML
-- CSS
-- AI-assisted workflow
-
-Still supports:
-
-- Portfolio
-- Personal OS
-- Automation
-- Future projects
-
-Relationship:
-
-AI became an accelerator, not a replacement for business understanding.
-
----
-
-### Portfolio Experience Design
-
-Started: 2026
-
-Question:
-
-> How can my portfolio demonstrate how I think?
-
-Current exploration:
-
-- Better storytelling
-- Homepage experience
-- Public-safe case studies
-- Thinking Lab
-- Learning Journey
-- Personal OS
-
-Status:
-
-Still evolving.
-
-Relationship:
-
-The portfolio itself has become another learning project.
-
----
-
-## Draft Visual Shape
+Example:
 
 ```text
-                         Portfolio Experience
-                                ●
-                               / \
-                              /   \
-                    AI-Assisted Development
-                             ●
-                             │
-                     ERP Analytics
-                     ●──────────────┐
-                    /               │
-                   /                │
-         Business Control      Manufacturing
-                ●                  ●
-                 \                /
-                  \              /
-                  Cost Control
-                       ●
-                       │
-                       │
-             Engineering Foundation
-                       ●
+Manufacturing
+-> ERP Analytics
 ```
 
----
+This connection is not just about moving from factory context to dashboards. It means process understanding made ERP data easier to interpret and validate.
 
-## Connection Meaning
+## What the Graph Should Reveal
 
-Every line should have meaning.
+The graph should reveal:
 
-Examples:
+- curiosity across domains,
+- business learning from real operational problems,
+- systems thinking before technology choice,
+- practical solution-building,
+- continuous learning,
+- AI-assisted execution guided by human judgment.
 
-- Engineering created systems thinking.
-- Cost Control connected engineering with business.
-- Business Control focused the work on management decisions.
-- Manufacturing added operational reality.
-- ERP Analytics unified operations and data.
-- AI-assisted development accelerated iteration.
-- Portfolio Experience communicates the journey itself.
+It should not overclaim mastery. It should show accumulated perspective.
 
----
+## Relationship to Projects
 
-## Self-Driven Exploration
+The graph should route visitors toward evidence, especially:
 
-Not every capability came from employment.
+- Odoo ERP Analytics,
+- dashboard and reporting work,
+- AI-assisted portfolio development,
+- future case studies that follow the business-problem-first structure.
 
-Some came from curiosity outside work.
+The graph should not become an exhaustive list of every skill.
 
-These should appear differently in the graph, possibly with a dashed outline or subtle secondary accent.
+## Learning Graph Migration
 
-Examples:
+Older Learning Graph notes contained useful ideas about curiosity, growth, and experience accumulation. Those ideas are preserved here under the Capability Graph model.
 
-- Personal OS
-- Investment Analytics
-- AI Agents
-- Portfolio Experience Design
+The final homepage concept should use the term **Capability Graph** because the goal is to show accumulated capability, not learning progress.
 
-These nodes demonstrate initiative.
+## Implementation Boundary
 
----
-
-## Public Section Direction
-
-Possible public section label:
-
-> Learning Journey
-
-Possible heading:
-
-> Curiosity turned into capability
-
-Possible lead:
-
-> I learn best when a business problem makes me curious. Each capability started from a question, then became part of a larger system for understanding operations, data, and decision-making.
-
----
-
-## Success Criteria
-
-The visitor should think:
-
-> He did not randomly collect skills. Everything he knows is connected.
-
-The section fails if it feels like a generic resume timeline or a list of tools.
-
----
-
-## Next Step
-
-Create two visual prototypes before implementing on the live homepage:
-
-1. Capability graph layout
-2. Simpler fallback timeline / graph hybrid
-
-Choose the version that communicates the story with fewer words and works cleanly on mobile.
+This is not a UI specification. A future implementation task should translate this concept into layout, interaction, data structure, and responsive behavior.

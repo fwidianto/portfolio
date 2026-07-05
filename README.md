@@ -1,6 +1,6 @@
 # Fauzan Widianto Portfolio
 
-Personal portfolio website for Data & Business Analytics work across operations insight, dashboard/reporting workflows, automation, ERP process understanding, and AI-assisted delivery.
+Personal portfolio website for business systems, operations insight, dashboard/reporting workflows, automation, ERP process understanding, and AI-assisted delivery.
 
 ## Live Site
 
@@ -8,9 +8,9 @@ Visit the portfolio at [fwidianto.github.io/portofolio](https://fwidianto.github
 
 ## Positioning
 
-This portfolio is written for recruiters and collaborators looking for a Data Analyst, Business Analyst, BI Analyst, Operations Analyst, Commercial Analyst, Digital Transformation Analyst, or analytics-adjacent AI workflow profile.
+This portfolio is written for recruiters and collaborators looking for a business-first analytics and systems profile: Data Analyst, Business Analyst, BI Analyst, Operations Analyst, Commercial Analyst, Digital Transformation Analyst, or analytics-adjacent AI workflow roles.
 
-The core story is business-first analytics: understand the operational problem, structure the data, build repeatable reporting or automation, and communicate the business value clearly.
+The current portfolio direction is **Business Systems Designer**: understand the operational problem, structure the business logic, use technology to make the system visible, and communicate evidence clearly.
 
 Focus areas:
 
@@ -66,8 +66,12 @@ portofolio/
 |   |-- portfolio-app/                 # supporting Flask app
 |   `-- hs-code-automation/            # supporting source folder
 `-- docs/
-    `-- portfolio-refresh/
-        `-- ROADMAP.md
+    |-- README.md                     # active documentation entry point
+    |-- core/                         # philosophy, workflow, vision, principles
+    |-- homepage/                     # homepage experience concepts
+    |-- case-studies/                 # case-study source documents
+    |-- design/                       # visitor psychology and IA direction
+    `-- portfolio-refresh/            # historical refresh implementation records
 ```
 
 ## Local Preview
@@ -84,9 +88,11 @@ Then visit `http://localhost:8000`.
 
 The site is static and GitHub Pages friendly. No build step is required.
 
-## Roadmap
+## Documentation
 
-The refresh plan for this repository is tracked in [docs/portfolio-refresh/ROADMAP.md](docs/portfolio-refresh/ROADMAP.md).
+The active documentation architecture starts at [docs/README.md](docs/README.md).
+
+Historical refresh implementation records remain in [docs/portfolio-refresh/](docs/portfolio-refresh/README.md).
 
 ## Analytics Setup
 
