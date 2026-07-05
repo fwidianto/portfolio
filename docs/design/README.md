@@ -13,6 +13,7 @@ Read [../core/portfolio-design-philosophy.md](../core/portfolio-design-philosoph
 | [visitor-psychology.md](visitor-psychology.md) | What visitors should feel, notice, and avoid. |
 | [information-architecture.md](information-architecture.md) | How docs, homepage sections, and case studies connect. |
 | [visual-direction.md](visual-direction.md) | High-level visual direction for future design work. |
+| [target-audience.md](target-audience.md) | Primary audience profile and design implications for experienced HR and managers. |
 
 ## When to Read
 
