@@ -8,14 +8,16 @@ This document defines the homepage experience. It follows the principles in [../
 
 The homepage should help visitors understand how Fauzan thinks before asking them to inspect individual projects.
 
-The intended discovery path is:
+The current intended discovery path is:
 
 ```text
-identity
--> accumulated capability
--> current thinking
--> active building
--> strongest proof
+Identity
+-> Skill Development Curve
+-> Flagship Evidence / Odoo ERP Analytics
+-> Supporting Projects
+-> How I Work
+-> Website Updates
+-> Contact
 ```
 
 The homepage is not a project gallery first. It is the entry point to a professional operating system.
@@ -33,12 +35,13 @@ Visitors should naturally discover that Fauzan:
 
 ## Homepage Pillars
 
-The homepage should eventually revolve around four pillars:
+The current homepage direction revolves around these pillars:
 
-1. Capability Graph
-2. Thinking Lab
-3. Currently Building
-4. Flagship Case Study
+1. Skill Development Curve
+2. Flagship Evidence / Odoo ERP Analytics
+3. Supporting Projects
+4. How I Work
+5. Website Updates
 
 Each pillar should have a clear job. Avoid adding sections that only repeat the same claim in a different format.
 
@@ -50,21 +53,27 @@ The first impression should signal **Business Systems Designer**.
 
 It should not lead with AI Engineer, AI Developer, or software developer-first framing. AI can appear as part of the operating method, not as the core identity.
 
-### 2. Capability Graph
+### 2. Skill Development Curve
 
-The next step should show how past experience compounds into current capability. See [homepage-capability-graph.md](homepage-capability-graph.md).
+The next step should show how past experience compounds into current capability. See [homepage-skill-development-curve.md](homepage-skill-development-curve.md).
 
-### 3. Thinking Lab
-
-The homepage should reveal active thinking through selected questions, ideas, experiments, and systems being designed. See [homepage-thinking-lab.md](homepage-thinking-lab.md).
-
-### 4. Currently Building
-
-The homepage should show that the portfolio is alive without making it feel unfinished. See [homepage-currently-building.md](homepage-currently-building.md).
-
-### 5. Flagship Case Study
+### 3. Flagship Evidence / Odoo ERP Analytics
 
 The homepage should guide visitors toward the Odoo ERP Analytics case study as the strongest proof of the philosophy. See [homepage-flagship-case-study.md](homepage-flagship-case-study.md).
+
+### 4. Supporting Projects
+
+Supporting projects should show related evidence without competing with the flagship case study.
+
+Avoid repeating Odoo as a normal supporting card when it is already positioned as the flagship evidence.
+
+### 5. How I Work
+
+The workflow section should clarify how Fauzan moves from business question to process mapping, data logic, reporting output, and practical review.
+
+### 6. Website Updates
+
+Website Updates should show that the portfolio is actively maintained without making it feel unfinished. See [website-updates.md](website-updates.md).
 
 ## Interaction Principles
 
