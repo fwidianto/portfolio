@@ -1,59 +1,73 @@
 # Capability Growth Curve v7 Implementation Brief
 
-Status: Approved visual direction for implementation
+Status: Historical implementation brief / implemented
 
-## Purpose
+## Implementation result
 
-Replace the current stacked-card Capability Graph on the homepage with the approved **Capability Growth Curve v7** direction.
+This brief led to the accepted homepage v1 section now publicly called:
 
-The section should help experienced HR, recruiters, hiring managers, business managers, and functional leaders quickly understand how Fauzan's capability matured over time.
+```text
+Skill Development Curve
+```
 
-Target audience guidance is defined in:
+Accepted implementation commit:
 
-- [../design/target-audience.md](../design/target-audience.md)
+```text
+683680316db6ae84c49c588b4c030f882e8f57be
+```
 
-## Public section framing
+The current accepted source of truth is:
+
+- [homepage-skill-development-curve.md](homepage-skill-development-curve.md)
+
+## Historical purpose
+
+This file is preserved because it documented the v7 visual direction that shaped the final section.
+
+The original implementation direction was to replace the stacked-card Capability Graph with a graph-like growth curve. During review, the public name changed because `Capability Graph` was too abstract for experienced HR and manager audiences.
+
+## Final public wording
 
 Eyebrow:
 
 ```text
-Capability Graph
+Skill Development Curve
 ```
 
 Title:
 
 ```text
-How my capabilities connect
+How my skills evolved over time
 ```
 
 Intro:
 
 ```text
-A visual map of how business experience, systems thinking, ERP analytics, and AI-assisted execution compounded over time.
+A visual map of how my skills developed from engineering foundations into business systems, ERP analytics, and AI-assisted execution.
 ```
 
 Legend chips:
 
 ```text
 Years
-Capability Depth
+Skill Depth
 Foundation → Business Systems Maturity
 ```
 
-## Visual concept
+## Visual concept preserved
 
-Use a graph-like visual, not stacked cards.
+The final section keeps the v7 visual direction:
 
-The graph should show:
+- x-axis = years,
+- y-axis = qualitative skill depth,
+- exponential / compounding curve,
+- plotted points centered on the curve,
+- minimal node text,
+- one unified explanation panel below the graph,
+- no `What each phase means` heading,
+- no separate title column.
 
-- x-axis = years
-- y-axis = qualitative capability depth
-- an exponential / compounding curve
-- plotted points directly centered on the curve
-- minimal node text
-- one unified explanation panel below the graph
-
-The curve is a visual metaphor. It is not a measurable skill score, KPI, or self-rating chart.
+The curve remains a visual metaphor. It is not a measurable score, KPI, or self-rating chart.
 
 ## Graph stages
 
@@ -67,111 +81,22 @@ The curve is a visual metaphor. It is not a measurable skill score, KPI, or self
 | 2025 | AI-Assisted | Acceleration |
 | 2026 | Operating System | Portfolio System |
 
-## Y-axis labels
+## Freeze rule
 
-The y-axis labels must be uniformly aligned.
+This section is frozen as accepted homepage v1.
 
-Use qualitative markers:
+Do not redesign or rename it unless real visitor, recruiter, HR, or manager feedback shows that the section is confusing or ineffective.
 
-```text
-Foundation
-Visibility
-Judgment
-Systems
-Acceleration
-Maturity
-```
+Allowed future changes:
 
-Avoid numeric values or percentages.
+- mobile layout bug fixes,
+- accessibility fixes,
+- typo or grammar fixes,
+- performance-safe visual corrections,
+- consistency updates if the broader homepage structure changes.
 
-## Explanation panel
+Avoid taste-based polishing.
 
-Do not use the heading:
+## Next priority
 
-```text
-What each phase means
-```
-
-Do not use a separate title column for every phase.
-
-Use one clean explanation container below the graph. Each explanation should be one sentence with the phase keyword bolded at the start.
-
-Approved explanation copy:
-
-```text
-Foundation was shaped by mechanical engineering, where I learned to think in systems, constraints, and cause-effect relationships.
-
-Visibility came from turning operational activity into cost, margin, inventory, and profitability visibility.
-
-Judgment was built by connecting reports, pricing, vendors, operations, and management decisions.
-
-Process Reality came from understanding the real meaning behind ERP transactions, materials, jobs, and operational exceptions.
-
-Systems Integration was achieved by connecting process, data, traceability, dashboards, and business insight into one working system.
-
-Acceleration came from using AI to build, document, test, and iterate faster while keeping judgment human-led.
-
-Operating System means turning learning, projects, evidence, and working style into a living professional system.
-```
-
-In HTML, bold only the first phrase of each sentence:
-
-- Foundation
-- Visibility
-- Judgment
-- Process Reality
-- Systems Integration
-- Acceleration
-- Operating System
-
-## Mobile behavior
-
-Mobile must not show the old stacked-card arrow version.
-
-Mobile should show either:
-
-1. a simplified SVG graph with points centered on the curve, or
-2. a visually coherent vertical version where every point is clearly centered on the visual path.
-
-Priority:
-
-- no horizontal overflow
-- y-axis labels aligned uniformly
-- points centered on the line/curve
-- graph remains readable on Android Chrome
-- explanation block remains below the graph
-
-## Implementation scope
-
-Update only the homepage Capability Graph section in `index.html`.
-
-Do not change:
-
-- hero section
-- about section
-- project cards
-- navigation
-- analytics scripts
-- SEO metadata
-- Odoo case study page
-- unrelated CSS
-
-## Acceptance criteria
-
-- Current stacked-card Capability Graph is replaced.
-- New section uses the v7 graph-like visual direction.
-- Desktop graph uses x-axis, y-axis, curve, points, and stage labels.
-- Mobile graph is visually centered and readable.
-- Y-axis labels are uniformly aligned.
-- Explanation panel has no heading and no title column.
-- Explanation sentences use bold phase keywords at the start.
-- Final stage is `Operating System`, not `Visible Proof` or `Personal Operating System`.
-- AI remains framed as an accelerator, not the identity.
-- The graph remains a maturity metaphor, not a quantified skill score.
-- No unrelated files are changed.
-
-## Recommended commit message
-
-```text
-refactor: replace capability graph with growth curve
-```
+The next homepage priority is **Flagship Evidence / Odoo ERP Analytics routing**, not further polishing of this section.
