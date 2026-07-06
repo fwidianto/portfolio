@@ -1,87 +1,40 @@
 # Homepage Capability Graph
 
-Status: Active source of truth
+Status: Superseded by [homepage-skill-development-curve.md](homepage-skill-development-curve.md)
 
-This document defines the Capability Graph concept for the homepage. It replaces the older Learning Graph direction.
+## Supersession Note
 
-## Definition
+This document is preserved as historical context for the internal concept of accumulated capability.
 
-The Capability Graph is:
+The public homepage section should no longer use `Capability Graph` as the visible name.
 
-- not a timeline,
-- not a skill chart,
-- not a progress bar,
-- not a career ladder,
-- not a visual resume.
+Use the accepted public wording defined in:
 
-It is a map of accumulated capability. It should show how earlier experience compounds into current business-system thinking.
+- [homepage-skill-development-curve.md](homepage-skill-development-curve.md)
 
-## Core Idea
+## What remains useful from this document
 
-The graph should help visitors see that Fauzan's value is not a disconnected set of tools or projects.
+The original concept is still useful internally:
 
-The main capability chain is:
+- earlier experiences compound into current business-system thinking,
+- engineering, cost control, business control, manufacturing, ERP analytics, AI-assisted development, and portfolio work are connected,
+- the section should not overclaim mastery,
+- AI should remain an accelerator, not the identity,
+- the section should route visitors toward evidence, especially Odoo ERP Analytics.
 
-```text
-Engineering
--> Cost Control
--> Business Control
--> Manufacturing
--> ERP Analytics
--> AI-Assisted Development
--> Portfolio Experience
-```
+## Public wording rule
 
-Years can exist as metadata, but chronology should not dominate. Connections matter more than dates.
+Use this distinction:
 
-## Capability Nodes
+| Context | Preferred wording |
+| --- | --- |
+| Public homepage section name | Skill Development Curve |
+| Public section title | How my skills evolved over time |
+| Public y-axis label | Skill Depth |
+| Internal concept | capability growth / capability compounding |
 
-Each node should communicate:
+## Freeze rule
 
-- what business context was learned,
-- what kind of system understanding was developed,
-- what evidence or project can support it,
-- how it connects to the next capability.
+The Skill Development Curve is accepted as homepage v1.
 
-Example:
-
-```text
-Manufacturing
--> ERP Analytics
-```
-
-This connection is not just about moving from factory context to dashboards. It means process understanding made ERP data easier to interpret and validate.
-
-## What the Graph Should Reveal
-
-The graph should reveal:
-
-- curiosity across domains,
-- business learning from real operational problems,
-- systems thinking before technology choice,
-- practical solution-building,
-- continuous learning,
-- AI-assisted execution guided by human judgment.
-
-It should not overclaim mastery. It should show accumulated perspective.
-
-## Relationship to Projects
-
-The graph should route visitors toward evidence, especially:
-
-- Odoo ERP Analytics,
-- dashboard and reporting work,
-- AI-assisted portfolio development,
-- future case studies that follow the business-problem-first structure.
-
-The graph should not become an exhaustive list of every skill.
-
-## Learning Graph Migration
-
-Older Learning Graph notes contained useful ideas about curiosity, growth, and experience accumulation. Those ideas are preserved here under the Capability Graph model.
-
-The final homepage concept should use the term **Capability Graph** because the goal is to show accumulated capability, not learning progress.
-
-## Implementation Boundary
-
-This is not a UI specification. A future implementation task should translate this concept into layout, interaction, data structure, and responsive behavior.
+Do not redesign or rename it unless real visitor, recruiter, HR, or manager feedback shows that it is confusing or ineffective.
