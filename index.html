@@ -615,124 +615,52 @@
       transform: translateY(-3px);
     }
 
-    .website-updates {
-      background:
-        radial-gradient(circle at bottom left, rgba(31, 77, 90, 0.08), transparent 24rem),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(246, 242, 234, 0.52));
-      border: 1px solid rgba(31, 41, 51, 0.1);
-      border-radius: 34px;
-      padding: 18px;
+    .website-update-strip {
+      margin: 0 auto;
+      max-width: 1240px;
     }
 
-    .website-updates__panel {
+    .website-update-strip__panel {
+      align-items: center;
       background: rgba(255, 255, 255, 0.72);
       border: 1px solid rgba(31, 41, 51, 0.1);
-      border-radius: 28px;
-      box-shadow: 0 18px 45px rgba(31, 41, 51, 0.08);
-      margin: 0 auto;
-      max-width: 1040px;
-      padding: 34px;
-    }
-
-    .website-updates__header {
-      align-items: end;
+      border-radius: 18px;
+      box-shadow: 0 10px 26px rgba(31, 41, 51, 0.05);
       display: grid;
-      gap: 24px;
-      grid-template-columns: minmax(0, 1fr) auto;
-      margin-bottom: 26px;
+      gap: 14px;
+      grid-template-columns: auto auto minmax(0, 1fr) auto;
+      padding: 14px 16px;
     }
 
-    .website-updates__eyebrow {
+    .website-update-strip__eyebrow {
       color: var(--accent, #1f4d5a);
-      display: inline-block;
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 0.12em;
-      margin-bottom: 12px;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    .website-updates__header h2 {
+    .website-update-strip__date {
+      color: var(--accent, #1f4d5a);
+      font-size: 12.5px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .website-update-strip__text {
       color: var(--text, #1f2933);
-      font-size: clamp(32px, 4vw, 48px);
-      letter-spacing: -0.05em;
-      line-height: 1.06;
-      margin: 0 0 12px;
-    }
-
-    .website-updates__header p {
-      color: var(--muted, #6b7280);
-      font-size: 16px;
-      line-height: 1.7;
+      font-size: 14px;
+      line-height: 1.5;
       margin: 0;
-      max-width: 680px;
+      min-width: 0;
     }
 
-    .website-updates__summary {
-      background: rgba(31, 77, 90, 0.08);
-      border: 1px solid rgba(31, 77, 90, 0.12);
-      border-radius: 999px;
+    .website-update-strip__link {
       color: var(--accent, #1f4d5a);
       font-size: 13px;
       font-weight: 800;
-      padding: 10px 14px;
       white-space: nowrap;
-    }
-
-    .website-updates__list {
-      display: grid;
-      gap: 0;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .website-updates__item {
-      border-top: 1px solid rgba(31, 41, 51, 0.1);
-      display: grid;
-      gap: 22px;
-      grid-template-columns: 128px minmax(0, 1fr);
-      padding: 18px 0;
-    }
-
-    .website-updates__item:first-child {
-      border-top: 0;
-      padding-top: 0;
-    }
-
-    .website-updates__item:last-child {
-      padding-bottom: 0;
-    }
-
-    .website-updates__item time {
-      color: var(--accent, #1f4d5a);
-      font-size: 13px;
-      font-weight: 850;
-      line-height: 1.5;
-      white-space: nowrap;
-    }
-
-    .website-updates__item h3 {
-      color: var(--text, #1f2933);
-      font-size: 16px;
-      line-height: 1.35;
-      margin: 0 0 6px;
-    }
-
-    .website-updates__item p {
-      color: var(--muted, #6b7280);
-      font-size: 14.5px;
-      line-height: 1.65;
-      margin: 0;
-    }
-
-    .website-updates__footnote {
-      border-top: 1px solid rgba(31, 41, 51, 0.1);
-      color: var(--muted, #6b7280);
-      font-size: 12.5px;
-      line-height: 1.6;
-      margin: 22px 0 0;
-      padding-top: 16px;
     }
 
     @media (max-width: 980px) {
@@ -771,44 +699,14 @@
     }
 
     @media (max-width: 760px) {
-      .website-updates {
-        border-radius: 26px;
-        padding: 10px;
-      }
-
-      .website-updates__panel {
-        border-radius: 22px;
-        padding: 22px;
-      }
-
-      .website-updates__header {
-        align-items: start;
-        gap: 14px;
+      .website-update-strip__panel {
+        gap: 8px;
         grid-template-columns: 1fr;
-        margin-bottom: 22px;
+        padding: 14px;
       }
 
-      .website-updates__summary {
+      .website-update-strip__link {
         justify-self: start;
-        white-space: normal;
-      }
-
-      .website-updates__item {
-        gap: 6px;
-        grid-template-columns: 1fr;
-        padding: 16px 0;
-      }
-
-      .website-updates__item time {
-        font-size: 12.5px;
-      }
-
-      .website-updates__item h3 {
-        font-size: 15.5px;
-      }
-
-      .website-updates__item p {
-        font-size: 14px;
       }
     }
 
@@ -1509,103 +1407,13 @@
   </section>
 
   <!-- WEBSITE UPDATES -->
-  <section id="website-updates" aria-labelledby="website-updates-title">
+  <section id="website-updates" class="website-update-strip" aria-labelledby="website-updates-title">
     <div class="container">
-      <div class="website-updates">
-        <div class="website-updates__panel">
-          <div class="website-updates__header">
-            <div>
-              <span class="website-updates__eyebrow">Website Updates</span>
-              <h2 id="website-updates-title">Latest website updates</h2>
-              <p>A short record of recent improvements to this portfolio website.</p>
-            </div>
-            <span class="website-updates__summary">Latest 10 updates</span>
-          </div>
-
-          <ol class="website-updates__list" aria-label="Latest portfolio website updates">
-            <li class="website-updates__item">
-              <time datetime="2026-07-06">6 Jul 2026</time>
-              <div>
-                <h3>Skill Development Curve refined</h3>
-                <p>Reworked the homepage skill-development section to better show how my skills evolved over time.</p>
-              </div>
-            </li>
-
-            <li class="website-updates__item">
-              <time datetime="2026-07-06">6 Jul 2026</time>
-              <div>
-                <h3>Skill Development Curve accepted as v1</h3>
-                <p>Locked the current skill-development section as the accepted first version for the homepage.</p>
-              </div>
-            </li>
-
-            <li class="website-updates__item">
-              <time datetime="2026-07-06">6 Jul 2026</time>
-              <div>
-                <h3>Homepage evidence direction clarified</h3>
-                <p>Updated the next homepage direction toward Odoo ERP Analytics as the strongest project evidence.</p>
-              </div>
-            </li>
-
-            <li class="website-updates__item">
-              <time datetime="2026-07-05">5 Jul 2026</time>
-              <div>
-                <h3>Skill-growth section added</h3>
-                <p>Added the first visual section connecting engineering, cost control, business control, ERP analytics, and AI-assisted execution.</p>
-              </div>
-            </li>
-
-            <li class="website-updates__item">
-              <time datetime="2026-07-05">5 Jul 2026</time>
-              <div>
-                <h3>Homepage skill section specified</h3>
-                <p>Added implementation guidance so the skill-growth section stays aligned with the portfolio direction.</p>
-              </div>
-            </li>
-
-            <li class="website-updates__item">
-              <time datetime="2026-07-04">4 Jul 2026</time>
-              <div>
-                <h3>Portfolio philosophy reorganized</h3>
-                <p>Refined the documentation structure around the direction: understand how I think, not only what I built.</p>
-              </div>
-            </li>
-
-            <li class="website-updates__item">
-              <time datetime="2026-07-04">4 Jul 2026</time>
-              <div>
-                <h3>Homepage experience blueprint added</h3>
-                <p>Added planning guidance for how the homepage should guide visitors through identity, skill development, thinking, and evidence.</p>
-              </div>
-            </li>
-
-            <li class="website-updates__item">
-              <time datetime="2026-07-03">3 Jul 2026</time>
-              <div>
-                <h3>Homepage project section simplified</h3>
-                <p>Removed redundant project inventory content so the homepage feels less crowded and easier to scan.</p>
-              </div>
-            </li>
-
-            <li class="website-updates__item">
-              <time datetime="2026-07-03">3 Jul 2026</time>
-              <div>
-                <h3>Project filtering added</h3>
-                <p>Added homepage project filters to make the project list easier to explore by focus area.</p>
-              </div>
-            </li>
-
-            <li class="website-updates__item">
-              <time datetime="2026-07-03">3 Jul 2026</time>
-              <div>
-                <h3>Homepage visual hierarchy polished</h3>
-                <p>Refined spacing, visual hierarchy, and section flow for a cleaner reading experience.</p>
-              </div>
-            </li>
-          </ol>
-
-          <p class="website-updates__footnote">These are visitor-facing website updates, not raw commit messages.</p>
-        </div>
+      <div class="website-update-strip__panel">
+        <span class="website-update-strip__eyebrow">Latest website update</span>
+        <time class="website-update-strip__date" datetime="2026-07-06">6 Jul 2026</time>
+        <p class="website-update-strip__text">Skill Development Curve refined and accepted as homepage v1.</p>
+        <a class="website-update-strip__link" href="website-updates.html">View updates</a>
       </div>
     </div>
   </section>
