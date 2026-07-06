@@ -12,12 +12,13 @@ The homepage should act as the public interface of the portfolio philosophy defi
 | --- | --- |
 | [homepage-experience-blueprint.md](homepage-experience-blueprint.md) | Overall homepage journey and section order. |
 | [homepage-skill-development-curve.md](homepage-skill-development-curve.md) | Accepted v1 source of truth for the public Skill Development Curve section. |
+| [homepage-flagship-case-study.md](homepage-flagship-case-study.md) | Accepted homepage routing toward the Odoo ERP Analytics flagship case study. |
+| [website-updates.md](website-updates.md) | Maintenance rule for the public Website Updates changelog. |
 | [homepage-capability-graph.md](homepage-capability-graph.md) | Superseded historical concept document for internal capability-growth thinking. |
 | [homepage-capability-graph-feature-spec.md](homepage-capability-graph-feature-spec.md) | Historical feature specification for the earlier Capability Graph direction. |
 | [homepage-capability-growth-curve-v7-implementation-brief.md](homepage-capability-growth-curve-v7-implementation-brief.md) | Historical implementation brief that led to the accepted v1 Skill Development Curve. |
 | [homepage-thinking-lab.md](homepage-thinking-lab.md) | Thinking Lab concept for current questions and explorations. |
 | [homepage-currently-building.md](homepage-currently-building.md) | Future section that shows the portfolio is alive. |
-| [homepage-flagship-case-study.md](homepage-flagship-case-study.md) | Homepage routing toward the Odoo ERP Analytics case study. |
 
 ## When to Read
 
@@ -27,7 +28,11 @@ Read this folder before designing or implementing homepage sections, navigation 
 
 The Skill Development Curve is accepted as homepage v1 and should be treated as frozen.
 
-The next homepage priority is Flagship Evidence / Odoo ERP Analytics routing.
+The Odoo Flagship Evidence section is accepted as an active homepage proof section.
+
+Website Updates is a maintained public changelog and should be updated when visible website changes are made.
+
+The next priority is the Odoo ERP Analytics case study page: first-screen clarity and story refinement.
 
 ## What Should Not Be Placed Here
 
