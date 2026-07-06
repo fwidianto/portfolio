@@ -325,70 +325,6 @@
       text-align: center;
     }
 
-    .workflow-steps {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 30px;
-    }
-
-    .workflow-step {
-      background: rgba(255, 255, 255, 0.84);
-      border: 1px solid var(--border, rgba(31, 41, 51, 0.12));
-      border-radius: 24px;
-      box-shadow: var(--shadow-card, 0 10px 28px rgba(31, 41, 51, 0.07));
-      min-height: 100%;
-      padding: 24px;
-      position: relative;
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-    }
-
-    .workflow-step:hover,
-    .workflow-step:focus-within {
-      border-color: rgba(31, 77, 90, 0.22);
-      box-shadow: var(--shadow-soft, 0 18px 45px rgba(31, 41, 51, 0.08));
-      transform: translateY(-4px);
-    }
-
-    .workflow-step-number {
-      align-items: center;
-      background: rgba(31, 77, 90, 0.09);
-      border: 1px solid rgba(31, 77, 90, 0.12);
-      border-radius: 999px;
-      color: var(--accent, #1f4d5a);
-      display: inline-flex;
-      font-size: 13px;
-      font-weight: 850;
-      height: 38px;
-      justify-content: center;
-      margin-bottom: 18px;
-      width: 38px;
-    }
-
-    .workflow-step h3 {
-      color: var(--text, #1f2933);
-      font-size: 20px;
-      line-height: 1.25;
-      margin-bottom: 12px;
-    }
-
-    .workflow-step p {
-      color: var(--muted, #6b7280);
-      font-size: 15.5px;
-      line-height: 1.65;
-      margin: 0;
-    }
-
-    .workflow-step-meta {
-      color: var(--accent, #1f4d5a);
-      display: block;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      margin-top: 18px;
-      text-transform: uppercase;
-    }
-
     .flagship-case {
       background:
         radial-gradient(circle at top left, rgba(31, 77, 90, 0.12), transparent 28rem),
@@ -813,7 +749,6 @@
     }
 
     @media (max-width: 980px) {
-      .workflow-steps,
       .flagship-case__top {
         grid-template-columns: 1fr;
       }
@@ -905,7 +840,6 @@
       }
 
       .project-filter-bar,
-      .workflow-step,
       .flagship-case {
         padding: 22px;
       }
@@ -1403,51 +1337,69 @@
     <div class="container">
       <h2 class="section-title">How I Think Through Problems</h2>
       <p class="section-lead">
-        I usually start with discussion, not tools. Before designing a dashboard, workflow, or system, I try to understand whether the issue is really a data problem, a process problem, a perspective problem, or simply an unclear question. A useful solution should fit the users, the environment, the available resources, and the real situation behind the problem.
+        I start with the mess first, then turn it into something people can actually use.
       </p>
 
-      <div class="workflow-steps" aria-label="Six-step workflow from business question to review-ready visibility">
-        <article class="workflow-step">
-          <span class="workflow-step-number">01</span>
-          <h3>Start with discussion</h3>
-          <p>I discuss the situation with users and stakeholders first. Some problems are obvious, but many are hidden behind unclear expectations, different perspectives, missing data, or repeated manual work that people have accepted as normal.</p>
-          <span class="workflow-step-meta">Output: shared problem understanding</span>
-        </article>
+      <div class="problem-engine" aria-labelledby="problem-engine-title">
+        <div class="problem-engine__eyebrow">Problem-Solving Engine</div>
+        <h3 id="problem-engine-title" class="problem-engine__title">How I Turn Unclear Problems Into Usable Systems</h3>
+        <p class="problem-engine__lede">
+          I usually do not start with tools. I start by understanding the mess first, then I turn it into something people can actually use.
+        </p>
+        <div class="problem-engine__flow" aria-label="Messy inputs to practical outputs flow">
+          <span>Messy inputs</span>
+          <span aria-hidden="true">&rarr;</span>
+          <span>Thinking engine</span>
+          <span aria-hidden="true">&rarr;</span>
+          <span>Practical outputs</span>
+        </div>
 
-        <article class="workflow-step">
-          <span class="workflow-step-number">02</span>
-          <h3>Understand the process end to end</h3>
-          <p>I trace how the work actually moves: who creates the data, where it changes, where it gets delayed, and how it finally becomes a report, decision, or follow-up action.</p>
-          <span class="workflow-step-meta">Output: process understanding</span>
-        </article>
+        <div class="problem-engine__grid">
+          <article class="problem-engine__zone problem-engine__zone--inputs" aria-label="Messy inputs">
+            <div class="problem-engine__zone-title">Messy inputs</div>
+            <div class="problem-engine__cloud" aria-label="Messy business problem inputs">
+              <span class="problem-engine__note" style="--x:4%;--y:8%;--r:-5deg;">Need report ASAP</span>
+              <span class="problem-engine__note" style="--x:48%;--y:2%;--r:4deg;">which data is correct?</span>
+              <span class="problem-engine__note" style="--x:16%;--y:26%;--r:3deg;">manual recheck</span>
+              <span class="problem-engine__note" style="--x:55%;--y:24%;--r:-3deg;">scattered file</span>
+              <span class="problem-engine__note" style="--x:2%;--y:48%;--r:4deg;">different answer</span>
+              <span class="problem-engine__note" style="--x:44%;--y:47%;--r:-4deg;">missing follow-up</span>
+              <span class="problem-engine__note" style="--x:18%;--y:68%;--r:-2deg;">too many sheets</span>
+              <span class="problem-engine__note" style="--x:48%;--y:74%;--r:3deg;">why delayed?</span>
+              <span class="problem-engine__note" style="--x:6%;--y:86%;--r:2deg;">profit or revenue?</span>
+            </div>
+            <p class="problem-engine__caption">Most real problems arrive as confusion, pressure, repeated work, and missing visibility.</p>
+          </article>
 
-        <article class="workflow-step">
-          <span class="workflow-step-number">03</span>
-          <h3>Find a suitable solution</h3>
-          <p>I do not assume the most advanced solution is the best one. The right solution needs to fit the users, the environment, the available resources, and the way people actually work.</p>
-          <span class="workflow-step-meta">Output: practical solution direction</span>
-        </article>
+          <article class="problem-engine__zone problem-engine__zone--core" aria-label="Thinking engine">
+            <div class="problem-engine__zone-title">Thinking engine</div>
+            <div class="problem-engine__core" aria-label="Problem core with six-step thinking loop: Discuss, Trace, Diagnose, Design, Test, Improve">
+              <div class="problem-engine__ring" aria-hidden="true"></div>
+              <div class="problem-engine__center">Problem<br>Core</div>
+              <span class="problem-engine__node problem-engine__node--1">Discuss</span>
+              <span class="problem-engine__node problem-engine__node--2">Trace</span>
+              <span class="problem-engine__node problem-engine__node--3">Diagnose</span>
+              <span class="problem-engine__node problem-engine__node--4">Design</span>
+              <span class="problem-engine__node problem-engine__node--5">Test</span>
+              <span class="problem-engine__node problem-engine__node--6">Improve</span>
+            </div>
+            <p class="problem-engine__caption">I try to find whether the issue is process, data, logic, perspective, or an unclear question.</p>
+          </article>
 
-        <article class="workflow-step">
-          <span class="workflow-step-number">04</span>
-          <h3>Design a system around the problem</h3>
-          <p>Many problems I face are related to data, interpretation, and repeated reporting. I build systems, dashboards, workflows, or review logic to make information easier to understand and act on.</p>
-          <span class="workflow-step-meta">Output: repeatable system design</span>
-        </article>
-
-        <article class="workflow-step">
-          <span class="workflow-step-number">05</span>
-          <h3>Test and protect the core purpose</h3>
-          <p>After creating a mockup or working version, I test whether it answers the original question. A clear project core helps me improve the solution without overthinking every detail.</p>
-          <span class="workflow-step-meta">Output: tested working version</span>
-        </article>
-
-        <article class="workflow-step">
-          <span class="workflow-step-number">06</span>
-          <h3>Present, improve, and prepare for real use</h3>
-          <p>When the solution is ready enough, I present it, collect feedback, and refine it toward practical use. The goal is something people can understand, trust, and use for review, action, or decision-making.</p>
-          <span class="workflow-step-meta">Output: usable improvement</span>
-        </article>
+          <article class="problem-engine__zone problem-engine__zone--outputs" aria-label="Practical outputs">
+            <div class="problem-engine__zone-title">Practical outputs</div>
+            <div class="problem-engine__outputs">
+              <span class="problem-engine__chip">Dashboard logic</span>
+              <span class="problem-engine__chip">Review view</span>
+              <span class="problem-engine__chip">Report structure</span>
+              <span class="problem-engine__chip">Automation</span>
+              <span class="problem-engine__chip">Follow-up system</span>
+              <span class="problem-engine__chip">Decision support</span>
+              <span class="problem-engine__chip">Clearer visibility</span>
+            </div>
+            <p class="problem-engine__caption">The goal is something people can understand, trust, review, and use.</p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -1668,15 +1620,15 @@
         <ol class="website-update-strip__list" aria-label="Latest homepage website updates">
           <li class="website-update-strip__item">
             <time class="website-update-strip__date" datetime="2026-07-06">6 Jul 2026</time>
+            <p class="website-update-strip__text">Problem-solving engine redesigned with a clearer messy-inputs to practical-outputs flow.</p>
+          </li>
+          <li class="website-update-strip__item">
+            <time class="website-update-strip__date" datetime="2026-07-06">6 Jul 2026</time>
             <p class="website-update-strip__text">Professional experience visuals refined with real company logos, wider cards, cleaner alignment, and calmer spacing.</p>
           </li>
           <li class="website-update-strip__item">
             <time class="website-update-strip__date" datetime="2026-07-06">6 Jul 2026</time>
             <p class="website-update-strip__text">Homepage positioning and flow refined.</p>
-          </li>
-          <li class="website-update-strip__item">
-            <time class="website-update-strip__date" datetime="2026-07-06">6 Jul 2026</time>
-            <p class="website-update-strip__text">Odoo flagship evidence strengthened.</p>
           </li>
         </ol>
       </div>
