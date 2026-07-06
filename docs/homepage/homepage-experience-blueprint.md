@@ -12,10 +12,12 @@ The current intended discovery path is:
 
 ```text
 Identity
+-> Professional Experience
+-> Core Skills
 -> Skill Development Curve
+-> How I Think Through Problems
 -> Flagship Evidence / Odoo ERP Analytics
 -> Supporting Projects
--> How I Work
 -> Website Updates
 -> Contact
 ```
@@ -37,11 +39,13 @@ Visitors should naturally discover that Fauzan:
 
 The current homepage direction revolves around these pillars:
 
-1. Skill Development Curve
-2. Flagship Evidence / Odoo ERP Analytics
-3. Supporting Projects
-4. How I Work
-5. Website Updates
+1. Professional Experience
+2. Core Skills
+3. Skill Development Curve
+4. How I Think Through Problems
+5. Flagship Evidence / Odoo ERP Analytics
+6. Supporting Projects
+7. Website Updates
 
 Each pillar should have a clear job. Avoid adding sections that only repeat the same claim in a different format.
 
@@ -53,27 +57,38 @@ The first impression should signal **Business Systems Designer**.
 
 It should not lead with AI Engineer, AI Developer, or software developer-first framing. AI can appear as part of the operating method, not as the core identity.
 
-### 2. Skill Development Curve
+### 2. Professional Experience
 
-The next step should show how past experience compounds into current capability. See [homepage-skill-development-curve.md](homepage-skill-development-curve.md).
+The next step should show the roles that shaped Fauzan's understanding of cost control, profitability, operations, manufacturing reality, ERP migration, and business review.
 
-### 3. Flagship Evidence / Odoo ERP Analytics
+### 3. Core Skills
+
+The skills section should show the practical tools and methods Fauzan uses today.
+
+### 4. Skill Development Curve
+
+This section should show how past experience compounds into current capability. See [homepage-skill-development-curve.md](homepage-skill-development-curve.md).
+
+### 5. How I Think Through Problems
+
+The workflow section should clarify how Fauzan moves from discussion to process understanding, solution selection, system design, testing, and practical refinement.
+
+### 6. Flagship Evidence / Odoo ERP Analytics
 
 The homepage should guide visitors toward the Odoo ERP Analytics case study as the strongest proof of the philosophy. See [homepage-flagship-case-study.md](homepage-flagship-case-study.md).
 
-### 4. Supporting Projects
+### 7. Supporting Projects
 
 Supporting projects should show related evidence without competing with the flagship case study.
 
 Avoid repeating Odoo as a normal supporting card when it is already positioned as the flagship evidence.
 
-### 5. How I Work
-
-The workflow section should clarify how Fauzan moves from business question to process mapping, data logic, reporting output, and practical review.
-
-### 6. Website Updates
+### 8. Website Updates
 
 Website Updates should show that the portfolio is actively maintained without making it feel unfinished. See [website-updates.md](website-updates.md).
+
+Approved homepage working philosophy:
+Fauzan’s “How I Think Through Problems” section should start from discussion, not tools. The process should show that useful solutions begin with shared problem understanding, end-to-end process understanding, suitable solution selection, system design around the problem, testing against the project core, and presentation/refinement for real use. The tone should avoid forcing an identity too early and let visitors understand the thinking through experience, skills, and projects.
 
 ## Interaction Principles
 
