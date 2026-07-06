@@ -37,11 +37,17 @@ Business problem
 The homepage should guide visitors toward this case study after they have seen:
 
 - the Business Systems Designer identity,
-- the Capability Graph,
-- active thinking through Thinking Lab,
-- evidence that the portfolio is actively maintained.
+- the Skill Development Curve,
+- evidence that Fauzan's skills developed into business systems thinking,
+- public-safe proof that the portfolio is actively maintained.
 
 The homepage should not rewrite the full case study. It should frame why the case matters and make the next click obvious.
+
+## Current Priority
+
+After the accepted Skill Development Curve v1, this is the next homepage priority.
+
+The main goal is to help experienced HR and managers understand why Odoo ERP Analytics is the strongest proof of Fauzan's positioning.
 
 ## Implementation Boundary
 
