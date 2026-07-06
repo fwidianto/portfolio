@@ -12,7 +12,8 @@ The homepage should act as the public interface of the portfolio philosophy defi
 | --- | --- |
 | [homepage-experience-blueprint.md](homepage-experience-blueprint.md) | Overall homepage journey and section order. |
 | [homepage-skill-development-curve.md](homepage-skill-development-curve.md) | Accepted v1 source of truth for the public Skill Development Curve section. |
-| [homepage-flagship-case-study.md](homepage-flagship-case-study.md) | Accepted homepage routing toward the Odoo ERP Analytics flagship case study. |
+| [homepage-odoo-flagship-evidence.md](homepage-odoo-flagship-evidence.md) | Accepted v1 guidance for the public Odoo Flagship Evidence section. |
+| [homepage-flagship-case-study.md](homepage-flagship-case-study.md) | Earlier routing document for the Odoo ERP Analytics flagship case study. |
 | [website-updates.md](website-updates.md) | Maintenance rule for the public Website Updates changelog. |
 | [homepage-capability-graph.md](homepage-capability-graph.md) | Superseded historical concept document for internal capability-growth thinking. |
 | [homepage-capability-graph-feature-spec.md](homepage-capability-graph-feature-spec.md) | Historical feature specification for the earlier Capability Graph direction. |
