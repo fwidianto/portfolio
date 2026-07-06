@@ -383,7 +383,7 @@
   }
 
   .experience-section {
-    padding-top: 82px;
+    padding-top: 92px;
   }
 
   .experience-container {
@@ -391,7 +391,7 @@
   }
 
   .experience-header {
-    margin: 0 auto 24px;
+    margin: 0 auto 50px;
     max-width: 920px;
   }
 
@@ -406,16 +406,17 @@
   }
 
   .experience-title {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 
   .experience-lead {
     max-width: 860px;
+    margin-bottom: 0;
   }
 
   .experience-list {
     display: grid;
-    gap: 18px;
+    gap: 22px;
   }
 
   .experience-card {
@@ -437,8 +438,8 @@
     display: flex;
     justify-content: center;
     min-height: 100%;
-    min-height: 148px;
-    padding: 22px;
+    min-height: 160px;
+    padding: 26px;
   }
 
   .experience-logo-panel--stacked {
@@ -455,21 +456,21 @@
   }
 
   .experience-logo--nobi {
-    max-width: 138px;
+    max-width: 154px;
   }
 
   .experience-logo--traknus {
-    max-width: 146px;
+    max-width: 152px;
   }
 
   .experience-logo--astra {
-    max-width: 72px;
+    max-width: 64px;
   }
 
   .experience-member-row {
     align-items: center;
     display: flex;
-    gap: 8px;
+    gap: 10px;
     justify-content: center;
     width: 100%;
   }
@@ -499,7 +500,7 @@
   }
 
   .experience-content {
-    padding: 26px 28px 24px;
+    padding: 28px 30px 26px;
   }
 
   .experience-topline {
@@ -843,7 +844,7 @@
       border-bottom: 1px solid rgba(31, 41, 51, 0.08);
       border-right: 0;
       min-height: auto;
-      padding: 22px;
+      padding: 24px;
     }
 
     .experience-content {
