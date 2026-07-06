@@ -480,7 +480,7 @@
     }
 
     .flagship-case__badge {
-      align-items: flex-start;
+      align-items: center;
       background: rgba(255, 255, 255, 0.82);
       border: 1px solid rgba(31, 41, 51, 0.1);
       border-radius: 999px;
@@ -488,8 +488,10 @@
       display: inline-flex;
       flex: 0 0 auto;
       gap: 10px;
+      justify-content: center;
       justify-self: start;
-      padding: 8px 12px;
+      min-height: 40px;
+      padding: 8px 14px;
     }
 
     .flagship-case__badge img {
@@ -505,7 +507,7 @@
       font-size: 12px;
       font-weight: 850;
       letter-spacing: 0.06em;
-      line-height: 1.25;
+      line-height: 1;
     }
 
     .flagship-case__summary {
@@ -557,6 +559,7 @@
       align-items: center;
       display: flex;
       gap: 10px;
+      min-height: 32px;
     }
 
     .flagship-case__flow-step-index {
@@ -566,11 +569,13 @@
       border-radius: 999px;
       color: var(--accent, #1f4d5a);
       display: inline-flex;
+      flex: 0 0 30px;
       font-size: 11px;
       font-weight: 900;
-      height: 28px;
+      height: 30px;
+      line-height: 1;
       justify-content: center;
-      width: 28px;
+      width: 30px;
     }
 
     .flagship-case__flow-step h4 {
@@ -594,14 +599,20 @@
     }
 
     .flagship-case__chip {
+      align-items: center;
       background: rgba(255, 255, 255, 0.92);
       border: 1px solid rgba(31, 41, 51, 0.1);
       border-radius: 999px;
       color: var(--text, #1f2933);
+      display: inline-flex;
       font-size: 12px;
       font-weight: 700;
-      line-height: 1.35;
-      padding: 7px 10px;
+      justify-content: center;
+      line-height: 1;
+      min-height: 32px;
+      padding: 7px 12px;
+      text-align: center;
+      white-space: nowrap;
     }
 
     .flagship-case__pillar {
@@ -614,9 +625,10 @@
     }
 
     .flagship-case__pillar-head {
-      align-items: center;
+      align-items: flex-start;
       display: flex;
       gap: 12px;
+      min-height: 48px;
     }
 
     .flagship-case__icon {
@@ -643,9 +655,16 @@
       display: block;
       font-size: 11px;
       font-weight: 900;
+      line-height: 1;
       letter-spacing: 0.08em;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       text-transform: uppercase;
+    }
+
+    .flagship-case__pillar-copy {
+      display: grid;
+      gap: 0;
+      min-width: 0;
     }
 
     .flagship-case__pillar h4 {
@@ -1548,7 +1567,7 @@
                     <path d="M13 14h8v6h-8z"></path>
                   </svg>
                 </div>
-                <div>
+                <div class="flagship-case__pillar-copy">
                   <span class="flagship-case__pillar-index">1</span>
                   <h4>Understand the business flow</h4>
                 </div>
@@ -1564,7 +1583,7 @@
                     <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                   </svg>
                 </div>
-                <div>
+                <div class="flagship-case__pillar-copy">
                   <span class="flagship-case__pillar-index">2</span>
                   <h4>Check the data logic</h4>
                 </div>
@@ -1582,7 +1601,7 @@
                     <path d="M17 16v-4"></path>
                   </svg>
                 </div>
-                <div>
+                <div class="flagship-case__pillar-copy">
                   <span class="flagship-case__pillar-index">3</span>
                   <h4>Turn data into management-ready views</h4>
                 </div>
