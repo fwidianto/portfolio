@@ -383,36 +383,35 @@
   }
 
   .experience-section {
-    padding-top: 96px;
+    padding-top: 56px;
   }
 
   .experience-container {
     max-width: 1180px;
   }
 
-  .experience-header {
-    margin: 0 auto 44px;
-    max-width: 920px;
+  .experience-section .experience-header {
+    margin-bottom: 26px;
   }
 
-  .section-kicker {
+  .experience-section .section-kicker {
     color: var(--accent);
     display: inline-block;
     font-size: 12px;
     font-weight: 900;
     letter-spacing: 0.12em;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     text-transform: uppercase;
   }
 
-  .experience-title {
-    margin-bottom: 12px;
+  .experience-section .experience-title {
+    margin-bottom: 8px;
   }
 
-  .experience-lead {
-    max-width: 860px;
-    margin-bottom: 0;
-    line-height: 1.54;
+  .experience-section .experience-lead {
+    line-height: 1.42;
+    margin: 0 auto;
+    max-width: 760px;
   }
 
   .experience-list {
@@ -823,23 +822,16 @@
     }
 
     .experience-section {
-      padding-top: 80px;
+      padding-top: 52px;
     }
 
-    .experience-header {
-      margin-bottom: 34px;
+    .experience-section .experience-header {
+      margin-bottom: 24px;
     }
 
-    .section-kicker {
-      margin-bottom: 8px;
-    }
-
-    .experience-title {
-      margin-bottom: 10px;
-    }
-
-    .experience-lead {
-      line-height: 1.5;
+    .experience-section .experience-lead {
+      line-height: 1.42;
+      margin: 0 auto;
     }
 
     .experience-logo-panel {
