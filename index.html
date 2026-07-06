@@ -435,10 +435,15 @@
     }
 
     .flagship-case-grid {
+      display: grid;
+      gap: 28px;
+    }
+
+    .flagship-case__top {
       align-items: stretch;
       display: grid;
       gap: 28px;
-      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
     }
 
     .flagship-kicker,
@@ -458,6 +463,7 @@
       letter-spacing: -0.04em;
       line-height: 1.16;
       margin: 0;
+      max-width: 12ch;
     }
 
     .flagship-case p {
@@ -470,23 +476,11 @@
 
     .flagship-case-content {
       display: grid;
-      gap: 22px;
+      gap: 16px;
     }
 
-    .flagship-case__title-row {
+    .flagship-case__badge {
       align-items: flex-start;
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .flagship-case__title-row h3 {
-      flex: 1 1 260px;
-      min-width: 0;
-    }
-
-    .flagship-case__logo-badge {
-      align-items: center;
       background: rgba(255, 255, 255, 0.82);
       border: 1px solid rgba(31, 41, 51, 0.1);
       border-radius: 999px;
@@ -494,10 +488,11 @@
       display: inline-flex;
       flex: 0 0 auto;
       gap: 10px;
+      justify-self: start;
       padding: 8px 12px;
     }
 
-    .flagship-case__logo-badge img {
+    .flagship-case__badge img {
       border-radius: 8px;
       display: block;
       height: 24px;
@@ -505,24 +500,38 @@
       width: 24px;
     }
 
-    .flagship-case__logo-badge span {
+    .flagship-case__badge span {
       color: var(--accent, #1f4d5a);
       font-size: 12px;
       font-weight: 850;
       letter-spacing: 0.06em;
-      text-transform: uppercase;
+      line-height: 1.25;
     }
 
-    .flagship-case__route {
+    .flagship-case__summary {
+      color: var(--text, #1f2933);
+      font-size: 20px;
+      font-weight: 650;
+      line-height: 1.55;
+      max-width: 32rem;
+    }
+
+    .flagship-case__note {
+      font-size: 13px;
+      line-height: 1.55;
+      margin-top: -4px;
+    }
+
+    .flagship-case__flow-card {
       background: rgba(255, 255, 255, 0.72);
       border: 1px solid var(--border, rgba(31, 41, 51, 0.12));
-      border-radius: 22px;
+      border-radius: 24px;
       display: grid;
-      gap: 12px;
-      padding: 18px 20px;
+      gap: 18px;
+      padding: 22px;
     }
 
-    .flagship-case__route-label {
+    .flagship-case__flow-heading {
       color: var(--accent, #1f4d5a);
       font-size: 12px;
       font-weight: 900;
@@ -530,34 +539,69 @@
       text-transform: uppercase;
     }
 
-    .flagship-case__route-flow {
+    .flagship-case__flow-steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .flagship-case__flow-step {
+      background: rgba(246, 242, 234, 0.75);
+      border: 1px solid rgba(31, 41, 51, 0.1);
+      border-radius: 20px;
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .flagship-case__flow-step-head {
       align-items: center;
-      color: var(--text, #1f2933);
       display: flex;
-      flex-wrap: wrap;
-      font-size: 15px;
-      font-weight: 750;
-      gap: 10px 12px;
-      line-height: 1.45;
+      gap: 10px;
     }
 
-    .flagship-case__route-flow span {
+    .flagship-case__flow-step-index {
+      align-items: center;
       background: rgba(31, 77, 90, 0.07);
-      border: 1px solid rgba(31, 77, 90, 0.1);
+      border: 1px solid rgba(31, 77, 90, 0.12);
       border-radius: 999px;
-      padding: 8px 12px;
+      color: var(--accent, #1f4d5a);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      height: 28px;
+      justify-content: center;
+      width: 28px;
     }
 
-    .flagship-case__route-arrow {
-      color: var(--accent, #1f4d5a);
-      font-size: 18px;
+    .flagship-case__flow-step h4 {
+      color: var(--text, #1f2933);
+      font-size: 19px;
       font-weight: 800;
-      line-height: 1;
+      line-height: 1.28;
+      margin: 0;
     }
 
     .flagship-case__pillars {
       display: grid;
-      gap: 14px;
+      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .flagship-case__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .flagship-case__chip {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(31, 41, 51, 0.1);
+      border-radius: 999px;
+      color: var(--text, #1f2933);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+      padding: 7px 10px;
     }
 
     .flagship-case__pillar {
@@ -785,7 +829,11 @@
     @media (max-width: 980px) {
       .hero-proof-strip,
       .workflow-steps,
-      .flagship-case-grid {
+      .flagship-case__top {
+        grid-template-columns: 1fr;
+      }
+
+      .flagship-case__pillars {
         grid-template-columns: 1fr;
       }
 
@@ -887,19 +935,16 @@
 
       .flagship-case h3 {
         font-size: 27px;
+        max-width: none;
       }
 
-      .flagship-case__title-row {
-        flex-direction: column;
-        gap: 10px;
+      .flagship-case__summary {
+        font-size: 18px;
       }
 
-      .flagship-case__route {
-        padding: 16px;
-      }
-
-      .flagship-case__route-flow {
-        font-size: 14px;
+      .flagship-case__flow-card,
+      .flagship-case__pillar {
+        padding: 18px;
       }
     }
   </style>
@@ -1425,35 +1470,71 @@
 
       <div class="flagship-case" aria-label="Flagship Odoo ERP Analytics case study">
         <div class="flagship-case-grid">
-          <div class="flagship-case-content">
-            <span class="flagship-kicker">Flagship Case Study</span>
-            <div class="flagship-case__title-row">
-              <h3>Odoo ERP Analytics</h3>
-              <div class="flagship-case__logo-badge" aria-label="Odoo visual reference">
+          <div class="flagship-case__top">
+            <div class="flagship-case-content">
+              <div class="flagship-case__badge" aria-label="Odoo ERP analytics case badge">
                 <img src="Assets/Odoo.png" alt="Odoo logo" />
-                <span>Odoo</span>
+                <span>Odoo | ERP analytics case</span>
               </div>
+              <span class="flagship-kicker">Flagship Case Study</span>
+              <h3>Odoo ERP Analytics</h3>
+              <p class="flagship-case__summary">
+                A case study of how I turned scattered ERP transactions into management-ready views.
+              </p>
+              <p>
+                In this project, I mapped how sales, purchasing, production, delivery, invoicing, and payment data connect in Odoo. Then I reviewed the business logic behind the data and built dashboard views that help teams see order status, issues, insights, and follow-up points more clearly.
+              </p>
+              <a href="Projects/Odoo-ERP-Analytics.html" class="btn btn-primary">View full Odoo case study</a>
+              <p class="flagship-case__note">Public-safe case study, built from real ERP analytics work.</p>
             </div>
-            <p>
-              A case study of how I turned scattered ERP transactions into management-ready views.
-            </p>
-            <p>
-              In this project, I mapped how sales, purchasing, production, delivery, invoicing, and payment data connect in Odoo. Then I reviewed the business logic behind the data and built dashboard views that help teams see order status, issues, insights, and follow-up points more clearly.
-            </p>
-            <div class="flagship-case__route" aria-label="Odoo case study transformation flow">
-              <span class="flagship-case__route-label">Route</span>
-              <div class="flagship-case__route-flow">
-                <span>Scattered ERP transactions</span>
-                <span class="flagship-case__route-arrow" aria-hidden="true">&rarr;</span>
-                <span>Reliable business logic</span>
-                <span class="flagship-case__route-arrow" aria-hidden="true">&rarr;</span>
-                <span>Management-ready views</span>
+
+            <aside class="flagship-case__flow-card" aria-label="How the Odoo ERP analytics work moves">
+              <span class="flagship-case__flow-heading">How the work moves</span>
+              <div class="flagship-case__flow-steps">
+                <article class="flagship-case__flow-step">
+                  <div class="flagship-case__flow-step-head">
+                    <span class="flagship-case__flow-step-index" aria-hidden="true">1</span>
+                    <h4>Scattered ERP transactions</h4>
+                  </div>
+                  <div class="flagship-case__chips" aria-label="Scattered ERP transaction sources">
+                    <span class="flagship-case__chip">Sales</span>
+                    <span class="flagship-case__chip">Purchase</span>
+                    <span class="flagship-case__chip">Production</span>
+                    <span class="flagship-case__chip">Invoice</span>
+                    <span class="flagship-case__chip">Payment</span>
+                  </div>
+                </article>
+
+                <article class="flagship-case__flow-step">
+                  <div class="flagship-case__flow-step-head">
+                    <span class="flagship-case__flow-step-index" aria-hidden="true">2</span>
+                    <h4>Reliable business logic</h4>
+                  </div>
+                  <div class="flagship-case__chips" aria-label="Reliable business logic themes">
+                    <span class="flagship-case__chip">Status</span>
+                    <span class="flagship-case__chip">References</span>
+                    <span class="flagship-case__chip">Unusual cases</span>
+                    <span class="flagship-case__chip">Report logic</span>
+                  </div>
+                </article>
+
+                <article class="flagship-case__flow-step">
+                  <div class="flagship-case__flow-step-head">
+                    <span class="flagship-case__flow-step-index" aria-hidden="true">3</span>
+                    <h4>Management-ready views</h4>
+                  </div>
+                  <div class="flagship-case__chips" aria-label="Management-ready review outputs">
+                    <span class="flagship-case__chip">Progress</span>
+                    <span class="flagship-case__chip">Profitability</span>
+                    <span class="flagship-case__chip">Insights</span>
+                    <span class="flagship-case__chip">Follow-up</span>
+                  </div>
+                </article>
               </div>
-            </div>
-            <a href="Projects/Odoo-ERP-Analytics.html" class="btn btn-primary">View full Odoo case study</a>
+            </aside>
           </div>
 
-          <aside class="flagship-case__pillars" aria-label="Odoo case study pillars">
+          <div class="flagship-case__pillars" aria-label="Odoo case study proof pillars">
             <article class="flagship-case__pillar">
               <div class="flagship-case__pillar-head">
                 <div class="flagship-case__icon" aria-hidden="true">
@@ -1508,7 +1589,7 @@
               </div>
               <p>Built dashboard views that help managers and teams review order progress, profitability, insights, and follow-up points.</p>
             </article>
-          </aside>
+          </div>
         </div>
       </div>
 
