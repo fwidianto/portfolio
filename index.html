@@ -99,7 +99,6 @@
     /* homepage-hero-focus-removed-version: 20260703-v1 */
     /* homepage-phase-2-structure-version: 20260703-v1 */
     /* homepage-phase-3-visual-polish-version: 20260703-v1 */
-    /* homepage-phase-4-project-filter-version: 20260703-v1 */
     .section-lead {
       color: var(--muted, #6b7280);
       font-size: 18px;
@@ -349,8 +348,7 @@
       grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
     }
 
-    .flagship-kicker,
-    .supporting-projects-label {
+    .flagship-kicker {
       color: var(--accent, #1f4d5a);
       display: inline-block;
       font-size: 12px;
@@ -587,74 +585,6 @@
       margin-bottom: 26px;
     }
 
-    .supporting-projects-label {
-      margin: 4px 0 18px;
-    }
-
-    /* homepage-phase-4-project-filter-version: 20260703-v1 */
-    .project-filter-bar {
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid var(--border, rgba(31, 41, 51, 0.12));
-      border-radius: 24px;
-      box-shadow: 0 10px 26px rgba(31, 41, 51, 0.05);
-      margin: 0 0 24px;
-      padding: 18px;
-    }
-
-    .project-filter-label {
-      color: var(--text, #1f2933);
-      display: block;
-      font-size: 14px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .project-filter-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .project-filter-chip {
-      appearance: none;
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid var(--border, rgba(31, 41, 51, 0.12));
-      border-radius: 999px;
-      color: var(--text, #1f2933);
-      cursor: pointer;
-      font: inherit;
-      font-size: 13px;
-      font-weight: 750;
-      padding: 10px 14px;
-      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
-    }
-
-    .project-filter-chip:hover,
-    .project-filter-chip:focus-visible {
-      border-color: rgba(31, 77, 90, 0.28);
-      transform: translateY(-1px);
-    }
-
-    .project-filter-chip.is-active {
-      background: var(--accent, #1f4d5a);
-      border-color: var(--accent, #1f4d5a);
-      color: #fff;
-    }
-
-    .project-card.is-hidden {
-      display: none;
-    }
-
-    .project-card--supporting {
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-    }
-
-    .project-card--supporting:hover {
-      border-color: rgba(31, 77, 90, 0.18);
-      box-shadow: var(--shadow-soft, 0 18px 45px rgba(31, 41, 51, 0.08));
-      transform: translateY(-3px);
-    }
-
     .website-update-strip {
       margin: 0 auto;
       max-width: 1240px;
@@ -839,13 +769,8 @@
         font-size: 14px;
       }
 
-      .project-filter-bar,
       .flagship-case {
         padding: 22px;
-      }
-
-      .project-filter-chip {
-        width: 100%;
       }
 
       .flagship-case h3 {
@@ -873,19 +798,10 @@
       <a href="index.html" class="logo" aria-label="Home - Fauzan Widianto Portfolio">FW.</a>
 
       <div class="nav-links" role="menubar">
-        <a href="#about" role="menuitem">About</a>
-        <a href="#workflow" role="menuitem">Workflow</a>
-
-        <div class="dropdown" role="none">
-          <button type="button" class="dropbtn" aria-haspopup="true" aria-expanded="false" role="menuitem">Projects &#9662;</button>
-          <div class="dropdown-content" role="menu" aria-label="Projects submenu">
-            <a href="Projects/Odoo-ERP-Analytics.html" role="menuitem">Odoo ERP Analytics</a>
-            <a href="https://lasta.pythonanywhere.com/" target="_blank" rel="noopener noreferrer" role="menuitem">AI ERP Dashboard</a>
-            <a href="Projects/Investment Dashboard.html" role="menuitem">Investment Dashboard</a>
-          </div>
-        </div>
-
-        <a href="#projects" role="menuitem">Projects</a>
+        <a href="#experience" role="menuitem">Experience</a>
+        <a href="#skills" role="menuitem">Skills</a>
+        <a href="#workflow" role="menuitem">Thinking</a>
+        <a href="#projects" role="menuitem">Project</a>
         <a href="#contact" role="menuitem">Contact</a>
       </div>
     </div>
@@ -904,7 +820,7 @@
         </p>
 
         <div class="hero-buttons">
-          <a href="#projects" class="btn btn-primary">Explore Projects</a>
+          <a href="#projects" class="btn btn-primary">View Flagship Project</a>
           <a href="Assets/Fauzan_Widianto_CV.pdf" class="btn btn-secondary" download>Download CV</a>
           <a href="https://github.com/fwidianto" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a href="https://linkedin.com/in/fauzanw19" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -1407,9 +1323,9 @@
   <!-- PROJECTS -->
   <section id="projects">
     <div class="container">
-      <h2 class="section-title">Featured Projects</h2>
+      <h2 class="section-title">Flagship Project</h2>
       <p class="section-lead projects-lead">
-        Start with the flagship Odoo case study, then explore supporting projects that show analytics, reporting, automation, and market-review workflows.
+        A focused case study showing how I connect business process, ERP data, reporting logic, and AI-assisted development into management-ready views.
       </p>
 
       <div class="flagship-case" aria-label="Flagship Odoo ERP Analytics case study">
@@ -1536,72 +1452,6 @@
           </div>
         </div>
       </div>
-
-      <!-- homepage-phase-4-project-filter-version: 20260703-v1 -->
-      <div class="project-filter-bar" aria-label="Project filters">
-        <span class="project-filter-label">Explore supporting projects by focus</span>
-        <div class="project-filter-chips" role="group" aria-label="Filter supporting projects by focus">
-          <button type="button" class="project-filter-chip is-active" data-filter="All" aria-pressed="true">All</button>
-          <button type="button" class="project-filter-chip" data-filter="ERP Analytics" aria-pressed="false">ERP Analytics</button>
-          <button type="button" class="project-filter-chip" data-filter="Operations Visibility" aria-pressed="false">Operations Visibility</button>
-          <button type="button" class="project-filter-chip" data-filter="Automation" aria-pressed="false">Automation</button>
-          <button type="button" class="project-filter-chip" data-filter="Dashboard / Reporting" aria-pressed="false">Dashboard / Reporting</button>
-          <button type="button" class="project-filter-chip" data-filter="AI-Assisted Workflow" aria-pressed="false">AI-Assisted Workflow</button>
-          <button type="button" class="project-filter-chip" data-filter="Market Analytics" aria-pressed="false">Market Analytics</button>
-        </div>
-      </div>
-
-      <span class="supporting-projects-label">Supporting project examples</span>
-      <div class="projects-grid">
-        <div class="project-card project-card--supporting" data-categories="ERP Analytics|Automation|Dashboard / Reporting|AI-Assisted Workflow">
-          <div class="project-top">
-            <img src="Assets/Data Studio.png" alt="AI ERP intelligence dashboard preview" class="project-image" />
-          </div>
-          <div class="project-content">
-            <h3>AI ERP Intelligence Dashboard</h3>
-            <p class="muted">
-              Flask-based analytics demo with sample ERP-style data, SQL query support, table browsing, and decision-support views.
-            </p>
-            <ul class="project-points">
-              <li><strong>Problem:</strong> Analytics capability needed a public-safe demo.</li>
-              <li><strong>Tools:</strong> Python, Flask, SQL, sample data.</li>
-              <li><strong>Value:</strong> Queryable dashboards and sample-data exploration.</li>
-            </ul>
-            <div class="project-tags">
-              <div class="tag">Python</div>
-              <div class="tag">Flask</div>
-              <div class="tag">SQL</div>
-            </div>
-            <a href="https://lasta.pythonanywhere.com/" target="_blank" rel="noopener noreferrer" class="news-link project-card-cta">Open demo</a>
-          </div>
-        </div>
-
-        <div class="project-card project-card--supporting" data-categories="Market Analytics|Dashboard / Reporting">
-          <div class="project-top project-top--placeholder">
-            <div class="project-placeholder">
-              <div class="project-placeholder-kicker">Market data</div>
-              <div class="project-placeholder-title">Investment Analytics Dashboard</div>
-            </div>
-          </div>
-          <div class="project-content">
-            <h3>Investment Analytics Dashboard</h3>
-            <p class="muted">
-              Dashboard for market monitoring, allocation tracking, and macro review using Google Sheets, Looker Studio, and TradingView widgets.
-            </p>
-            <ul class="project-points">
-              <li><strong>Problem:</strong> Market review needed a repeatable personal workflow.</li>
-              <li><strong>Tools:</strong> Google Sheets, Looker Studio, TradingView.</li>
-              <li><strong>Value:</strong> Clearer allocation tracking and market context.</li>
-            </ul>
-            <div class="project-tags">
-              <div class="tag">Google Sheets</div>
-              <div class="tag">Looker Studio</div>
-              <div class="tag">TradingView</div>
-            </div>
-            <a href="Projects/Investment Dashboard.html" class="news-link project-card-cta">View case study</a>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1620,7 +1470,7 @@
         <ol class="website-update-strip__list" aria-label="Latest homepage website updates">
           <li class="website-update-strip__item">
             <time class="website-update-strip__date" datetime="2026-07-06">6 Jul 2026</time>
-            <p class="website-update-strip__text">Problem-solving engine redesigned with a clearer messy-inputs to practical-outputs flow.</p>
+            <p class="website-update-strip__text">Flagship project focus simplified by keeping Odoo ERP Analytics as the single visible homepage project.</p>
           </li>
           <li class="website-update-strip__item">
             <time class="website-update-strip__date" datetime="2026-07-06">6 Jul 2026</time>
@@ -1659,34 +1509,5 @@
     </div>
   </footer>
 
-  <script>
-    // homepage-phase-4-project-filter-version: 20260703-v1
-    document.addEventListener('DOMContentLoaded', function () {
-      const filterButtons = document.querySelectorAll('.project-filter-chip[data-filter]');
-      const projectCards = document.querySelectorAll('.project-card[data-categories]');
-
-      if (!filterButtons.length || !projectCards.length) {
-        return;
-      }
-
-      filterButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-          const selectedFilter = button.dataset.filter;
-
-          filterButtons.forEach(function (item) {
-            const isActive = item === button;
-            item.classList.toggle('is-active', isActive);
-            item.setAttribute('aria-pressed', String(isActive));
-          });
-
-          projectCards.forEach(function (card) {
-            const categories = (card.dataset.categories || '').split('|');
-            const shouldShow = selectedFilter === 'All' || categories.includes(selectedFilter);
-            card.classList.toggle('is-hidden', !shouldShow);
-          });
-        });
-      });
-    });
-  </script>
 </body>
 </html>

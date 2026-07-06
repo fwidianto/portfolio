@@ -16,8 +16,7 @@ Identity
 -> Core Skills
 -> Skill Development Curve
 -> How I Think Through Problems
--> Flagship Evidence / Odoo ERP Analytics
--> Supporting Projects
+-> Flagship Project / Odoo ERP Analytics
 -> Website Updates
 -> Contact
 ```
@@ -43,9 +42,8 @@ The current homepage direction revolves around these pillars:
 2. Core Skills
 3. Skill Development Curve
 4. How I Think Through Problems
-5. Flagship Evidence / Odoo ERP Analytics
-6. Supporting Projects
-7. Website Updates
+5. Flagship Project / Odoo ERP Analytics
+6. Website Updates
 
 Each pillar should have a clear job. Avoid adding sections that only repeat the same claim in a different format.
 
@@ -73,22 +71,18 @@ This section should show how past experience compounds into current capability. 
 
 The workflow section should clarify how Fauzan moves from discussion to process understanding, solution selection, system design, testing, and practical refinement.
 
-### 6. Flagship Evidence / Odoo ERP Analytics
+### 6. Flagship Project / Odoo ERP Analytics
 
 The homepage should guide visitors toward the Odoo ERP Analytics case study as the strongest proof of the philosophy. See [homepage-flagship-case-study.md](homepage-flagship-case-study.md).
 
-### 7. Supporting Projects
+The homepage should not present supporting projects alongside the flagship case study until they are ready to compete for attention on equal footing.
 
-Supporting projects should show related evidence without competing with the flagship case study.
-
-Avoid repeating Odoo as a normal supporting card when it is already positioned as the flagship evidence.
-
-### 8. Website Updates
+### 7. Website Updates
 
 Website Updates should show that the portfolio is actively maintained without making it feel unfinished. See [website-updates.md](website-updates.md).
 
 Approved homepage working philosophy:
-Fauzan’s “How I Think Through Problems” section should start from discussion, not tools. The process should show that useful solutions begin with shared problem understanding, end-to-end process understanding, suitable solution selection, system design around the problem, testing against the project core, and presentation/refinement for real use. The tone should avoid forcing an identity too early and let visitors understand the thinking through experience, skills, and projects.
+Fauzan's "How I Think Through Problems" section should start from discussion, not tools. The process should show that useful solutions begin with shared problem understanding, end-to-end process understanding, suitable solution selection, system design around the problem, testing against the project core, and presentation/refinement for real use. The tone should avoid forcing an identity too early and let visitors understand the thinking through experience, skills, and projects.
 
 ## Interaction Principles
 
