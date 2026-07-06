@@ -1,6 +1,6 @@
 # Homepage Odoo Flagship Evidence
 
-Status: Accepted v1 / active homepage section
+Status: Accepted v1 / frozen except fixes
 
 This document records the accepted homepage direction for the Odoo ERP Analytics flagship section.
 
@@ -38,6 +38,22 @@ Right side: How the work moves visual route.
 
 Bottom row: three proof pillar cards.
 
+## Accepted Implementation
+
+Accepted polish commit:
+
+```text
+bd69826
+```
+
+The accepted implementation fixed:
+
+- Odoo badge vertical centering,
+- route chip centering,
+- consistent route step numbers,
+- bottom proof card header alignment,
+- mobile 390px no-overflow behavior.
+
 ## Public Wording Rule
 
 Use human business wording on the homepage.
@@ -49,6 +65,14 @@ Keep scattered ERP transactions and management-ready views.
 ## Duplicate Content Rule
 
 Odoo should appear as flagship evidence, not as another normal supporting project card.
+
+## Freeze Rule
+
+This homepage section is accepted as v1.
+
+Only fix bugs, accessibility, mobile readability, broken links, obvious alignment issues, or wording clarity problems.
+
+Do not redesign this section again unless real visitor, recruiter, HR, or manager feedback shows that it is confusing or ineffective.
 
 ## Next Priority
 
