@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Core Skills Dynamic Flow — Viewer Ready Prototype</title>
+  <style>
+    :root {
+      --bg: #f6f2ea;
+      --paper: #fffdf8;
+      --text: #1f2933;
+      --muted: #6b7280;
+      --accent: #1f4d5a;
+      --accent-2: #2c6a78;
+      --accent-soft: rgba(31, 77, 90, 0.08);
+      --accent-line: rgba(31, 77, 90, 0.16);
+      --border: rgba(31, 41, 51, 0.10);
+      --shadow: 0 18px 42px rgba(31, 41, 51, 0.08);
+      --shadow-soft: 0 10px 28px rgba(31, 41, 51, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(31, 77, 90, 0.10), transparent 30rem),
+        linear-gradient(180deg, #f6f2ea 0%, #fffdf8 48%, #f8f5ef 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    .page-header {
+      max-width: 860px;
+      margin: 0 auto 38px;
+      text-align: center;
+    }
+
+    .page-kicker,
+    .section-kicker,
+    .growth-detail__eyebrow,
+    .growth-rail__label {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 18px;
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+    }
+
+    .page-header p,
+    .section-lead {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .page-header p {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 18px;
+    }
+
+    .core-skills-shell {
+      overflow: hidden;
+      padding: clamp(24px, 4vw, 42px);
+      border: 1px solid var(--border);
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at top right, rgba(31, 77, 90, 0.08), transparent 24rem),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(246, 242, 234, 0.78));
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      max-width: 840px;
+      margin-bottom: 28px;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      margin-bottom: 14px;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+    }
+
+    .section-lead {
+      max-width: 780px;
+      margin-bottom: 0;
+      font-size: 17px;
+    }
+
+    .dynamic-skill-map { margin-top: 26px; }
+
+    .growth-rail {
+      overflow: hidden;
+      position: relative;
+      padding: 26px 26px 24px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .growth-rail__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .growth-rail__hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .working-track {
+      overflow: hidden;
+      position: relative;
+      height: 12px;
+      margin: 0 8px 38px;
+      border-radius: 999px;
+      background: rgba(31, 77, 90, 0.10);
+    }
+
+    .working-fill {
+      position: relative;
+      width: var(--fill, 25%);
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .working-fill::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -42%;
+      width: 42%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.34), transparent);
+      animation: shimmer 2.8s linear infinite;
+    }
+
+    @keyframes shimmer { to { left: 100%; } }
+
+    .growth-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .growth-step {
+      min-height: 100%;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 8px 24px rgba(31, 41, 51, 0.045);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+
+    .growth-step:hover,
+    .growth-step:focus-visible,
+    .growth-step.is-active {
+      outline: none;
+      border-color: rgba(31, 77, 90, 0.24);
+      background: #fff;
+      box-shadow: 0 16px 38px rgba(31, 41, 51, 0.08);
+      transform: translateY(-3px);
+    }
+
+    .growth-step::before {
+      content: attr(data-step);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(31, 77, 90, 0.16);
+      border-radius: 999px;
+      background: rgba(31, 77, 90, 0.08);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .growth-step.is-active::before {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .growth-step h3 {
+      margin-bottom: 10px;
+      font-size: 23px;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .growth-step p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 8px 11px;
+      border: 1px solid var(--accent-line);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 760;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .growth-detail {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .growth-detail__panel {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(31, 77, 90, 0.08), transparent 18rem),
+        rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .growth-detail__eyebrow {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 11px;
+    }
+
+    .growth-detail__title {
+      margin-bottom: 10px;
+      font-size: 30px;
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    .growth-detail__text {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.68;
+    }
+
+    .growth-emphasis { display: grid; gap: 12px; }
+
+    .emphasis-row {
+      display: grid;
+      grid-template-columns: 128px minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+    }
+
+    .emphasis-row span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 760;
+    }
+
+    .emphasis-bar {
+      overflow: hidden;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(31, 77, 90, 0.08);
+    }
+
+    .emphasis-bar i {
+      display: block;
+      width: var(--w, 25%);
+      height: 100%;
+      border-radius: inherit;
+      background: var(--accent);
+      transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .implementation-note,
+    .viewer-note {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+
+    .implementation-note { margin: 18px 0 0; }
+
+    .viewer-note {
+      margin-top: 22px;
+      padding: 14px 16px;
+      border: 1px dashed var(--accent-line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.68);
+      font-size: 14px;
+    }
+
+    @media (max-width: 960px) {
+      .growth-steps,
+      .growth-detail { grid-template-columns: 1fr; }
+      .working-track { margin-bottom: 22px; }
+      .growth-rail__top { align-items: flex-start; flex-direction: column; }
+      .growth-rail__hint { text-align: left; }
+    }
+
+    @media (max-width: 620px) {
+      .page { padding: 36px 16px 56px; }
+      h1 { font-size: 40px; }
+      .core-skills-shell,
+      .growth-rail,
+      .growth-detail__panel { border-radius: 24px; padding: 22px; }
+      .section-title { font-size: 34px; }
+      .section-lead,
+      .page-header p { font-size: 15.5px; }
+      .tag { white-space: normal; }
+      .emphasis-row { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <span class="page-kicker">Prototype for Codex</span>
+      <h1>Core Skills dynamic flow</h1>
+      <p>Viewer-ready prototype for showing core skills as a working path, not as a fixed score or generic tool inventory.</p>
+    </header>
+
+    <section class="core-skills-preview" aria-labelledby="core-skills-title">
+      <div class="core-skills-shell">
+        <div class="section-header">
+          <span class="section-kicker">Core Skills</span>
+          <h2 id="core-skills-title" class="section-title">From business context to useful outputs</h2>
+          <p class="section-lead">A practical skill set that moves from understanding business context to structuring data, reviewing logic, and building useful outputs.</p>
+        </div>
+
+        <div class="dynamic-skill-map" data-growth-map>
+          <div class="growth-rail" style="--fill: 25%;">
+            <div class="growth-rail__top">
+              <span class="growth-rail__label">Working path</span>
+              <p class="growth-rail__hint">The visual slowly advances. Click each stage to inspect the skill focus.</p>
+            </div>
+
+            <div class="working-track" aria-hidden="true"><div class="working-fill"></div></div>
+
+            <div class="growth-steps" role="list">
+              <button class="growth-step is-active" type="button" data-step="1" data-stage="0">
+                <h3>Understand</h3>
+                <p>Start from business systems, ERP context, operational workflows, and real process behavior.</p>
+                <div class="tag-row"><span class="tag">Odoo ERP</span><span class="tag">SAP ERP</span><span class="tag">Workflow mapping</span></div>
+              </button>
+
+              <button class="growth-step" type="button" data-step="2" data-stage="1">
+                <h3>Structure</h3>
+                <p>Turn messy data, fields, statuses, and references into reliable reporting logic.</p>
+                <div class="tag-row"><span class="tag">SQL</span><span class="tag">Excel / Sheets</span><span class="tag">Data validation</span></div>
+              </button>
+
+              <button class="growth-step" type="button" data-step="3" data-stage="2">
+                <h3>Review</h3>
+                <p>Connect numbers with business meaning: cost, profitability, order status, and payment context.</p>
+                <div class="tag-row"><span class="tag">Cost control</span><span class="tag">Profitability</span><span class="tag">SO / PR / PO review</span></div>
+              </button>
+
+              <button class="growth-step" type="button" data-step="4" data-stage="3">
+                <h3>Build</h3>
+                <p>Create dashboards, workflows, scripts, and AI-assisted outputs that can be reused.</p>
+                <div class="tag-row"><span class="tag">Looker Studio</span><span class="tag">Apps Script</span><span class="tag">VBA</span><span class="tag">Codex</span></div>
+              </button>
+            </div>
+          </div>
+
+          <div class="growth-detail">
+            <article class="growth-detail__panel">
+              <span class="growth-detail__eyebrow">Current focus</span>
+              <h3 class="growth-detail__title" data-detail-title>Understand the business flow</h3>
+              <p class="growth-detail__text" data-detail-text>I start by understanding how work actually moves through ERP, operations, approvals, and reporting. This prevents the solution from becoming only a tool exercise.</p>
+              <div class="tag-row" data-detail-tags><span class="tag">Business process</span><span class="tag">ERP context</span><span class="tag">Operational reality</span></div>
+            </article>
+
+            <aside class="growth-detail__panel">
+              <span class="growth-detail__eyebrow">Skill emphasis at this stage</span>
+              <div class="growth-emphasis" aria-label="Skill emphasis at this stage">
+                <div class="emphasis-row"><span>Context</span><div class="emphasis-bar"><i data-emphasis="context" style="--w: 70%;"></i></div></div>
+                <div class="emphasis-row"><span>Data logic</span><div class="emphasis-bar"><i data-emphasis="data" style="--w: 25%;"></i></div></div>
+                <div class="emphasis-row"><span>Review judgment</span><div class="emphasis-bar"><i data-emphasis="review" style="--w: 20%;"></i></div></div>
+                <div class="emphasis-row"><span>Build output</span><div class="emphasis-bar"><i data-emphasis="build" style="--w: 15%;"></i></div></div>
+              </div>
+              <p class="implementation-note">These bars show emphasis in each stage, not a percentage score.</p>
+            </aside>
+          </div>
+        </div>
+
+        <p class="viewer-note">This prototype is a reference file for Codex implementation. Adapt it into the existing homepage styling instead of copying it blindly.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const stages = [
+      { fill: '25%', title: 'Understand the business flow', text: 'I start by understanding how work actually moves through ERP, operations, approvals, and reporting. This prevents the solution from becoming only a tool exercise.', tags: ['Business process', 'ERP context', 'Operational reality'], emphasis: { context: '70%', data: '25%', review: '20%', build: '15%' } },
+      { fill: '50%', title: 'Structure the data logic', text: 'After the process is clear, I organize fields, statuses, references, and reporting logic so the data can support a reliable review.', tags: ['SQL thinking', 'Data validation', 'Reporting logic'], emphasis: { context: '75%', data: '68%', review: '32%', build: '25%' } },
+      { fill: '75%', title: 'Review the business meaning', text: 'I connect the structured data with business questions: profitability, cost movement, order status, procurement context, invoice, and payment follow-up.', tags: ['Profitability', 'Cost control', 'Review judgment'], emphasis: { context: '78%', data: '72%', review: '70%', build: '38%' } },
+      { fill: '100%', title: 'Build useful outputs', text: 'The final skill layer is execution: dashboards, automation, scripts, and AI-assisted workflows that make the review process repeatable and easier to use.', tags: ['Dashboard output', 'Automation', 'AI-assisted workflow'], emphasis: { context: '82%', data: '78%', review: '74%', build: '82%' } }
+    ];
+
+    const root = document.querySelector('[data-growth-map]');
+    const rail = document.querySelector('.growth-rail');
+    const buttons = Array.from(document.querySelectorAll('[data-stage]'));
+    const title = document.querySelector('[data-detail-title]');
+    const text = document.querySelector('[data-detail-text]');
+    const tags = document.querySelector('[data-detail-tags]');
+    const emphasis = {
+      context: document.querySelector('[data-emphasis="context"]'),
+      data: document.querySelector('[data-emphasis="data"]'),
+      review: document.querySelector('[data-emphasis="review"]'),
+      build: document.querySelector('[data-emphasis="build"]')
+    };
+
+    let activeIndex = 0;
+    let timer = null;
+
+    function renderStage(index) {
+      activeIndex = index;
+      const stage = stages[index];
+      rail.style.setProperty('--fill', stage.fill);
+      title.textContent = stage.title;
+      text.textContent = stage.text;
+      tags.innerHTML = stage.tags.map(item => `<span class="tag">${item}</span>`).join('');
+      Object.entries(stage.emphasis).forEach(([key, value]) => emphasis[key].style.setProperty('--w', value));
+      buttons.forEach(button => button.classList.toggle('is-active', Number(button.dataset.stage) === index));
+    }
+
+    function startAutoAdvance() {
+      stopAutoAdvance();
+      timer = window.setInterval(() => renderStage((activeIndex + 1) % stages.length), 4800);
+    }
+
+    function stopAutoAdvance() {
+      if (timer) window.clearInterval(timer);
+      timer = null;
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => { renderStage(Number(button.dataset.stage)); startAutoAdvance(); });
+      button.addEventListener('mouseenter', () => { renderStage(Number(button.dataset.stage)); stopAutoAdvance(); });
+      button.addEventListener('mouseleave', startAutoAdvance);
+    });
+
+    root.addEventListener('focusin', stopAutoAdvance);
+    root.addEventListener('focusout', startAutoAdvance);
+    renderStage(0);
+    startAutoAdvance();
+  </script>
+</body>
+</html>
