@@ -1,8 +1,8 @@
 # Homepage Documentation
 
-Status: Active source index
+Status: Active source index / homepage v1 frozen
 
-This folder defines the future homepage experience. It is documentation only; it does not authorize implementation by itself.
+This folder defines the accepted homepage experience, frozen homepage checkpoint, and future homepage boundaries.
 
 The homepage should act as the public interface of the portfolio philosophy defined in [../core/portfolio-design-philosophy.md](../core/portfolio-design-philosophy.md).
 
@@ -10,10 +10,11 @@ The homepage should act as the public interface of the portfolio philosophy defi
 
 | Document | Purpose |
 | --- | --- |
+| [HOMEPAGE_V1_FREEZE.md](HOMEPAGE_V1_FREEZE.md) | Frozen homepage v1 checkpoint, accepted section flow, locked decisions, and allowed future changes. |
 | [homepage-experience-blueprint.md](homepage-experience-blueprint.md) | Overall homepage journey and section order. |
 | [homepage-skill-development-curve.md](homepage-skill-development-curve.md) | Accepted v1 source of truth for the public Skill Development Curve section. |
 | [homepage-odoo-flagship-evidence.md](homepage-odoo-flagship-evidence.md) | Accepted v1 guidance for the public Odoo Flagship Evidence section. |
-| [homepage-flagship-case-study.md](homepage-flagship-case-study.md) | Earlier routing document for the Odoo ERP Analytics flagship case study. |
+| [homepage-flagship-case-study.md](homepage-flagship-case-study.md) | Routing document for the Odoo ERP Analytics flagship case study. |
 | [website-updates.md](website-updates.md) | Maintenance rule for the public Website Updates changelog. |
 | [homepage-capability-graph.md](homepage-capability-graph.md) | Superseded historical concept document for internal capability-growth thinking. |
 | [homepage-capability-graph-feature-spec.md](homepage-capability-graph-feature-spec.md) | Historical feature specification for the earlier Capability Graph direction. |
@@ -25,15 +26,36 @@ The homepage should act as the public interface of the portfolio philosophy defi
 
 Read this folder before designing or implementing homepage sections, navigation flow, homepage copy, homepage interaction behavior, or project-routing decisions.
 
+Start with [HOMEPAGE_V1_FREEZE.md](HOMEPAGE_V1_FREEZE.md) before proposing any homepage change.
+
 ## Current Section Status
+
+Homepage v1 is frozen at commit `67cb782`.
+
+The accepted homepage story is:
+
+```text
+Hero
+-> Professional Experience
+-> Core Skills
+-> Skill Development Curve
+-> How I Think Through Problems
+-> Flagship Project / Odoo ERP Analytics
+-> Website Updates
+-> Contact
+```
 
 The Skill Development Curve is accepted as homepage v1 and should be treated as frozen.
 
-The Odoo Flagship Evidence section is accepted as an active homepage proof section.
+The Core Skills dynamic working path is accepted as homepage v1 and should be treated as frozen.
+
+The Problem-Solving Engine in How I Think Through Problems is accepted as homepage v1 and should be treated as frozen.
+
+The homepage project section is intentionally focused on one visible flagship project: Odoo ERP Analytics.
 
 Website Updates is a maintained public changelog and should be updated when visible website changes are made.
 
-The next priority is the Odoo ERP Analytics case study page: first-screen clarity and story refinement.
+The next priority is the Odoo ERP Analytics case study page: first-screen clarity, business story, proof strength, and public-safe evidence.
 
 ## What Should Not Be Placed Here
 
@@ -44,6 +66,6 @@ The next priority is the Odoo ERP Analytics case study page: first-screen clarit
 
 ## Implementation Boundary
 
-These documents define intent and structure only. Do not build the Thinking Lab UI or other future homepage features until a future implementation task explicitly requests it.
+These documents define intent, structure, and boundaries. Do not redesign frozen homepage sections unless the user explicitly requests a new strategy discussion or real visitor, recruiter, HR, or manager feedback shows that the current version is confusing or ineffective.
 
-Do not redesign the Skill Development Curve unless real visitor, recruiter, HR, or manager feedback shows that it is confusing or ineffective.
+Do not build the Thinking Lab UI or other future homepage features until a future implementation task explicitly requests it.
