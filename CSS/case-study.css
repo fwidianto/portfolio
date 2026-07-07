@@ -439,6 +439,187 @@
   line-height: 1.65;
 }
 
+/* odoo-business-context-case-file: 20260707-v2 */
+#business-context .case-lead {
+  font-size: 18px;
+  line-height: 1.72;
+  max-width: 760px;
+}
+
+#business-context .case-lead::before {
+  content: none;
+}
+
+.erp-case-file {
+  background:
+    radial-gradient(circle at 8% 10%, rgba(31, 77, 90, 0.08), transparent 24rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(246, 242, 234, 0.74));
+  border: 1px solid var(--border);
+  border-radius: 34px;
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 22px;
+  overflow: hidden;
+  padding: clamp(22px, 3vw, 36px);
+}
+
+.erp-case-trail,
+.erp-case-thread {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.erp-case-trail li,
+.erp-case-thread li {
+  align-items: center;
+  display: inline-flex;
+  position: relative;
+}
+
+.erp-case-trail {
+  color: var(--accent);
+  flex-wrap: wrap;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.erp-case-trail li {
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(31, 77, 90, 0.11);
+  border-radius: 999px;
+  line-height: 1.2;
+  padding: 11px 14px;
+}
+
+.erp-case-trail li:not(:last-child)::after,
+.erp-case-thread li:not(:last-child)::after {
+  color: rgba(31, 77, 90, 0.46);
+  content: "\2192";
+  font-weight: 900;
+  margin-left: 10px;
+}
+
+.erp-case-layout {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+}
+
+.erp-case-panel {
+  border: 1px solid rgba(31, 77, 90, 0.12);
+  border-radius: 28px;
+  box-shadow: var(--shadow-card);
+  min-width: 0;
+  position: relative;
+}
+
+.erp-case-panel--main {
+  background: rgba(255, 255, 255, 0.84);
+  padding: clamp(24px, 3vw, 34px);
+}
+
+.erp-case-panel--summary {
+  background: linear-gradient(145deg, rgba(31, 77, 90, 0.09), rgba(246, 242, 234, 0.9));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(24px, 3vw, 32px);
+}
+
+.erp-case-label {
+  color: var(--accent);
+  display: block;
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  margin-bottom: 13px;
+  text-transform: uppercase;
+}
+
+.erp-case-panel h3 {
+  color: var(--text);
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 850;
+  letter-spacing: -0.05em;
+  line-height: 1.06;
+  margin: 0 0 14px;
+}
+
+.erp-case-panel p {
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.68;
+  margin: 0;
+  max-width: 720px;
+}
+
+.erp-evidence-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 26px;
+}
+
+.erp-evidence-card {
+  background: linear-gradient(145deg, rgba(246, 242, 234, 0.82), rgba(255, 255, 255, 0.88));
+  border: 1px dashed rgba(31, 77, 90, 0.2);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.erp-evidence-card strong {
+  color: var(--text);
+  display: block;
+  font-size: 14.5px;
+  font-weight: 850;
+  line-height: 1.25;
+  margin-bottom: 7px;
+}
+
+.erp-evidence-card span {
+  color: var(--muted);
+  display: block;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.erp-case-questions {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+}
+
+.erp-case-questions li {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(31, 77, 90, 0.1);
+  border-radius: 16px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 760;
+  line-height: 1.4;
+  padding: 14px 15px;
+}
+
+.erp-case-thread {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(31, 77, 90, 0.1);
+  border-radius: 22px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 650;
+  justify-content: center;
+  line-height: 1.55;
+  padding: 16px 18px;
+  text-align: center;
+}
+
 .case-card { border-radius: 24px; padding: 28px; transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease; }
 .case-card:hover { border-color: rgba(31, 77, 90, 0.22); box-shadow: var(--shadow-soft); transform: translateY(-3px); }
 .case-card h3 { color: var(--text); font-size: 22px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.2; margin: 0 0 12px; }
@@ -580,6 +761,14 @@
     grid-row: auto;
     min-height: auto;
   }
+
+  .erp-case-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .erp-case-panel--summary {
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 760px) {
@@ -624,5 +813,43 @@
 
   #business-context .context-card-grid .case-card:nth-child(1)::after {
     padding-left: 20px;
+  }
+
+  #business-context .case-lead {
+    font-size: 16px;
+  }
+
+  .erp-case-file {
+    border-radius: 26px;
+    gap: 18px;
+    padding: 18px;
+  }
+
+  .erp-case-trail,
+  .erp-case-thread {
+    flex-direction: column;
+  }
+
+  .erp-case-trail li,
+  .erp-case-thread li {
+    width: 100%;
+  }
+
+  .erp-case-trail li:not(:last-child)::after,
+  .erp-case-thread li:not(:last-child)::after {
+    content: "\2193";
+    margin-left: auto;
+  }
+
+  .erp-case-panel {
+    border-radius: 22px;
+  }
+
+  .erp-evidence-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .erp-case-thread {
+    text-align: left;
   }
 }

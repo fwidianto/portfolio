@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/project.css?v=20260629-warm">
-  <link rel="stylesheet" href="../CSS/case-study.css?v=20260703-clean-translation-board">
+  <link rel="stylesheet" href="../CSS/case-study.css?v=20260707-case-file-v2">
 
   <style>
     /* css-cleanup-version: 20260702-v1 */
@@ -1168,23 +1168,68 @@
         <div class="case-eyebrow">Business Context</div>
         <h2 class="case-subheading">The problem was not missing data. It was a scattered business story.</h2>
         <p class="case-lead">
-          One order could touch sales, purchasing, production, delivery, invoicing, and payment. The challenge was to connect those records into a flow that people could review and act on.
+          The records were already inside Odoo. The challenge was reading them as one business case.
         </p>
       </div>
 
-      <div class="case-grid case-grid--3 context-card-grid">
-        <div class="case-card">
-          <h3>One order, many places</h3>
-          <p>Sales, purchasing, production, delivery, invoicing, and payment records existed, but they were not easy to read as one business flow.</p>
+      <div class="erp-case-file">
+        <ol class="erp-case-trail" aria-label="ERP case file review trail">
+          <li>Case opened</li>
+          <li>Clues traced</li>
+          <li>Summary reviewed</li>
+        </ol>
+
+        <div class="erp-case-layout">
+          <article class="erp-case-panel erp-case-panel--main">
+            <span class="erp-case-label">ERP Case File</span>
+            <h3>One order, many clues</h3>
+            <p>A single order could leave traces across sales, purchasing, production, delivery, invoicing, and payment. The dashboard helped turn those traces into a clearer review summary.</p>
+
+            <div class="erp-evidence-grid" aria-label="ERP evidence traces">
+              <div class="erp-evidence-card">
+                <strong>Sales Order</strong>
+                <span>Where the business request begins.</span>
+              </div>
+              <div class="erp-evidence-card">
+                <strong>Purchase Order</strong>
+                <span>Where material readiness starts to become visible.</span>
+              </div>
+              <div class="erp-evidence-card">
+                <strong>Manufacturing</strong>
+                <span>Where stock and production movement need checking.</span>
+              </div>
+              <div class="erp-evidence-card">
+                <strong>Delivery</strong>
+                <span>Where operational progress becomes customer-facing.</span>
+              </div>
+              <div class="erp-evidence-card">
+                <strong>Invoice</strong>
+                <span>Where delivery begins to become financial progress.</span>
+              </div>
+              <div class="erp-evidence-card">
+                <strong>Payment</strong>
+                <span>Where outstanding follow-up becomes visible.</span>
+              </div>
+            </div>
+          </article>
+
+          <aside class="erp-case-panel erp-case-panel--summary">
+            <span class="erp-case-label">Case Summary</span>
+            <h3>What the dashboard needed to answer</h3>
+            <ul class="erp-case-questions">
+              <li>Where is the order now?</li>
+              <li>What needs attention?</li>
+              <li>Who or what needs follow-up?</li>
+              <li>Can the progress be trusted?</li>
+            </ul>
+          </aside>
         </div>
-        <div class="case-card">
-          <h3>Logic before dashboard</h3>
-          <p>Before building charts, I had to check the process, fields, statuses, references, and unusual cases behind the ERP data.</p>
-        </div>
-        <div class="case-card">
-          <h3>From records to review</h3>
-          <p>The output became dashboard views that help teams review progress, issues, profitability, and follow-up points more clearly.</p>
-        </div>
+
+        <ol class="erp-case-thread" aria-label="Business context interpretation thread">
+          <li>ERP records existed in different places</li>
+          <li>The relationship between records had to be interpreted</li>
+          <li>The dashboard became the shared review summary.</li>
+        </ol>
       </div>
     </div>
   </section>
