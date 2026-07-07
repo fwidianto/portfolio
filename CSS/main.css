@@ -391,27 +391,25 @@
   }
 
   .experience-section .experience-header {
-    margin-bottom: 26px;
+    margin-bottom: 0;
   }
 
   .experience-section .section-kicker {
-    color: var(--accent);
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: 0.12em;
-    margin-bottom: 6px;
-    text-transform: uppercase;
+    margin-bottom: 0;
   }
 
   .experience-section .experience-title {
-    margin-bottom: 8px;
+    margin-bottom: 0;
   }
 
   .experience-section .experience-lead {
-    line-height: 1.42;
-    margin: 0 auto;
+    line-height: 1.55;
+    margin: 0;
     max-width: 760px;
+  }
+
+  .core-skills__header {
+    margin-bottom: 0;
   }
 
   .experience-list {
@@ -420,13 +418,15 @@
   }
 
   #workflow .section-title {
-    margin-bottom: 28px;
+    margin-bottom: 0;
+    text-align: left;
   }
 
   #workflow .section-lead {
     line-height: 1.55;
-    margin: 0 auto 22px;
+    margin: 0;
     max-width: 760px;
+    text-align: left;
   }
 
   .problem-engine {
@@ -789,6 +789,7 @@
 
   .core-skills__header {
     max-width: 880px;
+    margin-bottom: 0;
   }
 
   .core-skills__kicker {
@@ -797,7 +798,7 @@
     font-size: 12px;
     font-weight: 900;
     letter-spacing: 0.14em;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     text-transform: uppercase;
   }
 
@@ -806,7 +807,7 @@
     font-size: clamp(34px, 4.2vw, 52px);
     letter-spacing: -0.05em;
     line-height: 1.06;
-    margin: 0 0 12px;
+    margin: 0;
     max-width: 14ch;
   }
 
@@ -1341,12 +1342,12 @@
     }
 
     .experience-section .experience-header {
-      margin-bottom: 24px;
+      margin-bottom: 0;
     }
 
     .experience-section .experience-lead {
-      line-height: 1.42;
-      margin: 0 auto;
+      line-height: 1.5;
+      margin: 0;
     }
 
     .experience-logo-panel {
@@ -1627,6 +1628,14 @@
     text-decoration: underline;
   }
 
+  .projects-header {
+    margin-bottom: 0;
+  }
+
+  .projects-lead {
+    margin-bottom: 0;
+  }
+
   footer {
     border-top: 1px solid var(--border);
     color: var(--muted);
@@ -1640,11 +1649,11 @@
 
   @media (max-width: 900px) {
     #workflow .section-title {
-      margin-bottom: 24px;
+      margin-bottom: 0;
     }
 
     #workflow .section-lead {
-      margin-bottom: 18px;
+      margin-bottom: 0;
     }
 
     .problem-engine__grid {
@@ -1687,6 +1696,21 @@
   }
 
   @media (max-width: 600px) {
+    .section-header {
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .section-header--editorial .section-title {
+      font-size: 32px;
+      margin-bottom: 0;
+    }
+
+    .section-header--editorial .section-lead {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
     .core-skills {
       gap: 22px;
     }
@@ -1696,12 +1720,12 @@
     }
 
     .core-skills__kicker {
-      margin-bottom: 8px;
+      margin-bottom: 0;
     }
 
     .core-skills__title {
       font-size: clamp(30px, 9vw, 38px);
-      margin-bottom: 10px;
+      margin-bottom: 0;
       max-width: 100%;
     }
 
@@ -1770,12 +1794,12 @@
     }
 
     #workflow .section-title {
-      margin-bottom: 22px;
+      margin-bottom: 0;
     }
 
     #workflow .section-lead {
-      line-height: 1.52;
-      margin-bottom: 16px;
+      line-height: 1.5;
+      margin-bottom: 0;
     }
 
     .hero-buttons {

@@ -108,6 +108,40 @@
       text-align: center;
     }
 
+    .section-header {
+      display: grid;
+      gap: 10px;
+      margin: 0 0 28px;
+      max-width: 820px;
+    }
+
+    .section-header--editorial {
+      text-align: left;
+    }
+
+    .section-header--editorial .section-kicker {
+      color: var(--accent, #1f4d5a);
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .section-header--editorial .section-title {
+      margin: 0;
+      text-align: left;
+    }
+
+    .section-header--editorial .section-lead {
+      font-size: 18px;
+      line-height: 1.55;
+      margin: 0;
+      max-width: 760px;
+      text-align: left;
+    }
+
     .capability-graph {
       background:
         radial-gradient(circle at top right, rgba(31, 77, 90, 0.1), transparent 24rem),
@@ -117,7 +151,7 @@
     }
 
     .capability-graph__header {
-      margin: 0 0 18px;
+      margin: 0;
       max-width: 820px;
       text-align: left;
     }
@@ -128,7 +162,7 @@
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 0.12em;
-      margin-bottom: 12px;
+      margin-bottom: 0;
       text-transform: uppercase;
     }
 
@@ -137,7 +171,7 @@
       font-size: clamp(32px, 4vw, 56px);
       letter-spacing: -0.055em;
       line-height: 1.01;
-      margin: 0 0 10px;
+      margin: 0;
       overflow-wrap: break-word;
     }
 
@@ -145,7 +179,7 @@
       color: var(--muted, #6b7280);
       font-size: 15.5px;
       line-height: 1.7;
-      margin: 0 0 20px;
+      margin: 0;
       max-width: 820px;
     }
 
@@ -854,7 +888,7 @@
   <!-- EXPERIENCE -->
   <section id="experience" class="experience-section">
     <div class="container experience-container">
-      <div class="experience-header">
+      <div class="experience-header section-header section-header--editorial">
         <span class="section-kicker">Experience</span>
         <h2 class="section-title experience-title">Professional Experience</h2>
         <p class="section-lead experience-lead">
@@ -969,10 +1003,10 @@
   <!-- SKILLS -->
   <section id="skills">
     <div class="container core-skills" data-core-skills>
-      <div class="core-skills__header">
-        <span class="core-skills__kicker">Core Skills</span>
-        <h2 class="core-skills__title">From business context to useful outputs</h2>
-        <p class="core-skills__lead">
+      <div class="core-skills__header section-header section-header--editorial">
+        <span class="section-kicker core-skills__kicker">Core Skills</span>
+        <h2 class="section-title core-skills__title">From business context to useful outputs</h2>
+        <p class="section-lead core-skills__lead">
           A practical skill set that moves from understanding business context to structuring data, reviewing logic, and building useful outputs.
         </p>
       </div>
@@ -1075,12 +1109,12 @@
   <section id="capability-graph" class="capability-graph" aria-labelledby="capability-graph-title">
     <div class="container">
       <div class="capability-growth" aria-label="Skill Development Curve from 2019 to 2026">
-        <div class="capability-graph__header">
-          <span class="capability-graph__eyebrow">Skill Development Curve</span>
-          <h2 id="capability-graph-title" class="capability-graph__title">How my skills evolved over time</h2>
-          <p class="capability-graph__intro">
-            A visual map of how my skills developed from engineering foundations into business systems, ERP analytics, and AI-assisted execution.
-          </p>
+      <div class="capability-graph__header section-header section-header--editorial">
+        <span class="section-kicker capability-graph__eyebrow">Skill Development Curve</span>
+        <h2 id="capability-graph-title" class="section-title capability-graph__title">How my skills evolved over time</h2>
+        <p class="section-lead capability-graph__intro">
+          A visual map of how my skills developed from engineering foundations into business systems, ERP analytics, and AI-assisted execution.
+        </p>
           <div class="capability-graph__legend" aria-label="Skill Development Curve legend">
             <span>Years</span>
             <span>Skill Depth</span>
@@ -1300,10 +1334,13 @@
   <!-- homepage-phase-2-structure-version: 20260703-v1 -->
   <section id="workflow">
     <div class="container">
-      <h2 class="section-title">How I Think Through Problems</h2>
-      <p class="section-lead">
-        I start with the mess first, then turn it into something people can actually use.
-      </p>
+      <div class="section-header section-header--editorial workflow-header">
+        <span class="section-kicker">Thinking Process</span>
+        <h2 class="section-title">How I Think Through Problems</h2>
+        <p class="section-lead">
+          I start with the mess first, then turn it into something people can actually use.
+        </p>
+      </div>
 
       <div class="problem-engine" aria-labelledby="problem-engine-title">
         <div class="problem-engine__eyebrow">Problem-Solving Engine</div>
@@ -1372,10 +1409,13 @@
   <!-- PROJECTS -->
   <section id="projects">
     <div class="container">
-      <h2 class="section-title">Flagship Project</h2>
-      <p class="section-lead projects-lead">
-        A focused case study showing how I connect business process, ERP data, reporting logic, and AI-assisted development into management-ready views.
-      </p>
+      <div class="section-header section-header--editorial projects-header">
+        <span class="section-kicker">Flagship Project</span>
+        <h2 class="section-title">Odoo ERP Analytics</h2>
+        <p class="section-lead projects-lead">
+          A focused case study showing how I connect business process, ERP data, reporting logic, and AI-assisted development into management-ready views.
+        </p>
+      </div>
 
       <div class="flagship-case" aria-label="Flagship Odoo ERP Analytics case study">
         <div class="flagship-case-grid">
@@ -1519,7 +1559,7 @@
         <ol class="website-update-strip__list" aria-label="Latest homepage website updates">
           <li class="website-update-strip__item">
             <time class="website-update-strip__date" datetime="2026-07-06">6 Jul 2026</time>
-            <p class="website-update-strip__text">Core Skills visual flow refined into a dynamic path from business context to useful outputs.</p>
+            <p class="website-update-strip__text">Homepage structure and flagship focus refined.</p>
           </li>
           <li class="website-update-strip__item">
             <time class="website-update-strip__date" datetime="2026-07-06">6 Jul 2026</time>
