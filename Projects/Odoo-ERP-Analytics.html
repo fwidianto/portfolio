@@ -51,7 +51,11 @@
       margin-top: 24px;
     }
 
-    .role-section {
+    #my-role {
+      --role-card-width: 370px;
+      --role-bridge-gap: 250px;
+      --role-bridge-overlap: 26px;
+      --role-stage-min-width: calc((var(--role-card-width) * 2) + var(--role-bridge-gap));
       background:
         radial-gradient(circle at top left, rgba(31, 77, 90, 0.08), transparent 26rem),
         rgba(255, 255, 255, 0.58);
@@ -59,48 +63,178 @@
       border-bottom: 1px solid rgba(215, 226, 223, 0.72);
     }
 
-    .role-grid {
-      display: grid;
-      gap: 16px;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      margin-top: 28px;
+    #my-role .case-section-header {
+      margin-bottom: 10px;
     }
 
-    .role-card {
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(31, 77, 90, 0.11);
-      border-radius: 22px;
-      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
-      padding: 22px;
+    #my-role .role-bridge-scroll {
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 0 0 12px;
     }
 
-    .role-card span {
-      align-items: center;
-      background: rgba(31, 77, 90, 0.08);
-      border: 1px solid rgba(31, 77, 90, 0.1);
-      border-radius: 999px;
+    #my-role .role-bridge-stage {
+      margin: 0 auto;
+      min-width: var(--role-stage-min-width);
+      padding-top: 138px;
+      position: relative;
+      width: var(--role-stage-min-width);
+    }
+
+    #my-role .role-bridge-layer {
+      left: 50%;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      width: calc(var(--role-bridge-gap) + (var(--role-bridge-overlap) * 2));
+      z-index: 8;
+    }
+
+    #my-role .role-bridge-title {
       color: var(--accent);
-      display: inline-flex;
+      display: block;
       font-size: 12px;
       font-weight: 900;
-      height: 32px;
-      justify-content: center;
-      margin-bottom: 16px;
-      width: 42px;
+      letter-spacing: 0.16em;
+      line-height: 1;
+      margin-bottom: 8px;
+      text-align: center;
+      text-transform: uppercase;
     }
 
-    .role-card h3 {
+    #my-role .role-bridge-svg {
+      display: block;
+      height: auto;
+      overflow: visible;
+      width: 100%;
+    }
+
+    #my-role .role-bridge-grid {
+      display: grid;
+      gap: 0;
+      grid-template-columns: var(--role-card-width) var(--role-bridge-gap) var(--role-card-width);
+      position: relative;
+      z-index: 2;
+    }
+
+    #my-role .role-bridge-card {
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(31, 77, 90, 0.12);
+      border-radius: 28px;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.07);
+      min-height: 430px;
+      padding: 34px 30px 30px;
+    }
+
+    #my-role .role-bridge-card--left {
+      grid-column: 1;
+    }
+
+    #my-role .role-bridge-card--right {
+      background: linear-gradient(145deg, rgba(31, 77, 90, 0.08), rgba(255, 255, 255, 0.9));
+      grid-column: 3;
+    }
+
+    #my-role .role-bridge-label {
+      color: var(--accent);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.13em;
+      line-height: 1;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    #my-role .role-bridge-card h3 {
       color: var(--text);
-      font-size: 17px;
-      line-height: 1.28;
-      margin: 0 0 10px;
+      font-size: 26px;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin: 0 0 14px;
     }
 
-    .role-card p {
+    #my-role .role-bridge-card p {
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.62;
+      font-size: 15px;
+      line-height: 1.66;
       margin: 0;
+    }
+
+    #my-role .role-bridge-list {
+      display: grid;
+      gap: 14px;
+      list-style: none;
+      margin: 26px 0 0;
+      padding: 0;
+    }
+
+    #my-role .role-bridge-item {
+      align-items: start;
+      background: rgba(246, 242, 234, 0.58);
+      border: 1px solid rgba(31, 77, 90, 0.1);
+      border-radius: 18px;
+      display: grid;
+      gap: 13px;
+      grid-template-columns: 44px minmax(0, 1fr);
+      padding: 14px;
+    }
+
+    #my-role .role-bridge-badge {
+      align-self: start;
+      background: rgba(31, 77, 90, 0.09);
+      border: 1px solid rgba(31, 77, 90, 0.14);
+      border-radius: 999px;
+      color: var(--accent);
+      display: grid;
+      font-feature-settings: "tnum";
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 900;
+      height: 34px;
+      letter-spacing: 0;
+      line-height: 1;
+      place-items: center;
+      text-align: center;
+      width: 44px;
+    }
+
+    #my-role .role-bridge-badge span {
+      display: block;
+      line-height: 1;
+      transform: translateY(0.5px);
+    }
+
+    #my-role .role-bridge-item strong {
+      color: var(--text);
+      display: block;
+      font-size: 15px;
+      font-weight: 820;
+      line-height: 1.25;
+      margin-bottom: 5px;
+    }
+
+    #my-role .role-bridge-copy span {
+      color: var(--muted);
+      display: block;
+      font-size: 13.5px;
+      line-height: 1.48;
+    }
+
+    #my-role .role-bridge-summary {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(31, 77, 90, 0.1);
+      border-radius: 999px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 720;
+      line-height: 1.45;
+      margin: 22px auto 0;
+      max-width: 760px;
+      padding: 14px 22px;
+      text-align: center;
     }
 
     #visual-proof {
@@ -948,10 +1082,6 @@
     }
 
     @media (max-width: 1100px) {
-      .role-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
       .case-story-spine,
       .review-signals-grid,
       .build-journey-layout {
@@ -1026,10 +1156,6 @@
     }
 
     @media (max-width: 640px) {
-      .role-grid {
-        grid-template-columns: 1fr;
-      }
-
       #visual-proof .case-visual-content {
         padding: 18px;
       }
@@ -1239,35 +1365,71 @@
       <div class="case-section-header">
         <div class="case-eyebrow">MY ROLE</div>
         <h2 class="case-subheading">Turning ERP complexity into business-readable review logic</h2>
-        <p class="case-lead">I mapped the operational flow behind sales orders and internal orders, reviewed how ERP records connect across purchasing, production, delivery, invoicing, and payment, then translated the logic into dashboard views that support operational review.</p>
+        <p class="case-lead">My role was to bridge the gap between operational reality and dashboard review, so scattered ERP records could become a clearer business story.</p>
       </div>
 
-      <div class="role-grid">
-        <article class="role-card">
-          <span>01</span>
-          <h3>Mapped the business flow</h3>
-          <p>Connected how sales orders, internal orders, stock, purchasing, production, delivery, invoicing, and payment interact in the real process.</p>
-        </article>
-        <article class="role-card">
-          <span>02</span>
-          <h3>Reviewed the ERP data logic</h3>
-          <p>Checked source fields, statuses, references, custom fields, and unusual cases before turning them into reporting rules.</p>
-        </article>
-        <article class="role-card">
-          <span>03</span>
-          <h3>Built review-oriented dashboard views</h3>
-          <p>Designed outputs to help teams review order progress, delivery and invoice status, payment follow-up, issue signals, and profitability context.</p>
-        </article>
-        <article class="role-card">
-          <span>04</span>
-          <h3>Used AI-assisted iteration responsibly</h3>
-          <p>Used AI to accelerate coding, debugging, documentation, and design iteration while keeping business-rule validation human-led.</p>
-        </article>
-        <article class="role-card">
-          <span>05</span>
-          <h3>Protected confidential data</h3>
-          <p>Recreated public-safe visuals and examples so the project can be explained without exposing customer, supplier, order, invoice, payment, or profitability data.</p>
-        </article>
+      <div class="role-bridge-scroll" aria-label="My role bridge between operational reality and dashboard review logic">
+        <div class="role-bridge-stage">
+          <div class="role-bridge-layer" aria-hidden="true">
+            <span class="role-bridge-title">My Role</span>
+            <svg class="role-bridge-svg" viewBox="0 0 302 142" role="img" aria-label="Bridge between challenge and outcome">
+              <path d="M42 100 C92 28 210 28 260 100" fill="none" stroke="#1f4d5a" stroke-width="7" stroke-linecap="round"/>
+              <path d="M32 96 H270" fill="none" stroke="#1f4d5a" stroke-width="6" stroke-linecap="round"/>
+              <path d="M42 82 H260" fill="none" stroke="#1f4d5a" stroke-opacity="0.56" stroke-width="3" stroke-linecap="round"/>
+              <path d="M72 76 V96 M102 62 V96 M132 54 V96 M162 54 V96 M192 62 V96 M222 76 V96" fill="none" stroke="#1f4d5a" stroke-opacity="0.52" stroke-width="3" stroke-linecap="round"/>
+              <rect x="0" y="100" width="54" height="42" rx="10" fill="#f6f2ea" stroke="#1f4d5a" stroke-width="3"/>
+              <rect x="248" y="100" width="54" height="42" rx="10" fill="#f6f2ea" stroke="#1f4d5a" stroke-width="3"/>
+              <rect x="10" y="111" width="34" height="7" rx="3.5" fill="#1f4d5a" fill-opacity="0.16"/>
+              <rect x="258" y="111" width="34" height="7" rx="3.5" fill="#1f4d5a" fill-opacity="0.16"/>
+            </svg>
+          </div>
+
+          <div class="role-bridge-grid">
+            <article class="role-bridge-card role-bridge-card--left">
+              <span class="role-bridge-label">THE CHALLENGE</span>
+              <h3>Understanding the business flow</h3>
+              <p>The work started from real operational questions across sales, purchasing, production, delivery, invoicing, and payment.</p>
+
+              <ol class="role-bridge-list">
+                <li class="role-bridge-item">
+                  <span class="role-bridge-badge"><span>01</span></span>
+                  <span class="role-bridge-copy"><strong>Business process</strong><span>How the work actually moved across teams.</span></span>
+                </li>
+                <li class="role-bridge-item">
+                  <span class="role-bridge-badge"><span>02</span></span>
+                  <span class="role-bridge-copy"><strong>ERP records</strong><span>Where the data appeared in Odoo.</span></span>
+                </li>
+                <li class="role-bridge-item">
+                  <span class="role-bridge-badge"><span>03</span></span>
+                  <span class="role-bridge-copy"><strong>Review questions</strong><span>What people needed to check or follow up.</span></span>
+                </li>
+              </ol>
+            </article>
+
+            <article class="role-bridge-card role-bridge-card--right">
+              <span class="role-bridge-label">THE OUTCOME</span>
+              <h3>Delivering review visibility</h3>
+              <p>The output needed to make interpretation easier: progress visibility, issue signals, and follow-up points that could support review.</p>
+
+              <ol class="role-bridge-list">
+                <li class="role-bridge-item">
+                  <span class="role-bridge-badge"><span>01</span></span>
+                  <span class="role-bridge-copy"><strong>Dashboard rules</strong><span>How ERP records should be classified.</span></span>
+                </li>
+                <li class="role-bridge-item">
+                  <span class="role-bridge-badge"><span>02</span></span>
+                  <span class="role-bridge-copy"><strong>Review signals</strong><span>Progress, issue, and watchlist context.</span></span>
+                </li>
+                <li class="role-bridge-item">
+                  <span class="role-bridge-badge"><span>03</span></span>
+                  <span class="role-bridge-copy"><strong>Follow-up visibility</strong><span>What needed action or discussion.</span></span>
+                </li>
+              </ol>
+            </article>
+          </div>
+
+          <p class="role-bridge-summary">In short: the bridge represents the role itself - connecting operational reality with dashboard review logic.</p>
+        </div>
       </div>
     </div>
   </section>
