@@ -260,6 +260,28 @@
   width: 100%;
 }
 
+/* odoo-process-diagram-title-cleanup: 20260707-v1 */
+#process-complexity .process-complexity__frame::before {
+  color: #0f172a;
+  content: "Business Process";
+  display: block;
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 4px 0 14px;
+  text-align: center;
+}
+
+#process-complexity .process-complexity__scroll {
+  --process-diagram-title-crop: clamp(58px, 5.4vw, 82px);
+  overflow-y: hidden;
+}
+
+#process-complexity .process-complexity__scroll > svg {
+  margin-top: calc(var(--process-diagram-title-crop) * -1);
+}
+
 @media (min-width: 961px) {
   #process-complexity .process-complexity__wide {
     left: 50% !important;
@@ -275,6 +297,10 @@
 }
 
 @media (max-width: 960px) {
+  #process-complexity .process-complexity__scroll {
+    --process-diagram-title-crop: 62px;
+  }
+
   #process-complexity .process-complexity__scroll > svg {
     max-width: none;
     min-width: 1120px;
