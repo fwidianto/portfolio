@@ -33,10 +33,16 @@ Do not overclaim. Show evidence.
 
 ## Positioning
 
-The long-term public identity is:
+The current public identity is:
 
 ```text
-Business Systems Designer
+Analytical Systems Builder
+```
+
+Core positioning:
+
+```text
+From problems and data to system design, insights, and AI-powered workflows.
 ```
 
 This is not AI Engineer, AI Developer, or software-developer-first positioning.
@@ -172,6 +178,12 @@ Avoid:
 - tool dumping,
 - flashy SaaS-style presentation,
 - clever interactions that do not clarify anything.
+
+## Current Portfolio Checkpoint
+
+Homepage v1 is frozen at commit `67cb782`. Future homepage work should start from [../homepage/HOMEPAGE_V1_FREEZE.md](../homepage/HOMEPAGE_V1_FREEZE.md).
+
+The next major proof-building priority is the Odoo ERP Analytics case study page.
 
 ## Guiding Sentence
 
