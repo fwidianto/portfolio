@@ -96,6 +96,199 @@
       margin-top: 24px;
     }
 
+    .process-complexity {
+      background:
+        linear-gradient(180deg, rgba(247, 249, 252, 0.96), rgba(246, 242, 234, 0.72));
+      border-top: 1px solid rgba(215, 226, 223, 0.9);
+      border-bottom: 1px solid rgba(215, 226, 223, 0.9);
+    }
+
+    .process-complexity__frame {
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(215, 226, 223, 0.95);
+      border-radius: 28px;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+      padding: 18px;
+    }
+
+    .process-complexity__scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 6px;
+    }
+
+    .process-complexity__svg {
+      display: block;
+      min-width: 1380px;
+      width: 100%;
+      height: auto;
+    }
+
+    .process-complexity__note {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+      margin: 16px 4px 0;
+      max-width: 980px;
+    }
+
+    .pc-bg {
+      fill: #f7f9fc;
+    }
+
+    .pc-title {
+      fill: #0f172a;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .pc-label {
+      fill: #64748b;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pc-text {
+      fill: #0f172a;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .pc-small {
+      fill: #64748b;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+
+    .pc-lane-title {
+      fill: #0f172a;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pc-lane-fill {
+      fill: rgba(255, 255, 255, 0.72);
+      stroke: #d7e2df;
+      stroke-width: 1.25;
+    }
+
+    .pc-lane-fill--warm {
+      fill: #f6f2ea;
+    }
+
+    .pc-box {
+      fill: #ffffff;
+      stroke: #d7e2df;
+      stroke-width: 1.3;
+    }
+
+    .pc-box--warm {
+      fill: #f6f2ea;
+    }
+
+    .pc-box--green {
+      fill: rgba(47, 124, 103, 0.1);
+      stroke: rgba(47, 124, 103, 0.3);
+    }
+
+    .pc-box--blue {
+      fill: rgba(111, 145, 160, 0.14);
+      stroke: rgba(111, 145, 160, 0.32);
+    }
+
+    .pc-box--amber {
+      fill: rgba(192, 132, 45, 0.14);
+      stroke: rgba(192, 132, 45, 0.34);
+    }
+
+    .pc-diamond {
+      fill: #ffffff;
+      stroke: #cbd5e1;
+      stroke-width: 1.35;
+    }
+
+    .pc-diamond--control {
+      fill: rgba(192, 132, 45, 0.12);
+      stroke: rgba(192, 132, 45, 0.42);
+    }
+
+    .pc-review-box {
+      fill: #ffffff;
+      stroke: rgba(31, 77, 90, 0.18);
+      stroke-width: 1.35;
+    }
+
+    .pc-review-box--soft {
+      fill: rgba(31, 77, 90, 0.05);
+    }
+
+    .pc-flow-line {
+      stroke: rgba(15, 23, 42, 0.55);
+      stroke-width: 2.1;
+      fill: none;
+      marker-end: url(#pc-arrow);
+    }
+
+    .pc-flow-line--thin {
+      stroke-width: 1.7;
+    }
+
+    .pc-flow-line--green {
+      stroke: rgba(47, 124, 103, 0.75);
+    }
+
+    .pc-flow-line--blue {
+      stroke: rgba(31, 77, 90, 0.75);
+    }
+
+    .pc-flow-line--amber {
+      stroke: rgba(192, 132, 45, 0.8);
+    }
+
+    .pc-flow-line--dashed {
+      stroke-dasharray: 6 7;
+    }
+
+    .pc-flow-label {
+      fill: #64748b;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .pc-review-link {
+      stroke: rgba(31, 77, 90, 0.38);
+      stroke-dasharray: 5 7;
+      stroke-width: 1.6;
+      fill: none;
+      marker-end: url(#pc-arrow-soft);
+    }
+
+    .pc-review-pill {
+      fill: #ffffff;
+      stroke: rgba(31, 77, 90, 0.16);
+      stroke-width: 1.2;
+    }
+
+    .pc-review-pill-title {
+      fill: #0f172a;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .pc-review-pill-text {
+      fill: #64748b;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
+
     .case-story-spine {
       align-items: stretch;
       background: rgba(255, 255, 255, 0.72);
@@ -861,6 +1054,157 @@
           <h3>From records to review</h3>
           <p>The output became dashboard views that help teams review progress, issues, profitability, and follow-up points more clearly.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section process-complexity" id="process-complexity">
+    <div class="case-container">
+      <div class="case-section-header">
+        <div class="case-eyebrow">Process Complexity</div>
+        <h2 class="case-subheading">How order flow, stock, purchase, and production logic connect</h2>
+        <p class="case-lead">The diagram below shows how one request can branch through sales, internal demand, stock, procurement, production, finance, and the dashboard review layer.</p>
+      </div>
+
+      <div class="process-complexity__frame" aria-label="Odoo ERP process complexity diagram">
+        <div class="process-complexity__scroll">
+          <svg class="process-complexity__svg" viewBox="0 0 1600 760" role="img" aria-labelledby="process-complexity-title process-complexity-desc">
+            <defs>
+              <marker id="pc-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+                <path d="M0,0 L12,6 L0,12 Z" fill="rgba(15, 23, 42, 0.55)"></path>
+              </marker>
+              <marker id="pc-arrow-soft" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+                <path d="M0,0 L12,6 L0,12 Z" fill="rgba(31, 77, 90, 0.38)"></path>
+              </marker>
+            </defs>
+
+            <title id="process-complexity-title">Odoo ERP process complexity diagram</title>
+            <desc id="process-complexity-desc">Swimlane diagram showing estimator branching into sales order and internal order, converging into BOQ, checking stock, routing through procurement when needed, then moving to manufacture order, delivery, invoice, and dashboard review signals.</desc>
+
+            <rect x="0" y="0" width="1600" height="760" rx="28" class="pc-bg"></rect>
+
+            <g>
+              <rect x="34" y="34" width="152" height="124" rx="20" class="pc-lane-fill"></rect>
+              <rect x="34" y="166" width="152" height="124" rx="20" class="pc-lane-fill pc-lane-fill--warm"></rect>
+              <rect x="34" y="298" width="152" height="124" rx="20" class="pc-lane-fill"></rect>
+              <rect x="34" y="430" width="152" height="124" rx="20" class="pc-lane-fill pc-lane-fill--warm"></rect>
+              <rect x="34" y="562" width="152" height="124" rx="20" class="pc-lane-fill"></rect>
+
+              <text x="58" y="94" class="pc-lane-title">Commercial / Planning</text>
+              <text x="58" y="226" class="pc-lane-title">Material / Procurement</text>
+              <text x="58" y="358" class="pc-lane-title">Operations</text>
+              <text x="58" y="490" class="pc-lane-title">Finance</text>
+              <text x="58" y="622" class="pc-lane-title">Analytics Output</text>
+            </g>
+
+            <g>
+              <rect x="222" y="58" width="186" height="78" rx="18" class="pc-box pc-box--warm"></rect>
+              <text x="250" y="94" class="pc-title">Estimator</text>
+              <text x="250" y="116" class="pc-small">Initial request</text>
+
+              <rect x="454" y="32" width="200" height="94" rx="22" class="pc-box pc-box--green"></rect>
+              <text x="486" y="74" class="pc-title">Sales Order</text>
+              <text x="486" y="98" class="pc-small">Commercial path</text>
+
+              <rect x="454" y="150" width="200" height="94" rx="22" class="pc-box pc-box--blue"></rect>
+              <text x="484" y="192" class="pc-title">Internal Order</text>
+              <text x="484" y="216" class="pc-small">Operations path</text>
+
+              <rect x="696" y="92" width="164" height="88" rx="22" class="pc-box pc-box--warm"></rect>
+              <text x="742" y="133" class="pc-title">BOQ</text>
+              <text x="730" y="156" class="pc-small">Shared quantity logic</text>
+
+              <polygon points="928,132 964,168 1000,132 964,96" class="pc-diamond"></polygon>
+              <text x="950" y="138" text-anchor="middle" class="pc-title">Check Stock</text>
+              <text x="950" y="158" text-anchor="middle" class="pc-small">Enough material?</text>
+
+              <rect x="1108" y="34" width="162" height="86" rx="22" class="pc-box pc-box--green"></rect>
+              <text x="1138" y="74" class="pc-title">Manufacture</text>
+              <text x="1138" y="98" class="pc-small">Production order</text>
+
+              <rect x="1108" y="164" width="162" height="86" rx="22" class="pc-box pc-box--amber"></rect>
+              <text x="1140" y="204" class="pc-title">Create PR</text>
+              <text x="1140" y="228" class="pc-small">Procurement request</text>
+
+              <polygon points="1386,132 1420,166 1454,132 1420,98" class="pc-diamond pc-diamond--control"></polygon>
+              <text x="1420" y="126" text-anchor="middle" class="pc-title">Compare Budget</text>
+              <text x="1420" y="146" text-anchor="middle" class="pc-small">to BOQ</text>
+
+              <rect x="1108" y="292" width="162" height="86" rx="22" class="pc-box pc-box--amber"></rect>
+              <text x="1138" y="332" class="pc-title">Purchase Order</text>
+              <text x="1138" y="356" class="pc-small">Approved buying</text>
+
+              <polygon points="1386,348 1420,382 1454,348 1420,314" class="pc-diamond pc-diamond--control"></polygon>
+              <text x="1420" y="342" text-anchor="middle" class="pc-title">Compare Budget</text>
+              <text x="1420" y="362" text-anchor="middle" class="pc-small">with PR</text>
+
+              <rect x="1108" y="430" width="162" height="86" rx="22" class="pc-box pc-box--warm"></rect>
+              <text x="1140" y="470" class="pc-title">Approved</text>
+              <text x="1140" y="494" class="pc-small">Ready to receive</text>
+
+              <rect x="1108" y="560" width="162" height="86" rx="22" class="pc-box pc-box--blue"></rect>
+              <text x="1128" y="600" class="pc-title">Material Received</text>
+              <text x="1128" y="624" class="pc-small">Stock confirmed</text>
+
+              <rect x="696" y="342" width="164" height="88" rx="22" class="pc-box pc-box--green"></rect>
+              <text x="726" y="382" class="pc-title">Manufacture</text>
+              <text x="726" y="406" class="pc-small">Order release</text>
+
+              <rect x="696" y="490" width="164" height="88" rx="22" class="pc-box pc-box--blue"></rect>
+              <text x="748" y="530" class="pc-title">Delivery</text>
+              <text x="734" y="554" class="pc-small">Shipment stage</text>
+
+              <rect x="900" y="490" width="152" height="88" rx="22" class="pc-box pc-box--blue"></rect>
+              <text x="952" y="530" class="pc-title">Invoice</text>
+              <text x="946" y="554" class="pc-small">Finance stage</text>
+            </g>
+
+            <g>
+              <path d="M408 97 L454 79" class="pc-flow-line pc-flow-line--green"></path>
+              <path d="M408 97 L454 197" class="pc-flow-line pc-flow-line--blue"></path>
+              <path d="M654 79 L696 136" class="pc-flow-line pc-flow-line--green"></path>
+              <path d="M654 197 L696 136" class="pc-flow-line pc-flow-line--blue"></path>
+              <path d="M860 136 L928 136" class="pc-flow-line pc-flow-line--thin pc-flow-line--amber"></path>
+
+              <path d="M964 168 L964 198 L1108 198" class="pc-flow-line pc-flow-line--amber"></path>
+              <path d="M1000 132 L1098 132 L1108 318" class="pc-flow-line pc-flow-line--amber"></path>
+              <path d="M1270 208 L1386 142" class="pc-flow-line pc-flow-line--amber"></path>
+              <path d="M1454 132 L1478 132 L1478 348 L1454 348" class="pc-flow-line pc-flow-line--amber"></path>
+              <path d="M1420 382 L1420 472 L1270 472" class="pc-flow-line pc-flow-line--amber"></path>
+              <path d="M1270 602 L1380 602 L1380 540 L1270 540" class="pc-flow-line pc-flow-line--blue"></path>
+
+              <path d="M1270 76 L1298 76 L1298 370 L1270 370" class="pc-flow-line pc-flow-line--green"></path>
+              <path d="M1270 206 L1290 206 L1290 532 L1270 532" class="pc-flow-line pc-flow-line--blue"></path>
+              <path d="M1270 472 L1380 472 L1380 132 L1386 132" class="pc-flow-line pc-flow-line--dashed pc-flow-line--blue"></path>
+              <path d="M1270 602 L1380 602 L1380 348 L1386 348" class="pc-flow-line pc-flow-line--dashed pc-flow-line--blue"></path>
+            </g>
+
+            <g>
+              <rect x="76" y="12" width="82" height="22" rx="11" class="pc-review-pill"></rect>
+              <text x="117" y="27" text-anchor="middle" class="pc-review-pill-title">Swimlanes</text>
+
+              <text x="1446" y="82" class="pc-label">Dashboard Review</text>
+              <rect x="1388" y="104" width="168" height="286" rx="24" class="pc-review-box"></rect>
+              <text x="1412" y="138" class="pc-review-pill-title">Progress</text>
+              <text x="1412" y="160" class="pc-review-pill-text">order stage</text>
+              <text x="1412" y="198" class="pc-review-pill-title">Budget</text>
+              <text x="1412" y="220" class="pc-review-pill-text">control check</text>
+              <text x="1412" y="258" class="pc-review-pill-title">Profitability</text>
+              <text x="1412" y="280" class="pc-review-pill-text">margin view</text>
+              <text x="1412" y="318" class="pc-review-pill-title">Issues</text>
+              <text x="1412" y="340" class="pc-review-pill-text">gaps / blockers</text>
+              <text x="1412" y="378" class="pc-review-pill-title">Follow-up</text>
+              <text x="1412" y="400" class="pc-review-pill-text">next action</text>
+
+              <path d="M1360 176 C1340 176 1330 168 1314 158" class="pc-review-link"></path>
+              <path d="M1360 240 C1340 240 1330 232 1314 226" class="pc-review-link"></path>
+              <path d="M1360 308 C1340 308 1330 294 1314 288" class="pc-review-link"></path>
+              <path d="M1360 376 C1340 376 1330 356 1314 352" class="pc-review-link"></path>
+            </g>
+          </svg>
+        </div>
+
+        <p class="process-complexity__note">Mixed cases combine order, stock, purchase, and production logic. Why it mattered: each branch changes timing, control, and interpretation.</p>
       </div>
     </div>
   </section>
