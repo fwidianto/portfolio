@@ -51,6 +51,102 @@
       margin-top: 24px;
     }
 
+    .role-section {
+      background:
+        radial-gradient(circle at top left, rgba(31, 77, 90, 0.08), transparent 26rem),
+        rgba(255, 255, 255, 0.58);
+      border-top: 1px solid rgba(215, 226, 223, 0.72);
+      border-bottom: 1px solid rgba(215, 226, 223, 0.72);
+    }
+
+    .role-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      margin-top: 28px;
+    }
+
+    .role-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(31, 77, 90, 0.11);
+      border-radius: 22px;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
+      padding: 22px;
+    }
+
+    .role-card span {
+      align-items: center;
+      background: rgba(31, 77, 90, 0.08);
+      border: 1px solid rgba(31, 77, 90, 0.1);
+      border-radius: 999px;
+      color: var(--accent);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      height: 32px;
+      justify-content: center;
+      margin-bottom: 16px;
+      width: 42px;
+    }
+
+    .role-card h3 {
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.28;
+      margin: 0 0 10px;
+    }
+
+    .role-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.62;
+      margin: 0;
+    }
+
+    #visual-proof {
+      background:
+        radial-gradient(circle at 90% 12%, rgba(192, 132, 45, 0.08), transparent 24rem),
+        linear-gradient(180deg, rgba(246, 242, 234, 0.9), rgba(255, 255, 255, 0.62));
+    }
+
+    #visual-proof .case-section-header {
+      margin-bottom: 26px;
+      max-width: 940px;
+    }
+
+    .showcase-line {
+      color: var(--text);
+      font-size: clamp(20px, 2.4vw, 28px);
+      font-weight: 760;
+      letter-spacing: -0.025em;
+      line-height: 1.32;
+      margin: 0 0 16px;
+      max-width: 820px;
+    }
+
+    #visual-proof .case-visual-frame {
+      border-radius: 32px;
+      margin-top: 12px;
+    }
+
+    #visual-proof .case-visual-content {
+      padding: 30px;
+    }
+
+    #visual-proof .case-caption {
+      color: rgba(100, 116, 139, 0.88);
+      font-size: 13.5px;
+      max-width: 940px;
+    }
+
+    .case-section--supporting {
+      padding: 64px 0;
+    }
+
+    .case-section--supporting .case-section-header {
+      margin-bottom: 24px;
+    }
+
     .case-hero-lead {
       color: var(--text);
       font-size: clamp(24px, 3vw, 32px);
@@ -852,6 +948,10 @@
     }
 
     @media (max-width: 1100px) {
+      .role-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .case-story-spine,
       .review-signals-grid,
       .build-journey-layout {
@@ -926,6 +1026,14 @@
     }
 
     @media (max-width: 640px) {
+      .role-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #visual-proof .case-visual-content {
+        padding: 18px;
+      }
+
       .case-story-spine,
       .case-insight-callout,
       .review-signals-note,
@@ -1081,12 +1189,50 @@
     </div>
   </section>
 
+  <section class="case-section role-section" id="my-role">
+    <div class="case-container">
+      <div class="case-section-header">
+        <div class="case-eyebrow">MY ROLE</div>
+        <h2 class="case-subheading">Turning ERP complexity into business-readable review logic</h2>
+        <p class="case-lead">I mapped the operational flow behind sales orders and internal orders, reviewed how ERP records connect across purchasing, production, delivery, invoicing, and payment, then translated the logic into dashboard views that support operational review.</p>
+      </div>
+
+      <div class="role-grid">
+        <article class="role-card">
+          <span>01</span>
+          <h3>Mapped the business flow</h3>
+          <p>Connected how sales orders, internal orders, stock, purchasing, production, delivery, invoicing, and payment interact in the real process.</p>
+        </article>
+        <article class="role-card">
+          <span>02</span>
+          <h3>Reviewed the ERP data logic</h3>
+          <p>Checked source fields, statuses, references, custom fields, and unusual cases before turning them into reporting rules.</p>
+        </article>
+        <article class="role-card">
+          <span>03</span>
+          <h3>Built review-oriented dashboard views</h3>
+          <p>Designed outputs to help teams review order progress, delivery and invoice status, payment follow-up, issue signals, and profitability context.</p>
+        </article>
+        <article class="role-card">
+          <span>04</span>
+          <h3>Used AI-assisted iteration responsibly</h3>
+          <p>Used AI to accelerate coding, debugging, documentation, and design iteration while keeping business-rule validation human-led.</p>
+        </article>
+        <article class="role-card">
+          <span>05</span>
+          <h3>Protected confidential data</h3>
+          <p>Recreated public-safe visuals and examples so the project can be explained without exposing customer, supplier, order, invoice, payment, or profitability data.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="case-section process-complexity" id="process-complexity">
     <div class="case-container">
       <div class="case-section-header">
-        <div class="case-eyebrow">Process Complexity</div>
-        <h2 class="case-subheading">How order flow, stock, purchase, and production logic connect</h2>
-        <p class="case-lead">The diagram below shows how one request can branch through sales, internal demand, stock, procurement, production, finance, and the dashboard review layer.</p>
+        <div class="case-eyebrow">BUSINESS PROCESS</div>
+        <h2 class="case-subheading">The business flow behind the dashboard</h2>
+        <p class="case-lead">Before the dashboard could become useful, the process itself had to be understood. A case could begin from Sales Order or Internal Order, then move through BOQ, stock checking, purchasing, production, delivery, and invoice.</p>
       </div>
 
       <div class="process-complexity__frame process-complexity__wide" aria-label="Odoo ERP process complexity diagram">
@@ -1105,6 +1251,7 @@
       <div class="case-section-header">
         <div class="case-eyebrow">VISUAL PROOF</div>
         <h2 class="case-subheading">Dashboard views built for practical review</h2>
+        <p class="showcase-line">The dashboard turns the process into reviewable visibility.</p>
         <p class="case-lead">
           The output was not a dashboard for decoration. It was a set of views designed to help teams review order progress, issues, insights, profitability context, and follow-up points without jumping through raw ERP menus one record at a time.
         </p>
@@ -1137,12 +1284,12 @@
     </div>
   </section>
 
-  <section class="case-section" id="approach-workflow">
+  <section class="case-section case-section--supporting" id="approach-workflow">
     <div class="case-container">
       <div class="case-section-header">
         <div class="case-eyebrow">APPROACH / WORKFLOW</div>
         <h2 class="case-subheading">From business problem to dashboard logic</h2>
-        <p class="case-lead">The project moved from business questions, to process understanding, to data logic review, to dashboards that support practical review and follow-up.</p>
+        <p class="case-lead">A compact path from question, to validated logic, to reviewable output.</p>
       </div>
 
       <div class="case-grid case-grid--3">
@@ -1156,12 +1303,12 @@
     </div>
   </section>
 
-  <section class="case-section case-section--soft" id="architecture-data-flow">
+  <section class="case-section case-section--soft case-section--supporting" id="architecture-data-flow">
     <div class="case-container">
       <div class="case-section-header">
         <div class="case-eyebrow">ARCHITECTURE / DATA FLOW</div>
         <h2 class="case-subheading">How scattered ERP records became structured dashboard views</h2>
-        <p class="case-lead">The analytics layer starts from Odoo transactions, then applies extraction, validation, business logic review, and reporting outputs so teams can read the flow more clearly.</p>
+        <p class="case-lead">The analytics layer connects Odoo transactions, validation, business logic, and reporting outputs.</p>
       </div>
 
       <div class="case-architecture" aria-label="ERP analytics architecture pipeline">
@@ -1189,12 +1336,12 @@
   </section>
 
   <!-- built-section-redesign-version: 20260703-v1 -->
-  <section class="case-section" id="how-project-built">
+  <section class="case-section case-section--supporting" id="how-project-built">
     <div class="case-container">
       <div class="case-section-header">
         <div class="case-eyebrow">HOW THE PROJECT WAS BUILT</div>
         <h2 class="case-subheading">From ERP complexity to practical review views</h2>
-        <p class="case-lead">This project was not only about building a dashboard. It required understanding process complexity, validating business rules, turning ERP relationships into readable logic, and preparing public-safe evidence.</p>
+        <p class="case-lead">The build moved from process complexity into validated logic, review views, and public-safe evidence.</p>
       </div>
 
       <div class="build-journey-layout">
@@ -1259,11 +1406,11 @@
     </div>
   </section>
 
-  <section class="case-section case-section--soft" id="dashboard-modules"><div class="case-container"><div class="case-section-header"><div class="case-eyebrow">DASHBOARD MODULES</div><h2 class="case-subheading">What the system supports for operational review</h2><p class="case-lead">The dashboard groups familiar review needs so users can trace orders, materials, profitability signals, business rules, and spreadsheet-friendly outputs without reading raw tables.</p></div><div class="case-grid case-grid--3"><div class="case-card"><h3>Sales Order View</h3><p>Shows order context, source, fulfillment, invoice, payment, and review status.</p></div><div class="case-card"><h3>Internal Order View</h3><p>Links internal demand to procurement, manufacturing, stock movement, and fulfillment.</p></div><div class="case-card"><h3>Order Material Tracking</h3><p>Tracks order needs through purchase, stock movement, delivery readiness, and follow-up.</p></div><div class="case-card"><h3>Profitability Review</h3><p>Supports commercial and operational signal review before approval or performance discussion.</p></div><div class="case-card"><h3>Business Rule Validation</h3><p>Clarifies how ERP fields, references, statuses, and exceptions become KPI logic.</p></div><div class="case-card"><h3>Excel Export Workflow</h3><p>Keeps spreadsheet review familiar while using a more structured data source.</p></div></div></div></section>
+  <section class="case-section case-section--soft case-section--supporting" id="dashboard-modules"><div class="case-container"><div class="case-section-header"><div class="case-eyebrow">DASHBOARD MODULES</div><h2 class="case-subheading">What the system supports for operational review</h2><p class="case-lead">The dashboard groups familiar review needs so users can trace orders, materials, profitability signals, business rules, and spreadsheet-friendly outputs.</p></div><div class="case-grid case-grid--3"><div class="case-card"><h3>Sales Order View</h3><p>Shows order context, source, fulfillment, invoice, payment, and review status.</p></div><div class="case-card"><h3>Internal Order View</h3><p>Links internal demand to procurement, manufacturing, stock movement, and fulfillment.</p></div><div class="case-card"><h3>Order Material Tracking</h3><p>Tracks order needs through purchase, stock movement, delivery readiness, and follow-up.</p></div><div class="case-card"><h3>Profitability Review</h3><p>Supports commercial and operational signal review before approval or performance discussion.</p></div><div class="case-card"><h3>Business Rule Validation</h3><p>Clarifies how ERP fields, references, statuses, and exceptions become KPI logic.</p></div><div class="case-card"><h3>Excel Export Workflow</h3><p>Keeps spreadsheet review familiar while using a more structured data source.</p></div></div></div></section>
 
   <section class="case-section" id="business-value"><div class="case-container"><div class="case-section-header"><div class="case-eyebrow">BUSINESS VALUE</div><h2 class="case-subheading">From manual checking to reusable dashboard review</h2><p class="case-lead">The project reduces repeated manual checking by turning scattered ERP records into reusable review views, helping teams understand what needs attention, what is progressing normally, and what requires follow-up more quickly.</p></div><div class="business-value-strip"><div class="business-value-step"><span class="business-value-symbol" aria-hidden="true">⌕</span><span class="business-value-label">Manual checking</span></div><div class="business-value-arrow" aria-hidden="true">→</div><div class="business-value-step"><span class="business-value-symbol" aria-hidden="true">↔</span><span class="business-value-label">Scattered ERP records</span></div><div class="business-value-arrow" aria-hidden="true">→</div><div class="business-value-step"><span class="business-value-symbol" aria-hidden="true">▦</span><span class="business-value-label">Structured dashboard views</span></div><div class="business-value-arrow" aria-hidden="true">→</div><div class="business-value-step"><span class="business-value-symbol" aria-hidden="true">✓</span><span class="business-value-label">Faster follow-up</span></div></div><div class="case-grid case-grid--2"><div class="case-card"><h3>Before</h3><ul class="business-value-list"><li>Manual checking across multiple ERP menus</li><li>Order, procurement, delivery, invoice, and payment information felt scattered</li><li>Traceability depended heavily on individual knowledge</li><li>Reporting required repeated spreadsheet reconstruction</li><li>Business rules and exceptions were difficult to review consistently</li></ul></div><div class="case-card"><h3>After</h3><ul class="business-value-list"><li>Centralized dashboard views for practical review</li><li>Clearer connection across order flow and supporting transactions</li><li>Reusable SQL logic and dashboard-ready analytical structure</li><li>Faster review path for management reporting and follow-up</li><li>Better documentation of business logic and data exceptions</li></ul></div></div></div></section>
 
-  <section class="case-section case-section--soft" id="skills-demonstrated"><div class="case-container"><div class="case-section-header"><div class="case-eyebrow">SKILLS DEMONSTRATED</div><h2 class="case-subheading">Why this project works as flagship evidence</h2><p class="case-lead">The project demonstrates the ability to connect business process understanding, ERP logic, data validation, dashboard design, and AI-assisted delivery into practical reporting.</p></div><div class="case-grid case-grid--3"><div class="case-card"><h3>Business Analysis</h3><p>Turned operational questions into reporting logic, KPI structure, and review flows.</p></div><div class="case-card"><h3>ERP Understanding</h3><p>Connected sales, purchasing, inventory, manufacturing, finance, and management review.</p></div><div class="case-card"><h3>Data Validation</h3><p>Checked tables, custom fields, statuses, exceptions, and business meaning before insights.</p></div><div class="case-card"><h3>Technical Translation</h3><p>Used SQL, PostgreSQL, Python, and frontend views to make business logic usable.</p></div><div class="case-card"><h3>AI-Assisted Delivery</h3><p>Used AI tools for faster iteration while keeping final judgment human-led.</p></div><div class="case-card"><h3>Cross-Functional Thinking</h3><p>Designed views for operations, sales, procurement, finance, and management.</p></div></div></div></section>
+  <section class="case-section case-section--soft" id="skills-demonstrated"><div class="case-container"><div class="case-section-header"><div class="case-eyebrow">WHAT THIS PROVES</div><h2 class="case-subheading">I can bridge business operations, ERP data, and AI-assisted analytics execution</h2><p class="case-lead">This project represents the type of work I want to keep doing: understanding messy operational processes, translating them into reliable data logic, and building dashboard views that make business review easier. It combines process understanding, analytical judgment, stakeholder context, and practical technical execution.</p></div><div class="case-grid case-grid--2"><div class="case-card"><h3>Business process first, not table-first.</h3><p>The work started by understanding how the operational flow actually moves before deciding what the dashboard should show.</p></div><div class="case-card"><h3>ERP records interpreted before becoming metrics.</h3><p>Fields, statuses, references, and unusual cases were reviewed as business logic, not treated as raw data alone.</p></div><div class="case-card"><h3>Confidential work turned into public-safe portfolio evidence.</h3><p>The page explains the method and recreated visuals without exposing customer, supplier, order, invoice, payment, or profitability data.</p></div><div class="case-card"><h3>AI used as an accelerator while business judgment remains human-led.</h3><p>AI supported faster coding, debugging, documentation, and iteration while validation stayed anchored in business context.</p></div></div></div></section>
 
   <!-- cta-confidentiality-version: 20260702-v2 -->
   <section class="case-section" id="cta-confidentiality"><div class="case-container"><div class="case-card"><div class="case-eyebrow">PUBLIC-SAFE CASE STUDY</div><h2 class="case-subheading">A portfolio version designed to protect confidential operational data</h2><p class="case-lead">This case study explains the project structure, business logic, and analytics approach without exposing customer names, supplier names, real order numbers, invoice values, profitability figures, database access details, server details, or confidential operational records.</p><div class="case-actions"><a class="case-btn case-btn--primary" href="https://github.com/fwidianto/dashboard-odoo" target="_blank" rel="noopener noreferrer">View repository</a><a class="case-btn case-btn--secondary" href="../index.html#projects">Back to projects</a></div></div></div></section>
