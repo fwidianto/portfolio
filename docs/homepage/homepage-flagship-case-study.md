@@ -1,8 +1,10 @@
 # Homepage Flagship Case Study
 
-Status: Active source of truth
+Status: Active source of truth / homepage v1 frozen
 
-This document defines how the homepage should route visitors toward the flagship case study.
+This document defines how the frozen homepage v1 routes visitors toward the flagship case study.
+
+For the accepted homepage checkpoint, see [HOMEPAGE_V1_FREEZE.md](HOMEPAGE_V1_FREEZE.md).
 
 ## Flagship Case
 
@@ -36,19 +38,47 @@ Business problem
 
 The homepage should guide visitors toward this case study after they have seen:
 
-- the Business Systems Designer identity,
+- the Analytical Systems Builder identity,
+- the Professional Experience foundation,
+- the Core Skills working path,
 - the Skill Development Curve,
 - evidence that Fauzan's skills developed into business systems thinking,
-- public-safe proof that the portfolio is actively maintained.
+- and public-safe proof that the portfolio is actively maintained.
 
 The homepage should not rewrite the full case study. It should frame why the case matters and make the next click obvious.
 
+## Accepted Homepage Flagship Direction
+
+The homepage project area should show one visible flagship project only:
+
+```text
+Odoo ERP Analytics
+```
+
+Supporting projects may remain in the repository or on separate pages, but they should not appear as a homepage project grid until they are ready to compete for attention on equal footing.
+
+Accepted route line:
+
+```text
+Scattered ERP transactions -> reliable business logic -> management-ready views
+```
+
+CTA target:
+
+```text
+Projects/Odoo-ERP-Analytics.html
+```
+
 ## Current Priority
 
-After the accepted Skill Development Curve v1, this is the next homepage priority.
+The homepage routing is now accepted and frozen.
 
-The main goal is to help experienced HR and managers understand why Odoo ERP Analytics is the strongest proof of Fauzan's positioning.
+The next priority is the Odoo ERP Analytics case study page itself. The page must deliver the proof promised by the homepage flagship section, especially for experienced HR, business managers, operations managers, and analytics managers.
+
+The next refinement should focus on first-screen clarity, business context, proof strength, and public-safe evidence.
 
 ## Implementation Boundary
 
 This document defines routing and narrative priority only. It does not specify UI layout or interaction details.
+
+Do not reintroduce a multi-project homepage grid from this document. The homepage should remain focused on the single Odoo ERP Analytics flagship unless a future strategy discussion explicitly changes that decision.
