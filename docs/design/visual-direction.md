@@ -32,7 +32,23 @@ It should make relationships easier to understand.
 
 AI, code, dashboards, and tools can appear visually, but they should support the business-system story.
 
-Avoid visual treatment that makes the portfolio appear AI-first when the intended positioning is **Business Systems Designer**.
+Avoid visual treatment that makes the portfolio appear AI-first when the intended positioning is **Analytical Systems Builder**.
+
+## Homepage Visual Boundary
+
+Homepage v1 is frozen at commit `67cb782`.
+
+Future homepage visual changes should preserve the accepted character:
+
+- mature,
+- calm,
+- business-oriented,
+- editorial,
+- readable,
+- not flashy,
+- not too colorful,
+- not too animated,
+- not developer-template-like.
 
 ## Interaction Guidance
 
@@ -48,3 +64,5 @@ Avoid motion or decorative effects that do not clarify the experience.
 ## Implementation Boundary
 
 This is not a component specification, color system, or CSS plan. Future design tasks should translate this direction into implementation details.
+
+For homepage changes, read [../homepage/HOMEPAGE_V1_FREEZE.md](../homepage/HOMEPAGE_V1_FREEZE.md) before proposing visual revisions.
