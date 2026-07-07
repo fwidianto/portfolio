@@ -10,7 +10,9 @@ Visit the portfolio at [fwidianto.github.io/portofolio](https://fwidianto.github
 
 This portfolio is written for recruiters and collaborators looking for a business-first analytics and systems profile: Data Analyst, Business Analyst, BI Analyst, Operations Analyst, Commercial Analyst, Digital Transformation Analyst, or analytics-adjacent AI workflow roles.
 
-The current portfolio direction is **Business Systems Designer**: understand the operational problem, structure the business logic, use technology to make the system visible, and communicate evidence clearly.
+The current portfolio direction is **Analytical Systems Builder**: understand the operational problem, structure the business logic, use technology to make the system visible, and communicate evidence clearly.
+
+Core positioning: from problems and data to system design, insights, and AI-powered workflows.
 
 Focus areas:
 
@@ -22,67 +24,36 @@ Focus areas:
 - Reporting automation with SQL, Python, spreadsheets, and scripts
 - AI-assisted delivery with Codex and OpenHands
 
-## Featured Projects
+## Homepage Checkpoint
+
+Homepage v1 is frozen at commit `67cb782`.
+
+The homepage now focuses on one flagship project: [Odoo ERP Analytics Platform](Projects/Odoo-ERP-Analytics.html).
+
+For homepage change rules and frozen decisions, see [docs/homepage/HOMEPAGE_V1_FREEZE.md](docs/homepage/HOMEPAGE_V1_FREEZE.md).
+
+## Featured Project
 
 - [Odoo ERP Analytics Platform](Projects/Odoo-ERP-Analytics.html)
-  - SQL analytics layer on Odoo PostgreSQL data that turns ERP activity into reporting, traceability, and profitability review inputs.
-- [AI ERP Intelligence Dashboard](Projects/AI-ERP-IntelligenceDashboard/index.html)
-  - Flask-based analytics dashboard demo with sample ERP-style data, SQL query support, and table browsing.
-- [Business Reporting Automation](Projects/Business-Reporting-Automation.html)
-  - Excel, Google Sheets, Apps Script, VBA, UiPath, and Looker Studio workflows for reporting automation.
-- [PersonalOS / AI Handoff Workflow](Projects/PersonalOS-AI-Handoff.html)
-  - Private Markdown-based knowledge and workflow system for planning, documentation, and AI handoffs.
-- [HS Code Trade Compliance Automation](Projects/WebScrapping.html)
-  - Browser automation for tariff and licensing research with structured Excel and JSON outputs.
-- [Investment Analytics Dashboard](Projects/Investment%20Dashboard.html)
-  - Market monitoring and allocation tracking using Google Sheets, Looker Studio, and TradingView.
+  - SQL analytics layer on Odoo PostgreSQL data that turns ERP activity into reporting, traceability, profitability review inputs, and management-ready views.
 
-## Project Inventory
+## Supporting Project Inventory
+
+These projects may remain available in the repository or separate pages, but the homepage intentionally does not present them as a multi-project grid.
 
 | Category | Items | Notes |
 | --- | --- | --- |
-| Recruiter-facing case studies | Odoo ERP Analytics Platform, Business Reporting Automation, PersonalOS / AI Handoff Workflow, HS Code Trade Compliance Automation, Investment Analytics Dashboard | Public-safe pages that explain the business problem, tools, and analytical value. |
+| Recruiter-facing case studies | Odoo ERP Analytics Platform, Business Reporting Automation, PersonalOS / AI Handoff Workflow, HS Code Trade Compliance Automation, Investment Analytics Dashboard | Public-safe pages that explain the business problem, tools, and analytical value. Odoo is the current homepage flagship. |
 | Live demo | AI ERP Intelligence Dashboard | External PythonAnywhere demo with sample ERP-style data, dashboard views, and SQL browsing. |
-| Supporting artifacts | `Projects/portfolio-app`, `Projects/AI-ERP-IntelligenceDashboard/docs`, `Projects/hs-code-automation` | Supporting code, docs, and helper material. These are secondary to the recruiter-facing case studies. |
+| Supporting artifacts | `Projects/portfolio-app`, `Projects/AI-ERP-IntelligenceDashboard/docs`, `Projects/hs-code-automation` | Supporting code, docs, and helper material. These are secondary to the recruiter-facing Odoo flagship. |
 
 ## Project Structure
 
-```text
-portofolio/
-|-- index.html
-|-- README.md
-|-- Assets/
-|-- CSS/
-|   |-- main.css
-|   `-- project.css
-|-- Projects/
-|   |-- Odoo-ERP-Analytics.html        # recruiter-facing case study
-|   |-- Business-Reporting-Automation.html
-|   |-- PersonalOS-AI-Handoff.html
-|   |-- WebScrapping.html
-|   |-- Investment Dashboard.html
-|   |-- AI-ERP-IntelligenceDashboard/  # public demo support
-|   |   `-- index.html
-|   |-- portfolio-app/                 # supporting Flask app
-|   `-- hs-code-automation/            # supporting source folder
-`-- docs/
-    |-- README.md                     # active documentation entry point
-    |-- core/                         # philosophy, workflow, vision, principles
-    |-- homepage/                     # homepage experience concepts
-    |-- case-studies/                 # case-study source documents
-    |-- design/                       # visitor psychology and IA direction
-    `-- portfolio-refresh/            # historical refresh implementation records
-```
+The main public page is `index.html`. Project pages live under `Projects/`. Active documentation starts at `docs/README.md`.
 
 ## Local Preview
 
-Open `index.html` directly in a browser, or run a local server:
-
-```bash
-python -m http.server 8000
-```
-
-Then visit `http://localhost:8000`.
+Open `index.html` directly in a browser, or run a simple local static server from the repository root.
 
 ## Deployment
 
