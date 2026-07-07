@@ -4,9 +4,9 @@ Status: Active case study source / next refinement target
 
 This document defines the structure and refinement direction for the public Odoo ERP Analytics case study.
 
-The public case study page already exists and is now the main destination from the homepage Odoo Flagship Evidence section.
+The public case study page already exists and is now the main destination from the frozen homepage v1 Flagship Project section.
 
-The case study should be the strongest evidence for the portfolio direction: **Business Systems Designer**.
+The case study should be the strongest evidence for the portfolio direction: **Analytical Systems Builder**.
 
 ## Purpose
 
@@ -14,9 +14,15 @@ The case should show how business understanding, ERP process understanding, data
 
 Avoid making the case study purely technical.
 
+The page should answer the homepage promise:
+
+```text
+From problems and data to system design, insights, and AI-powered workflows.
+```
+
 ## Current Refinement Priority
 
-The next refinement target is first-screen clarity.
+The next refinement target is first-screen clarity and proof strength.
 
 Focus on:
 
@@ -24,6 +30,7 @@ Focus on:
 2. Project Snapshot
 3. Business Context
 4. Visual Proof
+5. Public-safe evidence of workflow, validation, and business logic
 
 The first screen should quickly answer:
 
@@ -73,6 +80,19 @@ Future versions should preserve public-safe evidence of:
 
 ## Homepage Relationship
 
-The homepage should route visitors toward this case study as the primary proof point. See [../homepage/homepage-flagship-case-study.md](../homepage/homepage-flagship-case-study.md).
+The homepage is frozen as v1 at commit `67cb782`. It now routes visitors toward this case study as the primary proof point. See [../homepage/HOMEPAGE_V1_FREEZE.md](../homepage/HOMEPAGE_V1_FREEZE.md) and [../homepage/homepage-flagship-case-study.md](../homepage/homepage-flagship-case-study.md).
 
 The case study page must deliver the proof promised by the homepage flagship section.
+
+## Next Workstream
+
+The next portfolio workstream should focus on the public Odoo ERP Analytics page, not another homepage pass.
+
+Recommended refinement order:
+
+1. Review the existing public page and identify what is unclear in the first 5-8 seconds.
+2. Rewrite the case-study hero and project snapshot around business value, not tools.
+3. Clarify the business context: ERP migration, scattered transactions, order follow-up, profitability/review needs, and management-ready views.
+4. Show the reasoning path from process mapping to reliable business logic.
+5. Add or refine visual proof only after the story is clear.
+6. Keep sensitive company data public-safe.
