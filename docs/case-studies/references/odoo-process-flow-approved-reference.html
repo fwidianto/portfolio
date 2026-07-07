@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Approved Odoo Process Flow Reference</title>
+  <style>
+    :root{--bg:#f7f9fc;--card:#fff;--warm:#f6f2ea;--text:#0f172a;--muted:#64748b;--accent:#1f4d5a;--green:#2f7c67;--branch:#6f91a0;--amber:#c0842d;--border:#d7e2df;}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.7}.wrap{max-width:1280px;margin:auto;padding:36px 18px}.section{background:rgba(255,255,255,.78);border:1px solid rgba(31,77,90,.12);border-radius:32px;box-shadow:0 22px 60px rgba(31,41,51,.1);padding:32px}.eyebrow{display:inline-flex;margin-bottom:14px;padding:9px 12px;border-radius:999px;background:rgba(31,77,90,.09);border:1px solid rgba(31,77,90,.14);color:var(--accent);font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}h1{margin:0 0 10px;font-size:clamp(30px,4vw,46px);line-height:1.08;letter-spacing:-.045em}.lead{margin:0;max-width:900px;color:var(--muted);font-size:15.5px}.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.chip{padding:10px 13px;border-radius:999px;background:rgba(246,242,234,.82);border:1px solid rgba(31,77,90,.1);color:var(--accent);font-size:12px;font-weight:800}.diagram-card{margin-top:28px;padding:18px;border:1px solid rgba(31,77,90,.12);border-radius:30px;background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(246,242,234,.58));box-shadow:0 18px 42px rgba(31,41,51,.08)}.diagram-head{display:flex;justify-content:space-between;gap:14px;align-items:baseline;margin-bottom:14px}.diagram-head h2{margin:0;font-size:21px;line-height:1.2;letter-spacing:-.03em}.diagram-head p{margin:0;color:var(--muted);font-size:13.5px}.scroll{overflow-x:auto;background:#f7f9fc;border:1px solid var(--border);border-radius:24px;padding:10px}svg{display:block;min-width:1320px;width:100%;height:auto}.note{margin-top:18px;padding:16px 18px;border:1px solid rgba(31,77,90,.10);border-radius:18px;background:rgba(255,255,255,.72);color:var(--muted);font-size:14px}.note strong{color:var(--text)}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="section" id="odoo-process-complexity-reference">
+      <span class="eyebrow">Process Complexity</span>
+      <h1>The business flow behind the dashboard</h1>
+      <p class="lead">Before the dashboard could become useful, the process itself had to be understood. A case could begin from Sales Order or Internal Order, then move through BOQ, stock checking, purchasing, production, delivery, and invoice.</p>
+      <div class="chips"><span class="chip">Sales Order / Internal Order</span><span class="chip">BOQ</span><span class="chip">Budget Checks</span><span class="chip">Delivery to Invoice</span></div>
+      <div class="diagram-card">
+        <div class="diagram-head"><h2>Sales Order + Internal Order process map</h2><p>Approved reference — copy this diagram, do not redraw</p></div>
+        <div class="scroll">
+          <svg viewBox="0 0 1400 780" role="img" aria-label="Approved Odoo ERP process flow diagram" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="a-main" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#1f4d5a"/></marker>
+              <marker id="a-branch" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#6f91a0"/></marker>
+              <marker id="a-control" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#c0842d"/></marker>
+              <marker id="a-output" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#2f7c67"/></marker>
+              <marker id="a-review" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#94a3b8"/></marker>
+              <style>
+                .lane{fill:rgba(255,255,255,.78);stroke:rgba(31,77,90,.12);stroke-width:1}.lane-warm{fill:rgba(246,242,234,.64);stroke:rgba(224,215,200,.95);stroke-width:1}.lane-label{fill:#1f4d5a;font-size:13px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}.node{fill:#edf7f6;stroke:#1f4d5a;stroke-width:1.8}.internal{fill:#f1f5f9;stroke:#64748b;stroke-width:1.5}.planning{fill:#f6f2ea;stroke:#b8a98e;stroke-width:1.6}.proc{fill:#f4f8fb;stroke:#6f91a0;stroke-width:1.6}.ops{fill:#eef8f1;stroke:#5c8d70;stroke-width:1.6}.finance{fill:#fff7ed;stroke:#c0842d;stroke-width:1.6}.dashboard{fill:#eef6f4;stroke:#1f4d5a;stroke-width:1.8}.decision{fill:#fff3d6;stroke:#d79b1f;stroke-width:1.8}.note-box{fill:#fff;stroke:#d7e2df;stroke-width:1.2}.mixed{fill:#f1f5f9;stroke:#94a3b8;stroke-width:1.4;stroke-dasharray:6 6}.title{fill:#0f172a;font-size:14px;font-weight:850}.sub{fill:#64748b;font-size:10.5px;font-weight:600}.dash-title{fill:#0f172a;font-size:15px;font-weight:820}.dash-label{fill:#0f172a;font-size:11.5px;font-weight:760}.dash-copy{fill:#64748b;font-size:9.4px;font-weight:560}.note-title{fill:#0f172a;font-size:13px;font-weight:850}.note-copy{fill:#475569;font-size:11px;font-weight:550}.line{fill:none;stroke-linecap:round;stroke-linejoin:round}.main{stroke:#1f4d5a;stroke-width:2.2}.branch{stroke:#6f91a0;stroke-width:2.2}.control{stroke:#c0842d;stroke-width:2.2}.output{stroke:#2f7c67;stroke-width:2.2}.review{stroke:#94a3b8;stroke-width:1.5;stroke-dasharray:7 7}.arrow-label{fill:#475569;font-size:10.5px;font-weight:750}
+              </style>
+            </defs>
+            <rect width="1400" height="780" fill="#f7f9fc" rx="22"/>
+            <rect x="20" y="35" width="1080" height="150" rx="18" class="lane"/><rect x="20" y="215" width="1080" height="230" rx="18" class="lane-warm"/><rect x="20" y="475" width="1080" height="125" rx="18" class="lane"/><rect x="20" y="630" width="1080" height="95" rx="18" class="lane-warm"/><rect x="1140" y="35" width="230" height="690" rx="18" class="lane"/>
+            <text x="42" y="62" class="lane-label">Commercial / Planning</text><text x="42" y="242" class="lane-label">Material / Procurement</text><text x="42" y="502" class="lane-label">Operations</text><text x="42" y="657" class="lane-label">Finance</text><text x="1162" y="62" class="lane-label">Analytics Output</text>
+            <rect x="52" y="288" width="238" height="96" rx="16" class="mixed"/><text x="72" y="314" class="note-title">Mixed cases</text><text x="72" y="338" class="note-copy">Some cases combine order,</text><text x="72" y="356" class="note-copy">stock, purchase, and</text><text x="72" y="374" class="note-copy">production logic.</text>
+            <rect x="850" y="75" width="210" height="82" rx="16" class="note-box"/><text x="872" y="103" class="note-title">Why it mattered</text><text x="872" y="127" class="note-copy">Each branch changes timing,</text><text x="872" y="145" class="note-copy">control, and interpretation.</text>
+            <rect x="80" y="98" width="120" height="52" rx="14" class="node"/><text x="140" y="129" text-anchor="middle" class="title">Estimator</text>
+            <rect x="270" y="74" width="150" height="52" rx="14" class="node"/><text x="345" y="105" text-anchor="middle" class="title">Sales Order</text>
+            <rect x="270" y="140" width="150" height="52" rx="14" class="internal"/><text x="345" y="171" text-anchor="middle" class="title">Internal Order</text>
+            <rect x="505" y="105" width="175" height="64" rx="14" class="planning"/><text x="592" y="138" text-anchor="middle" class="title">BOQ</text>
+            <polygon points="435,260 505,330 435,400 365,330" class="decision"/><text x="435" y="323" text-anchor="middle" class="title">Check Stock</text><text x="435" y="343" text-anchor="middle" class="sub">Enough?</text>
+            <rect x="585" y="301" width="130" height="58" rx="14" class="proc"/><text x="650" y="336" text-anchor="middle" class="title">Create PR</text>
+            <polygon points="810,260 900,330 810,400 720,330" class="decision"/><text x="810" y="322" text-anchor="middle" class="title">Compare Budget</text><text x="810" y="342" text-anchor="middle" class="sub">to BOQ</text>
+            <rect x="945" y="301" width="135" height="58" rx="14" class="proc"/><text x="1012" y="336" text-anchor="middle" class="title">Purchase Order</text>
+            <polygon points="810,350 900,420 810,490 720,420" class="decision"/><text x="810" y="412" text-anchor="middle" class="title">Compare Budget</text><text x="810" y="432" text-anchor="middle" class="sub">with PR</text>
+            <rect x="945" y="475" width="135" height="54" rx="14" class="proc"/><text x="1012" y="508" text-anchor="middle" class="title">Approved</text>
+            <rect x="945" y="540" width="135" height="54" rx="14" class="ops"/><text x="1012" y="563" text-anchor="middle" class="title">Material</text><text x="1012" y="582" text-anchor="middle" class="sub">Received</text>
+            <rect x="435" y="515" width="175" height="58" rx="14" class="ops"/><text x="522" y="550" text-anchor="middle" class="title">Manufacture Order</text>
+            <rect x="700" y="515" width="130" height="58" rx="14" class="ops"/><text x="765" y="550" text-anchor="middle" class="title">Delivery</text>
+            <rect x="700" y="652" width="130" height="54" rx="14" class="finance"/><text x="765" y="685" text-anchor="middle" class="title">Invoice</text>
+            <rect x="1183" y="138" width="145" height="378" rx="18" class="dashboard"/><text x="1256" y="174" text-anchor="middle" class="dash-title">Dashboard</text><text x="1256" y="194" text-anchor="middle" class="dash-title">Review</text><text x="1202" y="228" class="dash-label">Progress</text><text x="1202" y="244" class="dash-copy">order stage</text><text x="1202" y="274" class="dash-label">Budget</text><text x="1202" y="290" class="dash-copy">control check</text><text x="1202" y="320" class="dash-label">Profitability</text><text x="1202" y="336" class="dash-copy">margin view</text><text x="1202" y="366" class="dash-label">Issues</text><text x="1202" y="382" class="dash-copy">gaps / blockers</text><text x="1202" y="412" class="dash-label">Follow-up</text><text x="1202" y="428" class="dash-copy">next action</text>
+            <path d="M200 124 L270 100" class="line main" marker-end="url(#a-main)"/><path d="M200 124 L270 166" class="line main" marker-end="url(#a-main)"/><path d="M420 100 L505 126" class="line main" marker-end="url(#a-main)"/><path d="M420 166 L505 148" class="line main" marker-end="url(#a-main)"/><path d="M592 169 L592 205 L435 205 L435 260" class="line main" marker-end="url(#a-main)"/>
+            <path d="M435 400 L435 470 L522 470 L522 515" class="line main" marker-end="url(#a-main)"/><text x="452" y="455" class="arrow-label">enough stock</text>
+            <path d="M505 330 L585 330" class="line branch" marker-end="url(#a-branch)"/><text x="515" y="316" class="arrow-label">need purchase</text><path d="M715 330 L720 330" class="line control" marker-end="url(#a-control)"/><path d="M900 330 L945 330" class="line control" marker-end="url(#a-control)"/><path d="M1012 359 L1012 420 L900 420" class="line control" marker-end="url(#a-control)"/><path d="M810 490 L810 502 L945 502" class="line control" marker-end="url(#a-control)"/><path d="M1012 529 L1012 540" class="line branch" marker-end="url(#a-branch)"/>
+            <path d="M945 567 L890 567 L890 600 L522 600 L522 573" class="line output" marker-end="url(#a-output)"/><text x="650" y="618" class="arrow-label">materials ready</text><path d="M610 544 L700 544" class="line output" marker-end="url(#a-output)"/><path d="M765 573 L765 652" class="line output" marker-end="url(#a-output)"/>
+            <path d="M680 137 L1183 200" class="line review" marker-end="url(#a-review)"/><path d="M900 330 L1183 274" class="line review" marker-end="url(#a-review)"/><path d="M830 544 L1183 348" class="line review" marker-end="url(#a-review)"/><path d="M830 679 L1183 420" class="line review" marker-end="url(#a-review)"/><path d="M290 338 L365 330" class="line review" marker-end="url(#a-review)"/>
+          </svg>
+        </div>
+      </div>
+      <p class="note"><strong>In short:</strong> the flow starts from Sales Order or Internal Order, then moves into BOQ and stock checking. If stock is available, the case can continue more directly into production. If not, it branches into PR, budget checking, purchase order, approval, and material receipt before returning to production. From there, it continues to delivery and invoice, while the dashboard turns the whole flow into progress, budget, profitability, issue, and follow-up visibility.</p>
+    </section>
+  </main>
+</body>
+</html>
