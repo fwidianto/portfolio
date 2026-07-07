@@ -968,56 +968,105 @@
 
   <!-- SKILLS -->
   <section id="skills">
-    <div class="container">
-      <h2 class="section-title">Core Skills</h2>
-      <p class="section-lead">
-        The practical skills I use to understand processes, structure data, build dashboards, review business logic, and improve workflows.
-      </p>
+    <div class="container core-skills" data-core-skills>
+      <div class="core-skills__header">
+        <span class="core-skills__kicker">Core Skills</span>
+        <h2 class="core-skills__title">From business context to useful outputs</h2>
+        <p class="core-skills__lead">
+          A practical skill set that moves from understanding business context to structuring data, reviewing logic, and building useful outputs.
+        </p>
+      </div>
 
-      <div class="skills-grid">
-        <div class="skill-card">
-          <h3>Business Systems</h3>
-          <ul>
-            <li>Odoo ERP</li>
-            <li>SAP ERP</li>
-            <li>ERP process analysis</li>
-            <li>Operational workflow mapping</li>
-            <li>Business logic review</li>
-          </ul>
+      <div class="core-skills__path" aria-label="Working path from business context to useful outputs">
+        <div class="core-skills__path-steps" role="list" aria-label="Working path stages">
+          <span class="core-skills__path-step is-active" data-core-skills-path-step>Understand</span>
+          <span class="core-skills__path-step" data-core-skills-path-step>Structure</span>
+          <span class="core-skills__path-step" data-core-skills-path-step>Review</span>
+          <span class="core-skills__path-step" data-core-skills-path-step>Build</span>
         </div>
+        <div class="core-skills__path-track" aria-hidden="true">
+          <span class="core-skills__path-progress"></span>
+        </div>
+      </div>
 
-        <div class="skill-card">
-          <h3>Analytics &amp; Reporting</h3>
-          <ul>
-            <li>SQL</li>
-            <li>Excel / Google Sheets</li>
-            <li>Looker Studio</li>
-            <li>Dashboard reporting</li>
-            <li>Data validation</li>
-          </ul>
-        </div>
+      <div class="core-skills__stage-grid" role="group" aria-label="Core skills stage selectors">
+        <button type="button" class="core-skills__stage is-active" data-core-skills-stage="0" aria-pressed="true">
+          <span class="core-skills__stage-kicker">Stage 1</span>
+          <strong>Understand</strong>
+          <span class="core-skills__stage-copy">Map how work moves.</span>
+          <div class="core-skills__stage-tags" aria-label="Understand stage tags">
+            <span>ERP context</span>
+            <span>Workflow mapping</span>
+          </div>
+        </button>
 
-        <div class="skill-card">
-          <h3>Business Review</h3>
-          <ul>
-            <li>Cost control</li>
-            <li>Profitability analysis</li>
-            <li>Sales order follow-up</li>
-            <li>Procurement review</li>
-            <li>Invoice / payment context</li>
-          </ul>
-        </div>
+        <button type="button" class="core-skills__stage" data-core-skills-stage="1" aria-pressed="false">
+          <span class="core-skills__stage-kicker">Stage 2</span>
+          <strong>Structure</strong>
+          <span class="core-skills__stage-copy">Turn messy data into logic.</span>
+          <div class="core-skills__stage-tags" aria-label="Structure stage tags">
+            <span>Data validation</span>
+            <span>Reporting logic</span>
+          </div>
+        </button>
 
-        <div class="skill-card">
-          <h3>Automation &amp; AI-Assisted Workflow</h3>
-          <ul>
-            <li>Python scripting</li>
-            <li>Google Apps Script</li>
-            <li>VBA / Macro</li>
-            <li>UiPath</li>
-            <li>Codex / OpenHands</li>
-          </ul>
-        </div>
+        <button type="button" class="core-skills__stage" data-core-skills-stage="2" aria-pressed="false">
+          <span class="core-skills__stage-kicker">Stage 3</span>
+          <strong>Review</strong>
+          <span class="core-skills__stage-copy">Connect numbers to decisions.</span>
+          <div class="core-skills__stage-tags" aria-label="Review stage tags">
+            <span>Profitability</span>
+            <span>Business review</span>
+          </div>
+        </button>
+
+        <button type="button" class="core-skills__stage" data-core-skills-stage="3" aria-pressed="false">
+          <span class="core-skills__stage-kicker">Stage 4</span>
+          <strong>Build</strong>
+          <span class="core-skills__stage-copy">Create reusable outputs.</span>
+          <div class="core-skills__stage-tags" aria-label="Build stage tags">
+            <span>Dashboards</span>
+            <span>Automation</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="core-skills__panels">
+        <article class="core-skills__detail" aria-live="polite" aria-atomic="true">
+          <span class="core-skills__panel-kicker">Current focus</span>
+          <h3 class="core-skills__detail-title" data-core-skills-title>Understand the business flow</h3>
+          <p class="core-skills__detail-text" data-core-skills-text>
+            I start by understanding how work actually moves through ERP, operations, approvals, and reporting. This prevents the solution from becoming only a tool exercise.
+          </p>
+          <div class="core-skills__detail-tags" data-core-skills-tags aria-label="Current focus tags">
+            <span>Business process</span>
+            <span>ERP context</span>
+            <span>Operational reality</span>
+          </div>
+        </article>
+
+        <aside class="core-skills__emphasis" aria-labelledby="core-skills-emphasis-title">
+          <span class="core-skills__panel-kicker" id="core-skills-emphasis-title">Skill emphasis at this stage</span>
+          <p class="core-skills__helper">These bars show emphasis in each stage, not a percentage score.</p>
+          <div class="core-skills__bars">
+            <div class="core-skills__bar-row">
+              <span>Business context</span>
+              <div class="core-skills__bar" aria-hidden="true"><span class="core-skills__bar-fill" data-core-skills-emphasis="context"></span></div>
+            </div>
+            <div class="core-skills__bar-row">
+              <span>Data logic</span>
+              <div class="core-skills__bar" aria-hidden="true"><span class="core-skills__bar-fill" data-core-skills-emphasis="data"></span></div>
+            </div>
+            <div class="core-skills__bar-row">
+              <span>Review judgment</span>
+              <div class="core-skills__bar" aria-hidden="true"><span class="core-skills__bar-fill" data-core-skills-emphasis="review"></span></div>
+            </div>
+            <div class="core-skills__bar-row">
+              <span>Build output</span>
+              <div class="core-skills__bar" aria-hidden="true"><span class="core-skills__bar-fill" data-core-skills-emphasis="build"></span></div>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
@@ -1470,7 +1519,7 @@
         <ol class="website-update-strip__list" aria-label="Latest homepage website updates">
           <li class="website-update-strip__item">
             <time class="website-update-strip__date" datetime="2026-07-06">6 Jul 2026</time>
-            <p class="website-update-strip__text">Flagship project focus simplified by keeping Odoo ERP Analytics as the single visible homepage project.</p>
+            <p class="website-update-strip__text">Core Skills visual flow refined into a dynamic path from business context to useful outputs.</p>
           </li>
           <li class="website-update-strip__item">
             <time class="website-update-strip__date" datetime="2026-07-06">6 Jul 2026</time>
@@ -1509,5 +1558,181 @@
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const root = document.querySelector('[data-core-skills]');
+
+      if (!root) {
+        return;
+      }
+
+      const stageButtons = Array.from(root.querySelectorAll('[data-core-skills-stage]'));
+      const pathSteps = Array.from(root.querySelectorAll('[data-core-skills-path-step]'));
+      const progress = root.querySelector('.core-skills__path-progress');
+      const title = root.querySelector('[data-core-skills-title]');
+      const text = root.querySelector('[data-core-skills-text]');
+      const tags = root.querySelector('[data-core-skills-tags]');
+      const emphasisFills = {
+        context: root.querySelector('[data-core-skills-emphasis="context"]'),
+        data: root.querySelector('[data-core-skills-emphasis="data"]'),
+        review: root.querySelector('[data-core-skills-emphasis="review"]'),
+        build: root.querySelector('[data-core-skills-emphasis="build"]'),
+      };
+
+      const states = [
+        {
+          title: 'Understand the business flow',
+          text: 'I start by understanding how work actually moves through ERP, operations, approvals, and reporting. This prevents the solution from becoming only a tool exercise.',
+          tags: ['Business process', 'ERP context', 'Operational reality'],
+          progress: 25,
+          emphasis: { context: 70, data: 25, review: 20, build: 15 },
+        },
+        {
+          title: 'Structure the data logic',
+          text: 'After the process is clear, I organize fields, statuses, references, and reporting logic so the data can support a reliable review.',
+          tags: ['SQL thinking', 'Data validation', 'Reporting logic'],
+          progress: 50,
+          emphasis: { context: 75, data: 68, review: 32, build: 25 },
+        },
+        {
+          title: 'Review the business meaning',
+          text: 'I connect the structured data with business questions: profitability, cost movement, order status, procurement context, invoice, and payment follow-up.',
+          tags: ['Profitability', 'Cost control', 'Review judgment'],
+          progress: 75,
+          emphasis: { context: 78, data: 72, review: 70, build: 38 },
+        },
+        {
+          title: 'Build useful outputs',
+          text: 'The final skill layer is execution: dashboards, automation, scripts, and AI-assisted workflows that make the review process repeatable and easier to use.',
+          tags: ['Dashboard output', 'Automation', 'AI-assisted workflow'],
+          progress: 100,
+          emphasis: { context: 82, data: 78, review: 74, build: 82 },
+        },
+      ];
+
+      let activeIndex = 0;
+      let timer = null;
+      const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      function createTag(textContent) {
+        const tag = document.createElement('span');
+        tag.textContent = textContent;
+        return tag;
+      }
+
+      function pauseAutoAdvance() {
+        if (timer) {
+          window.clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      function startAutoAdvance() {
+        pauseAutoAdvance();
+
+        if (reduceMotionQuery.matches || stageButtons.length < 2) {
+          return;
+        }
+
+        timer = window.setInterval(function () {
+          setActive((activeIndex + 1) % states.length, false);
+        }, 4800);
+      }
+
+      function renderState(index) {
+        const state = states[index];
+
+        activeIndex = index;
+        root.dataset.activeStage = String(index);
+
+        stageButtons.forEach(function (button, buttonIndex) {
+          const isActive = buttonIndex === index;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', String(isActive));
+        });
+
+        pathSteps.forEach(function (step, stepIndex) {
+          step.classList.toggle('is-active', stepIndex === index);
+        });
+
+        if (progress) {
+          progress.style.width = state.progress + '%';
+        }
+
+        if (title) {
+          title.textContent = state.title;
+        }
+
+        if (text) {
+          text.textContent = state.text;
+        }
+
+        if (tags) {
+          tags.replaceChildren(...state.tags.map(createTag));
+        }
+
+        Object.keys(emphasisFills).forEach(function (key) {
+          const fill = emphasisFills[key];
+
+          if (fill) {
+            fill.style.width = state.emphasis[key] + '%';
+          }
+        });
+      }
+
+      function setActive(index, restartTimer) {
+        renderState(index);
+
+        if (restartTimer) {
+          startAutoAdvance();
+        }
+      }
+
+      stageButtons.forEach(function (button) {
+        const index = Number(button.dataset.coreSkillsStage);
+
+        button.addEventListener('click', function () {
+          pauseAutoAdvance();
+          renderState(index);
+        });
+
+        button.addEventListener('mouseenter', function () {
+          renderState(index);
+        });
+
+        button.addEventListener('focus', function () {
+          renderState(index);
+        });
+      });
+
+      root.addEventListener('pointerenter', pauseAutoAdvance);
+      root.addEventListener('pointerleave', function () {
+        if (!root.matches(':focus-within')) {
+          startAutoAdvance();
+        }
+      });
+      root.addEventListener('focusin', pauseAutoAdvance);
+      root.addEventListener('focusout', function (event) {
+        const relatedTarget = event.relatedTarget;
+
+        if (!root.contains(relatedTarget) && !root.matches(':hover')) {
+          startAutoAdvance();
+        }
+      });
+
+      if (typeof reduceMotionQuery.addEventListener === 'function') {
+        reduceMotionQuery.addEventListener('change', function () {
+          if (reduceMotionQuery.matches) {
+            pauseAutoAdvance();
+          } else {
+            startAutoAdvance();
+          }
+        });
+      }
+
+      renderState(0);
+      startAutoAdvance();
+    });
+  </script>
 </body>
 </html>

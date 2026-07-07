@@ -62,6 +62,7 @@ The next step should show the roles that shaped Fauzan's understanding of cost c
 ### 3. Core Skills
 
 The skills section should show the practical tools and methods Fauzan uses today.
+On the homepage, this now appears as a dynamic working path from understanding business context to structuring data, reviewing logic, and building useful outputs.
 
 ### 4. Skill Development Curve
 
