@@ -24,15 +24,22 @@ docs/README.md
 
 ## Homepage Flow
 
+Homepage v1 is frozen at commit `67cb782`. For homepage boundaries, see [../homepage/HOMEPAGE_V1_FREEZE.md](../homepage/HOMEPAGE_V1_FREEZE.md).
+
+Accepted homepage flow:
+
 ```text
-Business Systems Designer identity
--> Capability Graph
--> Thinking Lab
--> Currently Building
--> Flagship Case Study
+Analytical Systems Builder identity
+-> Professional Experience
+-> Core Skills
+-> Skill Development Curve
+-> How I Think Through Problems
+-> Flagship Project / Odoo ERP Analytics
+-> Website Updates
+-> Contact
 ```
 
-The homepage should route visitors from identity to evidence.
+The homepage should route visitors from identity to evidence, with Odoo ERP Analytics as the primary proof destination.
 
 ## Case-Study Flow
 
@@ -46,6 +53,8 @@ Business problem
 
 Case studies should prove the thinking described by the homepage.
 
+The next priority is the Odoo ERP Analytics case study page because it must deliver the proof promised by the frozen homepage flagship section.
+
 ## Historical Documents
 
 Older planning files can remain as short redirects or historical logs. They should not compete with active source-of-truth files.
@@ -56,4 +65,5 @@ Before implementing portfolio features, future ChatGPT or Codex sessions should 
 
 1. [../README.md](../README.md)
 2. [../core/portfolio-design-philosophy.md](../core/portfolio-design-philosophy.md)
-3. The specific source-of-truth file for the feature being implemented.
+3. [../homepage/HOMEPAGE_V1_FREEZE.md](../homepage/HOMEPAGE_V1_FREEZE.md), if the change touches the homepage
+4. The specific source-of-truth file for the feature being implemented.
