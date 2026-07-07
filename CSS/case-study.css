@@ -229,6 +229,216 @@
 .case-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .case-grid--auto { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
+/* odoo-business-context-case-file: 20260707-v1 */
+#business-context .case-section-header {
+  margin-bottom: 34px;
+}
+
+#business-context .case-lead {
+  font-size: 0;
+  max-width: 760px;
+}
+
+#business-context .case-lead::before {
+  color: var(--muted);
+  content: "The records were already inside Odoo. The challenge was reading them as one business case.";
+  display: block;
+  font-size: 18px;
+  line-height: 1.72;
+}
+
+#business-context .context-card-grid {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.84), rgba(246, 242, 234, 0.70));
+  border: 1px solid var(--border);
+  border-radius: 34px;
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 22px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.92fr);
+  margin-top: 0;
+  overflow: hidden;
+  padding: clamp(22px, 3vw, 36px);
+  position: relative;
+}
+
+#business-context .context-card-grid::before {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(31, 77, 90, 0.11);
+  border-radius: 999px;
+  color: var(--accent);
+  content: "1  Case opened   →   2  Clues traced   →   3  Summary reviewed";
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 900;
+  grid-column: 1 / -1;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  padding: 12px 16px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+#business-context .context-card-grid::after {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(31, 77, 90, 0.10);
+  border-radius: 22px;
+  color: var(--muted);
+  content: "ERP records existed in different places  →  Relationships had to be interpreted  →  The dashboard became the shared review summary";
+  display: block;
+  font-size: 14px;
+  font-weight: 650;
+  grid-column: 1 / -1;
+  line-height: 1.55;
+  padding: 16px 18px;
+  text-align: center;
+}
+
+#business-context .context-card-grid .case-card {
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  position: relative;
+  transform: none;
+}
+
+#business-context .context-card-grid .case-card:hover {
+  transform: none;
+}
+
+#business-context .context-card-grid .case-card:nth-child(1) {
+  background: rgba(255, 255, 255, 0.84);
+  border-color: rgba(31, 77, 90, 0.13);
+  grid-row: span 2;
+  min-height: 430px;
+  padding: 30px;
+}
+
+#business-context .context-card-grid .case-card:nth-child(1)::before,
+#business-context .context-card-grid .case-card:nth-child(2)::before,
+#business-context .context-card-grid .case-card:nth-child(3)::before {
+  color: var(--accent);
+  display: block;
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+#business-context .context-card-grid .case-card:nth-child(1)::before {
+  content: "ERP Case File";
+}
+
+#business-context .context-card-grid .case-card:nth-child(1) h3 {
+  font-size: clamp(27px, 3vw, 38px);
+  letter-spacing: -0.05em;
+  line-height: 1.06;
+  margin-bottom: 14px;
+}
+
+#business-context .context-card-grid .case-card:nth-child(1) p {
+  font-size: 15.5px;
+  line-height: 1.68;
+  max-width: 690px;
+}
+
+#business-context .context-card-grid .case-card:nth-child(1)::after {
+  background: linear-gradient(145deg, rgba(246, 242, 234, 0.92), rgba(255, 255, 255, 0.92));
+  border: 1px dashed rgba(31, 77, 90, 0.20);
+  border-radius: 24px;
+  color: var(--text);
+  content: "Sales Order\A Purchase Order\A Manufacturing\A Delivery\A Invoice\A Payment";
+  display: block;
+  font-size: 14.5px;
+  font-weight: 800;
+  line-height: 2.05;
+  margin-top: 24px;
+  padding: 20px 22px 20px 42px;
+  white-space: pre-line;
+}
+
+#business-context .context-card-grid .case-card:nth-child(2) {
+  background: linear-gradient(145deg, rgba(31, 77, 90, 0.09), rgba(246, 242, 234, 0.88));
+  border-color: rgba(31, 77, 90, 0.14);
+  padding: 28px;
+}
+
+#business-context .context-card-grid .case-card:nth-child(2)::before {
+  content: "Case Summary";
+}
+
+#business-context .context-card-grid .case-card:nth-child(2) h3 {
+  font-size: 0;
+  margin: 0;
+}
+
+#business-context .context-card-grid .case-card:nth-child(2) h3::after {
+  color: var(--text);
+  content: "What the dashboard needed to answer";
+  display: block;
+  font-size: 26px;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  margin-bottom: 14px;
+}
+
+#business-context .context-card-grid .case-card:nth-child(2) p {
+  color: var(--text);
+  font-size: 0;
+  line-height: 0;
+}
+
+#business-context .context-card-grid .case-card:nth-child(2) p::after {
+  color: var(--text);
+  content: "?  Where is the order now?\A!  What needs attention?\A↗  Who or what needs follow-up?\A✓  Can the progress be trusted?";
+  display: block;
+  font-size: 14.5px;
+  font-weight: 750;
+  line-height: 2;
+  white-space: pre-line;
+}
+
+#business-context .context-card-grid .case-card:nth-child(3) {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(31, 77, 90, 0.12);
+  padding: 28px;
+}
+
+#business-context .context-card-grid .case-card:nth-child(3)::before {
+  content: "Review Summary";
+}
+
+#business-context .context-card-grid .case-card:nth-child(3) h3 {
+  font-size: 0;
+  margin: 0;
+}
+
+#business-context .context-card-grid .case-card:nth-child(3) h3::after {
+  color: var(--text);
+  content: "From scattered clues to shared review";
+  display: block;
+  font-size: 24px;
+  font-weight: 850;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+#business-context .context-card-grid .case-card:nth-child(3) p {
+  font-size: 0;
+  line-height: 0;
+}
+
+#business-context .context-card-grid .case-card:nth-child(3) p::after {
+  color: var(--muted);
+  content: "The work was to turn scattered ERP clues into progress, issue, and follow-up visibility people could review.";
+  display: block;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
 .case-card { border-radius: 24px; padding: 28px; transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease; }
 .case-card:hover { border-color: rgba(31, 77, 90, 0.22); box-shadow: var(--shadow-soft); transform: translateY(-3px); }
 .case-card h3 { color: var(--text); font-size: 22px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.2; margin: 0 0 12px; }
@@ -361,6 +571,15 @@
   .case-snapshot-card,
   .case-architecture { padding: 28px; }
   .case-cta { align-items: flex-start; flex-direction: column; }
+
+  #business-context .context-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #business-context .context-card-grid .case-card:nth-child(1) {
+    grid-row: auto;
+    min-height: auto;
+  }
 }
 
 @media (max-width: 760px) {
@@ -387,4 +606,23 @@
   .case-cta { padding: 22px; }
   .case-architecture-flow { grid-template-columns: 1fr; }
   .case-architecture-step { padding: 22px; }
+
+  #business-context .context-card-grid {
+    border-radius: 26px;
+    padding: 18px;
+  }
+
+  #business-context .context-card-grid::before,
+  #business-context .context-card-grid::after {
+    border-radius: 20px;
+    width: 100%;
+  }
+
+  #business-context .context-card-grid::before {
+    line-height: 1.65;
+  }
+
+  #business-context .context-card-grid .case-card:nth-child(1)::after {
+    padding-left: 20px;
+  }
 }
