@@ -16,21 +16,28 @@ Not:
 Look at what I built.
 ```
 
-The public positioning is **Business Systems Designer**. The portfolio should show curiosity, business understanding, systems thinking, practical solution-building, continuous learning, and AI-assisted execution with human business judgment.
+The public positioning is **Analytical Systems Builder**: from problems and data to system design, insights, and AI-powered workflows. The portfolio should show curiosity, business understanding, systems thinking, practical solution-building, continuous learning, and AI-assisted execution with human business judgment.
+
+## Current Checkpoint
+
+Homepage v1 is frozen at commit `67cb782`.
+
+Before proposing homepage changes, read [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md). The next portfolio priority is the Odoo ERP Analytics case study page, not another homepage redesign.
 
 ## Read Order
 
 1. [core/README.md](core/README.md)
-2. [homepage/README.md](homepage/README.md)
-3. [design/README.md](design/README.md)
-4. [case-studies/README.md](case-studies/README.md)
+2. [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md)
+3. [homepage/README.md](homepage/README.md)
+4. [design/README.md](design/README.md)
+5. [case-studies/README.md](case-studies/README.md)
 
 ## Active Documentation Areas
 
 | Folder | Purpose |
 | --- | --- |
 | [core/](core/README.md) | Portfolio philosophy, long-term vision, working principles, and ChatGPT/Codex workflow. |
-| [homepage/](homepage/README.md) | Homepage experience architecture and future section definitions. |
+| [homepage/](homepage/README.md) | Homepage frozen checkpoint, experience architecture, and future section boundaries. |
 | [design/](design/README.md) | Visitor psychology, information architecture, and high-level visual direction. |
 | [case-studies/](case-studies/README.md) | Case-study structure and the Odoo ERP Analytics flagship direction. |
 
@@ -43,6 +50,7 @@ The public positioning is **Business Systems Designer**. The portfolio should sh
 | ChatGPT + Codex workflow | [core/portfolio-development-workflow.md](core/portfolio-development-workflow.md) |
 | ChatGPT + Codex tool division | [core/chatgpt-codex-tool-division.md](core/chatgpt-codex-tool-division.md) |
 | Portfolio working principles | [core/portfolio-working-principles.md](core/portfolio-working-principles.md) |
+| Homepage v1 freeze checkpoint | [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md) |
 | Homepage experience | [homepage/homepage-experience-blueprint.md](homepage/homepage-experience-blueprint.md) |
 | Capability Graph concept | [homepage/homepage-capability-graph.md](homepage/homepage-capability-graph.md) |
 | Capability Graph feature specification | [homepage/homepage-capability-graph-feature-spec.md](homepage/homepage-capability-graph-feature-spec.md) |
@@ -56,6 +64,7 @@ The public positioning is **Business Systems Designer**. The portfolio should sh
 
 ## Rules for Future Sessions
 
+- Do not reopen the homepage structure unless the user explicitly asks or real visitor feedback shows a problem.
 - Do not implement homepage features before the relevant concept document is stable.
 - Do not build the Capability Graph UI from these docs alone.
 - Do not build the Thinking Lab UI from these docs alone.
@@ -63,6 +72,7 @@ The public positioning is **Business Systems Designer**. The portfolio should sh
 - Link to the source of truth instead of duplicating long sections.
 - Keep AI positioned as an accelerator, not the identity.
 - Keep the story order: business problem -> process understanding -> business logic -> technology -> evidence.
+- After the homepage v1 freeze, prioritize the Odoo ERP Analytics case study page as the main proof destination.
 
 ## Historical Notes
 
