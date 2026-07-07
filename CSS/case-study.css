@@ -182,6 +182,27 @@
 .case-snapshot-label { color: var(--accent); display: block; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; margin-bottom: 6px; text-transform: uppercase; }
 .case-snapshot-value { color: var(--text); display: block; font-size: 16px; font-weight: 650; line-height: 1.55; }
 
+/* odoo-hero-snapshot-polish: 20260707-v1 */
+#odoo-case-title ~ .case-hero-copy {
+  font-size: 0;
+  max-width: 640px;
+}
+
+#odoo-case-title ~ .case-hero-copy::before {
+  color: var(--muted);
+  content: "I translated Odoo order flows into dashboard views that make progress, issues, and follow-up points easier to review.";
+  display: block;
+  font-size: 18px;
+  line-height: 1.78;
+}
+
+.case-hero[aria-labelledby="odoo-case-title"] .case-snapshot-item:nth-child(1) .case-snapshot-label::before { content: "◈ "; }
+.case-hero[aria-labelledby="odoo-case-title"] .case-snapshot-item:nth-child(2) .case-snapshot-label::before { content: "◉ "; }
+.case-hero[aria-labelledby="odoo-case-title"] .case-snapshot-item:nth-child(3) .case-snapshot-label::before { content: "⌁ "; }
+.case-hero[aria-labelledby="odoo-case-title"] .case-snapshot-item:nth-child(4) .case-snapshot-label::before { content: "▦ "; }
+.case-hero[aria-labelledby="odoo-case-title"] .case-snapshot-item:nth-child(5) .case-snapshot-label::before { content: "✦ "; }
+.case-hero[aria-labelledby="odoo-case-title"] .case-snapshot-item:nth-child(6) .case-snapshot-label::before { content: "✓ "; }
+
 .case-grid { display: grid; gap: 24px; }
 .case-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .case-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
