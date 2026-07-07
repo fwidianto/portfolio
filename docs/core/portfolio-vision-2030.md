@@ -25,17 +25,23 @@ The private system may include PersonalOS, project notes, career planning, AI ha
 The durable positioning is:
 
 ```text
-Business Systems Designer
+Analytical Systems Builder
 ```
 
-This identity can include analytics, ERP, dashboards, automation, AI-assisted development, documentation, and case-study storytelling. Those are expressions of the same underlying capability: understanding business systems and making them visible.
+This identity can include analytics, ERP, dashboards, automation, AI-assisted development, documentation, and case-study storytelling. Those are expressions of the same underlying capability: understanding business systems, structuring operational logic, and making practical outputs visible.
+
+Core positioning:
+
+```text
+From problems and data to system design, insights, and AI-powered workflows.
+```
 
 ## Long-Term Portfolio Layers
 
 | Layer | Question it answers | Evidence |
 | --- | --- | --- |
-| Identity | Who is Fauzan? | Capability Graph, working principles, positioning. |
-| Thinking | How does he think now? | Thinking Lab, current explorations, questions, experiments. |
+| Identity | Who is Fauzan? | Homepage positioning, working principles, frozen homepage v1 story. |
+| Thinking | How does he think now? | Problem-Solving Engine, current explorations, questions, experiments. |
 | Evidence | Can he actually do it? | Odoo case study, project pages, public-safe proof. |
 | Trust | Can this work be trusted? | Documentation, changelogs, validation notes, confidentiality discipline. |
 | Ecosystem | How does everything connect? | Portfolio, GitHub, PersonalOS, AI workflows, career direction. |
@@ -67,6 +73,12 @@ Fauzan should own the beginning and the end:
 ```text
 Question -> Judgment -> Validation -> Explanation
 ```
+
+## Current Checkpoint
+
+Homepage v1 is frozen at commit `67cb782`. The next proof-building priority is the Odoo ERP Analytics case study page.
+
+This checkpoint should reduce homepage redesign loops and shift effort toward evidence quality.
 
 ## Success Criteria
 
