@@ -1,0 +1,1 @@
+Use docs/case-studies/references/odoo-process-flow-approved-reference.html for the Odoo Process Complexity diagram.
