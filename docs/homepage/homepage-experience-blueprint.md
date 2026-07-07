@@ -1,6 +1,8 @@
 # Homepage Experience Blueprint
 
-Status: Active source of truth
+Status: Active source of truth / homepage v1 frozen
+
+Homepage v1 is frozen at commit `67cb782`. For accepted frozen decisions, allowed future changes, and homepage boundaries, read [HOMEPAGE_V1_FREEZE.md](HOMEPAGE_V1_FREEZE.md) first.
 
 This document defines the homepage experience. It follows the principles in [../core/portfolio-design-philosophy.md](../core/portfolio-design-philosophy.md).
 
@@ -8,7 +10,7 @@ This document defines the homepage experience. It follows the principles in [../
 
 The homepage should help visitors understand how Fauzan thinks before asking them to inspect individual projects.
 
-The current intended discovery path is:
+The accepted discovery path is:
 
 ```text
 Identity
@@ -36,7 +38,7 @@ Visitors should naturally discover that Fauzan:
 
 ## Homepage Pillars
 
-The current homepage direction revolves around these pillars:
+The frozen homepage v1 direction revolves around these pillars:
 
 1. Professional Experience
 2. Core Skills
@@ -51,9 +53,15 @@ Each pillar should have a clear job. Avoid adding sections that only repeat the 
 
 ### 1. Identity
 
-The first impression should signal **Business Systems Designer**.
+The first impression should signal **Analytical Systems Builder**.
 
 It should not lead with AI Engineer, AI Developer, or software developer-first framing. AI can appear as part of the operating method, not as the core identity.
+
+Accepted positioning:
+
+```text
+From problems and data to system design, insights, and AI-powered workflows.
+```
 
 ### 2. Professional Experience
 
@@ -62,7 +70,13 @@ The next step should show the roles that shaped Fauzan's understanding of cost c
 ### 3. Core Skills
 
 The skills section should show the practical tools and methods Fauzan uses today.
-On the homepage, this now appears as a dynamic working path from understanding business context to structuring data, reviewing logic, and building useful outputs.
+On the homepage, this appears as a dynamic working path from understanding business context to structuring data, reviewing logic, and building useful outputs.
+
+The accepted path is:
+
+```text
+Understand -> Structure -> Review -> Build
+```
 
 ### 4. Skill Development Curve
 
@@ -72,18 +86,48 @@ This section should show how past experience compounds into current capability. 
 
 The workflow section should clarify how Fauzan moves from discussion to process understanding, solution selection, system design, testing, and practical refinement.
 
+The accepted v1 concept is the Problem-Solving Engine:
+
+```text
+Messy Inputs -> Thinking Engine -> Practical Outputs
+```
+
 ### 6. Flagship Project / Odoo ERP Analytics
 
 The homepage should guide visitors toward the Odoo ERP Analytics case study as the strongest proof of the philosophy. See [homepage-flagship-case-study.md](homepage-flagship-case-study.md).
 
-The homepage should not present supporting projects alongside the flagship case study until they are ready to compete for attention on equal footing.
+The homepage should show one visible flagship project only. It should not present supporting projects alongside the flagship case study until they are ready to compete for attention on equal footing.
+
+Accepted route line:
+
+```text
+Scattered ERP transactions -> reliable business logic -> management-ready views
+```
 
 ### 7. Website Updates
 
 Website Updates should show that the portfolio is actively maintained without making it feel unfinished. See [website-updates.md](website-updates.md).
 
+Homepage Website Updates should show exactly 3 items. The full `website-updates.html` page should show exactly 10 items.
+
 Approved homepage working philosophy:
 Fauzan's "How I Think Through Problems" section should start from discussion, not tools. The process should show that useful solutions begin with shared problem understanding, end-to-end process understanding, suitable solution selection, system design around the problem, testing against the project core, and presentation/refinement for real use. The tone should avoid forcing an identity too early and let visitors understand the thinking through experience, skills, and projects.
+
+## Header System
+
+Main narrative section headers should stay consistently editorial and left-aligned:
+
+- Professional Experience
+- Core Skills
+- Skill Development Curve
+- How I Think Through Problems
+- Flagship Project
+
+Exceptions:
+
+- Hero remains unchanged.
+- Website Updates can keep its compact/special panel style.
+- Contact can remain centered as the closing CTA.
 
 ## Interaction Principles
 
@@ -101,3 +145,9 @@ Avoid noisy interactions, excessive animation, project-card clutter, and resume-
 ## Content Boundary
 
 The homepage should not duplicate full case studies, full philosophy text, or detailed implementation history. It should create curiosity and route visitors to the correct deeper document or project page.
+
+## Future Change Boundary
+
+The homepage is frozen as v1. Future homepage changes should be limited to bug fixes, accessibility fixes, responsive fixes, minor spacing adjustments, factual content updates, link updates, changelog updates, or small copy improvements that do not change the accepted structure.
+
+The next priority is not homepage redesign. The next priority is making the Odoo ERP Analytics case study page strong enough to deliver the proof promised by the homepage.
