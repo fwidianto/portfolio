@@ -52,10 +52,7 @@
     }
 
     #my-role {
-      --role-card-width: 370px;
-      --role-bridge-gap: 250px;
-      --role-bridge-overlap: 26px;
-      --role-stage-min-width: calc((var(--role-card-width) * 2) + var(--role-bridge-gap));
+      --role-bridge-overlap: clamp(16px, 2vw, 24px);
       background:
         radial-gradient(circle at top left, rgba(31, 77, 90, 0.08), transparent 26rem),
         rgba(255, 255, 255, 0.58);
@@ -68,17 +65,18 @@
     }
 
     #my-role .role-bridge-scroll {
-      overflow-x: auto;
+      max-width: 100%;
+      overflow-x: visible;
       overflow-y: visible;
-      padding: 0 0 12px;
+      padding: 0;
     }
 
     #my-role .role-bridge-stage {
       margin: 0 auto;
-      min-width: var(--role-stage-min-width);
-      padding-top: 138px;
+      max-width: 980px;
+      padding-top: clamp(116px, 13vw, 140px);
       position: relative;
-      width: var(--role-stage-min-width);
+      width: 100%;
     }
 
     #my-role .role-bridge-layer {
@@ -87,18 +85,18 @@
       position: absolute;
       top: 0;
       transform: translateX(-50%);
-      width: calc(var(--role-bridge-gap) + (var(--role-bridge-overlap) * 2));
+      width: clamp(220px, 34vw, 330px);
       z-index: 8;
     }
 
     #my-role .role-bridge-title {
       color: var(--accent);
       display: block;
-      font-size: 12px;
+      font-size: clamp(11px, 1.2vw, 12px);
       font-weight: 900;
       letter-spacing: 0.16em;
       line-height: 1;
-      margin-bottom: 8px;
+      margin-top: 7px;
       text-align: center;
       text-transform: uppercase;
     }
@@ -112,8 +110,9 @@
 
     #my-role .role-bridge-grid {
       display: grid;
-      gap: 0;
-      grid-template-columns: var(--role-card-width) var(--role-bridge-gap) var(--role-card-width);
+      gap: clamp(18px, 4vw, 44px);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 100%;
       position: relative;
       z-index: 2;
     }
@@ -124,16 +123,17 @@
       border-radius: 28px;
       box-shadow: 0 18px 42px rgba(15, 23, 42, 0.07);
       min-height: 430px;
-      padding: 34px 30px 30px;
+      min-width: 0;
+      padding: clamp(26px, 3vw, 34px) clamp(20px, 2.7vw, 30px) clamp(24px, 2.7vw, 30px);
     }
 
     #my-role .role-bridge-card--left {
-      grid-column: 1;
+      padding-top: calc(clamp(26px, 3vw, 34px) + var(--role-bridge-overlap));
     }
 
     #my-role .role-bridge-card--right {
       background: linear-gradient(145deg, rgba(31, 77, 90, 0.08), rgba(255, 255, 255, 0.9));
-      grid-column: 3;
+      padding-top: calc(clamp(26px, 3vw, 34px) + var(--role-bridge-overlap));
     }
 
     #my-role .role-bridge-label {
@@ -149,7 +149,7 @@
 
     #my-role .role-bridge-card h3 {
       color: var(--text);
-      font-size: 26px;
+      font-size: clamp(22px, 2.5vw, 26px);
       font-weight: 850;
       letter-spacing: -0.04em;
       line-height: 1.1;
@@ -177,8 +177,8 @@
       border: 1px solid rgba(31, 77, 90, 0.1);
       border-radius: 18px;
       display: grid;
-      gap: 13px;
-      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 12px;
+      grid-template-columns: 42px minmax(0, 1fr);
       padding: 14px;
     }
 
@@ -198,7 +198,7 @@
       line-height: 1;
       place-items: center;
       text-align: center;
-      width: 44px;
+      width: 42px;
     }
 
     #my-role .role-bridge-badge span {
@@ -226,7 +226,7 @@
     #my-role .role-bridge-summary {
       background: rgba(255, 255, 255, 0.72);
       border: 1px solid rgba(31, 77, 90, 0.1);
-      border-radius: 999px;
+      border-radius: 20px;
       color: var(--text);
       font-size: 14px;
       font-weight: 720;
@@ -1141,6 +1141,33 @@
     }
 
     @media (max-width: 760px) {
+      #my-role .role-bridge-stage {
+        max-width: 520px;
+        padding-top: 112px;
+      }
+
+      #my-role .role-bridge-layer {
+        width: clamp(210px, 62vw, 280px);
+      }
+
+      #my-role .role-bridge-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #my-role .role-bridge-card {
+        min-height: auto;
+      }
+
+      #my-role .role-bridge-card--left,
+      #my-role .role-bridge-card--right {
+        padding-top: clamp(26px, 6vw, 32px);
+      }
+
+      #my-role .role-bridge-summary {
+        border-radius: 18px;
+        text-align: left;
+      }
+
       .logic-translation-header {
         display: none;
       }
@@ -1371,17 +1398,15 @@
       <div class="role-bridge-scroll" aria-label="My role bridge between operational reality and dashboard review logic">
         <div class="role-bridge-stage">
           <div class="role-bridge-layer" aria-hidden="true">
-            <span class="role-bridge-title">My Role</span>
-            <svg class="role-bridge-svg" viewBox="0 0 302 142" role="img" aria-label="Bridge between challenge and outcome">
-              <path d="M42 100 C92 28 210 28 260 100" fill="none" stroke="#1f4d5a" stroke-width="7" stroke-linecap="round"/>
-              <path d="M32 96 H270" fill="none" stroke="#1f4d5a" stroke-width="6" stroke-linecap="round"/>
-              <path d="M42 82 H260" fill="none" stroke="#1f4d5a" stroke-opacity="0.56" stroke-width="3" stroke-linecap="round"/>
-              <path d="M72 76 V96 M102 62 V96 M132 54 V96 M162 54 V96 M192 62 V96 M222 76 V96" fill="none" stroke="#1f4d5a" stroke-opacity="0.52" stroke-width="3" stroke-linecap="round"/>
-              <rect x="0" y="100" width="54" height="42" rx="10" fill="#f6f2ea" stroke="#1f4d5a" stroke-width="3"/>
-              <rect x="248" y="100" width="54" height="42" rx="10" fill="#f6f2ea" stroke="#1f4d5a" stroke-width="3"/>
-              <rect x="10" y="111" width="34" height="7" rx="3.5" fill="#1f4d5a" fill-opacity="0.16"/>
-              <rect x="258" y="111" width="34" height="7" rx="3.5" fill="#1f4d5a" fill-opacity="0.16"/>
+            <svg class="role-bridge-svg" viewBox="0 0 300 112" role="img" aria-label="Bridge between challenge and outcome">
+              <path d="M50 74 C91 24 209 24 250 74" fill="none" stroke="#1f4d5a" stroke-width="6" stroke-linecap="round"/>
+              <path d="M42 76 H258" fill="none" stroke="#1f4d5a" stroke-width="6" stroke-linecap="round"/>
+              <path d="M62 61 H238" fill="none" stroke="#1f4d5a" stroke-opacity="0.44" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M92 52 V76 M122 43 V76 M150 40 V76 M178 43 V76 M208 52 V76" fill="none" stroke="#1f4d5a" stroke-opacity="0.46" stroke-width="2.5" stroke-linecap="round"/>
+              <rect x="18" y="76" width="58" height="30" rx="8" fill="#f6f2ea" stroke="#1f4d5a" stroke-width="2.5"/>
+              <rect x="224" y="76" width="58" height="30" rx="8" fill="#f6f2ea" stroke="#1f4d5a" stroke-width="2.5"/>
             </svg>
+            <span class="role-bridge-title">My Role</span>
           </div>
 
           <div class="role-bridge-grid">
