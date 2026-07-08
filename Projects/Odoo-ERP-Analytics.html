@@ -854,6 +854,17 @@
       margin-top: 4px;
     }
 
+    .review-signal-shot {
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .review-signal-shot img {
+      transform: scale(1.1);
+      transform-origin: center top;
+      transition: transform 0.24s ease;
+    }
+
     .review-signal-explainer-grid {
       display: grid;
       gap: 16px;
@@ -1293,6 +1304,10 @@
       .logic-translation-arrow {
         min-height: 22px;
         transform: rotate(90deg);
+      }
+
+      .review-signal-shot img {
+        transform: scale(1.06);
       }
     }
 
@@ -1787,8 +1802,8 @@
     <div class="case-container">
       <div class="case-section-header"><div class="case-eyebrow">REVIEW SIGNALS / EXCEPTION INSIGHTS</div><h2 class="case-subheading">From records to review signals</h2><p class="case-lead">The dashboard groups filtered ERP rows into simple review indicators so users can distinguish normal records from items that may need delivery, invoice, procurement, source relationship, or material follow-up.</p></div>
       <div class="review-signals-grid">
-        <article class="case-card review-signal-visual-card"><div><h3>Sales Order Review Signals</h3><p>Groups sales order rows into review categories for delayed delivery, invoice follow-up, source relationship checks, and operational follow-up.</p></div><div class="case-visual-frame" aria-label="Public-safe Sales Order Review Signals dashboard preview"><div class="case-browser-bar" aria-hidden="true"><span class="case-browser-dot"></span><span class="case-browser-dot"></span><span class="case-browser-dot"></span></div><div class="case-visual-content"><img src="../Assets/odoo-review-signals-sales-order-public-safe.svg" alt="Public-safe Sales Order Review Signals dashboard preview with sanitized review signal counts and detection cards"><div class="case-visual-guide"><span class="case-guide-chip">Delayed delivery</span><span class="case-guide-chip">Waiting invoice</span><span class="case-guide-chip">Source relationship check</span><span class="case-guide-chip">Operational follow-up</span></div></div></div></article>
-        <article class="case-card review-signal-visual-card"><div><h3>Material &amp; Procurement Review Signals</h3><p>Groups material and procurement rows into review categories for monitoring PO progress, receipt status, and procurement follow-up.</p></div><div class="case-visual-frame" aria-label="Public-safe Material and Procurement Review Signals dashboard preview"><div class="case-browser-bar" aria-hidden="true"><span class="case-browser-dot"></span><span class="case-browser-dot"></span><span class="case-browser-dot"></span></div><div class="case-visual-content"><img src="../Assets/odoo-review-signals-material-procurement-public-safe.svg" alt="Public-safe Material and Procurement Review Signals dashboard preview with sanitized review signal counts and detection cards"><p class="case-caption">Public-safe Material and Procurement Review Signals preview. Displayed values are sanitized or recreated for portfolio explanation.</p><div class="case-visual-guide"><span class="case-guide-chip">ROP without PO</span><span class="case-guide-chip">PO not received</span><span class="case-guide-chip">Partially received</span><span class="case-guide-chip">Supplier follow-up</span></div></div></div></article>
+        <article class="case-card review-signal-visual-card"><div><h3>Sales Order Review Signals</h3><p>Groups sales order rows into review categories for delayed delivery, invoice follow-up, source relationship checks, and operational follow-up.</p></div><div class="case-visual-frame" aria-label="Public-safe Sales Order Review Signals dashboard preview"><div class="case-browser-bar" aria-hidden="true"><span class="case-browser-dot"></span><span class="case-browser-dot"></span><span class="case-browser-dot"></span></div><div class="case-visual-content"><div class="review-signal-shot"><img src="../Assets/odoo-review-signals-sales-order-public-safe.svg" alt="Public-safe Sales Order Review Signals dashboard preview with sanitized review signal counts and detection cards"></div><div class="case-visual-guide"><span class="case-guide-chip">Delayed delivery</span><span class="case-guide-chip">Waiting invoice</span><span class="case-guide-chip">Source relationship check</span><span class="case-guide-chip">Operational follow-up</span></div></div></div></article>
+        <article class="case-card review-signal-visual-card"><div><h3>Material &amp; Procurement Review Signals</h3><p>Groups material and procurement rows into review categories for monitoring PO progress, receipt status, and procurement follow-up.</p></div><div class="case-visual-frame" aria-label="Public-safe Material and Procurement Review Signals dashboard preview"><div class="case-browser-bar" aria-hidden="true"><span class="case-browser-dot"></span><span class="case-browser-dot"></span><span class="case-browser-dot"></span></div><div class="case-visual-content"><div class="review-signal-shot"><img src="../Assets/odoo-review-signals-material-procurement-public-safe.svg" alt="Public-safe Material and Procurement Review Signals dashboard preview with sanitized review signal counts and detection cards"></div><div class="case-visual-guide"><span class="case-guide-chip">ROP without PO</span><span class="case-guide-chip">PO not received</span><span class="case-guide-chip">Partially received</span><span class="case-guide-chip">Supplier follow-up</span></div></div></div></article>
       </div>
       <div class="review-signal-explainer-grid"><div class="case-card review-signal-explainer-card"><h3>Healthy</h3><p>Rows with no immediate follow-up detected from the exposed dashboard fields.</p></div><div class="case-card review-signal-explainer-card"><h3>Watchlist</h3><p>Normal in-progress or context rows that should be monitored until complete.</p></div><div class="case-card review-signal-explainer-card"><h3>Needs Review</h3><p>Rows with delayed, unclear, mismatched, or variance-related signals.</p></div><div class="case-card review-signal-explainer-card"><h3>Supplier Follow-up</h3><p>Procurement or receipt progress that may need supplier-side follow-up.</p></div><div class="case-card review-signal-explainer-card"><h3>Operational Follow-up</h3><p>Fulfillment, manufacturing, source path, or internal process follow-up.</p></div></div>
     </div>
