@@ -301,6 +301,9 @@
         radial-gradient(circle at 8% 18%, rgba(31, 77, 90, 0.06), transparent 22rem),
         linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 242, 234, 0.5));
       --progress-timeline-x: 45px;
+      --progress-stage-gap: 18px;
+      --progress-stage-padding-y: 20px;
+      --progress-circle-size: 50px;
     }
 
     #approach-workflow .progress-story-layout {
@@ -393,19 +396,8 @@
 
     #approach-workflow .progress-stage-list {
       display: grid;
-      gap: 18px;
+      gap: var(--progress-stage-gap);
       position: relative;
-    }
-
-    #approach-workflow .progress-stage-list::before {
-      background: linear-gradient(180deg, rgba(31, 77, 90, 0.14), rgba(192, 132, 45, 0.2));
-      bottom: 28px;
-      content: "";
-      left: var(--progress-timeline-x);
-      position: absolute;
-      top: 28px;
-      width: 2px;
-      transform: translateX(-50%);
     }
 
     #approach-workflow .progress-stage {
@@ -418,6 +410,25 @@
       padding: 20px;
       position: relative;
       z-index: 1;
+    }
+
+    #approach-workflow .progress-stage::before {
+      background: linear-gradient(180deg, rgba(31, 77, 90, 0.14), rgba(192, 132, 45, 0.2));
+      content: "";
+      left: var(--progress-timeline-x);
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      width: 2px;
+      z-index: 0;
+    }
+
+    #approach-workflow .progress-stage:not(:last-child)::before {
+      bottom: calc(var(--progress-stage-gap) * -1);
+    }
+
+    #approach-workflow .progress-stage:last-child::before {
+      height: calc(var(--progress-stage-padding-y) + var(--progress-circle-size));
     }
 
     #approach-workflow .progress-stage-number {
@@ -1389,6 +1400,9 @@
     @media (max-width: 640px) {
       #approach-workflow {
         --progress-timeline-x: 37px;
+        --progress-stage-gap: 16px;
+        --progress-stage-padding-y: 16px;
+        --progress-circle-size: 42px;
       }
 
       #approach-workflow .progress-pattern-panel,
@@ -1402,11 +1416,6 @@
         gap: 12px;
         grid-template-columns: 42px minmax(0, 1fr);
         padding: 16px;
-      }
-
-      #approach-workflow .progress-stage-list::before {
-        top: 20px;
-        bottom: 20px;
       }
 
       #approach-workflow .progress-stage-number {
