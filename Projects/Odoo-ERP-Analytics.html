@@ -296,6 +296,185 @@
       margin: 0;
     }
 
+    #approach-workflow {
+      background:
+        radial-gradient(circle at 8% 18%, rgba(31, 77, 90, 0.06), transparent 22rem),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 242, 234, 0.5));
+    }
+
+    #approach-workflow .progress-story-layout {
+      align-items: stretch;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: minmax(280px, 0.86fr) minmax(0, 1.24fr);
+    }
+
+    #approach-workflow .progress-pattern-panel,
+    #approach-workflow .progress-story-panel {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(215, 226, 223, 0.95);
+      border-radius: 28px;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.055);
+      min-width: 0;
+    }
+
+    #approach-workflow .progress-pattern-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    #approach-workflow .progress-pattern-kicker,
+    #approach-workflow .progress-stage-label {
+      color: var(--accent);
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    #approach-workflow .progress-pattern-panel h3 {
+      color: var(--text);
+      font-size: clamp(24px, 2.6vw, 32px);
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      margin: 16px 0 14px;
+    }
+
+    #approach-workflow .progress-pattern-panel p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.66;
+      margin: 0;
+    }
+
+    #approach-workflow .progress-pattern-list {
+      border-top: 1px solid rgba(31, 77, 90, 0.1);
+      display: grid;
+      gap: 10px;
+      list-style: none;
+      margin: 24px 0 0;
+      padding: 20px 0 0;
+    }
+
+    #approach-workflow .progress-pattern-list li {
+      align-items: center;
+      color: var(--text);
+      display: grid;
+      font-size: 14px;
+      font-weight: 740;
+      gap: 12px;
+      grid-template-columns: 28px minmax(0, 1fr);
+      line-height: 1.35;
+    }
+
+    #approach-workflow .progress-pattern-list span {
+      align-items: center;
+      background: rgba(31, 77, 90, 0.08);
+      border: 1px solid rgba(31, 77, 90, 0.12);
+      border-radius: 999px;
+      color: var(--accent);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      height: 28px;
+      justify-content: center;
+      line-height: 1;
+      width: 28px;
+    }
+
+    #approach-workflow .progress-story-panel {
+      padding: 24px;
+    }
+
+    #approach-workflow .progress-stage-list {
+      display: grid;
+      gap: 18px;
+      position: relative;
+    }
+
+    #approach-workflow .progress-stage-list::before {
+      background: linear-gradient(180deg, rgba(31, 77, 90, 0.14), rgba(192, 132, 45, 0.2));
+      bottom: 28px;
+      content: "";
+      left: 24px;
+      position: absolute;
+      top: 28px;
+      width: 2px;
+    }
+
+    #approach-workflow .progress-stage {
+      background: rgba(246, 242, 234, 0.54);
+      border: 1px solid rgba(31, 77, 90, 0.1);
+      border-radius: 22px;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 50px minmax(0, 1fr);
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #approach-workflow .progress-stage-number {
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid rgba(31, 77, 90, 0.16);
+      border-radius: 999px;
+      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.055);
+      color: var(--accent);
+      display: inline-flex;
+      font-feature-settings: "tnum";
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 900;
+      height: 50px;
+      justify-content: center;
+      letter-spacing: 0;
+      line-height: 1;
+      width: 50px;
+    }
+
+    #approach-workflow .progress-stage h3 {
+      color: var(--text);
+      font-size: 20px;
+      font-weight: 820;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin: 8px 0 10px;
+    }
+
+    #approach-workflow .progress-stage p {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.62;
+      margin: 0;
+    }
+
+    #approach-workflow .progress-stage-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    #approach-workflow .progress-stage-tags span {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(31, 77, 90, 0.1);
+      border-radius: 999px;
+      color: var(--accent);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 760;
+      line-height: 1;
+      min-height: 28px;
+      padding: 7px 10px;
+    }
+
     .case-section--supporting {
       padding: 64px 0;
     }
@@ -1105,6 +1284,10 @@
     }
 
     @media (max-width: 1100px) {
+      #approach-workflow .progress-story-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
       .case-story-spine,
       .review-signals-grid,
       .build-journey-layout {
@@ -1201,6 +1384,29 @@
     }
 
     @media (max-width: 640px) {
+      #approach-workflow .progress-pattern-panel,
+      #approach-workflow .progress-story-panel {
+        border-radius: 22px;
+        padding: 18px;
+      }
+
+      #approach-workflow .progress-stage {
+        border-radius: 18px;
+        gap: 12px;
+        grid-template-columns: 42px minmax(0, 1fr);
+        padding: 16px;
+      }
+
+      #approach-workflow .progress-stage-list::before {
+        left: 21px;
+      }
+
+      #approach-workflow .progress-stage-number {
+        font-size: 12px;
+        height: 42px;
+        width: 42px;
+      }
+
       #visual-proof .case-visual-content {
         padding: 18px;
       }
@@ -1543,18 +1749,69 @@
   <section class="case-section case-section--supporting" id="approach-workflow">
     <div class="case-container">
       <div class="case-section-header">
-        <div class="case-eyebrow">APPROACH / WORKFLOW</div>
-        <h2 class="case-subheading">From business problem to dashboard logic</h2>
-        <p class="case-lead">A compact path from question, to validated logic, to reviewable output.</p>
+        <div class="case-eyebrow">APPROACH / PROGRESS STORY</div>
+        <h2 class="case-subheading">From weekly Excel reporting to dashboard signals</h2>
+        <p class="case-lead">This section shows how my usual problem-solving pattern was applied in the Odoo dashboard project.</p>
       </div>
 
-      <div class="case-grid case-grid--3">
-        <div class="case-card"><div class="case-card-number">01</div><h3>Clarify the business question</h3><p>Start from review needs: status, source, fulfillment, billing, payment, and profitability signals.</p></div>
-        <div class="case-card"><div class="case-card-number">02</div><h3>Map the ERP flow</h3><p>Trace how records connect across sales, internal orders, procurement, production, stock, and finance.</p></div>
-        <div class="case-card"><div class="case-card-number">03</div><h3>Review the data logic</h3><p>Check fields, references, statuses, and unusual cases before writing reporting logic.</p></div>
-        <div class="case-card"><div class="case-card-number">04</div><h3>Build analytics logic</h3><p>Turn validated logic into PostgreSQL / SQL views for reusable dashboard datasets.</p></div>
-        <div class="case-card"><div class="case-card-number">05</div><h3>Design dashboard views</h3><p>Present practical views for order progress, profitability, issues, insights, and follow-up.</p></div>
-        <div class="case-card"><div class="case-card-number">06</div><h3>Iterate with business judgment</h3><p>Use AI to speed iteration while keeping business-rule review and validation human-led.</p></div>
+      <div class="progress-story-layout">
+        <aside class="progress-pattern-panel" aria-label="Problem-solving pattern applied to this case">
+          <span class="progress-pattern-kicker">Same pattern, specific case</span>
+          <h3>How the work moved forward</h3>
+          <p>I started from the review need, traced how the work moved, then shaped the reporting logic into a more practical system.</p>
+          <ol class="progress-pattern-list">
+            <li><span>1</span>Start from discussion</li>
+            <li><span>2</span>Understand the process</li>
+            <li><span>3</span>Shape a suitable system</li>
+            <li><span>4</span>Improve toward real use</li>
+          </ol>
+        </aside>
+
+        <div class="progress-story-panel" aria-label="Odoo dashboard project progress story">
+          <div class="progress-stage-list">
+            <article class="progress-stage">
+              <span class="progress-stage-number">01</span>
+              <div>
+                <span class="progress-stage-label">BEFORE</span>
+                <h3>Weekly Excel reporting</h3>
+                <p>Progress review was mostly handled through weekly Excel reporting connected to the previous Scala ERP process.</p>
+                <div class="progress-stage-tags" aria-label="Before stage tags">
+                  <span>Scala ERP</span>
+                  <span>Weekly review</span>
+                  <span>Excel reporting</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="progress-stage">
+              <span class="progress-stage-number">02</span>
+              <div>
+                <span class="progress-stage-label">WORKING THROUGH</span>
+                <h3>ERP access and flow logic</h3>
+                <p>As ERP PIC, I had access to the available data and could trace how records moved across sales, purchasing, production, delivery, invoicing, and payment. From there, the required columns, calculations, classifications, and review signals became clearer.</p>
+                <div class="progress-stage-tags" aria-label="Working through stage tags">
+                  <span>ERP data</span>
+                  <span>Process tracing</span>
+                  <span>Review logic</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="progress-stage">
+              <span class="progress-stage-number">03</span>
+              <div>
+                <span class="progress-stage-label">CURRENT STATE</span>
+                <h3>Web app and dashboard signals</h3>
+                <p>The reporting direction is moving toward a Python and PostgreSQL-backed web application that can pull ERP data and turn it into dashboard signals for progress, unusual cases, and data quality.</p>
+                <div class="progress-stage-tags" aria-label="Current state stage tags">
+                  <span>Python</span>
+                  <span>PostgreSQL</span>
+                  <span>Near real-time signals</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </div>
   </section>
