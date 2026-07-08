@@ -1,0 +1,1 @@
+Temporary note: PNG binary upload requires local Codex or Git binary commit.
