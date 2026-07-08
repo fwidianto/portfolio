@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Odoo ERP Analytics Technical Data Flow</title>
+  <desc id="desc">Conceptual technical data flow showing Odoo ERP records fetched through XML-RPC, processed by Python, stored in PostgreSQL, and presented through front-end dashboard views.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f7f9fc}.title{font-family:Inter,Arial,sans-serif;font-size:56px;font-weight:850;fill:#0f2744}.subtitle{font-family:Inter,Arial,sans-serif;font-size:24px;fill:#40566e}.card{fill:#fff;stroke:#d7e2df;stroke-width:1.4;filter:url(#shadow)}.cardTop{fill:#0f766e}.cardTopNavy{fill:#0f2744}.numCircle{fill:#0f766e}.num{font-family:Inter,Arial,sans-serif;font-size:27px;font-weight:850;fill:#fff}.iconStroke{stroke:#0f766e;stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}.iconFill{fill:#edf7f6;stroke:#0f766e;stroke-width:4}.iconNavy{stroke:#0f2744;stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}.heading{font-family:Inter,Arial,sans-serif;font-size:26px;font-weight:850;fill:#0f766e}.headingNavy{font-family:Inter,Arial,sans-serif;font-size:26px;font-weight:850;fill:#0f2744}.body{font-family:Inter,Arial,sans-serif;font-size:18px;fill:#1f2937}.muted{font-family:Inter,Arial,sans-serif;font-size:16px;fill:#475569}.arrow{stroke:#0f2744;stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round}.dash{stroke:#0f2744;stroke-width:4;fill:none;stroke-dasharray:10 10;stroke-linecap:round}.noteBox{fill:#fffdf8;stroke:#d7e2df;stroke-width:1.4}.noteIcon{fill:#0f766e}.noteText{font-family:Inter,Arial,sans-serif;font-size:22px;fill:#1f2937}.loopLabel{font-family:Inter,Arial,sans-serif;font-size:18px;font-weight:800;fill:#0f766e}.smallCap{font-family:Inter,Arial,sans-serif;font-size:13px;font-weight:850;letter-spacing:.12em;fill:#0f766e}.pill{fill:#edf7f6;stroke:#9ccfc5;stroke-width:1.2}.divider{stroke:#0f766e;stroke-width:3}.caption{font-family:Inter,Arial,sans-serif;font-size:15px;fill:#64748b}
+    </style>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="15" stdDeviation="14" flood-color="#0f172a" flood-opacity="0.11"/>
+    </filter>
+    <marker id="arrowhead" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto">
+      <path d="M2 2 L12 7 L2 12" fill="none" stroke="#0f2744" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1600" height="900"/>
+
+  <text class="title" x="800" y="86" text-anchor="middle">Odoo ERP Analytics – Technical Data Flow</text>
+  <text class="subtitle" x="800" y="132" text-anchor="middle">Conceptual architecture showing how ERP records become business-readable review views</text>
+
+  <!-- Card 1 -->
+  <g transform="translate(54 218)">
+    <rect class="card" width="245" height="405" rx="20"/>
+    <path class="cardTop" d="M20 0h205a20 20 0 0 1 20 20v8H0v-8A20 20 0 0 1 20 0z"/>
+    <circle class="numCircle" cx="122.5" cy="48" r="27"/><text class="num" x="122.5" y="58" text-anchor="middle">1</text>
+    <text x="122.5" y="155" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="57" font-weight="800" fill="#8e4b85">o</text>
+    <text x="155" y="155" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="57" font-weight="800" fill="#888">doo</text>
+    <line class="divider" x1="32" y1="210" x2="213" y2="210"/>
+    <circle fill="#0f766e" cx="122.5" cy="210" r="5"/>
+    <text class="heading" x="122.5" y="262" text-anchor="middle">Odoo ERP</text>
+    <text class="body" x="122.5" y="307" text-anchor="middle">Sales Orders, Purchase,</text>
+    <text class="body" x="122.5" y="337" text-anchor="middle">Production, Delivery,</text>
+    <text class="body" x="122.5" y="367" text-anchor="middle">Invoice, Payment</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <path class="arrow" marker-end="url(#arrowhead)" d="M322 420h48"/>
+
+  <!-- Card 2 -->
+  <g transform="translate(388 218)">
+    <rect class="card" width="245" height="405" rx="20"/>
+    <path class="cardTop" d="M20 0h205a20 20 0 0 1 20 20v8H0v-8A20 20 0 0 1 20 0z"/>
+    <circle class="numCircle" cx="122.5" cy="48" r="27"/><text class="num" x="122.5" y="58" text-anchor="middle">2</text>
+    <path class="iconFill" d="M82 150c-24 0-43-18-43-40 0-20 16-37 37-39 8-23 30-39 56-39 34 0 62 25 65 57 20 6 34 23 34 43 0 25-21 45-47 45H82z" transform="translate(-11 66) scale(.9)"/>
+    <text class="body" x="122.5" y="159" text-anchor="middle">XML-RPC</text>
+    <path class="iconStroke" d="M102 186v34m0-34l-13 13m13-13l13 13M146 220v-34m0 34l-13-13m13 13l13-13"/>
+    <line class="divider" x1="32" y1="210" x2="213" y2="210"/>
+    <circle fill="#0f766e" cx="122.5" cy="210" r="5"/>
+    <text class="heading" x="122.5" y="262" text-anchor="middle">XML-RPC</text>
+    <text class="body" x="122.5" y="316" text-anchor="middle">Data extraction</text>
+    <text class="body" x="122.5" y="346" text-anchor="middle">interface</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <path class="arrow" marker-end="url(#arrowhead)" d="M656 420h48"/>
+
+  <!-- Card 3 -->
+  <g transform="translate(722 218)">
+    <rect class="card" width="245" height="405" rx="20"/>
+    <path class="cardTop" d="M20 0h205a20 20 0 0 1 20 20v8H0v-8A20 20 0 0 1 20 0z"/>
+    <circle class="numCircle" cx="122.5" cy="48" r="27"/><text class="num" x="122.5" y="58" text-anchor="middle">3</text>
+    <path d="M101 132c0-25 16-41 44-41h32c19 0 31 12 31 31v25c0 18-12 30-30 30h-59c-17 0-30 13-30 30v15H68v-24c0-39 25-66 64-66h13v-17h-44z" fill="#2f80c0" opacity=".95"/>
+    <circle cx="155" cy="112" r="6" fill="#fff"/>
+    <path d="M188 162c0 25-16 41-44 41h-32c-19 0-31-12-31-31v-25c0-18 12-30 30-30h59c17 0 30-13 30-30V72h21v24c0 39-25 66-64 66h-13v17h44z" fill="#f4c542" opacity=".95"/>
+    <circle cx="113" cy="183" r="6" fill="#fff"/>
+    <line class="divider" x1="32" y1="210" x2="213" y2="210"/>
+    <circle fill="#0f766e" cx="122.5" cy="210" r="5"/>
+    <text class="heading" x="122.5" y="262" text-anchor="middle">Python data pipeline</text>
+    <text class="body" x="122.5" y="315" text-anchor="middle">Fetch • Clean • Join •</text>
+    <text class="body" x="122.5" y="345" text-anchor="middle">Transform • Classify</text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <path class="arrow" marker-end="url(#arrowhead)" d="M990 420h48"/>
+
+  <!-- Card 4 -->
+  <g transform="translate(1056 218)">
+    <rect class="card" width="245" height="405" rx="20"/>
+    <path class="cardTopNavy" d="M20 0h205a20 20 0 0 1 20 20v8H0v-8A20 20 0 0 1 20 0z"/>
+    <circle class="numCircle" cx="122.5" cy="48" r="27"/><text class="num" x="122.5" y="58" text-anchor="middle">4</text>
+    <ellipse class="iconNavy" cx="122" cy="144" rx="55" ry="65"/>
+    <path class="iconNavy" d="M84 123c18-22 56-24 78 0M84 165c16 22 57 22 78 0M122 83v123M77 144h90" opacity=".88"/>
+    <path class="iconNavy" d="M159 182c20 6 34-2 42-17"/>
+    <line class="divider" x1="32" y1="210" x2="213" y2="210"/>
+    <circle fill="#0f766e" cx="122.5" cy="210" r="5"/>
+    <text class="heading" x="122.5" y="260" text-anchor="middle">PostgreSQL</text>
+    <text class="heading" x="122.5" y="292" text-anchor="middle">analytics database</text>
+    <text class="body" x="122.5" y="345" text-anchor="middle">Store processed tables</text>
+    <text class="body" x="122.5" y="375" text-anchor="middle">and review logic</text>
+  </g>
+
+  <!-- Arrow 4 -->
+  <path class="arrow" marker-end="url(#arrowhead)" d="M1324 420h48"/>
+
+  <!-- Card 5 -->
+  <g transform="translate(1390 218)">
+    <rect class="card" width="156" height="405" rx="20"/>
+    <path class="cardTopNavy" d="M20 0h116a20 20 0 0 1 20 20v8H0v-8A20 20 0 0 1 20 0z"/>
+    <circle class="numCircle" cx="78" cy="48" r="27"/><text class="num" x="78" y="58" text-anchor="middle">5</text>
+    <rect class="iconStroke" x="34" y="102" width="88" height="85" rx="7"/>
+    <line class="iconStroke" x1="34" y1="123" x2="122" y2="123"/>
+    <circle fill="#0f766e" cx="48" cy="113" r="3"/><circle fill="#0f766e" cx="61" cy="113" r="3"/><circle fill="#0f766e" cx="74" cy="113" r="3"/>
+    <path fill="#0f766e" d="M72 147v-25a25 25 0 1 0 24 31H72z" opacity=".9"/>
+    <rect fill="#0f766e" x="98" y="143" width="7" height="28"/><rect fill="#0f766e" x="110" y="132" width="7" height="39"/>
+    <line class="divider" x1="26" y1="210" x2="130" y2="210"/>
+    <circle fill="#0f766e" cx="78" cy="210" r="5"/>
+    <text class="heading" x="78" y="260" text-anchor="middle">Front-end</text>
+    <text class="heading" x="78" y="292" text-anchor="middle">dashboard</text>
+    <text class="body" x="78" y="345" text-anchor="middle">HTML • CSS •</text>
+    <text class="body" x="78" y="375" text-anchor="middle">Dashboard views</text>
+  </g>
+
+  <!-- Iteration loop -->
+  <path class="dash" marker-end="url(#arrowhead)" d="M1468 638v75H845v-74"/>
+  <text class="loopLabel" x="1045" y="695" text-anchor="middle">Iteration / logic refinement</text>
+
+  <!-- Note -->
+  <g transform="translate(156 765)">
+    <rect class="noteBox" width="1288" height="88" rx="10"/>
+    <circle class="noteIcon" cx="54" cy="44" r="28"/>
+    <text x="54" y="56" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="36" font-weight="700" fill="#fff">i</text>
+    <text class="noteText" x="112" y="36">XML-RPC is used to fetch data from Odoo. Python processes the extracted records, stores</text>
+    <text class="noteText" x="112" y="66">analytics-ready data in PostgreSQL, and serves the dashboard views.</text>
+  </g>
+</svg>
