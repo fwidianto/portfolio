@@ -35,6 +35,9 @@
     /* css-cleanup-version: 20260702-v1 */
     /* liveliness-polish-version: 20260702-v1 */
     /* review-signals-section-version: 20260703-v1 */
+    /* how-project-built-section-version: 20260703-v1 */
+    /* built-section-redesign-version: 20260703-v1 */
+    /* logic-translation-board-clean-html-version: 20260703-v1 */
     body {
       background: #f7f9fc;
       color: #0f172a;
@@ -297,9 +300,7 @@
       background:
         radial-gradient(circle at 8% 18%, rgba(31, 77, 90, 0.06), transparent 22rem),
         linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 242, 234, 0.5));
-      --progress-timeline-x: 45px;
       --progress-stage-gap: 18px;
-      --progress-stage-padding-y: 20px;
       --progress-circle-size: 50px;
     }
 
@@ -407,25 +408,6 @@
       padding: 20px;
       position: relative;
       z-index: 1;
-    }
-
-    #approach-workflow .progress-stage::before {
-      background: linear-gradient(180deg, rgba(31, 77, 90, 0.14), rgba(192, 132, 45, 0.2));
-      content: "";
-      left: var(--progress-timeline-x);
-      position: absolute;
-      top: 0;
-      transform: translateX(-50%);
-      width: 2px;
-      z-index: 0;
-    }
-
-    #approach-workflow .progress-stage:not(:last-child)::before {
-      bottom: calc(var(--progress-stage-gap) * -1);
-    }
-
-    #approach-workflow .progress-stage:last-child::before {
-      height: calc(var(--progress-stage-padding-y) + var(--progress-circle-size));
     }
 
     #approach-workflow .progress-stage-number {
@@ -793,7 +775,8 @@
       opacity: 0.65;
     }
 
-    .case-insight-callout {
+    .case-insight-callout,
+    .build-learning-note {
       background: linear-gradient(145deg, rgba(31, 77, 90, 0.1), rgba(255, 255, 255, 0.86));
       border: 1px solid rgba(31, 77, 90, 0.14);
       border-radius: 24px;
@@ -802,7 +785,8 @@
       padding: 24px;
     }
 
-    .case-insight-callout p {
+    .case-insight-callout p,
+    .build-learning-note p {
       color: var(--text);
       font-size: 17px;
       font-weight: 650;
@@ -892,60 +876,14 @@
       line-height: 1.6;
     }
 
-    #architecture-data-flow .case-section-header {
+    #how-project-built .case-section-header {
       max-width: 900px;
     }
 
-    #architecture-data-flow .case-lead {
+    #how-project-built .case-lead {
       max-width: 860px;
     }
 
-    #architecture-data-flow .case-architecture {
-      padding: 38px;
-    }
-
-    .case-architecture-pipeline {
-      align-items: stretch;
-      display: grid;
-      gap: 18px;
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
-    }
-
-    .case-architecture-stage {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(243, 240, 233, 0.84));
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow-card);
-      min-height: 100%;
-      padding: 30px;
-    }
-
-    .case-architecture-stage-label {
-      align-items: center;
-      background: rgba(31, 77, 90, 0.09);
-      border: 1px solid rgba(31, 77, 90, 0.12);
-      border-radius: 999px;
-      color: var(--accent);
-      display: inline-flex;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      line-height: 1;
-      margin-bottom: 18px;
-      padding: 9px 12px;
-      text-transform: uppercase;
-    }
-
-    .case-architecture-stage-title {
-      color: var(--text);
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin: 0 0 18px;
-    }
-
-    .case-architecture-stage-list,
     .business-value-list {
       display: grid;
       gap: 10px;
@@ -954,7 +892,6 @@
       padding: 0;
     }
 
-    .case-architecture-stage-list li,
     .business-value-list li {
       align-items: flex-start;
       color: var(--muted);
@@ -963,7 +900,6 @@
       line-height: 1.58;
     }
 
-    .case-architecture-stage-list li::before,
     .business-value-list li::before {
       background: var(--accent);
       border-radius: 999px;
@@ -975,19 +911,187 @@
       width: 6px;
     }
 
-    .case-architecture-connector {
-      align-items: center;
-      align-self: center;
-      background: rgba(31, 77, 90, 0.09);
-      border: 1px solid rgba(31, 77, 90, 0.12);
-      border-radius: 999px;
-      color: var(--accent);
-      display: inline-flex;
+    .build-journey-layout {
+      align-items: stretch;
+      display: grid;
+      gap: 26px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+      margin-top: 30px;
+    }
+
+    .build-journey-panel,
+    .logic-translation-panel {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      padding: 28px;
+      position: relative;
+    }
+
+    .build-journey-panel::before,
+    .logic-translation-panel::before {
+      background: radial-gradient(circle, rgba(31, 77, 90, 0.12), transparent 65%);
+      content: "";
+      height: 220px;
+      pointer-events: none;
+      position: absolute;
+      right: -90px;
+      top: -110px;
+      width: 220px;
+    }
+
+    .build-journey-panel > *,
+    .logic-translation-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .build-panel-heading {
+      color: var(--text);
       font-size: 22px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+
+    .build-panel-copy {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .build-journey-steps {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .build-journey-step {
+      align-items: flex-start;
+      background: rgba(246, 242, 234, 0.72);
+      border: 1px solid rgba(31, 77, 90, 0.1);
+      border-radius: 20px;
+      display: grid;
+      gap: 15px;
+      grid-template-columns: 48px minmax(0, 1fr);
+      padding: 16px;
+      position: relative;
+    }
+
+    .build-journey-step:not(:last-child)::after {
+      background: rgba(31, 77, 90, 0.24);
+      bottom: -16px;
+      content: "";
+      height: 16px;
+      left: 39px;
+      position: absolute;
+      width: 2px;
+    }
+
+    .build-journey-number {
+      align-items: center;
+      background: var(--accent);
+      border-radius: 999px;
+      color: #ffffff;
+      display: inline-flex;
+      font-size: 12px;
       font-weight: 900;
-      height: 44px;
+      height: 40px;
       justify-content: center;
-      width: 44px;
+      width: 40px;
+    }
+
+    .build-journey-step h3 {
+      color: var(--text);
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0 0 6px;
+    }
+
+    .build-journey-step p {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.62;
+      margin: 0;
+    }
+
+    .logic-translation-board {
+      background: rgba(246, 242, 234, 0.58);
+      border: 1px solid rgba(31, 77, 90, 0.12);
+      border-radius: 28px;
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+      padding: 18px;
+    }
+
+    .logic-translation-header,
+    .logic-translation-row {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) 26px minmax(0, 1fr) 26px minmax(0, 1fr);
+    }
+
+    .logic-translation-header {
+      background: rgba(31, 77, 90, 0.08);
+      border: 1px solid rgba(31, 77, 90, 0.12);
+      border-radius: 16px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      padding: 12px 14px;
+      text-transform: uppercase;
+    }
+
+    .logic-translation-header span:nth-child(1) { grid-column: 1; }
+    .logic-translation-header span:nth-child(2) { grid-column: 3; }
+    .logic-translation-header span:nth-child(3) { grid-column: 5; }
+
+    .logic-translation-row {
+      align-items: stretch;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(31, 77, 90, 0.12);
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(31, 41, 51, 0.05);
+      padding: 14px;
+    }
+
+    .logic-translation-cell {
+      align-content: start;
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .logic-translation-label {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .logic-translation-value {
+      color: var(--text);
+      font-size: 14.5px;
+      font-weight: 750;
+      line-height: 1.38;
+    }
+
+    .logic-translation-arrow {
+      align-items: center;
+      color: rgba(31, 77, 90, 0.66);
+      display: inline-flex;
+      font-size: 16px;
+      font-weight: 900;
+      justify-content: center;
     }
 
     #output-evidence .case-table-wrap {
@@ -1113,7 +1217,8 @@
       }
 
       .case-story-spine,
-      .review-signals-grid {
+      .review-signals-grid,
+      .build-journey-layout {
         grid-template-columns: 1fr;
       }
 
@@ -1124,15 +1229,6 @@
 
       .review-signal-explainer-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .case-architecture-pipeline {
-        grid-template-columns: 1fr;
-      }
-
-      .case-architecture-connector {
-        justify-self: center;
-        transform: rotate(90deg);
       }
 
       #business-value .business-value-strip {
@@ -1163,12 +1259,6 @@
       }
     }
 
-    @media (max-width: 920px) {
-      #architecture-data-flow .case-architecture {
-        padding: 28px;
-      }
-    }
-
     @media (max-width: 760px) {
       #my-role .role-bridge-stage {
         max-width: 520px;
@@ -1192,13 +1282,23 @@
         padding-top: clamp(26px, 6vw, 32px);
       }
 
+      .logic-translation-header {
+        display: none;
+      }
+
+      .logic-translation-row {
+        grid-template-columns: 1fr;
+      }
+
+      .logic-translation-arrow {
+        min-height: 22px;
+        transform: rotate(90deg);
+      }
     }
 
     @media (max-width: 640px) {
       #approach-workflow {
-        --progress-timeline-x: 37px;
         --progress-stage-gap: 16px;
-        --progress-stage-padding-y: 16px;
         --progress-circle-size: 42px;
       }
 
@@ -1236,7 +1336,8 @@
 
       .case-story-spine,
       .case-insight-callout,
-      .review-signals-note {
+      .review-signals-note,
+      .build-learning-note {
         padding: 16px;
       }
 
@@ -1244,15 +1345,25 @@
         grid-template-columns: 1fr;
       }
 
-      #architecture-data-flow .case-architecture {
+      .build-journey-panel,
+      .logic-translation-panel {
         padding: 22px;
       }
 
-      .case-architecture-stage {
-        padding: 22px;
+      .build-journey-step {
+        grid-template-columns: 42px minmax(0, 1fr);
       }
 
-      .case-architecture-stage-title {
+      .build-journey-number {
+        height: 36px;
+        width: 36px;
+      }
+
+      .build-journey-step:not(:last-child)::after {
+        left: 33px;
+      }
+
+      .build-panel-heading {
         font-size: 22px;
       }
 
@@ -1613,35 +1724,51 @@
     </div>
   </section>
 
-  <section class="case-section case-section--soft case-section--supporting" id="architecture-data-flow">
+  <!-- built-section-redesign-version: 20260703-v1 -->
+  <section class="case-section case-section--supporting" id="how-project-built">
     <div class="case-container">
       <div class="case-section-header">
-        <div class="case-eyebrow">ARCHITECTURE / DATA FLOW</div>
-        <h2 class="case-subheading">How scattered ERP records became structured dashboard views</h2>
-        <p class="case-lead">The analytics layer connects Odoo transactions, validation, business logic, and reporting outputs.</p>
+        <div class="case-eyebrow">HOW THE PROJECT WAS BUILT</div>
+        <h2 class="case-subheading">From ERP complexity to practical review views</h2>
+        <p class="case-lead">The build moved from process complexity into validated logic, review views, and public-safe evidence.</p>
       </div>
 
-      <div class="case-architecture" aria-label="ERP analytics architecture pipeline">
-        <div class="case-architecture-pipeline">
-          <div class="case-architecture-stage">
-            <div class="case-architecture-stage-label">INPUT</div>
-            <h3 class="case-architecture-stage-title">ERP Source</h3>
-            <ul class="case-architecture-stage-list"><li>Odoo transaction records</li><li>Sales, internal orders, purchasing</li><li>Manufacturing, inventory, invoices, payments</li></ul>
+      <div class="build-journey-layout">
+        <article class="build-journey-panel" aria-label="Build Journey">
+          <span class="build-panel-label">Build Journey</span>
+          <h3 class="build-panel-heading">From messy flow to review-ready visibility</h3>
+          <p class="build-panel-copy">A guided path showing how the project moved from ERP complexity into practical review outputs.</p>
+
+          <div class="build-journey-steps">
+            <div class="build-journey-step"><div class="build-journey-number">01</div><div><h3>Messy ERP flow</h3><p>Sales, procurement, production, delivery, invoice, and payment records were connected in practice but difficult to review together.</p></div></div>
+            <div class="build-journey-step"><div class="build-journey-number">02</div><div><h3>Source mapping</h3><p>The project mapped how SO, IO, PO, MO, DO, invoice, and payment records relate to each other.</p></div></div>
+            <div class="build-journey-step"><div class="build-journey-number">03</div><div><h3>Business rule validation</h3><p>Statuses, references, custom fields, and exceptions needed interpretation before becoming reporting logic.</p></div></div>
+            <div class="build-journey-step"><div class="build-journey-number">04</div><div><h3>Review logic</h3><p>Validated rules were translated into SQL views, dashboard outputs, and review signals.</p></div></div>
+            <div class="build-journey-step"><div class="build-journey-number">05</div><div><h3>Public-safe evidence</h3><p>The portfolio version uses sanitized visuals and recreated examples to explain the work safely.</p></div></div>
           </div>
-          <div class="case-architecture-connector" aria-hidden="true">→</div>
-          <div class="case-architecture-stage">
-            <div class="case-architecture-stage-label">PROCESSING</div>
-            <h3 class="case-architecture-stage-title">Data &amp; Logic Layer</h3>
-            <ul class="case-architecture-stage-list"><li>PostgreSQL / SQL extraction</li><li>Company filtering and canceled-state exclusion</li><li>Source classification and relationship checks</li><li>Status logic, exceptions, and profitability signals</li></ul>
+        </article>
+
+        <aside class="logic-translation-panel" aria-label="Logic Translation Board">
+          <span class="build-panel-label">Logic Translation Board</span>
+          <h3 class="build-panel-heading">How raw ERP records became business-readable review outputs</h3>
+          <p class="build-panel-copy">A structured board showing how ERP records were interpreted into business meaning and then turned into review outputs.</p>
+
+          <!-- logic-translation-board-clean-html-version: 20260703-v1 -->
+          <div class="logic-translation-board" aria-label="Logic Translation Board">
+            <div class="logic-translation-header" aria-hidden="true"><span>ERP Source / Record</span><span>Business Meaning</span><span>Review Output</span></div>
+
+            <div class="logic-translation-row"><div class="logic-translation-cell"><span class="logic-translation-label">ERP Source / Record</span><strong class="logic-translation-value">SO, IO, PO, MO</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Business Meaning</span><strong class="logic-translation-value">Source relationship and fulfillment path</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Review Output</span><strong class="logic-translation-value">Order traceability</strong></div></div>
+
+            <div class="logic-translation-row"><div class="logic-translation-cell"><span class="logic-translation-label">ERP Source / Record</span><strong class="logic-translation-value">Delivery, invoice, payment</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Business Meaning</span><strong class="logic-translation-value">Operational and financial progress</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Review Output</span><strong class="logic-translation-value">Delivery, invoicing, and payment review status</strong></div></div>
+
+            <div class="logic-translation-row"><div class="logic-translation-cell"><span class="logic-translation-label">ERP Source / Record</span><strong class="logic-translation-value">Statuses, references, exceptions</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Business Meaning</span><strong class="logic-translation-value">Business-rule interpretation</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Review Output</span><strong class="logic-translation-value">Watchlist, needs review, or follow-up signal</strong></div></div>
+
+            <div class="logic-translation-row"><div class="logic-translation-cell"><span class="logic-translation-label">ERP Source / Record</span><strong class="logic-translation-value">Real internal records</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Business Meaning</span><strong class="logic-translation-value">Confidential operational data</strong></div><span class="logic-translation-arrow" aria-hidden="true">→</span><div class="logic-translation-cell"><span class="logic-translation-label">Review Output</span><strong class="logic-translation-value">Public-safe recreated evidence</strong></div></div>
           </div>
-          <div class="case-architecture-connector" aria-hidden="true">→</div>
-          <div class="case-architecture-stage">
-            <div class="case-architecture-stage-label">OUTPUT</div>
-            <h3 class="case-architecture-stage-title">Review Visibility</h3>
-            <ul class="case-architecture-stage-list"><li>Analytics views and dashboard data</li><li>Searchable dashboard and Excel export</li><li>Management review and operational follow-up</li><li>Cross-functional coordination</li></ul>
-          </div>
-        </div>
+        </aside>
       </div>
+
+      <div class="build-learning-note"><span class="case-insight-label">Technical judgment</span><p>The key work was not only extracting ERP data. The harder part was validating what each transaction meant in the business process before turning it into review logic.</p></div>
     </div>
   </section>
 
