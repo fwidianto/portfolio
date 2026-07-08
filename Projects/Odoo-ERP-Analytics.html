@@ -261,6 +261,55 @@
       max-width: 940px;
     }
 
+    #visual-proof .visual-proof-summary-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(215, 226, 223, 0.95);
+      border-radius: 24px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.05);
+      margin-top: 18px;
+      padding: 22px 24px;
+    }
+
+    #visual-proof .visual-proof-summary-card h3 {
+      color: var(--text);
+      font-size: clamp(20px, 2.2vw, 24px);
+      font-weight: 820;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin: 0 0 18px;
+    }
+
+    #visual-proof .visual-proof-summary-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #visual-proof .visual-proof-summary-group {
+      background: rgba(246, 242, 234, 0.52);
+      border: 1px solid rgba(215, 226, 223, 0.78);
+      border-radius: 18px;
+      padding: 16px 18px;
+    }
+
+    #visual-proof .visual-proof-summary-label {
+      color: var(--accent);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      line-height: 1;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    #visual-proof .visual-proof-summary-group p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.62;
+      margin: 0;
+    }
+
     .case-section--supporting {
       padding: 64px 0;
     }
@@ -1175,6 +1224,15 @@
         padding: 18px;
       }
 
+      #visual-proof .visual-proof-summary-card {
+        padding: 18px;
+      }
+
+      #visual-proof .visual-proof-summary-grid {
+        gap: 12px;
+        grid-template-columns: minmax(0, 1fr);
+      }
+
       .case-story-spine,
       .case-insight-callout,
       .review-signals-note,
@@ -1490,14 +1548,17 @@
         </div>
       </div>
 
-      <div class="case-grid case-grid--2 case-proof-grid">
-        <div class="case-card">
-          <h3>What the dashboard needed to make clear</h3>
-          <p>Teams needed to understand how the order moved, what had already been delivered or billed, where the process was stuck, and what required practical follow-up.</p>
-        </div>
-        <div class="case-card">
-          <h3>Why this preview matters</h3>
-          <p>The preview shows that the work was not only about extracting records. It was about translating ERP complexity into a business-readable view that supports decisions and next actions.</p>
+      <div class="case-card visual-proof-summary-card">
+        <h3>What this visual proof shows</h3>
+        <div class="visual-proof-summary-grid">
+          <div class="visual-proof-summary-group">
+            <span class="visual-proof-summary-label">Review clarity</span>
+            <p>Teams needed to understand how the order moved, what had already been delivered or billed, where the process was stuck, and what required practical follow-up.</p>
+          </div>
+          <div class="visual-proof-summary-group">
+            <span class="visual-proof-summary-label">Business-readable output</span>
+            <p>The dashboard was not only about extracting records. It translated ERP complexity into a reviewable view that supports decisions, issue checking, and next actions.</p>
+          </div>
         </div>
       </div>
     </div>
