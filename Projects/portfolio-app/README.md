@@ -2,7 +2,7 @@
 
 Supporting interactive portfolio application for Fauzan Widianto - Data & Business Analytics Professional.
 
-The primary public portfolio lives at [fwidianto.github.io/portofolio](https://fwidianto.github.io/portofolio/).
+The primary public portfolio lives at [www.fwidianto.com](https://www.fwidianto.com/).
 
 This Flask application runs on PythonAnywhere and serves as an interactive portfolio with navigation to external projects hosted on GitHub Pages.
 

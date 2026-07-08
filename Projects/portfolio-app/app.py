@@ -7,19 +7,19 @@ from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
 app.config["SITE_URL"] = "https://fwidianto.pythonanywhere.com"
-app.config["GITHUB_PAGES_URL"] = "https://fwidianto.github.io/portofolio"
+app.config["GITHUB_PAGES_URL"] = "https://www.fwidianto.com"
 
 # Navigation links
 NAV_PROJECTS = [
     {
         "name": "Investment Dashboard",
         "icon": "Chart",
-        "url": "https://fwidianto.github.io/portofolio/Projects/Investment%20Dashboard.html",
+        "url": "https://www.fwidianto.com/Projects/Investment%20Dashboard.html",
     },
     {
         "name": "HS Code Automation",
         "icon": "Code",
-        "url": "https://fwidianto.github.io/portofolio/Projects/WebScrapping.html",
+        "url": "https://www.fwidianto.com/Projects/WebScrapping.html",
     },
 ]
 
@@ -72,7 +72,7 @@ def contact():
 def investment_dashboard():
     """Redirect to Investment Dashboard on GitHub Pages"""
     return redirect(
-        "https://fwidianto.github.io/portofolio/Projects/Investment%20Dashboard.html"
+        "https://www.fwidianto.com/Projects/Investment%20Dashboard.html"
     )
 
 
@@ -80,7 +80,7 @@ def investment_dashboard():
 def hs_code_automation():
     """Redirect to HS Code Automation on GitHub Pages"""
     return redirect(
-        "https://fwidianto.github.io/portofolio/Projects/WebScrapping.html"
+        "https://www.fwidianto.com/Projects/WebScrapping.html"
     )
 
 

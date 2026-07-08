@@ -4,7 +4,7 @@ Personal portfolio website for business systems, operations insight, dashboard/r
 
 ## Live Site
 
-Visit the portfolio at [fwidianto.github.io/portofolio](https://fwidianto.github.io/portofolio/).
+Visit the portfolio at [www.fwidianto.com](https://www.fwidianto.com/).
 
 ## Positioning
 
