@@ -522,6 +522,50 @@
       margin-top: 24px;
     }
 
+    #technical-data-flow {
+      background:
+        radial-gradient(circle at 12% 16%, rgba(31, 77, 90, 0.06), transparent 24rem),
+        linear-gradient(180deg, rgba(246, 242, 234, 0.45), rgba(255, 255, 255, 0.86));
+    }
+
+    #technical-data-flow .case-section-header {
+      margin-bottom: 26px;
+      max-width: 940px;
+    }
+
+    #technical-data-flow .technical-data-flow-frame {
+      border-radius: 32px;
+    }
+
+    #technical-data-flow .technical-data-flow-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 6px;
+    }
+
+    #technical-data-flow .technical-data-flow-scroll img {
+      display: block;
+      height: auto;
+      min-width: 1120px;
+      width: 100%;
+    }
+
+    #technical-data-flow .technical-data-flow-caption {
+      color: rgba(100, 116, 139, 0.9);
+      font-size: 13.5px;
+      line-height: 1.65;
+      margin: 14px 2px 0;
+      max-width: 940px;
+    }
+
+    #technical-data-flow .technical-data-flow-note {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+      margin: 16px 4px 0;
+      max-width: 940px;
+    }
+
     .process-complexity {
       background:
         linear-gradient(180deg, rgba(247, 249, 252, 0.96), rgba(246, 242, 234, 0.72));
@@ -1729,6 +1773,28 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- technical-data-flow-version: 20260708-v1 -->
+  <section class="case-section case-section--soft" id="technical-data-flow">
+    <div class="case-container">
+      <div class="case-section-header">
+        <div class="case-eyebrow">TECHNICAL DATA FLOW</div>
+        <h2 class="case-subheading">How Odoo records are fetched and turned into dashboard views</h2>
+        <p class="case-lead">This conceptual diagram shows the technical path behind the analytics layer: Odoo records are fetched through XML-RPC, processed in Python, stored as analytics-ready tables in PostgreSQL, and presented through front-end dashboard views.</p>
+      </div>
+
+      <div class="case-visual-frame technical-data-flow-frame" aria-label="Technical data flow diagram showing Odoo ERP data moving through XML-RPC, Python, PostgreSQL, and front-end dashboard views">
+        <div class="case-visual-content">
+          <div class="technical-data-flow-scroll">
+            <img src="../Assets/odoo-erp-technical-data-flow.svg" alt="Technical data flow diagram showing Odoo ERP data moving through XML-RPC, Python, PostgreSQL, and front-end dashboard views">
+          </div>
+          <p class="case-caption technical-data-flow-caption">Conceptual technical data flow. Odoo remains the source ERP system, while XML-RPC, Python, PostgreSQL, and the front end form the analytics layer used to create review-ready dashboard views.</p>
+        </div>
+      </div>
+
+      <p class="technical-data-flow-note">This section focuses on how the data is fetched and prepared. The following section explains how the extracted ERP records were interpreted, validated, and translated into reusable review logic.</p>
     </div>
   </section>
 
