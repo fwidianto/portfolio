@@ -45,23 +45,23 @@
       <text class="h3" x="26" y="38">Order Review Table</text>
       <text class="small" x="26" y="64">Dummy order rows used to explain review logic, not internal company records.</text>
       <rect class="table-head" x="26" y="88" width="996" height="48" rx="12"/>
-      <text class="th" x="46" y="118">ORDER REF</text><text class="th" x="180" y="118">SOURCE</text><text class="th" x="332" y="118">DELIVERY</text><text class="th" x="472" y="118">INVOICE</text><text class="th" x="604" y="118">PAYMENT</text><text class="th" x="738" y="118">SIGNAL</text><text class="th" x="872" y="118">NEXT REVIEW</text>
+      <text class="th" x="46" y="118">ORDER REF</text><text class="th" x="180" y="118">SOURCE</text><text class="th" x="332" y="118">DELIVERY</text><text class="th" x="472" y="118">INVOICE</text><text class="th" x="604" y="118">PAYMENT</text><text class="th" x="738" y="118">SIGNAL</text><text class="th" x="892" y="118">NEXT REVIEW</text>
       <line class="table-line" x1="26" y1="154" x2="1022" y2="154"/>
 
       <g transform="translate(0 168)">
-        <text class="td" x="46" y="0">SO-24-0142</text><text class="td-muted" x="180" y="0">From Stock</text><text class="td-muted" x="332" y="0">Delivered</text><text class="td-muted" x="472" y="0">Fully invoiced</text><text class="td-muted" x="604" y="0">Paid</text><rect class="badge-ok" x="734" y="-20" width="82" height="30" rx="15"/><text class="badge-text" x="754" y="0">Healthy</text><text class="td-muted" x="872" y="0">Routine review</text>
+        <text class="td" x="46" y="0">SO-24-0142</text><text class="td-muted" x="180" y="0">From Stock</text><text class="td-muted" x="332" y="0">Delivered</text><text class="td-muted" x="472" y="0">Fully invoiced</text><text class="td-muted" x="604" y="0">Paid</text><rect class="badge-ok" x="734" y="-20" width="82" height="30" rx="15"/><text class="badge-text" x="754" y="0">Healthy</text><text class="td-muted" x="892" y="0">Routine review</text>
       </g>
       <line class="table-line" x1="26" y1="198" x2="1022" y2="198"/>
       <g transform="translate(0 232)">
-        <text class="td" x="46" y="0">SO-24-0179</text><text class="td-muted" x="180" y="0">Manufacture</text><text class="td-muted" x="332" y="0">In progress</text><text class="td-muted" x="472" y="0">Pending</text><text class="td-muted" x="604" y="0">Not due</text><rect class="badge-watch" x="734" y="-20" width="86" height="30" rx="15"/><text class="badge-text" x="751" y="0">Watchlist</text><text class="td-muted" x="872" y="0">Track production</text>
+        <text class="td" x="46" y="0">SO-24-0179</text><text class="td-muted" x="180" y="0">Manufacture</text><text class="td-muted" x="332" y="0">In progress</text><text class="td-muted" x="472" y="0">Pending</text><text class="td-muted" x="604" y="0">Not due</text><rect class="badge-watch" x="734" y="-20" width="86" height="30" rx="15"/><text class="badge-text" x="751" y="0">Watchlist</text><text class="td-muted" x="892" y="0">Track production</text>
       </g>
       <line class="table-line" x1="26" y1="262" x2="1022" y2="262"/>
       <g transform="translate(0 296)">
-        <text class="td" x="46" y="0">SO-24-0208</text><text class="td-muted" x="180" y="0">Internal Order</text><text class="td-muted" x="332" y="0">Partial</text><text class="td-muted" x="472" y="0">Partial</text><text class="td-muted" x="604" y="0">Outstanding</text><rect class="badge-review" x="734" y="-20" width="108" height="30" rx="15"/><text class="badge-text" x="751" y="0">Needs Review</text><text class="td-muted" x="872" y="0">Invoice follow-up</text>
+        <text class="td" x="46" y="0">SO-24-0208</text><text class="td-muted" x="180" y="0">Internal Order</text><text class="td-muted" x="332" y="0">Partial</text><text class="td-muted" x="472" y="0">Partial</text><text class="td-muted" x="604" y="0">Outstanding</text><rect class="badge-review" x="734" y="-20" width="76" height="30" rx="15"/><text class="badge-text" x="753" y="0">Review</text><text class="td-muted" x="892" y="0">Invoice follow-up</text>
       </g>
       <line class="table-line" x1="26" y1="326" x2="1022" y2="326"/>
       <g transform="translate(0 360)">
-        <text class="td" x="46" y="0">SO-24-0241</text><text class="td-muted" x="180" y="0">Purchase</text><text class="td-muted" x="332" y="0">Waiting</text><text class="td-muted" x="472" y="0">Not invoiced</text><text class="td-muted" x="604" y="0">Not due</text><rect class="badge-watch" x="734" y="-20" width="132" height="30" rx="15"/><text class="badge-text" x="751" y="0">Supplier Follow-up</text><text class="td-muted" x="872" y="0">Check receipt</text>
+        <text class="td" x="46" y="0">SO-24-0241</text><text class="td-muted" x="180" y="0">Purchase</text><text class="td-muted" x="332" y="0">Waiting</text><text class="td-muted" x="472" y="0">Not invoiced</text><text class="td-muted" x="604" y="0">Not due</text><rect class="badge-watch" x="734" y="-20" width="94" height="30" rx="15"/><text class="badge-text" x="751" y="0">Supplier</text><text class="td-muted" x="892" y="0">Check receipt</text>
       </g>
     </g>
 
@@ -87,10 +87,10 @@
       </g>
     </g>
 
-    <g transform="translate(34 834)">
-      <rect class="panel-tint" width="1640" height="72" rx="22"/>
+    <g transform="translate(34 872)">
+      <rect class="panel-tint" width="1640" height="52" rx="18"/>
       <text class="label" x="26" y="30">WHAT THIS VIEW IS DESIGNED TO MAKE VISIBLE</text>
-      <text class="sub" x="26" y="56">Order status, source path, delivery progress, invoice/payment follow-up, review signals, and data-quality questions in one business-readable view.</text>
+      <text class="sub" x="26" y="45">Order status, source path, delivery progress, invoice/payment follow-up, review signals, and data-quality questions in one business-readable view.</text>
     </g>
   </g>
 </svg>
