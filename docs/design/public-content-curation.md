@@ -4,21 +4,24 @@ Status: Frozen content decision / pre-development checkpoint
 
 Date: 2026-08-02
 
-This document completes Phase 2 of the Living System portfolio renewal. It defines what may be featured publicly, what should appear only as supporting evidence, and what must remain held back.
+This document completes Phase 2 of the Living System portfolio renewal. It defines the deliberately small set of projects allowed in the next portfolio concept.
 
 The portfolio is a curated professional argument, not an archive of every project.
 
 ## Curation Goal
 
-Every visible item should strengthen the positioning:
+Every visible project should strengthen the positioning:
 
 ```text
 Analytical Systems Builder
 ```
 
-The public portfolio should prove that Fauzan can understand operational problems, structure business logic, interpret ERP and process data, create useful reporting and automation, and use AI-assisted development with human judgment.
+The public portfolio should show two complementary strengths:
 
-Project count is not a success metric. A small set of credible evidence is stronger than a large collection of unfinished work.
+1. understanding business and ERP operations, then turning them into visible and reviewable systems;
+2. designing practical AI-assisted workflows with clear controls, boundaries, and operational usefulness.
+
+Project count is not a success metric. Two credible projects are stronger than a large collection of unfinished work.
 
 ## Publication Criteria
 
@@ -32,168 +35,141 @@ A project may receive prominent public treatment only when it has:
 6. relevance to the intended professional positioning;
 7. no unsupported performance claims or confidential data.
 
-## Featured
+## Featured Projects
 
-### Odoo ERP Analytics
+### 1. Odoo Process Control Tower
 
-**Decision:** Current sole flagship project.
+**Project lineage:** This is the evolved form of the project previously described as **Odoo ERP Analytics**. They are not separate projects.
 
-**Public role:** Homepage flagship and full case-study destination.
+The work began as an analytics and traceability layer over Odoo data, then evolved toward a broader Process Control Tower that makes operational flow, status, dependencies, exceptions, and management follow-up visible.
+
+**Public role:** Primary business-systems flagship and full case-study destination.
 
 **Why it qualifies:**
 
 - grounded in real ERP and operational work;
-- combines process understanding, data logic, reporting, validation, and management visibility;
+- combines process understanding, data logic, reporting, validation, traceability, and management visibility;
 - demonstrates business judgment before technology;
 - connects directly to Fauzan's current professional experience;
 - has enough depth to support a substantial case study;
-- can include public-safe diagrams, mock data, and sanitised screenshots.
+- can include public-safe diagrams, mock data, sanitised screenshots, and the Process Map interaction.
 
-**Related work that belongs inside this flagship rather than becoming separate projects:**
+**Included scope within this one project:**
 
+- the original Odoo ERP Analytics work;
 - Odoo Process Control Tower;
 - Sales Order and Internal Order traceability;
 - Order-to-Cash and Procure-to-Pay analysis;
 - profitability and compliance review logic;
 - ROP, RFQ, purchase, manufacturing, delivery, invoicing, and payment workflow analysis;
-- Odoo automation experiments that are validated and safe to explain.
+- validated Odoo automation work that supports the same operational system.
 
-These are evidence modules within one coherent ERP analytics story, not separate homepage project cards.
+Do not split these into separate homepage project cards.
 
-## Supporting Evidence
+**Working public naming:**
 
-Supporting evidence may appear inside experience, capability, or case-study sections. It should not compete with Odoo ERP Analytics as a separate homepage flagship.
+```text
+Odoo Process Control Tower
+```
 
-### Business Reporting Automation
+A subtitle may explain that it evolved from an Odoo ERP analytics and traceability platform. Exact final wording will be approved during concept review.
 
-**Treatment:** Capability and experience evidence, not a standalone featured project for now.
+### 2. Telegram Codex Controller
 
-Use selected examples to demonstrate:
+**Public role:** Second featured project and the strongest current Systems Lab / AI-assisted workflow case.
 
-- Excel, Google Sheets, Apps Script, VBA, UiPath, and Looker Studio workflows;
-- manual reporting reduction;
-- management reporting preparation;
-- operational follow-up and cross-functional visibility.
+**Why it qualifies:**
 
-A standalone project page should wait until one specific workflow can be documented with stronger before-and-after evidence.
+- it is an installed and operating system rather than only a concept;
+- it solves a clear workflow problem: remotely controlling, observing, and reviewing Codex work;
+- it has visible user interaction through Telegram;
+- it demonstrates system architecture, task lifecycle control, project isolation, permission awareness, observability, and bounded automation;
+- it provides a credible contrast to the business-focused Odoo project without changing the overall professional identity.
 
-### Profitability Analysis and Business Control
+**Public story should focus on:**
 
-**Treatment:** Core professional evidence, not a software project card.
+- the problem with controlling and observing coding-agent work remotely;
+- the Telegram controller architecture;
+- configured project workers and bounded task execution;
+- queue, status, model, permissions, usage, tail, technical, and result visibility;
+- safety boundaries and why arbitrary machine control was intentionally avoided;
+- testing and validation evidence;
+- how the workflow improved practical use of Codex.
 
-Use it within professional experience and reasoning sections to demonstrate:
+**Public-safe evidence may include:**
 
-- cost and revenue interpretation;
-- service or project profitability review;
-- pricing and commercial analysis;
-- inventory and cost-control judgment;
-- management decision support.
+- a sanitised architecture diagram;
+- selected Telegram screenshots with private identifiers removed;
+- a short demonstration clip;
+- command and lifecycle examples;
+- verified test results and installed feature summary;
+- lessons learned from designing the control plane.
 
-This is central to Fauzan's credibility but should be presented as applied professional work rather than packaged as an invented product.
+**Must never be published:**
 
-### AI ERP Intelligence Dashboard
+- bot tokens;
+- Telegram chat IDs;
+- private usernames;
+- unrestricted local paths when unnecessary;
+- credentials or secrets;
+- confidential prompts, logs, or repository data;
+- any interface that suggests unrestricted arbitrary shell access.
 
-**Treatment:** Secondary public demo or supporting case evidence.
+## No Supporting Project Layer for Now
 
-It may remain accessible because it provides a public-safe demonstration using synthetic or sample ERP-style data.
+No other project is selected as supporting portfolio evidence in the next concept.
 
-It should not be presented as a production ERP platform or positioned above the real Odoo ERP Analytics work. Its role is to show practical analytics and application-building ability without exposing company records.
+Business Reporting Automation, Profitability Analysis, dashboards, AI ERP Intelligence Dashboard, Investment Analytics Dashboard, MCU Vault, HS Code automation, Personal OS, and agent orchestration experiments should not appear as project cards or secondary project links at this stage.
 
-### Investment Analytics Dashboard
-
-**Treatment:** Optional secondary evidence in a personal analytics or About/Interests context.
-
-It may demonstrate structured learning, allocation tracking, market observation, and dashboard thinking. It should not occupy primary recruiter attention, include private balances, or be framed as financial advice.
+Relevant reporting, profitability, ERP, and automation experience may still be described factually within the professional experience section. That is employment evidence, not a separate project portfolio layer.
 
 ## Hold Back
 
-Held-back work should remain private, unlisted, or available only in the repository until it becomes mature enough to strengthen the portfolio.
+The following remain private or unlisted for now:
 
-### Telegram Codex Controller
+- Personal OS;
+- separate agent orchestration experiments;
+- MCU Vault;
+- HS Code Trade Compliance Automation;
+- AI ERP Intelligence Dashboard as a separate public project;
+- Investment Analytics Dashboard as a separate public project;
+- unfinished prototypes and frontend experiments;
+- any other work that has not passed an explicit maturity review.
 
-**Current decision:** Hold back.
-
-Reasons:
-
-- still being stabilised and extended;
-- not yet the strongest professional proof;
-- requires end-to-end reliability and a sanitised demonstration;
-- public presentation would need clear architecture, safety boundaries, testing evidence, and a credible use case.
-
-It may later become a Systems Lab case study after reliable operation and validation.
-
-### Personal OS
-
-**Current decision:** Hold back.
-
-Reasons:
-
-- private system with personal and career information;
-- active development and evolving architecture;
-- difficult to demonstrate without exposing private context;
-- should not become an abstract AI-workflow claim without visible, validated outcomes.
-
-A future public case may describe selected architecture and lessons, not the private contents.
-
-### Agent Orchestration Experiments
-
-**Current decision:** Hold back.
-
-Reasons:
-
-- experimental workflow rather than a stable project;
-- easy to overstate;
-- needs repeatable evidence that orchestration improves quality, continuity, or efficiency.
-
-### MCU Vault
-
-**Current decision:** Hold back.
-
-Reasons:
-
-- interesting personal application but not closely aligned with the primary professional narrative;
-- requires stronger reliability, visual presentation, and public-safe evidence;
-- should not distract from ERP, operations, analytics, and business systems.
-
-### HS Code Trade Compliance Automation
-
-**Current decision:** Hold back as a standalone project.
-
-Reasons:
-
-- useful automation experiment but currently lacks enough polished evidence and scope clarity;
-- browser automation reliability and compliance interpretation require careful explanation;
-- may later become supporting evidence after a clear workflow, limitations, and output example are documented.
-
-### Unfinished Prototypes and Frontend Experiments
-
-**Current decision:** Hold back.
-
-Do not publish projects merely because code or screenshots exist. Prototypes must pass the same problem, evidence, stability, relevance, and public-safety criteria as other work.
+Do not publish projects merely because code or screenshots exist.
 
 ## Initial Public Content Set
 
-The first Living System experiment should work with this intentionally limited public set:
+The first Living System concept should use only:
 
 1. professional identity and positioning;
 2. professional experience;
 3. how Fauzan understands and structures problems;
-4. Odoo ERP Analytics as the sole flagship;
-5. selected reporting, profitability, automation, and analytics evidence within the relevant story;
-6. optional secondary links to the AI ERP Intelligence Dashboard and Investment Analytics Dashboard only when they support the visitor journey;
-7. contact.
+4. **Odoo Process Control Tower** as the primary business-systems flagship;
+5. **Telegram Codex Controller** as the second featured systems project;
+6. contact.
 
-Do not create a large project grid.
+Do not create a large project grid. The two projects should have distinct narrative roles:
+
+```text
+Odoo Process Control Tower
+= business systems, ERP understanding, operational visibility, and decision support
+
+Telegram Codex Controller
+= AI-assisted workflow design, control, observability, and bounded automation
+```
+
+Together they should reinforce one identity rather than create two disconnected portfolios.
 
 ## Promotion Rule
 
-A held-back project may be promoted only after a deliberate review confirms:
+Any additional project may be promoted only after a deliberate review confirms:
 
 - the project is working reliably enough;
 - its public story is specific and credible;
 - the evidence is safe and understandable;
 - its visuals are strong enough;
-- it adds a distinct capability not already proven better elsewhere;
+- it adds a distinct capability not already proven better by the two featured projects;
 - publishing it improves the visitor journey rather than adding noise.
 
 Promotion is a content decision first and a frontend decision second.
@@ -207,5 +183,5 @@ Frontend skills and coding agents must not invent additional projects, metrics, 
 ## Phase Status
 
 - Phase 1 — Living System direction: complete.
-- Phase 2 — Public content curation: complete.
+- Phase 2 — Public content curation: corrected and complete.
 - Phase 3 — Inspect and select an external mature frontend skill: next.
