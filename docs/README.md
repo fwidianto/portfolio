@@ -16,100 +16,93 @@ Not:
 Look at what I built.
 ```
 
-The public positioning is **Analytical Systems Builder**: from problems and data to system design, insights, and AI-powered workflows. The portfolio should show curiosity, business understanding, systems thinking, practical solution-building, continuous learning, and AI-assisted execution with human business judgment.
+The public positioning is **Analytical Systems Builder**: from problems and data to system design, insights, and AI-powered workflows.
+
+The identity is now defined as an operating design standard in [design/analytical-systems-builder-identity-lens.md](design/analytical-systems-builder-identity-lens.md). Every concept must visibly express:
+
+```text
+Analytical
+-> Systems
+-> Builder
+```
+
+not merely display the title.
 
 ## Current Checkpoint
 
 Homepage v1 is frozen at commit `67cb782` and remains the active public implementation.
 
-The next renewal direction is frozen in [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md). It defines a mature Living System experiment, external frontend-skill evaluation, local review, and approval phases. It does **not** authorise immediate changes to the live homepage.
+The renewal direction is frozen in [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md). It does **not** authorise immediate changes to the live homepage.
 
-The allowed public content set is frozen in [design/public-content-curation.md](design/public-content-curation.md).
-
-The next concept uses two featured projects:
+The public content set is frozen in [design/public-content-curation.md](design/public-content-curation.md):
 
 1. **Odoo Process Control Tower** — the evolved form of the earlier Odoo ERP Analytics project;
-2. **Telegram Codex Controller** — the current Systems Lab / AI-assisted workflow project.
+2. **Telegram Codex Controller** — the AI-assisted workflow-control project.
 
-There is no supporting project layer for now. Other work may not be promoted merely to fill the interface.
+There is no supporting project layer for now.
 
-The external frontend-skill decision is frozen in [design/frontend-skill-selection.md](design/frontend-skill-selection.md). The experiment will use only `frontend-design` and `design-review` from `julianoczkowski/designer-skills`. The full external design-flow suite is not selected.
+The external frontend-skill decision is frozen in [design/frontend-skill-selection.md](design/frontend-skill-selection.md). The experiment uses only `frontend-design` and `design-review` from `julianoczkowski/designer-skills`.
 
-The exact representative homepage surface, frozen copy inventory, concept options, and review questions are defined in [design/homepage-v2-representative-experiment.md](design/homepage-v2-representative-experiment.md).
+The revised homepage experiment, content inventory, identity criteria, motion rules, responsive rules, and review scorecard are defined in [design/homepage-v2-representative-experiment.md](design/homepage-v2-representative-experiment.md).
 
-The root [`AGENTS.md`](../AGENTS.md) is the mandatory operational authority for agents working in this repository. It applies the strategic decisions above as concrete scope, content, architecture, privacy, local-review, and approval rules.
-
-Before proposing homepage changes, read `AGENTS.md`, the v1 freeze, Living System direction, public content curation, frontend-skill selection, and representative experiment brief. The first V2 homepage work must remain an isolated local experiment limited to the approved representative surface.
+The root [`AGENTS.md`](../AGENTS.md) is the mandatory operational authority.
 
 ## Read Order
 
 1. [`../AGENTS.md`](../AGENTS.md)
-2. [core/README.md](core/README.md)
-3. [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md)
-4. [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md)
+2. [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md)
+3. [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md)
+4. [design/analytical-systems-builder-identity-lens.md](design/analytical-systems-builder-identity-lens.md)
 5. [design/public-content-curation.md](design/public-content-curation.md)
 6. [design/frontend-skill-selection.md](design/frontend-skill-selection.md)
 7. [design/homepage-v2-representative-experiment.md](design/homepage-v2-representative-experiment.md)
-8. [homepage/README.md](homepage/README.md)
-9. [design/README.md](design/README.md)
-10. [case-studies/README.md](case-studies/README.md)
+8. [core/README.md](core/README.md)
+9. [homepage/README.md](homepage/README.md)
+10. [design/README.md](design/README.md)
+11. [case-studies/README.md](case-studies/README.md)
 
 ## Active Documentation Areas
 
 | Folder | Purpose |
 | --- | --- |
 | Repository root | Mandatory agent guardrails in `AGENTS.md`. |
-| [core/](core/README.md) | Portfolio philosophy, long-term vision, working principles, and ChatGPT/Codex workflow. |
-| [homepage/](homepage/README.md) | Homepage frozen checkpoint, experience architecture, and future section boundaries. |
-| [design/](design/README.md) | Visitor psychology, information architecture, visual direction, Living System renewal direction, public content curation, frontend-skill selection, and the representative V2 experiment. |
-| [case-studies/](case-studies/README.md) | Existing case-study material, including the Odoo project history that is evolving into the Process Control Tower presentation. |
+| [core/](core/README.md) | Portfolio philosophy, long-term vision, and working workflow. |
+| [homepage/](homepage/README.md) | Homepage frozen checkpoint and existing experience architecture. |
+| [design/](design/README.md) | Living System direction, identity lens, content curation, skill selection, and V2 experiment. |
+| [case-studies/](case-studies/README.md) | Existing case-study material and project source content. |
 
 ## Source-of-Truth Ownership
 
 | Topic | Source of truth |
 | --- | --- |
 | Agent operating rules | [`../AGENTS.md`](../AGENTS.md) |
-| Overall philosophy | [core/portfolio-design-philosophy.md](core/portfolio-design-philosophy.md) |
-| Long-term 2030 direction | [core/portfolio-vision-2030.md](core/portfolio-vision-2030.md) |
-| ChatGPT + Codex workflow | [core/portfolio-development-workflow.md](core/portfolio-development-workflow.md) |
-| ChatGPT + Codex tool division | [core/chatgpt-codex-tool-division.md](core/chatgpt-codex-tool-division.md) |
-| Portfolio working principles | [core/portfolio-working-principles.md](core/portfolio-working-principles.md) |
-| Homepage v1 freeze checkpoint | [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md) |
-| Living System renewal direction and phased experiment | [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md) |
-| Public project and content curation | [design/public-content-curation.md](design/public-content-curation.md) |
+| Analytical Systems Builder identity and approval lens | [design/analytical-systems-builder-identity-lens.md](design/analytical-systems-builder-identity-lens.md) |
+| Living System renewal direction | [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md) |
+| Public project curation | [design/public-content-curation.md](design/public-content-curation.md) |
 | External frontend-skill selection | [design/frontend-skill-selection.md](design/frontend-skill-selection.md) |
 | Homepage V2 representative experiment | [design/homepage-v2-representative-experiment.md](design/homepage-v2-representative-experiment.md) |
-| Homepage experience | [homepage/homepage-experience-blueprint.md](homepage/homepage-experience-blueprint.md) |
-| Capability Graph concept | [homepage/homepage-capability-graph.md](homepage/homepage-capability-graph.md) |
-| Capability Graph feature specification | [homepage/homepage-capability-graph-feature-spec.md](homepage/homepage-capability-graph-feature-spec.md) |
-| Thinking Lab | [homepage/homepage-thinking-lab.md](homepage/homepage-thinking-lab.md) |
-| Currently Building section | [homepage/homepage-currently-building.md](homepage/homepage-currently-building.md) |
-| Flagship case-study routing | [homepage/homepage-flagship-case-study.md](homepage/homepage-flagship-case-study.md) |
+| Homepage v1 freeze checkpoint | [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md) |
 | Existing Odoo case-study source | [case-studies/odoo-erp-analytics.md](case-studies/odoo-erp-analytics.md) |
+| Overall philosophy | [core/portfolio-design-philosophy.md](core/portfolio-design-philosophy.md) |
+| Development workflow | [core/portfolio-development-workflow.md](core/portfolio-development-workflow.md) |
 | Visitor psychology | [design/visitor-psychology.md](design/visitor-psychology.md) |
 | Information architecture | [design/information-architecture.md](design/information-architecture.md) |
-| Visual direction | [design/visual-direction.md](design/visual-direction.md) |
+| Earlier visual direction | [design/visual-direction.md](design/visual-direction.md) |
 
 ## Rules for Future Sessions
 
-- Follow the root `AGENTS.md` before using any frontend or design skill.
-- Use [design/homepage-v2-representative-experiment.md](design/homepage-v2-representative-experiment.md) as the exact authority for the first concept experiment.
-- Do not change the active public homepage from the Living System direction document alone.
-- Do not implement homepage features before the relevant concept and representative surface are explicitly approved.
-- Keep experimental V2 work isolated and local until review is complete.
-- Use [design/public-content-curation.md](design/public-content-curation.md) as the authority for which projects may appear.
-- Treat Odoo ERP Analytics and Odoo Process Control Tower as one evolving project, not separate entries.
-- Use only Odoo Process Control Tower and Telegram Codex Controller as featured projects in the next concept.
-- Do not create a supporting project layer unless the user explicitly revises the curation.
-- Use [design/frontend-skill-selection.md](design/frontend-skill-selection.md) as the authority for the external skill experiment.
-- Do not publish immature projects simply to increase project count.
-- Do not build the Capability Graph UI from these docs alone.
-- Do not build the Thinking Lab UI from these docs alone.
-- Do not repeat the full philosophy in every document.
-- Link to the source of truth instead of duplicating long sections.
+- Follow root `AGENTS.md` before using any frontend or design skill.
+- Judge concepts through the Analytical / Systems / Builder identity lens.
+- Use the revised homepage experiment as the exact authority for the first concept refinement.
+- Do not change or deploy the active public homepage before local review and approval.
+- Keep V2 work isolated and limited to the representative surface.
+- Use only Odoo Process Control Tower and Telegram Codex Controller.
+- Treat Odoo ERP Analytics and Process Control Tower as one evolving project.
+- Do not create a supporting project layer without explicit revision.
 - Keep AI positioned as an accelerator, not the identity.
 - Keep the story order: business problem -> process understanding -> business logic -> technology -> evidence.
+- Do not invent projects, claims, metrics, outcomes, or maturity.
 
 ## Historical Notes
 
-Older planning files may remain as short redirects or historical implementation logs. They are not the active source of truth unless this index links to them directly.
+Older planning files may remain as redirects or historical implementation logs. They are not active sources of truth unless this index links to them directly.
