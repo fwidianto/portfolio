@@ -35,9 +35,11 @@ There is no supporting project layer for now. Other work may not be promoted mer
 
 The external frontend-skill decision is frozen in [design/frontend-skill-selection.md](design/frontend-skill-selection.md). The experiment will use only `frontend-design` and `design-review` from `julianoczkowski/designer-skills`. The full external design-flow suite is not selected.
 
+The exact representative homepage surface, frozen copy inventory, concept options, and review questions are defined in [design/homepage-v2-representative-experiment.md](design/homepage-v2-representative-experiment.md).
+
 The root [`AGENTS.md`](../AGENTS.md) is the mandatory operational authority for agents working in this repository. It applies the strategic decisions above as concrete scope, content, architecture, privacy, local-review, and approval rules.
 
-Before proposing homepage changes, read `AGENTS.md`, the v1 freeze, Living System direction, public content curation, and frontend-skill selection. The first V2 homepage work must be an isolated local experiment limited to one representative surface.
+Before proposing homepage changes, read `AGENTS.md`, the v1 freeze, Living System direction, public content curation, frontend-skill selection, and representative experiment brief. The first V2 homepage work must remain an isolated local experiment limited to the approved representative surface.
 
 ## Read Order
 
@@ -47,9 +49,10 @@ Before proposing homepage changes, read `AGENTS.md`, the v1 freeze, Living Syste
 4. [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md)
 5. [design/public-content-curation.md](design/public-content-curation.md)
 6. [design/frontend-skill-selection.md](design/frontend-skill-selection.md)
-7. [homepage/README.md](homepage/README.md)
-8. [design/README.md](design/README.md)
-9. [case-studies/README.md](case-studies/README.md)
+7. [design/homepage-v2-representative-experiment.md](design/homepage-v2-representative-experiment.md)
+8. [homepage/README.md](homepage/README.md)
+9. [design/README.md](design/README.md)
+10. [case-studies/README.md](case-studies/README.md)
 
 ## Active Documentation Areas
 
@@ -58,7 +61,7 @@ Before proposing homepage changes, read `AGENTS.md`, the v1 freeze, Living Syste
 | Repository root | Mandatory agent guardrails in `AGENTS.md`. |
 | [core/](core/README.md) | Portfolio philosophy, long-term vision, working principles, and ChatGPT/Codex workflow. |
 | [homepage/](homepage/README.md) | Homepage frozen checkpoint, experience architecture, and future section boundaries. |
-| [design/](design/README.md) | Visitor psychology, information architecture, visual direction, Living System renewal direction, public content curation, and external frontend-skill selection. |
+| [design/](design/README.md) | Visitor psychology, information architecture, visual direction, Living System renewal direction, public content curation, frontend-skill selection, and the representative V2 experiment. |
 | [case-studies/](case-studies/README.md) | Existing case-study material, including the Odoo project history that is evolving into the Process Control Tower presentation. |
 
 ## Source-of-Truth Ownership
@@ -75,6 +78,7 @@ Before proposing homepage changes, read `AGENTS.md`, the v1 freeze, Living Syste
 | Living System renewal direction and phased experiment | [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md) |
 | Public project and content curation | [design/public-content-curation.md](design/public-content-curation.md) |
 | External frontend-skill selection | [design/frontend-skill-selection.md](design/frontend-skill-selection.md) |
+| Homepage V2 representative experiment | [design/homepage-v2-representative-experiment.md](design/homepage-v2-representative-experiment.md) |
 | Homepage experience | [homepage/homepage-experience-blueprint.md](homepage/homepage-experience-blueprint.md) |
 | Capability Graph concept | [homepage/homepage-capability-graph.md](homepage/homepage-capability-graph.md) |
 | Capability Graph feature specification | [homepage/homepage-capability-graph-feature-spec.md](homepage/homepage-capability-graph-feature-spec.md) |
@@ -89,6 +93,7 @@ Before proposing homepage changes, read `AGENTS.md`, the v1 freeze, Living Syste
 ## Rules for Future Sessions
 
 - Follow the root `AGENTS.md` before using any frontend or design skill.
+- Use [design/homepage-v2-representative-experiment.md](design/homepage-v2-representative-experiment.md) as the exact authority for the first concept experiment.
 - Do not change the active public homepage from the Living System direction document alone.
 - Do not implement homepage features before the relevant concept and representative surface are explicitly approved.
 - Keep experimental V2 work isolated and local until review is complete.
