@@ -11,6 +11,7 @@ Before proposing or changing portfolio design, content, or frontend code, read:
 3. `docs/design/living-system-portfolio-direction.md`
 4. `docs/design/public-content-curation.md`
 5. `docs/design/frontend-skill-selection.md`
+6. `docs/design/homepage-v2-representative-experiment.md`
 
 Read additional documents only when they are relevant to the exact task.
 
@@ -173,20 +174,33 @@ Do not treat a successful build, valid HTML, or absence of console errors as vis
 
 ## Current Experiment Scope
 
-The first Living System experiment is limited to:
+The exact first experiment is defined in:
+
+`docs/design/homepage-v2-representative-experiment.md`
+
+It is limited to:
 
 ```text
-Homepage first viewport
-+ transition into the next section
+existing navigation
++ homepage first viewport
++ a visible transition into the next section
 ```
+
+The two concept options must use the same frozen content inventory and show only:
+
+- Fauzan Widianto / Analytical Systems Builder;
+- the approved headline and supporting statement;
+- Explore the systems, Download CV, LinkedIn, and GitHub;
+- Odoo Process Control Tower;
+- Telegram Codex Controller.
 
 The experiment should establish the visual language, not rebuild the full website.
 
 Allowed during the experiment:
 
 - inspect the current homepage and relevant styles;
-- create bounded concept options using real approved content;
-- implement the selected slice in an isolated local branch or worktree after approval;
+- create the two bounded concept options defined by the experiment brief;
+- implement the selected slice in an isolated local branch or worktree only after owner approval;
 - run a local static server;
 - capture local responsive screenshots;
 - make fixes required to match the approved concept.
@@ -194,6 +208,7 @@ Allowed during the experiment:
 Not allowed during the experiment:
 
 - modifying or deploying the public site before local approval;
+- coding before one concept is explicitly approved;
 - redesigning downstream homepage sections;
 - rebuilding project case studies;
 - changing navigation architecture for the full website;
