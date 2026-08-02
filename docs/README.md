@@ -20,17 +20,22 @@ The public positioning is **Analytical Systems Builder**: from problems and data
 
 ## Current Checkpoint
 
-Homepage v1 is frozen at commit `67cb782`.
+Homepage v1 is frozen at commit `67cb782` and remains the active public implementation.
 
-Before proposing homepage changes, read [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md). The next portfolio priority is the Odoo ERP Analytics case study page, not another homepage redesign.
+The next renewal direction is frozen in [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md). It defines a mature Living System experiment, content maturity gates, external frontend-skill evaluation, local review, and approval phases. It does **not** authorize immediate changes to the live homepage.
+
+Before proposing homepage changes, read both the v1 freeze and the Living System direction. The first V2 homepage work, when approved to begin, must be an isolated local experiment limited to one representative surface.
+
+The Odoo ERP Analytics case study remains the strongest current public proof destination.
 
 ## Read Order
 
 1. [core/README.md](core/README.md)
 2. [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md)
-3. [homepage/README.md](homepage/README.md)
-4. [design/README.md](design/README.md)
-5. [case-studies/README.md](case-studies/README.md)
+3. [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md)
+4. [homepage/README.md](homepage/README.md)
+5. [design/README.md](design/README.md)
+6. [case-studies/README.md](case-studies/README.md)
 
 ## Active Documentation Areas
 
@@ -38,7 +43,7 @@ Before proposing homepage changes, read [homepage/HOMEPAGE_V1_FREEZE.md](homepag
 | --- | --- |
 | [core/](core/README.md) | Portfolio philosophy, long-term vision, working principles, and ChatGPT/Codex workflow. |
 | [homepage/](homepage/README.md) | Homepage frozen checkpoint, experience architecture, and future section boundaries. |
-| [design/](design/README.md) | Visitor psychology, information architecture, and high-level visual direction. |
+| [design/](design/README.md) | Visitor psychology, information architecture, visual direction, and the frozen Living System renewal direction. |
 | [case-studies/](case-studies/README.md) | Case-study structure and the Odoo ERP Analytics flagship direction. |
 
 ## Source-of-Truth Ownership
@@ -51,6 +56,7 @@ Before proposing homepage changes, read [homepage/HOMEPAGE_V1_FREEZE.md](homepag
 | ChatGPT + Codex tool division | [core/chatgpt-codex-tool-division.md](core/chatgpt-codex-tool-division.md) |
 | Portfolio working principles | [core/portfolio-working-principles.md](core/portfolio-working-principles.md) |
 | Homepage v1 freeze checkpoint | [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md) |
+| Living System renewal direction and phased experiment | [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md) |
 | Homepage experience | [homepage/homepage-experience-blueprint.md](homepage/homepage-experience-blueprint.md) |
 | Capability Graph concept | [homepage/homepage-capability-graph.md](homepage/homepage-capability-graph.md) |
 | Capability Graph feature specification | [homepage/homepage-capability-graph-feature-spec.md](homepage/homepage-capability-graph-feature-spec.md) |
@@ -64,15 +70,17 @@ Before proposing homepage changes, read [homepage/HOMEPAGE_V1_FREEZE.md](homepag
 
 ## Rules for Future Sessions
 
-- Do not reopen the homepage structure unless the user explicitly asks or real visitor feedback shows a problem.
-- Do not implement homepage features before the relevant concept document is stable.
+- Do not change the active public homepage from the Living System direction document alone.
+- Do not implement homepage features before the relevant concept and representative surface are explicitly approved.
+- Keep experimental V2 work isolated and local until review is complete.
+- Do not publish immature projects simply to increase project count.
 - Do not build the Capability Graph UI from these docs alone.
 - Do not build the Thinking Lab UI from these docs alone.
 - Do not repeat the full philosophy in every document.
 - Link to the source of truth instead of duplicating long sections.
 - Keep AI positioned as an accelerator, not the identity.
 - Keep the story order: business problem -> process understanding -> business logic -> technology -> evidence.
-- After the homepage v1 freeze, prioritize the Odoo ERP Analytics case study page as the main proof destination.
+- Keep Odoo ERP Analytics as the strongest current public proof destination until another project passes the maturity gate.
 
 ## Historical Notes
 
