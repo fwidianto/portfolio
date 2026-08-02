@@ -33,7 +33,9 @@ The next concept uses two featured projects:
 
 There is no supporting project layer for now. Other work may not be promoted merely to fill the interface.
 
-Before proposing homepage changes, read the v1 freeze, Living System direction, and public content curation. The first V2 homepage work, when approved to begin, must be an isolated local experiment limited to one representative surface.
+The external frontend-skill decision is frozen in [design/frontend-skill-selection.md](design/frontend-skill-selection.md). The first experiment will use only `frontend-design` and `design-review` from `julianoczkowski/designer-skills`, after repository guardrails are approved. The full external design-flow suite is not selected.
+
+Before proposing homepage changes, read the v1 freeze, Living System direction, public content curation, and frontend-skill selection. The first V2 homepage work, when approved to begin, must be an isolated local experiment limited to one representative surface.
 
 ## Read Order
 
@@ -41,9 +43,10 @@ Before proposing homepage changes, read the v1 freeze, Living System direction, 
 2. [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md)
 3. [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md)
 4. [design/public-content-curation.md](design/public-content-curation.md)
-5. [homepage/README.md](homepage/README.md)
-6. [design/README.md](design/README.md)
-7. [case-studies/README.md](case-studies/README.md)
+5. [design/frontend-skill-selection.md](design/frontend-skill-selection.md)
+6. [homepage/README.md](homepage/README.md)
+7. [design/README.md](design/README.md)
+8. [case-studies/README.md](case-studies/README.md)
 
 ## Active Documentation Areas
 
@@ -51,7 +54,7 @@ Before proposing homepage changes, read the v1 freeze, Living System direction, 
 | --- | --- |
 | [core/](core/README.md) | Portfolio philosophy, long-term vision, working principles, and ChatGPT/Codex workflow. |
 | [homepage/](homepage/README.md) | Homepage frozen checkpoint, experience architecture, and future section boundaries. |
-| [design/](design/README.md) | Visitor psychology, information architecture, visual direction, Living System renewal direction, and public content curation. |
+| [design/](design/README.md) | Visitor psychology, information architecture, visual direction, Living System renewal direction, public content curation, and external frontend-skill selection. |
 | [case-studies/](case-studies/README.md) | Existing case-study material, including the Odoo project history that is evolving into the Process Control Tower presentation. |
 
 ## Source-of-Truth Ownership
@@ -66,6 +69,7 @@ Before proposing homepage changes, read the v1 freeze, Living System direction, 
 | Homepage v1 freeze checkpoint | [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md) |
 | Living System renewal direction and phased experiment | [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md) |
 | Public project and content curation | [design/public-content-curation.md](design/public-content-curation.md) |
+| External frontend-skill selection | [design/frontend-skill-selection.md](design/frontend-skill-selection.md) |
 | Homepage experience | [homepage/homepage-experience-blueprint.md](homepage/homepage-experience-blueprint.md) |
 | Capability Graph concept | [homepage/homepage-capability-graph.md](homepage/homepage-capability-graph.md) |
 | Capability Graph feature specification | [homepage/homepage-capability-graph-feature-spec.md](homepage/homepage-capability-graph-feature-spec.md) |
@@ -86,6 +90,8 @@ Before proposing homepage changes, read the v1 freeze, Living System direction, 
 - Treat Odoo ERP Analytics and Odoo Process Control Tower as one evolving project, not separate entries.
 - Use only Odoo Process Control Tower and Telegram Codex Controller as featured projects in the next concept.
 - Do not create a supporting project layer unless the user explicitly revises the curation.
+- Use [design/frontend-skill-selection.md](design/frontend-skill-selection.md) as the authority for the external skill experiment.
+- Do not install or use the selected external skills before the repository `AGENTS.md` guardrails are reviewed and approved.
 - Do not publish immature projects simply to increase project count.
 - Do not build the Capability Graph UI from these docs alone.
 - Do not build the Thinking Lab UI from these docs alone.
