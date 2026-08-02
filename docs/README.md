@@ -24,18 +24,19 @@ Homepage v1 is frozen at commit `67cb782` and remains the active public implemen
 
 The next renewal direction is frozen in [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md). It defines a mature Living System experiment, content maturity gates, external frontend-skill evaluation, local review, and approval phases. It does **not** authorize immediate changes to the live homepage.
 
-Before proposing homepage changes, read both the v1 freeze and the Living System direction. The first V2 homepage work, when approved to begin, must be an isolated local experiment limited to one representative surface.
+The allowed public content set is frozen in [design/public-content-curation.md](design/public-content-curation.md). Odoo ERP Analytics remains the sole flagship. Other work must follow its Featured, Supporting Evidence, or Hold Back classification and may not be promoted merely to fill the interface.
 
-The Odoo ERP Analytics case study remains the strongest current public proof destination.
+Before proposing homepage changes, read the v1 freeze, Living System direction, and public content curation. The first V2 homepage work, when approved to begin, must be an isolated local experiment limited to one representative surface.
 
 ## Read Order
 
 1. [core/README.md](core/README.md)
 2. [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md)
 3. [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md)
-4. [homepage/README.md](homepage/README.md)
-5. [design/README.md](design/README.md)
-6. [case-studies/README.md](case-studies/README.md)
+4. [design/public-content-curation.md](design/public-content-curation.md)
+5. [homepage/README.md](homepage/README.md)
+6. [design/README.md](design/README.md)
+7. [case-studies/README.md](case-studies/README.md)
 
 ## Active Documentation Areas
 
@@ -43,7 +44,7 @@ The Odoo ERP Analytics case study remains the strongest current public proof des
 | --- | --- |
 | [core/](core/README.md) | Portfolio philosophy, long-term vision, working principles, and ChatGPT/Codex workflow. |
 | [homepage/](homepage/README.md) | Homepage frozen checkpoint, experience architecture, and future section boundaries. |
-| [design/](design/README.md) | Visitor psychology, information architecture, visual direction, and the frozen Living System renewal direction. |
+| [design/](design/README.md) | Visitor psychology, information architecture, visual direction, Living System renewal direction, and public content curation. |
 | [case-studies/](case-studies/README.md) | Case-study structure and the Odoo ERP Analytics flagship direction. |
 
 ## Source-of-Truth Ownership
@@ -57,6 +58,7 @@ The Odoo ERP Analytics case study remains the strongest current public proof des
 | Portfolio working principles | [core/portfolio-working-principles.md](core/portfolio-working-principles.md) |
 | Homepage v1 freeze checkpoint | [homepage/HOMEPAGE_V1_FREEZE.md](homepage/HOMEPAGE_V1_FREEZE.md) |
 | Living System renewal direction and phased experiment | [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md) |
+| Public project and content curation | [design/public-content-curation.md](design/public-content-curation.md) |
 | Homepage experience | [homepage/homepage-experience-blueprint.md](homepage/homepage-experience-blueprint.md) |
 | Capability Graph concept | [homepage/homepage-capability-graph.md](homepage/homepage-capability-graph.md) |
 | Capability Graph feature specification | [homepage/homepage-capability-graph-feature-spec.md](homepage/homepage-capability-graph-feature-spec.md) |
@@ -73,6 +75,7 @@ The Odoo ERP Analytics case study remains the strongest current public proof des
 - Do not change the active public homepage from the Living System direction document alone.
 - Do not implement homepage features before the relevant concept and representative surface are explicitly approved.
 - Keep experimental V2 work isolated and local until review is complete.
+- Use [design/public-content-curation.md](design/public-content-curation.md) as the authority for which projects may be featured, used as supporting evidence, or held back.
 - Do not publish immature projects simply to increase project count.
 - Do not build the Capability Graph UI from these docs alone.
 - Do not build the Thinking Lab UI from these docs alone.
