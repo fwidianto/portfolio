@@ -22,9 +22,16 @@ The public positioning is **Analytical Systems Builder**: from problems and data
 
 Homepage v1 is frozen at commit `67cb782` and remains the active public implementation.
 
-The next renewal direction is frozen in [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md). It defines a mature Living System experiment, content maturity gates, external frontend-skill evaluation, local review, and approval phases. It does **not** authorize immediate changes to the live homepage.
+The next renewal direction is frozen in [design/living-system-portfolio-direction.md](design/living-system-portfolio-direction.md). It defines a mature Living System experiment, external frontend-skill evaluation, local review, and approval phases. It does **not** authorise immediate changes to the live homepage.
 
-The allowed public content set is frozen in [design/public-content-curation.md](design/public-content-curation.md). Odoo ERP Analytics remains the sole flagship. Other work must follow its Featured, Supporting Evidence, or Hold Back classification and may not be promoted merely to fill the interface.
+The allowed public content set is frozen in [design/public-content-curation.md](design/public-content-curation.md).
+
+The next concept uses two featured projects:
+
+1. **Odoo Process Control Tower** — the evolved form of the earlier Odoo ERP Analytics project;
+2. **Telegram Codex Controller** — the current Systems Lab / AI-assisted workflow project.
+
+There is no supporting project layer for now. Other work may not be promoted merely to fill the interface.
 
 Before proposing homepage changes, read the v1 freeze, Living System direction, and public content curation. The first V2 homepage work, when approved to begin, must be an isolated local experiment limited to one representative surface.
 
@@ -45,7 +52,7 @@ Before proposing homepage changes, read the v1 freeze, Living System direction, 
 | [core/](core/README.md) | Portfolio philosophy, long-term vision, working principles, and ChatGPT/Codex workflow. |
 | [homepage/](homepage/README.md) | Homepage frozen checkpoint, experience architecture, and future section boundaries. |
 | [design/](design/README.md) | Visitor psychology, information architecture, visual direction, Living System renewal direction, and public content curation. |
-| [case-studies/](case-studies/README.md) | Case-study structure and the Odoo ERP Analytics flagship direction. |
+| [case-studies/](case-studies/README.md) | Existing case-study material, including the Odoo project history that is evolving into the Process Control Tower presentation. |
 
 ## Source-of-Truth Ownership
 
@@ -64,8 +71,8 @@ Before proposing homepage changes, read the v1 freeze, Living System direction, 
 | Capability Graph feature specification | [homepage/homepage-capability-graph-feature-spec.md](homepage/homepage-capability-graph-feature-spec.md) |
 | Thinking Lab | [homepage/homepage-thinking-lab.md](homepage/homepage-thinking-lab.md) |
 | Currently Building section | [homepage/homepage-currently-building.md](homepage/homepage-currently-building.md) |
-| Flagship case study routing | [homepage/homepage-flagship-case-study.md](homepage/homepage-flagship-case-study.md) |
-| Odoo ERP Analytics case study | [case-studies/odoo-erp-analytics.md](case-studies/odoo-erp-analytics.md) |
+| Flagship case-study routing | [homepage/homepage-flagship-case-study.md](homepage/homepage-flagship-case-study.md) |
+| Existing Odoo case-study source | [case-studies/odoo-erp-analytics.md](case-studies/odoo-erp-analytics.md) |
 | Visitor psychology | [design/visitor-psychology.md](design/visitor-psychology.md) |
 | Information architecture | [design/information-architecture.md](design/information-architecture.md) |
 | Visual direction | [design/visual-direction.md](design/visual-direction.md) |
@@ -75,7 +82,10 @@ Before proposing homepage changes, read the v1 freeze, Living System direction, 
 - Do not change the active public homepage from the Living System direction document alone.
 - Do not implement homepage features before the relevant concept and representative surface are explicitly approved.
 - Keep experimental V2 work isolated and local until review is complete.
-- Use [design/public-content-curation.md](design/public-content-curation.md) as the authority for which projects may be featured, used as supporting evidence, or held back.
+- Use [design/public-content-curation.md](design/public-content-curation.md) as the authority for which projects may appear.
+- Treat Odoo ERP Analytics and Odoo Process Control Tower as one evolving project, not separate entries.
+- Use only Odoo Process Control Tower and Telegram Codex Controller as featured projects in the next concept.
+- Do not create a supporting project layer unless the user explicitly revises the curation.
 - Do not publish immature projects simply to increase project count.
 - Do not build the Capability Graph UI from these docs alone.
 - Do not build the Thinking Lab UI from these docs alone.
@@ -83,7 +93,6 @@ Before proposing homepage changes, read the v1 freeze, Living System direction, 
 - Link to the source of truth instead of duplicating long sections.
 - Keep AI positioned as an accelerator, not the identity.
 - Keep the story order: business problem -> process understanding -> business logic -> technology -> evidence.
-- Keep Odoo ERP Analytics as the strongest current public proof destination until another project passes the maturity gate.
 
 ## Historical Notes
 
