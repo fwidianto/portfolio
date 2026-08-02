@@ -1,6 +1,6 @@
 # Portfolio Agent Guardrails
 
-This file contains the mandatory operating rules for AI agents working in this repository.
+This file contains mandatory operating rules for AI agents working in this repository.
 
 ## Read First
 
@@ -9,11 +9,12 @@ Before proposing or changing portfolio design, content, or frontend code, read:
 1. `docs/README.md`
 2. `docs/homepage/HOMEPAGE_V1_FREEZE.md`
 3. `docs/design/living-system-portfolio-direction.md`
-4. `docs/design/public-content-curation.md`
-5. `docs/design/frontend-skill-selection.md`
-6. `docs/design/homepage-v2-representative-experiment.md`
+4. `docs/design/analytical-systems-builder-identity-lens.md`
+5. `docs/design/public-content-curation.md`
+6. `docs/design/frontend-skill-selection.md`
+7. `docs/design/homepage-v2-representative-experiment.md`
 
-Read additional documents only when they are relevant to the exact task.
+Read additional documents only when relevant to the exact task.
 
 ## Professional Identity
 
@@ -23,20 +24,37 @@ The portfolio identity is:
 Analytical Systems Builder
 ```
 
-Core positioning:
+This is not merely a title. Every public concept must communicate:
 
 ```text
-From problems and data to system design, insights, and AI-powered workflows.
+Analytical
+= investigate complexity, validate evidence, and structure ambiguity
+
+Systems
+= understand flows, dependencies, handoffs, and end-to-end consequences
+
+Builder
+= turn that understanding into useful tools, workflows, interfaces, and operating systems
 ```
 
-Present Fauzan as someone who understands business and operational problems, structures process and data logic, builds useful reporting and workflows, and uses AI-assisted development with human judgment.
+The portfolio should make this sequence visible:
+
+```text
+messy reality
+-> structured understanding
+-> connected system
+-> usable outcome
+```
+
+A visitor should infer this identity from the experience even if the title were hidden.
 
 Do not present Fauzan as:
 
 - a pure software developer;
-- a generic dashboard builder;
+- a generic data analyst or dashboard builder;
 - a flashy AI engineer;
 - an autonomous-agent expert without evidence;
+- a consultant using abstract language without built outcomes;
 - a collection of disconnected projects.
 
 ## Story Order
@@ -51,17 +69,51 @@ Business problem
 -> evidence
 ```
 
-Do not lead with tools, frameworks, or AI terminology when the business problem is the real reason the work matters.
+Do not lead with tools, frameworks, AI terminology, or decorative metrics when the business problem is what makes the work meaningful.
+
+## Mandatory Identity Test
+
+Every concept, interaction, and implementation must pass all three dimensions.
+
+### Analytical
+
+- The problem-solving value is understandable quickly.
+- Hierarchy reveals reasoning rather than decoration.
+- Claims and evidence are credible and supported.
+
+### Systems
+
+- Sections and projects feel connected rather than assembled randomly.
+- Relationships, flow, ownership, or sequence are visible where useful.
+- Responsive changes preserve system logic.
+
+### Builder
+
+- Analysis clearly leads to a practical outcome.
+- Projects appear as functioning systems, not abstract interests.
+- The visitor has a clear route toward evidence of what was built.
+
+If one dimension is weak, the concept is not approved.
 
 ## Living System Direction
 
 The approved renewal direction is a mature **Living System**:
 
-- Editorial / Casebook foundation;
-- Systems Canvas for relationships, flows, and reasoning;
-- restrained interaction and motion;
-- calm, professional, readable, and quietly distinctive;
-- business-oriented rather than developer-template-like.
+```text
+Editorial / Casebook foundation
++ Systems Canvas for relationships and flow
++ restrained systems motion
++ intentional responsive adaptation
+```
+
+The likely design interpretation is:
+
+```text
+Living System Editorial as the base
++ selected Living World connection cues
+```
+
+The editorial foundation protects clarity and professional credibility. Connection cues should make systems thinking visible without becoming a literal world map or game interface.
 
 Avoid:
 
@@ -69,112 +121,141 @@ Avoid:
 - automatic dark mode or theme toggles;
 - glassmorphism;
 - bento-grid defaults;
-- excessive gradients, glow, animation, or floating widgets;
-- literal game maps or theme-park interpretations;
-- generic newspaper styling;
+- generic project-card walls;
+- decorative charts or unsupported metrics;
+- terminal or code-editor imagery as the main identity;
+- excessive gradients, glow, parallax, or floating widgets;
+- literal game maps, futuristic control rooms, or theme-park interpretations;
 - visual spectacle that weakens business clarity.
+
+## Motion Rules
+
+Motion is permitted only when it explains:
+
+- sequence;
+- connection;
+- state;
+- direction;
+- cause and effect;
+- progression toward a usable result.
+
+Good motion reveals a reading sequence, traces a meaningful path, highlights one system while preserving context, and settles into a stable state.
+
+Do not use continuous floating, pulsing, glowing, rotating, bouncing, or decorative movement. Support `prefers-reduced-motion`.
+
+## Responsive Rules
+
+Responsiveness must preserve meaning rather than merely shrink desktop.
+
+- Desktop may show the full relationship between identity and the two systems.
+- Tablet requires an intentional intermediate composition.
+- Mobile becomes a clear vertical narrative: identity -> value -> systems -> evidence.
+- Complex paths must simplify into a vertical rail or staged reveal without becoming a stack of generic cards.
+- Touch targets, reading order, line length, and actions must remain intentional.
 
 ## Approved Public Projects
 
 Use only these two featured projects unless the owner explicitly changes the curation:
 
 1. **Odoo Process Control Tower**
-   - This is the evolved form of the earlier Odoo ERP Analytics project.
-   - Treat them as one project, never as separate portfolio entries.
+   - The evolved form of the earlier Odoo ERP Analytics project.
+   - Treat both names as one project, never separate entries.
+   - Proves ERP analysis, connected operating flow, and a practical visibility/control system.
 
 2. **Telegram Codex Controller**
-   - Present it as a bounded AI-workflow control and observability system.
-   - Emphasise architecture, permissions, project isolation, task lifecycle, testing, and practical use.
+   - A bounded AI-workflow control and observability system.
+   - Emphasise architecture, permissions, project isolation, task lifecycle, testing, and practical operation.
+
+Together they should communicate:
+
+```text
+business operating systems
++
+AI-assisted work systems
+=
+Analytical Systems Builder
+```
 
 There is no supporting project layer for now.
 
-Do not add project cards or public links for Personal OS, MCU Vault, HS Code automation, AI ERP Intelligence Dashboard, Investment Analytics Dashboard, separate agent orchestration experiments, or unfinished prototypes unless the owner explicitly promotes them.
+Do not add project cards or public links for Personal OS, MCU Vault, HS Code automation, AI ERP Intelligence Dashboard, Investment Analytics Dashboard, separate agent orchestration experiments, or unfinished prototypes unless explicitly promoted.
 
-Professional experience may still mention factual reporting, profitability, ERP, and automation work. Do not repackage those facts as invented standalone products.
+Professional experience may mention factual reporting, profitability, ERP, and automation work. Do not repackage those facts as invented standalone products.
 
 ## Content Integrity
 
 Never invent or exaggerate:
 
-- projects;
-- clients;
-- employers;
-- metrics;
-- financial outcomes;
-- user counts;
-- performance improvements;
-- technical sophistication;
-- test results;
-- completion status;
-- product maturity.
+- projects, clients, or employers;
+- metrics, financial outcomes, user counts, or performance improvements;
+- technical sophistication or completion status;
+- test results or product maturity.
 
 Use public-safe, supported evidence only.
 
 Never expose:
 
-- company-confidential records;
-- real ERP transactions or customer data;
+- company-confidential records or real ERP transactions;
 - credentials, tokens, chat IDs, secrets, or private usernames;
-- sensitive local paths when unnecessary;
 - private prompts, logs, repositories, or Personal OS content;
+- unnecessary sensitive local paths;
 - unrestricted machine-control interfaces.
 
 ## Architecture Boundary
 
-The current site is a static HTML/CSS/JavaScript website.
+The current site is static HTML, CSS, and JavaScript.
 
 - Continue from the existing implementation.
-- Reuse existing assets, CSS variables, components, and conventions where appropriate.
-- Do not migrate to React, Vite, Next.js, another framework, or another deployment model without explicit owner approval.
-- Do not add dependencies merely to achieve a visual effect that can be implemented cleanly in the current architecture.
-- Keep changes limited to the smallest number of files needed for the approved outcome.
+- Reuse existing assets, variables, components, and conventions where appropriate.
+- Do not migrate to React, Vite, Next.js, another framework, or another deployment model without explicit approval.
+- Do not add dependencies for effects that can be implemented cleanly in the current architecture.
+- Change the smallest number of files required for the approved visible outcome.
 
 ## External Frontend Skills
 
-The selected third-party skills for the experiment are:
+The selected third-party skills are:
 
 - `frontend-design`
 - `design-review`
 
 from `julianoczkowski/designer-skills`.
 
-Repository rules in this file override any conflicting skill defaults.
+This file overrides conflicting skill defaults. In particular:
 
-In particular:
+- no automatic dark mode;
+- no full-site redesign;
+- no invented content;
+- no extra project layer;
+- no coding beyond the approved surface;
+- no committed temporary screenshots or QA artifacts unless requested.
 
-- do not add automatic dark mode;
-- do not redesign the whole site;
-- do not invent content to fill layouts;
-- do not create extra design documents unless required for the current approval gate;
-- do not continue beyond the approved representative surface;
-- do not publish or commit temporary screenshots and QA artifacts unless requested.
-
-The external skill provides design and review methodology. It does not control portfolio identity, project selection, claims, or scope.
+The skills provide design and review methodology. They do not control identity, claims, project selection, architecture, or scope.
 
 ## Approval Gates
 
-For meaningful visual work, follow this sequence:
+For meaningful visual work, follow:
 
 ```text
 Inspect existing implementation
 -> define one bounded outcome
--> create concept options
+-> create or refine concept options
+-> test each concept against Analytical / Systems / Builder
 -> owner selects or revises a concept
 -> freeze the approved visual specification
 -> implement one representative slice locally
 -> capture desktop, tablet, and mobile screenshots
--> compare rendered result with the approved concept
+-> compare the rendered result with the approved concept
 -> owner reviews locally
 -> expand only after explicit approval
 ```
 
 Do not move from concept to implementation without explicit owner approval.
 
-Do not treat a successful build, valid HTML, or absence of console errors as visual approval.
+A successful build, valid HTML, or absence of console errors is not visual approval.
 
 ## Current Experiment Scope
 
-The exact first experiment is defined in:
+The exact experiment is defined in:
 
 `docs/design/homepage-v2-representative-experiment.md`
 
@@ -186,7 +267,7 @@ existing navigation
 + a visible transition into the next section
 ```
 
-The two concept options must use the same frozen content inventory and show only:
+The concept may show only:
 
 - Fauzan Widianto / Analytical Systems Builder;
 - the approved headline and supporting statement;
@@ -194,31 +275,27 @@ The two concept options must use the same frozen content inventory and show only
 - Odoo Process Control Tower;
 - Telegram Codex Controller.
 
-The experiment should establish the visual language, not rebuild the full website.
+It must establish the identity and visual language, not rebuild the full website.
 
-Allowed during the experiment:
+Allowed:
 
 - inspect the current homepage and relevant styles;
-- create the two bounded concept options defined by the experiment brief;
+- refine bounded concept options using real approved content;
 - implement the selected slice in an isolated local branch or worktree only after owner approval;
-- run a local static server;
-- capture local responsive screenshots;
-- make fixes required to match the approved concept.
+- run a local static server and capture responsive screenshots;
+- make fixes required for concept fidelity.
 
-Not allowed during the experiment:
+Not allowed:
 
 - modifying or deploying the public site before local approval;
 - coding before one concept is explicitly approved;
-- redesigning downstream homepage sections;
-- rebuilding project case studies;
-- changing navigation architecture for the full website;
+- redesigning downstream homepage sections or project case studies;
+- changing the full navigation architecture;
 - installing a framework;
 - creating a large project grid;
 - propagating a concept before the representative slice is approved.
 
 ## Local Review
-
-All experimental frontend work must be reviewed locally before publication.
 
 Minimum viewports:
 
@@ -228,29 +305,44 @@ Minimum viewports:
 
 Review:
 
-- immediate positioning clarity;
-- visual continuity with the existing portfolio;
+- Analytical clarity;
+- Systems coherence;
+- Builder evidence;
+- professional credibility;
+- visual continuity;
 - copy accuracy;
-- hierarchy and typography;
-- spacing and container alignment;
-- responsive behaviour;
-- next-section transition;
+- hierarchy, typography, and spacing;
+- responsive preservation of meaning;
 - motion purpose and reduced-motion behaviour;
-- public-safety of all visible content;
+- public safety;
 - visual fidelity to the approved concept.
 
-Keep temporary concepts, screenshots, and review artifacts local until the owner approves publishing or committing them.
+Each of the following must score at least 4/5 before expansion:
+
+- Analytical clarity;
+- Systems coherence;
+- Builder evidence;
+- Professional credibility;
+- Responsive preservation;
+- Motion purpose.
+
+Keep temporary concepts, screenshots, and review artifacts local until approved.
 
 ## Completion Standard
 
 A scoped task is complete only when:
 
-- the requested visible outcome works locally;
-- no unrelated page or feature was changed;
-- the implementation matches the approved concept closely;
+- the visible outcome works locally;
+- no unrelated page or feature changed;
+- the implementation closely matches the approved concept;
 - desktop, tablet, and mobile were reviewed;
+- the identity test passes;
 - no invented or confidential content appears;
-- changed files and intentional non-changes are reported clearly;
+- changed files and intentional non-changes are reported;
 - the agent stops at the approved boundary.
+
+When novelty conflicts with identity, preserve the identity.
+
+When interaction complexity conflicts with clarity, simplify the interaction.
 
 When uncertain between a minimal solution and a broader redesign, choose the minimal solution and stop.
