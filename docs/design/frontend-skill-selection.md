@@ -4,7 +4,7 @@ Status: Frozen tool-selection decision / pre-development checkpoint
 
 Date: 2026-08-02
 
-This document completes Phase 3 of the Living System portfolio renewal. It records which external frontend skills will be tested, why they were selected, and which parts of larger skill suites will not be adopted.
+This document records which external frontend skills will be tested, why they were selected, and which parts of larger skill suites will not be adopted.
 
 ## Goal
 
@@ -146,9 +146,11 @@ design-review
 
 This separation lets us evaluate both creation quality and review discipline.
 
-## Required Overrides
+## Repository Overrides
 
-The repository `AGENTS.md` must override the following defaults before either skill is used:
+The root `AGENTS.md` is now the operational authority for the experiment and overrides conflicting external skill defaults.
+
+Key overrides include:
 
 - no automatic dark mode or theme toggle;
 - no framework migration;
@@ -190,11 +192,11 @@ Avoid defaulting to:
 
 ## Installation Boundary
 
-Selection does not yet authorise installation or frontend changes.
+The root `AGENTS.md` guardrails are now present. The two selected skills may be installed for the isolated experiment.
 
-The skills should be installed only after Phase 4 creates and approves a compact repository `AGENTS.md`.
+Installation must remain limited to the intended agent environment or local machine. Do not copy third-party skill files into public website content.
 
-Installation should be limited to the intended agent environment or isolated experiment branch/worktree. Do not copy third-party skills into public website content.
+Installing the skills does not authorise frontend implementation. Concept review and explicit owner approval remain required before code changes.
 
 ## Evaluation Criteria
 
@@ -214,4 +216,5 @@ After the first representative slice, evaluate:
 - Phase 1 — Living System direction: complete.
 - Phase 2 — Public content curation: complete.
 - Phase 3 — External frontend skill selection: complete.
-- Phase 4 — Review and create repository guardrails in `AGENTS.md`: next.
+- Phase 4 — Repository guardrails in `AGENTS.md`: complete.
+- Phase 5 — Define the representative homepage experiment: next.
