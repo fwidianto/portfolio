@@ -14,9 +14,9 @@ Before proposing or changing portfolio design, content, or frontend code, read:
 6. `docs/design/frontend-skill-selection.md`
 7. `docs/design/homepage-v2-representative-experiment.md`
 
-For the active Ariadne v2 experiment also read:
+For the active Ariadne v3 experiment also read:
 
-8. `.design/homepage-v2-skill-experiment/ARIADNE_V2_NARRATIVE_PILOT.md`
+8. `.design/homepage-v2-skill-experiment/ARIADNE_V3_PROJECT_IDENTITY_PILOT.md`
 
 Read additional documents only when relevant to the exact task.
 
@@ -146,11 +146,43 @@ Motion is useful when it communicates or creates:
 - progression toward a usable result;
 - ambient liveliness that makes a system feel active rather than frozen.
 
-Continuous motion is explicitly allowed for the active Ariadne v2 experiment when it remains visually calm and supports atmosphere, system flow, connection, or state. Examples include subtle ambient drift, a recurring path flow, restrained system-state pulses, or slow media movement.
+Continuous motion is allowed when it remains visually calm and supports atmosphere, system flow, connection, or state.
 
-Do not use generic bouncing, random particles, constant attention-seeking glow, or several unrelated motions competing at the same time. Motion must not interfere with reading or navigation.
+### Semantic economy
+
+Do not repeat the same meaning through static and animated cues without a reason.
+
+If motion already makes direction obvious, remove static arrows, chevrons, or `next` markers unless they add a second meaning or remain necessary in reduced-motion mode.
+
+Every visible cue should answer:
+
+```text
+What information does this add that is not already clear?
+```
+
+If the answer is `none`, remove it.
+
+### Project-specific motion
+
+Featured-project motion should teach something about that specific system.
+
+Do not use generic `system activity` animation that could be copied unchanged between Odoo Process Control Tower and Telegram Codex Controller.
+
+Prefer motion derived from real approved behavior, such as document traceability, lifecycle state, branching/convergence, controller request flow, or another genuine system relationship.
 
 Support `prefers-reduced-motion` and preserve the same meaning in the reduced-motion state.
+
+## Perceptual Contrast
+
+Important words and controls must be discoverable at normal attention, not merely technically present.
+
+- white or near-white buttons must not disappear into light backgrounds;
+- primary and secondary actions must have perceptible hierarchy;
+- small text and metadata must remain readable without pixel-peeping;
+- borders, fills, shadows, and text weights should create enough surface separation;
+- hover/focus states must not be the only way a user discovers interactivity.
+
+Numeric accessibility checks are necessary where applicable, but are not a substitute for perceptual legibility.
 
 ## Responsive Rules
 
@@ -246,39 +278,28 @@ For meaningful visual work, follow:
 ```text
 Inspect existing implementation and previous rendered evidence
 -> define one bounded outcome
--> establish macro composition and motion concept
--> implement one representative narrative chapter locally
--> capture desktop, tablet, and mobile screenshots
--> critique the screenshots for optical and compositional maturity
--> perform at most one bounded refinement pass
--> capture final rendered evidence
+-> establish macro composition and project-specific motion concept
+-> implement locally
+-> capture desktop, tablet, and mobile evidence
+-> apply explicit owner feedback
+-> use genuine screenshot critique only when image vision exists
 -> owner reviews locally
 -> expand only after explicit approval
 ```
 
-A successful build, valid HTML, aligned DOM coordinates, or absence of console errors is not visual approval.
+A successful build, valid HTML, aligned DOM coordinates, absence of console errors, or pixel-density measurement is not visual approval.
+
+When the implementation model has no image vision, do not pretend geometry analysis is equivalent to seeing the screenshot. Report that limitation and return final optical judgment to Fauzan or a fresh vision-capable reviewer.
 
 ## Experiment History and Active Scope
 
 ### Ariadne v1 — completed local pilot
 
-The original representative experiment was limited to:
+V1 successfully tested bounded execution, runtime invocation, responsive evidence, and stopping behavior. Owner review found the visual composition and micro-geometry insufficiently mature for propagation.
 
-```text
-existing navigation
-+ homepage first viewport
-+ visible transition into the next section
-```
+### Ariadne v2 — completed local pilot
 
-It successfully tested bounded execution, runtime invocation, responsive evidence, and stopping behavior. Owner review found the visual composition and micro-geometry insufficiently mature for propagation. Preserve that result as evidence; do not treat it as an approved final homepage design.
-
-### Ariadne v2 — owner-approved expansion (2026-08-07)
-
-For the next run, the older hero-only scope is superseded by the bounded narrative chapter defined in:
-
-`.design/homepage-v2-skill-experiment/ARIADNE_V2_NARRATIVE_PILOT.md`
-
-The active visual surface is:
+V2 expanded the experiment to:
 
 ```text
 existing navigation
@@ -287,29 +308,52 @@ existing navigation
 + one full representative Odoo Process Control Tower chapter
 ```
 
-This is intentionally larger than one viewport and intentionally smaller than a whole-homepage redesign. The goal is to judge page-level rhythm, composition continuity, and motion language across approximately the first two to three screen heights.
+Owner review found the result materially more mature and much more lively than v1. Continuous animation was a clear improvement. V2 also proved that the same Builder model could produce a substantially better result after improving the specialist workflow.
+
+Remaining owner feedback:
+
+- static arrows/chevrons can be redundant when animated flow already communicates direction;
+- project animations should express the featured project's identity instead of generic systems motion;
+- white/near-white controls on light backgrounds need stronger perceptual contrast;
+- the lower half of the homepage remains intentionally outside the new visual language for now.
+
+### Ariadne v3 — active bounded refinement
+
+The active task is:
+
+`.design/homepage-v2-skill-experiment/ARIADNE_V3_PROJECT_IDENTITY_PILOT.md`
+
+The active visual surface remains:
+
+```text
+existing navigation
++ hero / identity
++ systems transition
++ Odoo Process Control Tower representative chapter
+```
+
+V3 is a refinement of the successful v2 direction, not another broad redesign.
 
 Allowed:
 
-- use the current local Ariadne v1 result as comparative evidence, not unquestioned authority;
-- substantially refine the hero composition when needed for maturity;
-- redesign the transition between hero and systems so it feels continuous rather than attached;
-- create one complete Odoo representative chapter using public-safe existing content;
-- use purposeful continuous motion when it improves liveliness, flow, or system state;
-- use JavaScript only when HTML/CSS cannot deliver the approved interaction cleanly, and request approval before the first JavaScript edit when the task packet requires it;
-- run local browser rendering and capture responsive screenshots;
-- perform one screenshot-driven optical refinement pass.
+- remove redundant static direction cues when animation already communicates the same meaning;
+- preserve static direction only where reduced-motion comprehension genuinely needs it;
+- create one Odoo-specific animated 2D/SVG/system visual based on real public-safe document/process relationships;
+- strengthen control and text contrast inside the active surface;
+- preserve the v2 composition and liveliness unless owner feedback justifies a change;
+- use JavaScript only when HTML/CSS/SVG cannot deliver the approved interaction cleanly and the task packet's approval gate is satisfied;
+- run local browser rendering and responsive/motion validation.
 
 Not allowed:
 
-- redesigning the entire homepage;
+- redesigning the remaining homepage sections;
 - propagating the new language through Experience, Skills, Thinking, Contact, footer, or project detail pages;
-- building a full Telegram Codex Controller chapter in this run;
+- building the Telegram Codex Controller chapter;
 - adding supporting projects;
 - installing a framework or new dependency;
 - modifying or deploying the public site;
 - inventing claims, metrics, outcomes, or confidential evidence;
-- treating Ariadne's own critique as owner approval.
+- treating Ariadne's own output as owner approval.
 
 ## Local Review
 
@@ -325,31 +369,28 @@ Review:
 - Systems coherence;
 - Builder evidence;
 - professional credibility;
-- macro composition and visual center of gravity;
-- optical geometry and connector endpoints;
-- visual continuity across hero -> transition -> Odoo chapter;
-- copy accuracy;
+- composition continuity across hero -> transition -> Odoo chapter;
+- semantic economy and removal of redundant cues;
+- Odoo-specificity of the project motion;
+- perceptual contrast and control discoverability;
 - hierarchy, typography, spacing, and density rhythm;
 - responsive preservation of meaning;
 - motion purpose, liveliness, and reduced-motion behaviour;
-- public safety;
-- visual fidelity to the approved direction.
-
-Do not score maturity from technical checks alone. Render and inspect the page as an image and as a moving experience.
+- public safety.
 
 ## Completion Standard
 
-A scoped task is complete only when:
+A scoped v3 task is complete only when:
 
-- the visible outcome works locally;
+- owner feedback on redundant direction cues is addressed;
+- one Odoo-specific motion/visual identity is implemented without invented process claims;
+- important controls in the active surface are perceptually discoverable;
+- desktop, tablet, and mobile were validated;
+- motion and reduced-motion states were validated;
 - no unrelated page or feature changed;
-- the representative chapter feels compositionally coherent across its section boundaries;
-- desktop, tablet, and mobile were reviewed;
-- one screenshot-based optical critique and at most one bounded refinement pass were completed;
-- continuous motion, when present, has an explicit purpose and reduced-motion equivalent;
-- the identity test passes;
 - no invented or confidential content appears;
 - changed files and intentional non-changes are reported;
+- visual critique capability is stated honestly;
 - the agent stops at the approved boundary.
 
 When novelty conflicts with identity, preserve the identity.
