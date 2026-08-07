@@ -14,6 +14,10 @@ Before proposing or changing portfolio design, content, or frontend code, read:
 6. `docs/design/frontend-skill-selection.md`
 7. `docs/design/homepage-v2-representative-experiment.md`
 
+For the active Ariadne v2 experiment also read:
+
+8. `.design/homepage-v2-skill-experiment/ARIADNE_V2_NARRATIVE_PILOT.md`
+
 Read additional documents only when relevant to the exact task.
 
 ## Professional Identity
@@ -102,7 +106,7 @@ The approved renewal direction is a mature **Living System**:
 ```text
 Editorial / Casebook foundation
 + Systems Canvas for relationships and flow
-+ restrained systems motion
++ purposeful systems motion
 + intentional responsive adaptation
 ```
 
@@ -124,30 +128,35 @@ Avoid:
 - generic project-card walls;
 - decorative charts or unsupported metrics;
 - terminal or code-editor imagery as the main identity;
-- excessive gradients, glow, parallax, or floating widgets;
+- excessive gradients, glow, parallax, or floating widgets that compete with reading;
 - literal game maps, futuristic control rooms, or theme-park interpretations;
 - visual spectacle that weakens business clarity.
 
 ## Motion Rules
 
-Motion is permitted only when it explains:
+Motion may be one-shot, interactive, state-driven, or continuous when it supports the approved experience.
+
+Motion is useful when it communicates or creates:
 
 - sequence;
 - connection;
 - state;
 - direction;
 - cause and effect;
-- progression toward a usable result.
+- progression toward a usable result;
+- ambient liveliness that makes a system feel active rather than frozen.
 
-Good motion reveals a reading sequence, traces a meaningful path, highlights one system while preserving context, and settles into a stable state.
+Continuous motion is explicitly allowed for the active Ariadne v2 experiment when it remains visually calm and supports atmosphere, system flow, connection, or state. Examples include subtle ambient drift, a recurring path flow, restrained system-state pulses, or slow media movement.
 
-Do not use continuous floating, pulsing, glowing, rotating, bouncing, or decorative movement. Support `prefers-reduced-motion`.
+Do not use generic bouncing, random particles, constant attention-seeking glow, or several unrelated motions competing at the same time. Motion must not interfere with reading or navigation.
+
+Support `prefers-reduced-motion` and preserve the same meaning in the reduced-motion state.
 
 ## Responsive Rules
 
 Responsiveness must preserve meaning rather than merely shrink desktop.
 
-- Desktop may show the full relationship between identity and the two systems.
+- Desktop may show the full relationship between identity and the systems narrative.
 - Tablet requires an intentional intermediate composition.
 - Mobile becomes a clear vertical narrative: identity -> value -> systems -> evidence.
 - Complex paths must simplify into a vertical rail or staged reveal without becoming a stack of generic cards.
@@ -223,7 +232,6 @@ from `julianoczkowski/designer-skills`.
 This file overrides conflicting skill defaults. In particular:
 
 - no automatic dark mode;
-- no full-site redesign;
 - no invented content;
 - no extra project layer;
 - no coding beyond the approved surface;
@@ -236,64 +244,72 @@ The skills provide design and review methodology. They do not control identity, 
 For meaningful visual work, follow:
 
 ```text
-Inspect existing implementation
+Inspect existing implementation and previous rendered evidence
 -> define one bounded outcome
--> create or refine concept options
--> test each concept against Analytical / Systems / Builder
--> owner selects or revises a concept
--> freeze the approved visual specification
--> implement one representative slice locally
+-> establish macro composition and motion concept
+-> implement one representative narrative chapter locally
 -> capture desktop, tablet, and mobile screenshots
--> compare the rendered result with the approved concept
+-> critique the screenshots for optical and compositional maturity
+-> perform at most one bounded refinement pass
+-> capture final rendered evidence
 -> owner reviews locally
 -> expand only after explicit approval
 ```
 
-Do not move from concept to implementation without explicit owner approval.
+A successful build, valid HTML, aligned DOM coordinates, or absence of console errors is not visual approval.
 
-A successful build, valid HTML, or absence of console errors is not visual approval.
+## Experiment History and Active Scope
 
-## Current Experiment Scope
+### Ariadne v1 — completed local pilot
 
-The exact experiment is defined in:
-
-`docs/design/homepage-v2-representative-experiment.md`
-
-It is limited to:
+The original representative experiment was limited to:
 
 ```text
 existing navigation
 + homepage first viewport
-+ a visible transition into the next section
++ visible transition into the next section
 ```
 
-The concept may show only:
+It successfully tested bounded execution, runtime invocation, responsive evidence, and stopping behavior. Owner review found the visual composition and micro-geometry insufficiently mature for propagation. Preserve that result as evidence; do not treat it as an approved final homepage design.
 
-- Fauzan Widianto / Analytical Systems Builder;
-- the approved headline and supporting statement;
-- Explore the systems, Download CV, LinkedIn, and GitHub;
-- Odoo Process Control Tower;
-- Telegram Codex Controller.
+### Ariadne v2 — owner-approved expansion (2026-08-07)
 
-It must establish the identity and visual language, not rebuild the full website.
+For the next run, the older hero-only scope is superseded by the bounded narrative chapter defined in:
+
+`.design/homepage-v2-skill-experiment/ARIADNE_V2_NARRATIVE_PILOT.md`
+
+The active visual surface is:
+
+```text
+existing navigation
++ hero / identity
++ systems transition
++ one full representative Odoo Process Control Tower chapter
+```
+
+This is intentionally larger than one viewport and intentionally smaller than a whole-homepage redesign. The goal is to judge page-level rhythm, composition continuity, and motion language across approximately the first two to three screen heights.
 
 Allowed:
 
-- inspect the current homepage and relevant styles;
-- refine bounded concept options using real approved content;
-- implement the selected slice in an isolated local branch or worktree only after owner approval;
-- run a local static server and capture responsive screenshots;
-- make fixes required for concept fidelity.
+- use the current local Ariadne v1 result as comparative evidence, not unquestioned authority;
+- substantially refine the hero composition when needed for maturity;
+- redesign the transition between hero and systems so it feels continuous rather than attached;
+- create one complete Odoo representative chapter using public-safe existing content;
+- use purposeful continuous motion when it improves liveliness, flow, or system state;
+- use JavaScript only when HTML/CSS cannot deliver the approved interaction cleanly, and request approval before the first JavaScript edit when the task packet requires it;
+- run local browser rendering and capture responsive screenshots;
+- perform one screenshot-driven optical refinement pass.
 
 Not allowed:
 
-- modifying or deploying the public site before local approval;
-- coding before one concept is explicitly approved;
-- redesigning downstream homepage sections or project case studies;
-- changing the full navigation architecture;
-- installing a framework;
-- creating a large project grid;
-- propagating a concept before the representative slice is approved.
+- redesigning the entire homepage;
+- propagating the new language through Experience, Skills, Thinking, Contact, footer, or project detail pages;
+- building a full Telegram Codex Controller chapter in this run;
+- adding supporting projects;
+- installing a framework or new dependency;
+- modifying or deploying the public site;
+- inventing claims, metrics, outcomes, or confidential evidence;
+- treating Ariadne's own critique as owner approval.
 
 ## Local Review
 
@@ -309,24 +325,17 @@ Review:
 - Systems coherence;
 - Builder evidence;
 - professional credibility;
-- visual continuity;
+- macro composition and visual center of gravity;
+- optical geometry and connector endpoints;
+- visual continuity across hero -> transition -> Odoo chapter;
 - copy accuracy;
-- hierarchy, typography, and spacing;
+- hierarchy, typography, spacing, and density rhythm;
 - responsive preservation of meaning;
-- motion purpose and reduced-motion behaviour;
+- motion purpose, liveliness, and reduced-motion behaviour;
 - public safety;
-- visual fidelity to the approved concept.
+- visual fidelity to the approved direction.
 
-Each of the following must score at least 4/5 before expansion:
-
-- Analytical clarity;
-- Systems coherence;
-- Builder evidence;
-- Professional credibility;
-- Responsive preservation;
-- Motion purpose.
-
-Keep temporary concepts, screenshots, and review artifacts local until approved.
+Do not score maturity from technical checks alone. Render and inspect the page as an image and as a moving experience.
 
 ## Completion Standard
 
@@ -334,8 +343,10 @@ A scoped task is complete only when:
 
 - the visible outcome works locally;
 - no unrelated page or feature changed;
-- the implementation closely matches the approved concept;
+- the representative chapter feels compositionally coherent across its section boundaries;
 - desktop, tablet, and mobile were reviewed;
+- one screenshot-based optical critique and at most one bounded refinement pass were completed;
+- continuous motion, when present, has an explicit purpose and reduced-motion equivalent;
 - the identity test passes;
 - no invented or confidential content appears;
 - changed files and intentional non-changes are reported;
@@ -345,4 +356,4 @@ When novelty conflicts with identity, preserve the identity.
 
 When interaction complexity conflicts with clarity, simplify the interaction.
 
-When uncertain between a minimal solution and a broader redesign, choose the minimal solution and stop.
+When uncertain between another internal refinement loop and owner review, stop and return the result to Fauzan.
