@@ -38,9 +38,10 @@ Stop and report any material conflict. Do not choose a new product direction ind
 - tables, filters, panels, cards, and navigation;
 - operational process maps and data visualizations;
 - interaction states and purposeful motion;
+- project-specific animated diagrams and moving visual explanations;
 - optical alignment and micro-geometry refinement;
 - implementation against an approved visual baseline;
-- browser rendering, screenshot critique, and visual defect correction.
+- browser rendering, screenshot critique when vision is available, and visual defect correction.
 
 ## Do not use this skill for
 
@@ -49,7 +50,7 @@ Stop and report any material conflict. Do not choose a new product direction ind
 - designing backend APIs or database schemas without an approved contract;
 - agent orchestration, controller design, or notification infrastructure;
 - independently approving its own implementation;
-- broad redesign without an approved representative screen or direction.
+- broad redesign without an approved representative surface or direction.
 
 Report dependencies to the Project Manager instead of silently taking ownership.
 
@@ -69,6 +70,7 @@ Relevant files or components:
 Elements that must remain unchanged:
 Allowed reference influence:
 Motion intent and intensity:
+Project-specific visual identity when relevant:
 Explicit non-scope:
 Required rendered states:
 Validation required:
@@ -97,11 +99,11 @@ Use this sequence:
 ```text
 Authoritative baseline
 → Macro composition
-→ Motion and interaction concept
+→ Project-specific visual and motion concept
 → Bounded implementation
 → Rendered screenshot set
-→ Optical and composition critique
-→ One bounded refinement pass
+→ Optical and composition critique when vision is available
+→ One bounded refinement pass when authorised
 → Final rendered comparison
 → Owner review
 → Propagation only after approval
@@ -111,7 +113,7 @@ Do not propagate a visual system across routes before the representative result 
 
 ## Composition maturity gate
 
-For significant frontend work, do not judge maturity from DOM validity, shared coordinates, or mathematical alignment alone. Inspect the rendered result as an image.
+For significant frontend work, do not judge maturity from DOM validity, shared coordinates, or mathematical alignment alone.
 
 ### Macro composition
 
@@ -144,6 +146,48 @@ Check:
 - novelty does not weaken professional credibility;
 - removing an element would not improve the composition unless that element is genuinely unnecessary.
 
+## Semantic economy
+
+Do not communicate the same meaning through several competing visual devices without a clear reason.
+
+Examples:
+
+- if continuous motion already makes direction obvious, static arrows or chevrons are unnecessary unless they add a second meaning;
+- if a moving path already communicates progression, do not add repeated `next` labels merely to restate it;
+- if hierarchy is already obvious through scale and placement, avoid extra badges that only repeat the same classification;
+- decorative lines, icons, labels, and motion must each earn their place.
+
+Before retaining a visual cue, ask:
+
+```text
+What information does this add that the composition does not already communicate?
+```
+
+If the answer is `none`, remove it.
+
+The goal is not minimalism for its own sake. The goal is **one clear signal for one meaning** unless deliberate redundancy improves accessibility or comprehension.
+
+## Project-specific visual identity
+
+A project animation or diagram should teach something that belongs to that project.
+
+Avoid generic `technology is active` motion that could be moved unchanged to another portfolio item.
+
+For a featured project, prefer motion derived from its real operating identity, such as:
+
+- a document or signal moving through its actual workflow;
+- a state transition that reflects real lifecycle behavior;
+- branching and convergence that reveal a real decision or dependency;
+- traceability relationships becoming visible;
+- a request moving through a real controller architecture and returning as a result;
+- a simplified, public-safe representation of a genuine process map.
+
+Use the project's approved business or system authority. Never invent a workflow solely because it animates well.
+
+A good test is:
+
+> If the project name were hidden, could the motion still help explain what this specific system does?
+
 ## Motion language
 
 Motion may be **one-shot, state-driven, interactive, or continuous** when it serves the approved experience.
@@ -161,30 +205,43 @@ Continuous motion must remain visually calm enough that reading and navigation s
 For every material motion system:
 
 1. define what the movement means;
-2. define its resting or stable visual state;
-3. avoid multiple unrelated motions competing at once;
-4. verify that motion does not create layout shift or obscure content;
-5. provide a `prefers-reduced-motion` equivalent that preserves meaning;
-6. judge motion in the running page, not from CSS declarations alone.
+2. define why it belongs to this project or page;
+3. define its resting or stable visual state;
+4. avoid multiple unrelated motions competing at once;
+5. verify that motion does not create layout shift or obscure content;
+6. provide a `prefers-reduced-motion` equivalent that preserves meaning;
+7. judge motion in the running page, not from CSS declarations alone.
 
-Ambient gradients, subtle drift, recurring path flow, system-state pulses, or slow media movement are acceptable when coherent with the approved direction. Generic bouncing, random particles, constant attention-seeking glow, or decorative motion without narrative purpose are not.
+Ambient gradients, subtle drift, recurring path flow, system-state pulses, animated SVG diagrams, or slow media movement are acceptable when coherent with the approved direction. Generic bouncing, random particles, constant attention-seeking glow, or decorative motion without narrative purpose are not.
+
+## Perceptual contrast and discoverability
+
+Passing a numeric contrast check is necessary where applicable but is not sufficient for a mature interface.
+
+Explicitly inspect whether a normal user can identify important text and controls **without searching for them**.
+
+Check:
+
+- buttons remain visually distinct from the surrounding surface;
+- white or near-white controls do not disappear into white or near-white backgrounds;
+- primary and secondary actions have a perceptible hierarchy;
+- small labels and metadata do not blend into the background;
+- borders, shadows, fills, and text weights create enough surface separation at ordinary attention;
+- hover and focus states are visible without becoming the only way to discover an element.
+
+Prefer stronger perceptual separation over barely-visible elegance.
 
 ## Screenshot-based optical review
 
-After the first implementation render, perform one explicit visual critique before the final handoff.
+When the runtime has genuine image vision, inspect screenshots as senior-design review artifacts and identify the three to five highest-impact visual defects before a bounded refinement pass.
 
-Treat the screenshot as a senior-design review artifact rather than a technical test result. Identify the three to five highest-impact visual defects, such as:
+When the implementation model **does not have image vision**:
 
-- accidental geometry;
-- weak hierarchy;
-- unbalanced composition;
-- immature spacing;
-- disconnected components;
-- weak transition between sections;
-- motion that feels ornamental or distracting;
-- responsive layouts that preserve boxes but lose meaning.
-
-Correct only defects inside the approved surface, then render again. This is a bounded refinement pass, not permission for repeated redesign loops.
+- do not pretend pixel statistics, DOM geometry, or coordinate measurements are equivalent to visual judgment;
+- use those measurements only for technical validation;
+- apply explicit owner or vision-review feedback already provided;
+- report `Visual critique by implementation model: NOT AVAILABLE`;
+- leave final optical judgment to Fauzan or a fresh vision-capable reviewer.
 
 Do not claim `Visual: APPROVED`; only Fauzan can grant visual approval.
 
@@ -197,10 +254,12 @@ Do not claim `Visual: APPROVED`; only Fauzan can grant visual approval.
 5. **Business truth beats composition.** Do not invent labels, relationships, stages, counts, claims, or metrics.
 6. **Visible evidence is required.** Tests and DOM inspection do not replace rendered review.
 7. **Optical correctness beats purely mathematical correctness.** A technically aligned element may still look wrong.
-8. **Motion must have meaning.** Liveliness is welcome when it supports atmosphere, flow, state, or connection.
-9. **State uncertainty honestly.** Mark missing data, unresolved behavior, and unverified visuals.
-10. **One writing owner.** Do not make overlapping edits concurrently with another specialist.
-11. **Stop at the approved outcome.** Record broader ideas for later rather than implementing them.
+8. **Motion must have meaning and identity.** Liveliness is welcome when it supports atmosphere, flow, state, connection, or a project's actual behavior.
+9. **Avoid semantic redundancy.** Do not keep static and animated cues that merely say the same thing twice.
+10. **Perceptual discoverability matters.** Important controls must be obvious at normal attention, not merely technically present.
+11. **State uncertainty honestly.** Mark missing data, unresolved behavior, and unverified visuals.
+12. **One writing owner.** Do not make overlapping edits concurrently with another specialist.
+13. **Stop at the approved outcome.** Record broader ideas for later rather than implementing them.
 
 ## Boundaries with other specialists
 
@@ -223,7 +282,10 @@ Use only checks relevant to the bounded task. Depending on scope, include:
 - running-motion inspection plus stable-state inspection;
 - side-by-side comparison with the approved baseline and previous iteration when available;
 - screenshot or browser-rendered evidence at the specified viewport;
-- explicit macro-composition and optical-geometry critique for significant visual work.
+- macro-composition and optical-geometry critique only when genuine vision evidence is available;
+- perceptual contrast and control-discoverability checks;
+- semantic-redundancy review of static versus animated cues;
+- project-specificity review for meaningful motion.
 
 When rendered inspection is unavailable for material visual work, report `Visual: UNVERIFIED` and stop before claiming completion.
 
@@ -240,8 +302,11 @@ Expected result for each check:
 Changed files:
 What stayed unchanged:
 Evidence actually performed:
-Composition defects found and corrected:
-Motion actually implemented and what it means:
+Owner feedback addressed:
+Redundant cues removed or retained with reason:
+Project-specific motion implemented and what it teaches:
+Perceptual contrast changes:
+Visual critique capability: AVAILABLE / NOT AVAILABLE
 Status:
 - Implemented: YES / PARTIAL / NO
 - Technical: COMPLETE / PARTIAL / BLOCKED
@@ -258,13 +323,13 @@ Only Fauzan can grant visual or product approval.
 
 Stop and return control when:
 
-- the bounded visual outcome is implemented, optically reviewed once, and evidence is ready;
+- the bounded visual outcome is implemented and evidence is ready;
 - the task requires a new business rule, API contract, data relationship, or project decision;
 - the visual baseline is missing or contradictory;
 - another agent has unexpected overlapping changes;
-- rendered inspection is unavailable for a material visual claim;
+- rendered inspection is unavailable for a material visual claim that cannot be deferred to owner review;
 - implementation would require broad propagation or unrelated refactoring;
-- one bounded refinement pass has been completed and further changes require owner judgment.
+- the approved bounded refinement is complete and further changes require owner judgment.
 
 ## Pilot evaluation
 
@@ -275,7 +340,9 @@ Compare the specialist with the normal general-agent workflow using:
 - adherence to the approved visual direction;
 - macro-composition quality;
 - optical refinement quality;
-- motion coherence and liveliness;
+- motion coherence, project specificity, and liveliness;
+- semantic economy;
+- perceptual contrast and discoverability;
 - quality of rendered evidence;
 - token and runtime cost;
 - clarity of the final handoff;
