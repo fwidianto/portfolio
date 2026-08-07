@@ -13,12 +13,19 @@ Before proposing or changing portfolio design, content, or frontend code, read:
 5. `docs/design/public-content-curation.md`
 6. `docs/design/frontend-skill-selection.md`
 7. `docs/design/homepage-v2-representative-experiment.md`
+8. `.agents/skills/shared-frontend-visualization-specialist/SKILL.md` when Ariadne is routed
 
-For the active Ariadne v3 experiment also read:
+When Ariadne's significant-work gates apply, also load only the relevant method modules under:
 
-8. `.design/homepage-v2-skill-experiment/ARIADNE_V3_PROJECT_IDENTITY_PILOT.md`
+`.agents/skills/shared-frontend-visualization-specialist/methods/`
 
-Read additional documents only when relevant to the exact task.
+Current method modules:
+
+- `CONCEPT_AND_CREATIVE_DIRECTION.md`
+- `GEOMETRY_AND_MOTION_QA.md`
+- `VISUAL_FIDELITY_REVIEW.md`
+
+The previous v1/v2/v3 task packets remain experiment history. **No v4 implementation task is currently authorised merely by opening this repository.** A new bounded task packet/routing decision is required.
 
 ## Professional Identity
 
@@ -28,14 +35,14 @@ The portfolio identity is:
 Analytical Systems Builder
 ```
 
-This is not merely a title. Every public concept must communicate:
+Every public concept should communicate:
 
 ```text
 Analytical
-= investigate complexity, validate evidence, and structure ambiguity
+= investigate complexity, validate evidence, structure ambiguity
 
 Systems
-= understand flows, dependencies, handoffs, and end-to-end consequences
+= understand flows, dependencies, handoffs, end-to-end consequences
 
 Builder
 = turn that understanding into useful tools, workflows, interfaces, and operating systems
@@ -45,167 +52,49 @@ The portfolio should make this sequence visible:
 
 ```text
 messy reality
--> structured understanding
--> connected system
--> usable outcome
+→ structured understanding
+→ connected system
+→ usable outcome
 ```
 
-A visitor should infer this identity from the experience even if the title were hidden.
-
-Do not present Fauzan as:
-
-- a pure software developer;
-- a generic data analyst or dashboard builder;
-- a flashy AI engineer;
-- an autonomous-agent expert without evidence;
-- a consultant using abstract language without built outcomes;
-- a collection of disconnected projects.
+Do not present Fauzan as a pure developer, generic dashboard builder, flashy AI engineer, unsupported autonomous-agent expert, abstract consultant without built outcomes, or collection of disconnected projects.
 
 ## Story Order
 
-Use this order in public narratives:
+Public narratives use:
 
 ```text
 Business problem
--> process understanding
--> business logic
--> technology
--> evidence
+→ process understanding
+→ business logic
+→ technology
+→ evidence
 ```
 
-Do not lead with tools, frameworks, AI terminology, or decorative metrics when the business problem is what makes the work meaningful.
-
-## Mandatory Identity Test
-
-Every concept, interaction, and implementation must pass all three dimensions.
-
-### Analytical
-
-- The problem-solving value is understandable quickly.
-- Hierarchy reveals reasoning rather than decoration.
-- Claims and evidence are credible and supported.
-
-### Systems
-
-- Sections and projects feel connected rather than assembled randomly.
-- Relationships, flow, ownership, or sequence are visible where useful.
-- Responsive changes preserve system logic.
-
-### Builder
-
-- Analysis clearly leads to a practical outcome.
-- Projects appear as functioning systems, not abstract interests.
-- The visitor has a clear route toward evidence of what was built.
-
-If one dimension is weak, the concept is not approved.
+Do not lead with tools, frameworks, AI terminology, or decorative metrics when business meaning is the actual proof.
 
 ## Living System Direction
 
-The approved renewal direction is a mature **Living System**:
+The approved renewal direction remains:
 
 ```text
-Editorial / Casebook foundation
-+ Systems Canvas for relationships and flow
-+ purposeful systems motion
+Living System Editorial
+= editorial / casebook clarity
++ systems relationships and flow
++ purposeful project-specific motion
 + intentional responsive adaptation
 ```
 
-The likely design interpretation is:
+Purposeful continuous motion is allowed when it supports atmosphere, system flow, state, connection, progression, or project identity without competing with reading.
 
-```text
-Living System Editorial as the base
-+ selected Living World connection cues
-```
-
-The editorial foundation protects clarity and professional credibility. Connection cues should make systems thinking visible without becoming a literal world map or game interface.
-
-Avoid:
-
-- dark neon AI styling;
-- automatic dark mode or theme toggles;
-- glassmorphism;
-- bento-grid defaults;
-- generic project-card walls;
-- decorative charts or unsupported metrics;
-- terminal or code-editor imagery as the main identity;
-- excessive gradients, glow, parallax, or floating widgets that compete with reading;
-- literal game maps, futuristic control rooms, or theme-park interpretations;
-- visual spectacle that weakens business clarity.
-
-## Motion Rules
-
-Motion may be one-shot, interactive, state-driven, or continuous when it supports the approved experience.
-
-Motion is useful when it communicates or creates:
-
-- sequence;
-- connection;
-- state;
-- direction;
-- cause and effect;
-- progression toward a usable result;
-- ambient liveliness that makes a system feel active rather than frozen.
-
-Continuous motion is allowed when it remains visually calm and supports atmosphere, system flow, connection, or state.
-
-### Semantic economy
-
-Do not repeat the same meaning through static and animated cues without a reason.
-
-If motion already makes direction obvious, remove static arrows, chevrons, or `next` markers unless they add a second meaning or remain necessary in reduced-motion mode.
-
-Every visible cue should answer:
-
-```text
-What information does this add that is not already clear?
-```
-
-If the answer is `none`, remove it.
-
-### Project-specific motion
-
-Featured-project motion should teach something about that specific system.
-
-Do not use generic `system activity` animation that could be copied unchanged between Odoo Process Control Tower and Telegram Codex Controller.
-
-Prefer motion derived from real approved behavior, such as document traceability, lifecycle state, branching/convergence, controller request flow, or another genuine system relationship.
-
-Support `prefers-reduced-motion` and preserve the same meaning in the reduced-motion state.
-
-## Perceptual Contrast
-
-Important words and controls must be discoverable at normal attention, not merely technically present.
-
-- white or near-white buttons must not disappear into light backgrounds;
-- primary and secondary actions must have perceptible hierarchy;
-- small text and metadata must remain readable without pixel-peeping;
-- borders, fills, shadows, and text weights should create enough surface separation;
-- hover/focus states must not be the only way a user discovers interactivity.
-
-Numeric accessibility checks are necessary where applicable, but are not a substitute for perceptual legibility.
-
-## Responsive Rules
-
-Responsiveness must preserve meaning rather than merely shrink desktop.
-
-- Desktop may show the full relationship between identity and the systems narrative.
-- Tablet requires an intentional intermediate composition.
-- Mobile becomes a clear vertical narrative: identity -> value -> systems -> evidence.
-- Complex paths must simplify into a vertical rail or staged reveal without becoming a stack of generic cards.
-- Touch targets, reading order, line length, and actions must remain intentional.
+Avoid generic dark-neon AI styling, automatic dark mode, glassmorphism, bento-grid defaults, generic project-card walls, unsupported charts/metrics, terminal imagery as the main identity, excessive glow/parallax/floating widgets, game-map/control-room spectacle, or novelty that weakens professional clarity.
 
 ## Approved Public Projects
 
-Use only these two featured projects unless the owner explicitly changes the curation:
+Only these featured systems are approved unless Fauzan changes the curation:
 
-1. **Odoo Process Control Tower**
-   - The evolved form of the earlier Odoo ERP Analytics project.
-   - Treat both names as one project, never separate entries.
-   - Proves ERP analysis, connected operating flow, and a practical visibility/control system.
-
-2. **Telegram Codex Controller**
-   - A bounded AI-workflow control and observability system.
-   - Emphasise architecture, permissions, project isolation, task lifecycle, testing, and practical operation.
+1. **Odoo Process Control Tower** — evolved from the earlier Odoo ERP Analytics project; one project, not separate entries.
+2. **Telegram Codex Controller** — bounded AI-workflow control and observability system.
 
 Together they should communicate:
 
@@ -217,184 +106,171 @@ AI-assisted work systems
 Analytical Systems Builder
 ```
 
-There is no supporting project layer for now.
-
-Do not add project cards or public links for Personal OS, MCU Vault, HS Code automation, AI ERP Intelligence Dashboard, Investment Analytics Dashboard, separate agent orchestration experiments, or unfinished prototypes unless explicitly promoted.
-
-Professional experience may mention factual reporting, profitability, ERP, and automation work. Do not repackage those facts as invented standalone products.
+Do not promote other internal/prototype projects without explicit approval.
 
 ## Content Integrity
 
 Never invent or exaggerate:
 
-- projects, clients, or employers;
-- metrics, financial outcomes, user counts, or performance improvements;
+- projects, clients, employers;
+- metrics, financial outcomes, user counts, performance improvements;
 - technical sophistication or completion status;
-- test results or product maturity.
+- test results or product maturity;
+- ERP/document relationships merely because they make a better visual.
 
-Use public-safe, supported evidence only.
-
-Never expose:
-
-- company-confidential records or real ERP transactions;
-- credentials, tokens, chat IDs, secrets, or private usernames;
-- private prompts, logs, repositories, or Personal OS content;
-- unnecessary sensitive local paths;
-- unrestricted machine-control interfaces.
+Never expose confidential ERP records, credentials, tokens, private usernames, private prompts/logs/repos, PersonalOS content, or unrestricted machine-control interfaces.
 
 ## Architecture Boundary
 
-The current site is static HTML, CSS, and JavaScript.
+The current site remains static HTML/CSS/JavaScript.
 
 - Continue from the existing implementation.
-- Reuse existing assets, variables, components, and conventions where appropriate.
-- Do not migrate to React, Vite, Next.js, another framework, or another deployment model without explicit approval.
-- Do not add dependencies for effects that can be implemented cleanly in the current architecture.
-- Change the smallest number of files required for the approved visible outcome.
+- Reuse existing assets, variables, and conventions when appropriate.
+- No React/Vite/Next/framework migration without explicit approval.
+- No dependency installation merely for visual effects.
+- Change only task-packet-declared files/surfaces.
+- Deployment, analytics, and SEO configuration are protected unless explicitly named.
 
-## External Frontend Skills
+## Ariadne Methodology — Mandatory Gates
 
-The selected third-party skills are:
+The repository-scoped Ariadne skill owns the method. These gates summarize the non-negotiable parts.
 
-- `frontend-design`
-- `design-review`
+### 1. Concept gate
 
-from `julianoczkowski/designer-skills`.
+For significant new visual direction, do not immediately code the first plausible idea.
 
-This file overrides conflicting skill defaults. In particular:
+Use the concept method to:
+
+- mine project-specific artifacts/states/behavior;
+- generate multiple genuinely different concepts for novel visual/motion work;
+- establish the whole approved-surface rhythm, not only the hero if the task is broader;
+- extract the design system before implementation;
+- freeze an accepted concept as the implementation target.
+
+### 2. Geometry gate
+
+For connectors, rails, SVG paths, process maps, or moving tokens:
+
+```text
+visible path
+=
+animation path
+=
+shared geometry source
+```
+
+whenever technically possible.
+
+Do not use unrelated hardcoded coordinates for a line and the object meant to travel on it. Sample congruence through the animation and across responsive breakpoints. A single DOM-state check is insufficient.
+
+### 3. Vision gate
+
+For material visual work:
+
+```text
+No genuine rendered-image inspection
+= Visual review BLOCKED
+```
+
+DOM geometry, computed CSS, pixel-density analysis, automated contrast, and coordinate measurements are technical evidence only. If the current model has no image vision, do not present those tools as aesthetic review. Return to a vision-capable review path or Fauzan.
+
+### 4. Fidelity gate
+
+When an accepted concept/baseline exists, compare it directly with the latest browser render using the visual-fidelity method. Keep a mismatch ledger and use only the approved correction count.
+
+## Durable Frontend Rules
+
+- Structure before decoration.
+- Composition before micro-polish.
+- Project truth before aesthetic convenience.
+- Optical correctness follows deterministic correctness; equal numbers may still look wrong.
+- One clear signal for one meaning: motion that already conveys direction normally makes duplicate arrows unnecessary.
+- Signature project motion must teach project-specific behavior rather than generic `system activity`.
+- Important controls/text must be perceptually discoverable, not barely visible on light surfaces.
+- Responsive layouts preserve meaning; they may reorganize rather than shrink.
+- Build/test success does not equal visual approval.
+- Fauzan owns final visual/product approval.
+
+## External Frontend Methods
+
+Useful external references/tools include `frontend-design`, `design-review`, and other mature frontend design systems. Their durable, compatible lessons have been adapted into Ariadne's own core and method modules.
+
+External defaults do **not** override this repository. In particular:
 
 - no automatic dark mode;
-- no invented content;
-- no extra project layer;
-- no coding beyond the approved surface;
-- no committed temporary screenshots or QA artifacts unless requested.
+- no automatic framework migration;
+- no invented content/project layer;
+- no unlimited self-polish loops;
+- no external font/dependency addition without approval;
+- no coding beyond the bounded task surface.
 
-The skills provide design and review methodology. They do not control identity, claims, project selection, architecture, or scope.
+## Motion Rules
 
-## Approval Gates
-
-For meaningful visual work, follow:
-
-```text
-Inspect existing implementation and previous rendered evidence
--> define one bounded outcome
--> establish macro composition and project-specific motion concept
--> implement locally
--> capture desktop, tablet, and mobile evidence
--> apply explicit owner feedback
--> use genuine screenshot critique only when image vision exists
--> owner reviews locally
--> expand only after explicit approval
-```
-
-A successful build, valid HTML, aligned DOM coordinates, absence of console errors, or pixel-density measurement is not visual approval.
-
-When the implementation model has no image vision, do not pretend geometry analysis is equivalent to seeing the screenshot. Report that limitation and return final optical judgment to Fauzan or a fresh vision-capable reviewer.
-
-## Experiment History and Active Scope
-
-### Ariadne v1 — completed local pilot
-
-V1 successfully tested bounded execution, runtime invocation, responsive evidence, and stopping behavior. Owner review found the visual composition and micro-geometry insufficiently mature for propagation.
-
-### Ariadne v2 — completed local pilot
-
-V2 expanded the experiment to:
+Every material motion must answer:
 
 ```text
-existing navigation
-+ hero / identity
-+ systems transition
-+ one full representative Odoo Process Control Tower chapter
+What does this movement mean?
+What does the visitor learn?
+Why does it belong here / to this project?
+What is the reduced-motion equivalent?
 ```
 
-Owner review found the result materially more mature and much more lively than v1. Continuous animation was a clear improvement. V2 also proved that the same Builder model could produce a substantially better result after improving the specialist workflow.
+Avoid several unrelated continuous motions competing simultaneously. Support `prefers-reduced-motion` and preserve meaning in the static state.
 
-Remaining owner feedback:
+## Responsive Rules
 
-- static arrows/chevrons can be redundant when animated flow already communicates direction;
-- project animations should express the featured project's identity instead of generic systems motion;
-- white/near-white controls on light backgrounds need stronger perceptual contrast;
-- the lower half of the homepage remains intentionally outside the new visual language for now.
+Minimum review targets unless the task packet says otherwise:
 
-### Ariadne v3 — active bounded refinement
+- desktop: approximately `1440 × 900`;
+- tablet: approximately `768 × 1024`;
+- mobile: approximately `390 × 844`.
 
-The active task is:
+Desktop may show full system relationships. Tablet requires an intentional intermediate composition. Mobile becomes a clear vertical narrative with readable text, adequate touch targets, stable actions, and simplified process geometry where needed.
 
-`.design/homepage-v2-skill-experiment/ARIADNE_V3_PROJECT_IDENTITY_PILOT.md`
+## Experiment History
 
-The active visual surface remains:
+### Ariadne v1
+
+Runtime/scope discipline passed; owner visual review found immature composition and unresolved connector geometry.
+
+### Ariadne v2
+
+Same Builder model, improved methodology. Hero → systems → Odoo narrative became materially more mature and lively. Remaining issues included redundant direction cues, generic project motion, perceptual contrast, and missing image vision.
+
+### Ariadne v3
+
+Improved semantic economy, Odoo-specific traceability concept, and contrast, but owner judged the leap **incremental rather than significant**. A visible line/pointer alignment defect still survived, and the animation was still not novel enough to prove mature creative capability.
+
+Therefore v3 is evidence, not an approved full-homepage design system.
+
+## Current State — Methodology Consolidation
+
+The current approved work is **method consolidation**, not another homepage patch.
+
+The repository now contains Ariadne's modular methods for:
 
 ```text
-existing navigation
-+ hero / identity
-+ systems transition
-+ Odoo Process Control Tower representative chapter
+Concept / creative direction
+Geometry / motion QA
+Visual fidelity review
 ```
 
-V3 is a refinement of the successful v2 direction, not another broad redesign.
+Do not propagate the v3 style into Professional Experience, Skills, Thinking, Contact, footer, project pages, or a Telegram chapter without a new bounded task and owner routing decision.
 
-Allowed:
+## Completion Standard for Future Significant Work
 
-- remove redundant static direction cues when animation already communicates the same meaning;
-- preserve static direction only where reduced-motion comprehension genuinely needs it;
-- create one Odoo-specific animated 2D/SVG/system visual based on real public-safe document/process relationships;
-- strengthen control and text contrast inside the active surface;
-- preserve the v2 composition and liveliness unless owner feedback justifies a change;
-- use JavaScript only when HTML/CSS/SVG cannot deliver the approved interaction cleanly and the task packet's approval gate is satisfied;
-- run local browser rendering and responsive/motion validation.
+A future significant Ariadne task is complete only when the task packet's applicable gates are honestly satisfied:
 
-Not allowed:
+- bounded scope preserved;
+- concept gate used when direction is new;
+- deterministic geometry gate used when connected/moving geometry exists;
+- desktop/tablet/mobile rendered;
+- focus/accessibility/overflow/console checks performed as relevant;
+- running/reduced motion checked when relevant;
+- genuine image-based visual review performed for visual-quality claims, or explicitly blocked;
+- concept/render mismatch ledger produced when an accepted concept exists;
+- allowed correction count respected;
+- changed/protected areas reported;
+- Fauzan receives the result before propagation/deployment.
 
-- redesigning the remaining homepage sections;
-- propagating the new language through Experience, Skills, Thinking, Contact, footer, or project detail pages;
-- building the Telegram Codex Controller chapter;
-- adding supporting projects;
-- installing a framework or new dependency;
-- modifying or deploying the public site;
-- inventing claims, metrics, outcomes, or confidential evidence;
-- treating Ariadne's own output as owner approval.
-
-## Local Review
-
-Minimum viewports:
-
-- desktop: approximately `1440 x 900`;
-- tablet: approximately `768 x 1024`;
-- mobile: approximately `390 x 844`.
-
-Review:
-
-- Analytical clarity;
-- Systems coherence;
-- Builder evidence;
-- professional credibility;
-- composition continuity across hero -> transition -> Odoo chapter;
-- semantic economy and removal of redundant cues;
-- Odoo-specificity of the project motion;
-- perceptual contrast and control discoverability;
-- hierarchy, typography, spacing, and density rhythm;
-- responsive preservation of meaning;
-- motion purpose, liveliness, and reduced-motion behaviour;
-- public safety.
-
-## Completion Standard
-
-A scoped v3 task is complete only when:
-
-- owner feedback on redundant direction cues is addressed;
-- one Odoo-specific motion/visual identity is implemented without invented process claims;
-- important controls in the active surface are perceptually discoverable;
-- desktop, tablet, and mobile were validated;
-- motion and reduced-motion states were validated;
-- no unrelated page or feature changed;
-- no invented or confidential content appears;
-- changed files and intentional non-changes are reported;
-- visual critique capability is stated honestly;
-- the agent stops at the approved boundary.
-
-When novelty conflicts with identity, preserve the identity.
-
-When interaction complexity conflicts with clarity, simplify the interaction.
-
-When uncertain between another internal refinement loop and owner review, stop and return the result to Fauzan.
+When novelty conflicts with identity, preserve identity. When interaction complexity conflicts with clarity, simplify. When the next step is subjective design judgment, stop and return control to Fauzan.
