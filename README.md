@@ -1,70 +1,49 @@
 # Fauzan Widianto Portfolio
 
-Personal portfolio website for business systems, operations insight, dashboard/reporting workflows, automation, ERP process understanding, and AI-assisted delivery.
+Public portfolio website for business systems, operational analytics, ERP process understanding, reporting automation, and AI-assisted delivery.
 
-## Live Site
-
-Visit the portfolio at [www.fwidianto.com](https://www.fwidianto.com/).
+**Live site:** https://www.fwidianto.com/
 
 ## Positioning
 
-This portfolio is written for recruiters and collaborators looking for a business-first analytics and systems profile: Data Analyst, Business Analyst, BI Analyst, Operations Analyst, Commercial Analyst, Digital Transformation Analyst, or analytics-adjacent AI workflow roles.
+The portfolio presents an **Analytical Systems Builder** profile: understand the business problem, structure the process and data, turn the logic into a useful system, and communicate the evidence clearly.
 
-The current portfolio direction is **Analytical Systems Builder**: understand the operational problem, structure the business logic, use technology to make the system visible, and communicate evidence clearly.
+Target roles include Data Analyst, Business Analyst, BI Analyst, Operations Analyst, Commercial Analyst, Digital Transformation Analyst, and analytics-adjacent AI workflow roles.
 
-Core positioning: from problems and data to system design, insights, and AI-powered workflows.
+## Current public direction
 
-Focus areas:
+The live homepage remains the approved v1 implementation until a later change is explicitly reviewed and approved.
 
-- Data analysis and business insight
-- Dashboard, BI, and management reporting
-- Operations, profitability, and commercial analysis
-- ERP process understanding through Odoo and SAP-related work
-- Profitability analysis and business control
-- Reporting automation with SQL, Python, spreadsheets, and scripts
-- AI-assisted delivery with Codex and OpenHands
+Current public project direction is intentionally narrow:
 
-## Homepage Checkpoint
+- **Odoo Process Control Tower** — the evolved form of the Odoo ERP Analytics work;
+- **Telegram Codex Controller** — a bounded AI-workflow control and observability system when/where explicitly published.
 
-Homepage v1 is frozen at commit `67cb782`.
+Older project pages may remain accessible for continuity, but they are not automatically part of the current featured portfolio.
 
-The homepage now focuses on one flagship project: [Odoo ERP Analytics Platform](Projects/Odoo-ERP-Analytics.html).
+## Repository responsibility
 
-For homepage change rules and frozen decisions, see [docs/homepage/HOMEPAGE_V1_FREEZE.md](docs/homepage/HOMEPAGE_V1_FREEZE.md).
+This repository contains the live static site, recruiter-facing case-study material, public-safe assets, and the minimum documentation required to maintain them.
 
-## Featured Project
+Historical design experiments, refresh phases, audits, and superseded implementation plans belong in Git history rather than the active working tree.
 
-- [Odoo ERP Analytics Platform](Projects/Odoo-ERP-Analytics.html)
-  - SQL analytics layer on Odoo PostgreSQL data that turns ERP activity into reporting, traceability, profitability review inputs, and management-ready views.
+## Structure
 
-## Supporting Project Inventory
+- `index.html` — live homepage
+- `Projects/` — public project/case-study pages and supporting assets
+- `CSS/` — shared styles
+- `Assets/` — public site assets and CV
+- `AGENTS.md` — concise operating rules for AI-assisted changes
+- `docs/README.md` — current documentation index
 
-These projects may remain available in the repository or separate pages, but the homepage intentionally does not present them as a multi-project grid.
+## Working rule
 
-| Category | Items | Notes |
-| --- | --- | --- |
-| Recruiter-facing case studies | Odoo ERP Analytics Platform, Business Reporting Automation, PersonalOS / AI Handoff Workflow, HS Code Trade Compliance Automation, Investment Analytics Dashboard | Public-safe pages that explain the business problem, tools, and analytical value. Odoo is the current homepage flagship. |
-| Live demo | AI ERP Intelligence Dashboard | External PythonAnywhere demo with sample ERP-style data, dashboard views, and SQL browsing. |
-| Supporting artifacts | `Projects/portfolio-app`, `Projects/AI-ERP-IntelligenceDashboard/docs`, `Projects/hs-code-automation` | Supporting code, docs, and helper material. These are secondary to the recruiter-facing Odoo flagship. |
+For any change, start with `AGENTS.md`, then read only the documentation directly relevant to the requested page or content. Do not reconstruct old experiments unless explicitly asked.
 
-## Project Structure
+## Local preview
 
-The main public page is `index.html`. Project pages live under `Projects/`. Active documentation starts at `docs/README.md`.
-
-## Local Preview
-
-Open `index.html` directly in a browser, or run a simple local static server from the repository root.
+The site is static HTML/CSS/JavaScript. Open `index.html` directly or serve the repository root with a simple local static server.
 
 ## Deployment
 
-The site is static and GitHub Pages friendly. No build step is required.
-
-## Documentation
-
-The active documentation architecture starts at [docs/README.md](docs/README.md).
-
-Historical refresh implementation records remain in [docs/portfolio-refresh/](docs/portfolio-refresh/README.md).
-
-## Analytics Setup
-
-Analytics and search verification placeholders are documented in [docs/portfolio-refresh/ANALYTICS_SETUP.md](docs/portfolio-refresh/ANALYTICS_SETUP.md). The snippets stay disabled until real IDs are provided.
+The site is deployed through GitHub Pages with the custom domain in `CNAME`. No application build step is required.
