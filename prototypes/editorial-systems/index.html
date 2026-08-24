@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Reconcept Prototype — Fauzan Widianto</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="rail" aria-label="Prototype navigation">
+    <a class="rail__mark" href="#identity" aria-label="Back to identity">A.</a>
+    <nav class="rail__nav">
+      <a class="rail__link is-active" href="#identity"><span>01</span>Identity</a>
+      <a class="rail__link" href="#analytical"><span>02</span>Analytical</a>
+      <span class="rail__link is-muted"><span>03</span>Systems</span>
+      <span class="rail__link is-muted"><span>04</span>Builder</span>
+      <span class="rail__link is-muted"><span>05</span>Work</span>
+      <span class="rail__link is-muted"><span>06</span>About</span>
+    </nav>
+    <div class="rail__footer">Prototype · 2026</div>
+  </aside>
+
+  <main>
+    <section class="hero" id="identity">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">Fauzan Widianto</p>
+          <h1>Analytical<br />Systems<br />Builder</h1>
+          <p class="hero__lead">
+            I tend to understand how a process works first, then build the reporting,
+            controls, or systems around it.
+          </p>
+          <a class="text-link" href="#analytical">See how I work <span>→</span></a>
+        </div>
+
+        <div class="hero__visual" aria-label="Abstract system composition">
+          <div class="system-frame">
+            <div class="system-frame__label">01 / Structure</div>
+            <div class="system-canvas">
+              <div class="module module--a">
+                <span class="module__index">A</span>
+                <span class="module__line"></span>
+                <span class="module__line module__line--short"></span>
+              </div>
+              <div class="module module--b">
+                <span class="module__index">B</span>
+                <span class="module__dot"></span>
+              </div>
+              <div class="module module--c">
+                <span class="module__index">C</span>
+                <span class="module__line"></span>
+                <span class="module__line module__line--short"></span>
+              </div>
+              <div class="connector connector--one"></div>
+              <div class="connector connector--two"></div>
+              <div class="connector connector--three"></div>
+              <div class="focus-node" aria-hidden="true"></div>
+            </div>
+            <div class="system-frame__footer">
+              <span>observe</span>
+              <span>connect</span>
+              <span>build</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#analytical" aria-label="Continue to analytical section">↓</a>
+    </section>
+
+    <section class="analytical" id="analytical">
+      <div class="section-number">02</div>
+      <div class="analytical__intro">
+        <p class="eyebrow">Analytical</p>
+        <h2>Question the assumption.</h2>
+        <p>
+          At Traktor Nusantara, a manager-sponsored review examined full-maintenance
+          contracts using a fixed 20% cost assumption. I built a diagnostic model to
+          test that assumption against the work behind it.
+        </p>
+      </div>
+
+      <div class="model">
+        <div class="model__inputs">
+          <div class="input-card"><span>01</span><strong>Operating hours</strong></div>
+          <div class="input-card"><span>02</span><strong>Utilization</strong></div>
+          <div class="input-card"><span>03</span><strong>Travel distance</strong></div>
+          <div class="input-card"><span>04</span><strong>Standard work time</strong></div>
+          <div class="input-card"><span>05</span><strong>Parts & inflation</strong></div>
+          <div class="input-card"><span>06</span><strong>Manpower & transport</strong></div>
+        </div>
+
+        <div class="model__logic">
+          <span class="model__logic-label">Diagnostic cost model</span>
+          <div class="model__logic-ring">
+            <div class="model__logic-core">20%</div>
+          </div>
+          <p>Test the simplified assumption against operational drivers.</p>
+        </div>
+
+        <div class="model__result">
+          <span class="result-tag">Finding</span>
+          <h3>Several contracts could be unprofitable under the simplified assumption.</h3>
+          <p>The model was used as diagnostic evidence in an existing management review.</p>
+        </div>
+      </div>
+
+      <div class="evidence-strip" aria-label="Evidence summary">
+        <div>
+          <span class="evidence-strip__value">IDR 8–10B</span>
+          <span class="evidence-strip__label">approx. monthly contract revenue reviewed</span>
+        </div>
+        <div>
+          <span class="evidence-strip__value">20%</span>
+          <span class="evidence-strip__label">existing revenue-based cost assumption tested</span>
+        </div>
+        <div>
+          <span class="evidence-strip__value">6+</span>
+          <span class="evidence-strip__label">operational cost drivers brought into the model</span>
+        </div>
+      </div>
+
+      <div class="next-section">
+        <span>Next</span>
+        <strong>Systems</strong>
+        <span class="next-section__line"></span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
