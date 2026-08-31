@@ -61,13 +61,10 @@ manifest.core.tiles.forEach((tile) => {
   contains(`<use href="#tile-${tile.style}"`, `${tile.id} style definition`);
 });
 
-const sourceIds = ids(manifest.source.structureTiles);
-const coreSourceIds = manifest.core.tiles.flatMap(({ sourceTiles }) => sourceTiles);
-check(manifest.source.structureTiles.length === 26, '26 locked Structure source tiles');
-check(new Set(sourceIds).size === 26, 'source tile ids are unique');
-check(coreSourceIds.length === 26, 'core source use count');
-deepEqual([...new Set(coreSourceIds)].sort(), [...sourceIds].sort(), 'every source tile is used exactly once');
-check(manifest.core.tiles.every(({ sourceTiles }) => sourceTiles.length === 2), 'each core tile has two source tiles');
+check(manifest.sourceBridge.file === 'integrate-live-source-bridge.json', 'live source bridge file');
+check(manifest.sourceBridge.runtimeFile === 'prototypes/editorial-systems/immersive.js', 'live runtime source file');
+check(manifest.sourceBridge.nodeCount === 50, 'live runtime node count');
+deepEqual(manifest.sourceBridge.structureRowCounts, [18, 12, 8, 6, 4, 2], 'live Structure row counts');
 
 const expectedSupportPaths = [
   'M402 300H468', 'M402 324H468', 'M700 292L662 334', 'M700 292L664 360',
@@ -213,11 +210,116 @@ check(!manifestText.includes('5-3-1'), 'manifest has no legacy 5-3-1 assumption'
 check(!manifestText.includes('9-tile'), 'manifest has no legacy 9-tile assumption');
 check(manifest.hardGate.legacyLayoutAllowed === false, 'legacy layout is disallowed');
 
+const bridgePath = new URL('./integrate-live-source-bridge.json', here);
+const runtimePath = new URL('./immersive.js', here);
+const bridge = JSON.parse(fs.readFileSync(bridgePath, 'utf8'));
+const runtimeSource = fs.readFileSync(runtimePath, 'utf8');
+const targetIds = new Set(visibleIds);
+const requiredRuntimeExpressions = [
+  'const nodeSpecs = Array.from({ length: 50 }',
+  'const nodeElements = nodeSpecs.map',
+  'const networkElements = networkPairs.map',
+  'const boundaryElements = groups.map',
+  'const roleFrameElements = Object.entries(integrateFrames).map',
+  'const lineTrack = { path: svgElement(\'path\', \'immersive-line\')',
+  'const insightTracks = insightOutput.slice(0, 3).map',
+  'const outputFlowPath = svgElement(\'path\', \'immersive-output-flow\')',
+  'const outputFlowNodes = outputFlowTargets.map',
+  'const outputTracePaths = overviewNodeIndices.length >= 6',
+  'const outputFindingChevrons = insightOutput.slice(0, 3).map',
+  'const outputLabels = [',
+  'const outputMetrics = ['
+];
+check(bridge.targetManifest === 'integrate-golden-v26.manifest.json', 'bridge target manifest');
+check(bridge.runtime.file === 'prototypes/editorial-systems/immersive.js', 'bridge runtime file');
+check(bridge.runtime.nodeSource === 'nodeSpecs[index]', 'bridge node source');
+check(bridge.runtime.domSource.includes('.immersive-node:nth-child'), 'bridge DOM source');
+check(bridge.runtime.nodeCount === 50, 'bridge node count');
+check(manifest.sourceBridge.nodeCount === bridge.runtime.nodeCount, 'manifest/bridge node count');
+requiredRuntimeExpressions.forEach((expression) => check(runtimeSource.includes(expression), `live runtime source expression: ${expression}`));
+
+const runtimeRowMatch = runtimeSource.match(/const structureTargets = \[\];\s*\[([0-9,\s]+)\]\.forEach/);
+check(runtimeRowMatch, 'live Structure target row generator');
+const runtimeRows = runtimeRowMatch[1].split(',').map((value) => Number(value.trim())).filter(Number.isFinite);
+deepEqual(runtimeRows, bridge.runtime.structureRowCounts, 'live Structure row counts');
+const runtimeRoles = Array(bridge.runtime.nodeCount).fill('core');
+const roleMatches = [...runtimeSource.matchAll(/setRole\('([^']+)',\s*\[([^\]]+)\]\);/g)];
+check(roleMatches.length === 5, 'live runtime role assignments');
+roleMatches.forEach(([, role, values]) => values.split(',').map((value) => Number(value.trim())).filter(Number.isInteger).forEach((index) => { runtimeRoles[index] = role; }));
+
+const expectedLiveNodes = [];
+runtimeRows.forEach((count, row) => {
+  const firstX = 1080 - ((count - 1) * 48) / 2;
+  for (let column = 0; column < count; column += 1) {
+    expectedLiveNodes.push({ row, column, x: firstX + column * 48, y: 602 - row * 32 });
+  }
+});
+check(expectedLiveNodes.length === bridge.runtime.nodeCount, 'live Structure source expansion');
+deepEqual(
+  bridge.liveNodes.map(({ id, index, role, structure }) => ({ id, index, role, structure })),
+  expectedLiveNodes.map((structure, index) => ({ id: `live-node-${String(index).padStart(2, '0')}`, index, role: runtimeRoles[index], structure })),
+  'live node identity/role/Structure geometry'
+);
+const allowedNodeDispositions = new Set([
+  'split-to-overview-detail', 'reshape-to-core-detail', 'merge-into-core-tile',
+  'detach-to-performance-point', 'split-to-trends-widget', 'detach-to-trends-bar',
+  'split-to-insight-row', 'detach-to-insight-line', 'detach-to-insight-dot',
+  'split-to-distribution-widget', 'detach-to-distribution-arc', 'cease-after-widget-merge'
+]);
+const liveNodeIndices = bridge.liveNodes.map(({ index }) => index);
+deepEqual([...new Set(liveNodeIndices)].sort((a, b) => a - b), Array.from({ length: bridge.runtime.nodeCount }, (_, index) => index), 'every live node has one bridge record');
+bridge.liveNodes.forEach((node) => {
+  check(allowedNodeDispositions.has(node.disposition), `${node.id} disposition`);
+  check(Array.isArray(node.targetRefs), `${node.id} targetRefs`);
+  check(new Set(node.targetRefs).size === node.targetRefs.length, `${node.id} targetRefs are unique`);
+  node.targetRefs.forEach((targetId) => check(targetIds.has(targetId), `${node.id} references unknown target ${targetId}`));
+});
+
+const formatFamilyId = (family, index) => family.idFormat.replace('%02d', String(index).padStart(2, '0'));
+const expandFamilyIds = (family) => family.explicitIds || Array.from({ length: family.count }, (_, index) => formatFamilyId(family, index));
+const runtimeObjectOwners = [];
+bridge.liveNodes.forEach((node) => runtimeObjectOwners.push({ id: node.id, disposition: node.disposition, targetRefs: node.targetRefs }));
+bridge.runtimeObjects.families.forEach((family) => {
+  check(runtimeSource.includes(family.sourceExpression), `live runtime family source: ${family.sourceExpression}`);
+  const familyIds = expandFamilyIds(family);
+  check(familyIds.length === family.count, `${family.sourceExpression} family count`);
+  const assignedIds = [];
+  family.ranges.forEach((range) => {
+    const rangeIds = range.ids || Array.from({ length: range.to - range.from + 1 }, (_, offset) => formatFamilyId(family, range.from + offset));
+    check(rangeIds.length > 0, `${family.sourceExpression} non-empty disposition range`);
+    check(rangeIds.every((id) => familyIds.includes(id)), `${family.sourceExpression} range references its source family`);
+    check(range.disposition, `${family.sourceExpression} disposition`);
+    check(Array.isArray(range.targetRefs), `${family.sourceExpression} targetRefs`);
+    check(new Set(rangeIds).size === rangeIds.length, `${family.sourceExpression} range ids are unique`);
+    rangeIds.forEach((id) => {
+      assignedIds.push(id);
+      runtimeObjectOwners.push({ id, disposition: range.disposition, targetRefs: range.targetRefs });
+    });
+    range.targetRefs.forEach((targetId) => check(targetIds.has(targetId), `${family.sourceExpression} references unknown target ${targetId}`));
+  });
+  deepEqual([...new Set(assignedIds)].sort(), [...new Set(familyIds)].sort(), `${family.sourceExpression} disposition coverage`);
+});
+const runtimeObjectIds = runtimeObjectOwners.map(({ id }) => id);
+check(new Set(runtimeObjectIds).size === runtimeObjectIds.length, 'live runtime object ids are unique');
+const targetOwners = new Map();
+runtimeObjectOwners.forEach(({ id, targetRefs }) => targetRefs.forEach((targetId) => {
+  const owners = targetOwners.get(targetId) || [];
+  owners.push(id);
+  targetOwners.set(targetId, owners);
+}));
+const missingTargetOwners = visibleIds.filter((targetId) => !targetOwners.has(targetId));
+deepEqual(missingTargetOwners, [], 'every manifest artwork target has a live source owner');
+const mergeTargets = new Set(bridge.ownershipRules.mergeTargets);
+targetOwners.forEach((owners, targetId) => {
+  check(owners.length === 1 || mergeTargets.has(targetId), `${targetId} has inconsistent live source ownership`);
+});
+
 console.log('PASS integrate-golden-v26 manifest parity');
 console.log(JSON.stringify({
   coreTiles: manifest.core.tiles.length,
   coreRows: manifest.core.rowCounts,
-  sourceTiles: manifest.source.structureTiles.length,
+  liveNodes: manifest.sourceBridge.nodeCount,
+  liveRuntimeObjects: runtimeObjectOwners.length,
   supportRails: manifest.supportGeometry.length,
   visibleObjects: visibleObjects.length,
   widgets: {
