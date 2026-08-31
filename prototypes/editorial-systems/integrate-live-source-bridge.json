@@ -124,8 +124,8 @@
       {
         "sourceExpression": "outputTracePaths",
         "idFormat": "output-trace-%02d",
-        "count": 2,
-        "ranges": [{ "from": 0, "to": 1, "disposition": "cease-before-integrate", "targetRefs": [] }]
+        "count": 0,
+        "ranges": []
       },
       {
         "sourceExpression": "outputFindingChevrons",

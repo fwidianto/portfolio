@@ -246,6 +246,28 @@ const runtimeRoles = Array(bridge.runtime.nodeCount).fill('core');
 const roleMatches = [...runtimeSource.matchAll(/setRole\('([^']+)',\s*\[([^\]]+)\]\);/g)];
 check(roleMatches.length === 5, 'live runtime role assignments');
 roleMatches.forEach(([, role, values]) => values.split(',').map((value) => Number(value.trim())).filter(Number.isInteger).forEach((index) => { runtimeRoles[index] = role; }));
+const expectedRuntimeFamilies = [
+  'networkElements', 'boundaryElements', 'roleFrameElements', 'lineTrack', 'insightTracks',
+  'outputFlowPath', 'outputFlowNodes', 'outputTracePaths', 'outputFindingChevrons', 'outputLabels', 'outputMetrics'
+];
+deepEqual(
+  [...new Set(bridge.runtimeObjects.families.map(({ sourceExpression }) => sourceExpression))].sort(),
+  expectedRuntimeFamilies.sort(),
+  'complete live runtime family set'
+);
+const expectedRuntimeFamilyCounts = {
+  networkElements: 65,
+  boundaryElements: 5,
+  roleFrameElements: 5,
+  lineTrack: 1,
+  insightTracks: 3,
+  outputFlowPath: 1,
+  outputFlowNodes: 4,
+  outputTracePaths: runtimeRoles.filter((role) => role === 'overview').length >= 6 ? 2 : 0,
+  outputFindingChevrons: 3,
+  outputLabels: 11,
+  outputMetrics: 3
+};
 
 const expectedLiveNodes = [];
 runtimeRows.forEach((count, row) => {
@@ -282,6 +304,7 @@ bridge.liveNodes.forEach((node) => runtimeObjectOwners.push({ id: node.id, dispo
 bridge.runtimeObjects.families.forEach((family) => {
   check(runtimeSource.includes(family.sourceExpression), `live runtime family source: ${family.sourceExpression}`);
   const familyIds = expandFamilyIds(family);
+  check(family.count === expectedRuntimeFamilyCounts[family.sourceExpression], `${family.sourceExpression} source count`);
   check(familyIds.length === family.count, `${family.sourceExpression} family count`);
   const assignedIds = [];
   family.ranges.forEach((range) => {
