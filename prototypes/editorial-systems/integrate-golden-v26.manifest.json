@@ -1,0 +1,163 @@
+{
+  "id": "integrate-golden-v26",
+  "kind": "approved-integrate-target-manifest",
+  "scope": "svg-artwork",
+  "authority": {
+    "file": "integrate-golden-v26.html",
+    "viewBox": [0, 0, 1000, 720],
+    "coreTransform": [360, 286]
+  },
+  "palette": {
+    "navy": "#0e1a2e",
+    "paper": "#fcfcfc",
+    "sand": "#cf9d63",
+    "slate": "#5d626b",
+    "grid": "#d7d7d1"
+  },
+  "source": {
+    "authority": "manifest-declared locked Structure tile inventory",
+    "reviewedAgainst": "prototypes/structure-integrate/transition.js#structureTiles",
+    "mergeRule": "row-major pairwise; each locked Structure tile is used exactly once",
+    "structureTiles": [
+      { "id": "structure-tile-01", "index": 0, "x": 60, "y": 185, "width": 32, "height": 33, "style": "navy" },
+      { "id": "structure-tile-02", "index": 1, "x": 92, "y": 185, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-03", "index": 2, "x": 124, "y": 185, "width": 32, "height": 33, "style": "sand" },
+      { "id": "structure-tile-04", "index": 3, "x": 156, "y": 185, "width": 32, "height": 33, "style": "navy" },
+      { "id": "structure-tile-05", "index": 4, "x": 188, "y": 185, "width": 32, "height": 33, "style": "navy" },
+      { "id": "structure-tile-06", "index": 5, "x": 220, "y": 185, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-07", "index": 6, "x": 252, "y": 185, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-08", "index": 7, "x": 284, "y": 185, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-09", "index": 8, "x": 92, "y": 152, "width": 32, "height": 33, "style": "navy" },
+      { "id": "structure-tile-10", "index": 9, "x": 124, "y": 152, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-11", "index": 10, "x": 156, "y": 152, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-12", "index": 11, "x": 188, "y": 152, "width": 32, "height": 33, "style": "navy" },
+      { "id": "structure-tile-13", "index": 12, "x": 220, "y": 152, "width": 32, "height": 33, "style": "navy" },
+      { "id": "structure-tile-14", "index": 13, "x": 252, "y": 152, "width": 32, "height": 33, "style": "navy" },
+      { "id": "structure-tile-15", "index": 14, "x": 108, "y": 119, "width": 32, "height": 33, "style": "navy" },
+      { "id": "structure-tile-16", "index": 15, "x": 140, "y": 119, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-17", "index": 16, "x": 172, "y": 119, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-18", "index": 17, "x": 204, "y": 119, "width": 32, "height": 33, "style": "navy" },
+      { "id": "structure-tile-19", "index": 18, "x": 236, "y": 119, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-20", "index": 19, "x": 124, "y": 86, "width": 32, "height": 33, "style": "slate" },
+      { "id": "structure-tile-21", "index": 20, "x": 156, "y": 86, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-22", "index": 21, "x": 188, "y": 86, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-23", "index": 22, "x": 220, "y": 86, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-24", "index": 23, "x": 140, "y": 53, "width": 32, "height": 33, "style": "paper" },
+      { "id": "structure-tile-25", "index": 24, "x": 172, "y": 53, "width": 32, "height": 33, "style": "slate" },
+      { "id": "structure-tile-26", "index": 25, "x": 204, "y": 53, "width": 32, "height": 33, "style": "paper" }
+    ]
+  },
+  "core": {
+    "rowOrder": ["bottom", "middle", "upper", "top"],
+    "rowCounts": [6, 4, 2, 1],
+    "tileWidth": 52,
+    "tileHeight": 48,
+    "tiles": [
+      { "id": "core-tile-01", "kind": "tile", "row": "bottom", "column": 1, "x": 360, "y": 430, "width": 52, "height": 48, "style": "navy", "className": "tile navy", "sourceTiles": ["structure-tile-01", "structure-tile-02"], "mark": { "id": "core-tile-01-plus", "kind": "plus", "x": 386, "y": 454, "className": "plus" } },
+      { "id": "core-tile-02", "kind": "tile", "row": "bottom", "column": 2, "x": 412, "y": 430, "width": 52, "height": 48, "style": "paper", "className": "tile paper", "sourceTiles": ["structure-tile-03", "structure-tile-04"], "mark": { "id": "core-tile-02-plus", "kind": "plus", "x": 438, "y": 454, "className": "plus dark" } },
+      { "id": "core-tile-03", "kind": "tile", "row": "bottom", "column": 3, "x": 464, "y": 430, "width": 52, "height": 48, "style": "sand", "className": "tile sand", "sourceTiles": ["structure-tile-05", "structure-tile-06"], "mark": { "id": "core-tile-03-plus", "kind": "plus", "x": 490, "y": 454, "className": "plus dark" } },
+      { "id": "core-tile-04", "kind": "tile", "row": "bottom", "column": 4, "x": 516, "y": 430, "width": 52, "height": 48, "style": "slate", "className": "tile slate", "sourceTiles": ["structure-tile-07", "structure-tile-08"], "mark": { "id": "core-tile-04-plus", "kind": "plus", "x": 542, "y": 454, "className": "plus" } },
+      { "id": "core-tile-05", "kind": "tile", "row": "bottom", "column": 5, "x": 568, "y": 430, "width": 52, "height": 48, "style": "navy", "className": "tile navy", "sourceTiles": ["structure-tile-09", "structure-tile-10"], "mark": { "id": "core-tile-05-plus", "kind": "plus", "x": 594, "y": 454, "className": "plus" } },
+      { "id": "core-tile-06", "kind": "tile", "row": "bottom", "column": 6, "x": 620, "y": 430, "width": 52, "height": 48, "style": "paper", "className": "tile paper", "sourceTiles": ["structure-tile-11", "structure-tile-12"], "mark": { "id": "core-tile-06-plus", "kind": "plus", "x": 646, "y": 454, "className": "plus dark" } },
+      { "id": "core-tile-07", "kind": "tile", "row": "middle", "column": 1, "x": 412, "y": 382, "width": 52, "height": 48, "style": "slate", "className": "tile slate", "sourceTiles": ["structure-tile-13", "structure-tile-14"], "mark": { "id": "core-tile-07-plus", "kind": "plus", "x": 438, "y": 406, "className": "plus" } },
+      { "id": "core-tile-08", "kind": "tile", "row": "middle", "column": 2, "x": 464, "y": 382, "width": 52, "height": 48, "style": "navy", "className": "tile navy", "sourceTiles": ["structure-tile-15", "structure-tile-16"], "mark": { "id": "core-tile-08-plus", "kind": "plus", "x": 490, "y": 406, "className": "plus" } },
+      { "id": "core-tile-09", "kind": "tile", "row": "middle", "column": 3, "x": 516, "y": 382, "width": 52, "height": 48, "style": "navy", "className": "tile navy", "sourceTiles": ["structure-tile-17", "structure-tile-18"], "mark": { "id": "core-tile-09-plus", "kind": "plus", "x": 542, "y": 406, "className": "plus" } },
+      { "id": "core-tile-10", "kind": "tile", "row": "middle", "column": 4, "x": 568, "y": 382, "width": 52, "height": 48, "style": "sand", "className": "tile sand", "sourceTiles": ["structure-tile-19", "structure-tile-20"], "mark": { "id": "core-tile-10-plus", "kind": "plus", "x": 594, "y": 406, "className": "plus dark" } },
+      { "id": "core-tile-11", "kind": "tile", "row": "upper", "column": 1, "x": 464, "y": 334, "width": 52, "height": 48, "style": "navy", "className": "tile navy", "sourceTiles": ["structure-tile-21", "structure-tile-22"], "mark": { "id": "core-tile-11-plus", "kind": "plus", "x": 490, "y": 358, "className": "plus" } },
+      { "id": "core-tile-12", "kind": "tile", "row": "upper", "column": 2, "x": 516, "y": 334, "width": 52, "height": 48, "style": "paper", "className": "tile paper", "sourceTiles": ["structure-tile-23", "structure-tile-24"], "mark": { "id": "core-tile-12-plus", "kind": "plus", "x": 542, "y": 358, "className": "plus dark" } },
+      { "id": "core-tile-13", "kind": "tile", "row": "top", "column": 1, "x": 516, "y": 286, "width": 52, "height": 48, "style": "navy", "className": "tile navy", "sourceTiles": ["structure-tile-25", "structure-tile-26"], "mark": { "id": "core-tile-13-plus", "kind": "plus", "x": 542, "y": 310, "className": "plus" } }
+    ],
+    "baseHairlines": [
+      { "id": "core-base-hairline-01", "kind": "hairline", "x1": 360, "y1": 478, "x2": 668, "y2": 478, "width": 308, "height": 0, "className": "hairline", "d": "M360 478H668" },
+      { "id": "core-base-hairline-02", "kind": "hairline", "x1": 412, "y1": 430, "x2": 620, "y2": 430, "width": 208, "height": 0, "className": "hairline", "d": "M412 430H620" },
+      { "id": "core-base-hairline-03", "kind": "hairline", "x1": 464, "y1": 382, "x2": 568, "y2": 382, "width": 104, "height": 0, "className": "hairline", "d": "M464 382H568" }
+    ]
+  },
+  "widgets": {
+    "distribution": {
+      "label": { "id": "label-distribution", "kind": "text", "x": 684, "y": 214, "text": "DISTRIBUTION", "className": "micro-label" },
+      "ring": { "id": "distribution-ring-base", "kind": "circle", "cx": 724, "cy": 274, "radius": 42, "fill": "none", "stroke": "slate", "strokeWidth": 11 },
+      "accentArcs": [
+        { "id": "distribution-arc-navy", "kind": "arc", "d": "M724 232A42 42 0 0 1 761 294", "stroke": "navy", "strokeWidth": 11, "fill": "none" },
+        { "id": "distribution-arc-sand", "kind": "arc", "d": "M753 252A42 42 0 0 1 765 275", "stroke": "sand", "strokeWidth": 11, "fill": "none" }
+      ]
+    },
+    "trends": {
+      "label": { "id": "label-trends", "kind": "text", "x": 808, "y": 344, "text": "TRENDS", "className": "micro-label" },
+      "bars": [
+        { "id": "trends-bar-01", "kind": "bar", "x": 814, "baselineY": 440, "topY": 405, "width": 13, "height": 35, "stroke": "navy", "strokeWidth": 13 },
+        { "id": "trends-bar-02", "kind": "bar", "x": 844, "baselineY": 440, "topY": 383, "width": 13, "height": 57, "stroke": "navy", "strokeWidth": 13 },
+        { "id": "trends-bar-03", "kind": "bar", "x": 874, "baselineY": 440, "topY": 395, "width": 13, "height": 45, "stroke": "navy", "strokeWidth": 13 },
+        { "id": "trends-bar-04", "kind": "bar", "x": 904, "baselineY": 440, "topY": 370, "width": 13, "height": 70, "stroke": "navy", "strokeWidth": 13 },
+        { "id": "trends-bar-05", "kind": "bar", "x": 934, "baselineY": 440, "topY": 410, "width": 13, "height": 30, "stroke": "navy", "strokeWidth": 13 }
+      ],
+      "baseline": { "id": "trends-baseline", "kind": "hairline", "x1": 814, "y1": 440, "x2": 942, "y2": 440, "width": 128, "height": 0, "className": "hairline", "d": "M814 440H942" }
+    },
+    "performance": {
+      "label": { "id": "label-performance", "kind": "text", "x": 88, "y": 548, "text": "PERFORMANCE", "className": "micro-label" },
+      "polyline": { "id": "performance-polyline", "kind": "polyline", "d": "M92 610L124 584L156 596L188 550L220 520L252 538", "stroke": "navy", "strokeWidth": 2, "className": "rail" },
+      "points": [
+        { "id": "performance-point-01", "kind": "point", "cx": 92, "cy": 610, "radius": 4, "fill": "navy" },
+        { "id": "performance-point-02", "kind": "point", "cx": 124, "cy": 584, "radius": 4, "fill": "navy" },
+        { "id": "performance-point-03", "kind": "point", "cx": 156, "cy": 596, "radius": 4, "fill": "navy" },
+        { "id": "performance-point-04", "kind": "point", "cx": 188, "cy": 550, "radius": 4, "fill": "navy" },
+        { "id": "performance-point-05", "kind": "point", "cx": 220, "cy": 520, "radius": 4, "fill": "navy" },
+        { "id": "performance-point-06", "kind": "point", "cx": 252, "cy": 538, "radius": 4, "fill": "navy" }
+      ]
+    },
+    "insights": {
+      "label": { "id": "label-insights", "kind": "text", "x": 214, "y": 244, "text": "INSIGHTS", "className": "micro-label" },
+      "lines": [
+        { "id": "insights-line-01", "kind": "line", "x1": 246, "y1": 276, "x2": 356, "y2": 276, "width": 110, "height": 0, "className": "rail", "d": "M246 276H356" },
+        { "id": "insights-line-02", "kind": "line", "x1": 246, "y1": 300, "x2": 336, "y2": 300, "width": 90, "height": 0, "className": "rail", "d": "M246 300H336" },
+        { "id": "insights-line-03", "kind": "line", "x1": 246, "y1": 324, "x2": 364, "y2": 324, "width": 118, "height": 0, "className": "rail", "d": "M246 324H364" },
+        { "id": "insights-line-04", "kind": "line", "x1": 246, "y1": 348, "x2": 346, "y2": 348, "width": 100, "height": 0, "className": "rail", "d": "M246 348H346" }
+      ],
+      "dots": [
+        { "id": "insights-dot-01", "kind": "dot", "cx": 230, "cy": 276, "radius": 4, "fill": "sand" },
+        { "id": "insights-dot-02", "kind": "dot", "cx": 230, "cy": 300, "radius": 4, "fill": "sand" },
+        { "id": "insights-dot-03", "kind": "dot", "cx": 230, "cy": 324, "radius": 4, "fill": "sand" },
+        { "id": "insights-dot-04", "kind": "dot", "cx": 230, "cy": 348, "radius": 4, "fill": "sand" }
+      ]
+    },
+    "overviewSystemDetail": {
+      "label": { "id": "label-overview-system-detail", "kind": "text", "x": 380, "y": 196, "text": "OVERVIEW / SYSTEM DETAIL", "className": "section-label" },
+      "hairlines": [
+        { "id": "overview-hairline-01", "kind": "hairline", "x1": 382, "y1": 220, "x2": 602, "y2": 220, "width": 220, "height": 0, "className": "hairline", "d": "M382 220H602" },
+        { "id": "overview-hairline-02", "kind": "hairline", "x1": 382, "y1": 232, "x2": 548, "y2": 232, "width": 166, "height": 0, "className": "hairline", "d": "M382 232H548" },
+        { "id": "overview-hairline-03", "kind": "hairline", "x1": 382, "y1": 244, "x2": 580, "y2": 244, "width": 198, "height": 0, "className": "hairline", "d": "M382 244H580" }
+      ],
+      "rails": [
+        { "id": "overview-rail-01", "kind": "rail", "x1": 412, "y1": 262, "x2": 464, "y2": 262, "width": 52, "height": 0, "className": "rail", "d": "M412 262H464" },
+        { "id": "overview-rail-02", "kind": "rail", "x1": 480, "y1": 262, "x2": 532, "y2": 262, "width": 52, "height": 0, "className": "rail", "d": "M480 262H532" },
+        { "id": "overview-rail-03", "kind": "rail", "x1": 548, "y1": 262, "x2": 600, "y2": 262, "width": 52, "height": 0, "className": "rail", "d": "M548 262H600" }
+      ]
+    }
+  },
+  "supportGeometry": [
+    { "id": "support-rail-01", "kind": "rail", "from": [402, 300], "to": [468, 300], "width": 66, "height": 0, "length": 66, "className": "rail", "d": "M402 300H468" },
+    { "id": "support-rail-02", "kind": "rail", "from": [402, 324], "to": [468, 324], "width": 66, "height": 0, "length": 66, "className": "rail", "d": "M402 324H468" },
+    { "id": "support-rail-03", "kind": "rail", "from": [700, 292], "to": [662, 334], "width": 38, "height": 42, "length": 56.64, "className": "rail sand", "d": "M700 292L662 334" },
+    { "id": "support-rail-04", "kind": "rail", "from": [700, 292], "to": [664, 360], "width": 36, "height": 68, "length": 76.94, "className": "rail sand", "d": "M700 292L664 360" },
+    { "id": "support-rail-05", "kind": "rail", "from": [275, 535], "to": [336, 498], "width": 61, "height": 37, "length": 71.34, "className": "rail", "d": "M275 535L336 498" },
+    { "id": "support-rail-06", "kind": "rail", "from": [286, 560], "to": [350, 510], "width": 64, "height": 50, "length": 81.22, "className": "rail", "d": "M286 560L350 510" },
+    { "id": "support-rail-07", "kind": "rail", "from": [364, 284], "to": [410, 330], "width": 46, "height": 46, "length": 65.05, "className": "rail", "d": "M364 284L410 330" },
+    { "id": "support-rail-08", "kind": "rail", "from": [364, 308], "to": [410, 350], "width": 46, "height": 42, "length": 62.29, "className": "rail", "d": "M364 308L410 350" }
+  ],
+  "hardGate": {
+    "coreTileCount": 13,
+    "coreRows": [6, 4, 2, 1],
+    "supportRailSegmentCount": 8,
+    "requiredWidgetCounts": {
+      "distributionAccentArcs": 2,
+      "trendsBars": 5,
+      "performancePoints": 6,
+      "insightsDots": 4,
+      "insightsLines": 4,
+      "overviewHairlines": 3,
+      "overviewRails": 3
+    },
+    "sourceTileUse": { "required": 26, "perCoreTile": 2, "reusable": false },
+    "legacyLayoutAllowed": false
+  }
+}
