@@ -35,6 +35,7 @@ const flattenVisibleObjects = () => [
 
 check(manifest.id === 'integrate-golden-v26', 'manifest id');
 deepEqual(manifest.authority.viewBox, [0, 0, 1000, 720], 'viewBox');
+deepEqual(manifest.authority.referenceFrame, { left: 548, top: 34, width: 1000, height: 720 }, 'reference frame');
 contains('<svg viewBox="0 0 1000 720"', 'locked SVG viewBox');
 
 const coreGroup = golden.match(/<g transform="translate\(360 286\)">([\s\S]*?)<\/g>/)?.[1] || '';
@@ -97,6 +98,14 @@ deepEqual(
   'Distribution accent geometry/style'
 );
 deepEqual(
+  manifest.widgets.distribution.accentArcs.map(({ cx, cy, radius, thickness, startAngle, endAngle }) => ({ cx, cy, radius, thickness, startAngle, endAngle })),
+  [
+    { cx: 724, cy: 274, radius: 42, thickness: 11, startAngle: -1.5707963268, endAngle: 0.4964227534 },
+    { cx: 724, cy: 274, radius: 42, thickness: 11, startAngle: -0.6483312853, endAngle: 0.0243865266 }
+  ],
+  'Distribution arc parameters'
+);
+deepEqual(
   manifest.widgets.trends.bars.map(({ x, baselineY, topY, width, height }) => ({ x, baselineY, topY, width, height })),
   [
     { x: 814, baselineY: 440, topY: 405, width: 13, height: 35 },
@@ -116,6 +125,11 @@ deepEqual(
   (({ d, stroke, strokeWidth, className }) => ({ d, stroke, strokeWidth, className }))(manifest.widgets.performance.polyline),
   { d: 'M92 610L124 584L156 596L188 550L220 520L252 538', stroke: 'navy', strokeWidth: 2, className: 'rail' },
   'Performance polyline geometry/style'
+);
+deepEqual(
+  manifest.widgets.performance.polyline.points,
+  [[92, 610], [124, 584], [156, 596], [188, 550], [220, 520], [252, 538]],
+  'Performance polyline points'
 );
 deepEqual(
   manifest.widgets.performance.points.map(({ cx, cy, radius, fill }) => ({ cx, cy, radius, fill })),
@@ -222,7 +236,7 @@ const requiredRuntimeExpressions = [
   'const boundaryElements = groups.map',
   'const roleFrameElements = Object.entries(integrateFrames).map',
   'const lineTrack = { path: svgElement(\'path\', \'immersive-line\')',
-  'const insightTracks = insightOutput.slice(0, 3).map',
+  'const insightTracks = integrateInsightLines.slice(0, 3).map',
   'const outputFlowPath = svgElement(\'path\', \'immersive-output-flow\')',
   'const outputFlowNodes = outputFlowTargets.map',
   'const outputTracePaths = overviewNodeIndices.length >= 6',
@@ -242,10 +256,10 @@ const runtimeRowMatch = runtimeSource.match(/const structureTargets = \[\];\s*\[
 check(runtimeRowMatch, 'live Structure target row generator');
 const runtimeRows = runtimeRowMatch[1].split(',').map((value) => Number(value.trim())).filter(Number.isFinite);
 deepEqual(runtimeRows, bridge.runtime.structureRowCounts, 'live Structure row counts');
-const runtimeRoles = Array(bridge.runtime.nodeCount).fill('core');
-const roleMatches = [...runtimeSource.matchAll(/setRole\('([^']+)',\s*\[([^\]]+)\]\);/g)];
-check(roleMatches.length === 5, 'live runtime role assignments');
-roleMatches.forEach(([, role, values]) => values.split(',').map((value) => Number(value.trim())).filter(Number.isInteger).forEach((index) => { runtimeRoles[index] = role; }));
+const runtimeRoleExpression = 'const roles = integrateBridge.liveNodes.slice().sort((left, right) => left.index - right.index).map((node) => node.role);';
+check(runtimeSource.includes(runtimeRoleExpression), 'live runtime consumes bridge-defined roles');
+const runtimeRoles = bridge.liveNodes.slice().sort((left, right) => left.index - right.index).map((node) => node.role);
+check(runtimeRoles.length === bridge.runtime.nodeCount, 'live runtime role assignments');
 const expectedRuntimeFamilies = [
   'networkElements', 'boundaryElements', 'roleFrameElements', 'lineTrack', 'insightTracks',
   'outputFlowPath', 'outputFlowNodes', 'outputTracePaths', 'outputFindingChevrons', 'outputLabels', 'outputMetrics'
@@ -295,6 +309,7 @@ bridge.liveNodes.forEach((node) => {
   check(Array.isArray(node.targetRefs), `${node.id} targetRefs`);
   check(new Set(node.targetRefs).size === node.targetRefs.length, `${node.id} targetRefs are unique`);
   node.targetRefs.forEach((targetId) => check(targetIds.has(targetId), `${node.id} references unknown target ${targetId}`));
+  if (node.mergeInto) check(targetIds.has(node.mergeInto), `${node.id} references unknown merge target ${node.mergeInto}`);
 });
 
 const formatFamilyId = (family, index) => family.idFormat.replace('%02d', String(index).padStart(2, '0'));
@@ -330,6 +345,11 @@ runtimeObjectOwners.forEach(({ id, targetRefs }) => targetRefs.forEach((targetId
   owners.push(id);
   targetOwners.set(targetId, owners);
 }));
+bridge.liveNodes.filter(({ mergeInto }) => mergeInto).forEach(({ id, mergeInto }) => {
+  const owners = targetOwners.get(mergeInto) || [];
+  owners.push(id);
+  targetOwners.set(mergeInto, owners);
+});
 const missingTargetOwners = visibleIds.filter((targetId) => !targetOwners.has(targetId));
 deepEqual(missingTargetOwners, [], 'every manifest artwork target has a live source owner');
 const mergeTargets = new Set(bridge.ownershipRules.mergeTargets);

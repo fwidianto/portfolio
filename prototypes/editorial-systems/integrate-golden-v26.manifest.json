@@ -5,7 +5,8 @@
   "authority": {
     "file": "integrate-golden-v26.html",
     "viewBox": [0, 0, 1000, 720],
-    "coreTransform": [360, 286]
+    "coreTransform": [360, 286],
+    "referenceFrame": { "left": 548, "top": 34, "width": 1000, "height": 720 }
   },
   "palette": {
     "navy": "#0e1a2e",
@@ -52,8 +53,8 @@
       "label": { "id": "label-distribution", "kind": "text", "x": 684, "y": 214, "text": "DISTRIBUTION", "className": "micro-label" },
       "ring": { "id": "distribution-ring-base", "kind": "circle", "cx": 724, "cy": 274, "radius": 42, "fill": "none", "stroke": "slate", "strokeWidth": 11 },
       "accentArcs": [
-        { "id": "distribution-arc-navy", "kind": "arc", "d": "M724 232A42 42 0 0 1 761 294", "stroke": "navy", "strokeWidth": 11, "fill": "none" },
-        { "id": "distribution-arc-sand", "kind": "arc", "d": "M753 252A42 42 0 0 1 765 275", "stroke": "sand", "strokeWidth": 11, "fill": "none" }
+        { "id": "distribution-arc-navy", "kind": "arc", "cx": 724, "cy": 274, "radius": 42, "thickness": 11, "startAngle": -1.5707963268, "endAngle": 0.4964227534, "d": "M724 232A42 42 0 0 1 761 294", "stroke": "navy", "strokeWidth": 11, "fill": "none" },
+        { "id": "distribution-arc-sand", "kind": "arc", "cx": 724, "cy": 274, "radius": 42, "thickness": 11, "startAngle": -0.6483312853, "endAngle": 0.0243865266, "d": "M753 252A42 42 0 0 1 765 275", "stroke": "sand", "strokeWidth": 11, "fill": "none" }
       ]
     },
     "trends": {
@@ -69,7 +70,7 @@
     },
     "performance": {
       "label": { "id": "label-performance", "kind": "text", "x": 88, "y": 548, "text": "PERFORMANCE", "className": "micro-label" },
-      "polyline": { "id": "performance-polyline", "kind": "polyline", "d": "M92 610L124 584L156 596L188 550L220 520L252 538", "stroke": "navy", "strokeWidth": 2, "className": "rail" },
+      "polyline": { "id": "performance-polyline", "kind": "polyline", "points": [[92, 610], [124, 584], [156, 596], [188, 550], [220, 520], [252, 538]], "d": "M92 610L124 584L156 596L188 550L220 520L252 538", "stroke": "navy", "strokeWidth": 2, "className": "rail" },
       "points": [
         { "id": "performance-point-01", "kind": "point", "cx": 92, "cy": 610, "radius": 4, "fill": "navy" },
         { "id": "performance-point-02", "kind": "point", "cx": 124, "cy": 584, "radius": 4, "fill": "navy" },

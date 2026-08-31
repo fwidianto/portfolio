@@ -49,7 +49,7 @@
     { "id": "live-node-34", "index": 34, "role": "distribution", "structure": { "row": 2, "column": 4, "x": 1104, "y": 538 }, "disposition": "split-to-distribution-widget", "targetRefs": ["label-distribution", "distribution-ring-base"] },
     { "id": "live-node-35", "index": 35, "role": "distribution", "structure": { "row": 2, "column": 5, "x": 1152, "y": 538 }, "disposition": "detach-to-distribution-arc", "targetRefs": ["distribution-arc-navy"] },
     { "id": "live-node-36", "index": 36, "role": "distribution", "structure": { "row": 2, "column": 6, "x": 1200, "y": 538 }, "disposition": "detach-to-distribution-arc", "targetRefs": ["distribution-arc-sand"] },
-    { "id": "live-node-37", "index": 37, "role": "distribution", "structure": { "row": 2, "column": 7, "x": 1248, "y": 538 }, "disposition": "cease-after-widget-merge", "targetRefs": [], "reason": "The source mark is absorbed into the single approved distribution ring; no fourth accent arc exists in v26." },
+    { "id": "live-node-37", "index": 37, "role": "distribution", "structure": { "row": 2, "column": 7, "x": 1248, "y": 538 }, "disposition": "cease-after-widget-merge", "targetRefs": [], "mergeInto": "distribution-ring-base", "reason": "The source mark is absorbed into the single approved distribution ring; no fourth accent arc exists in v26." },
     { "id": "live-node-38", "index": 38, "role": "core", "structure": { "row": 3, "column": 0, "x": 960, "y": 506 }, "disposition": "merge-into-core-tile", "targetRefs": ["core-tile-07", "core-tile-07-plus"] },
     { "id": "live-node-39", "index": 39, "role": "core", "structure": { "row": 3, "column": 1, "x": 1008, "y": 506 }, "disposition": "merge-into-core-tile", "targetRefs": ["core-tile-07"] },
     { "id": "live-node-40", "index": 40, "role": "core", "structure": { "row": 3, "column": 2, "x": 1056, "y": 506 }, "disposition": "merge-into-core-tile", "targetRefs": ["core-tile-08", "core-tile-08-plus"] },
@@ -148,7 +148,7 @@
     ]
   },
   "ownershipRules": {
-    "mergeTargets": ["core-tile-01", "core-tile-02", "core-tile-03", "core-tile-04", "core-tile-05", "core-tile-06", "core-tile-07", "core-tile-08", "core-tile-09", "core-tile-10", "core-tile-11", "core-tile-12", "core-tile-13"],
+    "mergeTargets": ["core-tile-01", "core-tile-02", "core-tile-03", "core-tile-04", "core-tile-05", "core-tile-06", "core-tile-07", "core-tile-08", "core-tile-09", "core-tile-10", "core-tile-11", "core-tile-12", "core-tile-13", "distribution-ring-base"],
     "splitAllowed": true,
     "allLiveNodesRequired": true,
     "allRuntimeFamiliesRequired": true,
