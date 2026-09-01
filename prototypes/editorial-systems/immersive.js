@@ -286,17 +286,35 @@
     y: (referenceFrame.top + y - runtimeFrame.top) * runtimeFrame.scaleY
   });
   const runtimeSize = (value, axis = 'x') => value * (axis === 'y' ? runtimeFrame.scaleY : runtimeFrame.scaleX);
-  const outputOrigin = { x: 652.5, y: 89.5 };
-  const outputScale = 1.391;
+  const outputGoldenSize = { width: 405, height: 236 };
+  const outputLayout = { x: 0, y: 0, scale: 1 };
+  const refreshOutputLayout = () => {
+    const safeLeft = 760;
+    const safeRight = WIDTH - 72;
+    const safeTop = 72;
+    const safeBottom = HEIGHT - 48;
+    outputLayout.scale = Math.min(1.22, (safeRight - safeLeft) / outputGoldenSize.width, (safeBottom - safeTop) / outputGoldenSize.height);
+    outputLayout.x = safeRight - outputGoldenSize.width * outputLayout.scale;
+    outputLayout.y = safeTop;
+  };
+  refreshOutputLayout();
   const outputFinalHoldStart = .78;
   const outputPalette = outputManifest.palette || {};
   const outputColor = (value) => {
     if (value == null || value === 'none') return value;
     return outputPalette[value] || value;
   };
+  const outputStyleFor = (target) => {
+    const style = target?.style || {};
+    return {
+      fill: outputColor(style.fill || 'none'),
+      stroke: outputColor(style.stroke || 'none'),
+      strokeWidth: style.strokeWidth == null ? 1.05 : style.strokeWidth
+    };
+  };
   const outputLayerTransform = () => {
-    const origin = runtimePoint(outputOrigin.x, outputOrigin.y);
-    outputTargetLayer.setAttribute('transform', `translate(${origin.x.toFixed(2)} ${origin.y.toFixed(2)}) scale(${(outputScale * runtimeFrame.scaleX).toFixed(5)} ${(outputScale * runtimeFrame.scaleY).toFixed(5)})`);
+    refreshOutputLayout();
+    outputTargetLayer.setAttribute('transform', `translate(${outputLayout.x.toFixed(2)} ${outputLayout.y.toFixed(2)}) scale(${outputLayout.scale.toFixed(5)})`);
   };
   const outputPathPoints = (d = '') => {
     const points = [];
@@ -323,17 +341,17 @@
   };
   const outputTargetShapePoints = (target) => {
     const geometry = target.geometry || {};
-    const scaleX = outputScale * runtimeFrame.scaleX;
-    const scaleY = outputScale * runtimeFrame.scaleY;
-    if (target.tag === 'rect') return roundedRectPoints(runtimeSize(geometry.width * outputScale), runtimeSize(geometry.height * outputScale, 'y'), runtimeSize((geometry.rx || 2) * outputScale));
-    if (target.tag === 'circle') return ellipsePoints(runtimeSize(geometry.r * outputScale), runtimeSize(geometry.r * outputScale, 'y'));
-    if (target.id.includes('distribution-ring-')) return ellipsePoints(runtimeSize(20 * outputScale), runtimeSize(20 * outputScale, 'y'));
+    const scaleX = outputLayout.scale;
+    const scaleY = outputLayout.scale;
+    if (target.tag === 'rect') return roundedRectPoints(geometry.width * scaleX, geometry.height * scaleY, (geometry.rx || 2) * scaleX);
+    if (target.tag === 'circle') return ellipsePoints(geometry.r * scaleX, geometry.r * scaleY);
+    if (target.id.includes('distribution-ring-')) return ellipsePoints(20 * scaleX, 20 * scaleY);
     const points = outputPathPoints(geometry.d);
     if (points.length >= 2) {
       const center = outputTargetLocalCenter(target);
       return points.map(([x, y]) => [(x - center.x) * scaleX, (y - center.y) * scaleY]);
     }
-    return roundedRectPoints(runtimeSize(10 * outputScale), runtimeSize(5 * outputScale, 'y'), runtimeSize(1 * outputScale));
+    return roundedRectPoints(10 * scaleX, 5 * scaleY, 1 * scaleX);
   };
   const outputTargetElementFor = (target) => {
     const wrapper = group('immersive-output-target-wrapper');
@@ -380,6 +398,10 @@
     [28, 'output-insights-row-3'], [29, 'output-insights-row-3'], [34, 'output-distribution-ring-base'], [35, 'output-distribution-ring-navy'],
     [36, 'output-distribution-ring-sand'], [37, 'output-distribution-ring-base']
   ]);
+  const outputPanelCarrierByNode = new Map([
+    [4, 'output-frame'], [6, 'output-panel-overview'], [8, 'output-panel-distribution'],
+    [10, 'output-panel-performance'], [32, 'output-panel-insights'], [44, 'output-panel-trends']
+  ]);
   const nodeSourceByIndex = new Map(integrateOutputBridge.sourceObjects
     .filter(({ runtime }) => runtime.family === 'nodeElements' && runtime.part === 'shape')
     .map((source) => [source.runtime.index, source.id]));
@@ -387,7 +409,7 @@
   const outputTargetReveal = (target, progress) => {
     if (progress >= outputFinalHoldStart) return 1;
     const id = target.id;
-    if (id === 'output-frame' || id.startsWith('output-panel-')) return easeOut(clamp((progress - .28) / .28));
+    if (id === 'output-frame' || id.startsWith('output-panel-')) return easeOut(clamp((progress - .58) / .06));
     if (id === 'output-distribution-ring-slate') return easeOut(clamp((progress - .68) / .12));
     if (id.startsWith('output-distribution-legend-')) return easeOut(clamp((progress - .72) / .10));
     if (id === 'output-performance-point-7') return easeOut(clamp((progress - .70) / .10));
@@ -401,7 +423,7 @@
   };
   const outputSourceAnchor = (sourceId, poses) => {
     const source = outputSourceObjects.get(sourceId);
-    if (!source) return { x: runtimePoint(outputOrigin.x, outputOrigin.y).x, y: runtimePoint(outputOrigin.x, outputOrigin.y).y };
+    if (!source) return { x: outputLayout.x, y: outputLayout.y };
     const runtime = source.runtime;
     if (runtime.family === 'nodeElements') return poses[runtime.index]?.position || targetCenter(targetFor(sourceId));
     if (runtime.family === 'lineTrack') return targetCenter(targetFor(sourceId));
@@ -412,6 +434,51 @@
     const anchors = sourceIds.map((sourceId) => outputSourceAnchor(sourceId, poses)).filter((point) => Number.isFinite(point.x) && Number.isFinite(point.y));
     if (!anchors.length) return targetCenter(target);
     return anchors.reduce((sum, point) => ({ x: sum.x + point.x / anchors.length, y: sum.y + point.y / anchors.length }), { x: 0, y: 0 });
+  };
+  const outputPanelHandoffGate = (progress) => {
+    if (progress < .58) {
+      const pass = [...outputPanelCarrierByNode.values()].every((targetId) => Number(outputTargetElements.get(targetId)?.element.style.opacity || 0) === 0);
+      motionRoot.dataset.integrateOutputPanelHandoff = pass ? 'PASS' : 'FAIL';
+      if (!pass) throw new Error('G2_PANEL_HANDOFF_FAIL: target panel shell became visible before source carrier alignment.');
+      return;
+    }
+    let pass = true;
+    outputPanelCarrierByNode.forEach((targetId, index) => {
+      const carrier = nodeElements[index]?.element;
+      const target = outputTargetElements.get(targetId)?.element;
+      if (!carrier || !target) { pass = false; return; }
+      const carrierOpacity = Number(carrier.style.opacity || 0);
+      const targetOpacity = Number(target.style.opacity || 0);
+      if (progress >= .64 && (carrierOpacity > .01 || targetOpacity < .99)) pass = false;
+      if (progress >= .58 && progress < .64 && carrierOpacity > .01 && targetOpacity > .01) {
+        const from = carrier.getBoundingClientRect();
+        const to = target.getBoundingClientRect();
+        const fromCenter = { x: from.left + from.width / 2, y: from.top + from.height / 2 };
+        const toCenter = { x: to.left + to.width / 2, y: to.top + to.height / 2 };
+        if (Math.abs(fromCenter.x - toCenter.x) > 10 || Math.abs(fromCenter.y - toCenter.y) > 10) pass = false;
+      }
+    });
+    motionRoot.dataset.integrateOutputPanelHandoff = pass ? 'PASS' : 'FAIL';
+    if (!pass) throw new Error('G2_PANEL_HANDOFF_FAIL: source and target panel geometry were not aligned for the short handoff.');
+  };
+  const outputViewportContainmentGate = (progress) => {
+    if (progress < outputFinalHoldStart) {
+      motionRoot.dataset.integrateOutputG5Viewport = 'PENDING';
+      return;
+    }
+    const artwork = canvas.getBoundingClientRect();
+    const margin = 24;
+    const safe = { left: artwork.left + margin, top: artwork.top + margin, right: artwork.right - margin, bottom: artwork.bottom - margin };
+    let pass = true;
+    outputTargetElements.forEach(({ element }) => {
+      const box = element.getBoundingClientRect();
+      if (!box.width && !box.height) pass = false;
+      if (box.left < safe.left - .5 || box.top < safe.top - .5 || box.right > safe.right + .5 || box.bottom > safe.bottom + .5) pass = false;
+    });
+    const frame = outputTargetElements.get('output-frame')?.element?.getBoundingClientRect();
+    if (!frame || frame.left < safe.left - .5 || frame.top < safe.top - .5 || frame.right > safe.right + .5 || frame.bottom > safe.bottom + .5) pass = false;
+    motionRoot.dataset.integrateOutputG5Viewport = pass ? 'PASS' : 'FAIL';
+    if (!pass) throw new Error('G5_VIEWPORT_CONTAINMENT_FAIL: Golden v1 extends outside the safe hero artwork area.');
   };
   const targetReferenceEndpoints = (target) => {
     if (target?.from && target?.to) return [target.from, target.to];
@@ -941,9 +1008,10 @@
     const target = outputTargetObjects.get(targetId);
     const settled = integrateNodePose(node, 1);
     if (!target || !settled.position) return { ...settled, opacity: 0, detail: 0, build: 0 };
-    const targetPoint = runtimePoint(outputOrigin.x + outputTargetLocalCenter(target).x * outputScale, outputOrigin.y + outputTargetLocalCenter(target).y * outputScale);
+    const targetCenter = outputTargetLocalCenter(target);
+    const targetPoint = { x: outputLayout.x + targetCenter.x * outputLayout.scale, y: outputLayout.y + targetCenter.y * outputLayout.scale };
     if (progress >= outputFinalHoldStart) {
-      const targetStyleValue = targetStyle(target);
+      const targetStyleValue = outputStyleFor(target);
       return {
         position: targetPoint,
         shape: outputTargetShapePoints(target),
@@ -958,18 +1026,27 @@
     }
     const travelAmount = easeInOut(clamp((progress - .08) / .42));
     const position = pointLerp(settled.position, targetPoint, travelAmount);
-    const shape = interpolatePoints(settled.shape, outputTargetShapePoints(target), easeInOut(clamp((progress - .30) / .52)));
-    const isAbsorbed = node.index === 37 || (node.role === 'core' && !outputCarrierTargetByNode.has(node.index));
-    const fadeStart = isAbsorbed ? .52 : .64;
-    const fadeEnd = isAbsorbed ? .68 : .76;
+    const isPanelCarrier = outputPanelCarrierByNode.has(node.index);
+    const shapeStart = isPanelCarrier ? .28 : .30;
+    const shapeEnd = isPanelCarrier ? .58 : .82;
+    const shape = isPanelCarrier || node.role !== 'core' && node.index !== 3
+      ? interpolatePoints(settled.shape, outputTargetShapePoints(target), easeInOut(clamp((progress - shapeStart) / Math.max(.01, shapeEnd - shapeStart))))
+      : settled.shape;
+    const isAbsorbed = node.index === 37 || ((node.role === 'core' || node.index === 3) && !isPanelCarrier);
+    const fadeStart = isPanelCarrier ? .58 : isAbsorbed ? .45 : .64;
+    const fadeEnd = isPanelCarrier ? .64 : isAbsorbed ? .56 : .76;
     const fade = 1 - easeInOut(clamp((progress - fadeStart) / Math.max(.01, fadeEnd - fadeStart)));
-    const sourceFill = settled.fill || color(node.sourceColor);
-    const targetStyleValue = targetStyle(target);
-    const targetFill = targetStyleValue.fill === 'none' ? sourceFill : targetStyleValue.fill;
+    const sourceFill = sourceColorFor(node);
+    const targetStyleValue = outputStyleFor(target);
+    const targetFill = target.id === 'output-frame' ? 'none' : targetStyleValue.fill;
+    const fillAmount = easeInOut(clamp((progress - .36) / .46));
+    const fill = target.id === 'output-frame'
+      ? 'none'
+      : targetFill === 'none' ? sourceFill : fillAmount >= 1 ? targetFill : mixColor(sourceFill, targetFill, fillAmount);
     return {
       position,
       shape,
-      fill: mixColor(sourceFill, targetFill, easeInOut(clamp((progress - .36) / .46))),
+      fill,
       stroke: targetStyleValue.stroke || color('navy'),
       strokeWidth: lerp(settled.strokeWidth || 1.05, targetStyleValue.strokeWidth || 1.05, easeInOut(clamp((progress - .42) / .38))),
       detail: (settled.detail || 0) * fade,
@@ -1076,10 +1153,10 @@
     outputLayerTransform();
     const progress = active ? phase.progress : 0;
     const travelAmount = easeInOut(clamp((progress - .08) / .42));
-    const origin = runtimePoint(outputOrigin.x, outputOrigin.y);
-    const scaleX = outputScale * runtimeFrame.scaleX;
-    const scaleY = outputScale * runtimeFrame.scaleY;
-    const stage = !active ? 'integrate' : progress < .22 ? 'release' : progress < .52 ? 'skeleton' : progress < .68 ? 'settlement' : progress < outputFinalHoldStart ? 'local-transformation' : 'output';
+    const origin = { x: outputLayout.x, y: outputLayout.y };
+    const scaleX = outputLayout.scale;
+    const scaleY = outputLayout.scale;
+    const stage = !active ? 'integrate' : progress < .22 ? 'release' : progress < .60 ? 'skeleton' : progress < .68 ? 'settlement' : progress < outputFinalHoldStart ? 'local-transformation' : 'output';
     motionRoot.dataset.integrateOutputStage = stage;
     motionRoot.dataset.integrateOutputHold = String(active && progress >= outputFinalHoldStart);
     outputTargetElements.forEach(({ target, wrapper, element }) => {
@@ -1108,6 +1185,8 @@
       element.style.fill = panel && progress < .56 && target.id !== 'output-panel-insights' ? 'none' : fill;
       if (progress >= outputFinalHoldStart) element.style.fill = fill;
     });
+    outputPanelHandoffGate(progress);
+    outputViewportContainmentGate(progress);
   };
 
   const render = (rawElapsed) => {
@@ -1323,8 +1402,8 @@
     outputMetrics.forEach((metric) => { metric.style.opacity = String(metricAmount); });
 
     if (phase.index >= 6) {
-      // Leave the retired Output geometry hidden while Integrate remains the
-      // visible endpoint for this checkpoint.
+      // Retire the old Output study geometry; the manifest-backed target layer
+      // owns phase 7 and the exact final endpoint.
       networkElements.forEach(({ path, targetId }) => { if (!targetId) path.style.opacity = '0'; });
       insightTracks.forEach(({ path }) => { path.style.opacity = '0'; });
       roleFrameElements.forEach(({ path, targetId }) => { if (!targetId) path.style.opacity = '0'; });
