@@ -60,10 +60,10 @@ expect(spec.authority.runtime.animationImplementation === false, 'animation impl
 expect(!runtimeText.includes('output-golden-v2'), 'immersive.js contains Output v2 animation wiring');
 
 const { timebase } = spec;
-expect(timebase.transitionDurationMs === 8200, 'transition duration must be exactly 8200ms');
+expect(timebase.transitionDurationMs === 9400, 'transition duration must be exactly 9400ms');
 expect(timebase.finalHoldDurationMs === 1800, 'final hold must be exactly 1800ms');
 expect(timebase.totalDurationMs === timebase.transitionDurationMs + timebase.finalHoldDurationMs, 'total duration does not equal transition plus hold');
-expect(timebase.transitionProgress === 'elapsedMs / 8200' && timebase.totalProgress === 'elapsedMs / 10000', 'progress formula drifted');
+expect(timebase.transitionProgress === 'elapsedMs / 9400' && timebase.totalProgress === 'elapsedMs / 11200', 'progress formula drifted');
 expect(spec.sourceInventory.count === 72 && exactArray(spec.sourceInventory.sourceIds, sourceIds), 'choreography source inventory differs from the settled live bridge');
 expect(spec.targetInventory.count === 113 && exactArray(spec.targetInventory.targetIds, targetIds), 'choreography target inventory differs from Output Golden v2');
 expect(unique(spec.sourceInventory.sourceIds) && unique(spec.targetInventory.targetIds), 'choreography inventory IDs are not unique');
@@ -71,14 +71,15 @@ expect(exactArray(sourceIds, sourceManifestIds), 'settled Integrate source order
 expect(bridge.sourceAuthority.runtime.settledEndpoint.phase === 'integrate' && bridge.sourceAuthority.runtime.settledEndpoint.scheduleIndex === 6, 'bridge does not start at settled Integrate');
 
 const expectedStages = [
-  ['C0', 0, 600], ['C1', 600, 1800], ['C2', 1700, 2800], ['C3', 2750, 4300],
-  ['C4', 4250, 5200], ['C5', 5150, 6100], ['C6', 6050, 7200], ['C7', 7150, 8200], ['C8', 8200, 10000]
+  ['C0', 0, 600], ['C1', 600, 2100], ['C2', 2000, 3100], ['C3', 3050, 4650],
+  ['C4', 4600, 5850], ['C5', 5800, 7200], ['C6', 7100, 8300], ['C7', 8250, 9400], ['C8', 9400, 11200]
 ];
 expect(exactArray(spec.stages.map((stage) => stage.id), expectedStages.map(([id]) => id)), 'stage IDs/order must be exactly C0-C8');
 for (const [id, start, end] of expectedStages) {
   const stage = spec.stages.find((candidate) => candidate.id === id);
   expect(exactArray(stage.elapsedMs, [start, end]), `${id} elapsed window drifted`);
-  expect(Math.abs(stage.transitionProgress[0] - start / 8200) < 0.000001 && Math.abs(stage.transitionProgress[1] - Math.min(end, 8200) / 8200) < 0.000001, `${id} normalized transition progress drifted`);
+  expect(Math.abs(stage.transitionProgress[0] - start / 9400) < 0.000001 && Math.abs(stage.transitionProgress[1] - Math.min(end, 9400) / 9400) < 0.000001, `${id} normalized transition progress drifted`);
+  if (id === 'C8') expect(Math.abs(stage.totalProgress[0] - start / 11200) < 0.000001 && stage.totalProgress[1] === 1, 'C8 normalized total progress drifted');
   expect(stage.windows && stage.hardGate?.id === `G${id.slice(1)}`, `${id} hard-gate binding is missing`);
   for (const window of Object.values(stage.windows)) {
     if (!window) continue;
@@ -92,10 +93,15 @@ for (const [id, start, end] of expectedStages) {
   for (const action of stage.sequence || []) {
     expect(Array.isArray(action.windowMs) && action.windowMs[0] <= action.windowMs[1], `${id}/${action.id} has an invalid action window`);
     expect(action.windowMs[0] >= start && action.windowMs[1] <= end, `${id}/${action.id} action escapes the stage`);
+    expect(stage.participatingSourceIds && stage.participatingTargetIds, `${id}/${action.id} has no stage participation contract`);
     for (const sourceId of action.sourceIds || []) expect(sourceSet.has(sourceId), `${id}/${action.id} references unknown source ${sourceId}`);
     for (const targetId of action.targetIds || []) expect(targetSet.has(targetId), `${id}/${action.id} references unknown target ${targetId}`);
+    expect((action.sourceIds || []).every((sourceId) => stage.participatingSourceIds.includes(sourceId)), `${id}/${action.id} source is only covered by stage participation`);
+    expect((action.targetIds || []).every((targetId) => stage.participatingTargetIds.includes(targetId)), `${id}/${action.id} target is only covered by stage participation`);
   }
 }
+const actions = spec.stages.flatMap((stage) => (stage.sequence || []).map((action) => ({ ...action, stageId: stage.id })));
+expect(unique(actions.map((action) => action.id)), 'scheduled action IDs are not unique');
 const stageSourceUnion = new Set(spec.stages.flatMap((stage) => stage.participatingSourceIds));
 const stageTargetUnion = new Set(spec.stages.flatMap((stage) => stage.participatingTargetIds));
 const coversInventory = (values, inventory) => values.size === inventory.length && inventory.every((id) => values.has(id));
@@ -103,6 +109,22 @@ expect(coversInventory(stageSourceUnion, sourceIds), 'not every settled Integrat
 expect(coversInventory(stageTargetUnion, targetIds), 'not every Output v2 target participates in the choreography');
 expect(spec.stages.find((stage) => stage.id === 'C8').frozen === true, 'final hold is not frozen');
 expect(spec.stages.find((stage) => stage.id === 'C8').participatingSourceIds.length === 0, 'source remnants are scheduled during final hold');
+
+const scheduledEdge = (sourceId, targetId) => actions.some((action) => (action.sourceIds || []).includes(sourceId) && (action.targetIds || []).includes(targetId));
+const absorbedEdge = (sourceId, targetId) => actions.some((action) => (action.absorbedSourceIds || []).includes(sourceId) && (action.targetIds || []).includes(targetId));
+const missingOwnershipEdges = [];
+for (const source of bridge.sourceObjects) for (const targetId of source.disposition.targetIds) if (!scheduledEdge(source.id, targetId) && !absorbedEdge(source.id, targetId)) missingOwnershipEdges.push(`${source.id} -> ${targetId}`);
+expect(missingOwnershipEdges.length === 0, `ownership edges rely on implementation invention: ${missingOwnershipEdges.join(', ')}`);
+
+const shellTargetIds = ['output-v2-frame', 'output-v2-panel-overview', 'output-v2-panel-distribution', 'output-v2-panel-performance', 'output-v2-panel-trends', 'output-v2-panel-variance', 'output-v2-panel-insights'];
+for (const targetId of shellTargetIds) {
+  const handoffs = actions.filter((action) => action.handoff && (action.targetIds || []).includes(targetId));
+  expect(handoffs.length > 0, `visible shell/frame ${targetId} has no scheduled ownership handoff`);
+  for (const action of handoffs) {
+    const stage = spec.stages.find((candidate) => candidate.id === action.stageId);
+    expect(action.windowMs[0] >= stage.windows.travelMs[0] && action.windowMs[0] <= stage.windows.settlementMs[1] && action.windowMs[1] <= stage.windows.settlementMs[1], `shell/frame ${targetId} handoff is not aligned after carrier travel`);
+  }
+}
 
 const overlapWindows = spec.overlapPolicy.allowedOverlapWindowsMs;
 expect(overlapWindows.length === 6, 'allowed overlap count drifted');
@@ -138,11 +160,19 @@ for (const [sourceId, targetId, stageId] of expectedLabels) {
   expect(label.travelWindowMs[0] >= stage.elapsedMs[0] && label.travelWindowMs[1] <= stage.elapsedMs[1] && label.settleWindowMs[0] >= stage.elapsedMs[0] && label.settleWindowMs[1] <= stage.elapsedMs[1], `persistent label ${sourceId} timing escapes ${stageId}`);
 }
 
+const durationMs = (action) => action.windowMs[1] - action.windowMs[0];
+const actionById = (id) => actions.find((action) => action.id === id);
+for (const id of ['overview-revenue', 'overview-growth', 'overview-margin']) expect(durationMs(actionById(id)) >= 140, `${id} is shorter than the 140ms KPI minimum`);
+for (const id of ['performance-point-7', 'performance-point-8', 'performance-point-9', 'performance-point-10']) expect(durationMs(actionById(id)) >= 110, `${id} is shorter than the 110ms point minimum`);
+for (const id of ['trends-jan', 'trends-apr', 'trends-jul', 'trends-oct-merge']) expect(durationMs(actionById(id)) >= 110, `${id} is shorter than the 110ms Trends minimum`);
+for (const id of ['variance-base', 'variance-connector-1', 'variance-driver-1', 'variance-connector-2', 'variance-driver-2', 'variance-connector-3', 'variance-offset', 'variance-connector-4', 'variance-net-and-labels']) expect(durationMs(actionById(id)) >= 90, `${id} is shorter than the 90ms Variance minimum`);
+for (const id of ['system-source', 'system-relate', 'system-model', 'system-review', 'system-use']) expect(durationMs(actionById(id)) >= 100, `${id} is shorter than the 100ms System node minimum`);
+
 const performance = spec.stages.find((stage) => stage.id === 'C3');
 expect(exactArray(spec.authority.targetManifest.manifestId === 'output-golden-v2' ? ['performance'] : [], ['performance']), 'Performance target authority drifted');
 const performancePointActions = performance.sequence.filter((action) => /^performance-point-(7|8|9|10)$/.test(action.id));
 expect(exactArray(performancePointActions.map((action) => action.id), ['performance-point-7', 'performance-point-8', 'performance-point-9', 'performance-point-10']), 'Performance additional-point sequence drifted');
-for (const action of performancePointActions) expect(action.windowMs[0] >= 3700 && action.operation === 'split-local' && action.parentTargetId === 'output-v2-performance-line' && exactArray(action.sourceIds, ['performance-polyline']), `${action.id} is not a post-line local split`);
+for (const action of performancePointActions) expect(action.windowMs[0] >= 3830 && durationMs(action) >= 110 && action.operation === 'split-local' && action.parentTargetId === 'output-v2-performance-line' && exactArray(action.sourceIds, ['performance-polyline']), `${action.id} is not a post-line local split`);
 expect(performance.sequence.find((action) => action.id === 'performance-line-settle').windowMs[1] <= performancePointActions[0].windowMs[0], 'Performance points begin before line settlement');
 expect(spec.sourceInventory.sourceIds.filter((id) => id.startsWith('performance-point-')).length === 6, 'Performance source inventory is not six existing points');
 expect(spec.targetInventory.targetIds.filter((id) => /^output-v2-performance-point-/.test(id)).length === 10, 'Performance target inventory is not ten points');
@@ -160,13 +190,13 @@ expect(insightsMerge.windowMs[0] >= insights.sequence.find((action) => action.id
 expect(targetManifest.inventory.insights.rowCount === 3, 'Insights target inventory is not three rows');
 
 const variance = spec.stages.find((stage) => stage.id === 'C5');
-const varianceOrder = ['variance-panel', 'variance-heading-baseline', 'variance-base', 'variance-connector-1', 'variance-driver-1', 'variance-connector-2', 'variance-driver-2', 'variance-connector-3', 'variance-offset', 'variance-connector-4', 'variance-net-and-labels'];
+const varianceOrder = ['variance-panel-handoff', 'variance-heading-baseline', 'variance-base', 'variance-connector-1', 'variance-driver-1', 'variance-connector-2', 'variance-driver-2', 'variance-connector-3', 'variance-offset', 'variance-connector-4', 'variance-net-and-labels'];
 expect(exactArray(variance.sequence.map((action) => action.id), varianceOrder), 'Variance progressive sequence drifted');
 expect(targetManifest.inventory.variance.barCount === 5 && targetManifest.inventory.variance.connectorCount === 4, 'Variance target inventory drifted');
 
 const system = spec.stages.find((stage) => stage.id === 'C7');
-const systemNodes = system.sequence.filter((action) => /^system-(source-relate|model-review|use)$/.test(action.id));
-expect(exactArray(systemNodes.map((action) => action.id), ['system-source-relate', 'system-model-review', 'system-use']), 'system nodes are not ordered left-to-right');
+const systemNodes = system.sequence.filter((action) => /^system-(source|relate|model|review|use)$/.test(action.id));
+expect(exactArray(systemNodes.map((action) => action.id), ['system-source', 'system-relate', 'system-model', 'system-review', 'system-use']), 'system nodes are not ordered left-to-right');
 const systemLabels = system.sequence.find((action) => action.id === 'system-labels');
 expect(systemLabels && exactArray(systemLabels.targetIds, ['output-v2-system-label-source', 'output-v2-system-label-relate', 'output-v2-system-label-model', 'output-v2-system-label-review', 'output-v2-system-label-use']), 'system labels are not staggered in order');
 expect(targetManifest.inventory.systemLayer.nodeCount === 5 && targetManifest.inventory.systemLayer.labels.join('|') === 'SOURCE|RELATE|MODEL|REVIEW|USE', 'system-layer target inventory drifted');
