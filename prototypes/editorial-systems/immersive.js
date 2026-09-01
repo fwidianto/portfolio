@@ -23,9 +23,10 @@
   const HEIGHT = 720;
   const TOTAL = 18000;
   const SCALE = 18000 / 32800;
-  // Clean rework baseline: approved earlier phases remain active while the
-  // retired Output composition stays disabled during this Integrate pass.
-  const RESET_INTEGRATE_OUTPUT = true;
+  // The approved Output composition is not part of this review checkpoint.
+  // Hold the settled Integrate endpoint until that phase is intentionally
+  // reworked.
+  const HOLD_INTEGRATE_ENDPOINT = true;
   const time = (milliseconds) => milliseconds * SCALE;
   const schedule = [
     { phase: 'scatter', start: time(0), end: time(2550) },
@@ -37,6 +38,7 @@
     { phase: 'integrate', start: time(18000), end: time(22800) },
     { phase: 'output', start: time(22800), end: TOTAL }
   ];
+  const integrateEnd = schedule[6].end;
   const structureStart = schedule[5].start;
   const integrateStart = schedule[6].start;
   const outputStart = schedule[7].start;
@@ -158,6 +160,9 @@
     return circlePoints(spec.radius || 3);
   };
   const phaseFor = (elapsed) => {
+    if (HOLD_INTEGRATE_ENDPOINT && elapsed >= integrateEnd) {
+      return { ...schedule[6], index: 6, progress: 1 };
+    }
     let index = 0;
     schedule.forEach((entry, candidate) => { if (elapsed >= entry.start) index = candidate; });
     const entry = schedule[index];
@@ -705,7 +710,26 @@
     const offset = (ownerIndex - (owners.length - 1) / 2) * (32 / (owners.length - 1));
     return { x: center.x + unit.x * offset, y: center.y + unit.y * offset };
   };
-  const integrateWidgetContact = () => runtimePoint(integrateCoreContactReference.x, integrateCoreContactReference.y);
+  const integrateWidgetContactReference = {
+    overview: [[438, 270], [490, 270], [542, 270], [594, 270]],
+    performance: [[386, 494], [438, 494], [490, 494], [542, 494], [594, 494], [646, 494]],
+    trend: [[686, 342], [686, 374], [686, 406], [686, 438]],
+    insights: [[328, 326], [364, 326], [328, 358], [364, 358], [328, 390], [364, 390], [328, 422], [364, 422]],
+    distribution: [[594, 310], [630, 310], [630, 346], [666, 346]]
+  };
+  const integrateWidgetContact = (node) => {
+    const points = integrateWidgetContactReference[node.role] || [];
+    const point = points[roleSlots[node.index]] || [integrateCoreContactReference.x, integrateCoreContactReference.y];
+    return runtimePoint(point[0], point[1]);
+  };
+  const integrateWidgetReleaseReference = {
+    distribution: [[692, 274], [724, 242], [756, 274], [744, 306]]
+  };
+  const integrateWidgetRelease = (node, target) => {
+    const points = integrateWidgetReleaseReference[node.role] || [];
+    const point = points[roleSlots[node.index]];
+    return point ? runtimePoint(point[0], point[1]) : targetCenter(target);
+  };
   const integrateNodePose = (node, progress) => {
     const bridgeNode = bridgeNodeFor(node.index);
     const targetId = primaryTargetIdFor(node.index);
@@ -750,13 +774,15 @@
         owners
       };
     }
-    const contactPoint = integrateWidgetContact();
-    const approachAmount = easeInOut(clamp((progress - .02) / .42));
-    const departAmount = easeInOut(clamp((progress - .78) / .12));
-    const morphAmount = easeInOut(clamp((progress - .90) / .09));
+    const contactPoint = integrateWidgetContact(node);
+    const releasePoint = integrateWidgetRelease(node, target);
+    const approachAmount = easeInOut(clamp((progress - .02) / .48));
+    const departAmount = easeOut(clamp((progress - .72) / .12));
+    const morphAmount = easeInOut(clamp((progress - .84) / .11));
     const approachPoint = pointLerp(sourcePoint, contactPoint, approachAmount);
-    const position = progress < .78 ? approachPoint : pointLerp(contactPoint, targetPoint, departAmount);
-    const shape = progress < .90 ? sourceShape : interpolatePoints(sourceShape, targetShape, morphAmount);
+    const settledPoint = pointLerp(releasePoint, targetPoint, morphAmount);
+    const position = progress < .72 ? approachPoint : pointLerp(contactPoint, settledPoint, departAmount);
+    const shape = progress < .84 ? sourceShape : interpolatePoints(sourceShape, targetShape, morphAmount);
     const sourceFill = sourceColorFor(node);
     const targetFill = targetFillFor(target, sourceFill);
     const fill = targetStyleValue.fill === 'none' && morphAmount >= 1 ? 'none' : mixColor(sourceFill, targetFill, morphAmount);
@@ -802,7 +828,7 @@
         build
       };
     }
-    if (RESET_INTEGRATE_OUTPUT && phase.index >= 7) {
+    if (phase.index >= 7) {
       return {
         position: node.structure,
         shape: shapePoints(node.structure),
@@ -853,23 +879,24 @@
         return;
       }
       const node = nodeSpecs[sourceIndex];
-      const sourcePoint = sourcePointFor(node);
-      const contactPoint = integrateWidgetContact();
+      const primaryTarget = targetFor(primaryTargetIdFor(sourceIndex)) || node.integrate;
+      const primaryPose = integrateNodePose(node, phase.progress);
       const targetPoint = targetCenter(target);
-      const approachAmount = easeInOut(clamp((phase.progress - .02) / .42));
-      const departAmount = easeInOut(clamp((phase.progress - .78) / .12));
-      const morphAmount = easeInOut(clamp((phase.progress - .90) / .09));
-      const position = phase.progress < .78
-        ? pointLerp(sourcePoint, contactPoint, approachAmount)
-        : pointLerp(contactPoint, targetPoint, departAmount);
+      const localRevealAmount = easeOut(clamp((phase.progress - .84) / .04));
+      const morphAmount = easeInOut(clamp((phase.progress - .84) / .11));
+      const primaryPoint = primaryPose.position;
+      const splitPoint = targetCenter(primaryTarget);
+      const position = phase.progress < .84
+        ? primaryPoint
+        : pointLerp(splitPoint, targetPoint, morphAmount);
       const sourceShape = shapePoints(node.structure);
       const targetShape = targetShapePoints(target);
-      const shape = phase.progress < .90 ? sourceShape : interpolatePoints(sourceShape, targetShape, morphAmount);
+      const shape = phase.progress < .84 ? sourceShape : interpolatePoints(sourceShape, targetShape, morphAmount);
       const style = targetStyle(target);
       const sourceFill = sourceColorFor(node);
       const targetFill = targetFillFor(target, sourceFill);
       const fill = style.fill === 'none' && morphAmount >= 1 ? 'none' : mixColor(sourceFill, targetFill, morphAmount);
-      const opacity = easeOut(clamp((phase.progress - .48) / .12));
+      const opacity = localRevealAmount;
       path.setAttribute('transform', `translate(${position.x.toFixed(2)} ${position.y.toFixed(2)})`);
       path.setAttribute('d', pointsToPath(shape));
       path.setAttribute('fill', fill);
@@ -897,7 +924,7 @@
       label.setAttribute('font-size', String(runtimeSize(section ? 11 : 8, 'y')));
       label.setAttribute('font-weight', '700');
       label.setAttribute('letter-spacing', section ? '.17em' : '.15em');
-      const opacity = easeOut(clamp((phase.progress - .78) / .16));
+      const opacity = easeOut(clamp((phase.progress - .86) / .09));
       label.style.opacity = String(opacity);
       label.style.visibility = opacity > 0 ? 'visible' : 'hidden';
     });
@@ -1003,7 +1030,7 @@
         : phase.index === 4 || phase.index === 5
           ? .42
           : phase.index === 6
-            ? lerp(0, .86, easeInOut(clamp((phase.progress - .90) / .08)))
+            ? lerp(0, .86, easeInOut(clamp((phase.progress - .84) / .11)))
             : lerp(.86, .96, easeInOut(clamp(phase.progress / .12)));
     const visibleLine = linePoints;
     lineTrack.path.setAttribute('d', linePath(visibleLine));
@@ -1119,10 +1146,9 @@
     const metricAmount = phase.index >= 7 ? easeOut(clamp((phase.progress - .64) / .20)) : 0;
     outputMetrics.forEach((metric) => { metric.style.opacity = String(metricAmount); });
 
-    if (RESET_INTEGRATE_OUTPUT && phase.index >= 6) {
-      // Leave the retired phases visually empty of future analytical
-      // geometry. Integrate keeps only its source-owned performance line;
-      // Output remains the clean neutral baseline.
+    if (phase.index >= 6) {
+      // Leave the retired Output geometry hidden while Integrate remains the
+      // visible endpoint for this checkpoint.
       networkElements.forEach(({ path, targetId }) => { if (!targetId) path.style.opacity = '0'; });
       insightTracks.forEach(({ path }) => { path.style.opacity = '0'; });
       roleFrameElements.forEach(({ path, targetId }) => { if (!targetId) path.style.opacity = '0'; });
