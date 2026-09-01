@@ -112,6 +112,8 @@ for (const source of bridge.sourceObjects) {
   expect(['direct', 'persist', 'resize', 'reshape', 'merge', 'split', 'move', 'become'].includes(disposition.operation), `source ${source.id} has unsupported disposition ${disposition.operation}`);
   expect(Array.isArray(disposition.targetIds) && disposition.targetIds.length > 0, `source ${source.id} has no target IDs`);
   expect(new Set(disposition.targetIds).size === disposition.targetIds.length, `source ${source.id} repeats a target ID`);
+  if (disposition.operation === 'split') expect(disposition.targetIds.length > 1, `source ${source.id} uses split for ${disposition.targetIds.length} target; split requires more than one target`);
+  if (disposition.targetIds.length > 1) expect(disposition.operation === 'split' || disposition.multiTarget === true && typeof disposition.multiTargetOperation === 'string', `source ${source.id} has multiple targets without an explicit multi-target operation`);
   for (const targetId of disposition.targetIds) expect(targetObjects.has(targetId), `source ${source.id} points to missing target ${targetId}`);
 }
 
@@ -138,6 +140,7 @@ for (const [sourceId, targetId] of persistentLabels) {
   const source = sourceObjects.get(sourceId);
   const target = targetBridgeObjects.get(targetId);
   expect(source.disposition.operation === 'persist' && source.disposition.primaryTargetId === targetId && source.disposition.identityPreserved === true, `persistent source ${sourceId} is not declared as identity-preserving`);
+  if (sourceId === 'label-overview-system-detail') expect(source.disposition.multiTarget === true && source.disposition.multiTargetOperation === 'persist-primary-with-derived-system-detail', 'Overview/System Detail persistence expansion is not explicitly multi-target');
   expect(target.identity?.sourceId === sourceId && target.identity.primary === true && target.composition === 'persist', `persistent target ${targetId} is not declared as identity-preserving`);
 }
 
