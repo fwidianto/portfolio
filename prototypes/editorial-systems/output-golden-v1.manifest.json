@@ -1,0 +1,749 @@
+{
+  "manifestId": "output-golden-v1",
+  "authority": {
+    "kind": "static-svg-golden",
+    "file": "prototypes/editorial-systems/output-golden-v1.html",
+    "reference": "prototypes/editorial-systems/output-golden-v1-checkpoint.png",
+    "viewBox": { "x": 0, "y": 0, "width": 405, "height": 236 },
+    "coordinateSpace": "svg-local-pixels",
+    "runtimeAuthority": false
+  },
+  "palette": {
+    "navy": "#001834",
+    "slate": "#5a5c63",
+    "sand": "#dec6ac",
+    "green": "#00743c",
+    "grid": "#d9dde2",
+    "white": "#fefefe",
+    "paper": "#f6f0e5"
+  },
+  "hierarchy": {
+    "root": "output-root",
+    "groups": [
+      {
+        "id": "output-overview",
+        "parent": "output-root",
+        "children": [
+          "output-panel-overview",
+          "output-overview-title",
+          "output-overview-divider-1",
+          "output-overview-divider-2",
+          "output-overview-revenue-label",
+          "output-overview-revenue-value",
+          "output-overview-growth-label",
+          "output-overview-growth-value",
+          "output-overview-margin-label",
+          "output-overview-margin-value"
+        ]
+      },
+      {
+        "id": "output-distribution",
+        "parent": "output-root",
+        "children": [
+          "output-panel-distribution",
+          "output-distribution-title",
+          "output-distribution-ring-base",
+          "output-distribution-ring-navy",
+          "output-distribution-ring-sand",
+          "output-distribution-ring-slate",
+          "output-distribution-legend-navy-dot",
+          "output-distribution-legend-navy-line",
+          "output-distribution-legend-slate-dot",
+          "output-distribution-legend-slate-line",
+          "output-distribution-legend-sand-dot",
+          "output-distribution-legend-sand-line",
+          "output-distribution-legend-ivory-dot",
+          "output-distribution-legend-ivory-line"
+        ]
+      },
+      {
+        "id": "output-performance",
+        "parent": "output-root",
+        "children": [
+          "output-panel-performance",
+          "output-performance-title",
+          "output-performance-grid",
+          "output-performance-area",
+          "output-performance-line",
+          "output-performance-point-1",
+          "output-performance-point-2",
+          "output-performance-point-3",
+          "output-performance-point-4",
+          "output-performance-point-5",
+          "output-performance-point-6",
+          "output-performance-point-7",
+          "output-performance-label-jan",
+          "output-performance-label-mar",
+          "output-performance-label-may",
+          "output-performance-label-jun"
+        ]
+      },
+      {
+        "id": "output-insights",
+        "parent": "output-root",
+        "children": [
+          "output-panel-insights",
+          "output-insights-title",
+          "output-insights-row-1",
+          "output-insights-dot-1",
+          "output-insights-mark-1",
+          "output-insights-copy-1a",
+          "output-insights-copy-1b",
+          "output-insights-row-2",
+          "output-insights-dot-2",
+          "output-insights-mark-2",
+          "output-insights-copy-2a",
+          "output-insights-copy-2b",
+          "output-insights-row-3",
+          "output-insights-dot-3",
+          "output-insights-mark-3",
+          "output-insights-copy-3a",
+          "output-insights-copy-3b"
+        ]
+      },
+      {
+        "id": "output-trends",
+        "parent": "output-root",
+        "children": [
+          "output-panel-trends",
+          "output-trends-title",
+          "output-trends-grid",
+          "output-trends-baseline",
+          "output-trends-bar-1",
+          "output-trends-bar-2",
+          "output-trends-bar-3",
+          "output-trends-bar-4",
+          "output-trends-bar-5",
+          "output-trends-label-q1",
+          "output-trends-label-q2",
+          "output-trends-label-q3",
+          "output-trends-label-q4",
+          "output-trends-label-q5"
+        ]
+      }
+    ]
+  },
+  "objects": [
+    {
+      "id": "output-frame",
+      "parent": "output-root",
+      "type": "frame",
+      "tag": "rect",
+      "geometry": { "x": 1, "y": 1, "width": 403, "height": 234, "rx": 5 },
+      "style": { "class": "output-frame", "fill": "white", "stroke": "grid", "strokeWidth": 1 }
+    },
+    {
+      "id": "output-panel-overview",
+      "parent": "output-overview",
+      "type": "panel",
+      "tag": "rect",
+      "geometry": { "x": 16, "y": 22, "width": 225, "height": 84, "rx": 5 },
+      "style": { "class": "output-panel", "fill": "white", "stroke": "grid", "strokeWidth": 1 },
+      "label": "Overview"
+    },
+    {
+      "id": "output-overview-title",
+      "parent": "output-overview",
+      "type": "title",
+      "tag": "text",
+      "geometry": { "x": 26, "y": 38 },
+      "style": { "class": "panel-title", "fill": "navy", "font": "Inter 600 7px" },
+      "text": "Overview"
+    },
+    {
+      "id": "output-overview-divider-1",
+      "parent": "output-overview",
+      "type": "divider",
+      "tag": "path",
+      "geometry": { "d": "M87 49V98" },
+      "style": { "class": "overview-divider", "stroke": "grid", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-overview-divider-2",
+      "parent": "output-overview",
+      "type": "divider",
+      "tag": "path",
+      "geometry": { "d": "M160 49V98" },
+      "style": { "class": "overview-divider", "stroke": "grid", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-overview-revenue-label",
+      "parent": "output-overview",
+      "type": "metric-label",
+      "tag": "text",
+      "geometry": { "x": 27, "y": 62 },
+      "style": { "class": "metric-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "Revenue"
+    },
+    {
+      "id": "output-overview-revenue-value",
+      "parent": "output-overview",
+      "type": "metric",
+      "tag": "text",
+      "geometry": { "x": 27, "y": 82 },
+      "style": { "class": "metric-value", "fill": "navy", "font": "Cormorant Garamond 600 14px" },
+      "text": "$24.8M"
+    },
+    {
+      "id": "output-overview-growth-label",
+      "parent": "output-overview",
+      "type": "metric-label",
+      "tag": "text",
+      "geometry": { "x": 108, "y": 62 },
+      "style": { "class": "metric-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "Growth"
+    },
+    {
+      "id": "output-overview-growth-value",
+      "parent": "output-overview",
+      "type": "metric",
+      "tag": "text",
+      "geometry": { "x": 108, "y": 82 },
+      "style": { "class": "metric-value metric-growth", "fill": "green", "font": "Cormorant Garamond 600 14px" },
+      "text": "+18.6%"
+    },
+    {
+      "id": "output-overview-margin-label",
+      "parent": "output-overview",
+      "type": "metric-label",
+      "tag": "text",
+      "geometry": { "x": 184, "y": 62 },
+      "style": { "class": "metric-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "Margin"
+    },
+    {
+      "id": "output-overview-margin-value",
+      "parent": "output-overview",
+      "type": "metric",
+      "tag": "text",
+      "geometry": { "x": 184, "y": 82 },
+      "style": { "class": "metric-value", "fill": "navy", "font": "Cormorant Garamond 600 14px" },
+      "text": "42.7%"
+    },
+    {
+      "id": "output-panel-distribution",
+      "parent": "output-distribution",
+      "type": "panel",
+      "tag": "rect",
+      "geometry": { "x": 254, "y": 22, "width": 133, "height": 84, "rx": 5 },
+      "style": { "class": "output-panel", "fill": "white", "stroke": "grid", "strokeWidth": 1 },
+      "label": "Distribution"
+    },
+    {
+      "id": "output-distribution-title",
+      "parent": "output-distribution",
+      "type": "title",
+      "tag": "text",
+      "geometry": { "x": 264, "y": 38 },
+      "style": { "class": "panel-title", "fill": "navy", "font": "Inter 600 7px" },
+      "text": "Distribution"
+    },
+    {
+      "id": "output-distribution-ring-base",
+      "parent": "output-distribution",
+      "type": "donut-base",
+      "tag": "circle",
+      "geometry": { "cx": 304, "cy": 80, "r": 20 },
+      "style": { "class": "donut-base", "fill": "none", "stroke": "grid", "strokeWidth": 10 }
+    },
+    {
+      "id": "output-distribution-ring-navy",
+      "parent": "output-distribution",
+      "type": "accent-arc",
+      "tag": "path",
+      "geometry": { "d": "M304 60A20 20 0 0 1 321 87" },
+      "style": { "class": "donut-arc donut-navy", "stroke": "navy", "strokeWidth": 10 }
+    },
+    {
+      "id": "output-distribution-ring-sand",
+      "parent": "output-distribution",
+      "type": "accent-arc",
+      "tag": "path",
+      "geometry": { "d": "M321 87A20 20 0 0 1 289 95" },
+      "style": { "class": "donut-arc donut-sand", "stroke": "sand", "strokeWidth": 10 }
+    },
+    {
+      "id": "output-distribution-ring-slate",
+      "parent": "output-distribution",
+      "type": "accent-arc",
+      "tag": "path",
+      "geometry": { "d": "M289 95A20 20 0 0 1 304 60" },
+      "style": { "class": "donut-arc donut-slate", "stroke": "slate", "strokeWidth": 10 }
+    },
+    {
+      "id": "output-distribution-legend-navy-dot",
+      "parent": "output-distribution",
+      "type": "legend-dot",
+      "tag": "circle",
+      "geometry": { "cx": 350, "cy": 62, "r": 2 },
+      "style": { "class": "legend-navy", "fill": "navy" }
+    },
+    {
+      "id": "output-distribution-legend-navy-line",
+      "parent": "output-distribution",
+      "type": "legend-line",
+      "tag": "path",
+      "geometry": { "d": "M357 62H377" },
+      "style": { "class": "distribution-legend-line", "stroke": "grid", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-distribution-legend-slate-dot",
+      "parent": "output-distribution",
+      "type": "legend-dot",
+      "tag": "circle",
+      "geometry": { "cx": 350, "cy": 75, "r": 2 },
+      "style": { "class": "legend-slate", "fill": "slate" }
+    },
+    {
+      "id": "output-distribution-legend-slate-line",
+      "parent": "output-distribution",
+      "type": "legend-line",
+      "tag": "path",
+      "geometry": { "d": "M357 75H377" },
+      "style": { "class": "distribution-legend-line", "stroke": "grid", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-distribution-legend-sand-dot",
+      "parent": "output-distribution",
+      "type": "legend-dot",
+      "tag": "circle",
+      "geometry": { "cx": 350, "cy": 87, "r": 2 },
+      "style": { "class": "legend-sand", "fill": "sand" }
+    },
+    {
+      "id": "output-distribution-legend-sand-line",
+      "parent": "output-distribution",
+      "type": "legend-line",
+      "tag": "path",
+      "geometry": { "d": "M357 87H377" },
+      "style": { "class": "distribution-legend-line", "stroke": "grid", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-distribution-legend-ivory-dot",
+      "parent": "output-distribution",
+      "type": "legend-dot",
+      "tag": "circle",
+      "geometry": { "cx": 350, "cy": 99, "r": 2 },
+      "style": { "class": "legend-ivory", "fill": "grid" }
+    },
+    {
+      "id": "output-distribution-legend-ivory-line",
+      "parent": "output-distribution",
+      "type": "legend-line",
+      "tag": "path",
+      "geometry": { "d": "M357 99H377" },
+      "style": { "class": "distribution-legend-line", "stroke": "grid", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-panel-performance",
+      "parent": "output-performance",
+      "type": "panel",
+      "tag": "rect",
+      "geometry": { "x": 16, "y": 119, "width": 115, "height": 104, "rx": 5 },
+      "style": { "class": "output-panel", "fill": "white", "stroke": "grid", "strokeWidth": 1 },
+      "label": "Performance"
+    },
+    {
+      "id": "output-performance-title",
+      "parent": "output-performance",
+      "type": "title",
+      "tag": "text",
+      "geometry": { "x": 26, "y": 135 },
+      "style": { "class": "panel-title", "fill": "navy", "font": "Inter 600 7px" },
+      "text": "Performance"
+    },
+    {
+      "id": "output-performance-grid",
+      "parent": "output-performance",
+      "type": "grid",
+      "tag": "path",
+      "geometry": { "d": "M27 160H120M27 182H120M27 210H120" },
+      "style": { "class": "chart-grid", "stroke": "grid", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-performance-area",
+      "parent": "output-performance",
+      "type": "area",
+      "tag": "path",
+      "geometry": { "d": "M29 204L43 188L57 197L72 176L86 189L101 158L119 174V210Z" },
+      "style": { "class": "chart-area", "fill": "rgba(185,191,198,.2)" }
+    },
+    {
+      "id": "output-performance-line",
+      "parent": "output-performance",
+      "type": "polyline",
+      "tag": "path",
+      "geometry": { "d": "M29 204L43 188L57 197L72 176L86 189L101 158L119 174" },
+      "style": { "class": "chart-line", "stroke": "navy", "strokeWidth": 1.35 }
+    },
+    {
+      "id": "output-performance-point-1",
+      "parent": "output-performance",
+      "type": "point",
+      "tag": "circle",
+      "geometry": { "cx": 29, "cy": 204, "r": 2 },
+      "style": { "class": "chart-point", "fill": "white", "stroke": "navy", "strokeWidth": 1 }
+    },
+    {
+      "id": "output-performance-point-2",
+      "parent": "output-performance",
+      "type": "point",
+      "tag": "circle",
+      "geometry": { "cx": 43, "cy": 188, "r": 2 },
+      "style": { "class": "chart-point", "fill": "white", "stroke": "navy", "strokeWidth": 1 }
+    },
+    {
+      "id": "output-performance-point-3",
+      "parent": "output-performance",
+      "type": "point",
+      "tag": "circle",
+      "geometry": { "cx": 57, "cy": 197, "r": 2 },
+      "style": { "class": "chart-point", "fill": "white", "stroke": "navy", "strokeWidth": 1 }
+    },
+    {
+      "id": "output-performance-point-4",
+      "parent": "output-performance",
+      "type": "point",
+      "tag": "circle",
+      "geometry": { "cx": 72, "cy": 176, "r": 2 },
+      "style": { "class": "chart-point", "fill": "white", "stroke": "navy", "strokeWidth": 1 }
+    },
+    {
+      "id": "output-performance-point-5",
+      "parent": "output-performance",
+      "type": "point",
+      "tag": "circle",
+      "geometry": { "cx": 86, "cy": 189, "r": 2 },
+      "style": { "class": "chart-point", "fill": "white", "stroke": "navy", "strokeWidth": 1 }
+    },
+    {
+      "id": "output-performance-point-6",
+      "parent": "output-performance",
+      "type": "point",
+      "tag": "circle",
+      "geometry": { "cx": 101, "cy": 158, "r": 2 },
+      "style": { "class": "chart-point", "fill": "white", "stroke": "navy", "strokeWidth": 1 }
+    },
+    {
+      "id": "output-performance-point-7",
+      "parent": "output-performance",
+      "type": "point",
+      "tag": "circle",
+      "geometry": { "cx": 119, "cy": 174, "r": 2 },
+      "style": { "class": "chart-point", "fill": "white", "stroke": "navy", "strokeWidth": 1 }
+    },
+    {
+      "id": "output-performance-label-jan",
+      "parent": "output-performance",
+      "type": "axis-label",
+      "tag": "text",
+      "geometry": { "x": 29, "y": 218 },
+      "style": { "class": "chart-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "JAN"
+    },
+    {
+      "id": "output-performance-label-mar",
+      "parent": "output-performance",
+      "type": "axis-label",
+      "tag": "text",
+      "geometry": { "x": 58, "y": 218 },
+      "style": { "class": "chart-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "MAR"
+    },
+    {
+      "id": "output-performance-label-may",
+      "parent": "output-performance",
+      "type": "axis-label",
+      "tag": "text",
+      "geometry": { "x": 89, "y": 218 },
+      "style": { "class": "chart-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "MAY"
+    },
+    {
+      "id": "output-performance-label-jun",
+      "parent": "output-performance",
+      "type": "axis-label",
+      "tag": "text",
+      "geometry": { "x": 115, "y": 218 },
+      "style": { "class": "chart-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "JUN"
+    },
+    {
+      "id": "output-panel-insights",
+      "parent": "output-insights",
+      "type": "panel",
+      "tag": "rect",
+      "geometry": { "x": 143, "y": 119, "width": 98, "height": 104, "rx": 5 },
+      "style": { "class": "insights-panel", "fill": "navy", "stroke": "navy", "strokeWidth": 1 },
+      "label": "Insights"
+    },
+    {
+      "id": "output-insights-title",
+      "parent": "output-insights",
+      "type": "title",
+      "tag": "text",
+      "geometry": { "x": 153, "y": 135 },
+      "style": { "class": "panel-title", "fill": "white", "font": "Inter 600 7px" },
+      "text": "Insights"
+    },
+    {
+      "id": "output-insights-row-1",
+      "parent": "output-insights",
+      "type": "row",
+      "tag": "rect",
+      "geometry": { "x": 151, "y": 145, "width": 82, "height": 20, "rx": 3 },
+      "style": { "class": "insight-row", "fill": "rgba(255,255,255,.18)" }
+    },
+    {
+      "id": "output-insights-dot-1",
+      "parent": "output-insights",
+      "type": "dot",
+      "tag": "circle",
+      "geometry": { "cx": 158, "cy": 155, "r": 3 },
+      "style": { "class": "insight-dot", "fill": "sand" }
+    },
+    {
+      "id": "output-insights-mark-1",
+      "parent": "output-insights",
+      "type": "mark",
+      "tag": "path",
+      "geometry": { "d": "M158 151V159M155 159H161" },
+      "style": { "class": "insight-mark", "stroke": "white", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-insights-copy-1a",
+      "parent": "output-insights",
+      "type": "copy",
+      "tag": "text",
+      "geometry": { "x": 166, "y": 153 },
+      "style": { "class": "insight-copy", "fill": "white", "font": "Inter 4.2px" },
+      "text": "Driver performance"
+    },
+    {
+      "id": "output-insights-copy-1b",
+      "parent": "output-insights",
+      "type": "copy",
+      "tag": "text",
+      "geometry": { "x": 166, "y": 160 },
+      "style": { "class": "insight-copy", "fill": "white", "font": "Inter 4.2px" },
+      "text": "accelerates outcomes"
+    },
+    {
+      "id": "output-insights-row-2",
+      "parent": "output-insights",
+      "type": "row",
+      "tag": "rect",
+      "geometry": { "x": 151, "y": 169, "width": 82, "height": 20, "rx": 3 },
+      "style": { "class": "insight-row", "fill": "rgba(255,255,255,.18)" }
+    },
+    {
+      "id": "output-insights-dot-2",
+      "parent": "output-insights",
+      "type": "dot",
+      "tag": "circle",
+      "geometry": { "cx": 158, "cy": 179, "r": 3 },
+      "style": { "class": "insight-dot", "fill": "sand" }
+    },
+    {
+      "id": "output-insights-mark-2",
+      "parent": "output-insights",
+      "type": "mark",
+      "tag": "path",
+      "geometry": { "d": "M156 177L158 181L161 176" },
+      "style": { "class": "insight-mark", "stroke": "white", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-insights-copy-2a",
+      "parent": "output-insights",
+      "type": "copy",
+      "tag": "text",
+      "geometry": { "x": 166, "y": 177 },
+      "style": { "class": "insight-copy", "fill": "white", "font": "Inter 4.2px" },
+      "text": "Operational efficiency"
+    },
+    {
+      "id": "output-insights-copy-2b",
+      "parent": "output-insights",
+      "type": "copy",
+      "tag": "text",
+      "geometry": { "x": 166, "y": 184 },
+      "style": { "class": "insight-copy", "fill": "white", "font": "Inter 4.2px" },
+      "text": "reduces friction and risk"
+    },
+    {
+      "id": "output-insights-row-3",
+      "parent": "output-insights",
+      "type": "row",
+      "tag": "rect",
+      "geometry": { "x": 151, "y": 193, "width": 82, "height": 20, "rx": 3 },
+      "style": { "class": "insight-row", "fill": "rgba(255,255,255,.18)" }
+    },
+    {
+      "id": "output-insights-dot-3",
+      "parent": "output-insights",
+      "type": "dot",
+      "tag": "circle",
+      "geometry": { "cx": 158, "cy": 203, "r": 3 },
+      "style": { "class": "insight-dot", "fill": "sand" }
+    },
+    {
+      "id": "output-insights-mark-3",
+      "parent": "output-insights",
+      "type": "mark",
+      "tag": "path",
+      "geometry": { "d": "M158 199V206M155 203H161" },
+      "style": { "class": "insight-mark", "stroke": "white", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-insights-copy-3a",
+      "parent": "output-insights",
+      "type": "copy",
+      "tag": "text",
+      "geometry": { "x": 166, "y": 201 },
+      "style": { "class": "insight-copy", "fill": "white", "font": "Inter 4.2px" },
+      "text": "Strategic focus unlocks"
+    },
+    {
+      "id": "output-insights-copy-3b",
+      "parent": "output-insights",
+      "type": "copy",
+      "tag": "text",
+      "geometry": { "x": 166, "y": 208 },
+      "style": { "class": "insight-copy", "fill": "white", "font": "Inter 4.2px" },
+      "text": "growth opportunities"
+    },
+    {
+      "id": "output-panel-trends",
+      "parent": "output-trends",
+      "type": "panel",
+      "tag": "rect",
+      "geometry": { "x": 255, "y": 119, "width": 132, "height": 104, "rx": 5 },
+      "style": { "class": "output-panel", "fill": "white", "stroke": "grid", "strokeWidth": 1 },
+      "label": "Trends"
+    },
+    {
+      "id": "output-trends-title",
+      "parent": "output-trends",
+      "type": "title",
+      "tag": "text",
+      "geometry": { "x": 265, "y": 135 },
+      "style": { "class": "panel-title", "fill": "navy", "font": "Inter 600 7px" },
+      "text": "Trends"
+    },
+    {
+      "id": "output-trends-grid",
+      "parent": "output-trends",
+      "type": "grid",
+      "tag": "path",
+      "geometry": { "d": "M266 178H378" },
+      "style": { "class": "trend-grid", "stroke": "grid", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-trends-baseline",
+      "parent": "output-trends",
+      "type": "baseline",
+      "tag": "path",
+      "geometry": { "d": "M266 210H378" },
+      "style": { "class": "trend-grid", "stroke": "grid", "strokeWidth": 0.8 }
+    },
+    {
+      "id": "output-trends-bar-1",
+      "parent": "output-trends",
+      "type": "bar",
+      "tag": "rect",
+      "geometry": { "x": 276, "y": 196, "width": 9, "height": 14 },
+      "style": { "class": "trends-bar", "fill": "slate" },
+      "label": "Q1"
+    },
+    {
+      "id": "output-trends-bar-2",
+      "parent": "output-trends",
+      "type": "bar",
+      "tag": "rect",
+      "geometry": { "x": 295, "y": 190, "width": 9, "height": 20 },
+      "style": { "class": "trends-bar", "fill": "navy" },
+      "label": "Q2"
+    },
+    {
+      "id": "output-trends-bar-3",
+      "parent": "output-trends",
+      "type": "bar",
+      "tag": "rect",
+      "geometry": { "x": 314, "y": 184, "width": 9, "height": 26 },
+      "style": { "class": "trends-bar", "fill": "navy" },
+      "label": "Q3"
+    },
+    {
+      "id": "output-trends-bar-4",
+      "parent": "output-trends",
+      "type": "bar",
+      "tag": "rect",
+      "geometry": { "x": 333, "y": 178, "width": 9, "height": 32 },
+      "style": { "class": "trends-bar", "fill": "navy" },
+      "label": "Q4"
+    },
+    {
+      "id": "output-trends-bar-5",
+      "parent": "output-trends",
+      "type": "bar",
+      "tag": "rect",
+      "geometry": { "x": 352, "y": 168, "width": 9, "height": 42 },
+      "style": { "class": "trends-bar trends-bar-accent", "fill": "sand" },
+      "label": "Q5"
+    },
+    {
+      "id": "output-trends-label-q1",
+      "parent": "output-trends",
+      "type": "axis-label",
+      "tag": "text",
+      "geometry": { "x": 280, "y": 218 },
+      "style": { "class": "chart-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "Q1"
+    },
+    {
+      "id": "output-trends-label-q2",
+      "parent": "output-trends",
+      "type": "axis-label",
+      "tag": "text",
+      "geometry": { "x": 299, "y": 218 },
+      "style": { "class": "chart-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "Q2"
+    },
+    {
+      "id": "output-trends-label-q3",
+      "parent": "output-trends",
+      "type": "axis-label",
+      "tag": "text",
+      "geometry": { "x": 318, "y": 218 },
+      "style": { "class": "chart-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "Q3"
+    },
+    {
+      "id": "output-trends-label-q4",
+      "parent": "output-trends",
+      "type": "axis-label",
+      "tag": "text",
+      "geometry": { "x": 337, "y": 218 },
+      "style": { "class": "chart-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "Q4"
+    },
+    {
+      "id": "output-trends-label-q5",
+      "parent": "output-trends",
+      "type": "axis-label",
+      "tag": "text",
+      "geometry": { "x": 356, "y": 218 },
+      "style": { "class": "chart-label", "fill": "slate", "font": "Inter 4.6px" },
+      "text": "Q5"
+    }
+  ],
+  "inventory": {
+    "panelCount": 5,
+    "panels": ["overview", "distribution", "performance", "insights", "trends"],
+    "metricCount": 3,
+    "distribution": { "ringBaseCount": 1, "accentArcCount": 3, "legendDotCount": 4, "legendLineCount": 4 },
+    "performance": { "pointCount": 7, "polylineCount": 1, "areaCount": 1, "labelCount": 4 },
+    "insights": { "rowCount": 3, "dotCount": 3, "markCount": 3, "copyCount": 6, "darkTreatment": true },
+    "trends": { "barCount": 5, "baselineCount": 1, "labelCount": 5 }
+  }
+}
