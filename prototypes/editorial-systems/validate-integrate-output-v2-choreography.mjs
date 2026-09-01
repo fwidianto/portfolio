@@ -80,6 +80,13 @@ for (const [id, start, end] of expectedStages) {
   expect(exactArray(stage.elapsedMs, [start, end]), `${id} elapsed window drifted`);
   expect(Math.abs(stage.transitionProgress[0] - start / 9400) < 0.000001 && Math.abs(stage.transitionProgress[1] - Math.min(end, 9400) / 9400) < 0.000001, `${id} normalized transition progress drifted`);
   if (id === 'C8') expect(Math.abs(stage.totalProgress[0] - start / 11200) < 0.000001 && stage.totalProgress[1] === 1, 'C8 normalized total progress drifted');
+  if (id === 'C0') expect(stage.dominantWindowMs === null && stage.dominantFamily === null, 'C0 must not declare a dominant window');
+  if (id !== 'C0') {
+    expect(Array.isArray(stage.dominantWindowMs) && stage.dominantWindowMs.length === 2, `${id} dominant window is missing`);
+    expect(stage.dominantWindowMs[0] >= start && stage.dominantWindowMs[1] <= end, `${id} dominant window escapes its stage`);
+    if (!stage.dominantWindowReason) expect(exactArray(stage.dominantWindowMs, stage.elapsedMs), `${id} dominant window must equal elapsedMs unless a narrower reason is declared`);
+  }
+  if (id === 'C8') expect(stage.dominantFamily === 'output-hold' && exactArray(stage.dominantWindowMs, stage.elapsedMs), 'C8 must remain the full final Output hold');
   expect(stage.windows && stage.hardGate?.id === `G${id.slice(1)}`, `${id} hard-gate binding is missing`);
   for (const window of Object.values(stage.windows)) {
     if (!window) continue;
@@ -135,7 +142,8 @@ for (const overlap of overlapWindows) {
   expect(exactArray(overlap.windowMs, [to.elapsedMs[0], from.elapsedMs[1]]), `overlap window is not the exact stage seam for ${overlap.fromStage}/${overlap.toStage}`);
   expect(overlap.windowMs[1] - overlap.windowMs[0] <= 100, `overlap is too large for ${overlap.fromStage}/${overlap.toStage}`);
 }
-const dominantStages = spec.stages.filter((stage) => stage.dominantWindowMs && stage.dominantFamily && stage.id !== 'C8');
+const dominantStages = spec.stages.filter((stage) => /^C[1-7]$/.test(stage.id));
+expect(dominantStages.length === 7 && dominantStages.every((stage) => stage.dominantWindowMs && stage.dominantFamily), 'C1-C7 dominant-window inventory is incomplete');
 const events = dominantStages.flatMap((stage) => [[stage.dominantWindowMs[0], 1, stage.dominantFamily], [stage.dominantWindowMs[1], -1, stage.dominantFamily]]).sort((a, b) => a[0] - b[0] || a[1] - b[1]);
 let activeDominant = 0;
 let maxDominant = 0;
