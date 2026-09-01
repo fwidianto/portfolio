@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Output Golden v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --art-navy: #001834;
+      --art-slate: #5a5c63;
+      --art-sand: #dec6ac;
+      --art-green: #00743c;
+      --art-grid: #d9dde2;
+      --art-white: #fefefe;
+      --art-paper: #f6f0e5;
+      --art-area: #edf1f4;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 16px;
+      background: var(--art-paper);
+    }
+
+    .output-golden-v2 {
+      width: min(860px, calc(100vw - 32px), calc((100vh - 32px) * 1.653846));
+      aspect-ratio: 860 / 520;
+    }
+
+    .output-golden-v2 svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 860 / 520;
+      overflow: visible;
+      background: var(--art-white);
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    .output-v2-frame,
+    .output-v2-panel {
+      fill: var(--art-white);
+      stroke: var(--art-grid);
+      stroke-width: 1;
+    }
+
+    .output-v2-panel-title {
+      fill: var(--art-navy);
+      font: 600 10px/1 Inter, Arial, sans-serif;
+      letter-spacing: .01em;
+    }
+
+    .output-v2-eyebrow,
+    .output-v2-metric-label,
+    .output-v2-chart-label,
+    .output-v2-system-label {
+      fill: var(--art-slate);
+      font: 500 7px/1 Inter, Arial, sans-serif;
+      letter-spacing: .08em;
+    }
+
+    .output-v2-eyebrow,
+    .output-v2-system-label { font-size: 6px; letter-spacing: .14em; }
+
+    .output-v2-title-rule,
+    .output-v2-divider,
+    .output-v2-chart-grid,
+    .output-v2-trends-grid,
+    .output-v2-variance-baseline,
+    .output-v2-variance-connector,
+    .output-v2-distribution-legend-line,
+    .output-v2-system-line {
+      fill: none;
+      stroke: var(--art-grid);
+      stroke-width: 1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .output-v2-title-rule { stroke: var(--art-navy); stroke-width: 1.2; }
+    .output-v2-divider { stroke-width: .8; }
+
+    .output-v2-metric {
+      fill: var(--art-navy);
+      font: 600 22px/1 "Cormorant Garamond", Georgia, serif;
+    }
+
+    .output-v2-metric-positive { fill: var(--art-green); }
+
+    .output-v2-ring-base {
+      fill: none;
+      stroke: var(--art-grid);
+      stroke-width: 12;
+    }
+
+    .output-v2-ring-arc { fill: none; stroke-width: 12; }
+    .output-v2-ring-navy { stroke: var(--art-navy); }
+    .output-v2-ring-sand { stroke: var(--art-sand); }
+    .output-v2-ring-slate { stroke: var(--art-slate); }
+    .output-v2-legend-navy { fill: var(--art-navy); }
+    .output-v2-legend-slate { fill: var(--art-slate); }
+    .output-v2-legend-sand { fill: var(--art-sand); }
+    .output-v2-legend-ivory { fill: var(--art-grid); }
+    .output-v2-legend-label { fill: var(--art-slate); font: 500 7px/1 Inter, Arial, sans-serif; letter-spacing: .08em; }
+
+    .output-v2-chart-area { fill: var(--art-area); stroke: none; }
+    .output-v2-chart-line { fill: none; stroke: var(--art-navy); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .output-v2-chart-point { fill: var(--art-white); stroke: var(--art-navy); stroke-width: 1.4; }
+    .output-v2-chart-label { font-size: 7px; letter-spacing: .04em; }
+
+    .output-v2-insights-panel { fill: var(--art-navy); stroke: var(--art-navy); }
+    .output-v2-insight-row { fill: rgba(255,255,255,.12); stroke: none; }
+    .output-v2-insight-dot { fill: var(--art-sand); }
+    .output-v2-insight-mark { fill: none; stroke: var(--art-white); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+    .output-v2-insight-copy { fill: var(--art-white); font: 500 7px/1 Inter, Arial, sans-serif; }
+    .output-v2-insights-panel-title { fill: var(--art-white); }
+    .output-v2-insights-eyebrow { fill: rgba(255,255,255,.56); }
+
+    .output-v2-variance-bar,
+    .output-v2-trends-bar { stroke-width: 1; }
+    .output-v2-bar-navy { fill: var(--art-navy); stroke: var(--art-navy); }
+    .output-v2-bar-green { fill: var(--art-green); stroke: var(--art-green); }
+    .output-v2-bar-sand { fill: var(--art-sand); stroke: var(--art-sand); }
+    .output-v2-variance-label,
+    .output-v2-trends-label { fill: var(--art-slate); font: 500 6px/1 Inter, Arial, sans-serif; letter-spacing: .08em; }
+    .output-v2-system-line { stroke: var(--art-navy); stroke-width: 1.2; }
+    .output-v2-system-node { fill: var(--art-white); stroke: var(--art-navy); stroke-width: 1.2; }
+    .output-v2-system-label { font-size: 6px; letter-spacing: .1em; text-anchor: middle; }
+  </style>
+</head>
+<body>
+  <main class="output-golden-v2" aria-label="Output Golden v2 visual authority">
+    <svg id="output-golden-v2" viewBox="0 0 860 520" role="img" aria-labelledby="output-v2-title output-v2-description">
+      <title id="output-v2-title">Output Golden v2</title>
+      <desc id="output-v2-description">A coherent analytical management view combining overview metrics, primary performance, distribution, interpreted insights, variance, trends, and a connected system layer.</desc>
+
+      <g id="output-v2-root" data-group-id="output-v2-root">
+        <rect id="output-v2-frame" data-object-id="output-v2-frame" data-geometry="x=1;y=1;width=858;height=518;rx=8" data-style="frame" x="1" y="1" width="858" height="518" rx="8" class="output-v2-frame" />
+
+        <g id="output-v2-overview" data-group-id="output-v2-overview">
+          <rect id="output-v2-panel-overview" data-object-id="output-v2-panel-overview" data-geometry="x=24;y=24;width=512;height=106;rx=7" data-style="panel" x="24" y="24" width="512" height="106" rx="7" class="output-v2-panel" />
+          <text id="output-v2-overview-title" data-object-id="output-v2-overview-title" data-geometry="x=38;y=44" data-style="panel-title" data-text="Overview" x="38" y="44" class="output-v2-panel-title">Overview</text>
+          <text id="output-v2-overview-detail" data-object-id="output-v2-overview-detail" data-geometry="x=522;y=44" data-style="system-label" data-text="SYSTEM DETAIL" x="522" y="44" text-anchor="end" class="output-v2-system-label">SYSTEM DETAIL</text>
+          <path id="output-v2-overview-title-rule" data-object-id="output-v2-overview-title-rule" data-geometry="d=M38 51H104" data-style="title-rule" d="M38 51H104" class="output-v2-title-rule" />
+          <path id="output-v2-overview-divider-1" data-object-id="output-v2-overview-divider-1" data-geometry="d=M205 58V112" data-style="divider" d="M205 58V112" class="output-v2-divider" />
+          <path id="output-v2-overview-divider-2" data-object-id="output-v2-overview-divider-2" data-geometry="d=M370 58V112" data-style="divider" d="M370 58V112" class="output-v2-divider" />
+          <text id="output-v2-overview-revenue-label" data-object-id="output-v2-overview-revenue-label" data-geometry="x=38;y=74" data-style="metric-label" data-text="Revenue" x="38" y="74" class="output-v2-metric-label">Revenue</text>
+          <text id="output-v2-overview-revenue-value" data-object-id="output-v2-overview-revenue-value" data-geometry="x=38;y=104" data-style="metric" data-text="$24.8M" x="38" y="104" class="output-v2-metric">$24.8M</text>
+          <text id="output-v2-overview-growth-label" data-object-id="output-v2-overview-growth-label" data-geometry="x=224;y=74" data-style="metric-label" data-text="Growth" x="224" y="74" class="output-v2-metric-label">Growth</text>
+          <text id="output-v2-overview-growth-value" data-object-id="output-v2-overview-growth-value" data-geometry="x=224;y=104" data-style="metric-positive" data-text="+18.6%" x="224" y="104" class="output-v2-metric output-v2-metric-positive">+18.6%</text>
+          <text id="output-v2-overview-margin-label" data-object-id="output-v2-overview-margin-label" data-geometry="x=389;y=74" data-style="metric-label" data-text="Margin" x="389" y="74" class="output-v2-metric-label">Margin</text>
+          <text id="output-v2-overview-margin-value" data-object-id="output-v2-overview-margin-value" data-geometry="x=389;y=104" data-style="metric" data-text="42.7%" x="389" y="104" class="output-v2-metric">42.7%</text>
+        </g>
+
+        <g id="output-v2-distribution" data-group-id="output-v2-distribution">
+          <rect id="output-v2-panel-distribution" data-object-id="output-v2-panel-distribution" data-geometry="x=556;y=24;width=280;height=168;rx=7" data-style="panel" x="556" y="24" width="280" height="168" rx="7" class="output-v2-panel" />
+          <text id="output-v2-distribution-title" data-object-id="output-v2-distribution-title" data-geometry="x=570;y=44" data-style="panel-title" data-text="Distribution" x="570" y="44" class="output-v2-panel-title">Distribution</text>
+          <circle id="output-v2-distribution-ring-base" data-object-id="output-v2-distribution-ring-base" data-geometry="cx=614;cy=108;r=42" data-style="ring-base" cx="614" cy="108" r="42" class="output-v2-ring-base" />
+          <path id="output-v2-distribution-ring-navy" data-object-id="output-v2-distribution-ring-navy" data-geometry="d=M614 66A42 42 0 0 1 654 117" data-style="ring-navy" d="M614 66A42 42 0 0 1 654 117" class="output-v2-ring-arc output-v2-ring-navy" />
+          <path id="output-v2-distribution-ring-sand" data-object-id="output-v2-distribution-ring-sand" data-geometry="d=M654 117A42 42 0 0 1 581 141" data-style="ring-sand" d="M654 117A42 42 0 0 1 581 141" class="output-v2-ring-arc output-v2-ring-sand" />
+          <path id="output-v2-distribution-ring-slate" data-object-id="output-v2-distribution-ring-slate" data-geometry="d=M581 141A42 42 0 0 1 614 66" data-style="ring-slate" d="M581 141A42 42 0 0 1 614 66" class="output-v2-ring-arc output-v2-ring-slate" />
+          <circle id="output-v2-distribution-legend-navy-dot" data-object-id="output-v2-distribution-legend-navy-dot" data-geometry="cx=700;cy=80;r=3" data-style="legend-navy" cx="700" cy="80" r="3" class="output-v2-legend-navy" />
+          <text id="output-v2-distribution-legend-navy-label" data-object-id="output-v2-distribution-legend-navy-label" data-geometry="x=714;y=83" data-style="legend-label" data-text="CORE" x="714" y="83" class="output-v2-legend-label">CORE</text>
+          <path id="output-v2-distribution-legend-navy-line" data-object-id="output-v2-distribution-legend-navy-line" data-geometry="d=M760 80H816" data-style="legend-line" d="M760 80H816" class="output-v2-distribution-legend-line" />
+          <circle id="output-v2-distribution-legend-slate-dot" data-object-id="output-v2-distribution-legend-slate-dot" data-geometry="cx=700;cy=108;r=3" data-style="legend-slate" cx="700" cy="108" r="3" class="output-v2-legend-slate" />
+          <text id="output-v2-distribution-legend-slate-label" data-object-id="output-v2-distribution-legend-slate-label" data-geometry="x=714;y=111" data-style="legend-label" data-text="FLOW" x="714" y="111" class="output-v2-legend-label">FLOW</text>
+          <path id="output-v2-distribution-legend-slate-line" data-object-id="output-v2-distribution-legend-slate-line" data-geometry="d=M760 108H816" data-style="legend-line" d="M760 108H816" class="output-v2-distribution-legend-line" />
+          <circle id="output-v2-distribution-legend-sand-dot" data-object-id="output-v2-distribution-legend-sand-dot" data-geometry="cx=700;cy=136;r=3" data-style="legend-sand" cx="700" cy="136" r="3" class="output-v2-legend-sand" />
+          <text id="output-v2-distribution-legend-sand-label" data-object-id="output-v2-distribution-legend-sand-label" data-geometry="x=714;y=139" data-style="legend-label" data-text="CONTROL" x="714" y="139" class="output-v2-legend-label">CONTROL</text>
+          <path id="output-v2-distribution-legend-sand-line" data-object-id="output-v2-distribution-legend-sand-line" data-geometry="d=M760 136H816" data-style="legend-line" d="M760 136H816" class="output-v2-distribution-legend-line" />
+          <circle id="output-v2-distribution-legend-ivory-dot" data-object-id="output-v2-distribution-legend-ivory-dot" data-geometry="cx=700;cy=164;r=3" data-style="legend-ivory" cx="700" cy="164" r="3" class="output-v2-legend-ivory" />
+          <text id="output-v2-distribution-legend-ivory-label" data-object-id="output-v2-distribution-legend-ivory-label" data-geometry="x=714;y=167" data-style="legend-label" data-text="SIGNAL" x="714" y="167" class="output-v2-legend-label">SIGNAL</text>
+          <path id="output-v2-distribution-legend-ivory-line" data-object-id="output-v2-distribution-legend-ivory-line" data-geometry="d=M760 164H816" data-style="legend-line" d="M760 164H816" class="output-v2-distribution-legend-line" />
+        </g>
+
+        <g id="output-v2-performance" data-group-id="output-v2-performance">
+          <rect id="output-v2-panel-performance" data-object-id="output-v2-panel-performance" data-geometry="x=24;y=144;width=512;height=230;rx=7" data-style="panel" x="24" y="144" width="512" height="230" rx="7" class="output-v2-panel" />
+          <text id="output-v2-performance-title" data-object-id="output-v2-performance-title" data-geometry="x=38;y=164" data-style="panel-title" data-text="Performance" x="38" y="164" class="output-v2-panel-title">Performance</text>
+          <path id="output-v2-performance-grid-1" data-object-id="output-v2-performance-grid-1" data-geometry="d=M40 212H520" data-style="chart-grid" d="M40 212H520" class="output-v2-chart-grid" />
+          <path id="output-v2-performance-grid-2" data-object-id="output-v2-performance-grid-2" data-geometry="d=M40 254H520" data-style="chart-grid" d="M40 254H520" class="output-v2-chart-grid" />
+          <path id="output-v2-performance-grid-3" data-object-id="output-v2-performance-grid-3" data-geometry="d=M40 296H520" data-style="chart-grid" d="M40 296H520" class="output-v2-chart-grid" />
+          <path id="output-v2-performance-grid-4" data-object-id="output-v2-performance-grid-4" data-geometry="d=M40 338H520" data-style="chart-grid" d="M40 338H520" class="output-v2-chart-grid" />
+          <path id="output-v2-performance-area" data-object-id="output-v2-performance-area" data-geometry="d=M40 327L92 312L144 320L196 286L248 298L300 264L352 276L404 232L456 244L510 196V338H40Z" data-style="chart-area" d="M40 327L92 312L144 320L196 286L248 298L300 264L352 276L404 232L456 244L510 196V338H40Z" class="output-v2-chart-area" />
+          <path id="output-v2-performance-line" data-object-id="output-v2-performance-line" data-geometry="d=M40 327L92 312L144 320L196 286L248 298L300 264L352 276L404 232L456 244L510 196" data-style="chart-line" d="M40 327L92 312L144 320L196 286L248 298L300 264L352 276L404 232L456 244L510 196" class="output-v2-chart-line" />
+          <circle id="output-v2-performance-point-1" data-object-id="output-v2-performance-point-1" data-geometry="cx=40;cy=327;r=3" data-style="chart-point" cx="40" cy="327" r="3" class="output-v2-chart-point" />
+          <circle id="output-v2-performance-point-2" data-object-id="output-v2-performance-point-2" data-geometry="cx=92;cy=312;r=3" data-style="chart-point" cx="92" cy="312" r="3" class="output-v2-chart-point" />
+          <circle id="output-v2-performance-point-3" data-object-id="output-v2-performance-point-3" data-geometry="cx=144;cy=320;r=3" data-style="chart-point" cx="144" cy="320" r="3" class="output-v2-chart-point" />
+          <circle id="output-v2-performance-point-4" data-object-id="output-v2-performance-point-4" data-geometry="cx=196;cy=286;r=3" data-style="chart-point" cx="196" cy="286" r="3" class="output-v2-chart-point" />
+          <circle id="output-v2-performance-point-5" data-object-id="output-v2-performance-point-5" data-geometry="cx=248;cy=298;r=3" data-style="chart-point" cx="248" cy="298" r="3" class="output-v2-chart-point" />
+          <circle id="output-v2-performance-point-6" data-object-id="output-v2-performance-point-6" data-geometry="cx=300;cy=264;r=3" data-style="chart-point" cx="300" cy="264" r="3" class="output-v2-chart-point" />
+          <circle id="output-v2-performance-point-7" data-object-id="output-v2-performance-point-7" data-geometry="cx=352;cy=276;r=3" data-style="chart-point" cx="352" cy="276" r="3" class="output-v2-chart-point" />
+          <circle id="output-v2-performance-point-8" data-object-id="output-v2-performance-point-8" data-geometry="cx=404;cy=232;r=3" data-style="chart-point" cx="404" cy="232" r="3" class="output-v2-chart-point" />
+          <circle id="output-v2-performance-point-9" data-object-id="output-v2-performance-point-9" data-geometry="cx=456;cy=244;r=3" data-style="chart-point" cx="456" cy="244" r="3" class="output-v2-chart-point" />
+          <circle id="output-v2-performance-point-10" data-object-id="output-v2-performance-point-10" data-geometry="cx=510;cy=196;r=3" data-style="chart-point" cx="510" cy="196" r="3" class="output-v2-chart-point" />
+          <text id="output-v2-performance-label-jan" data-object-id="output-v2-performance-label-jan" data-geometry="x=40;y=358" data-style="chart-label" data-text="JAN" x="40" y="358" class="output-v2-chart-label">JAN</text>
+          <text id="output-v2-performance-label-apr" data-object-id="output-v2-performance-label-apr" data-geometry="x=196;y=358" data-style="chart-label" data-text="APR" x="196" y="358" class="output-v2-chart-label">APR</text>
+          <text id="output-v2-performance-label-jul" data-object-id="output-v2-performance-label-jul" data-geometry="x=352;y=358" data-style="chart-label" data-text="JUL" x="352" y="358" class="output-v2-chart-label">JUL</text>
+          <text id="output-v2-performance-label-oct" data-object-id="output-v2-performance-label-oct" data-geometry="x=500;y=358" data-style="chart-label" data-text="OCT" x="500" y="358" class="output-v2-chart-label">OCT</text>
+        </g>
+
+        <g id="output-v2-insights" data-group-id="output-v2-insights">
+          <rect id="output-v2-panel-insights" data-object-id="output-v2-panel-insights" data-geometry="x=556;y=208;width=280;height=166;rx=7" data-style="insights-panel" x="556" y="208" width="280" height="166" rx="7" class="output-v2-insights-panel" />
+          <text id="output-v2-insights-title" data-object-id="output-v2-insights-title" data-geometry="x=572;y=230" data-style="insights-title" data-text="Insights" x="572" y="230" class="output-v2-panel-title output-v2-insights-panel-title">Insights</text>
+          <text id="output-v2-insights-eyebrow" data-object-id="output-v2-insights-eyebrow" data-geometry="x=572;y=244" data-style="insights-eyebrow" data-text="INTERPRETED SIGNALS" x="572" y="244" class="output-v2-eyebrow output-v2-insights-eyebrow">INTERPRETED SIGNALS</text>
+          <rect id="output-v2-insights-row-1" data-object-id="output-v2-insights-row-1" data-geometry="x=570;y=250;width=252;height=32;rx=4" data-style="insight-row" x="570" y="250" width="252" height="32" rx="4" class="output-v2-insight-row" />
+          <circle id="output-v2-insights-dot-1" data-object-id="output-v2-insights-dot-1" data-geometry="cx=584;cy=266;r=4" data-style="insight-dot" cx="584" cy="266" r="4" class="output-v2-insight-dot" />
+          <path id="output-v2-insights-mark-1" data-object-id="output-v2-insights-mark-1" data-geometry="d=M584 260V272M580 266H588" data-style="insight-mark" d="M584 260V272M580 266H588" class="output-v2-insight-mark" />
+          <text id="output-v2-insights-copy-1a" data-object-id="output-v2-insights-copy-1a" data-geometry="x=598;y=263" data-style="insight-copy" data-text="Driver performance" x="598" y="263" class="output-v2-insight-copy">Driver performance</text>
+          <text id="output-v2-insights-copy-1b" data-object-id="output-v2-insights-copy-1b" data-geometry="x=598;y=274" data-style="insight-copy" data-text="accelerates outcomes" x="598" y="274" class="output-v2-insight-copy">accelerates outcomes</text>
+          <rect id="output-v2-insights-row-2" data-object-id="output-v2-insights-row-2" data-geometry="x=570;y=288;width=252;height=32;rx=4" data-style="insight-row" x="570" y="288" width="252" height="32" rx="4" class="output-v2-insight-row" />
+          <circle id="output-v2-insights-dot-2" data-object-id="output-v2-insights-dot-2" data-geometry="cx=584;cy=304;r=4" data-style="insight-dot" cx="584" cy="304" r="4" class="output-v2-insight-dot" />
+          <path id="output-v2-insights-mark-2" data-object-id="output-v2-insights-mark-2" data-geometry="d=M580 303L584 307L590 299" data-style="insight-mark" d="M580 303L584 307L590 299" class="output-v2-insight-mark" />
+          <text id="output-v2-insights-copy-2a" data-object-id="output-v2-insights-copy-2a" data-geometry="x=598;y=301" data-style="insight-copy" data-text="Operational efficiency" x="598" y="301" class="output-v2-insight-copy">Operational efficiency</text>
+          <text id="output-v2-insights-copy-2b" data-object-id="output-v2-insights-copy-2b" data-geometry="x=598;y=312" data-style="insight-copy" data-text="reduces friction and risk" x="598" y="312" class="output-v2-insight-copy">reduces friction and risk</text>
+          <rect id="output-v2-insights-row-3" data-object-id="output-v2-insights-row-3" data-geometry="x=570;y=326;width=252;height=32;rx=4" data-style="insight-row" x="570" y="326" width="252" height="32" rx="4" class="output-v2-insight-row" />
+          <circle id="output-v2-insights-dot-3" data-object-id="output-v2-insights-dot-3" data-geometry="cx=584;cy=342;r=4" data-style="insight-dot" cx="584" cy="342" r="4" class="output-v2-insight-dot" />
+          <path id="output-v2-insights-mark-3" data-object-id="output-v2-insights-mark-3" data-geometry="d=M580 342H588M584 338V346" data-style="insight-mark" d="M580 342H588M584 338V346" class="output-v2-insight-mark" />
+          <text id="output-v2-insights-copy-3a" data-object-id="output-v2-insights-copy-3a" data-geometry="x=598;y=339" data-style="insight-copy" data-text="Strategic focus unlocks" x="598" y="339" class="output-v2-insight-copy">Strategic focus unlocks</text>
+          <text id="output-v2-insights-copy-3b" data-object-id="output-v2-insights-copy-3b" data-geometry="x=598;y=350" data-style="insight-copy" data-text="growth opportunities" x="598" y="350" class="output-v2-insight-copy">growth opportunities</text>
+        </g>
+
+        <g id="output-v2-variance" data-group-id="output-v2-variance">
+          <rect id="output-v2-panel-variance" data-object-id="output-v2-panel-variance" data-geometry="x=24;y=392;width=386;height=92;rx=7" data-style="panel" x="24" y="392" width="386" height="92" rx="7" class="output-v2-panel" />
+          <text id="output-v2-variance-title" data-object-id="output-v2-variance-title" data-geometry="x=38;y=412" data-style="panel-title" data-text="Variance" x="38" y="412" class="output-v2-panel-title">Variance</text>
+          <text id="output-v2-variance-eyebrow" data-object-id="output-v2-variance-eyebrow" data-geometry="x=396;y=412" data-style="system-label" data-text="CONTRIBUTION" x="396" y="412" text-anchor="end" class="output-v2-system-label">CONTRIBUTION</text>
+          <path id="output-v2-variance-baseline" data-object-id="output-v2-variance-baseline" data-geometry="d=M40 465H392" data-style="variance-baseline" d="M40 465H392" class="output-v2-variance-baseline" />
+          <rect id="output-v2-variance-bar-base" data-object-id="output-v2-variance-bar-base" data-geometry="x=52;y=440;width=32;height=25" data-style="bar-navy" x="52" y="440" width="32" height="25" class="output-v2-variance-bar output-v2-bar-navy" />
+          <path id="output-v2-variance-connector-1" data-object-id="output-v2-variance-connector-1" data-geometry="d=M84 440H100" data-style="variance-connector" d="M84 440H100" class="output-v2-variance-connector" />
+          <rect id="output-v2-variance-bar-driver-1" data-object-id="output-v2-variance-bar-driver-1" data-geometry="x=100;y=426;width=32;height=14" data-style="bar-green" x="100" y="426" width="32" height="14" class="output-v2-variance-bar output-v2-bar-green" />
+          <path id="output-v2-variance-connector-2" data-object-id="output-v2-variance-connector-2" data-geometry="d=M132 426H148" data-style="variance-connector" d="M132 426H148" class="output-v2-variance-connector" />
+          <rect id="output-v2-variance-bar-driver-2" data-object-id="output-v2-variance-bar-driver-2" data-geometry="x=148;y=412;width=32;height=14" data-style="bar-green" x="148" y="412" width="32" height="14" class="output-v2-variance-bar output-v2-bar-green" />
+          <path id="output-v2-variance-connector-3" data-object-id="output-v2-variance-connector-3" data-geometry="d=M180 412H196" data-style="variance-connector" d="M180 412H196" class="output-v2-variance-connector" />
+          <rect id="output-v2-variance-bar-offset" data-object-id="output-v2-variance-bar-offset" data-geometry="x=196;y=430;width=32;height=20" data-style="bar-sand" x="196" y="430" width="32" height="20" class="output-v2-variance-bar output-v2-bar-sand" />
+          <path id="output-v2-variance-connector-4" data-object-id="output-v2-variance-connector-4" data-geometry="d=M228 450H244" data-style="variance-connector" d="M228 450H244" class="output-v2-variance-connector" />
+          <rect id="output-v2-variance-bar-net" data-object-id="output-v2-variance-bar-net" data-geometry="x=244;y=419;width=32;height=46" data-style="bar-navy" x="244" y="419" width="32" height="46" class="output-v2-variance-bar output-v2-bar-navy" />
+          <text id="output-v2-variance-label-base" data-object-id="output-v2-variance-label-base" data-geometry="x=52;y=478" data-style="variance-label" data-text="BASE" x="52" y="478" class="output-v2-variance-label">BASE</text>
+          <text id="output-v2-variance-label-driver-1" data-object-id="output-v2-variance-label-driver-1" data-geometry="x=100;y=478" data-style="variance-label" data-text="DRIVER" x="100" y="478" class="output-v2-variance-label">DRIVER</text>
+          <text id="output-v2-variance-label-driver-2" data-object-id="output-v2-variance-label-driver-2" data-geometry="x=148;y=478" data-style="variance-label" data-text="MIX" x="148" y="478" class="output-v2-variance-label">MIX</text>
+          <text id="output-v2-variance-label-offset" data-object-id="output-v2-variance-label-offset" data-geometry="x=196;y=478" data-style="variance-label" data-text="OFFSET" x="196" y="478" class="output-v2-variance-label">OFFSET</text>
+          <text id="output-v2-variance-label-net" data-object-id="output-v2-variance-label-net" data-geometry="x=244;y=478" data-style="variance-label" data-text="NET" x="244" y="478" class="output-v2-variance-label">NET</text>
+        </g>
+
+        <g id="output-v2-trends" data-group-id="output-v2-trends">
+          <rect id="output-v2-panel-trends" data-object-id="output-v2-panel-trends" data-geometry="x=426;y=392;width=410;height=92;rx=7" data-style="panel" x="426" y="392" width="410" height="92" rx="7" class="output-v2-panel" />
+          <text id="output-v2-trends-title" data-object-id="output-v2-trends-title" data-geometry="x=440;y=412" data-style="panel-title" data-text="Trends" x="440" y="412" class="output-v2-panel-title">Trends</text>
+          <text id="output-v2-trends-eyebrow" data-object-id="output-v2-trends-eyebrow" data-geometry="x=822;y=412" data-style="system-label" data-text="PACE" x="822" y="412" text-anchor="end" class="output-v2-system-label">PACE</text>
+          <path id="output-v2-trends-grid" data-object-id="output-v2-trends-grid" data-geometry="d=M442 430H820" data-style="trends-grid" d="M442 430H820" class="output-v2-trends-grid" />
+          <path id="output-v2-trends-baseline" data-object-id="output-v2-trends-baseline" data-geometry="d=M442 465H820" data-style="trends-baseline" d="M442 465H820" class="output-v2-trends-grid" />
+          <rect id="output-v2-trends-bar-jan" data-object-id="output-v2-trends-bar-jan" data-geometry="x=480;y=445;width=26;height=20" data-style="bar-navy" x="480" y="445" width="26" height="20" class="output-v2-trends-bar output-v2-bar-navy" />
+          <rect id="output-v2-trends-bar-apr" data-object-id="output-v2-trends-bar-apr" data-geometry="x=570;y=435;width=26;height=30" data-style="bar-navy" x="570" y="435" width="26" height="30" class="output-v2-trends-bar output-v2-bar-navy" />
+          <rect id="output-v2-trends-bar-jul" data-object-id="output-v2-trends-bar-jul" data-geometry="x=660;y=420;width=26;height=45" data-style="bar-navy" x="660" y="420" width="26" height="45" class="output-v2-trends-bar output-v2-bar-navy" />
+          <rect id="output-v2-trends-bar-oct" data-object-id="output-v2-trends-bar-oct" data-geometry="x=750;y=405;width=26;height=60" data-style="bar-sand" x="750" y="405" width="26" height="60" class="output-v2-trends-bar output-v2-bar-sand" />
+          <text id="output-v2-trends-label-jan" data-object-id="output-v2-trends-label-jan" data-geometry="x=480;y=478" data-style="trends-label" data-text="JAN" x="480" y="478" class="output-v2-trends-label">JAN</text>
+          <text id="output-v2-trends-label-apr" data-object-id="output-v2-trends-label-apr" data-geometry="x=570;y=478" data-style="trends-label" data-text="APR" x="570" y="478" class="output-v2-trends-label">APR</text>
+          <text id="output-v2-trends-label-jul" data-object-id="output-v2-trends-label-jul" data-geometry="x=660;y=478" data-style="trends-label" data-text="JUL" x="660" y="478" class="output-v2-trends-label">JUL</text>
+          <text id="output-v2-trends-label-oct" data-object-id="output-v2-trends-label-oct" data-geometry="x=750;y=478" data-style="trends-label" data-text="OCT" x="750" y="478" class="output-v2-trends-label">OCT</text>
+        </g>
+
+        <g id="output-v2-system-layer" data-group-id="output-v2-system-layer">
+          <path id="output-v2-system-line" data-object-id="output-v2-system-line" data-geometry="d=M24 500H836" data-style="system-line" d="M24 500H836" class="output-v2-system-line" />
+          <circle id="output-v2-system-node-source" data-object-id="output-v2-system-node-source" data-geometry="cx=120;cy=500;r=4" data-style="system-node" cx="120" cy="500" r="4" class="output-v2-system-node" />
+          <text id="output-v2-system-label-source" data-object-id="output-v2-system-label-source" data-geometry="x=120;y=513" data-style="system-label" data-text="SOURCE" x="120" y="513" class="output-v2-system-label">SOURCE</text>
+          <circle id="output-v2-system-node-relate" data-object-id="output-v2-system-node-relate" data-geometry="cx=290;cy=500;r=4" data-style="system-node" cx="290" cy="500" r="4" class="output-v2-system-node" />
+          <text id="output-v2-system-label-relate" data-object-id="output-v2-system-label-relate" data-geometry="x=290;y=513" data-style="system-label" data-text="RELATE" x="290" y="513" class="output-v2-system-label">RELATE</text>
+          <circle id="output-v2-system-node-model" data-object-id="output-v2-system-node-model" data-geometry="cx=460;cy=500;r=4" data-style="system-node" cx="460" cy="500" r="4" class="output-v2-system-node" />
+          <text id="output-v2-system-label-model" data-object-id="output-v2-system-label-model" data-geometry="x=460;y=513" data-style="system-label" data-text="MODEL" x="460" y="513" class="output-v2-system-label">MODEL</text>
+          <circle id="output-v2-system-node-review" data-object-id="output-v2-system-node-review" data-geometry="cx=630;cy=500;r=4" data-style="system-node" cx="630" cy="500" r="4" class="output-v2-system-node" />
+          <text id="output-v2-system-label-review" data-object-id="output-v2-system-label-review" data-geometry="x=630;y=513" data-style="system-label" data-text="REVIEW" x="630" y="513" class="output-v2-system-label">REVIEW</text>
+          <circle id="output-v2-system-node-use" data-object-id="output-v2-system-node-use" data-geometry="cx=800;cy=500;r=4" data-style="system-node" cx="800" cy="500" r="4" class="output-v2-system-node" />
+          <text id="output-v2-system-label-use" data-object-id="output-v2-system-label-use" data-geometry="x=800;y=513" data-style="system-label" data-text="USE" x="800" y="513" class="output-v2-system-label">USE</text>
+        </g>
+      </g>
+    </svg>
+  </main>
+</body>
+</html>

@@ -280,22 +280,46 @@
     runtimeFrame.scaleY = HEIGHT / runtimeFrame.height;
   };
   refreshRuntimeFrame();
-  window.addEventListener('resize', refreshRuntimeFrame, { passive: true });
   const runtimePoint = (x, y) => ({
     x: (referenceFrame.left + x - runtimeFrame.left) * runtimeFrame.scaleX,
     y: (referenceFrame.top + y - runtimeFrame.top) * runtimeFrame.scaleY
   });
   const runtimeSize = (value, axis = 'x') => value * (axis === 'y' ? runtimeFrame.scaleY : runtimeFrame.scaleX);
   const outputGoldenSize = { width: 405, height: 236 };
-  const outputLayout = { x: 0, y: 0, scale: 1 };
+  const outputLayout = { x: 0, y: 0, scaleX: 1, scaleY: 1, paddingX: 0, paddingY: 0, artwork: null };
   const refreshOutputLayout = () => {
-    const safeLeft = 760;
-    const safeRight = WIDTH - 72;
-    const safeTop = 72;
-    const safeBottom = HEIGHT - 48;
-    outputLayout.scale = Math.min(1.22, (safeRight - safeLeft) / outputGoldenSize.width, (safeBottom - safeTop) / outputGoldenSize.height);
-    outputLayout.x = safeRight - outputGoldenSize.width * outputLayout.scale;
-    outputLayout.y = safeTop;
+    const canvasBox = canvas.getBoundingClientRect();
+    const artworkBox = motionRoot.getBoundingClientRect();
+    const copyBox = hero.querySelector('.hero-copy')?.getBoundingClientRect();
+    const statusBox = motionRoot.querySelector('.motion-phase-status')?.getBoundingClientRect();
+    const legendBox = motionRoot.querySelector('.motion-legend')?.getBoundingClientRect();
+    const canvasScaleX = Math.max(.001, canvasBox.width / WIDTH);
+    const canvasScaleY = Math.max(.001, canvasBox.height / HEIGHT);
+    const padding = Math.max(12, Math.min(32, Math.min(artworkBox.width, artworkBox.height) * .04));
+    let left = artworkBox.left + padding;
+    let right = artworkBox.right - padding;
+    let top = artworkBox.top + padding;
+    let bottom = artworkBox.bottom - padding;
+    const copyOverlapsArtwork = copyBox && copyBox.right > artworkBox.left && copyBox.left < artworkBox.right && copyBox.bottom > artworkBox.top && copyBox.top < artworkBox.bottom;
+    if (copyOverlapsArtwork) left = Math.max(left, copyBox.right + padding);
+    if (statusBox && statusBox.bottom > top && statusBox.top < bottom) top = Math.max(top, statusBox.bottom + padding * .75);
+    if (legendBox && legendBox.bottom > top && legendBox.top < bottom) bottom = Math.min(bottom, legendBox.top - padding * .75);
+    if (right <= left) { left = artworkBox.left + padding; right = artworkBox.right - padding; }
+    if (bottom <= top) { top = artworkBox.top + padding; bottom = artworkBox.bottom - padding; }
+    const regionWidth = Math.max(1, right - left);
+    const regionHeight = Math.max(1, bottom - top);
+    const screenScale = Math.max(.01, Math.min(regionWidth / outputGoldenSize.width, regionHeight / outputGoldenSize.height) * .8);
+    const compositionWidth = outputGoldenSize.width * screenScale;
+    const compositionHeight = outputGoldenSize.height * screenScale;
+    const compositionLeft = left + (regionWidth - compositionWidth) / 2;
+    const compositionTop = top + (regionHeight - compositionHeight) / 2;
+    outputLayout.x = (compositionLeft - canvasBox.left) / canvasScaleX;
+    outputLayout.y = (compositionTop - canvasBox.top) / canvasScaleY;
+    outputLayout.scaleX = screenScale / canvasScaleX;
+    outputLayout.scaleY = screenScale / canvasScaleY;
+    outputLayout.paddingX = padding;
+    outputLayout.paddingY = padding;
+    outputLayout.artwork = { left: artworkBox.left, top: artworkBox.top, right: artworkBox.right, bottom: artworkBox.bottom };
   };
   refreshOutputLayout();
   const outputFinalHoldStart = .78;
@@ -314,8 +338,17 @@
   };
   const outputLayerTransform = () => {
     refreshOutputLayout();
-    outputTargetLayer.setAttribute('transform', `translate(${outputLayout.x.toFixed(2)} ${outputLayout.y.toFixed(2)}) scale(${outputLayout.scale.toFixed(5)})`);
+    outputTargetLayer.setAttribute('transform', `translate(${outputLayout.x.toFixed(2)} ${outputLayout.y.toFixed(2)}) scale(${outputLayout.scaleX.toFixed(5)} ${outputLayout.scaleY.toFixed(5)})`);
   };
+  const refreshSceneLayout = () => {
+    refreshRuntimeFrame();
+    outputLayerTransform();
+  };
+  window.addEventListener('resize', refreshSceneLayout, { passive: true });
+  if (typeof ResizeObserver === 'function') {
+    const sceneResizeObserver = new ResizeObserver(refreshSceneLayout);
+    sceneResizeObserver.observe(motionRoot);
+  }
   const outputPathPoints = (d = '') => {
     const points = [];
     const pairPattern = /(?:M|L)\s*(-?\d+(?:\.\d+)?)\s*[ ,]\s*(-?\d+(?:\.\d+)?)/g;
@@ -341,8 +374,8 @@
   };
   const outputTargetShapePoints = (target) => {
     const geometry = target.geometry || {};
-    const scaleX = outputLayout.scale;
-    const scaleY = outputLayout.scale;
+    const scaleX = outputLayout.scaleX;
+    const scaleY = outputLayout.scaleY;
     if (target.tag === 'rect') return roundedRectPoints(geometry.width * scaleX, geometry.height * scaleY, (geometry.rx || 2) * scaleX);
     if (target.tag === 'circle') return ellipsePoints(geometry.r * scaleX, geometry.r * scaleY);
     if (target.id.includes('distribution-ring-')) return ellipsePoints(20 * scaleX, 20 * scaleY);
@@ -466,9 +499,8 @@
       motionRoot.dataset.integrateOutputG5Viewport = 'PENDING';
       return;
     }
-    const artwork = canvas.getBoundingClientRect();
-    const margin = 24;
-    const safe = { left: artwork.left + margin, top: artwork.top + margin, right: artwork.right - margin, bottom: artwork.bottom - margin };
+    const artwork = outputLayout.artwork || motionRoot.getBoundingClientRect();
+    const safe = { left: artwork.left + outputLayout.paddingX, top: artwork.top + outputLayout.paddingY, right: artwork.right - outputLayout.paddingX, bottom: artwork.bottom - outputLayout.paddingY };
     let pass = true;
     outputTargetElements.forEach(({ element }) => {
       const box = element.getBoundingClientRect();
@@ -1009,7 +1041,7 @@
     const settled = integrateNodePose(node, 1);
     if (!target || !settled.position) return { ...settled, opacity: 0, detail: 0, build: 0 };
     const targetCenter = outputTargetLocalCenter(target);
-    const targetPoint = { x: outputLayout.x + targetCenter.x * outputLayout.scale, y: outputLayout.y + targetCenter.y * outputLayout.scale };
+    const targetPoint = { x: outputLayout.x + targetCenter.x * outputLayout.scaleX, y: outputLayout.y + targetCenter.y * outputLayout.scaleY };
     if (progress >= outputFinalHoldStart) {
       const targetStyleValue = outputStyleFor(target);
       return {
@@ -1154,8 +1186,8 @@
     const progress = active ? phase.progress : 0;
     const travelAmount = easeInOut(clamp((progress - .08) / .42));
     const origin = { x: outputLayout.x, y: outputLayout.y };
-    const scaleX = outputLayout.scale;
-    const scaleY = outputLayout.scale;
+    const scaleX = outputLayout.scaleX;
+    const scaleY = outputLayout.scaleY;
     const stage = !active ? 'integrate' : progress < .22 ? 'release' : progress < .60 ? 'skeleton' : progress < .68 ? 'settlement' : progress < outputFinalHoldStart ? 'local-transformation' : 'output';
     motionRoot.dataset.integrateOutputStage = stage;
     motionRoot.dataset.integrateOutputHold = String(active && progress >= outputFinalHoldStart);
