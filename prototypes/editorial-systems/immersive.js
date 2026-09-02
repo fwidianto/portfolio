@@ -50,6 +50,10 @@
   const frameDuration = 1000 / 30;
   const seekMax = TOTAL - frameDuration;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const enforceOutputGates = params.get('validate-output') === '1' || params.get('validate-runtime') === '1';
+  const failOutputGate = (message) => {
+    if (enforceOutputGates) throw new Error(message);
+  };
 
   const palette = {
     navy: '#0e1a2e',
@@ -478,6 +482,7 @@
       element.setAttribute('stroke-linecap', 'round');
       element.setAttribute('stroke-linejoin', 'round');
     }
+    if (target.id.includes('distribution-ring-')) element.setAttribute('shape-rendering', 'geometricPrecision');
     if (target.tag === 'text') {
       const font = style.font || '';
       element.setAttribute('font-family', font.includes('Cormorant') ? 'Cormorant Garamond, Georgia, serif' : 'Inter, Arial, sans-serif');
@@ -489,7 +494,9 @@
       else if (style.class?.includes('metric-label')) element.setAttribute('letter-spacing', '.08em');
       else if (style.class?.includes('chart-label')) element.setAttribute('letter-spacing', '.04em');
       else if (style.class?.includes('panel-title')) element.setAttribute('letter-spacing', '.01em');
+      element.setAttribute('dominant-baseline', 'alphabetic');
       if (style.class?.includes('system-label')) element.setAttribute('text-anchor', /overview-detail|variance-eyebrow|trends-eyebrow/.test(target.id) ? 'end' : 'middle');
+      else element.setAttribute('text-anchor', 'start');
     }
     element.style.visibility = 'hidden';
     element.style.opacity = '0';
@@ -623,7 +630,7 @@
     const frame = outputTargetElements.get('output-v2-frame')?.element?.getBoundingClientRect();
     if (!frame || frame.left < safe.left - .5 || frame.top < safe.top - .5 || frame.right > safe.right + .5 || frame.bottom > safe.bottom + .5) pass = false;
     motionRoot.dataset.integrateOutputG5Viewport = pass ? 'PASS' : 'FAIL';
-    if (!pass) throw new Error('G5_VIEWPORT_CONTAINMENT_FAIL: Golden v2 extends outside the safe hero artwork area.');
+    if (!pass) failOutputGate('G5_VIEWPORT_CONTAINMENT_FAIL: Golden v2 extends outside the safe hero artwork area.');
   };
   const visibleTargetElement = (targetId) => Number(outputTargetElements.get(targetId)?.element.style.opacity || 0) > .01;
   const outputNodeVisibleForSource = (sourceId) => {
@@ -686,13 +693,13 @@
       ];
       const pass = outputLayerOrderPass && futureSources.every(outputLiveSourceVisible);
       motionRoot.dataset.integrateOutputLayerC1 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('OUTPUT_LAYER_C1_SOURCE_VISIBILITY_FAIL: future Integrate modules were masked after the Overview shell handoff.');
+      if (!pass) failOutputGate('OUTPUT_LAYER_C1_SOURCE_VISIBILITY_FAIL: future Integrate modules were masked after the Overview shell handoff.');
       outputLayeringGateState.C1 = true;
     }
     if (!outputLayeringGateState.C2 && elapsedMs >= 2200 && elapsedMs < 2580) {
       const pass = outputLiveSourceVisible('label-distribution') && (outputLiveSourceVisible('distribution-ring-base') || visibleTargetElement('output-v2-distribution-ring-base'));
       motionRoot.dataset.integrateOutputLayerC2 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('OUTPUT_LAYER_C2_DISTRIBUTION_CONTINUITY_FAIL: Distribution lost source visibility during travel or handoff.');
+      if (!pass) failOutputGate('OUTPUT_LAYER_C2_DISTRIBUTION_CONTINUITY_FAIL: Distribution lost source visibility during travel or handoff.');
       outputLayeringGateState.C2 = true;
     }
     if (!outputLayeringGateState.C3 && elapsedMs >= 2900 && elapsedMs < 3050) {
@@ -700,7 +707,7 @@
       const targetPoints = points.map((index) => `output-v2-performance-point-${Number(index)}`);
       const pass = outputLiveSourceVisible('label-performance') && outputLiveSourceVisible('performance-polyline') && points.every((index) => outputLiveSourceVisible(`performance-point-${index}`)) && !visibleTargetElement('output-v2-performance-line') && targetPoints.every((id) => !visibleTargetElement(id));
       motionRoot.dataset.integrateOutputLayerC3 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('OUTPUT_LAYER_C3_PERFORMANCE_SOURCE_FAIL: Performance source graph was hidden or duplicated before C3.');
+      if (!pass) failOutputGate('OUTPUT_LAYER_C3_PERFORMANCE_SOURCE_FAIL: Performance source graph was hidden or duplicated before C3.');
       outputLayeringGateState.C3 = true;
     }
     if (!outputLayeringGateState.C3Handoff && elapsedMs >= 3830 && elapsedMs < 4000) {
@@ -710,14 +717,14 @@
       const targetPoints = [1, 2, 3, 4, 5, 6].some((index) => visibleTargetElement(`output-v2-performance-point-${index}`));
       const pass = !(sourceLine && targetLine) && !(sourcePoints && targetPoints);
       motionRoot.dataset.integrateOutputLayerC3Handoff = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('OUTPUT_LAYER_C3_DUPLICATE_GRAPH_FAIL: Performance source and target graphs remained simultaneously visible after handoff.');
+      if (!pass) failOutputGate('OUTPUT_LAYER_C3_DUPLICATE_GRAPH_FAIL: Performance source and target graphs remained simultaneously visible after handoff.');
       outputLayeringGateState.C3Handoff = true;
     }
     if (!outputLayeringGateState.C4 && elapsedMs >= 4400 && elapsedMs < 4600) {
       const sourceBars = ['01', '02', '03', '04'].every((index) => outputLiveSourceVisible(`trends-bar-${index}`));
       const pass = outputLiveSourceVisible('label-trends') && sourceBars && outputLiveSourceVisible('trends-bar-05');
       motionRoot.dataset.integrateOutputLayerC4 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('OUTPUT_LAYER_C4_TRENDS_SOURCE_FAIL: Trends source bars were hidden before C4.');
+      if (!pass) failOutputGate('OUTPUT_LAYER_C4_TRENDS_SOURCE_FAIL: Trends source bars were hidden before C4.');
       outputLayeringGateState.C4 = true;
     }
     if (!outputLayeringGateState.C6 && elapsedMs >= 6900 && elapsedMs < 7100) {
@@ -725,21 +732,21 @@
       const sourceDots = ['01', '02', '03', '04'].every((index) => outputLiveSourceVisible(`insights-dot-${index}`));
       const pass = outputLiveSourceVisible('label-insights') && sourceLines && sourceDots;
       motionRoot.dataset.integrateOutputLayerC6 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('OUTPUT_LAYER_C6_INSIGHTS_SOURCE_FAIL: Insights geometry was hidden before C6.');
+      if (!pass) failOutputGate('OUTPUT_LAYER_C6_INSIGHTS_SOURCE_FAIL: Insights geometry was hidden before C6.');
       outputLayeringGateState.C6 = true;
     }
     if (!outputGateState.G1 && elapsedMs >= 1650 && elapsedMs < 2000) {
       const label = persistentLabel('label-overview-system-detail');
       const pass = !!label && Number(integrateLabelElements.find(({ target }) => target.id === label.sourceId)?.label.style.opacity || 0) > .01 && visibleTargetElement('output-v2-panel-overview') && !visibleTargetElement('output-v2-panel-distribution');
       motionRoot.dataset.integrateOutputG1 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('G1_OVERVIEW_CONTINUITY_FAIL: Overview label/panel timing is not continuous.');
+      if (!pass) failOutputGate('G1_OVERVIEW_CONTINUITY_FAIL: Overview label/panel timing is not continuous.');
       outputGateState.G1 = true;
     }
     if (!outputGateState.G2 && elapsedMs >= 2500 && elapsedMs < 3050) {
       const legends = [...outputTargetElements.keys()].filter((id) => id.startsWith('output-v2-distribution-legend-'));
       const pass = visibleTargetElement('output-v2-distribution-ring-base') && visibleTargetElement('output-v2-distribution-ring-navy') && visibleTargetElement('output-v2-distribution-ring-sand') && legends.every((id) => !visibleTargetElement(id));
       motionRoot.dataset.integrateOutputG2 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('G2_DISTRIBUTION_ORDER_FAIL: Distribution legend appeared before the ring settled.');
+      if (!pass) failOutputGate('G2_DISTRIBUTION_ORDER_FAIL: Distribution legend appeared before the ring settled.');
       outputGateState.G2 = true;
     }
     if (!outputGateState.G3 && elapsedMs >= 3900 && elapsedMs < 4600) {
@@ -747,25 +754,25 @@
       const earlyExtra = elapsedMs < 3830 && [7, 8, 9, 10].some((index) => visibleTargetElement(`output-v2-performance-point-${index}`));
       const pass = existing && !earlyExtra && !visibleTargetElement('output-v2-performance-point-8') && !visibleTargetElement('output-v2-performance-point-9') && !visibleTargetElement('output-v2-performance-point-10');
       motionRoot.dataset.integrateOutputG3 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('G3_PERFORMANCE_EXPANSION_FAIL: Performance points were created before the established line or out of order.');
+      if (!pass) failOutputGate('G3_PERFORMANCE_EXPANSION_FAIL: Performance points were created before the established line or out of order.');
       outputGateState.G3 = true;
     }
     if (!outputGateState.G4 && elapsedMs >= 5570 && elapsedMs < 5800) {
       const pass = ['jan', 'apr', 'jul', 'oct'].every((slot) => visibleTargetElement(`output-v2-trends-bar-${slot}`)) && !JSON.stringify(outputManifest).match(/Q[1-5]/) && outputNodeVisibleForSource('trends-bar-04') && Number(outputSourceCarrierElements.get('trends-bar-05')?.element.style.opacity || 0) > .01;
       motionRoot.dataset.integrateOutputG4 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('G4_TRENDS_MERGE_FAIL: Trends does not show the exact four checkpoints and OCT merge.');
+      if (!pass) failOutputGate('G4_TRENDS_MERGE_FAIL: Trends does not show the exact four checkpoints and OCT merge.');
       outputGateState.G4 = true;
     }
     if (!outputGateState.G5 && elapsedMs >= 6350 && elapsedMs < 7100) {
       const pass = visibleTargetElement('output-v2-panel-variance') && visibleTargetElement('output-v2-variance-bar-base');
       motionRoot.dataset.integrateOutputG5 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('G5_VARIANCE_PROGRESS_FAIL: Variance did not resolve progressively from its source material.');
+      if (!pass) failOutputGate('G5_VARIANCE_PROGRESS_FAIL: Variance did not resolve progressively from its source material.');
       outputGateState.G5 = true;
     }
     if (!outputGateState.G6 && elapsedMs >= 8070 && elapsedMs < 8250) {
       const pass = visibleTargetElement('output-v2-insights-row-3') && outputNodeVisibleForSource('insights-line-04') && outputNodeVisibleForSource('insights-dot-04');
       motionRoot.dataset.integrateOutputG6 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('G6_INSIGHTS_CONSOLIDATION_FAIL: Insights row 3 or its fourth-source merge is not visible.');
+      if (!pass) failOutputGate('G6_INSIGHTS_CONSOLIDATION_FAIL: Insights row 3 or its fourth-source merge is not visible.');
       outputGateState.G6 = true;
     }
     if (!outputGateState.G7 && elapsedMs >= 9300 && elapsedMs < outputTransitionDuration) {
@@ -773,7 +780,7 @@
       const boxes = nodeIds.map((id) => outputTargetElements.get(id)?.element.getBoundingClientRect()).filter(Boolean);
       const pass = boxes.length === 5 && boxes.every((box) => Number(outputTargetElements.get(nodeIds[boxes.indexOf(box)])?.element.style.opacity || 0) > .01) && boxes.every((box, index) => index === 0 || box.left > boxes[index - 1].left);
       motionRoot.dataset.integrateOutputG7 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('G7_SYSTEM_ORDER_FAIL: System nodes are not resolving left-to-right.');
+      if (!pass) failOutputGate('G7_SYSTEM_ORDER_FAIL: System nodes are not resolving left-to-right.');
       outputGateState.G7 = true;
     }
     if (elapsedMs >= outputTransitionDuration) {
@@ -788,7 +795,7 @@
       const layeringGatesPassed = Object.values(outputLayeringGateState).every(Boolean);
       const pass = allTargetsVisible && noSources && priorGatesPassed && layeringGatesPassed && motionRoot.dataset.integrateOutputLayerOrder === 'PASS' && motionRoot.dataset.integrateOutputG5Viewport === 'PASS' && phase.progress >= outputFinalHoldStart;
       motionRoot.dataset.integrateOutputG8 = pass ? 'PASS' : 'FAIL';
-      if (!pass) throw new Error('G8_OUTPUT_HOLD_FAIL: Output v2 is not exact, source remnants remain, or the hold is not active.');
+      if (!pass) failOutputGate('G8_OUTPUT_HOLD_FAIL: Output v2 is not exact, source remnants remain, or the hold is not active.');
       const snapshot = JSON.stringify({
         shell: outputShellLayer.getAttribute('transform'),
         layer: outputTargetLayer.getAttribute('transform'),
@@ -797,7 +804,7 @@
       });
       const layoutBox = motionRoot.getBoundingClientRect();
       const holdLayoutSignature = `${innerWidth}x${innerHeight}|${layoutBox.width.toFixed(2)}x${layoutBox.height.toFixed(2)}|${outputTargetLayer.getAttribute('transform')}`;
-      if (outputHoldSnapshot && outputHoldSnapshot.layout === holdLayoutSignature && outputHoldSnapshot.snapshot !== snapshot) throw new Error('G8_OUTPUT_HOLD_FAIL: final Output changed during the frozen hold.');
+      if (outputHoldSnapshot && outputHoldSnapshot.layout === holdLayoutSignature && outputHoldSnapshot.snapshot !== snapshot) failOutputGate('G8_OUTPUT_HOLD_FAIL: final Output changed during the frozen hold.');
       outputHoldSnapshot = { layout: holdLayoutSignature, snapshot };
     } else {
       outputHoldSnapshot = null;
@@ -1067,6 +1074,8 @@
     const element = group('immersive-node');
     const shape = svgElement('path', 'immersive-node-shape');
     const detail = svgElement('path', 'immersive-node-detail');
+    shape.setAttribute('stroke-linecap', 'round');
+    shape.setAttribute('stroke-linejoin', 'round');
     element.dataset.liveNodeIndex = String(spec.index);
     element.dataset.integrateTarget = primaryTargetIdFor(spec.index) || '';
     element.append(shape, detail);
@@ -1221,6 +1230,7 @@
     const style = targetStyle(target);
     return style.fill === 'none' ? sourceColor : style.fill;
   };
+  const outlineTarget = (target) => ['arc', 'circle', 'polyline'].includes(target?.kind);
   const integrateCoreContactFor = (targetId, target, node) => {
     const owners = coreOwnersByTarget.get(targetId) || [];
     if (!owners.length) return targetCenter(target);
@@ -1284,14 +1294,22 @@
       const owners = coreOwnersByTarget.get(targetId) || [];
       const primary = corePrimaryIndex.get(targetId) === node.index;
       const opacity = primary ? 1 : 1 - easeInOut(clamp((progress - .72) / .12));
-      const fill = mixColor(sourceColorFor(node), targetFillFor(target, sourceColorFor(node)), resolveAmount);
+      const sourceFill = sourceColorFor(node);
+      const fill = outlineTarget(target)
+        ? sourceFill
+        : mixColor(sourceFill, targetFillFor(target, sourceFill), resolveAmount);
+      const fillOpacity = outlineTarget(target)
+        ? 1 - easeOut(clamp((progress - .46) / .22))
+        : 1;
+      const markRelease = 1 - easeOut(clamp((progress - .44) / .22));
       return {
         position,
         shape,
         fill,
+        fillOpacity,
         stroke: targetStyleValue.stroke,
         strokeWidth: lerp(1.05, targetStyleValue.strokeWidth, resolveAmount),
-        detail: opacity,
+        detail: opacity * markRelease,
         opacity,
         build: resolveAmount,
         targetId,
@@ -1310,15 +1328,24 @@
     const shape = progress < .84 ? sourceShape : interpolatePoints(sourceShape, targetShape, morphAmount);
     const sourceFill = sourceColorFor(node);
     const targetFill = targetFillFor(target, sourceFill);
-    const fill = targetStyleValue.fill === 'none' && morphAmount >= 1 ? 'none' : mixColor(sourceFill, targetFill, morphAmount);
+    const fill = outlineTarget(target)
+      ? sourceFill
+      : targetStyleValue.fill === 'none' && morphAmount >= 1
+        ? 'none'
+        : mixColor(sourceFill, targetFill, morphAmount);
+    const fillOpacity = outlineTarget(target)
+      ? 1 - easeOut(clamp((progress - .68) / .18))
+      : 1;
     const opacity = mergeOnly ? 1 - easeInOut(clamp((progress - .75) / .12)) : 1;
+    const markRelease = 1 - easeOut(clamp((progress - .34) / .28));
     return {
       position,
       shape,
       fill,
+      fillOpacity,
       stroke: morphAmount >= 1 ? targetStyleValue.stroke : color('navy'),
       strokeWidth: lerp(1.05, targetStyleValue.strokeWidth, morphAmount),
-      detail: mergeOnly ? opacity : lerp(1, 0, morphAmount),
+      detail: (mergeOnly ? opacity : lerp(1, 0, morphAmount)) * markRelease,
       opacity,
       build: departAmount,
       targetId,
@@ -1340,7 +1367,7 @@
     const travelStart = travelAction?.windowMs?.[0] ?? 0;
     const travelEnd = Math.max(travelStart + 1, travelAction?.windowMs?.[1] ?? outputTransitionDuration);
     const targetPoint = outputCanvasPointForTarget(target);
-    const travelAmount = easeInOut(clamp((elapsedMs - travelStart) / Math.max(1, travelEnd - travelStart)));
+    const travelAmount = easeOut(clamp((elapsedMs - travelStart) / Math.max(1, travelEnd - travelStart)));
     const position = pointLerp(settled.position, targetPoint, travelAmount);
     const targetAction = targetActions[targetActions.length - 1] || travelAction;
     const targetWindow = targetAction ? { start: targetAction.windowMs[0], end: targetAction.windowMs[1], action: targetAction } : outputTargetWindowFor(targetId);
@@ -1355,18 +1382,30 @@
     const lastAction = sourceActions[sourceActions.length - 1];
     const fadeEnd = Math.max(travelEnd, lastAction?.windowMs?.[1] ?? outputTransitionDuration);
     const fade = elapsedMs < fadeEnd ? 1 : 1 - easeInOut(clamp((elapsedMs - fadeEnd) / 120));
+    const settledFill = settled.fill == null ? sourceColorFor(node) : settled.fill;
+    const settledFillOpacity = settled.fillOpacity == null ? 1 : settled.fillOpacity;
     const sourceFill = sourceColorFor(node);
     const targetStyleValue = outputStyleFor(target);
     const targetFill = targetStyleValue.fill === 'none' ? sourceFill : targetStyleValue.fill;
     const fillAmount = easeInOut(clamp((elapsedMs - shapeStart) / Math.max(1, shapeEnd - shapeStart)));
-    const fill = targetFill === 'none' ? sourceFill : /^#[0-9a-f]{6}$/i.test(targetFill) ? (fillAmount >= 1 ? targetFill : mixColor(sourceFill, targetFill, fillAmount)) : (fillAmount >= 1 ? targetFill : sourceFill);
-    if (elapsedMs >= outputTransitionDuration) return { position: targetPoint, shape: outputTargetShapePoints(target), fill: targetStyleValue.fill, stroke: targetStyleValue.stroke || color('navy'), strokeWidth: targetStyleValue.strokeWidth || 1.05, detail: 0, opacity: 0, build: 1, targetId };
+    const fill = targetFill === 'none'
+      ? settledFill
+      : /^#[0-9a-f]{6}$/i.test(settledFill) && /^#[0-9a-f]{6}$/i.test(targetFill)
+        ? (fillAmount >= 1 ? targetFill : mixColor(settledFill, targetFill, fillAmount))
+        : (fillAmount >= 1 ? targetFill : settledFill);
+    const fillOpacity = targetStyleValue.fill === 'none'
+      ? lerp(settledFillOpacity, 0, fillAmount)
+      : lerp(settledFillOpacity, 1, fillAmount);
+    const stroke = fillAmount >= 1 ? targetStyleValue.stroke || color('navy') : settled.stroke || color('navy');
+    const strokeWidth = lerp(settled.strokeWidth || 1.05, targetStyleValue.strokeWidth || 1.05, fillAmount);
+    if (elapsedMs >= outputTransitionDuration) return { position: targetPoint, shape: outputTargetShapePoints(target), fill: targetStyleValue.fill, fillOpacity, stroke: targetStyleValue.stroke || color('navy'), strokeWidth: targetStyleValue.strokeWidth || 1.05, detail: 0, opacity: 0, build: 1, targetId };
     return {
       position,
       shape,
       fill,
-      stroke: targetStyleValue.stroke || color('navy'),
-      strokeWidth: lerp(settled.strokeWidth || 1.05, targetStyleValue.strokeWidth || 1.05, shapeAmount),
+      fillOpacity,
+      stroke,
+      strokeWidth,
       detail: (settled.detail || 0) * fade,
       opacity: (settled.opacity == null ? 1 : settled.opacity) * fade,
       build: travelAmount,
@@ -1376,21 +1415,21 @@
   const poseFor = (node, phase) => {
     if (phase.index === 0) return { position: node.scatter, shape: circlePoints(2.5), fill: color(node.sourceColor), stroke: color(node.sourceColor), detail: 0, build: 0 };
     if (phase.index === 1) {
-      const amount = easeInOut(phase.progress);
+      const amount = easeOut(clamp(phase.progress / .86));
       return { position: { x: lerp(node.scatter.x, node.attract.x, amount), y: lerp(node.scatter.y, node.attract.y, amount) }, shape: circlePoints(lerp(2.5, 3, amount)), fill: color(node.sourceColor), stroke: color(node.sourceColor), detail: 0, build: 0 };
     }
     if (phase.index === 2) {
-      const amount = easeInOut(phase.progress);
+      const amount = easeOut(clamp(phase.progress / .86));
       return { position: { x: lerp(node.attract.x, node.align.x, amount), y: lerp(node.attract.y, node.align.y, amount) }, shape: interpolatePoints(circlePoints(3), roundedRectPoints(7, 7, 1), amount), fill: color(node.sourceColor), stroke: color(node.sourceColor), detail: 0, build: 0 };
     }
     if (phase.index === 3 || phase.index === 4) {
-      const amount = phase.index === 3 ? easeInOut(phase.progress) : 1;
+      const amount = phase.index === 3 ? easeOut(clamp(phase.progress / .88)) : 1;
       return { position: { x: lerp(node.align.x, node.cluster.x, amount), y: lerp(node.align.y, node.cluster.y, amount) }, shape: interpolatePoints(roundedRectPoints(7, 7, 1), roundedRectPoints(9, 9, 1), amount), fill: color(node.sourceColor), stroke: color(node.sourceColor), detail: 0, build: 0 };
     }
     if (phase.index === 5) {
       const rowStarts = [.04, .17, .30, .43, .56, .68];
       const row = node.structure.row;
-      const build = easeInOut(clamp((phase.progress - rowStarts[row]) / .24));
+      const build = easeOut(clamp((phase.progress - rowStarts[row]) / .24));
       return {
         position: { x: lerp(node.cluster.x, node.structure.x, build), y: lerp(node.cluster.y, node.structure.y, build) },
         shape: interpolatePoints(roundedRectPoints(9, 9, 1), shapePoints(node.structure), build),
@@ -1431,13 +1470,22 @@
       const style = targetStyle(target);
       const sourceFill = sourceColorFor(node);
       const targetFill = targetFillFor(target, sourceFill);
-      const fill = style.fill === 'none' && morphAmount >= 1 ? 'none' : mixColor(sourceFill, targetFill, morphAmount);
+      const fill = outlineTarget(target)
+        ? sourceFill
+        : style.fill === 'none' && morphAmount >= 1
+          ? 'none'
+          : mixColor(sourceFill, targetFill, morphAmount);
+      const fillOpacity = outlineTarget(target)
+        ? 1 - easeOut(clamp((phase.progress - .82) / .14))
+        : 1;
       const opacity = localRevealAmount;
       path.setAttribute('transform', `translate(${position.x.toFixed(2)} ${position.y.toFixed(2)})`);
       path.setAttribute('d', pointsToPath(shape));
       path.setAttribute('fill', fill);
+      path.setAttribute('fill-opacity', String(fillOpacity));
       path.setAttribute('stroke', morphAmount >= 1 ? style.stroke : color('navy'));
       path.setAttribute('stroke-width', String(lerp(1.05, style.strokeWidth, morphAmount)));
+      path.style.fillOpacity = String(fillOpacity);
       path.style.opacity = String(opacity);
       path.style.visibility = opacity > 0 ? 'visible' : 'hidden';
     });
@@ -1460,6 +1508,8 @@
       label.setAttribute('font-size', String(runtimeSize(section ? 11 : 8, 'y')));
       label.setAttribute('font-weight', '700');
       label.setAttribute('letter-spacing', section ? '.17em' : '.15em');
+      label.setAttribute('dominant-baseline', 'alphabetic');
+      label.setAttribute('text-anchor', 'start');
       const opacity = easeOut(clamp((phase.progress - .86) / .09));
       label.style.opacity = String(opacity);
       label.style.visibility = opacity > 0 ? 'visible' : 'hidden';
@@ -1478,22 +1528,38 @@
       const sourcePoint = targetCenter(sourceObject);
       const targetPoint = outputCanvasPointForTarget(target);
       const travelEnd = mapping.settleWindowMs[1];
-      const amount = easeInOut(clamp((elapsedMs - mapping.travelWindowMs[0]) / Math.max(1, travelEnd - mapping.travelWindowMs[0])));
+      const amount = easeOut(clamp((elapsedMs - mapping.travelWindowMs[0]) / Math.max(1, travelEnd - mapping.travelWindowMs[0])));
       const position = pointLerp(sourcePoint, targetPoint, amount);
       const style = target.style || {};
       const font = style.font || '';
-      const fontSize = Number(font.match(/(\d+(?:\.\d+)?)px/)?.[1] || 8) * outputLayout.scaleY;
-      const fontWeight = font.match(/\b(400|500|600|700)\b/)?.[1] || '500';
+      const targetFontSize = Number(font.match(/(\d+(?:\.\d+)?)px/)?.[1] || 8);
+      const targetFontWeight = Number(font.match(/\b(400|500|600|700)\b/)?.[1] || 500);
+      const sourceIsSection = entry.target.className?.includes('section-label');
+      const styleWindow = mapping.textStyleTransformation?.windowMs || mapping.settleWindowMs;
+      const styleAmount = easeOut(clamp((elapsedMs - styleWindow[0]) / Math.max(1, styleWindow[1] - styleWindow[0])));
+      const fontSize = lerp(sourceIsSection ? 11 : 8, targetFontSize, styleAmount) * outputLayout.scaleY;
+      const fontWeight = String(Math.round(lerp(700, targetFontWeight, styleAmount) / 10) * 10);
+      const sourceLetterSpacing = sourceIsSection ? .17 : .15;
+      const targetLetterSpacing = style.class?.includes('system-label') ? .1 : .01;
+      const letterSpacing = lerp(sourceLetterSpacing, targetLetterSpacing, styleAmount);
+      const sourceFill = sourceIsSection ? targetColor('navy') : targetColor('slate');
+      const targetFill = outputColor(style.fill || 'navy');
       const targetText = target.text || entry.target.text || '';
       entry.label.dataset.outputTargetId = mapping.targetId;
       entry.label.setAttribute('x', position.x.toFixed(2));
       entry.label.setAttribute('y', position.y.toFixed(2));
-      entry.label.setAttribute('fill', outputColor(style.fill || 'navy'));
+      entry.label.setAttribute('fill', /^#[0-9a-f]{6}$/i.test(sourceFill) && /^#[0-9a-f]{6}$/i.test(targetFill) ? mixColor(sourceFill, targetFill, styleAmount) : targetFill);
       entry.label.setAttribute('font-family', font.includes('Cormorant') ? 'Cormorant Garamond, Georgia, serif' : 'Inter, ui-sans-serif, system-ui, sans-serif');
       entry.label.setAttribute('font-size', String(fontSize));
       entry.label.setAttribute('font-weight', fontWeight);
-      entry.label.setAttribute('letter-spacing', style.class?.includes('system-label') ? '.1em' : '.01em');
-      entry.label.textContent = elapsedMs >= mapping.settleWindowMs[0] ? targetText : entry.target.text;
+      entry.label.setAttribute('letter-spacing', `${letterSpacing.toFixed(3)}em`);
+      entry.label.setAttribute('dominant-baseline', 'alphabetic');
+      if (style.class?.includes('system-label')) {
+        entry.label.setAttribute('text-anchor', /overview-detail|variance-eyebrow|trends-eyebrow/.test(target.id) ? 'end' : 'middle');
+      } else {
+        entry.label.setAttribute('text-anchor', 'start');
+      }
+      entry.label.textContent = styleAmount >= 1 ? targetText : entry.target.text;
       entry.label.style.opacity = '1';
       entry.label.style.visibility = 'visible';
     });
@@ -1514,7 +1580,7 @@
       const source = targetFor(sourceId);
       const sourcePoint = outputSourceAnchor(sourceId, poses);
       const targetPoint = outputCanvasPointForTarget(target);
-      const amount = easeInOut(clamp((elapsedMs - travelAction.windowMs[0]) / Math.max(1, mergeAction.windowMs[1] - travelAction.windowMs[0])));
+      const amount = easeOut(clamp((elapsedMs - travelAction.windowMs[0]) / Math.max(1, mergeAction.windowMs[1] - travelAction.windowMs[0])));
       const position = pointLerp(sourcePoint, targetPoint, amount);
       const fade = 1 - easeInOut(clamp((elapsedMs - mergeAction.windowMs[0]) / Math.max(1, mergeAction.windowMs[1] - mergeAction.windowMs[0])));
       const sourceStyle = targetStyle(source);
@@ -1586,9 +1652,12 @@
       node.element.style.visibility = pose.opacity === 0 ? 'hidden' : 'visible';
       node.shape.setAttribute('d', pointsToPath(pose.shape));
       node.shape.setAttribute('fill', pose.fill);
+      const fillOpacity = pose.fillOpacity == null ? 1 : pose.fillOpacity;
+      node.shape.setAttribute('fill-opacity', String(fillOpacity));
       node.shape.setAttribute('stroke', pose.stroke);
       node.shape.setAttribute('stroke-width', String(pose.strokeWidth || 1.05));
       node.shape.style.fill = pose.fill;
+      node.shape.style.fillOpacity = String(fillOpacity);
       node.shape.style.stroke = pose.stroke;
       node.shape.style.strokeWidth = String(pose.strokeWidth || 1.05);
       node.detail.setAttribute('d', pointsToPath([
