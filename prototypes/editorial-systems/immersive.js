@@ -1279,25 +1279,19 @@
     if (isCore) {
       const contactPoint = integrateCoreContactFor(targetId, target, node);
       const approachAmount = easeInOut(clamp((progress - .02) / .36));
-      const contactAmount = easeOut(clamp((progress - .38) / .14));
       const pressAmount = easeInOut(clamp((progress - .50) / .16));
-      const resolveAmount = easeOut(clamp((progress - .62) / .12));
       const approachPoint = pointLerp(sourcePoint, contactPoint, approachAmount);
       const pressedPoint = pointLerp(approachPoint, targetPoint, pressAmount);
       const position = progress < .50 ? approachPoint : pressedPoint;
-      const contactShape = roundedRectPoints(runtimeSize(40), runtimeSize(36, 'y'), runtimeSize(3, 'x'));
-      const shape = progress < .42
-        ? sourceShape
-        : progress < .62
-          ? interpolatePoints(sourceShape, contactShape, contactAmount)
-          : interpolatePoints(contactShape, targetShape, resolveAmount);
+      const shapeAmount = easeInOut(clamp((progress - .46) / .28));
+      const shape = interpolatePoints(sourceShape, targetShape, shapeAmount);
       const owners = coreOwnersByTarget.get(targetId) || [];
       const primary = corePrimaryIndex.get(targetId) === node.index;
       const opacity = primary ? 1 : 1 - easeInOut(clamp((progress - .72) / .12));
       const sourceFill = sourceColorFor(node);
       const fill = outlineTarget(target)
         ? sourceFill
-        : mixColor(sourceFill, targetFillFor(target, sourceFill), resolveAmount);
+        : mixColor(sourceFill, targetFillFor(target, sourceFill), shapeAmount);
       const fillOpacity = outlineTarget(target)
         ? 1 - easeOut(clamp((progress - .46) / .22))
         : 1;
@@ -1308,10 +1302,10 @@
         fill,
         fillOpacity,
         stroke: targetStyleValue.stroke,
-        strokeWidth: lerp(1.05, targetStyleValue.strokeWidth, resolveAmount),
+        strokeWidth: lerp(1.05, targetStyleValue.strokeWidth, shapeAmount),
         detail: opacity * markRelease,
         opacity,
-        build: resolveAmount,
+        build: shapeAmount,
         targetId,
         primary,
         owners
