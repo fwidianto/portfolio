@@ -1439,8 +1439,9 @@
     return integrateOutputNodePose(node, phase.progress);
   };
   const renderIntegrateSplits = (phase) => {
-    const active = phase.index === 6;
-    integrateSplitLayer.style.opacity = active ? '1' : '0';
+    const active = phase.index === 6 || phase.index === 7;
+    const outputRelease = phase.index === 7 ? easeOut(clamp((phase.progress * outputStageDuration) / 600)) : 0;
+    integrateSplitLayer.style.opacity = active ? String(1 - outputRelease) : '0';
     integrateSplitElements.forEach(({ path, sourceIndex, target }) => {
       if (!active) {
         path.style.opacity = '0';
@@ -1449,10 +1450,11 @@
       }
       const node = nodeSpecs[sourceIndex];
       const primaryTarget = targetFor(primaryTargetIdFor(sourceIndex)) || node.integrate;
-      const primaryPose = integrateNodePose(node, phase.progress);
+      const integrateProgress = phase.index === 6 ? phase.progress : 1;
+      const primaryPose = integrateNodePose(node, integrateProgress);
       const targetPoint = targetCenter(target);
-      const localRevealAmount = easeOut(clamp((phase.progress - .84) / .04));
-      const morphAmount = easeInOut(clamp((phase.progress - .84) / .11));
+      const localRevealAmount = phase.index === 7 ? 1 : easeOut(clamp((phase.progress - .84) / .04));
+      const morphAmount = phase.index === 7 ? 1 : easeInOut(clamp((phase.progress - .84) / .11));
       const primaryPoint = primaryPose.position;
       const splitPoint = targetCenter(primaryTarget);
       const position = phase.progress < .84
@@ -1470,9 +1472,9 @@
           ? 'none'
           : mixColor(sourceFill, targetFill, morphAmount);
       const fillOpacity = outlineTarget(target)
-        ? 1 - easeOut(clamp((phase.progress - .82) / .14))
+        ? phase.index === 7 ? 0 : 1 - easeOut(clamp((phase.progress - .82) / .14))
         : 1;
-      const opacity = localRevealAmount;
+      const opacity = localRevealAmount * (1 - outputRelease);
       path.setAttribute('transform', `translate(${position.x.toFixed(2)} ${position.y.toFixed(2)})`);
       path.setAttribute('d', pointsToPath(shape));
       path.setAttribute('fill', fill);
@@ -1485,7 +1487,8 @@
     });
   };
   const renderIntegrateLabels = (phase) => {
-    const active = phase.index === 6;
+    const active = phase.index === 6 || phase.index === 7;
+    const outputRelease = phase.index === 7 ? easeOut(clamp((phase.progress * outputStageDuration) / 600)) : 0;
     integrateLabelLayer.style.opacity = active ? '1' : '0';
     integrateLabelElements.forEach(({ label, target }) => {
       if (!active) {
@@ -1504,7 +1507,7 @@
       label.setAttribute('letter-spacing', section ? '.17em' : '.15em');
       label.setAttribute('dominant-baseline', 'alphabetic');
       label.setAttribute('text-anchor', 'start');
-      const opacity = easeOut(clamp((phase.progress - .86) / .09));
+      const opacity = phase.index === 7 ? 1 - outputRelease : easeOut(clamp((phase.progress - .86) / .09));
       label.style.opacity = String(opacity);
       label.style.visibility = opacity > 0 ? 'visible' : 'hidden';
     });
@@ -1674,7 +1677,17 @@
       const from = nodePosition(edge.from, poses[edge.from].position);
       const to = nodePosition(edge.to, poses[edge.to].position);
       let points = [[from.x, from.y], [to.x, to.y]];
-      let opacity = phase.index === 0 ? .05 : phase.index === 1 ? .16 : phase.index === 2 ? .28 : phase.index <= 4 ? .58 : .20;
+      let opacity = phase.index === 0
+        ? .05
+        : phase.index === 1
+          ? .16
+          : phase.index === 2
+            ? .28
+            : phase.index === 3
+              ? lerp(.28, .58, easeOut(clamp(phase.progress / .42)))
+              : phase.index <= 4
+                ? .58
+                : .20;
       if (edge.crossGroup) {
         // Cross-group traces explain the loose network, but release before the
         // aligned rows settle. This leaves one consistent visual language for
@@ -1696,32 +1709,56 @@
           const sourcePoints = [from, to];
           const amount = easeOut(clamp((phase.progress - .56) / .18));
           points = sourcePoints.map((point, index) => [lerp(point.x, targetPoints[index].x, amount), lerp(point.y, targetPoints[index].y, amount)]);
-          opacity = amount * .72;
+          opacity = phase.progress < .56 ? .22 : lerp(.22, .72, amount);
           const style = targetStyle(target);
-          edge.path.setAttribute('stroke', style.stroke);
-          edge.path.setAttribute('stroke-width', String(style.strokeWidth));
-          edge.path.style.stroke = style.stroke;
-          edge.path.style.strokeWidth = String(style.strokeWidth);
+          const styleAmount = easeOut(clamp((phase.progress - .56) / .18));
+          edge.path.setAttribute('stroke', styleAmount > 0 ? style.stroke : palette.grid);
+          edge.path.setAttribute('stroke-width', String(styleAmount > 0 ? style.strokeWidth : 1.05));
+          edge.path.style.stroke = styleAmount > 0 ? style.stroke : '';
+          edge.path.style.strokeWidth = styleAmount > 0 ? String(style.strokeWidth) : '';
         } else {
           const coreish = (role) => role === 'core' || role === 'overview';
-          opacity = coreish(nodeSpecs[edge.from].role) && coreish(nodeSpecs[edge.to].role) ? .08 : 0;
+          const targetOpacity = coreish(nodeSpecs[edge.from].role) && coreish(nodeSpecs[edge.to].role) ? .08 : 0;
+          opacity = lerp(.22, targetOpacity, easeOut(clamp(phase.progress / .32)));
         }
       } else if (phase.index === 7) {
         const supportSourceId = outputNetworkSourceByIndex.get(edgeIndex);
         const supportActions = supportSourceId ? outputActionsForSource(supportSourceId) : [];
         const supportEnd = supportActions.length ? Math.max(...supportActions.map((action) => action.windowMs[1])) : 0;
-        opacity = supportEnd && outputElapsedMs < supportEnd
+        const outputHandoffAmount = easeOut(clamp(outputElapsedMs / 600));
+        const outputOpacity = supportEnd && outputElapsedMs < supportEnd
           ? .24
           : supportEnd
             ? .24 * (1 - easeInOut(clamp((outputElapsedMs - supportEnd) / 120)))
             : 0;
+        const integrateOpacity = edge.targetId
+          ? .72
+          : ((nodeSpecs[edge.from].role === 'core' || nodeSpecs[edge.from].role === 'overview')
+            && (nodeSpecs[edge.to].role === 'core' || nodeSpecs[edge.to].role === 'overview') ? .08 : 0);
+        opacity = lerp(integrateOpacity, outputOpacity, outputHandoffAmount);
+        const outputPoints = [from, to];
+        const integratePoints = edge.targetId
+          ? targetReferenceEndpoints(targetFor(edge.targetId)).map(([x, y]) => runtimePoint(x, y))
+          : outputPoints;
+        points = integratePoints.map((point, index) => [
+          lerp(point.x, outputPoints[index].x, outputHandoffAmount),
+          lerp(point.y, outputPoints[index].y, outputHandoffAmount)
+        ]);
+        if (edge.targetId) {
+          const integrateStyle = targetStyle(targetFor(edge.targetId));
+          const outputStyleAmount = easeOut(clamp(outputElapsedMs / 600));
+          edge.path.setAttribute('stroke', outputStyleAmount >= 1 ? palette.grid : integrateStyle.stroke);
+          edge.path.setAttribute('stroke-width', String(lerp(integrateStyle.strokeWidth, 1.05, outputStyleAmount)));
+          edge.path.style.stroke = outputStyleAmount >= 1 ? '' : integrateStyle.stroke;
+          edge.path.style.strokeWidth = outputStyleAmount >= 1 ? '' : String(lerp(integrateStyle.strokeWidth, 1.05, outputStyleAmount));
+        }
       }
       // Phase-specific rail styling above must never re-enable the non-local
       // network edges. After Align, only local/support geometry should remain.
       if (edge.crossGroup && phase.index >= 2) opacity = 0;
       edge.path.setAttribute('d', linePath(points));
       edge.path.style.opacity = String(opacity);
-      if (!(phase.index === 6 && edge.targetId)) {
+      if (!(phase.index === 6 && edge.targetId) && !(phase.index === 7 && edge.targetId && outputElapsedMs < 600)) {
         edge.path.setAttribute('stroke', phase.index >= 5 ? palette.grid : palette.slate);
         edge.path.style.stroke = '';
         edge.path.style.strokeWidth = '';
@@ -1731,30 +1768,55 @@
     // Keep the line path owned by the six performance nodes. At the Structure
     // -> Integrate seam they remain the visible source, and the path follows
     // their live positions until they have reached the Integrate chart.
-    const lineSourceIndices = phase.index >= 6 ? integratePerformanceNodeIndices : performanceNodeIndices;
-    const sourceLine = lineSourceIndices.map((index) => [poses[index].position.x, poses[index].position.y]);
+    const lineSourceIndices = performanceNodeIndices;
+    const lineHandoffAmount = phase.index === 6
+      ? easeOut(clamp(phase.progress / .32))
+      : phase.index >= 7
+        ? 1
+        : 0;
+    const sourceLine = lineSourceIndices.map((index, lineIndex) => {
+      const from = poses[index].position;
+      const targetIndex = integratePerformanceNodeIndices[lineIndex] ?? index;
+      const to = poses[targetIndex]?.position || from;
+      const point = phase.index >= 6 ? pointLerp(from, to, lineHandoffAmount) : from;
+      return [point.x, point.y];
+    });
     const outputLine = outputCanvasPathPointsForTarget(outputTargetObjects.get('output-v2-performance-line'), sourceLine.length).map(({ x, y }) => [x, y]);
     const lineTravelAmount = phase.index >= 7 ? easeInOut(clamp((outputElapsedMs - 3050) / 600)) : 0;
     const linePoints = phase.index >= 7
       ? sourceLine.map((point, index) => [lerp(point[0], outputLine[index][0], lineTravelAmount), lerp(point[1], outputLine[index][1], lineTravelAmount)])
       : sourceLine;
+    const outputLineHandoffAmount = phase.index === 7 ? easeOut(clamp(outputElapsedMs / 600)) : 0;
     const lineOpacity = phase.index < 3
       ? 0
       : phase.index === 3
         ? 0
-        : phase.index === 4 || phase.index === 5
-          ? .42
-          : phase.index === 6
-            ? lerp(0, .86, easeInOut(clamp((phase.progress - .84) / .11)))
-            : 1 - easeInOut(clamp((outputElapsedMs - 3650) / 180));
+        : phase.index === 4
+          ? .42 * easeOut(clamp(phase.progress / .35))
+          : phase.index === 5
+            ? .42
+            : phase.index === 6
+              ? lerp(.42, .86, easeInOut(clamp((phase.progress - .56) / .28)))
+              : lerp(.86, 1, outputLineHandoffAmount) * (1 - easeInOut(clamp((outputElapsedMs - 3650) / 180)));
     const visibleLine = linePoints;
     lineTrack.path.setAttribute('d', linePath(visibleLine));
     lineTrack.path.style.opacity = String(lineOpacity);
-    const lineStyle = phase.index === 6 ? targetStyle(integratePerformancePolyline) : { stroke: palette.navy, strokeWidth: 1.5 };
+    const integrateLineStyle = targetStyle(integratePerformancePolyline);
+    const lineStyleAmount = phase.index === 6
+      ? easeOut(clamp((phase.progress - .56) / .28))
+      : phase.index === 7
+        ? outputLineHandoffAmount
+        : 0;
+    const lineStyle = phase.index === 6
+      ? { stroke: palette.navy, strokeWidth: lerp(1.5, integrateLineStyle.strokeWidth, lineStyleAmount) }
+      : phase.index === 7
+        ? { stroke: palette.navy, strokeWidth: lerp(integrateLineStyle.strokeWidth, 1.5, lineStyleAmount) }
+        : { stroke: palette.navy, strokeWidth: 1.5 };
     lineTrack.path.setAttribute('stroke', lineStyle.stroke);
     lineTrack.path.setAttribute('stroke-width', String(lineStyle.strokeWidth));
-    lineTrack.path.style.stroke = phase.index === 6 ? lineStyle.stroke : '';
-    lineTrack.path.style.strokeWidth = phase.index === 6 ? String(lineStyle.strokeWidth) : '';
+    const preserveOutputLineStyle = phase.index === 7 && outputLineHandoffAmount < 1;
+    lineTrack.path.style.stroke = phase.index === 6 || preserveOutputLineStyle ? lineStyle.stroke : '';
+    lineTrack.path.style.strokeWidth = phase.index === 6 || preserveOutputLineStyle ? String(lineStyle.strokeWidth) : '';
 
     insightTracks.forEach((track, index) => {
       const target = track.integrate;
