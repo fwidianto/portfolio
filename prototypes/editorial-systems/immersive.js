@@ -204,6 +204,9 @@
   const outputTargetObjects = new Map(outputManifest.objects.map((object) => [object.id, object]));
   const settledRuntimeSourceObjects = new Map(settledRuntimeBridge.sourceObjects.map((object) => [object.id, object]));
   const outputSourceObjects = new Map(integrateOutputBridge.sourceObjects.map((object) => [object.id, { ...object, runtime: settledRuntimeSourceObjects.get(object.runtimeSourceId)?.runtime }]));
+  const outputNetworkSourceByIndex = new Map([...outputSourceObjects.entries()]
+    .filter(([, source]) => source.runtime?.family === 'networkElements')
+    .map(([sourceId, source]) => [source.runtime.index, sourceId]));
   const outputTargetOwners = new Map(integrateOutputBridge.targetObjects.map((object) => [object.id, object]));
   const targetGeometryKinds = new Set(['tile', 'bar', 'circle', 'arc', 'point', 'dot', 'metric', 'line', 'hairline', 'rail', 'polyline']);
   const bridgeNodeFor = (index) => integrateBridge.liveNodes.find((node) => node.index === index) || null;
@@ -266,13 +269,21 @@
   const nodeLayer = group('immersive-node-layer');
   const detailLayer = group('immersive-detail-layer');
   const labelLayer = group('immersive-label-layer');
+  const outputShellLayer = group('immersive-output-shell-layer');
   const outputSourceCarrierLayer = group('immersive-output-source-carrier-layer');
-  const outputTargetLayer = group('immersive-output-target-layer');
+  const outputTargetLayer = group('immersive-output-detail-layer');
+  const outputShellTargetIds = new Set(['output-v2-frame', 'output-v2-panel-overview', 'output-v2-panel-distribution', 'output-v2-panel-performance', 'output-v2-panel-trends', 'output-v2-panel-variance', 'output-v2-panel-insights']);
   integrateSplitLayer.style.opacity = '0';
   integrateLabelLayer.style.opacity = '0';
+  outputShellLayer.style.opacity = '0';
   outputSourceCarrierLayer.style.opacity = '0';
   outputTargetLayer.style.opacity = '0';
-  canvas.append(frameLayer, boundaryLayer, linkLayer, lineLayer, nodeLayer, detailLayer, integrateSplitLayer, integrateLabelLayer, labelLayer, outputSourceCarrierLayer, outputTargetLayer);
+  canvas.append(frameLayer, boundaryLayer, linkLayer, outputShellLayer, lineLayer, nodeLayer, detailLayer, integrateSplitLayer, integrateLabelLayer, labelLayer, outputSourceCarrierLayer, outputTargetLayer);
+  const outputLayerOrderPass = [
+    [outputShellLayer, lineLayer], [outputShellLayer, nodeLayer], [outputShellLayer, detailLayer],
+    [outputShellLayer, integrateLabelLayer], [outputShellLayer, outputSourceCarrierLayer], [outputSourceCarrierLayer, outputTargetLayer]
+  ].every(([lower, higher]) => Boolean(lower.compareDocumentPosition(higher) & Node.DOCUMENT_POSITION_FOLLOWING));
+  if (!outputLayerOrderPass) throw new Error('OUTPUT_LAYER_ORDER_FAIL: shell, source, and detail layers are not ordered deterministically.');
   hero.prepend(canvas);
 
   const referenceFrame = integrateManifest.authority.referenceFrame || { left: 548, top: 34, width: 1000, height: 720 };
@@ -345,7 +356,9 @@
   };
   const outputLayerTransform = () => {
     refreshOutputLayout();
-    outputTargetLayer.setAttribute('transform', `translate(${outputLayout.x.toFixed(2)} ${outputLayout.y.toFixed(2)}) scale(${outputLayout.scaleX.toFixed(5)} ${outputLayout.scaleY.toFixed(5)})`);
+    const transform = `translate(${outputLayout.x.toFixed(2)} ${outputLayout.y.toFixed(2)}) scale(${outputLayout.scaleX.toFixed(5)} ${outputLayout.scaleY.toFixed(5)})`;
+    outputShellLayer.setAttribute('transform', transform);
+    outputTargetLayer.setAttribute('transform', transform);
   };
   let lastRenderedElapsed = 0;
   let rerenderAfterLayout = null;
@@ -481,7 +494,7 @@
     element.style.visibility = 'hidden';
     element.style.opacity = '0';
     wrapper.append(element);
-    outputTargetLayer.append(wrapper);
+    (outputShellTargetIds.has(target.id) ? outputShellLayer : outputTargetLayer).append(wrapper);
     return { target, wrapper, element };
   };
   const outputTargetElements = new Map(outputManifest.objects.map((target) => [target.id, outputTargetElementFor(target)]));
@@ -501,7 +514,6 @@
     outputActionsByTarget.set(targetId, actions);
   }));
   const outputPersistentTargetIds = new Set(outputChoreography.persistentLabels.map(({ targetId }) => targetId));
-  const outputShellTargetIds = new Set(['output-v2-frame', 'output-v2-panel-overview', 'output-v2-panel-distribution', 'output-v2-panel-performance', 'output-v2-panel-trends', 'output-v2-panel-variance', 'output-v2-panel-insights']);
   const outputActionForTarget = (targetId) => {
     const candidates = outputActionsByTarget.get(targetId) || [];
     if (!candidates.length || outputPersistentTargetIds.has(targetId)) return null;
@@ -527,6 +539,10 @@
     const center = outputTargetLocalCenter(target);
     return { x: outputLayout.x + center.x * outputLayout.scaleX, y: outputLayout.y + center.y * outputLayout.scaleY };
   };
+  const outputCanvasPathPointsForTarget = (target, count = 6) => resampleOutputPath(outputPathPoints(target?.geometry?.d), count).map(([x, y]) => ({
+    x: outputLayout.x + x * outputLayout.scaleX,
+    y: outputLayout.y + y * outputLayout.scaleY
+  }));
   const outputCarrierTargetByNode = new Map([
     [0, 'output-v2-overview-divider-1'], [1, 'output-v2-overview-divider-2'], [2, 'output-v2-overview-margin-value'], [3, 'output-v2-frame'],
     [4, 'output-v2-frame'], [6, 'output-v2-panel-overview'], [8, 'output-v2-panel-distribution'], [10, 'output-v2-panel-performance'],
@@ -614,6 +630,21 @@
     const runtime = outputSourceObjects.get(sourceId)?.runtime;
     return runtime?.family === 'nodeElements' && Number(nodeElements[runtime.index]?.element.style.opacity || 0) > .01;
   };
+  const outputLiveSourceVisible = (sourceId) => {
+    const carrier = outputSourceCarrierElements.get(sourceId)?.element;
+    if (carrier) return Number(carrier.style.opacity || 0) > .01 && carrier.style.visibility !== 'hidden';
+    const runtime = outputSourceObjects.get(sourceId)?.runtime;
+    if (!runtime) return false;
+    if (runtime.family === 'nodeElements') return outputNodeVisibleForSource(sourceId);
+    if (runtime.family === 'lineTrack') return Number(lineTrack.path.style.opacity || 0) > .01;
+    if (runtime.family === 'networkElements') return Number(networkElements[runtime.index]?.path.style.opacity || 0) > .01;
+    if (runtime.family === 'roleFrameElements') return Number(roleFrameElements.find(({ runtimeId }) => runtimeId === runtime.runtimeId)?.path.style.opacity || 0) > .01;
+    if (runtime.family === 'integrateLabelElements') return Number(integrateLabelElements.find(({ target }) => target.id === runtime.targetId)?.label.style.opacity || 0) > .01;
+    if (runtime.family === 'integrateSplitElements') return Number(integrateSplitElements.find(({ target }) => target.id === runtime.targetId)?.path.style.opacity || 0) > .01;
+    return false;
+  };
+  const outputLayeringGateState = { C1: false, C2: false, C3: false, C3Handoff: false, C4: false, C6: false };
+  const resetOutputLayeringGateState = () => Object.keys(outputLayeringGateState).forEach((key) => { outputLayeringGateState[key] = false; });
   const outputGateState = { G1: false, G2: false, G3: false, G4: false, G5: false, G6: false, G7: false };
   const resetOutputGateState = () => Object.keys(outputGateState).forEach((key) => { outputGateState[key] = false; });
   let outputHoldSnapshot = null;
@@ -621,6 +652,14 @@
     if (phase.index === 6) {
       const pass = phase.progress >= .99 && outputTargetElements.size === 113 && [...outputTargetElements.values()].every(({ element }) => Number(element.style.opacity || 0) === 0);
       motionRoot.dataset.integrateOutputG0 = pass ? 'PASS' : 'PENDING';
+      motionRoot.dataset.integrateOutputLayerOrder = outputLayerOrderPass ? 'PASS' : 'FAIL';
+      resetOutputLayeringGateState();
+      motionRoot.dataset.integrateOutputLayerC1 = 'PENDING';
+      motionRoot.dataset.integrateOutputLayerC2 = 'PENDING';
+      motionRoot.dataset.integrateOutputLayerC3 = 'PENDING';
+      motionRoot.dataset.integrateOutputLayerC3Handoff = 'PENDING';
+      motionRoot.dataset.integrateOutputLayerC4 = 'PENDING';
+      motionRoot.dataset.integrateOutputLayerC6 = 'PENDING';
       resetOutputGateState();
       motionRoot.dataset.integrateOutputG1 = 'PENDING';
       motionRoot.dataset.integrateOutputG2 = 'PENDING';
@@ -637,6 +676,58 @@
     const elapsedMs = phase.progress * outputStageDuration;
     outputViewportContainmentGate(elapsedMs);
     const persistentLabel = (sourceId) => outputChoreography.persistentLabels.find((label) => label.sourceId === sourceId);
+    if (!outputLayeringGateState.C1 && elapsedMs >= 1650 && elapsedMs < 2000) {
+      const futureSources = [
+        'label-distribution', 'distribution-ring-base', 'distribution-arc-navy', 'distribution-arc-sand',
+        'label-performance', 'performance-polyline', 'performance-point-01', 'performance-point-02', 'performance-point-03', 'performance-point-04', 'performance-point-05', 'performance-point-06',
+        'label-trends', 'trends-bar-01', 'trends-bar-02', 'trends-bar-03', 'trends-bar-04', 'trends-bar-05',
+        'label-insights', 'insights-line-01', 'insights-line-02', 'insights-line-03', 'insights-line-04', 'insights-dot-01', 'insights-dot-02', 'insights-dot-03', 'insights-dot-04',
+        'support-rail-03', 'support-rail-04', 'support-rail-05', 'support-rail-06', 'support-rail-07', 'support-rail-08'
+      ];
+      const pass = outputLayerOrderPass && futureSources.every(outputLiveSourceVisible);
+      motionRoot.dataset.integrateOutputLayerC1 = pass ? 'PASS' : 'FAIL';
+      if (!pass) throw new Error('OUTPUT_LAYER_C1_SOURCE_VISIBILITY_FAIL: future Integrate modules were masked after the Overview shell handoff.');
+      outputLayeringGateState.C1 = true;
+    }
+    if (!outputLayeringGateState.C2 && elapsedMs >= 2200 && elapsedMs < 2580) {
+      const pass = outputLiveSourceVisible('label-distribution') && (outputLiveSourceVisible('distribution-ring-base') || visibleTargetElement('output-v2-distribution-ring-base'));
+      motionRoot.dataset.integrateOutputLayerC2 = pass ? 'PASS' : 'FAIL';
+      if (!pass) throw new Error('OUTPUT_LAYER_C2_DISTRIBUTION_CONTINUITY_FAIL: Distribution lost source visibility during travel or handoff.');
+      outputLayeringGateState.C2 = true;
+    }
+    if (!outputLayeringGateState.C3 && elapsedMs >= 2900 && elapsedMs < 3050) {
+      const points = ['01', '02', '03', '04', '05', '06'];
+      const targetPoints = points.map((index) => `output-v2-performance-point-${Number(index)}`);
+      const pass = outputLiveSourceVisible('label-performance') && outputLiveSourceVisible('performance-polyline') && points.every((index) => outputLiveSourceVisible(`performance-point-${index}`)) && !visibleTargetElement('output-v2-performance-line') && targetPoints.every((id) => !visibleTargetElement(id));
+      motionRoot.dataset.integrateOutputLayerC3 = pass ? 'PASS' : 'FAIL';
+      if (!pass) throw new Error('OUTPUT_LAYER_C3_PERFORMANCE_SOURCE_FAIL: Performance source graph was hidden or duplicated before C3.');
+      outputLayeringGateState.C3 = true;
+    }
+    if (!outputLayeringGateState.C3Handoff && elapsedMs >= 3830 && elapsedMs < 4000) {
+      const sourceLine = outputLiveSourceVisible('performance-polyline');
+      const targetLine = visibleTargetElement('output-v2-performance-line');
+      const sourcePoints = ['01', '02', '03', '04', '05', '06'].some((index) => outputLiveSourceVisible(`performance-point-${index}`));
+      const targetPoints = [1, 2, 3, 4, 5, 6].some((index) => visibleTargetElement(`output-v2-performance-point-${index}`));
+      const pass = !(sourceLine && targetLine) && !(sourcePoints && targetPoints);
+      motionRoot.dataset.integrateOutputLayerC3Handoff = pass ? 'PASS' : 'FAIL';
+      if (!pass) throw new Error('OUTPUT_LAYER_C3_DUPLICATE_GRAPH_FAIL: Performance source and target graphs remained simultaneously visible after handoff.');
+      outputLayeringGateState.C3Handoff = true;
+    }
+    if (!outputLayeringGateState.C4 && elapsedMs >= 4400 && elapsedMs < 4600) {
+      const sourceBars = ['01', '02', '03', '04'].every((index) => outputLiveSourceVisible(`trends-bar-${index}`));
+      const pass = outputLiveSourceVisible('label-trends') && sourceBars && outputLiveSourceVisible('trends-bar-05');
+      motionRoot.dataset.integrateOutputLayerC4 = pass ? 'PASS' : 'FAIL';
+      if (!pass) throw new Error('OUTPUT_LAYER_C4_TRENDS_SOURCE_FAIL: Trends source bars were hidden before C4.');
+      outputLayeringGateState.C4 = true;
+    }
+    if (!outputLayeringGateState.C6 && elapsedMs >= 6900 && elapsedMs < 7100) {
+      const sourceLines = ['01', '02', '03', '04'].every((index) => outputLiveSourceVisible(`insights-line-${index}`));
+      const sourceDots = ['01', '02', '03', '04'].every((index) => outputLiveSourceVisible(`insights-dot-${index}`));
+      const pass = outputLiveSourceVisible('label-insights') && sourceLines && sourceDots;
+      motionRoot.dataset.integrateOutputLayerC6 = pass ? 'PASS' : 'FAIL';
+      if (!pass) throw new Error('OUTPUT_LAYER_C6_INSIGHTS_SOURCE_FAIL: Insights geometry was hidden before C6.');
+      outputLayeringGateState.C6 = true;
+    }
     if (!outputGateState.G1 && elapsedMs >= 1650 && elapsedMs < 2000) {
       const label = persistentLabel('label-overview-system-detail');
       const pass = !!label && Number(integrateLabelElements.find(({ target }) => target.id === label.sourceId)?.label.style.opacity || 0) > .01 && visibleTargetElement('output-v2-panel-overview') && !visibleTargetElement('output-v2-panel-distribution');
@@ -694,10 +785,12 @@
       const allTargetsVisible = visibleIds.size === outputManifest.objects.length && outputManifest.objects.every((target) => visibleIds.has(target.id));
       const noSources = nodeElements.every((node) => Number(node.element.style.opacity || 0) <= .01) && (!outputSourceCarrierElements || [...outputSourceCarrierElements.values()].every(({ element }) => Number(element.style.opacity || 0) <= .01));
       const priorGatesPassed = Object.values(outputGateState).every(Boolean);
-      const pass = allTargetsVisible && noSources && priorGatesPassed && motionRoot.dataset.integrateOutputG5Viewport === 'PASS' && phase.progress >= outputFinalHoldStart;
+      const layeringGatesPassed = Object.values(outputLayeringGateState).every(Boolean);
+      const pass = allTargetsVisible && noSources && priorGatesPassed && layeringGatesPassed && motionRoot.dataset.integrateOutputLayerOrder === 'PASS' && motionRoot.dataset.integrateOutputG5Viewport === 'PASS' && phase.progress >= outputFinalHoldStart;
       motionRoot.dataset.integrateOutputG8 = pass ? 'PASS' : 'FAIL';
       if (!pass) throw new Error('G8_OUTPUT_HOLD_FAIL: Output v2 is not exact, source remnants remain, or the hold is not active.');
       const snapshot = JSON.stringify({
+        shell: outputShellLayer.getAttribute('transform'),
         layer: outputTargetLayer.getAttribute('transform'),
         targets: [...outputTargetElements.entries()].map(([id, value]) => [id, value.wrapper.getAttribute('transform'), value.element.outerHTML, value.element.style.cssText]),
         labels: outputChoreography.persistentLabels.map(({ sourceId }) => { const label = integrateLabelElements.find(({ target }) => target.id === sourceId)?.label; return [sourceId, label?.outerHTML, label?.style.cssText]; })
@@ -1412,29 +1505,33 @@
     outputSourceCarrierElements.forEach(({ sourceId, targetId, element }) => {
       const travelAction = outputActions.find((action) => action.sourceIds?.includes(sourceId) && action.operation === 'move');
       const mergeAction = outputActions.find((action) => action.id === 'trends-oct-merge');
-      if (!active || !travelAction || !mergeAction || elapsedMs < travelAction.windowMs[0] || elapsedMs >= mergeAction.windowMs[1]) {
+      if (!active || !travelAction || !mergeAction || elapsedMs >= mergeAction.windowMs[1]) {
         element.style.opacity = '0';
         element.style.visibility = 'hidden';
         return;
       }
       const target = outputTargetObjects.get(targetId);
+      const source = targetFor(sourceId);
       const sourcePoint = outputSourceAnchor(sourceId, poses);
       const targetPoint = outputCanvasPointForTarget(target);
       const amount = easeInOut(clamp((elapsedMs - travelAction.windowMs[0]) / Math.max(1, mergeAction.windowMs[1] - travelAction.windowMs[0])));
       const position = pointLerp(sourcePoint, targetPoint, amount);
       const fade = 1 - easeInOut(clamp((elapsedMs - mergeAction.windowMs[0]) / Math.max(1, mergeAction.windowMs[1] - mergeAction.windowMs[0])));
-      const style = outputStyleFor(target);
-      element.setAttribute('d', pointsToPath(outputTargetShapePoints(target)));
+      const sourceStyle = targetStyle(source);
+      const targetStyleValue = outputStyleFor(target);
+      const shape = interpolatePoints(targetShapePoints(source), outputTargetShapePoints(target), amount);
+      element.setAttribute('d', pointsToPath(shape));
       element.setAttribute('transform', `translate(${position.x.toFixed(2)} ${position.y.toFixed(2)})`);
-      element.setAttribute('fill', style.fill);
-      element.setAttribute('stroke', style.stroke);
-      element.setAttribute('stroke-width', String(style.strokeWidth || 1.05));
+      element.setAttribute('fill', amount >= 1 ? targetStyleValue.fill : sourceStyle.fill);
+      element.setAttribute('stroke', amount >= 1 ? targetStyleValue.stroke : sourceStyle.stroke);
+      element.setAttribute('stroke-width', String(amount >= 1 ? targetStyleValue.strokeWidth : sourceStyle.strokeWidth));
       element.style.opacity = String(fade);
       element.style.visibility = fade > 0 ? 'visible' : 'hidden';
     });
   };
   const renderOutputTargets = (phase, poses) => {
     const active = phase.index >= 7;
+    outputShellLayer.style.opacity = active ? '1' : '0';
     outputTargetLayer.style.opacity = active ? '1' : '0';
     outputLayerTransform();
     const elapsedMs = active ? phase.progress * outputStageDuration : 0;
@@ -1481,6 +1578,7 @@
     const elapsed = ((rawElapsed % TOTAL) + TOTAL) % TOTAL;
     const phase = phaseFor(elapsed);
     const poses = nodeElements.map((node) => poseFor(node, phase));
+    const outputElapsedMs = phase.index >= 7 ? phase.progress * outputStageDuration : 0;
     nodeElements.forEach((node, index) => {
       const pose = poses[index];
       node.element.setAttribute('transform', `translate(${pose.position.x.toFixed(2)} ${pose.position.y.toFixed(2)})`);
@@ -1509,7 +1607,7 @@
     renderIntegrateLabels(phase);
     renderOutputPersistentLabels(phase);
 
-    networkElements.forEach((edge) => {
+    networkElements.forEach((edge, edgeIndex) => {
       const from = nodePosition(edge.from, poses[edge.from].position);
       const to = nodePosition(edge.to, poses[edge.to].position);
       let points = [[from.x, from.y], [to.x, to.y]];
@@ -1546,10 +1644,14 @@
           opacity = coreish(nodeSpecs[edge.from].role) && coreish(nodeSpecs[edge.to].role) ? .08 : 0;
         }
       } else if (phase.index === 7) {
-        // Output uses its own source-derived flow, traceability, and finding
-        // marks. Retire the loose network links so they cannot read as
-        // unexplained diagonals across the settled analytical composition.
-        opacity = 0;
+        const supportSourceId = outputNetworkSourceByIndex.get(edgeIndex);
+        const supportActions = supportSourceId ? outputActionsForSource(supportSourceId) : [];
+        const supportEnd = supportActions.length ? Math.max(...supportActions.map((action) => action.windowMs[1])) : 0;
+        opacity = supportEnd && outputElapsedMs < supportEnd
+          ? .24
+          : supportEnd
+            ? .24 * (1 - easeInOut(clamp((outputElapsedMs - supportEnd) / 120)))
+            : 0;
       }
       // Phase-specific rail styling above must never re-enable the non-local
       // network edges. After Align, only local/support geometry should remain.
@@ -1568,8 +1670,11 @@
     // their live positions until they have reached the Integrate chart.
     const lineSourceIndices = phase.index >= 6 ? integratePerformanceNodeIndices : performanceNodeIndices;
     const sourceLine = lineSourceIndices.map((index) => [poses[index].position.x, poses[index].position.y]);
-    const linePoints = sourceLine;
-    const outputElapsedMs = phase.index >= 7 ? phase.progress * outputStageDuration : 0;
+    const outputLine = outputCanvasPathPointsForTarget(outputTargetObjects.get('output-v2-performance-line'), sourceLine.length).map(({ x, y }) => [x, y]);
+    const lineTravelAmount = phase.index >= 7 ? easeInOut(clamp((outputElapsedMs - 3050) / 600)) : 0;
+    const linePoints = phase.index >= 7
+      ? sourceLine.map((point, index) => [lerp(point[0], outputLine[index][0], lineTravelAmount), lerp(point[1], outputLine[index][1], lineTravelAmount)])
+      : sourceLine;
     const lineOpacity = phase.index < 3
       ? 0
       : phase.index === 3

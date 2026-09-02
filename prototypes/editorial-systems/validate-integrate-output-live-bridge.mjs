@@ -61,7 +61,12 @@ expect(sha256(resolveRepo(bridge.targetManifest.file)) === bridge.targetManifest
 expect(fs.existsSync(runtimePath), 'live runtime source does not exist');
 const runtimeMatchesBridgeBaseline = sha256(runtimePath) === bridge.runtime.sha256;
 const approvedOutputExtensionPresent = runtimeSource.includes("const outputTargetLayer = group('immersive-output-target-layer');");
-expect(runtimeMatchesBridgeBaseline || approvedOutputExtensionPresent, 'live runtime source is neither the locked baseline nor the approved phase-7 extension');
+const approvedLayeredOutputExtensionPresent = [
+  "const outputShellLayer = group('immersive-output-shell-layer');",
+  "const outputSourceCarrierLayer = group('immersive-output-source-carrier-layer');",
+  "const outputTargetLayer = group('immersive-output-detail-layer');"
+].every((expression) => runtimeSource.includes(expression));
+expect(runtimeMatchesBridgeBaseline || approvedOutputExtensionPresent || approvedLayeredOutputExtensionPresent, 'live runtime source is neither the locked baseline nor an approved Output-layer extension');
 expect(sha256(resolveRepo(bridge.runtime.lockedNodeOrderDependency.file)) === bridge.runtime.lockedNodeOrderDependency.sha256, 'locked runtime node-order dependency hash drifted');
 
 expect(integrateManifest.id === 'integrate-golden-v26', 'Integrate manifest is not v26');
@@ -245,5 +250,6 @@ console.log(JSON.stringify({
   runtimeFile: bridge.runtime.file,
   runtimeMatchesBridgeBaseline,
   approvedOutputExtensionPresent,
+  approvedLayeredOutputExtensionPresent,
   settledEndpoint: bridge.runtime.settledEndpoint
 }, null, 2));
