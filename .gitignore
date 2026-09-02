@@ -35,3 +35,8 @@ build/
 database/
 output/
 *.db
+
+# Generated visual review artifacts
+.playwright-mcp/
+hero-animation.mp4
+prototypes/editorial-systems/*.mp4
