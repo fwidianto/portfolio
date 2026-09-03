@@ -2046,6 +2046,37 @@
   position: absolute;
   z-index: -1;
 }
+.hero-red-dwarf__sky {
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.8s ease-out;
+  z-index: -1;
+}
+.hero-red-dwarf__star {
+  animation: red-dwarf-twinkle var(--duration) ease-in-out var(--delay) infinite;
+  background: #e8c2a5;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(232, 194, 165, .22);
+  height: var(--size);
+  left: var(--x);
+  opacity: .36;
+  position: absolute;
+  top: var(--y);
+  width: var(--size);
+}
+.hero-red-dwarf__star--far { opacity: .2; }
+.hero-red-dwarf__star--mid { opacity: .3; }
+.hero-red-dwarf__star--near { opacity: .44; }
+@keyframes red-dwarf-twinkle {
+  0%, 100% { opacity: .18; transform: scale(.8); }
+  46%, 54% { opacity: .58; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-red-dwarf__sky { transition: none; }
+  .hero-red-dwarf__star { animation: none; }
+}
 .hero--red-dwarf ~ * { position: relative; }
 body:has(.hero--red-dwarf) nav {
   background: rgba(18, 13, 13, .76);
