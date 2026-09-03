@@ -93,10 +93,23 @@
         });
         const star = new THREE.Mesh(geometry, material);
         scene.add(star);
-        const resize = () => { const r=host.getBoundingClientRect(); renderer.setSize(r.width,r.height,false); camera.aspect=r.width/r.height; camera.updateProjectionMatrix(); };
+        const probe = () => {
+          const gl = renderer.getContext();
+          const px = new Uint8Array(4);
+          gl.readPixels(Math.floor(canvas.width/2), Math.floor(canvas.height/2), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
+          window.__redDwarfProbe = { buffer: [canvas.width, canvas.height], center: [px[0], px[1], px[2], px[3]] };
+        };
+        const resize = () => {
+          const r = host.getBoundingClientRect();
+          if (!r.width || !r.height) return;
+          renderer.setSize(r.width, r.height, false);
+          camera.aspect = r.width / r.height;
+          camera.updateProjectionMatrix();
+          renderer.render(scene, camera);
+          probe();
+        };
         resize();
         new ResizeObserver(resize).observe(host);
-        renderer.render(scene,camera);
       `;
       document.head.appendChild(script);
     });
