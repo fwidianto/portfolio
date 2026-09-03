@@ -2046,6 +2046,20 @@
   position: absolute;
   z-index: -1;
 }
+.hero--red-dwarf ~ * { position: relative; }
+body:has(.hero--red-dwarf) nav {
+  background: rgba(18, 13, 13, .76);
+  border-bottom-color: rgba(247, 238, 229, .1);
+  box-shadow: none;
+}
+body:has(.hero--red-dwarf) .logo,
+body:has(.hero--red-dwarf) .nav-links a,
+body:has(.hero--red-dwarf) .dropbtn { color: #ead9cb; }
+body:has(.hero--red-dwarf) .nav-links a:hover,
+body:has(.hero--red-dwarf) .dropbtn:hover {
+  background: rgba(211, 154, 114, .1);
+  color: #f0b890;
+}
 .hero-red-dwarf__inner {
   align-items: center;
   display: grid;
@@ -2071,15 +2085,20 @@
 .hero--red-dwarf h1 {
   color: #f7eee5;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(64px, 8.4vw, 128px);
+  font-size: clamp(54px, 7vw, 104px);
   font-weight: 400;
   letter-spacing: -.075em;
   line-height: .82;
   margin: 0;
+  white-space: nowrap;
 }
-.hero--red-dwarf h1 span {
+.hero-red-dwarf__title {
   color: #d9b08f;
-  font-style: italic;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(24px, 2.5vw, 38px);
+  letter-spacing: -.035em;
+  line-height: 1.1;
+  margin: 24px 0 0;
 }
 .hero-red-dwarf__star-field {
   align-items: center;
@@ -2136,11 +2155,9 @@
 @media (max-width: 600px) {
   .hero--red-dwarf { min-height: 100svh; }
   .hero-red-dwarf__inner { padding-bottom: 48px; padding-top: 112px; }
-  .hero-red-dwarf__name { font-size: 10px; margin-bottom: 26px; }
-  .hero--red-dwarf h1 { font-size: clamp(58px, 18vw, 86px); line-height: .86; }
+  .hero--red-dwarf h1 { font-size: clamp(42px, 13vw, 64px); line-height: .92; white-space: normal; }
+  .hero-red-dwarf__title { font-size: clamp(22px, 6.2vw, 28px); margin-top: 18px; }
   .hero-red-dwarf__star-field { height: 92vw; margin-top: -6px; min-height: 290px; }
-  .hero-red-dwarf__orbit--outer { height: 92%; width: 92%; }
-  .hero-red-dwarf__orbit--inner { height: 64%; width: 64%; }
   .hero-red-dwarf__star-placeholder {
     height: clamp(160px, 48vw, 230px);
     width: clamp(160px, 48vw, 230px);
