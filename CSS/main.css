@@ -2132,13 +2132,6 @@ body:has(.hero--red-dwarf) .dropbtn:hover {
   position: relative;
   width: clamp(190px, 25vw, 360px);
 }
-.hero-red-dwarf__star-placeholder::after {
-  border: 1px dashed rgba(228, 161, 111, .42);
-  border-radius: 50%;
-  content: "";
-  inset: -28px;
-  position: absolute;
-}
 @media (max-width: 900px) {
   .hero-red-dwarf__inner {
     grid-template-columns: 1fr;
