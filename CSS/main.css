@@ -2155,13 +2155,30 @@ body:has(.hero--red-dwarf) .dropbtn:hover {
   width: 55%;
 }
 .hero-red-dwarf__star-placeholder {
-  background: radial-gradient(circle at 34% 28%, #e4a16f 0 5%, #b4492f 28%, #5c1c1b 67%, #260f12 100%);
-  border: 1px solid rgba(239, 175, 128, .7);
+  background:
+    radial-gradient(ellipse at 34% 24%, rgba(255, 205, 151, .78) 0 5%, transparent 19%),
+    radial-gradient(ellipse at 63% 69%, rgba(67, 14, 17, .58) 0 10%, transparent 32%),
+    radial-gradient(ellipse at 27% 65%, rgba(119, 31, 24, .64) 0 8%, transparent 27%),
+    radial-gradient(circle at 35% 28%, #d8784b 0, #a63a2c 27%, #70201f 61%, #2a1014 100%);
+  border: 1px solid rgba(239, 175, 128, .55);
   border-radius: 50%;
-  box-shadow: 0 0 0 18px rgba(143, 48, 31, .06), 0 0 70px rgba(152, 52, 31, .23);
+  box-shadow: 0 0 0 12px rgba(143, 48, 31, .05), 0 0 58px rgba(152, 52, 31, .24), inset -26px -22px 38px rgba(22, 5, 10, .36), inset 16px 14px 24px rgba(255, 183, 124, .16);
   height: clamp(190px, 25vw, 360px);
+  overflow: hidden;
   position: relative;
   width: clamp(190px, 25vw, 360px);
+}
+.hero-red-dwarf__star-placeholder::before {
+  background:
+    radial-gradient(ellipse at 45% 42%, rgba(249, 164, 100, .34) 0 2%, transparent 7%),
+    radial-gradient(ellipse at 72% 32%, rgba(39, 8, 14, .38) 0 3%, transparent 10%),
+    radial-gradient(ellipse at 57% 78%, rgba(226, 104, 61, .3) 0 2%, transparent 8%),
+    radial-gradient(ellipse at 20% 48%, rgba(243, 140, 83, .24) 0 2%, transparent 8%);
+  border-radius: inherit;
+  content: "";
+  inset: 0;
+  opacity: .9;
+  position: absolute;
 }
 @media (max-width: 900px) {
   .hero-red-dwarf__inner {
