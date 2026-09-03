@@ -2154,24 +2154,19 @@ body:has(.hero--red-dwarf) .dropbtn:hover {
   transform: translate(-50%, -50%) rotate(38deg);
   width: 55%;
 }
-.hero-red-dwarf__star-placeholder {
-  border-radius: 50%;
-  height: clamp(190px, 25vw, 360px);
-  position: relative;
-  width: clamp(190px, 25vw, 360px);
-}
-.hero-red-dwarf__star-placeholder::before {
-  background: radial-gradient(circle, rgba(187, 65, 35, .2), transparent 68%);
-  border-radius: 50%;
-  content: "";
-  inset: -9%;
-  position: absolute;
-  z-index: -1;
-}
-.hero-red-dwarf__star-canvas {
+.hero-red-dwarf__star-image {
   display: block;
-  height: 100%;
-  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: saturate(.95) contrast(1.03);
+  height: clamp(190px, 25vw, 360px);
+  mix-blend-mode: screen;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  transform: scale(1.03);
+  user-select: none;
+  width: clamp(190px, 25vw, 360px);
 }
 @media (max-width: 900px) {
   .hero-red-dwarf__inner {

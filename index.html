@@ -66,54 +66,6 @@
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FL42QH3WV0"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const placeholder = document.querySelector('.hero-red-dwarf__star-placeholder');
-      const canvas = document.querySelector('.hero-red-dwarf__star-canvas');
-      if (!placeholder || !canvas) return;
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.textContent = `
-        import * as THREE from 'https://unpkg.com/three@0.176.0/build/three.module.js';
-
-        const host = document.querySelector('.hero-red-dwarf__star-placeholder');
-        const canvas = document.querySelector('.hero-red-dwarf__star-canvas');
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-        renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(25, 1, 0.1, 10);
-        camera.position.z = 3.2;
-        const geometry = new THREE.SphereGeometry(1, 96, 64);
-        const material = new THREE.ShaderMaterial({
-          uniforms: { lightDirection: { value: new THREE.Vector3(-.46, .58, 1).normalize() } },
-          vertexShader: 'varying vec3 vNormal; varying vec3 vPosition; void main(){ vNormal=normalize(normalMatrix*normal); vPosition=position; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }',
-          fragmentShader: \
-            'varying vec3 vNormal; varying vec3 vPosition; uniform vec3 lightDirection; float hash(vec3 p){p=fract(p*.3183099+.1);p*=17.0;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));} float noise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);} void main(){vec3 n=normalize(vNormal);float light=max(dot(n,lightDirection),0.0);float grain=noise(vPosition*8.0)*.55+noise(vPosition*19.0)*.3+noise(vPosition*43.0)*.15;float activeRegion=smoothstep(.67,.9,grain);float cool=smoothstep(.2,.35,grain);vec3 base=mix(vec3(.18,.025,.02),vec3(.55,.095,.045),grain);base+=activeRegion*vec3(.38,.14,.055);base*=.62+.62*light;float rim=pow(1.0-max(dot(n,vec3(0,0,1)),0.0),3.0);vec3 color=base+rim*vec3(.16,.035,.012);gl_FragColor=vec4(color,1.0);}'
-        });
-        const star = new THREE.Mesh(geometry, material);
-        scene.add(star);
-        const probe = () => {
-          const gl = renderer.getContext();
-          const px = new Uint8Array(4);
-          gl.readPixels(Math.floor(canvas.width/2), Math.floor(canvas.height/2), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
-          window.__redDwarfProbe = { buffer: [canvas.width, canvas.height], center: [px[0], px[1], px[2], px[3]] };
-        };
-        const resize = () => {
-          const r = host.getBoundingClientRect();
-          if (!r.width || !r.height) return;
-          renderer.setSize(r.width, r.height, false);
-          camera.aspect = r.width / r.height;
-          camera.updateProjectionMatrix();
-          renderer.render(scene, camera);
-          probe();
-        };
-        resize();
-        new ResizeObserver(resize).observe(host);
-      `;
-      document.head.appendChild(script);
-    });
-
     (() => {
       const sky = document.querySelector('.hero-red-dwarf__sky');
       const hero = document.querySelector('.hero--red-dwarf');
@@ -623,12 +575,6 @@
     <div class="container nav-container">
       <a href="index.html" class="logo" aria-label="Home - Fauzan Widianto Portfolio">FW.</a>
 
-      <div class="nav-links" role="menubar">
-        <a href="#projects" role="menuitem">Project</a>
-        <a href="#experience" role="menuitem">Experience</a>
-        <a href="#skills" role="menuitem">Skills</a>
-        <a href="#contact" role="menuitem">Contact</a>
-      </div>
     </div>
   </nav>
 
@@ -642,9 +588,7 @@
       </div>
 
       <div class="hero-red-dwarf__star-field" aria-label="Reserved visual field for the future red dwarf star">
-        <div class="hero-red-dwarf__star-placeholder" aria-hidden="true">
-          <canvas class="hero-red-dwarf__star-canvas"></canvas>
-        </div>
+        <img class="hero-red-dwarf__star-image" src="Assets/red-dwarf-phase3.webp" alt="" aria-hidden="true">
       </div>
     </div>
   </section>
