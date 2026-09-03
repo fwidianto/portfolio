@@ -1,25 +1,31 @@
 # Portfolio Visual Reference Guide
 
 ## Purpose
-This file is the textual design authority for Fauzan Widianto's portfolio. Visual assets live outside GitHub in the Google Drive folder `Portfolio Visual Reference Pack` so the repository does not accumulate a large moodboard.
+This file is the textual design authority for Fauzan Widianto's portfolio.
 
-Supporting references are lessons, not templates. The goal is to infer a coherent design language and apply it to the actual portfolio content.
+GitHub stores the design rules. Google Drive stores the heavier visual reference assets in `Portfolio Visual Reference Pack`.
 
-## Current visual-pack status
+Supporting references are lessons, not templates. The goal is to infer one coherent visual language and apply it to the actual portfolio content.
 
-**Enough for the Hero, not yet enough for the full portfolio.**
+## Visual-pack status
 
-The approved Hero image is a strong primary reference, but a mature full-site design needs a small set of additional visual references covering typography, section rhythm, project presentation, dark editorial composition, and motion. Do not begin a full-site redesign until that visual pack has been expanded and owner-reviewed.
+**V1 is sufficient for the first clean design-sandbox exploration.**
 
-## Primary authority — approved Hero
+It is not a final full-site lock. The purpose of V1 is to give the design agent enough visual evidence to produce coherent alternatives without inventing generic agency UI. After the first exploration, owner review decides whether a specific area needs another reference before production work begins.
 
 Google Drive folder: `Portfolio Visual Reference Pack`
 Folder ID: `1V_WldXbXmd7e7IqP4B-WMPGtrCZLwfDn`
 
-Primary visual asset:
-- `00_APPROVED_HERO_REFERENCE.png`
+---
 
-What is approved:
+# Visual pack V1
+
+## 00 — Approved Hero
+Asset: `00_APPROVED_HERO_REFERENCE.png`
+
+This is the strongest visual authority.
+
+Approved lessons:
 - Header reduced to `FW.` only.
 - Near-black astronomical environment.
 - Large editorial serif name, left aligned.
@@ -31,145 +37,142 @@ What is approved:
 
 Do not reinterpret the Hero as generic sci-fi, cyberpunk, gaming UI, or agency-template UI.
 
+## 01 — Editorial typography + negative space
+Asset: `01_EDITORIAL_TYPOGRAPHY_NEGATIVE_SPACE.png`
+
+Use for:
+- display typography as page architecture
+- strong hierarchy without cards
+- very large negative space
+- one sparse warm accent
+- confidence through scale and alignment rather than decoration
+
+Do not copy literally:
+- the exact headline wording
+- the exact red text treatment
+
+## 02 — Chapter transition continuity
+Asset: `02_CHAPTER_TRANSITION_CONTINUITY.png`
+
+Use for:
+- transitions that feel like one narrative continuing into the next chapter
+- visual state handoff instead of stacked disconnected sections
+- thin structural rules
+- restrained system diagrams
+- a deliberate change in information density between chapters
+
+Rule to transfer: a section boundary should feel intentional, not like another website block starting.
+
+## 03 — Project / case-study presentation
+Asset: `03_PROJECT_CASE_STUDY_PRESENTATION.png`
+
+Use for:
+- a project as a thesis + evidence, not a repeated card
+- one dominant artifact or system visual
+- sparse structured metadata
+- visual proof carrying more weight than marketing copy
+- asymmetrical editorial composition
+
+Do not turn every project into the same component shape.
+
+## 04 — Long-page editorial rhythm
+Asset: `04_LONG_PAGE_EDITORIAL_RHYTHM.png`
+
+Use for:
+- chapter-like vertical pacing
+- variation in density while preserving one grid and visual grammar
+- statement → evidence → pause → transition rhythm
+- generous breathing room
+- restrained numbering and labels
+
+Rule to transfer: consistency does not mean every section has identical height, layout, or density.
+
+## 05 — Mobile composition
+Asset: `05_MOBILE_COMPOSITION_RHYTHM.png`
+
+Use for:
+- deliberately recomposed mobile layouts
+- vertical hierarchy and breathing room
+- avoiding miniature desktop compositions
+- letting the dominant visual move below or beside text naturally
+- maintaining editorial scale on a narrow viewport
+
+Rule to transfer: mobile is a composition problem, not just a breakpoint problem.
+
+## 06 — Motion narrative storyboard
+Asset: `06_MOTION_NARRATIVE_STORYBOARD.png`
+
+Use for:
+- motion that explains transformation
+- physically traceable continuity
+- clear start → transition → settled state
+- separating narrative animation from ambient motion
+
+For the Hero formation specifically:
+- scattered matter → gravity → protostar → stable red dwarf
+- same matter should remain conceptually traceable
+- avoid replacement objects, scene cuts hidden by fades, generic morphing, or constant movement after the story has finished
+
 ---
 
-# Curated supporting references
+# Research references behind the visual studies
 
-These are reference sources and principles. They are not yet all stored as local visual assets in Drive.
+These sources informed the principles above. They are research inputs, not templates Luna should reproduce.
 
-## 1. Dave J. Reid — OpenDesign Design DNA
+## Dave J. Reid — OpenDesign Design DNA
 Source: https://opendesign.cc/en/sites/davejreid
 
-Use for:
-- refined editorial restraint
-- typography + whitespace carrying the page
-- minimal navigation/chrome
-- flat composition without cards/shadows
-- calm vertical rhythm
+Relevant lessons: editorial restraint, whitespace, minimal chrome, flat composition.
 
-Do not copy:
-- light background palette
-
-Relevant rule to transfer: premium feeling comes from hierarchy, spacing, and restraint rather than decoration.
-
-## 2. Halden — Framer editorial photography portfolio
+## Halden — Framer editorial photography portfolio
 Source: https://www.framer.com/community/marketplace/templates/halden/
 
-Use for:
-- high-contrast serif display typography
-- dark gallery atmosphere
-- quiet section numbering / editorial labels
-- image and text breathing room
-- sophisticated responsive hierarchy
+Relevant lessons: dark gallery atmosphere, serif hierarchy, image/text breathing room, responsive hierarchy.
 
-Do not copy:
-- photography-first identity
-- visible top-navigation density
-
-## 3. Vence — dark editorial Framer portfolio
+## Vence — dark editorial Framer portfolio
 Source: https://www.framer.com/marketplace/templates/vence/
 Live site: https://vence.framer.website/
 
-Use for:
-- calm dark editorial system
-- serif display + clean supporting text
-- image-led project presentation
-- carefully paced section rhythm
-- subtle atmosphere used as support, not decoration
+Relevant lessons: calm dark editorial system, project pacing, typography-led structure.
 
-Do not copy:
-- agency structure wholesale
-- frequent CTAs
-- gradient-heavy treatments
-
-## 4. Peter Lindbergh portfolio redesign concept
+## Peter Lindbergh portfolio redesign concept
 Source: https://www.behance.net/gallery/94660263/Peter-Lindbergh-Website-Design
 
-Use for:
-- dark editorial canvas
-- thin lines and restrained micro-labels
-- serif typography as the dominant visual device
-- atmospheric transitions without UI clutter
+Relevant lessons: dark editorial canvas, thin rules, restrained micro-labels, atmosphere without UI clutter.
 
-Do not copy:
-- fashion-photography collage conventions
-- decorative circular framing if it competes with the Red Dwarf
-
-## 5. Minimal Portfolio / Personal Website Concept — Luke Liu
-Source: https://dribbble.com/shots/11231131-Minimal-Portfolio-Personal-Website-Concept-w-Dark-Mode
-
-Use for:
-- extreme minimal dark-mode composition
-- restrained neutral palette
-- typography-first authority
-- disciplined spacing
-
-Do not copy:
-- generic personal-site component patterns
-
-## 6. Alex Laurent minimal portfolio concept
+## Alex Laurent minimal portfolio concept
 Source: https://contra.com/p/mRoFbc6m-alex-laurent-minimal-portfolio-website
 
-Use for:
-- identity-first homepage rather than information dumping
-- deep red used in a controlled manner
-- architectural/editorial spacing
-- typography as the main design tool
-- subtle motion rather than constant animation
+Relevant lessons: identity-first homepage, controlled deep red, architectural spacing, typography as the main design tool.
 
-Do not copy:
-- red as a full-page dominant surface; in Fauzan's site, red belongs primarily to the Red Dwarf and carefully chosen accents.
-
-## 7. Aether Studio — dark editorial portfolio
-Source: https://www.framer.com/marketplace/templates/aether-studio/
-
-Use for:
-- considered cinematic pacing
-- expressive serif typography
-- carefully paced motion
-- premium visual rhythm across multiple sections
-
-Do not copy:
-- layered blur as a default treatment
-- excessive grain
-- agency/service-site section patterns
-
-## 8. Atelier — dark gallery theme
+## Atelier — dark gallery theme
 Source: https://fredrin.com/themes/atelier
 
-Use for:
-- 'gallery at night' principle: the work is lit, everything else recedes
-- near-black background
-- warm off-white text
-- minimal chrome
-- generous dark breathing room
-
-Do not copy:
-- antique-gold accent; Fauzan's accent family is red / burnt orange / amber.
+Relevant lesson: gallery-at-night principle — the work is lit while everything else recedes.
 
 ---
 
-# Extracted design language for Fauzan's portfolio
+# Extracted design language
 
 ## Identity
 Mature. Analytical. Cinematic. Editorial. Astronomical. Restrained. Warm rather than cold-tech.
 
 ## Color
-- Background: charcoal / near-black, not pure glossy black everywhere.
+- Background: charcoal / near-black, not glossy pure black everywhere.
 - Primary text: warm off-white.
 - Secondary text: muted grey with slight warmth.
 - Accent: deep red / burnt orange / amber, used sparingly.
 - Avoid blue-neon, purple-neon, cyan-tech palettes.
 
 ## Typography
-- Display: elegant editorial serif with real authority.
+- Display: elegant editorial serif with authority.
 - Supporting UI/body: restrained sans-serif or humanist sans.
-- Name should be dominant without becoming a three-line poster treatment.
-- Avoid giant generic uppercase agency headlines.
+- Name remains dominant without becoming a generic three-line agency poster.
+- Avoid giant generic uppercase agency slogans.
 
 ## Layout
 - Large negative space.
-- Clear alignment and strong grid.
+- Strong grid and alignment.
 - Few elements per viewport.
 - Prefer chapter-like compositions over card dashboards.
 - Use full-width or editorial project compositions rather than repeated rounded cards.
@@ -177,18 +180,18 @@ Mature. Analytical. Cinematic. Editorial. Astronomical. Restrained. Warm rather 
 ## Imagery
 - Red Dwarf is the signature visual anchor.
 - Supporting project imagery should feel curated, not tiled like a SaaS gallery.
-- Dark canvas should let individual visuals glow rather than filling the background with effects.
+- The dark canvas lets individual evidence visuals glow rather than filling the background with effects.
 
 ## Motion
-- Motion must communicate state or narrative.
+- Motion communicates state or narrative.
 - Slow, controlled, physically traceable.
 - Sparse sky twinkle is ambient only.
 - Red Dwarf formation is the Hero narrative.
-- Avoid constant floating, bouncing, marquee spam, and decorative motion everywhere.
+- Avoid constant floating, bouncing, marquees, and decorative motion everywhere.
 
 ## UI / chrome
 - Hero header: `FW.` only.
-- Avoid pills, glass cards, large CTA buttons, excessive nav links, or dashboard-like framing.
+- Avoid pills, glass cards, large competing CTAs, excessive nav links, or dashboard-like framing.
 - Thin rules and tiny labels are acceptable when they support structure.
 
 ## Explicit anti-references
@@ -207,13 +210,14 @@ Do not drift toward:
 
 # How Luna should use this authority
 
-1. Read this guide before visual design work.
-2. Download/open the approved visual references from Google Drive.
-3. Treat `00_APPROVED_HERO_REFERENCE.png` as the Hero visual authority.
-4. Treat supporting references as individual lessons, not templates to merge literally.
-5. Explore new visual directions in a clean standalone design sandbox before production implementation.
-6. Render desktop and mobile screenshots.
-7. Compare visually before touching the production portfolio.
-8. If two consecutive corrections do not visibly improve the design, roll back instead of continuing to patch.
+1. Read this guide first.
+2. Sync/open all V1 visual assets from Google Drive.
+3. Treat `00_APPROVED_HERO_REFERENCE.png` as the strongest visual authority.
+4. Treat `01`–`06` as focused visual lessons, not six templates to merge literally.
+5. Explore in a **clean standalone design sandbox**, not directly in production code.
+6. Produce multiple meaningfully different full-page directions using the same content and visual language.
+7. Render desktop and mobile evidence for each direction.
+8. Owner + ChatGPT review and select/freeze a direction before production integration.
+9. If two consecutive correction passes do not visibly improve a direction, roll back instead of patching indefinitely.
 
-The goal is not to make the portfolio look like any one reference. The goal is to make all sections feel as though they belong to the same visual world as the approved Red Dwarf Hero.
+The goal is not to imitate any one reference. The goal is for the entire portfolio to feel as though it belongs to the same world as the approved Red Dwarf Hero.
