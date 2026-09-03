@@ -9,39 +9,49 @@ Read locally from this repository:
 - `.design/02_VISUAL_REFERENCE_GUIDE.md`
 - `.design/04_LUNA_REFERENCE_SYNC_INSTRUCTIONS.md`
 
-Do not download these Markdown files from Google Drive.
+Do not download Markdown authority files from Google Drive.
 
-## Google Drive source for visual assets
+## Google Drive source
 Folder: `Portfolio Visual Reference Pack`
 Folder ID: `1V_WldXbXmd7e7IqP4B-WMPGtrCZLwfDn`
 
-Current visual assets:
+Required V1 visual assets:
 - `00_APPROVED_HERO_REFERENCE.png`
-- `03_REFERENCE_BOARD.html` — temporary visual board; supporting references may load remotely
+- `01_EDITORIAL_TYPOGRAPHY_NEGATIVE_SPACE.png`
+- `02_CHAPTER_TRANSITION_CONTINUITY.png`
+- `03_PROJECT_CASE_STUDY_PRESENTATION.png`
+- `04_LONG_PAGE_EDITORIAL_RHYTHM.png`
+- `05_MOBILE_COMPOSITION_RHYTHM.png`
+- `06_MOTION_NARRATIVE_STORYBOARD.png`
+
+Ignore `03_REFERENCE_BOARD.html` if it is still present; it is an older temporary board and is not required for V1.
 
 ## Local destination
 Use:
 
 `.design/reference-pack/`
 
-Visual assets copied here are references. Do not edit them during implementation.
+These files are read-only design references. Do not modify them during implementation.
 
 ## Sync procedure
 1. Read `.design/02_VISUAL_REFERENCE_GUIDE.md` first.
-2. If authenticated Google Drive access is available from the local environment, download the visual assets from the Drive folder into `.design/reference-pack/`.
-3. If Google Drive Desktop already syncs the folder locally, copy from that synced path instead of redownloading.
-4. If neither authenticated Drive access nor a synced Drive path is available, STOP and report the access blocker. Do not substitute guessed or recreated files.
-5. Verify `00_APPROVED_HERO_REFERENCE.png` exists locally and open it before Hero-related visual work.
-6. Treat supporting references as lessons, not templates.
+2. Download/copy all seven required V1 PNG assets into `.design/reference-pack/`.
+3. If Google Drive Desktop already syncs the folder locally, copy from that synced path.
+4. Otherwise use any already-authenticated Drive access available in the environment.
+5. If neither authenticated Drive access nor a synced Drive path is available, STOP and report the access blocker. Do not recreate or guess the missing references.
+6. Verify all seven filenames exist locally.
+7. Open/inspect the images before design work.
 
-## Current completeness gate
-The current pack is sufficient to reproduce or refine the approved Hero, but it is **not yet sufficient as the sole visual basis for a mature full-site redesign**.
+## Completeness gate
+V1 is sufficient for a **clean design-sandbox exploration** of the full portfolio.
 
-Before full-site exploration, expand the Drive visual pack with a small curated set of actual reference screenshots covering:
-- typography / editorial hierarchy
-- dark full-page composition
-- section rhythm / transitions
-- project or case-study presentation
-- restrained motion / interaction
+It is not permission to directly redesign production files.
 
-Do not compensate for missing references by inventing generic agency UI.
+The next design task should:
+- work in a standalone sandbox
+- use the same real portfolio content
+- produce 2–3 meaningfully different full-page directions
+- render desktop and mobile evidence
+- stop for owner + ChatGPT visual review
+
+Only the selected/frozen direction should later be integrated into the production portfolio.
