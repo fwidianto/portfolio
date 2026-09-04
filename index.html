@@ -66,21 +66,6 @@
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FL42QH3WV0"></script>
   <script>
-    (() => {
-      const sky = document.querySelector('.hero-red-dwarf__sky');
-      const hero = document.querySelector('.hero--red-dwarf');
-      if (!sky || !hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      hero.addEventListener('pointermove', (event) => {
-        const bounds = hero.getBoundingClientRect();
-        const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 4;
-        const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 3;
-        sky.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      }, { passive: true });
-      hero.addEventListener('pointerleave', () => {
-        sky.style.transform = 'translate3d(0, 0, 0)';
-      });
-    })();
-
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -587,7 +572,7 @@
         <p class="hero-red-dwarf__title">Analytical Systems Builder</p>
       </div>
 
-      <div class="hero-red-dwarf__star-field" aria-label="Reserved visual field for the future red dwarf star">
+      <div class="hero-red-dwarf__star-field" aria-hidden="true">
         <img class="hero-red-dwarf__star-image" src="Assets/red-dwarf-phase3.webp" alt="" aria-hidden="true">
       </div>
     </div>
