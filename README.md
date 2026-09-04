@@ -8,40 +8,38 @@ Public portfolio website for business systems, operational analytics, ERP proces
 
 The portfolio presents an **Analytical Systems Builder** profile: understand the business problem, structure the process and data, turn the logic into a useful system, and communicate the evidence clearly.
 
-## Active working tree
+## Current state
 
-The repository is intentionally kept small. The active tree contains only the current public portfolio, its direct dependencies, and the latest portfolio-animation prototype.
+- `main` is the current production baseline.
+- `design/editorial-systems-prototype` is the active implementation path for the approved Red Dwarf portfolio direction.
+- `.design/CURRENT_DIRECTION.md` is the current visual/design authority for that work.
+- `AGENTS.md` contains repository-specific AI working rules.
+- `docs/README.md` is the minimal routing guide.
 
-Current public site:
+Current public/runtime files include:
 
-- `index.html` — live homepage
-- `website-updates.html` — current public changelog
-- `Projects/Odoo-ERP-Analytics.html` — current flagship case study
-- `CSS/` — styles required by the current public pages
+- `index.html` — homepage and current Hero implementation
+- `CSS/` — site styles
 - `Assets/` — public-safe site assets and CV
-- `CNAME`, `robots.txt`, `sitemap.xml` — GitHub Pages / discovery files
+- `Projects/Odoo-ERP-Analytics.html` — current flagship case study
+- `website-updates.html` — public changelog
+- `CNAME`, `robots.txt`, `sitemap.xml` — GitHub Pages/discovery files
 
-Current animation work:
+The older `prototypes/editorial-systems/` material documents previous animation work. It is not current Red Dwarf Hero design authority unless a task explicitly targets that prototype.
 
-- `prototypes/editorial-systems/` — latest Analytical Systems Builder portfolio prototype and its current animation authorities
-- `prototypes/editorial-systems/README.md` — exact current/compatibility file map for that animation
-
-Maintenance:
-
-- `AGENTS.md` — concise operating rules for AI-assisted changes
-- `docs/README.md` — minimal current repository notes
-
-Historical project pages, abandoned portfolio implementations, design experiments, superseded planning documents, and review artifacts belong in **Git history**, not the active working tree.
+Historical experiments, superseded plans, rejected design directions, and review artifacts belong in Git history rather than being reconstructed as active context.
 
 ## Working rule
 
-Start with `AGENTS.md`, then inspect only the page or animation files directly required by the task. Do not reconstruct old portfolio experiments or search Git history unless explicitly requested.
+Start with `AGENTS.md`. For visual/design work, read `.design/CURRENT_DIRECTION.md`, then inspect only the implementation files directly required by the task.
 
-For animation work, treat the file map in `prototypes/editorial-systems/README.md` as the starting point and do not treat compatibility-only v1 data as current design authority.
+Continue accepted work rather than restarting from an older prototype or creating a competing implementation path.
 
 ## Architecture
 
-The public site and current prototype use static HTML, CSS, and JavaScript. No application build step is required.
+The public site and active Hero implementation use static HTML, CSS, and JavaScript. No application build step is required.
+
+For materially new animation architecture, validate the rendering approach before adding dependencies or committing to a full implementation.
 
 ## Deployment
 
