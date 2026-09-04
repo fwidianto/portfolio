@@ -1,19 +1,20 @@
-# Portfolio Agent Guardrails
+# Portfolio Agent Instructions
 
 ## Purpose
 
-This repository is a public recruiter-facing portfolio, not a general experimentation workspace. Preserve clarity, credibility, and the live site's stability.
+This repository is a public recruiter-facing portfolio. Preserve credibility, clarity, and the stability of accepted work.
 
 ## Authority
 
 Use this order:
 
-1. The user's current explicit request.
-2. This `AGENTS.md`.
-3. `docs/README.md` and only the directly relevant linked document.
-4. The current tested page/code.
+1. the owner's current explicit request;
+2. this `AGENTS.md`;
+3. `.design/CURRENT_DIRECTION.md` for current visual/design authority;
+4. `docs/README.md` for repository routing;
+5. the current tested implementation.
 
-Do not revive superseded plans, experiments, or historical branches unless explicitly asked.
+Do not reconstruct superseded plans, historical branches, or old animation authorities unless explicitly needed.
 
 ## Public identity
 
@@ -23,22 +24,12 @@ Public narratives should normally follow:
 
 ```text
 business problem
--> process understanding
--> business logic
+-> process understanding / business logic
 -> technology
 -> evidence / usable outcome
 ```
 
 Do not present Fauzan as a pure software developer, generic dashboard builder, or AI engineer. AI is an accelerator, not the identity.
-
-## Public project boundary
-
-Current featured direction is intentionally narrow:
-
-1. **Odoo Process Control Tower** — evolved from the earlier Odoo ERP Analytics work.
-2. **Telegram Codex Controller** — only where explicitly approved/published.
-
-Do not create new featured projects, project grids, or public links from dormant experiments without explicit instruction.
 
 ## Content integrity
 
@@ -46,35 +37,33 @@ Never invent or exaggerate projects, employers, metrics, business impact, techni
 
 Never expose confidential operational records, credentials, tokens, private repository content, PersonalOS material, internal prompts/logs, or unnecessary machine details.
 
-## Architecture boundary
+## Architecture
 
-The site is static HTML, CSS, and JavaScript deployed through GitHub Pages.
+The portfolio is static HTML, CSS, and JavaScript deployed through GitHub Pages.
 
-- Preserve the existing architecture unless the user explicitly requests a migration.
-- Reuse current styles/assets before adding dependencies.
-- Do not introduce React, Vite, Next.js, databases, backend services, or external UI frameworks for ordinary portfolio work.
-- Change the smallest number of files needed for the requested visible outcome.
+Preserve the existing architecture unless a different approach is explicitly approved. Reuse current code and assets before adding dependencies.
 
-## Execution rule
+For unfamiliar, materially visual, or architecture-sensitive work, validate the professional tool/rendering approach and relevant browser/performance constraints with a bounded proof before committing to the full implementation. Do not add a framework, rendering engine, library, backend, agent, or other layer unless it solves a demonstrated limitation better than the existing path.
+
+## Design and motion
+
+Follow `.design/CURRENT_DIRECTION.md`. Approved/frozen owner decisions outrank an older live appearance when developing an explicitly approved new direction.
+
+Motion should communicate sequence, connection, state, direction, or cause-and-effect. Materially visual work requires rendered desktop/mobile evidence; tests or DOM checks alone do not prove visual acceptance.
+
+## Execution
 
 For each task:
 
-1. Inspect the requested page and its direct dependencies.
-2. Define one bounded visible outcome.
-3. Make the smallest trustworthy change.
-4. Check relevant links, responsive behavior, console/runtime errors, and obvious regressions.
-5. Stop when the requested outcome works.
+1. establish the current implementation and approved outcome;
+2. continue or repair the existing path before creating a new one;
+3. resolve only uncertainties that could materially change the approach;
+4. make the smallest durable change that produces the requested visible result;
+5. verify the actual outcome and obvious regressions;
+6. stop when the acceptance condition passes.
 
-A new idea discovered during implementation is not automatically part of the task.
-
-## Design rule
-
-Preserve the approved live design unless redesign is explicitly requested. Avoid decorative complexity that weakens business clarity: neon-AI styling, glassmorphism, generic bento grids, terminal aesthetics as identity, unsupported charts/metrics, excessive glow, parallax, or motion without meaning.
-
-If motion is used, it should explain sequence, connection, state, direction, or cause-and-effect and should respect reduced-motion preferences.
+A discovered idea is not automatically a new task. Keep `Implemented`, `Technically validated`, and `Owner approved` distinct.
 
 ## Delivery
 
-Use one task-specific branch for meaningful changes. Keep the diff focused. Report changed files, validation performed, and anything intentionally left unchanged.
-
-When uncertain between a minimal solution and a broader redesign, choose the minimal solution and stop.
+Continue the existing task branch for ongoing work rather than creating another competing branch. Keep the diff focused and report changed files, validation performed, and anything intentionally left unchanged.
