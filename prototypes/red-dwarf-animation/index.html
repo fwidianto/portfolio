@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/svg+xml" href="Assets/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="../../Assets/favicon.svg">
 
   <!-- JSON-LD Structured Data for SEO -->
   <script type="application/ld+json">
@@ -93,7 +93,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/main.css?v=20260905-red-dwarf-spin">
+  <link rel="stylesheet" href="../../CSS/main.css?v=20260905-red-dwarf-spin">
 
   <style>
     /* homepage-hero-focus-removed-version: 20260703-v1 */
@@ -623,11 +623,93 @@
       0%, 100% { opacity: 0.42; filter: drop-shadow(0 0 2px rgba(255, 240, 220, 0.45)); transform: scale(0.88); }
       50% { opacity: 1.0; filter: drop-shadow(0 0 5px rgba(255, 240, 220, 0.95)) drop-shadow(0 0 11px rgba(255, 185, 130, 0.5)); transform: scale(1.18); }
     }
+    /* 14s Formation Layer & Replay Controls */
+    .hero-red-dwarf__formation-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      transition: opacity 0.6s ease-out;
+    }
+    .hero-red-dwarf__replay-btn {
+      position: absolute;
+      bottom: 12px;
+      right: clamp(10px, 3vw, 40px);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(14, 18, 28, 0.76);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(244, 239, 232, 0.18);
+      border-radius: 999px;
+      color: #f4efe8;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity 0.5s ease, background 0.2s ease, border-color 0.2s ease, transform 0.3s ease;
+      z-index: 10;
+    }
+    .hero-red-dwarf__replay-btn.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .hero-red-dwarf__replay-btn:hover {
+      background: rgba(28, 34, 48, 0.92);
+      border-color: rgba(255, 140, 60, 0.5);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .hero-red-dwarf__replay-btn:focus-visible {
+      outline: 2px solid #ff8c3c;
+      outline-offset: 3px;
+    }
+    .hero-red-dwarf__replay-icon {
+      width: 13px;
+      height: 13px;
+      color: #ff9d54;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .hero-red-dwarf__replay-btn:hover .hero-red-dwarf__replay-icon {
+      transform: rotate(-120deg);
+    }
+    .hero-red-dwarf__replay-kbd {
+      display: inline-block;
+      padding: 1px 5px;
+      font-size: 10px;
+      font-family: monospace;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 4px;
+      color: rgba(244, 239, 232, 0.75);
+    }
+    @media (max-width: 900px) {
+      .hero-red-dwarf__replay-btn {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin: 18px auto 0;
+      }
+    }
     @media (prefers-reduced-motion: reduce) {
       .hero-red-dwarf__night-sky .star {
         animation: none !important;
         opacity: 0.55 !important;
         transform: none !important;
+      }
+      .hero-red-dwarf__replay-btn,
+      .hero-red-dwarf__formation-canvas {
+        display: none !important;
       }
     }
   </style>
@@ -638,7 +720,7 @@
 
   <nav role="navigation" aria-label="Main navigation" style="border-bottom: none;">
     <div class="container nav-container">
-      <a href="index.html" class="logo" aria-label="Home - Fauzan Widianto Portfolio">FW.</a>
+      <a href="../../index.html" class="logo" aria-label="Home - Fauzan Widianto Portfolio">FW.</a>
 
     </div>
   </nav>
@@ -829,8 +911,14 @@
       </div>
 
       <div class="hero-red-dwarf__star-field" aria-label="Interactive 3D procedural red dwarf">
+        <canvas class="hero-red-dwarf__formation-canvas" aria-hidden="true"></canvas>
         <canvas class="hero-red-dwarf__canvas" aria-label="Interactive 3D procedural red dwarf" role="img"></canvas>
-        <img class="hero-red-dwarf__fallback" src="Assets/red-dwarf-phase3.webp" alt="" width="635" height="680" aria-hidden="true">
+        <img class="hero-red-dwarf__fallback" src="../../Assets/red-dwarf-phase3.webp" alt="" width="635" height="680" aria-hidden="true">
+        <button class="hero-red-dwarf__replay-btn" type="button" aria-label="Replay 14-second star formation animation (shortcut: R)" title="Replay 14-second star formation animation (R)">
+          <svg class="hero-red-dwarf__replay-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          <span class="hero-red-dwarf__replay-text">Replay Formation (14s)</span>
+          <kbd class="hero-red-dwarf__replay-kbd">R</kbd>
+        </button>
       </div>
     </div>
   </section>
@@ -844,7 +932,7 @@
 <span class="section-kicker">Flagship Project</span><h2 class="section-title">Odoo ERP Analytics</h2>
 <p class="odoo-board-lede">Turning scattered ERP transactions into practical operational visibility.</p>
 </div>
-<a class="odoo-board-cta" href="Projects/Odoo-ERP-Analytics.html">
+<a class="odoo-board-cta" href="../../Projects/Odoo-ERP-Analytics.html">
         View full Odoo case study
         <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
 </a>
@@ -1029,7 +1117,7 @@
       <div class="experience-list">
         <article class="experience-card">
           <div class="experience-logo-panel">
-            <img class="experience-logo experience-logo--nobi" src="Assets/logo-nobi.png" alt="Nobi Putra Angkasa logo">
+            <img class="experience-logo experience-logo--nobi" src="../../Assets/logo-nobi.png" alt="Nobi Putra Angkasa logo">
           </div>
           <div class="experience-content">
             <div class="experience-topline">
@@ -1079,7 +1167,7 @@
 
         <article class="experience-card">
           <div class="experience-logo-panel">
-            <img class="experience-logo experience-logo--traknus-astra" src="Assets/logo-traknus-astra-combined.png" alt="PT Traktor Nusantara and Astra logos">
+            <img class="experience-logo experience-logo--traknus-astra" src="../../Assets/logo-traknus-astra-combined.png" alt="PT Traktor Nusantara and Astra logos">
           </div>
           <div class="experience-content">
             <div class="experience-topline">
@@ -1104,7 +1192,7 @@
 
         <article class="experience-card">
           <div class="experience-logo-panel">
-            <img class="experience-logo experience-logo--traknus-astra" src="Assets/logo-traknus-astra-combined.png" alt="PT Traktor Nusantara and Astra logos">
+            <img class="experience-logo experience-logo--traknus-astra" src="../../Assets/logo-traknus-astra-combined.png" alt="PT Traktor Nusantara and Astra logos">
           </div>
           <div class="experience-content">
             <div class="experience-topline">
@@ -1470,7 +1558,7 @@
             <span class="website-update-strip__label">Website Updates</span>
             <h2 id="website-updates-title" class="website-update-strip__heading">Latest updates</h2>
           </div>
-          <a class="website-update-strip__link" href="website-updates.html">View all updates</a>
+          <a class="website-update-strip__link" href="../../website-updates.html">View all updates</a>
         </div>
 
         <ol class="website-update-strip__list" aria-label="Latest homepage website updates">
@@ -1778,7 +1866,9 @@
 <script>
 (function () {
   const canvas = document.querySelector('.hero-red-dwarf__canvas');
+  const formationCanvas = document.querySelector('.hero-red-dwarf__formation-canvas');
   const field = document.querySelector('.hero-red-dwarf__star-field');
+  const replayBtn = document.querySelector('.hero-red-dwarf__replay-btn');
   if (!canvas || !field) return;
 
   let gl = null;
@@ -1790,15 +1880,25 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let isReduced = reduceMotion.matches;
 
+  // Canonical WebGL parameters & state
+  const CANONICAL_FLARE_INTENSITY = 1.30;
+  const CANONICAL_FLARE_RAYS = 1.20;
+  const CANONICAL_PULSE_SPEED = 1.0;
+  const CANONICAL_PULSE_AMP = 1.4;
+  const CANONICAL_PLAGE_INTENSITY = 1.40;
+  const CANONICAL_SPOT_DEPTH = 1.0;
+  const CANONICAL_GRAN_SPEED = 1.0;
+  const CANONICAL_SPIN_SPEED = 0.4;
+
   const state = {
-    flareIntensity: 1.30,
-    flareRays: 1.20,
-    pulseSpeed: 1.0,
-    pulseAmp: 1.4,
-    plageIntensity: 1.40,
-    spotDepth: 1.0,
-    granSpeed: 1.0,
-    spinSpeed: 0.4,
+    flareIntensity: CANONICAL_FLARE_INTENSITY,
+    flareRays: CANONICAL_FLARE_RAYS,
+    pulseSpeed: CANONICAL_PULSE_SPEED,
+    pulseAmp: CANONICAL_PULSE_AMP,
+    plageIntensity: CANONICAL_PLAGE_INTENSITY,
+    spotDepth: CANONICAL_SPOT_DEPTH,
+    granSpeed: CANONICAL_GRAN_SPEED,
+    spinSpeed: CANONICAL_SPIN_SPEED,
     flareBurst: 0.0,
     isDragging: false
   };
@@ -1816,6 +1916,437 @@
   let lastPointerX = 0;
   let lastPointerY = 0;
 
+  // ==========================================
+  // 14-SECOND FORMATION TIMELINE ENGINE
+  // ==========================================
+  const FORMATION_DURATION = 14.0;
+  let formationTime = 0;
+  let isForming = !isReduced;
+  let formationComplete = isReduced;
+  let fCtx = formationCanvas ? formationCanvas.getContext('2d') : null;
+
+  // Deterministic Mulberry32 PRNG (seed: 0x5F3759DF)
+  function createPrng(seed) {
+    let s = seed | 0;
+    return function () {
+      s = (s + 0x6D2B79F5) | 0;
+      let t = Math.imul(s ^ (s >>> 15), 1 | s);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  const PARTICLE_COUNT = 380;
+  const KNOT_COUNT = 22;
+  let particles = [];
+  let knots = [];
+
+  function initFormationModel() {
+    const rng = createPrng(0x5F3759DF);
+    knots = [];
+    particles = [];
+
+    // 22 Primary Luminous Knots on spherical shell
+    for (let k = 0; k < KNOT_COUNT; k++) {
+      const y = 1 - (k / (KNOT_COUNT - 1)) * 2;
+      const radiusAtY = Math.sqrt(Math.max(0, 1 - y * y));
+      const theta = k * 2.3999632;
+      const x = Math.cos(theta) * radiusAtY;
+      const z = Math.sin(theta) * radiusAtY;
+
+      knots.push({
+        id: k,
+        nx: x,
+        ny: y,
+        nz: z,
+        startDistance: 1.6 + rng() * 1.6,
+        startAngle: rng() * Math.PI * 2,
+        startZ: (rng() - 0.5) * 1.3,
+        intensity: 0.85 + rng() * 0.65,
+        size: 3.5 + rng() * 2.5,
+        stagger: rng() * 0.8,
+        curvature: (rng() - 0.5) * 0.35
+      });
+    }
+
+    // Align knots to canonical plages
+    const canonicalPlages = [
+      { x: -0.25, y: 0.12, z: 0.92 },
+      { x: 0.42, y: 0.45, z: 0.75 },
+      { x: 0.35, y: -0.48, z: 0.78 },
+      { x: -0.05, y: 0.65, z: 0.72 }
+    ];
+    for (let p = 0; p < canonicalPlages.length && p < knots.length; p++) {
+      knots[p].nx = canonicalPlages[p].x;
+      knots[p].ny = canonicalPlages[p].y;
+      knots[p].nz = canonicalPlages[p].z;
+      knots[p].isPlage = true;
+      knots[p].intensity = 1.55;
+    }
+
+    // Align knots to canonical starspots
+    const canonicalSpots = [
+      { x: 0.18, y: -0.22, z: 0.95 },
+      { x: -0.45, y: -0.30, z: 0.82 }
+    ];
+    for (let s = 0; s < canonicalSpots.length && (s + 4) < knots.length; s++) {
+      knots[s + 4].nx = canonicalSpots[s].x;
+      knots[s + 4].ny = canonicalSpots[s].y;
+      knots[s + 4].nz = canonicalSpots[s].z;
+      knots[s + 4].isSpot = true;
+    }
+
+    // 380 Particles clustered around knots
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const knotIdx = i % KNOT_COUNT;
+      const knot = knots[knotIdx];
+
+      const jitterAngle = rng() * Math.PI * 2;
+      const jitterDist = rng() * 0.26;
+      const tx = knot.nx + Math.cos(jitterAngle) * jitterDist;
+      const ty = knot.ny + Math.sin(jitterAngle) * jitterDist;
+      const tz = knot.nz + (rng() - 0.5) * 0.2;
+      const tLen = Math.hypot(tx, ty, tz) || 1;
+
+      const initDist = 1.35 + rng() * 1.95;
+      const initAngle = knot.startAngle + (rng() - 0.5) * 0.9;
+      const initZ = (rng() - 0.5) * 1.4;
+
+      particles.push({
+        id: i,
+        knotIdx: knotIdx,
+        tx: tx / tLen,
+        ty: ty / tLen,
+        tz: tz / tLen,
+        initDist: initDist,
+        initAngle: initAngle,
+        initZ: initZ,
+        stagger: rng() * 1.0,
+        speedFactor: 0.85 + rng() * 0.35,
+        curveAmp: (rng() - 0.5) * 0.32,
+        radius: 1.2 + rng() * 2.2,
+        baseAlpha: 0.35 + rng() * 0.55
+      });
+    }
+  }
+
+  function easeInOutQuad(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+  function clamp(val, min, max) {
+    return Math.max(min, Math.min(max, val));
+  }
+
+  function updateFormation(dt) {
+    if (!isForming) return;
+    formationTime += dt;
+    const t = formationTime;
+
+    // Timeline breakdown (14.0s):
+    // Phase 0: 0.0 - 1.2s -> Prepared field (scattered matter, central negative space)
+    // Phase 1: 1.2 - 4.2s -> Directed gathering into embers & luminous knots
+    // Phase 2: 4.2 - 7.2s -> Coherent structure / tubuh berongga (hollow shell, 3D depth)
+    // Phase 3: 7.2 - 9.5s -> Surface inheritance & condensation into photosphere + ignition
+    // Phase 4: 9.5 - 11.8s -> Controlled convergence & damped overshoot
+    // Phase 5: 11.8 - 14.0s -> Canonical handoff & settle
+
+    if (t < 6.8) {
+      canvas.style.opacity = '0';
+      state.flareIntensity = 0.1;
+      state.flareRays = 0.1;
+      state.plageIntensity = 0.0;
+      state.spotDepth = 0.0;
+      state.flareBurst = 0.0;
+    } else if (t >= 6.8 && t < 9.5) {
+      const p = (t - 6.8) / (9.5 - 6.8);
+      const ep = easeInOutQuad(p);
+      canvas.style.opacity = ep.toFixed(3);
+      state.flareIntensity = 0.1 + ep * (CANONICAL_FLARE_INTENSITY - 0.1);
+      state.flareRays = 0.1 + ep * (CANONICAL_FLARE_RAYS - 0.1);
+      state.plageIntensity = ep * CANONICAL_PLAGE_INTENSITY;
+      state.spotDepth = ep * CANONICAL_SPOT_DEPTH;
+
+      // Ignition energy rise (smooth burst peak around t=8.4s)
+      if (t >= 7.6 && t <= 9.2) {
+        const burstP = (t - 7.6) / 1.6;
+        state.flareBurst = Math.sin(burstP * Math.PI) * 0.72;
+      } else {
+        state.flareBurst = 0.0;
+      }
+    } else if (t >= 9.5 && t < 11.8) {
+      const p = (t - 9.5) / (11.8 - 9.5);
+      canvas.style.opacity = '1';
+      state.flareIntensity = CANONICAL_FLARE_INTENSITY;
+      state.flareRays = CANONICAL_FLARE_RAYS;
+      state.plageIntensity = CANONICAL_PLAGE_INTENSITY;
+      state.spotDepth = CANONICAL_SPOT_DEPTH;
+
+      // Critical damped breathing overshoot (max ~3.8% at start, decaying smoothly)
+      const damping = Math.exp(-2.5 * p);
+      const overshoot = 0.038 * damping * Math.cos(p * Math.PI * 2.5);
+      state.pulseAmp = CANONICAL_PULSE_AMP * (1.0 + overshoot);
+      state.flareBurst = Math.max(0, state.flareBurst * 0.92);
+    } else {
+      canvas.style.opacity = '1';
+      state.flareIntensity = CANONICAL_FLARE_INTENSITY;
+      state.flareRays = CANONICAL_FLARE_RAYS;
+      state.pulseSpeed = CANONICAL_PULSE_SPEED;
+      state.pulseAmp = CANONICAL_PULSE_AMP;
+      state.plageIntensity = CANONICAL_PLAGE_INTENSITY;
+      state.spotDepth = CANONICAL_SPOT_DEPTH;
+      state.granSpeed = CANONICAL_GRAN_SPEED;
+      state.flareBurst = 0.0;
+    }
+
+    if (t >= FORMATION_DURATION) {
+      isForming = false;
+      formationComplete = true;
+      if (formationCanvas) {
+        formationCanvas.style.opacity = '0';
+        if (fCtx) fCtx.clearRect(0, 0, formationCanvas.width, formationCanvas.height);
+      }
+      if (replayBtn) replayBtn.classList.add('is-visible');
+    }
+  }
+
+  function renderFormation() {
+    if (!fCtx || !formationCanvas || formationComplete) return;
+
+    const w = formationCanvas.width;
+    const h = formationCanvas.height;
+    fCtx.clearRect(0, 0, w, h);
+
+    const t = formationTime;
+    if (t <= 0) return;
+
+    const cx = w * 0.5;
+    const cy = h * 0.5;
+    const minDim = Math.min(w, h);
+    const R_canonical = 0.355 * minDim;
+
+    // 3D rotation tracking canonical star axis
+    const sphereAngleY = (t * 0.18) % (Math.PI * 2);
+    const sphereAngleX = 0.22;
+
+    let shellRadiusMult = 1.0;
+    let formationFadeAlpha = 1.0;
+
+    if (t < 1.2) {
+      shellRadiusMult = 2.2;
+    } else if (t < 4.2) {
+      const p = (t - 1.2) / 3.0;
+      shellRadiusMult = 2.2 - easeInOutQuad(p) * 1.05;
+    } else if (t < 7.2) {
+      const p = (t - 4.2) / 3.0;
+      shellRadiusMult = 1.15 - p * 0.07;
+    } else if (t < 9.5) {
+      const p = (t - 7.2) / 2.3;
+      shellRadiusMult = 1.08 - easeInOutQuad(p) * 0.10;
+    } else if (t < 11.8) {
+      const p = (t - 9.5) / 2.3;
+      const overshoot = 0.035 * Math.exp(-2.2 * p) * Math.cos(p * Math.PI * 3.0);
+      shellRadiusMult = 1.0 + overshoot;
+      formationFadeAlpha = Math.max(0, 1.0 - easeInOutQuad(p));
+    } else {
+      const p = (t - 11.8) / 2.2;
+      formationFadeAlpha = Math.max(0, 1.0 - p);
+    }
+
+    if (formationFadeAlpha <= 0.001) return;
+
+    // Magnetic Filaments connecting knots during Phase 2 & 3 (hollow body)
+    if (t >= 3.8 && t < 10.0 && formationFadeAlpha > 0.05) {
+      const filamentAlpha = (t < 4.8 ? (t - 3.8) : t > 8.5 ? (10.0 - t) / 1.5 : 1.0) * 0.38 * formationFadeAlpha;
+      fCtx.save();
+      fCtx.lineWidth = 1.2;
+      for (let k = 0; k < knots.length; k++) {
+        const nextK = (k + 1) % knots.length;
+        const k1 = knots[k];
+        const k2 = knots[nextK];
+
+        const cosY = Math.cos(sphereAngleY);
+        const sinY = Math.sin(sphereAngleY);
+        const cosX = Math.cos(sphereAngleX);
+        const sinX = Math.sin(sphereAngleX);
+
+        const k1_rx = k1.nx * cosY - k1.nz * sinY;
+        const k1_rz = k1.nx * sinY + k1.nz * cosY;
+        const k1_ry = k1.ny * cosX - k1_rz * sinX;
+        const k1_z = k1.ny * sinX + k1_rz * cosX;
+
+        const k2_rx = k2.nx * cosY - k2.nz * sinY;
+        const k2_rz = k2.nx * sinY + k2.nz * cosY;
+        const k2_ry = k2.ny * cosX - k2_rz * sinX;
+        const k2_z = k2.ny * sinX + k2_rz * cosX;
+
+        const avgZ = (k1_z + k2_z) * 0.5;
+        const zAlpha = avgZ > 0 ? 1.0 : 0.25;
+
+        const x1 = cx + k1_rx * R_canonical * shellRadiusMult;
+        const y1 = cy - k1_ry * R_canonical * shellRadiusMult;
+        const x2 = cx + k2_rx * R_canonical * shellRadiusMult;
+        const y2 = cy - k2_ry * R_canonical * shellRadiusMult;
+
+        const grad = fCtx.createLinearGradient(x1, y1, x2, y2);
+        grad.addColorStop(0, `rgba(255, 120, 30, ${filamentAlpha * zAlpha})`);
+        grad.addColorStop(0.5, `rgba(255, 190, 70, ${filamentAlpha * zAlpha * 1.3})`);
+        grad.addColorStop(1, `rgba(255, 90, 20, ${filamentAlpha * zAlpha})`);
+
+        fCtx.strokeStyle = grad;
+        fCtx.beginPath();
+        fCtx.moveTo(x1, y1);
+        const mx = (x1 + x2) * 0.5 + (k1_rz - k2_rz) * 12;
+        const my = (y1 + y2) * 0.5 + (k1_rx - k2_rx) * 12;
+        fCtx.quadraticCurveTo(mx, my, x2, y2);
+        fCtx.stroke();
+      }
+      fCtx.restore();
+    }
+
+    // 3D Depth Sorting for Coherent Structure / Tubuh Berongga
+    const sortedParticles = [];
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      const localT = Math.max(0, t - p.stagger * 0.8);
+      let posX = 0;
+      let posY = 0;
+      let posZ = 0;
+      let pAlpha = p.baseAlpha * formationFadeAlpha;
+      let pRadius = p.radius;
+      let tempR = 255;
+      let tempG = 120;
+      let tempB = 40;
+
+      const cosY = Math.cos(sphereAngleY);
+      const sinY = Math.sin(sphereAngleY);
+      const cosX = Math.cos(sphereAngleX);
+      const sinX = Math.sin(sphereAngleX);
+
+      const target_rx = p.tx * cosY - p.tz * sinY;
+      const target_rz = p.tx * sinY + p.tz * cosY;
+      const target_ry = p.ty * cosX - target_rz * sinX;
+      const target_z = p.ty * sinX + target_rz * cosX;
+
+      const targetX = cx + target_rx * R_canonical * shellRadiusMult;
+      const targetY = cy - target_ry * R_canonical * shellRadiusMult;
+      const targetZ = target_z;
+
+      if (localT < 1.2) {
+        const appearP = clamp(localT / 0.8, 0, 1);
+        pAlpha *= appearP;
+        const curR = p.initDist * R_canonical;
+        const curAngle = p.initAngle + localT * 0.05;
+        posX = cx + Math.cos(curAngle) * curR;
+        posY = cy + Math.sin(curAngle) * curR;
+        posZ = p.initZ;
+        tempR = 220;
+        tempG = 100;
+        tempB = 50;
+      } else if (localT < 4.2) {
+        const gatherP = clamp((localT - 1.2) / 3.0, 0, 1);
+        const easeGather = easeInOutQuad(gatherP);
+        const curR = (p.initDist + (1.15 - p.initDist) * easeGather) * R_canonical;
+        const curAngle = p.initAngle + easeGather * p.curveAmp * Math.PI;
+
+        const scatteredX = cx + Math.cos(curAngle) * curR;
+        const scatteredY = cy + Math.sin(curAngle) * curR;
+
+        posX = scatteredX + (targetX - scatteredX) * easeGather;
+        posY = scatteredY + (targetY - scatteredY) * easeGather;
+        posZ = p.initZ + (targetZ - p.initZ) * easeGather;
+
+        pRadius = p.radius * (1.0 + easeGather * 0.45);
+        pAlpha = clamp(p.baseAlpha * (0.8 + easeGather * 0.5), 0, 1) * formationFadeAlpha;
+        tempR = 255;
+        tempG = Math.floor(80 + easeGather * 85);
+        tempB = Math.floor(25 + easeGather * 35);
+      } else if (localT < 7.2) {
+        posX = targetX;
+        posY = targetY;
+        posZ = targetZ;
+
+        // Front vs Back depth rendering creates visible "tubuh berongga" (hollow sphere)
+        const depthFactor = (posZ + 1.0) * 0.5;
+        pRadius = p.radius * (0.75 + depthFactor * 0.65);
+        pAlpha = clamp(p.baseAlpha * (0.4 + depthFactor * 0.8), 0, 1) * formationFadeAlpha;
+
+        if (depthFactor > 0.6) {
+          tempR = 255;
+          tempG = 175;
+          tempB = 60;
+        } else {
+          tempR = 200;
+          tempG = 45;
+          tempB = 20;
+        }
+      } else {
+        posX = targetX;
+        posY = targetY;
+        posZ = targetZ;
+
+        const depthFactor = (posZ + 1.0) * 0.5;
+        pRadius = p.radius * (0.8 + depthFactor * 0.5);
+        pAlpha = clamp(p.baseAlpha * (0.5 + depthFactor * 0.6), 0, 1) * formationFadeAlpha;
+
+        tempR = 255;
+        tempG = Math.floor(110 + depthFactor * 90);
+        tempB = Math.floor(30 + depthFactor * 40);
+      }
+
+      sortedParticles.push({
+        x: posX,
+        y: posY,
+        z: posZ,
+        radius: pRadius,
+        alpha: pAlpha,
+        r: tempR,
+        g: tempG,
+        b: tempB
+      });
+    }
+
+    // Sort ascending by depth Z (back to front)
+    sortedParticles.sort((a, b) => a.z - b.z);
+
+    fCtx.save();
+    for (let i = 0; i < sortedParticles.length; i++) {
+      const sp = sortedParticles[i];
+      if (sp.alpha <= 0.01) continue;
+
+      const rad = Math.max(1, sp.radius);
+      const glowRad = rad * 2.8;
+      const grad = fCtx.createRadialGradient(sp.x, sp.y, 0, sp.x, sp.y, glowRad);
+      grad.addColorStop(0, `rgba(${sp.r}, ${sp.g}, ${sp.b}, ${sp.alpha})`);
+      grad.addColorStop(0.4, `rgba(${sp.r}, ${Math.floor(sp.g * 0.7)}, ${Math.floor(sp.b * 0.4)}, ${sp.alpha * 0.65})`);
+      grad.addColorStop(1, `rgba(${sp.r}, ${Math.floor(sp.g * 0.4)}, 0, 0)`);
+
+      fCtx.fillStyle = grad;
+      fCtx.beginPath();
+      fCtx.arc(sp.x, sp.y, glowRad, 0, Math.PI * 2);
+      fCtx.fill();
+
+      if (sp.z > 0.2 && sp.alpha > 0.3) {
+        fCtx.fillStyle = `rgba(255, 245, 210, ${sp.alpha * 0.85})`;
+        fCtx.beginPath();
+        fCtx.arc(sp.x, sp.y, rad * 0.45, 0, Math.PI * 2);
+        fCtx.fill();
+      }
+    }
+    fCtx.restore();
+  }
+
+  function restartFormation() {
+    if (isReduced) return;
+    formationTime = 0;
+    isForming = true;
+    formationComplete = false;
+    if (replayBtn) replayBtn.classList.remove('is-visible');
+    if (formationCanvas) formationCanvas.style.opacity = '1';
+    initFormationModel();
+  }
+
+  // Canonical Vertex Shader
   const vsSource = `
     attribute vec2 a_position;
     void main() {
@@ -1823,6 +2354,7 @@
     }
   `;
 
+  // Canonical Fragment Shader (Exact 9 dimensions preserved)
   const fsSource = `
     precision highp float;
 
@@ -2049,6 +2581,10 @@
       canvas.width = width;
       canvas.height = height;
     }
+    if (formationCanvas && (formationCanvas.width !== width || formationCanvas.height !== height)) {
+      formationCanvas.width = width;
+      formationCanvas.height = height;
+    }
     if (gl) gl.viewport(0, 0, canvas.width, canvas.height);
   }
 
@@ -2058,6 +2594,9 @@
 
     if (!isReduced) {
       simTime += dt;
+      if (isForming) {
+        updateFormation(dt);
+      }
       if (!state.isDragging) {
         velX *= 0.92;
         velY *= 0.92;
@@ -2093,7 +2632,11 @@
 
     gl.drawArrays(gl.TRIANGLES, 0, 6);
 
-    if (!isReduced || state.isDragging) {
+    if (isForming) {
+      renderFormation();
+    }
+
+    if (!isReduced || state.isDragging || isForming) {
       raf = requestAnimationFrame(render);
     }
   }
@@ -2137,6 +2680,9 @@
   function onMotionChange(e) {
     isReduced = e.matches;
     if (isReduced) {
+      isForming = false;
+      formationComplete = true;
+      if (formationCanvas && fCtx) fCtx.clearRect(0, 0, formationCanvas.width, formationCanvas.height);
       state.isDragging = false;
       activePointerId = null;
       field.classList.remove('is-dragging');
@@ -2144,11 +2690,21 @@
       targetRotY = 0;
       rotX = 0;
       rotY = 0;
+      canvas.style.opacity = '1';
+      state.flareIntensity = CANONICAL_FLARE_INTENSITY;
+      state.flareRays = CANONICAL_FLARE_RAYS;
+      state.pulseSpeed = CANONICAL_PULSE_SPEED;
+      state.pulseAmp = CANONICAL_PULSE_AMP;
+      state.plageIntensity = CANONICAL_PLAGE_INTENSITY;
+      state.spotDepth = CANONICAL_SPOT_DEPTH;
+      state.granSpeed = CANONICAL_GRAN_SPEED;
+      state.flareBurst = 0.0;
       cancelAnimationFrame(raf);
       requestAnimationFrame(render);
     } else {
       cancelAnimationFrame(raf);
       lastTime = performance.now();
+      restartFormation();
       raf = requestAnimationFrame(render);
     }
   }
@@ -2193,6 +2749,7 @@
         loc[name] = gl.getUniformLocation(program, name);
       });
 
+      initFormationModel();
       resize();
       window.addEventListener('resize', resize, { passive: true });
 
@@ -2200,6 +2757,16 @@
       window.addEventListener('pointermove', onPointerMove, { passive: false });
       window.addEventListener('pointerup', onPointerUp);
       window.addEventListener('pointercancel', onPointerUp);
+
+      if (replayBtn) {
+        replayBtn.addEventListener('click', restartFormation);
+      }
+      window.addEventListener('keydown', function (e) {
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+        if (e.key === 'r' || e.key === 'R') {
+          restartFormation();
+        }
+      });
 
       if (typeof reduceMotion.addEventListener === 'function') {
         reduceMotion.addEventListener('change', onMotionChange);
