@@ -1937,15 +1937,50 @@
     };
   }
 
+  const STREAMLINE_COUNT = 36;
   const PARTICLE_COUNT = 380;
   const KNOT_COUNT = 22;
+  let streamlines = [];
   let particles = [];
   let knots = [];
 
   function initFormationModel() {
     const rng = createPrng(0x5F3759DF);
+    streamlines = [];
     knots = [];
     particles = [];
+
+    // 36 Gravitational Streamlines pulling inwards towards center
+    for (let s = 0; s < STREAMLINE_COUNT; s++) {
+      const baseAngle = (s / STREAMLINE_COUNT) * Math.PI * 2;
+      const angle = baseAngle + (rng() - 0.5) * 0.18;
+      const outerDist = 1.55 + rng() * 1.35;
+      const spiralDirection = (s % 2 === 0 ? 1 : -1);
+      const curvature = spiralDirection * (0.35 + rng() * 0.35);
+      const stagger = rng() * 1.2;
+      const speed = 0.85 + rng() * 0.35;
+      const width = 1.0 + rng() * 1.5;
+      const emberCount = 3 + Math.floor(rng() * 3);
+      const embers = [];
+      for (let e = 0; e < emberCount; e++) {
+        embers.push({
+          offset: e / emberCount + (rng() - 0.5) * 0.15,
+          speedMult: 0.8 + rng() * 0.45,
+          size: 1.4 + rng() * 2.2,
+          heat: 0.5 + rng() * 0.5
+        });
+      }
+      streamlines.push({
+        id: s,
+        angle: angle,
+        outerDist: outerDist,
+        curvature: curvature,
+        stagger: stagger,
+        speed: speed,
+        width: width,
+        embers: embers
+      });
+    }
 
     // 22 Primary Luminous Knots on spherical shell
     for (let k = 0; k < KNOT_COUNT; k++) {
@@ -1997,7 +2032,7 @@
       knots[s + 4].isSpot = true;
     }
 
-    // 380 Particles clustered around knots
+    // 380 Particles clustered around knots & streamlines
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const knotIdx = i % KNOT_COUNT;
       const knot = knots[knotIdx];
