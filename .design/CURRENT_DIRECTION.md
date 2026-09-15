@@ -83,20 +83,30 @@ Narrative intent:
 
 `different engineering experiences -> repeated observation and experimentation -> a coherent engineering method -> readiness for industrial reality`
 
-The previously implemented single thermal-fluid-mechanical study rig is accepted as useful motion material, but it is **not the final Scene 02 composition**.
+The isolated five-experiment Animation Lab is now accepted as the visual material for active Scene 02 integration. Preserve the experiment concepts and their successful scientific / engineering character.
 
-The active Scene 02 v2 direction is:
+Approved five stations:
+
+- Thermodynamics / Heat;
+- Measurement / Instrumentation;
+- Mechanics / Geometry;
+- Control / Response;
+- Data / Statistics / Pattern.
+
+Scientific formulas, notation, gauges, traces, construction geometry, and other technical attributes may remain where they improve the visual experience. They are generic engineering animation language, not autobiographical facts or verified historical measurements, and must not be presented as such.
+
+The active Scene 02 composition remains:
 
 - five compact engineering experiment stations;
 - arranged as a cinematic **arc / constellation**, not a card grid;
 - one traveling warm node carries continuity from Scene 01 and visits the experiments sequentially;
 - only one station visually dominates at a time while the other four remain quiet and present;
-- experiments represent Thermodynamics / Heat, Measurement / Instrumentation, Mechanics / Geometry, Control / Response, and Data / Statistics / Pattern;
-- direct click / tap / bounded drag interaction should make each experiment visibly react after the automatic sequence settles;
-- the current single-rig animation may be reduced in scale and adapted as one station rather than discarded;
-- main-scene text remains near-zero;
+- click / tap / bounded drag interaction should make each experiment visibly react after the automatic sequence settles;
+- main-scene prose remains near-zero;
 - after all five stations are visited, their learned behaviors converge into one coherent signal that exits toward the 2018 Astra Agro Lestari palm-oil mill chapter;
 - Scene 03 itself must not be implemented until owner approval of Scene 02.
+
+The earlier single thermal-fluid-mechanical Scene 02 rig is still considered valuable motion work but is no longer the active composition. Preserve it as a runnable archived prototype rather than deleting or overwriting it. It may be reused elsewhere later if the owner chooses.
 
 The bounded implementation instructions live in:
 
