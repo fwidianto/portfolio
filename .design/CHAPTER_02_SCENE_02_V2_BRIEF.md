@@ -14,15 +14,25 @@ Authority order remains:
 
 If any older prototype, generated reference, or local implementation conflicts with the above, the higher authority wins.
 
+## Current owner decision
+
+The isolated **five-experiment animation lab is accepted as the active visual material for Scene 02 integration**. Its scientific notation, formulas, gauges, traces, geometric construction, and related engineering attributes are intentionally part of the visual appeal and should be preserved where they improve the experience.
+
+Important factual guardrail: those formulas / values are generic engineering animation language, not autobiographical claims, verified coursework measurements, or historical results. Do not present them as facts from Fauzan's education.
+
+The earlier single thermal-fluid-mechanical rig animation is also worth preserving, but it is no longer the active Scene 02 hero composition. Preserve it as a runnable archived prototype before replacing the live Scene 02 implementation. Prefer a clearly non-authoritative location such as:
+
+`prototypes/new-portfolio-animation-first/archive/scene02-single-rig/`
+
+Do not delete or overwrite the original motion work merely to make the five-experiment composition easier to implement.
+
 ## Scope boundary
 
 Work only in the existing animation-first Chapter 02 prototype path:
 
 `prototypes/new-portfolio-animation-first/`
 
-Preserve the approved Red Dwarf Hero and approved Scene 01. Do not redesign or retune them. Do not touch root production files. Do not proceed into Scene 03 implementation. Stop after Scene 02 v2 is rendered and ready for owner review.
-
-The existing single-rig Scene 02 is useful material, not a failed direction. Preserve its successful motion language and reuse/adapt it where useful instead of discarding it wholesale.
+Preserve the approved Red Dwarf Hero and approved Scene 01. Do not redesign or retune them. Do not touch root production files. Do not proceed into Scene 03 implementation. Stop after the five-experiment Scene 02 composition is integrated, rendered, and ready for owner review.
 
 ## Fixed visual continuity
 
@@ -41,128 +51,100 @@ The background is continuity, not the subject. The eye should stay on the engine
 
 Scene 02 is about **learning how to think like an engineer**.
 
-It is not a curriculum list and not the story of one laboratory rig. The intended progression is:
+Narrative progression:
 
 `different engineering experiences -> repeated observation and experimentation -> a coherent engineering method -> readiness for industrial reality`
 
-The visitor should feel that multiple engineering fragments gradually became one repeatable way of approaching problems.
+The visitor should feel that multiple engineering experiences gradually became one repeatable way of approaching problems.
 
-## Composition — Option A: arc / constellation
+## Integration target — Option A: arc / constellation
 
-Replace the single large apparatus composition with **five compact engineering experiment stations arranged as one cinematic arc / constellation**.
+Replace the current single-rig Scene 02 presentation with the **five already-built experiment animations** from the isolated Experiment Animation Lab, arranged as one cinematic arc / constellation.
 
-Do not render them as five cards, five dashboard panels, or a rigid grid. They should feel like five physical study objects sharing one scene and one visual system.
+Do not rebuild the experiments from scratch unless integration exposes a real defect. Reuse the working lab modules and their current successful motion / interaction language.
 
-The current single thermal-fluid-mechanical rig should be reduced in scale and adapted as one of the stations if it remains visually useful. Do not simply clone the same rig five times.
+The five active stations are:
 
-Use five distinct experiment behaviors:
+1. **Thermodynamics / Heat** — heating element / thermal response / heat propagation.
+2. **Measurement / Instrumentation** — gauge / sensor / transient trace response.
+3. **Mechanics / Geometry** — kinematic mechanism / construction geometry / motion.
+4. **Control / Response** — disturbance / oscillation / correction / stabilization.
+5. **Data / Statistics / Pattern** — stochastic scatter / convergence / stable distribution or pattern.
 
-1. **Thermodynamics / Heat**
-   - compact vessel, coil, thermal body, or equivalent;
-   - visible heat pulse / gradient / energy response.
+Scientific notation, formulas, instrumentation marks, and technical overlays may remain because the owner explicitly likes this character. Keep them visually subordinate to the moving object itself and avoid turning the scene into a static textbook page or dashboard.
 
-2. **Measurement / Instrumentation**
-   - gauge, probe, sensor, trace, or equivalent;
-   - needle / signal / measured response activates.
-
-3. **Mechanics / Geometry**
-   - linkage, lever, rotating body, mechanism, or equivalent;
-   - motion plus restrained construction / geometric overlay.
-
-4. **Control / Response**
-   - a small system that can oscillate or deviate;
-   - feedback / correction visibly damps and stabilizes it.
-
-5. **Data / Statistics / Pattern**
-   - compact physical or abstract measurement object;
-   - scattered readings / points / trace resolve into a recognizable stable pattern.
-
-These are visual metaphors for engineering foundations. Do not present invented numeric results, invented coursework outcomes, or generated technical values as facts from Fauzan's history.
+Do not render the five experiments as cards, five dashboard panels, or a rigid grid. They should feel like five physical study objects sharing one visual field.
 
 ## Traveling signal — continuity thread
 
-Continue the **single warm node / carrier signal** established by the previous chapter transition.
+Continue the **single warm node / carrier signal** established by Scene 01.
 
-The signal enters Scene 02 and travels along the arc from one experiment to another.
+The node should enter Scene 02 and travel along the arc from one experiment to another.
 
 At each station:
 
 - the node arrives;
-- that station becomes the dominant active object;
-- its characteristic experiment animation plays;
-- the other four stations remain present but quiet, dimmer, and non-competing;
+- that experiment becomes the dominant active object;
+- its characteristic animation plays;
+- the other four remain present but quieter and non-competing;
 - the node then departs toward the next station.
 
-Only one station should visually dominate at a time. Avoid five simultaneous hero animations.
-
-The node is the storytelling thread: it represents experience accumulating rather than a decorative cursor.
+Only one station should visually dominate at a time. The node represents accumulating experience rather than a decorative cursor.
 
 ## Interaction after the automatic sequence
 
-After the five-station sequence settles, the experiments should remain explorable.
+After the automatic five-station sequence settles, all five experiments remain explorable.
 
-Each station should respond when the visitor directly interacts with it. Prefer simple, tactile behavior:
+Preserve / adapt the lab interactions so the object itself reacts:
 
-- click / tap the experiment to replay or perturb its micro-animation;
-- pointer drag may manipulate a meaningful parameter when practical;
-- the object itself should visibly react rather than opening a generic UI panel.
+- click / tap should replay, perturb, or activate the station;
+- bounded pointer drag may manipulate a meaningful property when practical;
+- heat may pulse / warm / cool;
+- measurement may move a gauge and redraw a trace;
+- mechanics may rotate / articulate / alter its kinematic motion;
+- control may be disturbed and then stabilize;
+- data may scatter and reconverge.
 
-Examples:
-
-- heat station pulses / warms / cools;
-- measurement station moves its gauge and redraws a trace;
-- mechanics station rotates or articulates;
-- control station is disturbed and then stabilizes;
-- data station scatters and reconverges.
-
-Keep interactions bounded, understandable, performant, keyboard-accessible where applicable, and compatible with reduced-motion preferences. Do not add a framework or heavy rendering dependency unless the current static HTML/CSS/JS approach demonstrably cannot support the required interaction.
+Interaction should remain tactile, understandable, performant, keyboard-accessible where applicable, and reduced-motion aware.
 
 ## Text and information density
 
-The main Scene 02 surface should remain essentially textless.
+The main Scene 02 surface should remain essentially textless apart from the scientific / engineering marks that are visually integral to the experiment objects.
 
 Do not add:
 
 - curriculum cards;
 - explanatory paragraphs;
-- five subject headings floating over the objects;
-- telemetry dashboards;
-- repeated labels that compete with the motion.
+- five large subject headings;
+- generic telemetry dashboard containers;
+- repeated labels competing with motion.
 
-If a settled inspectable artifact remains useful, it may reveal concise context such as:
-
-- `Engineering Foundations · 2015–2017`
-- `Thermodynamics · Measurement · Mechanics · Control · Statistics`
-- `Different subjects gradually became one way of approaching problems.`
-
-The inspect layer is secondary. The scene must communicate its intent through motion even when that text is hidden.
+A secondary inspectable artifact may still reveal concise context if it improves comprehension, but the main scene must communicate through motion.
 
 ## Ending — bridge to Scene 03
 
 After all five stations have been visited:
 
-- allow the five learned behaviors / traces to briefly feel connected;
+- briefly connect or synchronize the five learned behaviors / traces;
 - converge their warm accents into one coherent carrier signal;
-- let one stronger signal leave the academic experiment field;
+- let that single stronger signal leave the academic experiment field;
 - direct it toward the next chapter: **Astra Agro Lestari palm-oil mill industrial reality**.
 
-Do not build the palm-oil mill scene yet. A restrained destination cue / trajectory is sufficient.
+Do not build the palm-oil mill scene yet. A restrained trajectory / destination cue is sufficient.
 
 Important factual guardrail: Scene 03 is the 2018 Astra Agro Lestari palm-oil mill internship in Central Kalimantan, not automotive Astra.
 
 ## Reference composition
 
-Owner-selected visual direction: **Option A — arc / constellation**.
+Owner-selected composition remains **Option A — arc / constellation**.
 
-The reference image generated during design discussion depicts five compact experiment pedestals distributed across a broad shallow arc, connected by one dotted warm trajectory. It is a composition and attention-flow reference only, not factual or mechanical authority.
-
-Translate that reference into the existing Red Dwarf / Chapter 02 design language rather than copying generated machinery literally. Real portfolio facts and current governing files outrank generated reference imagery.
+The generated reference image is a composition / attention-flow guide only. Do not copy generated machinery literally. The existing Experiment Animation Lab modules are now the stronger implementation reference for the five objects.
 
 ## Responsive behavior
 
 Desktop should preserve the broad cinematic arc and large negative space.
 
-Mobile should preserve the same narrative order and one-active-station-at-a-time behavior, but may compress or reflow the arc into a narrower curved / vertical journey. Do not solve mobile by turning the stations into a conventional card list.
+Mobile should preserve the same narrative order and one-active-station-at-a-time behavior, but may compress or reflow the arc into a narrower curved / vertical journey. Do not turn mobile into a conventional card list.
 
 ## Acceptance evidence
 
@@ -173,20 +155,26 @@ Render and inspect at minimum:
 - node activating an early station;
 - node activating a later station;
 - settled interactive state;
-- one direct interaction response;
+- one or more direct interaction responses;
 - final converged exit signal toward Astra.
 
 ### Mobile — 390x844
 - five-station responsive composition;
 - active station state;
-- settled state;
+- settled interactive state;
 - one interaction response;
 - exit state.
 
-Verify syntax/runtime behavior and obvious regressions, but rendered evidence is mandatory for visual acceptance.
+Also verify that the preserved single-rig archive remains runnable / inspectable and that Hero + Scene 01 are unchanged.
 
 ## Stop condition
 
-Stop when Scene 02 v2 is implemented, technically validated, and rendered for owner review.
+Stop when:
+
+1. the original single-rig animation is safely preserved elsewhere;
+2. the five accepted Experiment Lab animations replace it in active Scene 02;
+3. the arc / constellation and traveling-node sequence are integrated;
+4. direct experiment interactions still work;
+5. desktop and mobile rendered evidence is ready for owner review.
 
 Do not proceed to Scene 03. Only the owner can mark the Scene 02 visual result as approved.
