@@ -37,6 +37,73 @@ The approved formation story is:
 - Replay and restrained interaction may be added only when they preserve the approved composition.
 - Reduced-motion behavior is required.
 
+## Chapter 02 — approved continuity rules
+
+Chapter 02 continues directly from the frozen Hero and must feel like the same visual universe rather than a separate application surface.
+
+### Shared background
+
+Chapter 01 and Chapter 02 use the same atmospheric background language:
+
+- near-black / charcoal night sky;
+- sparse distant stars;
+- subtle asynchronous blinking / twinkling;
+- restrained warm signal accents;
+- large negative space.
+
+The sky is persistent continuity. It must not become a dense starfield, decorative spectacle, dashboard canvas, or competing visual subject.
+
+### Scene 01 — owner approved
+
+Scene 01, **Stars to Campus**, is approved as the current Chapter 02 baseline.
+
+Narrative intent:
+
+`entering a larger academic world -> gradually finding a place within Mechanical Engineering`
+
+Approved characteristics:
+
+- one warm signal / node descends from the Hero into Scene 01;
+- the signal gradually decelerates rather than looping or multiplying;
+- the broader International Engineering cohort remains present;
+- the smaller Mechanical Engineering group becomes the focus without implying elimination, ranking, or winners;
+- the Makara / Universitas Indonesia artifact is the institutional focal object;
+- avoid duplicate standalone `Universitas Indonesia` text when the identity is already carried by the Makara artifact;
+- main-scene visible text stays extremely restrained;
+- inspection may reveal factual context without turning the scene into a data form or dashboard;
+- preserve the same night-sky background language as the Hero.
+
+Do not redesign Scene 01 unless the owner explicitly reopens it.
+
+### Scene 02 — active approved direction
+
+Scene 02 is about **learning how to think like an engineer**.
+
+Narrative intent:
+
+`different engineering experiences -> repeated observation and experimentation -> a coherent engineering method -> readiness for industrial reality`
+
+The previously implemented single thermal-fluid-mechanical study rig is accepted as useful motion material, but it is **not the final Scene 02 composition**.
+
+The active Scene 02 v2 direction is:
+
+- five compact engineering experiment stations;
+- arranged as a cinematic **arc / constellation**, not a card grid;
+- one traveling warm node carries continuity from Scene 01 and visits the experiments sequentially;
+- only one station visually dominates at a time while the other four remain quiet and present;
+- experiments represent Thermodynamics / Heat, Measurement / Instrumentation, Mechanics / Geometry, Control / Response, and Data / Statistics / Pattern;
+- direct click / tap / bounded drag interaction should make each experiment visibly react after the automatic sequence settles;
+- the current single-rig animation may be reduced in scale and adapted as one station rather than discarded;
+- main-scene text remains near-zero;
+- after all five stations are visited, their learned behaviors converge into one coherent signal that exits toward the 2018 Astra Agro Lestari palm-oil mill chapter;
+- Scene 03 itself must not be implemented until owner approval of Scene 02.
+
+The bounded implementation instructions live in:
+
+`.design/CHAPTER_02_SCENE_02_V2_BRIEF.md`
+
+Generated concept imagery is composition / motion reference only and must not override factual assets, owner decisions, or repository governance.
+
 ## Current implementation rule
 
 Phase 1 of the Red Dwarf Hero exists on the active implementation branch. Preserve accepted work and develop from it rather than restarting the Hero.
@@ -47,7 +114,7 @@ Do not introduce Three.js, WebGL, a framework, animation library, or other depen
 
 ## Scope
 
-- No full-page redesign is currently approved.
+- No production full-page redesign is currently approved.
 - Historical Editorial Systems / Connect-Integrate-Output animation work is not current Hero design authority.
 - Supporting visual references may inform visual judgment, but they are lessons rather than templates and do not override approved owner decisions.
 - Desktop and mobile rendered evidence are required for owner acceptance of materially visual changes.
