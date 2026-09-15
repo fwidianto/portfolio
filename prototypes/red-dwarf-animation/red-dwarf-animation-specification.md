@@ -1,8 +1,7 @@
-# Spesifikasi Animasi Pembentukan Red Dwarf
+# Spesifikasi Animasi Pembentukan Red Dwarf (Frozen Implementation Reference)
 
-**Status:** spesifikasi dasar untuk prototype; belum merupakan implementasi dan belum mendapat owner approval  
-**Durasi yang diizinkan:** 12–16 detik  
-**Durasi default yang direkomendasikan:** 14 detik  
+**Status:** implementasi existing yang dirujuk oleh dokumen ini telah disetujui owner as-is dan harus dipertahankan persis; dokumen ini adalah kontrak preservasi, bukan izin untuk membuat ulang atau mengubah sequence
+**Durasi tetap:** approximately 14 detik; tidak ada preset durasi lain
 **Sumber visual tunggal:** `../../index.html` — approved/canonical Red Dwarf pada repository Portfolio
 
 ---
@@ -47,31 +46,27 @@ Pada awal sequence, halaman boleh menampilkan komposisi hero yang sama dengan fo
 
 ---
 
-## 4. Timing Default: 14 Detik
+## 4. Timing Tetap: 14 Detik
 
 | Fase | Waktu | Durasi | Fungsi |
 |---|---:|---:|---|
-| 0. Prepared field | 0.0–1.2 s | 1.2 s | Material tersebar mulai terlihat secara tenang di area tujuan star. |
-| 1. Directed gathering | 1.2–4.2 s | 3.0 s | Kelompok material mulai bergerak ke pusat gravitasi bersama secara bertahap. |
-| 2. Coherent structure | 4.2–7.2 s | 3.0 s | Kepadatan meningkat; body/protostar terbentuk dari material yang sama. |
-| 3. Surface inheritance and ignition | 7.2–9.5 s | 2.3 s | Detail permukaan, hot regions, dan energi Red Dwarf mulai terbaca tanpa ledakan. |
-| 4. Controlled convergence | 9.5–11.8 s | 2.3 s | Bentuk dan ukuran mendekati proporsi approved dengan damping yang halus. |
-| 5. Canonical handoff and settle | 11.8–14.0 s | 2.2 s | Ownership berpindah tanpa lompatan ke canonical renderer; endpoint mencapai keadaan approved. |
+| 0. Prepared field | 0.0–1.4 s | 1.4 s | Material tersebar muncul dengan central negative space tetap terbaca. |
+| 1. Directed inward gathering | 1.4–4.8 s | 3.4 s | Material bergerak bertahap menuju shared gravitational center melalui streamlines dan infalling embers. |
+| 2. Gravitational condensation | 4.8–6.8 s | 2.0 s | Material mengembun menuju persistent protostar core. |
+| 3. Thermonuclear ignition | 6.8–7.6 s | 0.8 s | Energi ignition meningkat secara terkontrol tanpa generic explosion. |
+| 4. Continuous expansion and controlled peak | 7.6–10.2 s | 2.6 s | Core mengembang menuju Red Dwarf dan mencapai controlled overshoot. |
+| 5. Damped settlement | 10.2–13.0 s | 2.8 s | Overshoot mereda menuju exact canonical scale dan state. |
+| 6. Canonical handoff and settle | 13.0–14.0 s | 1.0 s | Formation layer berhenti dan ownership terlihat stabil pada canonical renderer. |
 
-### Rentang 12–16 detik
+Implementasi existing menggunakan satu sequence approximately 14 detik. Timing ini telah disetujui dan tidak boleh dipendekkan ke brief lama 8–10 detik, diperpanjang dengan preset baru, atau diubah secara proporsional.
 
-Durasi default 14 detik menjadi titik tengah review. Implementasi boleh menyediakan durasi 12–16 detik hanya dengan mengubah timing sequence secara proporsional atau memakai preset yang eksplisit.
-
-- Jangan mempercepat fase gathering secara ekstrem untuk memenuhi 12 detik.
-- Jangan menambah efek baru hanya untuk mengisi 16 detik.
-- Waktu handoff dan settle harus tetap cukup panjang untuk mencegah kesan “tiba-tiba menjadi Red Dwarf”.
-- Preset default harus menjadi satu-satunya preset yang digunakan selama validasi awal.
+Jangan mempercepat, memperlambat, atau membuat preset alternatif. Implementasi 14 detik yang ada adalah satu-satunya timing authority untuk Hero animation ini.
 
 ---
 
 ## 5. Behavior Tiap Fase
 
-### Fase 0 — Prepared field: 0.0–1.2 detik
+### Fase 0 — Prepared field: 0.0–1.4 detik
 
 - Tampilkan material sebagai node/fragment kecil dengan variasi ukuran dan brightness yang terbatas.
 - Distribusi harus terasa tersebar, tetapi tetap memiliki hubungan dengan area tujuan Red Dwarf.
@@ -79,7 +74,7 @@ Durasi default 14 detik menjadi titik tengah review. Implementasi boleh menyedia
 - Kemunculan staggered dan gradual; tidak boleh berupa flash atau strobe.
 - Jangan membuat particle wallpaper padat yang bersaing dengan copy.
 
-### Fase 1 — Directed gathering: 1.2–4.2 detik
+### Fase 1 — Directed gathering: 1.4–4.8 detik
 
 - Setiap particle memiliki target position yang diturunkan dari silhouette/surface approved Red Dwarf.
 - Gerak utama selalu inward menuju shared gravitational center.
@@ -88,7 +83,7 @@ Durasi default 14 detik menjadi titik tengah review. Implementasi boleh menyedia
 - Sebagian material boleh tertinggal sementara, tetapi arah akhirnya harus tetap jelas.
 - Kecepatan berkurang saat particle mendekati target; hindari tabrakan visual dan crossing yang tidak bermakna.
 
-### Fase 2 — Coherent structure: 4.2–7.2 detik
+### Fase 2 — Gravitational condensation: 4.8–6.8 detik
 
 - Material yang sudah berkumpul mulai membentuk body yang koheren.
 - Kepadatan, opacity, dan overlap meningkat secara bertahap dari particle yang sama.
@@ -97,21 +92,21 @@ Durasi default 14 detik menjadi titik tengah review. Implementasi boleh menyedia
 - Jangan menggambar radial-gradient sphere sederhana sebagai pengganti renderer.
 - Jangan melakukan cut dari particle field ke objek baru.
 
-### Fase 3 — Surface inheritance and ignition: 7.2–9.5 detik
+### Fase 3 — Thermonuclear ignition: 6.8–7.6 detik
 
 - Terangkan bahwa body yang terbentuk mewarisi karakter approved Red Dwarf: deep red, burnt orange, amber, granulation, active regions, dan restrained corona.
 - Ignition berupa kenaikan energi yang terkontrol, bukan ledakan, flash putih, shockwave, atau bloom yang mencuci seluruh subject.
 - Hot regions dan surface detail muncul secara lokal dan bertahap.
 - Ukuran dan silhouette mulai mendekati target canonical tanpa overshoot besar.
 
-### Fase 4 — Controlled convergence: 9.5–11.8 detik
+### Fase 4 — Continuous expansion and controlled peak: 7.6–10.2 detik
 
 - Gunakan convergence yang monotonic atau memiliki overshoot sangat kecil dan segera teredam.
 - Target akhir adalah posisi dan ukuran canonical, bukan posisi tengah halaman atau sphere yang dibuat ulang.
 - Tidak boleh ada bounce berulang, elastic spring, sudden scale jump, atau perubahan warna drastis.
 - Formation layer harus semakin sedikit terlihat karena material benar-benar menjadi bagian dari structure, bukan karena seluruh layar di-fade-out.
 
-### Fase 5 — Canonical handoff and settle: 11.8–14.0 detik
+### Fase 5 — Damped settlement and canonical handoff: 10.2–14.0 detik
 
 - Canonical renderer boleh disiapkan sejak awal sebagai layer terpisah, tetapi tidak boleh terlihat sebagai objek pengganti yang tiba-tiba muncul.
 - Handoff harus berbasis continuity: area yang menjadi permukaan canonical terbuka seiring material target yang sama mengembun dan menghilangkan fragment temporary.
@@ -221,9 +216,9 @@ Dengan WebGL tidak tersedia:
 
 ## 12. Acceptance Criteria
 
-Implementasi berikutnya hanya dapat disebut **technically validated** jika seluruh kriteria ini terpenuhi:
+Kriteria berikut adalah preservation checks untuk behavior yang telah disetujui. Status `technically validated` tetap harus dibedakan dari approval owner; approval saat ini berlaku untuk implementation existing, bukan untuk production integration:
 
-1. Durasi default berada pada 14 detik dan konfigurasi 12–16 detik dapat dijelaskan.
+1. Durasi existing tetap approximately 14 detik; tidak ada konfigurasi atau preset timing alternatif.
 2. Transformasi terbaca sebagai satu continuity dari material tersebar ke approved Red Dwarf.
 3. Tidak ada scene cut, replacement object, global crossfade, ring, spiral, vortex, planet, lava ball, atau generic sphere.
 4. Particle target mapping deterministik dan konsisten antar playback.
@@ -238,7 +233,7 @@ Implementasi berikutnya hanya dapat disebut **technically validated** jika selur
 13. WebGL fallback tersedia dan dapat digunakan.
 14. Desktop dan mobile tidak mengalami horizontal overflow.
 15. Tidak ada console error atau failed local asset request.
-16. Tidak ada perubahan pada production integration sebelum owner approval.
+16. Tidak ada production integration berdasarkan approval prototype ini saja; integrasi adalah keputusan owner terpisah.
 
 Status acceptance harus dilaporkan terpisah:
 
@@ -260,19 +255,17 @@ Implemented != Technically validated != Owner approved
 - Menambahkan teks/label dekoratif pada formation sequence.
 - Menggunakan random seed yang berubah setiap playback.
 - Membiarkan particle layer tetap aktif setelah handoff.
-- Mengklaim owner approval hanya karena prototype berhasil dirender.
-- Mengintegrasikan ke production sebelum review dan persetujuan owner.
+- Mengklaim production integration atau technical validation tambahan hanya karena prototype berhasil dirender.
+- Mengintegrasikan ke production tanpa keputusan owner yang terpisah untuk integration.
 
 ---
 
-## 14. Urutan Pekerjaan Berikutnya
+## 14. Governance dan keputusan berikutnya
 
-1. Owner meninjau dan menyetujui spesifikasi ini.
-2. Buat bounded visual proof di folder prototype ini saja.
-3. Implementasikan satu default timing 14 detik terlebih dahulu.
-4. Verifikasi desktop, mobile, reduced-motion, fallback, dan frame-separated continuity.
-5. Bandingkan endpoint dengan canonical `../../index.html`.
-6. Lakukan visual review terhadap kelancaran transisi.
-7. Hanya setelah owner approval, pertimbangkan integrasi ke production.
+1. Perlakukan `index.html` pada folder prototype ini sebagai implementasi frozen yang telah disetujui owner as-is.
+2. Jangan mengubah timing, particle, streamlines, formation sequence, replay, interaction, reduced-motion, shader, atau settled renderer untuk memenuhi brief atau rencana lama.
+3. Pemeriksaan di masa depan hanya boleh memverifikasi preservasi behavior existing dan tidak boleh mengubah file prototype.
+4. Production integration ke `../../index.html` adalah keputusan owner terpisah dan belum diambil oleh approval prototype ini.
+5. Chapter 02 tidak dimulai atau diotorisasi oleh approval ini.
 
-Dokumen ini menjadi dasar kerja animasi berikutnya. Sampai ada persetujuan eksplisit, tidak ada implementasi animasi atau perubahan production yang diizinkan.
+Dokumen ini menjadi authority preservasi untuk implementasi existing. Approval prototype sudah eksplisit; approval tersebut tidak boleh ditafsirkan sebagai approval untuk production integration.

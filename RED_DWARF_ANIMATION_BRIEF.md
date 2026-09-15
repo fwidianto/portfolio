@@ -1,4 +1,4 @@
-# Red Dwarf Hero — Current Animation Brief
+# Red Dwarf Hero — Current Animation Brief (Frozen Prototype Authority)
 
 ## Status and authority
 
@@ -6,13 +6,15 @@ This is the single current working brief for the Red Dwarf Hero animation on the
 
 - Portfolio identity: **Fauzan Widianto — Analytical Systems Builder**.
 - Active branch: `design/editorial-systems-prototype`.
-- Production must remain untouched until the owner explicitly approves a later integration step.
+- Owner decision: the existing approximately 14-second formation animation in `prototypes/red-dwarf-animation/index.html` is approved as-is and must be preserved exactly.
+- The accepted behavior includes the current timing, particles, streamlines, formation sequence, replay behavior, interaction, reduced-motion behavior, and settled renderer. This brief must not be used to shorten, redesign, or reinterpret that implementation.
+- Production must remain untouched. Approval of the prototype is not approval to integrate it into `index.html`; production integration is a separate future decision.
 - Current governance states remain separate: `Implemented`, `Technically validated`, and `Owner approved`.
-- Technical verification record: The visual board (`prototypes/red-dwarf-animation/red-dwarf-animation-visual-board.html`) has implemented and verified exact canonical WebGL parity with `index.html` across all 9 deterministic dimensions (renderer, silhouette, FBM surface detail, starspots, plages, coronal atmosphere/rays, alpha composition, 0.92-damped 3D motion, and `u_time = 2.5` reduced motion). Live side-by-side and split slider inspection tools are fully wired and operational. No production files were altered; owner approval remains pending.
+- The former visual-board reference is superseded. `prototypes/red-dwarf-animation/red-dwarf-animation-visual-board.html` is not present and is not a dependency, authority, or proof requirement for the approved prototype. Do not recreate or repair it merely to satisfy this brief.
 
 ## Reconciliation: what is already correct
 
-The current Red Dwarf beside Fauzan's name is already the accepted visual object. Its settled appearance is not the problem and must not be redesigned or replaced as part of the animation task.
+The existing Red Dwarf formation implementation and the settled object beside Fauzan's name are approved as-is. Neither may be redesigned or replaced as part of future work.
 
 The active star already satisfies the current object direction:
 
@@ -24,14 +26,14 @@ The active star already satisfies the current object direction:
 - Red Dwarf as the dominant visual anchor;
 - pointer/touch interaction and static fallback support.
 
-The current task is only to create the animation that forms this existing star on first experience.
+The current task state is preservation of this existing animation. Any future production integration is a separate decision and is outside this brief's authorization.
 
-### Endpoint Architecture Lock & Canonical Parity Verification
+### Endpoint Architecture Lock & Preservation Invariants
 
 The final settled star is rendered strictly by the canonical WebGL Red Dwarf renderer from `index.html`, not a 2D canvas approximation, separate shader, or substitute sphere.
 
 1. **Canonical Renderer Ownership:** The WebGL shader pipeline from `index.html` is the sole immutable source of truth for the settled star. Any former 2D canvas radial-gradient approximation at the mature stage is bypassed/removed.
-2. **Strict Layer Separation:** Matter gathering, curved trajectories, protostar condensation, ignition bloom, and overshoot damping operate as isolated formation layers on a separate 2D canvas. At 08.4s–09.0s, all formation-only drawing concludes completely, handing off visible ownership to the canonical WebGL star container.
+2. **Strict Layer Separation:** Matter gathering, curved trajectories, protostar condensation, ignition bloom, and overshoot damping operate as isolated formation layers on a separate 2D canvas. During the final approximately 13.0s–14.0s handoff, all formation-only drawing concludes completely, handing off visible ownership to the canonical WebGL star container.
 3. **No Deformation or Residue:** The canonical star retains its exact shader constants, circular silhouette, limb darkening, and interactive drag without any residual scale, blur, filter, or color deformation from the creation sequence.
 4. **Deterministic 9-Dimension Parity Verification:**
    - **Silhouette & Ratio:** Strict 1:1 circular boundary, radius `R = 0.355 * min(W, H)`, `border-radius: 50%`, spherical normal raymarching `z = sqrt(max(0.0, R*R - dist*dist))`.
@@ -67,35 +69,38 @@ The astronomical story is also a visual metaphor for analytical systems work:
 
 The metaphor must remain editorial and implicit. Do not add dashboards, labels, charts, or literal business UI to the star animation.
 
-## Formation sequence
+## Formation sequence (frozen at approximately 14 seconds)
 
-The first-experience entrance should take approximately **8–10 seconds**. The visual board uses a 9.0-second proof timing as the working midpoint:
+The accepted first-experience entrance is the existing approximately **14-second** implementation. The older 8–10-second wording and 9-second proof timing are superseded and must not be used to change this sequence:
 
-1. **Scattered inputs — 00.0s–01.5s**
-   - Begin with a wide and abundant field of matter across the available space.
-   - Vary particle size, brightness, depth, density, and distance from the center. The field feels meaningful and gently alive, not like a tight preassembled halo or dense particle wallpaper. A readable central negative space is preserved.
+1. **Scattered inputs — 00.0s–01.4s**
+   - Begin with a wide field of scattered cosmic matter and preserve a readable central negative space.
+   - Vary particle size, brightness, depth, density, and distance from the center without creating dense particle wallpaper.
 
-2. **Patterns emerge — 01.5s–04.0s**
-   - Matter begins gathering slowly in staggered groups and waves.
-   - Curved paths guide material toward a shared gravitational center with varied start times, speeds, path curvature, and depth while preserving a clear inward direction.
-   - Some matter remains dispersed so the transformation reads as gradual organization rather than a sudden collapse.
+2. **Directed inward gathering — 01.4s–04.8s**
+   - Matter gathers slowly in staggered groups and waves.
+   - Curved gravitational streamlines and infalling embers guide material toward a shared center with varied start times, speeds, curvature, and depth.
+   - Some material remains dispersed so the transformation reads as gradual organization rather than sudden collapse.
 
-3. **Structure develops / living protostar — 04.0s–06.2s**
-   - The protostar visibly evolves with layered density, depth, volumetric form, shifting hot regions, mottled detail, internal motion, and restrained gaseous activity.
-   - The protostar is never a simple glowing placeholder that merely scales up. The gathered matter remains visually traceable through the formation into the stellar core.
+3. **Gravitational condensation — 04.8s–06.8s**
+   - The gathered matter condenses toward a persistent central protostar core.
+   - The core grows from the same formation path; it is not a replacement sphere or a generic glowing placeholder.
 
-4. **Ignition and expansion — 06.2s–07.2s**
-   - Stellar ignition is perceptually distinct from ordinary brightening: a controlled increase in energy, restrained expansion, and a clear outward response without washing out the central subject or introducing a generic explosion effect.
-   - Rapid expansion reveals the characteristic Red Dwarf silhouette and coronal boundaries.
+4. **Thermonuclear ignition — 06.8s–07.6s**
+   - Ignition is a distinct but restrained energy surge with a controlled outward response.
+   - The central subject remains readable and the effect does not become a generic explosion or white flash.
 
-5. **Controlled overshoot — 07.2s–08.4s**
-   - The forming star briefly exceeds its target scale and energetic extent, then settles smoothly into its approved proportions.
-   - Avoids repeated spring bouncing, chaotic turbulence, or a cartoon-like elastic effect.
+5. **Continuous expansion and controlled peak — 07.6s–10.2s**
+   - The forming star expands continuously toward the Red Dwarf silhouette and briefly reaches the implementation's controlled peak overshoot.
+   - Do not replace this with repeated spring bouncing, chaotic turbulence, or a shorter timing preset.
 
-6. **Stable Red Dwarf / useful system — 08.4s–09.0s**
-   - Resolves seamlessly into the exact existing approved Red Dwarf (M3V compact star).
-   - The handoff is continuous with no visible jump, generic fade-in, replacement sphere, or residual deformation.
-   - A small amount of sparse ambient matter remains after stabilization to preserve environmental context without competing with the stable anchor.
+6. **Damped settlement — 10.2s–13.0s**
+   - The overshoot settles smoothly to the exact canonical scale and state.
+   - Formation-only detail reduces through continuity and handoff, not through a global fade that hides a scene cut.
+
+7. **Stable Red Dwarf / useful system — 13.0s–14.0s**
+   - The sequence resolves into the exact existing approved Red Dwarf (M3V compact star).
+   - A small amount of sparse ambient matter remains for context without competing with the stable anchor.
 
 The formation sequence plays once on first experience and does not auto-loop.
 
@@ -159,32 +164,28 @@ Educational flat-illustration principles may inform clarity, silhouette, anticip
 - Keep desktop and narrow mobile composition readable with no horizontal overflow.
 - Do not alter Hero copy, navigation, unrelated sections, or deployment configuration.
 
-## Development sequence
+## Governance and future decisions
 
-1. Use the visual-board artifact to align the formation concept and timing.
-2. Create a bounded animation proof that leads into the existing star.
-3. Capture desktop, mobile, reduced-motion, and time-separated motion evidence.
-4. Obtain independent visual review.
-5. Only after owner approval, consider integrating the animation into the current Hero implementation.
-
-The current implementation target for a future integration is `index.html`, but no integration is authorized by this brief.
+1. Treat `prototypes/red-dwarf-animation/index.html` as the frozen, owner-approved-as-is implementation.
+2. Any future inspection is a preservation check against the existing behavior; it must not alter timing, visuals, interaction, or accessibility behavior.
+3. Production integration into `index.html` is a separate owner decision and is not authorized by this brief.
+4. Chapter 02 work is not started or authorized by this approval.
 
 ## Canonical development artifacts
 
-- Current portfolio Hero implementation: `index.html`.
+- Frozen owner-approved formation implementation: `prototypes/red-dwarf-animation/index.html`.
+- Current production settled-Hero reference: `index.html`.
 - Current Hero styling: `CSS/main.css`.
-- Animation visual board: `prototypes/red-dwarf-animation/red-dwarf-animation-visual-board.html`.
-- OpenDesign project: `Prototype Brief`.
-- Existing settled-star reference: `D:/Projects/open-design/.od/projects/red-dwarf-hero-v2/red-dwarf-active-star.html`.
+- Deprecated/non-authoritative standalone artifact: `red-dwarf-animation.html`. It is incomplete; do not repair or replace it as part of this governance work.
 
-## Acceptance questions
+## Preservation questions
 
-Before implementation is considered conceptually aligned:
+The following are preservation invariants for future review. They are not permission to reopen the accepted implementation or its timing:
 
 - Does the same matter visibly gather into the final star?
 - Does the visual metaphor move clearly from scattered inputs to patterns, structure, and a stable useful system?
 - Does the sequence read as scattered matter, gravity, protostar, ignition, and stabilization?
-- Does the 8–10-second duration allow the opening abundance (0.0–1.5s), slow gathering (1.5–4.0s), living protostar (4.0–6.2s), ignition (6.2–7.2s), controlled overshoot (7.2–8.4s), and final settling (8.4–9.0s) to breathe?
+- Does the existing approximately 14-second duration preserve the implemented phases: scattered field (0.0–1.4s), inward gathering (1.4–4.8s), condensation (4.8–6.8s), ignition (6.8–7.6s), expansion (7.6–10.2s), damping (10.2–13.0s), and final settling (13.0–14.0s)?
 - Does the final state remain the current accepted Red Dwarf rather than a redesigned object?
 - Does a small amount of ambient matter remain after formation to preserve context without competing with the star?
 - Is the formation motion visible enough to understand without becoming theatrical?
@@ -193,4 +194,4 @@ Before implementation is considered conceptually aligned:
 - Does reduced motion preserve the final identity?
 - Are `Implemented`, `Technically validated`, and `Owner approved` kept distinct?
 
-No production integration, commit, push, deployment, or owner-approval claim may be made solely because a proof renders successfully.
+The explicit owner approval recorded in this brief applies to the existing prototype only. A successful render must not be used to infer production integration, a new timing variant, or any additional approval.

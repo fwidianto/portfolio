@@ -4,13 +4,13 @@
   "title": "Red Dwarf 14s Stellar Formation Animation",
   "entry": "red-dwarf-animation.html",
   "renderer": "html",
-  "status": "complete",
+  "status": "deprecated",
   "exports": [
     "html",
     "pdf",
     "zip"
   ],
-  "primary": true,
+  "primary": false,
   "createdAt": "2026-09-08T05:45:08.180Z",
   "updatedAt": "2026-09-08T05:45:08.206Z",
   "metadata": {

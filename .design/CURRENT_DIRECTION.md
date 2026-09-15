@@ -7,6 +7,7 @@ This file is the current design authority for active portfolio development.
 - Production baseline: `main`.
 - Active implementation path: `design/editorial-systems-prototype`.
 - Continue this implementation path; do not create a competing redesign branch unless the current path is shown to be unsuitable.
+- Frozen Hero implementation: `prototypes/red-dwarf-animation/index.html`.
 
 ## Identity
 
@@ -39,11 +40,11 @@ The approved formation story is:
 
 ## Current implementation rule
 
-Phase 1 of the Red Dwarf Hero exists on the active implementation branch. Preserve accepted work and develop from it rather than restarting the Hero.
+The existing approximately 14-second Red Dwarf formation animation in `prototypes/red-dwarf-animation/index.html` is the owner's approved-as-is Hero animation candidate. Preserve that file and its behavior exactly. The accepted timing, particles, streamlines, formation sequence, replay behavior, interaction, reduced-motion behavior, and settled renderer are frozen.
 
-The visual concept is approved, but the renderer/technical architecture for materially new animation behavior is not automatically frozen. For unfamiliar or architecture-sensitive motion work, first validate the professional rendering approach, browser/performance constraints, and a bounded representative proof before committing to the full sequence.
+This approval covers the existing prototype only. It does not authorize production integration, changes to the root homepage, or Chapter 02 work. Production integration is a separate future decision.
 
-Do not introduce Three.js, WebGL, a framework, animation library, or other dependency merely because it is available; add a layer only when it solves a demonstrated limitation better than the existing static HTML/CSS/JavaScript path.
+Do not shorten the accepted sequence to the older 8–10-second brief, reopen its visual/runtime architecture, or introduce a replacement renderer or dependency.
 
 ## Scope
 
@@ -51,6 +52,7 @@ Do not introduce Three.js, WebGL, a framework, animation library, or other depen
 - Historical Editorial Systems / Connect-Integrate-Output animation work is not current Hero design authority.
 - Supporting visual references may inform visual judgment, but they are lessons rather than templates and do not override approved owner decisions.
 - Desktop and mobile rendered evidence are required for owner acceptance of materially visual changes.
+- `red-dwarf-animation.html` is an obsolete/incomplete standalone artifact and is not Hero authority; do not repair or replace it as part of governance cleanup.
 
 ## Acceptance
 
@@ -60,4 +62,4 @@ Keep these states distinct:
 - Technically validated
 - Owner approved
 
-Only the owner can grant final visual acceptance.
+The frozen formation prototype is owner approved as-is. Production integration remains unapproved until a separate owner decision; only the owner can grant that integration decision.

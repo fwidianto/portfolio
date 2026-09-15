@@ -13,6 +13,7 @@ The portfolio presents an **Analytical Systems Builder** profile: understand the
 - `main` is the current production baseline.
 - `design/editorial-systems-prototype` is the active implementation path for the approved Red Dwarf portfolio direction.
 - `.design/CURRENT_DIRECTION.md` is the current visual/design authority for that work.
+- `prototypes/red-dwarf-animation/index.html` is the existing approximately 14-second Red Dwarf formation animation, frozen and owner-approved as-is. Production integration is a separate decision.
 - `AGENTS.md` contains repository-specific AI working rules.
 - `docs/README.md` is the minimal routing guide.
 
@@ -34,6 +35,8 @@ Historical experiments, superseded plans, rejected design directions, and review
 Start with `AGENTS.md`. For visual/design work, read `.design/CURRENT_DIRECTION.md`, then inspect only the implementation files directly required by the task.
 
 Continue accepted work rather than restarting from an older prototype or creating a competing implementation path.
+
+The approved formation prototype must be preserved exactly. The older 8–10-second animation brief, any missing visual-board reference, and the incomplete standalone `red-dwarf-animation.html` artifact are not current implementation authority.
 
 ## Architecture
 
