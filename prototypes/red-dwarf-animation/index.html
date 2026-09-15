@@ -623,12 +623,8 @@
       0%, 100% { opacity: 0.42; filter: drop-shadow(0 0 2px rgba(255, 240, 220, 0.45)); transform: scale(0.88); }
       50% { opacity: 1.0; filter: drop-shadow(0 0 5px rgba(255, 240, 220, 0.95)) drop-shadow(0 0 11px rgba(255, 185, 130, 0.5)); transform: scale(1.18); }
     }
-    /* 14s Formation Layer & Replay Controls */
     .hero-red-dwarf__formation-canvas {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
       pointer-events: none;
       z-index: 2;
       transition: opacity 0.6s ease-out;
@@ -1944,17 +1940,51 @@
   let particles = [];
   let knots = [];
 
+  // Frame pacing optimization: Cached radial glow sprites (Zero per-frame gradient allocation)
+  let spriteCool = null;
+  let spriteWarm = null;
+  let spriteHot = null;
+
+  function createGlowSprite(r, g, b) {
+    const c = document.createElement('canvas');
+    c.width = 32;
+    c.height = 32;
+    const ctx = c.getContext('2d');
+    const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+    grad.addColorStop(0, `rgb(${r}, ${g}, ${b})`);
+    grad.addColorStop(0.35, `rgba(${r}, ${Math.floor(g * 0.7)}, ${Math.floor(b * 0.4)}, 0.65)`);
+    grad.addColorStop(1, `rgba(${r}, ${Math.floor(g * 0.3)}, 0, 0)`);
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(16, 16, 16, 0, Math.PI * 2);
+    ctx.fill();
+    return c;
+  }
+
+  // Pre-allocated render pool to eliminate per-frame garbage collection
+  const renderPool = [];
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    renderPool.push({ x: 0, y: 0, z: 0, radius: 0, alpha: 0, sprite: null, isForeground: false });
+  }
+  const sortIndices = new Int16Array(PARTICLE_COUNT);
+
   function initFormationModel() {
     const rng = createPrng(0x5F3759DF);
     streamlines = [];
     knots = [];
     particles = [];
 
+    if (!spriteCool) {
+      spriteCool = createGlowSprite(220, 100, 50);
+      spriteWarm = createGlowSprite(255, 145, 45);
+      spriteHot = createGlowSprite(255, 215, 80);
+    }
+
     // 36 Gravitational Streamlines pulling inwards towards center
     for (let s = 0; s < STREAMLINE_COUNT; s++) {
       const baseAngle = (s / STREAMLINE_COUNT) * Math.PI * 2;
       const angle = baseAngle + (rng() - 0.5) * 0.18;
-      const outerDist = 1.55 + rng() * 1.35;
+      const outerDist = 1.05 + rng() * 0.25;
       const spiralDirection = (s % 2 === 0 ? 1 : -1);
       const curvature = spiralDirection * (0.35 + rng() * 0.35);
       const stagger = rng() * 1.2;
@@ -2044,7 +2074,7 @@
       const tz = knot.nz + (rng() - 0.5) * 0.2;
       const tLen = Math.hypot(tx, ty, tz) || 1;
 
-      const initDist = 1.35 + rng() * 1.95;
+      const initDist = 0.68 + rng() * 0.60;
       const initAngle = knot.startAngle + (rng() - 0.5) * 0.9;
       const initZ = (rng() - 0.5) * 1.4;
 
@@ -2069,61 +2099,129 @@
   function easeInOutQuad(t) {
     return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
   }
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+  function smootherstep(t) {
+    const c = Math.max(0, Math.min(1, t));
+    return c * c * c * (c * (c * 6 - 15) + 10);
+  }
   function clamp(val, min, max) {
     return Math.max(min, Math.min(max, val));
   }
+
+  const R_PROTOSTAR_SCALE = 0.048;
+  const TARGET_PEAK_SCALE = 1.075; // Clearly legible +7.5% overshoot
 
   function updateFormation(dt) {
     if (!isForming) return;
     formationTime += dt;
     const t = formationTime;
 
-    // Timeline breakdown (14.0s):
-    // Phase 0: 0.0 - 1.2s -> Prepared field (scattered matter, central negative space)
-    // Phase 1: 1.2 - 4.2s -> Directed gathering into embers & luminous knots
-    // Phase 2: 4.2 - 7.2s -> Coherent structure / tubuh berongga (hollow shell, 3D depth)
-    // Phase 3: 7.2 - 9.5s -> Surface inheritance & condensation into photosphere + ignition
-    // Phase 4: 9.5 - 11.8s -> Controlled convergence & damped overshoot
-    // Phase 5: 11.8 - 14.0s -> Canonical handoff & settle
+    // 14.0s Narrative Timeline:
+    // Phase 0: 0.0 - 1.4s -> Prepared field (scattered cosmic matter, central negative space preserved)
+    // Phase 1: 1.4 - 4.8s -> Directed inward gathering (gravitational streamlines & inward particle infall)
+    // Phase 2: 4.8 - 6.8s -> Gravitational condensation into persistent protostar core at (cx, cy)
+    // Phase 3: 6.8 - 7.6s -> Thermonuclear ignition (distinct, restrained surge of energy & coronal rays)
+    // Phase 4: 7.6 - 10.2s -> Majestic continuous expansion to controlled peak overshoot (+7.5%)
+    // Phase 5: 10.2 - 13.0s -> Controlled damped overshoot settlement to exact canonical 1.0000
+    // Settled: 13.0 - 14.0s -> 100% exact canonical Red Dwarf stabilization & handoff
 
-    if (t < 6.8) {
+    if (t < 4.8) {
+      // Prior to core condensation, central negative space is preserved
       canvas.style.opacity = '0';
-      state.flareIntensity = 0.1;
-      state.flareRays = 0.1;
+      state.growthScale = 0.035;
+      state.flareIntensity = 0.35;
+      state.flareRays = 0.35;
+      state.pulseSpeed = 1.0;
+      state.pulseAmp = 0.0;
       state.plageIntensity = 0.0;
       state.spotDepth = 0.0;
       state.flareBurst = 0.0;
-    } else if (t >= 6.8 && t < 9.5) {
-      const p = (t - 6.8) / (9.5 - 6.8);
-      const ep = easeInOutQuad(p);
-      canvas.style.opacity = ep.toFixed(3);
-      state.flareIntensity = 0.1 + ep * (CANONICAL_FLARE_INTENSITY - 0.1);
-      state.flareRays = 0.1 + ep * (CANONICAL_FLARE_RAYS - 0.1);
-      state.plageIntensity = ep * CANONICAL_PLAGE_INTENSITY;
-      state.spotDepth = ep * CANONICAL_SPOT_DEPTH;
+      state.spinSpeed = 0.0;
+    } else if (t >= 4.8 && t < 6.8) {
+      // Phase 2: Gravitational collapse inward - stellar core condenses as ONE persistent object
+      const pCollapse = clamp((t - 4.8) / 2.0, 0, 1);
+      const easeCore = smootherstep(pCollapse);
 
-      // Ignition energy rise (smooth burst peak around t=8.4s)
-      if (t >= 7.6 && t <= 9.2) {
-        const burstP = (t - 7.6) / 1.6;
-        state.flareBurst = Math.sin(burstP * Math.PI) * 0.72;
-      } else {
-        state.flareBurst = 0.0;
-      }
-    } else if (t >= 9.5 && t < 11.8) {
-      const p = (t - 9.5) / (11.8 - 9.5);
+      // Core condenses smoothly as infalling matter arrives at center; reaches solid opacity
+      const coreAppear = clamp((t - 4.8) / 0.8, 0, 1);
+      canvas.style.opacity = coreAppear.toFixed(3);
+
+      // Growth scale condenses smoothly to protostar core scale (0.035 -> 0.065)
+      state.growthScale = 0.035 + easeCore * (0.065 - 0.035);
+
+      state.flareIntensity = 0.70 + easeCore * 0.30;
+      state.flareRays = 0.55 + easeCore * 0.30;
+      state.granSpeed = CANONICAL_GRAN_SPEED; // Constant 1.0 prevents any noise phase jerk
+      state.pulseSpeed = CANONICAL_PULSE_SPEED;
+      state.pulseAmp = 0.0; // Zero pulsation during condensation prevents jitter
+      state.plageIntensity = easeCore * 0.35;
+      state.spotDepth = 0.0;
+      state.flareBurst = Math.sin(easeCore * Math.PI) * 0.20;
+      state.spinSpeed = 0.1 * easeCore;
+    } else if (t >= 6.8 && t < 7.6) {
+      // Phase 3: Thermonuclear ignition - distinct, legible, restrained energy release
       canvas.style.opacity = '1';
-      state.flareIntensity = CANONICAL_FLARE_INTENSITY;
-      state.flareRays = CANONICAL_FLARE_RAYS;
-      state.plageIntensity = CANONICAL_PLAGE_INTENSITY;
+      const pIgnite = clamp((t - 6.8) / 0.8, 0, 1);
+      const easeIgnite = smootherstep(pIgnite);
+
+      // Protostar primes at base of rapid expansion
+      state.growthScale = 0.065 + easeIgnite * 0.025;
+
+      // Crisp, restrained energy surge peaking at mid-ignition
+      state.flareBurst = Math.sin(pIgnite * Math.PI) * 0.95;
+      state.flareIntensity = 1.00 + Math.sin(pIgnite * Math.PI) * 0.40;
+      state.flareRays = 0.85 + Math.sin(pIgnite * Math.PI) * 0.45;
+      state.granSpeed = CANONICAL_GRAN_SPEED;
+      state.pulseSpeed = CANONICAL_PULSE_SPEED;
+      state.pulseAmp = 0.0; // Zero pulsation prevents vibration
+      state.plageIntensity = 0.35 + easeIgnite * 0.35;
+      state.spotDepth = 0.0;
+      state.spinSpeed = CANONICAL_SPIN_SPEED * 0.4;
+    } else if (t >= 7.6 && t < 10.2) {
+      // Phase 4: Majestic continuous expansion into Red Dwarf with +7.5% overshoot
+      canvas.style.opacity = '1';
+
+      const pExp = clamp((t - 7.6) / 2.6, 0, 1);
+      const ep = smootherstep(pExp);
+
+      // Smooth C2-continuous expansion: begins at 0.090 with zero velocity, crests at 1.075 with zero velocity
+      state.growthScale = 0.090 + ep * (TARGET_PEAK_SCALE - 0.090);
+
+      state.flareIntensity = 1.00 + ep * (1.48 - 1.00);
+      state.flareRays = 0.85 + ep * (1.35 - 0.85);
+      state.granSpeed = CANONICAL_GRAN_SPEED; // Constant 1.0
+      state.pulseSpeed = CANONICAL_PULSE_SPEED;
+      state.pulseAmp = 0.0; // Zero pulsation during expansion prevents vibration/jitter
+      state.plageIntensity = Math.pow(ep, 1.2) * 1.55;
+      state.spotDepth = Math.max(0, (ep - 0.25) / 0.75) * CANONICAL_SPOT_DEPTH;
+      state.spinSpeed = CANONICAL_SPIN_SPEED;
+      state.flareBurst = Math.max(0, 0.35 * (1.0 - pExp));
+    } else if (t >= 10.2 && t < 13.0) {
+      // Phase 5: Controlled damped overshoot settle & canonical stabilization
+      const pSettle = clamp((t - 10.2) / 2.8, 0, 1);
+      const es = smootherstep(pSettle);
+      canvas.style.opacity = '1';
+
+      // Visibly and smoothly settles from +7.5% overshoot (1.075) to exact canonical 1.0000
+      state.growthScale = TARGET_PEAK_SCALE - es * (TARGET_PEAK_SCALE - 1.000);
+
+      state.flareIntensity = 1.48 - es * (1.48 - CANONICAL_FLARE_INTENSITY);
+      state.flareRays = 1.35 - es * (1.35 - CANONICAL_FLARE_RAYS);
+      state.plageIntensity = 1.55 - es * (1.55 - CANONICAL_PLAGE_INTENSITY);
       state.spotDepth = CANONICAL_SPOT_DEPTH;
+      state.granSpeed = CANONICAL_GRAN_SPEED;
+      state.pulseSpeed = CANONICAL_PULSE_SPEED;
+      state.spinSpeed = CANONICAL_SPIN_SPEED;
 
-      // Critical damped breathing overshoot (max ~3.8% at start, decaying smoothly)
-      const damping = Math.exp(-2.5 * p);
-      const overshoot = 0.038 * damping * Math.cos(p * Math.PI * 2.5);
-      state.pulseAmp = CANONICAL_PULSE_AMP * (1.0 + overshoot);
-      state.flareBurst = Math.max(0, state.flareBurst * 0.92);
+      // Breathing pulse gently engages as the star stabilizes
+      state.pulseAmp = es * CANONICAL_PULSE_AMP;
+      state.flareBurst = 0.0;
     } else {
+      // Settled State: 100% exact canonical Red Dwarf
       canvas.style.opacity = '1';
+      state.growthScale = 1.0;
       state.flareIntensity = CANONICAL_FLARE_INTENSITY;
       state.flareRays = CANONICAL_FLARE_RAYS;
       state.pulseSpeed = CANONICAL_PULSE_SPEED;
@@ -2131,6 +2229,7 @@
       state.plageIntensity = CANONICAL_PLAGE_INTENSITY;
       state.spotDepth = CANONICAL_SPOT_DEPTH;
       state.granSpeed = CANONICAL_GRAN_SPEED;
+      state.spinSpeed = CANONICAL_SPIN_SPEED;
       state.flareBurst = 0.0;
     }
 
@@ -2159,198 +2258,205 @@
     const cy = h * 0.5;
     const minDim = Math.min(w, h);
     const R_canonical = 0.355 * minDim;
+    const currentCoreR = state.growthScale * R_canonical;
 
-    // 3D rotation tracking canonical star axis
-    const sphereAngleY = (t * 0.18) % (Math.PI * 2);
+    // 3D rotation tracking canonical star axis for subtle spherical depth cues
+    const sphereAngleY = (t * 0.12) % (Math.PI * 2);
     const sphereAngleX = 0.22;
 
-    let shellRadiusMult = 1.0;
-    let formationFadeAlpha = 1.0;
+    const cosY = Math.cos(sphereAngleY);
+    const sinY = Math.sin(sphereAngleY);
+    const cosX = Math.cos(sphereAngleX);
+    const sinX = Math.sin(sphereAngleX);
 
-    if (t < 1.2) {
-      shellRadiusMult = 2.2;
-    } else if (t < 4.2) {
-      const p = (t - 1.2) / 3.0;
-      shellRadiusMult = 2.2 - easeInOutQuad(p) * 1.05;
-    } else if (t < 7.2) {
-      const p = (t - 4.2) / 3.0;
-      shellRadiusMult = 1.15 - p * 0.07;
-    } else if (t < 9.5) {
-      const p = (t - 7.2) / 2.3;
-      shellRadiusMult = 1.08 - easeInOutQuad(p) * 0.10;
-    } else if (t < 11.8) {
-      const p = (t - 9.5) / 2.3;
-      const overshoot = 0.035 * Math.exp(-2.2 * p) * Math.cos(p * Math.PI * 3.0);
-      shellRadiusMult = 1.0 + overshoot;
-      formationFadeAlpha = Math.max(0, 1.0 - easeInOutQuad(p));
-    } else {
-      const p = (t - 11.8) / 2.2;
-      formationFadeAlpha = Math.max(0, 1.0 - p);
-    }
+    // ==========================================
+    // 1. INWARD GRAVITATIONAL STREAMLINES & EMBERS
+    // Curved trajectories clearly directed toward the central gravitational core
+    // ==========================================
+    if (t >= 1.4 && t < 6.8) {
+      let sAlpha = 0.28;
+      if (t < 2.4) {
+        sAlpha *= (t - 1.4) / 1.0;
+      } else if (t >= 5.0) {
+        sAlpha *= Math.max(0, (6.8 - t) / 1.8);
+      }
 
-    if (formationFadeAlpha <= 0.001) return;
+      const pCollapse = t >= 4.8 ? Math.min(1.0, (t - 4.8) / 2.0) : 0.0;
+      const easePull = Math.pow(pCollapse, 1.8);
 
-    // Magnetic Filaments connecting knots during Phase 2 & 3 (hollow body)
-    if (t >= 3.8 && t < 10.0 && formationFadeAlpha > 0.05) {
-      const filamentAlpha = (t < 4.8 ? (t - 3.8) : t > 8.5 ? (10.0 - t) / 1.5 : 1.0) * 0.38 * formationFadeAlpha;
       fCtx.save();
-      fCtx.lineWidth = 1.2;
-      for (let k = 0; k < knots.length; k++) {
-        const nextK = (k + 1) % knots.length;
-        const k1 = knots[k];
-        const k2 = knots[nextK];
+      for (let s = 0; s < streamlines.length; s++) {
+        const str = streamlines[s];
+        const sT = Math.max(0, t - str.stagger * 0.4);
+        if (sT <= 0) continue;
 
-        const cosY = Math.cos(sphereAngleY);
-        const sinY = Math.sin(sphereAngleY);
-        const cosX = Math.cos(sphereAngleX);
-        const sinX = Math.sin(sphereAngleX);
+        const startR = str.outerDist * R_canonical * (1.0 - easePull * 0.45);
+        const endR = Math.max(currentCoreR, 0.12 * R_canonical) * (1.0 - easePull * 0.6);
 
-        const k1_rx = k1.nx * cosY - k1.nz * sinY;
-        const k1_rz = k1.nx * sinY + k1.nz * cosY;
-        const k1_ry = k1.ny * cosX - k1_rz * sinX;
-        const k1_z = k1.ny * sinX + k1_rz * cosX;
-
-        const k2_rx = k2.nx * cosY - k2.nz * sinY;
-        const k2_rz = k2.nx * sinY + k2.nz * cosY;
-        const k2_ry = k2.ny * cosX - k2_rz * sinX;
-        const k2_z = k2.ny * sinX + k2_rz * cosX;
-
-        const avgZ = (k1_z + k2_z) * 0.5;
-        const zAlpha = avgZ > 0 ? 1.0 : 0.25;
-
-        const x1 = cx + k1_rx * R_canonical * shellRadiusMult;
-        const y1 = cy - k1_ry * R_canonical * shellRadiusMult;
-        const x2 = cx + k2_rx * R_canonical * shellRadiusMult;
-        const y2 = cy - k2_ry * R_canonical * shellRadiusMult;
+        const x1 = cx + Math.cos(str.angle) * startR;
+        const y1 = cy + Math.sin(str.angle) * startR;
+        const midA = str.angle + str.curvature * 0.45;
+        const midR = (startR + endR) * 0.52;
+        const mx = cx + Math.cos(midA) * midR;
+        const my = cy + Math.sin(midA) * midR;
+        const endA = str.angle + str.curvature;
+        const x2 = cx + Math.cos(endA) * endR;
+        const y2 = cy + Math.sin(endA) * endR;
 
         const grad = fCtx.createLinearGradient(x1, y1, x2, y2);
-        grad.addColorStop(0, `rgba(255, 120, 30, ${filamentAlpha * zAlpha})`);
-        grad.addColorStop(0.5, `rgba(255, 190, 70, ${filamentAlpha * zAlpha * 1.3})`);
-        grad.addColorStop(1, `rgba(255, 90, 20, ${filamentAlpha * zAlpha})`);
+        grad.addColorStop(0, `rgba(255, 90, 20, 0)`);
+        grad.addColorStop(0.55, `rgba(255, 160, 50, ${sAlpha * 0.75})`);
+        grad.addColorStop(1.0, `rgba(255, 230, 110, ${sAlpha * 1.35})`);
 
+        fCtx.lineWidth = Math.max(0.7, str.width * (1.0 - easePull * 0.4));
         fCtx.strokeStyle = grad;
         fCtx.beginPath();
         fCtx.moveTo(x1, y1);
-        const mx = (x1 + x2) * 0.5 + (k1_rz - k2_rz) * 12;
-        const my = (y1 + y2) * 0.5 + (k1_rx - k2_rx) * 12;
         fCtx.quadraticCurveTo(mx, my, x2, y2);
         fCtx.stroke();
+
+        // Infalling embers along the streamline
+        for (let e = 0; e < str.embers.length; e++) {
+          const emb = str.embers[e];
+          const embProgress = ((sT * str.speed * 0.22 * emb.speedMult + emb.offset) % 1.0);
+          const tE = smootherstep(embProgress);
+          const ex = (1 - tE) * (1 - tE) * x1 + 2 * (1 - tE) * tE * mx + tE * tE * x2;
+          const ey = (1 - tE) * (1 - tE) * y1 + 2 * (1 - tE) * tE * my + tE * tE * y2;
+          const eDist = Math.hypot(ex - cx, ey - cy);
+          if (eDist <= currentCoreR * 1.05) continue;
+
+          const embAlpha = Math.sin(embProgress * Math.PI) * sAlpha * 1.8;
+          fCtx.fillStyle = `rgba(255, ${Math.floor(160 + emb.heat * 80)}, ${Math.floor(40 + emb.heat * 120)}, ${embAlpha})`;
+          fCtx.beginPath();
+          fCtx.arc(ex, ey, emb.size * (0.8 + tE * 0.5), 0, Math.PI * 2);
+          fCtx.fill();
+        }
       }
       fCtx.restore();
     }
 
-    // 3D Depth Sorting for Coherent Structure / Tubuh Berongga
-    const sortedParticles = [];
+    // ==========================================
+    // 2. PARTICLES & LUMINOUS KNOTS (DEPTH SORTED)
+    // Pure center-directed convergence with seamless physical continuity!
+    // ==========================================
+    let activeCount = 0;
 
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
-      const localT = Math.max(0, t - p.stagger * 0.8);
+      const localT = Math.max(0, t - p.stagger * 0.5);
       let posX = 0;
       let posY = 0;
       let posZ = 0;
-      let pAlpha = p.baseAlpha * formationFadeAlpha;
+      let pAlpha = 0;
       let pRadius = p.radius;
       let tempR = 255;
       let tempG = 120;
       let tempB = 40;
 
-      const cosY = Math.cos(sphereAngleY);
-      const sinY = Math.sin(sphereAngleY);
-      const cosX = Math.cos(sphereAngleX);
-      const sinX = Math.sin(sphereAngleX);
+      const radialAngle = p.initAngle;
+      const isAmbientDust = (i % 6 === 0 && p.initDist > 1.5);
 
-      const target_rx = p.tx * cosY - p.tz * sinY;
-      const target_rz = p.tx * sinY + p.tz * cosY;
-      const target_ry = p.ty * cosX - target_rz * sinX;
-      const target_z = p.ty * sinX + target_rz * cosX;
-
-      const targetX = cx + target_rx * R_canonical * shellRadiusMult;
-      const targetY = cy - target_ry * R_canonical * shellRadiusMult;
-      const targetZ = target_z;
-
-      if (localT < 1.2) {
-        const appearP = clamp(localT / 0.8, 0, 1);
-        pAlpha *= appearP;
+      if (localT < 1.4) {
+        // Phase 0: scattered field with preserved central negative space
+        const appearP = clamp(localT / 0.9, 0, 1);
+        pAlpha = p.baseAlpha * appearP;
         const curR = p.initDist * R_canonical;
-        const curAngle = p.initAngle + localT * 0.05;
-        posX = cx + Math.cos(curAngle) * curR;
-        posY = cy + Math.sin(curAngle) * curR;
+        posX = cx + Math.cos(radialAngle) * curR;
+        posY = cy + Math.sin(radialAngle) * curR;
         posZ = p.initZ;
         tempR = 220;
         tempG = 100;
         tempB = 50;
-      } else if (localT < 4.2) {
-        const gatherP = clamp((localT - 1.2) / 3.0, 0, 1);
-        const easeGather = easeInOutQuad(gatherP);
-        const curR = (p.initDist + (1.15 - p.initDist) * easeGather) * R_canonical;
-        const curAngle = p.initAngle + easeGather * p.curveAmp * Math.PI;
+      } else if (isAmbientDust && localT >= 1.4) {
+        // Ambient cosmic matter gently persists in outer space
+        const driftAngle = radialAngle + (t - 1.4) * 0.015;
+        const driftR = p.initDist * R_canonical;
+        posX = cx + Math.cos(driftAngle) * driftR;
+        posY = cy + Math.sin(driftAngle) * driftR;
+        posZ = p.initZ;
+        pRadius = p.radius * 0.7;
+        const fadeOut = localT >= 11.0 ? clamp((14.0 - localT) / 3.0, 0.15, 1.0) : 1.0;
+        pAlpha = p.baseAlpha * 0.28 * fadeOut;
+        tempR = 230;
+        tempG = 120;
+        tempB = 50;
+      } else if (localT >= 1.4 && localT < 4.8) {
+        // Phase 1: Directed gathering - matter flows smoothly inward along curved trajectories
+        const gatherP = clamp((localT - 1.4) / 3.4, 0, 1);
+        const easeGather = smootherstep(gatherP);
 
-        const scatteredX = cx + Math.cos(curAngle) * curR;
-        const scatteredY = cy + Math.sin(curAngle) * curR;
+        const curveAngle = radialAngle + p.curveAmp * easeGather;
+        const targetR = (0.35 + (p.id % 12) * 0.05) * R_canonical;
+        const curR = (p.initDist * R_canonical) * (1.0 - easeGather) + targetR * easeGather;
 
-        posX = scatteredX + (targetX - scatteredX) * easeGather;
-        posY = scatteredY + (targetY - scatteredY) * easeGather;
-        posZ = p.initZ + (targetZ - p.initZ) * easeGather;
+        posX = cx + Math.cos(curveAngle) * curR;
+        posY = cy + Math.sin(curveAngle) * curR;
+        posZ = p.initZ * (1.0 - easeGather) + p.tz * easeGather;
 
-        pRadius = p.radius * (1.0 + easeGather * 0.45);
-        pAlpha = clamp(p.baseAlpha * (0.8 + easeGather * 0.5), 0, 1) * formationFadeAlpha;
+        pRadius = p.radius * (1.0 + easeGather * 0.35);
+        pAlpha = clamp(p.baseAlpha * (0.8 + easeGather * 0.5), 0, 1);
         tempR = 255;
-        tempG = Math.floor(80 + easeGather * 85);
-        tempB = Math.floor(25 + easeGather * 35);
-      } else if (localT < 7.2) {
-        posX = targetX;
-        posY = targetY;
-        posZ = targetZ;
+        tempG = Math.floor(90 + easeGather * 85);
+        tempB = Math.floor(30 + easeGather * 45);
+      } else if (localT >= 4.8 && localT < 8.2) {
+        // Phase 2 & 3: Gravitational collapse inward into the central core & absorption
+        const infallDuration = 1.8 + p.stagger * 1.4;
+        const pInfall = clamp((localT - 4.8) / infallDuration, 0, 1);
+        const easeInfall = Math.pow(pInfall, 2.0);
 
-        // Front vs Back depth rendering creates visible "tubuh berongga" (hollow sphere)
-        const depthFactor = (posZ + 1.0) * 0.5;
-        pRadius = p.radius * (0.75 + depthFactor * 0.65);
-        pAlpha = clamp(p.baseAlpha * (0.4 + depthFactor * 0.8), 0, 1) * formationFadeAlpha;
+        const targetR = (0.35 + (p.id % 12) * 0.05) * R_canonical;
+        const curR = Math.max(0, targetR * (1.0 - easeInfall));
+        const curveAngle = radialAngle + p.curveAmp * (1.0 + easeInfall * 0.5);
 
-        if (depthFactor > 0.6) {
-          tempR = 255;
-          tempG = 175;
-          tempB = 60;
+        posX = cx + Math.cos(curveAngle) * curR;
+        posY = cy + Math.sin(curveAngle) * curR;
+        posZ = p.tz * (1.0 - easeInfall);
+
+        pRadius = Math.max(0.4, p.radius * (1.0 - easeInfall * 0.5));
+
+        // Absorption into the stellar core / photosphere
+        if (curR <= currentCoreR * 1.10) {
+          const absorb = clamp(1.0 - curR / Math.max(1.0, currentCoreR * 1.10), 0, 1);
+          pAlpha = clamp(p.baseAlpha * (1.0 - absorb), 0, 1);
         } else {
-          tempR = 200;
-          tempG = 45;
-          tempB = 20;
+          pAlpha = clamp(p.baseAlpha * (1.0 + easeInfall * 0.25) * (1.0 - pInfall * 0.35), 0, 1);
         }
-      } else {
-        posX = targetX;
-        posY = targetY;
-        posZ = targetZ;
 
-        const depthFactor = (posZ + 1.0) * 0.5;
-        pRadius = p.radius * (0.8 + depthFactor * 0.5);
-        pAlpha = clamp(p.baseAlpha * (0.5 + depthFactor * 0.6), 0, 1) * formationFadeAlpha;
-
+        // Temperature increases to luminous white-gold near core
         tempR = 255;
-        tempG = Math.floor(110 + depthFactor * 90);
-        tempB = Math.floor(30 + depthFactor * 40);
+        tempG = Math.floor(140 + easeInfall * 110);
+        tempB = Math.floor(40 + easeInfall * 180);
+      } else {
+        pAlpha = 0;
       }
 
-      sortedParticles.push({
-        x: posX,
-        y: posY,
-        z: posZ,
-        radius: pRadius,
-        alpha: pAlpha,
-        r: tempR,
-        g: tempG,
-        b: tempB
-      });
+      const pDistFromCenter = Math.hypot(posX - cx, posY - cy);
+      const edgeDistFade = clamp((1.35 * R_canonical - pDistFromCenter) / (0.15 * R_canonical), 0, 1);
+      pAlpha *= edgeDistFade;
+
+      if (pAlpha > 0.01 && activeCount < PARTICLE_COUNT) {
+        const rp = renderPool[activeCount];
+        rp.x = posX;
+        rp.y = posY;
+        rp.z = posZ;
+        rp.radius = pRadius;
+        rp.alpha = pAlpha;
+        rp.r = tempR;
+        rp.g = tempG;
+        rp.b = tempB;
+        sortIndices[activeCount] = activeCount;
+        activeCount++;
+      }
     }
 
-    // Sort ascending by depth Z (back to front)
-    sortedParticles.sort((a, b) => a.z - b.z);
+    // Sort ascending by depth Z (back to front) without per-frame GC allocations
+    const activeIndices = sortIndices.subarray(0, activeCount);
+    activeIndices.sort((a, b) => renderPool[a].z - renderPool[b].z);
 
     fCtx.save();
-    for (let i = 0; i < sortedParticles.length; i++) {
-      const sp = sortedParticles[i];
-      if (sp.alpha <= 0.01) continue;
-
-      const rad = Math.max(1, sp.radius);
+    for (let idx = 0; idx < activeCount; idx++) {
+      const sp = renderPool[activeIndices[idx]];
+      const rad = Math.max(0.8, sp.radius);
       const glowRad = rad * 2.8;
       const grad = fCtx.createRadialGradient(sp.x, sp.y, 0, sp.x, sp.y, glowRad);
       grad.addColorStop(0, `rgba(${sp.r}, ${sp.g}, ${sp.b}, ${sp.alpha})`);
@@ -2370,6 +2476,71 @@
       }
     }
     fCtx.restore();
+
+    // ==========================================
+    // 3. GRAVITATIONAL ACCRETION STREAMS & IGNITION WAVE
+    // The core itself is exclusively the persistent WebGL star object!
+    // No secondary sphere, no replacement ball, and no cross-fade.
+    // ==========================================
+    if (t >= 4.8 && t < 6.8) {
+      fCtx.save();
+      const p = (t - 4.8) / 2.0;
+      const coreR = Math.max(2.0, currentCoreR);
+      const singAlpha = Math.min(1.0, p * 1.6) * (1.0 - p * 0.3);
+
+      // Central gravitational singularity glare concentrating light at (cx, cy)
+      const singGrad = fCtx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(6.0, coreR * 2.6));
+      singGrad.addColorStop(0, `rgba(255, 248, 220, ${0.92 * singAlpha})`);
+      singGrad.addColorStop(0.35, `rgba(255, 175, 60, ${0.55 * singAlpha})`);
+      singGrad.addColorStop(0.75, `rgba(255, 90, 20, ${0.20 * singAlpha})`);
+      singGrad.addColorStop(1, `rgba(255, 50, 10, 0)`);
+      fCtx.fillStyle = singGrad;
+      fCtx.beginPath();
+      fCtx.arc(cx, cy, Math.max(6.0, coreR * 2.6), 0, Math.PI * 2);
+      fCtx.fill();
+
+      // Accretion streams entering the persistent stellar core
+      const rayFade = Math.max(0, 1.0 - p * 0.85);
+      const rayCount = 12;
+      fCtx.lineWidth = 1.1;
+      for (let r = 0; r < rayCount; r++) {
+        const rayAngle = (r / rayCount) * Math.PI * 2 + (r % 2 === 0 ? 0.08 : -0.08);
+        const rayLength = coreR + (1.0 - Math.pow(p, 1.5)) * (85.0 * (minDim / 600));
+        const rx1 = cx + Math.cos(rayAngle) * coreR;
+        const ry1 = cy + Math.sin(rayAngle) * coreR;
+        const rx2 = cx + Math.cos(rayAngle) * rayLength;
+        const ry2 = cy + Math.sin(rayAngle) * rayLength;
+
+        const rGrad = fCtx.createLinearGradient(rx2, ry2, rx1, ry1);
+        rGrad.addColorStop(0, `rgba(255, 70, 20, 0)`);
+        rGrad.addColorStop(0.5, `rgba(255, 155, 45, ${0.40 * rayFade})`);
+        rGrad.addColorStop(1, `rgba(255, 240, 190, ${0.85 * rayFade})`);
+
+        fCtx.strokeStyle = rGrad;
+        fCtx.beginPath();
+        fCtx.moveTo(rx2, ry2);
+        fCtx.lineTo(rx1, ry1);
+        fCtx.stroke();
+      }
+      fCtx.restore();
+    } else if (t >= 6.8 && t < 8.2) {
+      // Outward thermonuclear ignition luminescence pulse radiating into space
+      fCtx.save();
+      const pIgnite = (t - 6.8) / 1.4;
+      const waveAlpha = Math.sin(pIgnite * Math.PI) * 0.70;
+      const coreR = currentCoreR;
+      const waveR = coreR + pIgnite * 140.0 * (minDim / 600);
+      const grad = fCtx.createRadialGradient(cx, cy, Math.max(0, coreR - 4), cx, cy, waveR);
+      grad.addColorStop(0, `rgba(255, 235, 150, ${waveAlpha * 0.60})`);
+      grad.addColorStop(0.40, `rgba(255, 150, 45, ${waveAlpha * 0.32})`);
+      grad.addColorStop(0.80, `rgba(255, 80, 20, ${waveAlpha * 0.10})`);
+      grad.addColorStop(1.0, `rgba(255, 50, 10, 0)`);
+      fCtx.fillStyle = grad;
+      fCtx.beginPath();
+      fCtx.arc(cx, cy, waveR, 0, Math.PI * 2);
+      fCtx.fill();
+      fCtx.restore();
+    }
   }
 
   function restartFormation() {
@@ -2377,8 +2548,20 @@
     formationTime = 0;
     isForming = true;
     formationComplete = false;
+    canvas.style.opacity = '0';
+    state.growthScale = 0.035;
+    state.flareBurst = 0.0;
+    velX = 0;
+    velY = 0;
+    targetRotX = 0;
+    targetRotY = 0;
+    rotX = 0;
+    rotY = 0;
     if (replayBtn) replayBtn.classList.remove('is-visible');
-    if (formationCanvas) formationCanvas.style.opacity = '1';
+    if (formationCanvas) {
+      formationCanvas.style.opacity = '1';
+      if (fCtx) fCtx.clearRect(0, 0, formationCanvas.width, formationCanvas.height);
+    }
     initFormationModel();
   }
 
@@ -2405,6 +2588,7 @@
     uniform float u_spot_depth;
     uniform float u_gran_speed;
     uniform float u_flare_burst;
+    uniform float u_growth_scale;
 
     vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
     vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
@@ -2480,7 +2664,7 @@
 
       float pulseTime = u_time * u_pulse_speed;
       float pulseCycle = sin(pulseTime * 1.4) * 0.012 + sin(pulseTime * 2.9) * 0.007 + sin(pulseTime * 0.7) * 0.005;
-      float R = 0.355 * (1.0 + pulseCycle * (u_pulse_amp / 1.0) + u_flare_burst * 0.035);
+      float R = 0.355 * u_growth_scale * (1.0 + pulseCycle * (u_pulse_amp / 1.0));
 
       vec3 c_deep_red   = vec3(0.78, 0.08, 0.04);
       vec3 c_body_red   = vec3(1.00, 0.23, 0.15);
@@ -2498,7 +2682,7 @@
 
       vec3 finalColor = vec3(0.0);
 
-      float dNorm = (dist - R) / (R * 0.36);
+      float dNorm = (dist - R) / max(0.001, R * 0.36);
       float tCorona = u_time * 0.4 * u_gran_speed;
       vec2 polarUv = vec2(dist * 7.0 - tCorona * 0.8, angle * 5.0);
       float flameWisp1 = fbm(vec3(polarUv, tCorona * 0.3));
@@ -2511,7 +2695,7 @@
       float rayFeather = (ray1 * 0.6 + ray2 * 0.4) * u_flare_rays;
 
       float prominence = smoothstep(0.35, 0.85, snoise(vec3(angle * 4.5, dist * 10.0 - u_time * 1.0, u_time * 0.3)));
-      float burstProminence = smoothstep(0.2, 0.8, snoise(vec3(angle * 3.5, dist * 6.0, u_time * 2.0))) * u_flare_burst * 2.0;
+      float burstProminence = smoothstep(0.30, 0.80, snoise(vec3(angle * 3.2, (dist - R) * 4.0, u_time * 0.8))) * u_flare_burst * 1.2;
 
       float coronaFalloff = exp(-max(0.0, dNorm) * 3.8);
       float coronaDensity = coronaFalloff * (
@@ -2528,7 +2712,7 @@
 
       if (dist <= R) {
         float z = sqrt(max(0.0, R * R - dist * dist));
-        vec3 normal = vec3(uv / R, z / R);
+        vec3 normal = vec3(uv / max(0.0001, R), z / max(0.0001, R));
         float mu = normal.z;
 
         vec3 p = normal;
@@ -2583,7 +2767,7 @@
       float edgeLine = smoothstep(0.007, 0.0, abs(dist - R)) * 0.75 * u_flare_intensity;
       finalColor += c_corona_limb * edgeLine;
 
-      finalColor += vec3(1.0, 0.4, 0.2) * u_flare_burst * 0.35 * exp(-dist * 2.5);
+      finalColor += vec3(1.0, 0.45, 0.22) * u_flare_burst * 0.40 * exp(-dist * 2.5);
 
       float outerFade = smoothstep(0.5, 0.46, dist);
       finalColor *= outerFade;
@@ -2621,6 +2805,12 @@
       formationCanvas.width = width;
       formationCanvas.height = height;
     }
+    if (formationCanvas) {
+      formationCanvas.style.width = r.width + 'px';
+      formationCanvas.style.height = r.height + 'px';
+      formationCanvas.style.left = canvas.offsetLeft + 'px';
+      formationCanvas.style.top = canvas.offsetTop + 'px';
+    }
     if (gl) gl.viewport(0, 0, canvas.width, canvas.height);
   }
 
@@ -2644,10 +2834,12 @@
       rotY += (targetRotY - rotY) * 0.25;
     }
 
-    if (state.flareBurst > 0.01) {
-      state.flareBurst *= 0.94;
-    } else {
-      state.flareBurst = 0.0;
+    if (!isForming) {
+      if (state.flareBurst > 0.01) {
+        state.flareBurst *= 0.94;
+      } else {
+        state.flareBurst = 0.0;
+      }
     }
 
     gl.clearColor(0, 0, 0, 0);
@@ -2665,6 +2857,7 @@
     gl.uniform1f(loc.u_spot_depth, state.spotDepth);
     gl.uniform1f(loc.u_gran_speed, isReduced ? 0.0 : state.granSpeed);
     gl.uniform1f(loc.u_flare_burst, isReduced ? 0.0 : state.flareBurst);
+    gl.uniform1f(loc.u_growth_scale, isReduced ? 1.0 : state.growthScale);
 
     gl.drawArrays(gl.TRIANGLES, 0, 6);
 
@@ -2780,7 +2973,7 @@
       [
         'u_resolution', 'u_time', 'u_rotation', 'u_flare_intensity',
         'u_flare_rays', 'u_pulse_speed', 'u_pulse_amp', 'u_plage_intensity',
-        'u_spot_depth', 'u_gran_speed', 'u_flare_burst'
+        'u_spot_depth', 'u_gran_speed', 'u_flare_burst', 'u_growth_scale'
       ].forEach(name => {
         loc[name] = gl.getUniformLocation(program, name);
       });
@@ -2815,6 +3008,14 @@
         cancelAnimationFrame(raf);
         document.body.classList.add('no-webgl');
       }, false);
+
+      if (isForming) {
+        canvas.style.opacity = '0';
+        state.growthScale = 0.035;
+      } else {
+        canvas.style.opacity = '1';
+        state.growthScale = 1.0;
+      }
 
       raf = requestAnimationFrame(render);
     } catch (e) {
