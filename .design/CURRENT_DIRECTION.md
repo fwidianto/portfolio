@@ -35,24 +35,48 @@ The approved formation story is:
 - The formation story plays once on first experience and does not auto-loop.
 - The same matter should remain conceptually traceable through the transformation; avoid replacement objects, hidden scene cuts, or generic morphing.
 - Ambient sky motion is separate from the formation narrative.
-- Replay and restrained interaction may be added only when they preserve the approved composition.
 - Reduced-motion behavior is required.
 
 ## Current implementation rule
 
 The existing approximately 14-second Red Dwarf formation animation in `prototypes/red-dwarf-animation/index.html` is the owner's approved-as-is Hero animation candidate. Preserve that file and its behavior exactly. The accepted timing, particles, streamlines, formation sequence, replay behavior, interaction, reduced-motion behavior, and settled renderer are frozen.
 
-This approval covers the existing prototype only. It does not authorize production integration, changes to the root homepage, or Chapter 02 work. Production integration is a separate future decision.
+In the active prototype `prototypes/new-portfolio-animation-first/index.html`, Chapter 02 is being developed following the frozen Hero.
 
-Do not shorten the accepted sequence to the older 8–10-second brief, reopen its visual/runtime architecture, or introduce a replacement renderer or dependency.
+## Chapter 02 — Architecture and Scene Status
+
+Chapter 02 ("College Years / Foundations to Real World") is structured into five sequential scenes:
+
+1. **Scene 01: Universitas Indonesia Entry (Stars to Campus)**
+   - Status: **Owner approved baseline** (frozen).
+   - Identity: Universitas Indonesia Mechanical Engineering cohort transformation (~70 cohort -> ~11 ME subset), institutional seal, archival dossier.
+
+2. **Scene 02: College Engineering Foundations (The Five Disciplines)**
+   - Status: **Semi-approved baseline** (may be reviewed later as part of the full chapter review; preserved as-is in active prototype).
+   - Identity: Laboratory experiments (Thermodynamics, Measurement, Mechanics, Control, Data/Statistics) in an arc constellation with live telemetry annotations, kinetic velocity vector, and central inquiry beacon.
+
+3. **Scene 03: Astra Agro Lestari Palm Oil Mill Internship (2018, Central Kalimantan)**
+   - Status: **Owner approved baseline** (frozen for current phase; further refinements deferred unless owner-requested).
+   - Accepted Implementation Scope:
+     1. **Causal Batch-Transformation Flow**: One identifiable batch traced continuously through all 6 stages (FFB intake, in-line weighing, saturated steam sterilization, twin-screw pressing, settling clarification, and CPO outflow/storage) under the governing rule *"Nothing moves unless the palm-oil process causes it to move"*.
+     2. **Click-to-Restart Stage Behavior**: Clicking any process stage immediately focuses that stage and restarts playback from that point in the sequence.
+     3. **Industrial Routing & Spatial Geometry**: Clean external conveyor and pipe paths that do not cut through machine bodies; physically grounded cart unload; position-coupled weighbridge deflection; realistic autoclave door sealing/discharge; auger rotation coupled to compression; and physically grounded fluid causality (clarification column and CPO receiver fill only upon actual liquid arrival).
+     4. **Personal Evidence Inspect Node**: Warm amber beacon point (`#scene-03-inspect-btn`) triggering the Astra Agro Lestari archival internship dossier modal with verified metadata, authentic quote, and on-site facility photographs including Fauzan's personal on-site photo.
+     5. **Process-Explainer Inspect Node**: Dedicated subtle cyan beacon point (`#scene-03-process-btn`) triggering a structured 6-stage educational walkthrough ("What Happens" and "Why It Matters"), keeping the main canvas surface completely free of always-visible explanatory text clutter.
+   - Preservation Rule: All current Scene 03 implementation files in `prototypes/new-portfolio-animation-first/` are preserved exactly as the active baseline. Further Scene 03 refinements or polish are deferred unless explicitly requested by the owner. Do not proceed to Scene 04 without separate instructions.
+
+4. **Scene 04: Journey to Tokyo / Tokyo Tech**
+   - Status: **Planned** (the journey to the other side of the world, Tokyo Institute of Technology lab).
+
+5. **Scene 05: Engineering Undergraduate Thesis / Synthesis**
+   - Status: **Planned** (experimental setup, energy efficiency modeling, physical-analytical closure).
 
 ## Scope
 
-- No full-page redesign is currently approved.
-- Historical Editorial Systems / Connect-Integrate-Output animation work is not current Hero design authority.
-- Supporting visual references may inform visual judgment, but they are lessons rather than templates and do not override approved owner decisions.
+- Root production files (`index.html`, `styles.css`, `main.js`) remain untouched.
+- All Chapter 02 implementation is developed inside `prototypes/new-portfolio-animation-first/`.
 - Desktop and mobile rendered evidence are required for owner acceptance of materially visual changes.
-- `red-dwarf-animation.html` is an obsolete/incomplete standalone artifact and is not Hero authority; do not repair or replace it as part of governance cleanup.
+- Do not proceed to Scene 04 until separately instructed.
 
 ## Acceptance
 
@@ -62,4 +86,7 @@ Keep these states distinct:
 - Technically validated
 - Owner approved
 
-The frozen formation prototype is owner approved as-is. Production integration remains unapproved until a separate owner decision; only the owner can grant that integration decision.
+- Hero (Red Dwarf): Owner approved (frozen).
+- Scene 01: Owner approved (frozen).
+- Scene 02: Semi-approved (retained as-is for chapter review).
+- Scene 03: Owner approved baseline (frozen for current phase; further refinements deferred unless owner-requested).

@@ -15,9 +15,14 @@ Do not reconstruct historical design explorations or animation authorities unles
 
 ## Current implementation
 
-- `../index.html` and `../CSS/` contain the active homepage/Hero implementation on the current design branch.
-- `../prototypes/red-dwarf-animation/index.html` contains the existing approximately 14-second Red Dwarf formation animation. It is the single frozen, owner-approved-as-is Hero animation authority. Preserve its implementation and behavior exactly; do not shorten it to the older 8–10-second brief.
-- Approval of the prototype does not authorize production integration. Integrating the formation animation into `../index.html` is a separate future decision, and Chapter 02 work is not started by this approval.
+- `../index.html` and `../CSS/` contain the root production homepage on the current design branch (kept untouched during prototype work).
+- `../prototypes/red-dwarf-animation/index.html` contains the frozen, owner-approved Hero animation authority.
+- `../prototypes/new-portfolio-animation-first/index.html` is the active Chapter 02 prototype workspace:
+  - **Scene 01**: Universitas Indonesia Entry (Approved baseline, frozen).
+  - **Scene 02**: College Engineering Foundations (Semi-approved, retained as-is for chapter review).
+  - **Scene 03**: Astra Agro Lestari Palm Oil Mill Internship (Owner-approved baseline, frozen for current phase. Accepted scope: causal 6-stage palm-oil batch transformation, click-to-restart stage behavior, industrial routing and geometry cleanup, personal evidence inspect node with on-site photo, and dedicated process-explainer inspect node. Further refinements deferred unless owner-requested).
+  - **Scene 04**: Journey to Tokyo / Tokyo Tech (Planned).
+  - **Scene 05**: Undergraduate Thesis / Synthesis (Planned).
 - `../Projects/Odoo-ERP-Analytics.html` is the current flagship case-study page.
 - `../prototypes/editorial-systems/` is older animation work and is not Red Dwarf Hero authority by default.
 - `../red-dwarf-animation.html` is an obsolete, incomplete standalone artifact. Its artifact metadata must not be treated as proof of a usable or authoritative Hero implementation. Do not repair or replace it as part of this governance scope.
