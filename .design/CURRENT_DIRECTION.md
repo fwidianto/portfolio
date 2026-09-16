@@ -69,10 +69,10 @@ Chapter 02 ("College Years / Foundations to Real World") is structured into five
    - Status: **Planned** (the journey to the other side of the world, Tokyo Institute of Technology lab).
 
 5. **Scene 05: Engineering Undergraduate Thesis / Synthesis**
-   - Status: **Scene 05.1A Owner-approved baseline (frozen)**; 05.1B+ planned.
+   - Status: **Scene 05.1A & 05.1B-1 Owner-approved baseline (frozen)**; 05.1B-2+ planned.
    - Authority Brief: `.design/CHAPTER_02_SCENE_05_BRIEF.md`.
-   - Approved Exploratory Workspace: `prototypes/scene-05-apparatus-explorations/index.html` (Study C: 2D orthographic editorial representation of Universitas Indonesia test rig with factual external geometry, abstract process zones, and inspection beacon).
-   - Scope Rule: All major equipment positions, external piping topology, supports, inlet/outlet relationships, and 1000 × 520 coordinate system are fixed geometry for 05.1B. Process flow animation (05.1B) has not started.
+   - Approved Exploratory Workspace: `prototypes/scene-05-apparatus-explorations/index.html` (Study C: 2D orthographic editorial representation of Universitas Indonesia test rig with approved 05.1B-1 fluid feed, pump engagement, vessel heating, overhead transfer, and throttling restriction hold).
+   - Scope Rule: All major equipment positions, piping topology, supports, and causal motion up to the throttling restriction node are frozen baseline. Section 05.1B-2 (flash evaporation) has not started.
 
 ## Scope
 
@@ -94,5 +94,5 @@ Keep these states distinct:
 - Scene 01: Owner approved (frozen).
 - Scene 02: Semi-approved (retained as-is for chapter review).
 - Scene 03: Owner approved baseline (frozen for current phase; further refinements deferred unless owner-requested).
-- Scene 05.1A: Owner approved baseline (frozen; physical apparatus composition in `prototypes/scene-05-apparatus-explorations/`).
+- Scene 05.1A / 05.1B-1: Owner approved baseline (frozen; physical apparatus composition and feed/heating/throttling motion in `prototypes/scene-05-apparatus-explorations/`).
 

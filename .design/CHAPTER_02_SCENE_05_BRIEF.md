@@ -2,11 +2,38 @@
 
 ## Status
 - **Scene**: Chapter 02, Scene 05 (Undergraduate Thesis / Synthesis)
-- **Sub-Phase**: **05.1A — Physical Apparatus Establishment**
-- **Current Status**: **Owner-approved baseline** (frozen for current phase; 05.1B process animation has not started).
+- **Sub-Phase**: **05.1B-1 — Feed, Heating & Throttling Approach** (05.1A apparatus geometry frozen at commit `1b63681`).
+- **Current Status**: **Owner-approved baseline** (frozen for current phase; 05.1B-2 flash evaporation has not started).
 - **Approved Workspace**: `prototypes/scene-05-apparatus-explorations/index.html` (Study C — Hybrid Technical Silhouette + Selective Process Visibility).
 - **Primary Factual Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_experiment_setup.png` (Universitas Indonesia Mechanical Engineering laboratory test rig, 2018–2019).
 - **Supporting Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_system_diagram.png` (system architecture and broader cycle context).
+
+---
+
+## Approved 05.1B-1 Baseline Scope (Feed, Heating & Throttling Approach)
+
+1. **Scope Boundary & Fixed Stop**:
+   - Covers the physical sequence: Feed intake → feed pump `[1]` → heated vessel `[4]` → thermal buildup → top outlet → overhead transfer → sensor response `[5, 6]` → throttling restriction `[7]`.
+   - Motion halts strictly at the restriction point ($X = 540$, node `(0, 0)` of manual valve `[7]`).
+   - Final state holds with pressurized/heated fluid primed immediately upstream of the restriction.
+
+2. **Downstream-Dry Requirement**:
+   - Downstream interconnecting spool (`M 552 226 L 620 226`), flash vessel `[8]`, brine catchment basin `[9]`, overhead vapor path, condenser `[10]`, extraction pump `[11]`, and aquadest collection bottle `[12]` contain zero fluid and remain 100% dry and inactive.
+
+3. **Causal Choreography Preserved**:
+   - **Inactive Starting State**: Rig begins completely settled, cold, and empty.
+   - **Feed Intake Entry**: Fluid introduces only at the intake/manifold area and sight flow indicator `[3]`, not downstream.
+   - **Pump Engagement Before Advance**: Pump motor visibly accelerates to operating speed before discharge fluid moves (operating head required).
+   - **Bottom Vessel Fill**: Fluid enters documented bottom inlet flange `(230, 345)` and rises inside vessel `[4]`.
+   - **Thermal Buildup After Presence**: Thermal addition zone activates and fluid transitions to amber-gold only after fluid physically enters and occupies the heated region ($t \ge 6.4\,\text{s}$). No unverified internal coils, baffles, or numerical temperatures.
+   - **Top Outlet Continuity**: Fluid exits top dome `(243, 200)` into vertical riser seamlessly; zero gaps, jumps, or teleportation.
+   - **Overhead Transfer & Sensors**: Fluid follows pipe centerline; Bourdon gauge pointer deflects $+38^\circ$ clockwise upon fluid arrival at $X = 410$; thermocouple port activates amber thermal monitoring upon hot fluid arrival at $X = 450$.
+   - **Throttling Approach Deceleration**: Fluid decelerates approaching the valve, fills upstream flange, and halts right at restriction node `(0, 0)`. Upstream fluid column compresses subtly.
+   - **Immutable Order**: The causal order (`feed → pump → heated vessel → thermal buildup → top outlet → overhead transfer → sensor response → throttling restriction`) is authoritative and must not be altered by later sections.
+
+4. **Tooling Boundary (Review/Development Controls Only)**:
+   - The interactive review controls (`PLAY / PAUSE`, `RESTART`, beat-stepper buttons `1·Feed` to `6·Valve`, timeline scrubber, keyboard shortcuts, and `window.scene05Player` API) are **review and verification tooling only**.
+   - They are non-authoritative controls provided in the isolated exploration workspace and **must not automatically migrate into the production Scene 05 visual language**.
 
 ---
 

@@ -306,6 +306,163 @@
       color: var(--text-muted);
     }
 
+    /* Playback Controls Bar for Section 05.1B-1 */
+    .playback-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: rgba(12, 16, 23, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 10px 16px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .playback-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line-steel);
+      border-radius: 4px;
+      color: var(--text-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 6px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+    }
+
+    .ctrl-btn.is-primary {
+      background: rgba(245, 158, 11, 0.18);
+      border-color: rgba(245, 158, 11, 0.5);
+      color: var(--amber-warm);
+    }
+
+    .ctrl-btn.is-primary:hover {
+      background: rgba(245, 158, 11, 0.3);
+      border-color: var(--amber-warm);
+      color: #ffffff;
+    }
+
+    .beat-steppers {
+      display: inline-flex;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .beat-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .beat-btn:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .beat-btn.is-active {
+      color: #ffffff;
+      background: rgba(245, 158, 11, 0.25);
+      font-weight: 600;
+    }
+
+    .timeline-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .timeline-scrubber {
+      width: 100%;
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+      accent-color: var(--amber-warm);
+    }
+
+    .timeline-scrubber::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--amber-warm);
+      box-shadow: 0 0 6px var(--amber-warm);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .timeline-scrubber::-webkit-slider-thumb:hover {
+      transform: scale(1.3);
+    }
+
+    .timeline-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+    }
+
+    .timecode {
+      color: var(--text-muted);
+    }
+
+    .beat-label {
+      color: var(--amber-warm);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .status-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--amber-warm);
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      padding: 3px 8px;
+      border-radius: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .apparatus-svg {
+      cursor: pointer;
+    }
+
     /* Mobile Responsive Rules */
     @media (max-width: 768px) {
       body {
@@ -357,6 +514,46 @@
         padding-bottom: 8px;
       }
 
+      .playback-bar {
+        padding: 8px 10px;
+        gap: 8px;
+      }
+
+      .playback-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .beat-steppers {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 2px;
+      }
+
+      .beat-btn {
+        white-space: nowrap;
+        text-align: center;
+        padding: 4px 2px;
+        font-size: 8px;
+        letter-spacing: -0.02em;
+      }
+
+      .timeline-container {
+        min-width: 100%;
+      }
+
+      .timeline-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+      }
+
+      .beat-label {
+        font-size: 9px;
+        line-height: 1.3;
+      }
+
       .comparison-grid {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -374,15 +571,15 @@
 
   <header class="editorial-header">
     <div class="header-text">
-      <div class="kicker">02.05 // UNDERGRADUATE THESIS (2018–2019)</div>
-      <h1>Section 05.1A — Physical Apparatus Visual Studies</h1>
-      <p class="subtitle">Faithful 2D editorial vector representations grounded directly in the Universitas Indonesia laboratory test rig (thesis_experiment_setup.png)</p>
+      <div class="kicker">02.05 // UNDERGRADUATE THESIS (2018–2019) · SECTION 05.1B-1</div>
+      <h1>Feed, Heating &amp; Throttling Approach</h1>
+      <p class="subtitle">Physical process flow animation through frozen 05.1A apparatus baseline: Intake → Feed Pump → Heated Vessel → Overhead Transfer → Throttling Valve Restriction</p>
     </div>
 
     <div class="study-tabs" role="tablist">
-      <button class="study-btn" data-target="study-a">Study A · Orthographic Elevation</button>
-      <button class="study-btn" data-target="study-b">Study B · Isometric Axonometric</button>
-      <button class="study-btn is-active" data-target="study-c">Study C · Cutaway Flow Geometry</button>
+      <button class="study-btn" data-target="study-a">Study A · Orthographic</button>
+      <button class="study-btn" data-target="study-b">Study B · Isometric</button>
+      <button class="study-btn is-active" data-target="study-c">Study C · Process Flow 05.1B-1 (Approved Baseline)</button>
     </div>
   </header>
 
@@ -724,16 +921,77 @@
          ========================================================================= -->
     <div class="study-card is-active" id="study-c">
       <div class="study-meta">
-        <span class="study-badge">STUDY C · HYBRID SILHOUETTE + FLOW GEOMETRY (RECOMMENDED)</span>
-        <span>Orthographic Baseline · Ghosted Internal Thermodynamics · Direct Animation Anchor</span>
+        <span class="study-badge">STUDY C · SECTION 05.1B-1 PROCESS FLOW (FROZEN BASELINE)</span>
+        <span id="study-c-status-pill" class="status-pill">STATUS: RIG AT REST</span>
       </div>
 
-      <svg class="apparatus-svg" viewBox="0 0 1000 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Playback Controls HUD for Section 05.1B-1 -->
+      <div class="playback-bar" id="playback-bar">
+        <div class="playback-actions">
+          <button id="btn-play-pause" class="ctrl-btn is-primary" title="Toggle Play / Pause (Space)">
+            <svg class="ctrl-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><polygon points="6,4 20,12 6,20" id="play-poly"/></svg>
+            <span id="play-text">PLAY</span>
+          </button>
+          <button id="btn-restart" class="ctrl-btn" title="Restart Process Sequence (R)">
+            <svg class="ctrl-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            <span>RESTART</span>
+          </button>
+          <div class="beat-steppers">
+            <button class="beat-btn" data-beat="1" title="Beat 1: Feed Intake Activation">1·Feed</button>
+            <button class="beat-btn" data-beat="2" title="Beat 2: Feed Pump Engagement">2·Pump</button>
+            <button class="beat-btn" data-beat="3" title="Beat 3: Heater Fill &amp; Thermal Buildup">3·Heat</button>
+            <button class="beat-btn" data-beat="4" title="Beat 4: Top Outlet Continuity">4·Exit</button>
+            <button class="beat-btn" data-beat="5" title="Beat 5: Overhead Transfer &amp; Sensors">5·Pipe</button>
+            <button class="beat-btn" data-beat="6" title="Beat 6: Throttling Approach &amp; Hold">6·Valve</button>
+          </div>
+        </div>
+
+        <div class="timeline-container">
+          <input type="range" id="timeline-scrubber" class="timeline-scrubber" min="0" max="17.5" step="0.05" value="0">
+          <div class="timeline-meta">
+            <span id="timecode-display" class="timecode">00:00.0 / 00:17.5</span>
+            <span id="beat-label-display" class="beat-label">RIG AT REST</span>
+          </div>
+        </div>
+      </div>
+
+      <svg class="apparatus-svg" id="study-c-svg" viewBox="0 0 1000 520" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="distillate-glow" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="rgba(100, 181, 246, 0.6)"/>
             <stop offset="100%" stop-color="rgba(33, 150, 243, 0.25)"/>
           </linearGradient>
+
+          <!-- Ambient Working Fluid Gradient (Cool feed solution) -->
+          <linearGradient id="cool-feed-fluid" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#60a5fa" stop-opacity="0.75"/>
+          </linearGradient>
+
+          <!-- Thermal Gradient in Heater Core (Ambient cyan to hot amber/gold) -->
+          <linearGradient id="heater-fluid-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8"/>
+            <stop offset="35%" stop-color="#60a5fa" stop-opacity="0.85"/>
+            <stop offset="70%" stop-color="#f59e0b" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="#ea580c" stop-opacity="0.98"/>
+          </linearGradient>
+
+          <!-- Hot Pressurized Working Fluid Gradient for Overhead Line -->
+          <linearGradient id="hot-transfer-fluid" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="50%" stop-color="#fbbf24"/>
+            <stop offset="100%" stop-color="#ea580c"/>
+          </linearGradient>
+
+          <!-- Clip Path for Vessel Interior (exact internal boundary) -->
+          <clipPath id="clip-heater-vessel">
+            <rect x="221" y="201" width="44" height="143" rx="3"/>
+          </clipPath>
+
+          <!-- Clip Path for Flow Meter Sight Glass -->
+          <clipPath id="clip-flow-meter">
+            <rect x="81" y="381" width="12" height="43" rx="1.5"/>
+          </clipPath>
         </defs>
 
         <!-- Floor Reference Line -->
@@ -746,19 +1004,32 @@
 
         <rect x="180" y="420" width="55" height="40" rx="4" fill="#1e2430" stroke="var(--line-steel)" stroke-width="1.2"/>
         <circle cx="205" cy="440" r="14" fill="#151922" stroke="var(--cyan-tech)" stroke-width="1.2"/>
-        <!-- Circulation Impeller Glyph -->
-        <path d="M 205 430 L 205 450 M 195 440 L 215 440" stroke="var(--cyan-tech)" stroke-width="1.2"/>
-        <circle cx="205" cy="440" r="3" fill="var(--cyan-tech)"/>
+        <circle id="pump-active-halo" cx="205" cy="440" r="14" fill="none" stroke="rgba(100, 181, 246, 0.5)" stroke-width="1.5" opacity="0"/>
+        <!-- Circulation Impeller Glyph (Rotates upon startup) -->
+        <g id="pump-impeller-group">
+          <path d="M 205 430 L 205 450 M 195 440 L 215 440" stroke="var(--cyan-tech)" stroke-width="1.2"/>
+          <circle cx="205" cy="440" r="3" fill="var(--cyan-tech)"/>
+        </g>
         <text x="205" y="475" font-family="'JetBrains Mono', monospace" font-size="8" fill="var(--text-muted)" text-anchor="middle">FEED PUMP [1]</text>
 
         <!-- Flow indicator [3] -->
         <rect x="80" y="380" width="14" height="45" rx="2" fill="rgba(100, 180, 246, 0.05)" stroke="var(--cyan-tech)" stroke-width="1"/>
-        <circle cx="87" cy="405" r="3.5" fill="var(--cyan-tech)"/>
+        <rect id="flow-meter-fluid" x="81" y="424" width="12" height="0" fill="url(#cool-feed-fluid)" clip-path="url(#clip-flow-meter)"/>
+        <circle id="flow-bob" cx="87" cy="415" r="3.5" fill="var(--cyan-tech)"/>
         <text x="87" y="372" font-family="'JetBrains Mono', monospace" font-size="8" fill="var(--cyan-tech)" text-anchor="middle">FLOW [3]</text>
 
+        <!-- Static Suction Piping Lines -->
         <path d="M 87 425 L 87 448 L 110 448" stroke="var(--line-steel)" stroke-width="1.5" fill="none"/>
         <path d="M 170 448 L 180 448" stroke="var(--line-steel)" stroke-width="1.5" fill="none"/>
-        <path d="M 205 420 L 205 385 Q 205 375 215 375 L 230 375" stroke="var(--line-steel)" stroke-width="1.5" fill="none"/>
+        <path d="M 205 420 L 205 385 Q 205 375 215 375 L 230 375 L 230 345" stroke="var(--line-steel)" stroke-width="1.5" fill="none"/>
+
+        <!-- Dynamic Suction Fluid Flow Overlays (Beat 1) -->
+        <path id="fluid-suction-glow" d="M 87 425 L 87 448 L 110 448 L 170 448 L 180 448" stroke="rgba(56, 189, 248, 0.4)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0"/>
+        <path id="fluid-suction-core" d="M 87 425 L 87 448 L 110 448 L 170 448 L 180 448" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" fill="none" opacity="0"/>
+
+        <!-- Dynamic Discharge Fluid Flow Overlays (Beat 2) -->
+        <path id="fluid-discharge-glow" d="M 205 420 L 205 385 Q 205 375 215 375 L 230 375 L 230 345" stroke="rgba(56, 189, 248, 0.4)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0"/>
+        <path id="fluid-discharge-core" d="M 205 420 L 205 385 Q 205 375 215 375 L 230 375 L 230 345" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" fill="none" opacity="0"/>
 
         <!-- ==================== 2. HEATED VESSEL WITH THERMAL ZONE [4] ==================== -->
         <!-- Slender Tripod Legs -->
@@ -768,17 +1039,23 @@
 
         <!-- External Insulated Vessel Outline -->
         <rect x="220" y="200" width="46" height="145" rx="4" fill="#141924" stroke="var(--line-crisp)" stroke-width="1.5"/>
+
+        <!-- Dynamic Vessel Internal Fluid Fill (Beat 3) -->
+        <g clip-path="url(#clip-heater-vessel)">
+          <rect id="heater-fluid-fill" x="221" y="344" width="44" height="0" fill="url(#heater-fluid-gradient)"/>
+          <line id="heater-fluid-meniscus" x1="221" y1="344" x2="265" y2="344" stroke="#ffffff" stroke-width="1" opacity="0"/>
+        </g>
         
         <!-- Restrained Thermal Addition Core (Abstract Heated Zone) -->
-        <rect x="226" y="235" width="34" height="95" rx="2" fill="rgba(245, 158, 11, 0.07)" stroke="rgba(245, 158, 11, 0.22)" stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="235" y1="282" x2="251" y2="282" stroke="rgba(245, 158, 11, 0.3)" stroke-width="1" stroke-dasharray="2 2"/>
+        <rect id="heater-thermal-core" x="226" y="235" width="34" height="95" rx="2" fill="rgba(245, 158, 11, 0.07)" stroke="rgba(245, 158, 11, 0.22)" stroke-width="1" stroke-dasharray="3 3"/>
+        <line id="heater-thermal-cross" x1="235" y1="282" x2="251" y2="282" stroke="rgba(245, 158, 11, 0.3)" stroke-width="1" stroke-dasharray="2 2"/>
         
         <!-- Unobstructed Label: Left Offset -->
         <text x="208" y="195" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="var(--text-primary)" text-anchor="end">HEATER [4]</text>
         <text x="208" y="206" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--amber-warm)" text-anchor="end">P_in, T_in</text>
 
         <!-- ==================== 3. OVERHEAD HIGH-PRESSURE TRANSFER & INSTRUMENTS [5, 6, 7] ==================== -->
-        <!-- High-Pressure Insulated Line -->
+        <!-- High-Pressure Insulated Line (Frozen Geometry) -->
         <path d="M 243 200 L 243 145 Q 243 130 258 130 L 505 130 Q 520 130 520 145 L 520 220 Q 520 226 526 226 L 540 226" 
               stroke="#1b2331" stroke-width="12" stroke-linecap="round" fill="none"/>
         <path d="M 243 200 L 243 145 Q 243 130 258 130 L 505 130 Q 520 130 520 145 L 520 220 Q 520 226 526 226 L 540 226" 
@@ -787,33 +1064,47 @@
         <path d="M 243 200 L 243 145 Q 243 130 258 130 L 505 130 Q 520 130 520 145 L 520 220 Q 520 226 526 226 L 540 226" 
               stroke="rgba(245, 158, 11, 0.4)" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/>
 
+        <!-- Dynamic Overhead Fluid Flow Overlays (Beats 4, 5, 6) -->
+        <path id="fluid-overhead-glow" d="M 243 200 L 243 145 Q 243 130 258 130 L 505 130 Q 520 130 520 145 L 520 220 Q 520 226 526 226 L 540 226" 
+              stroke="rgba(245, 158, 11, 0.45)" stroke-width="6" stroke-linecap="round" fill="none" opacity="0"/>
+        <path id="fluid-overhead-core" d="M 243 200 L 243 145 Q 243 130 258 130 L 505 130 Q 520 130 520 145 L 520 220 Q 520 226 526 226 L 540 226" 
+              stroke="url(#hot-transfer-fluid)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0"/>
+        <path id="fluid-overhead-inner" d="M 243 200 L 243 145 Q 243 130 258 130 L 505 130 Q 520 130 520 145 L 520 220 Q 520 226 526 226 L 540 226" 
+              stroke="#ffffff" stroke-width="1" stroke-linecap="round" fill="none" opacity="0"/>
+
         <!-- Dial Pressure Gauge [5] -->
         <line x1="410" y1="130" x2="410" y2="105" stroke="var(--line-steel)" stroke-width="1.5"/>
         <circle cx="410" cy="92" r="13" fill="#121722" stroke="var(--line-crisp)" stroke-width="1.5"/>
-        <line x1="410" y1="92" x2="418" y2="86" stroke="var(--orange-accent)" stroke-width="1.5"/>
+        <!-- Needle Pivoted at (410, 92) -->
+        <g id="gauge-needle-group" transform="rotate(-50 410 92)">
+          <line id="gauge-needle" x1="410" y1="92" x2="419" y2="92" stroke="var(--orange-accent)" stroke-width="1.5"/>
+        </g>
         <circle cx="410" cy="92" r="2" fill="#ffffff"/>
         <text x="410" y="72" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="var(--text-primary)" text-anchor="middle">BOURDON GAUGE [5]</text>
 
         <!-- Temperature Sensor Port [6] -->
-        <line x1="450" y1="130" x2="450" y2="148" stroke="var(--line-steel)" stroke-width="1.2"/>
-        <circle cx="450" cy="151" r="3" fill="var(--cyan-tech)"/>
+        <line id="temp-sensor-stem" x1="450" y1="130" x2="450" y2="148" stroke="var(--line-steel)" stroke-width="1.2"/>
+        <circle id="temp-sensor-halo" cx="450" cy="151" r="6" fill="rgba(245, 158, 11, 0.4)" opacity="0"/>
+        <circle id="temp-sensor-dot" cx="450" cy="151" r="3" fill="var(--cyan-tech)"/>
         <text x="450" y="166" font-family="'JetBrains Mono', monospace" font-size="8" fill="var(--cyan-tech)" text-anchor="middle">T_in PORT [6]</text>
 
         <!-- Manual Throttling Valve [7] (Accurate Manual Valve with Abstract Restriction Point) -->
         <g transform="translate(540, 226)">
           <polygon points="-12,-8 0,0 -12,8" fill="#1f2937" stroke="var(--line-crisp)" stroke-width="1.2"/>
+          <polygon id="valve-inlet-fluid" points="-12,-7 0,0 -12,7" fill="rgba(245, 158, 11, 0)" stroke="none"/>
           <polygon points="12,-8 0,0 12,8" fill="#1f2937" stroke="var(--line-crisp)" stroke-width="1.2"/>
           <!-- Abstract Restriction Node -->
-          <circle cx="0" cy="0" r="1.5" fill="var(--valve-red)"/>
+          <circle id="valve-restriction-node" cx="0" cy="0" r="1.5" fill="var(--valve-red)"/>
           
           <line x1="0" y1="0" x2="0" y2="-16" stroke="var(--line-crisp)" stroke-width="1.5"/>
-          <ellipse cx="0" cy="-16" rx="10" ry="3.5" fill="var(--valve-red)" stroke="#b91c1c" stroke-width="1"/>
+          <ellipse id="valve-handwheel" cx="0" cy="-16" rx="10" ry="3.5" fill="var(--valve-red)" stroke="#b91c1c" stroke-width="1"/>
+          <line id="valve-handwheel-notch" x1="0" y1="-19.5" x2="0" y2="-12.5" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1"/>
           
           <text x="0" y="-24" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="var(--valve-red)" text-anchor="middle">THROTTLING VALVE [7]</text>
           <text x="0" y="18" font-family="'JetBrains Mono', monospace" font-size="7" fill="var(--text-muted)" text-anchor="middle">MANUAL RESTRICTION</text>
         </g>
 
-        <!-- Interconnecting Pipe into Flash Vessel -->
+        <!-- Interconnecting Pipe into Flash Vessel (Remains 100% dry and inactive in 05.1B-1) -->
         <path d="M 552 226 L 620 226" stroke="var(--line-crisp)" stroke-width="1.5" fill="none"/>
 
         <!-- ==================== 4. FLASH CHAMBER & REGION [8, 9] ==================== -->
@@ -952,6 +1243,505 @@
         document.getElementById(targetId).classList.add('is-active');
       });
     });
+
+    // =========================================================================
+    // SECTION 05.1B-1: FEED, HEATING & THROTTLING APPROACH ANIMATION ENGINE
+    // Pure physics/mathematical state machine with sub-pixel SVG path control
+    // =========================================================================
+    (function initScene05Animation() {
+      // Configuration & Timeline Timestamps (seconds)
+      const DURATION = 17.5;
+      const BEATS = [
+        { id: 0, time: 0.0, name: 'RIG AT REST (INACTIVE)', pill: 'STATUS: RIG AT REST' },
+        { id: 1, time: 1.2, name: 'BEAT 1 · FEED INTAKE & SIGHT GLASS ACTIVATION', pill: 'BEAT 1: INTAKE ACTIVE' },
+        { id: 2, time: 3.0, name: 'BEAT 2 · FEED PUMP ENGAGEMENT & DISCHARGE ADVANCE', pill: 'BEAT 2: PUMP ENGAGED' },
+        { id: 3, time: 5.4, name: 'BEAT 3 · HEATER VESSEL FILL & THERMAL ACCUMULATION', pill: 'BEAT 3: HEATING CORE' },
+        { id: 4, time: 9.6, name: 'BEAT 4 · TOP OUTLET CONTINUOUS TRACEABLE HANDOFF', pill: 'BEAT 4: TOP OUTLET' },
+        { id: 5, time: 11.0, name: 'BEAT 5 · OVERHEAD TRANSFER, GAUGE & SENSOR RESPONSE', pill: 'BEAT 5: OVERHEAD TRANSFER' },
+        { id: 6, time: 15.0, name: 'BEAT 6 · THROTTLING VALVE APPROACH & PRIMED HOLD', pill: 'BEAT 6: THROTTLING PRIMED' }
+      ];
+
+      // DOM Elements
+      const stageSvg = document.getElementById('study-c-svg');
+      const btnPlayPause = document.getElementById('btn-play-pause');
+      const playText = document.getElementById('play-text');
+      const btnRestart = document.getElementById('btn-restart');
+      const scrubber = document.getElementById('timeline-scrubber');
+      const timecodeDisplay = document.getElementById('timecode-display');
+      const beatLabelDisplay = document.getElementById('beat-label-display');
+      const statusPill = document.getElementById('study-c-status-pill');
+      const beatBtns = document.querySelectorAll('.beat-btn');
+
+      // SVG Animated Elements
+      const flowMeterFluid = document.getElementById('flow-meter-fluid');
+      const flowBob = document.getElementById('flow-bob');
+      const suctionGlow = document.getElementById('fluid-suction-glow');
+      const suctionCore = document.getElementById('fluid-suction-core');
+      const pumpHalo = document.getElementById('pump-active-halo');
+      const pumpImpellerGroup = document.getElementById('pump-impeller-group');
+      const dischargeGlow = document.getElementById('fluid-discharge-glow');
+      const dischargeCore = document.getElementById('fluid-discharge-core');
+      const heaterFluidFill = document.getElementById('heater-fluid-fill');
+      const heaterFluidMeniscus = document.getElementById('heater-fluid-meniscus');
+      const heaterThermalCore = document.getElementById('heater-thermal-core');
+      const heaterThermalCross = document.getElementById('heater-thermal-cross');
+      const overheadGlow = document.getElementById('fluid-overhead-glow');
+      const overheadCore = document.getElementById('fluid-overhead-core');
+      const overheadInner = document.getElementById('fluid-overhead-inner');
+      const gaugeNeedleGroup = document.getElementById('gauge-needle-group');
+      const tempSensorDot = document.getElementById('temp-sensor-dot');
+      const tempSensorHalo = document.getElementById('temp-sensor-halo');
+      const tempSensorStem = document.getElementById('temp-sensor-stem');
+      const valveInletFluid = document.getElementById('valve-inlet-fluid');
+      const valveRestrictionNode = document.getElementById('valve-restriction-node');
+      const valveHandwheel = document.getElementById('valve-handwheel');
+      const valveHandwheelNotch = document.getElementById('valve-handwheel-notch');
+
+      // Compute exact geometric path lengths
+      const suctionLen = suctionCore.getTotalLength();
+      const dischargeLen = dischargeCore.getTotalLength();
+      const overheadLen = overheadCore.getTotalLength();
+
+      // Initialize path dasharrays
+      suctionGlow.style.strokeDasharray = `${suctionLen} ${suctionLen}`;
+      suctionCore.style.strokeDasharray = `${suctionLen} ${suctionLen}`;
+      dischargeGlow.style.strokeDasharray = `${dischargeLen} ${dischargeLen}`;
+      dischargeCore.style.strokeDasharray = `${dischargeLen} ${dischargeLen}`;
+      overheadGlow.style.strokeDasharray = `${overheadLen} ${overheadLen}`;
+      overheadCore.style.strokeDasharray = `${overheadLen} ${overheadLen}`;
+      overheadInner.style.strokeDasharray = `${overheadLen} ${overheadLen}`;
+
+      // Animation State
+      let currentTime = 0;
+      let isPlaying = false;
+      let lastRafTime = null;
+      let rafId = null;
+
+      // Mathematical Utilities
+      function clamp(val, min, max) {
+        return Math.max(min, Math.min(max, val));
+      }
+      function easeInOutQuad(t) {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      }
+      function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+      function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+      }
+
+      // Impeller angle analytical integral (smooth, deterministic acceleration from t=3.0 to 4.2)
+      function getImpellerAngle(t) {
+        if (t <= 3.0) return 0;
+        const accelDuration = 1.2;
+        const steadySpeed = 720; // degrees per second
+        if (t < 3.0 + accelDuration) {
+          const tau = (t - 3.0) / accelDuration;
+          let intS = 0;
+          if (tau < 0.5) {
+            intS = (2 / 3) * Math.pow(tau, 3);
+          } else {
+            intS = -tau + 2 * tau * tau - (2 / 3) * Math.pow(tau, 3) + (1 / 12);
+          }
+          return steadySpeed * accelDuration * intS;
+        } else {
+          const tau1Integral = 0.5; // integral from 0 to 1 of easeInOutQuad is 0.5
+          const angleAtSteady = steadySpeed * accelDuration * tau1Integral;
+          return angleAtSteady + steadySpeed * (t - (3.0 + accelDuration));
+        }
+      }
+
+      // Render Frame at Time t
+      function render(t) {
+        currentTime = clamp(t, 0, DURATION);
+
+        // -------------------------------------------------------------
+        // BEAT 1: Feed Intake & Sight Glass Activation (t = 1.2 .. 3.0s)
+        // -------------------------------------------------------------
+        if (currentTime < 1.2) {
+          // Cold rig at rest
+          flowMeterFluid.setAttribute('height', 0);
+          flowMeterFluid.setAttribute('y', 424);
+          flowBob.setAttribute('cy', 415);
+          suctionGlow.style.strokeDashoffset = suctionLen;
+          suctionCore.style.strokeDashoffset = suctionLen;
+          suctionGlow.style.opacity = '0';
+          suctionCore.style.opacity = '0';
+        } else if (currentTime <= 3.0) {
+          const p1 = clamp((currentTime - 1.2) / 1.8, 0, 1);
+          const e1 = easeInOutQuad(p1);
+
+          // Flow meter sight glass fluid rise
+          const bobRise = e1 * 10;
+          flowMeterFluid.setAttribute('height', e1 * 32);
+          flowMeterFluid.setAttribute('y', 424 - (e1 * 32));
+          flowBob.setAttribute('cy', 415 - bobRise);
+
+          // Suction pipe progression to pump suction flange (180, 448)
+          const offset1 = suctionLen * (1 - e1);
+          suctionGlow.style.strokeDashoffset = offset1;
+          suctionCore.style.strokeDashoffset = offset1;
+          suctionGlow.style.opacity = '0.8';
+          suctionCore.style.opacity = '1';
+        } else {
+          // Fully primed suction line
+          flowMeterFluid.setAttribute('height', 32);
+          flowMeterFluid.setAttribute('y', 392);
+          flowBob.setAttribute('cy', 405);
+          suctionGlow.style.strokeDashoffset = '0';
+          suctionCore.style.strokeDashoffset = '0';
+          suctionGlow.style.opacity = '0.8';
+          suctionCore.style.opacity = '1';
+        }
+
+        // -------------------------------------------------------------
+        // BEAT 2: Pump Engagement & Discharge Advance (t = 3.0 .. 5.4s)
+        // -------------------------------------------------------------
+        const impellerAngle = getImpellerAngle(currentTime);
+        pumpImpellerGroup.setAttribute('transform', `rotate(${impellerAngle % 360} 205 440)`);
+
+        if (currentTime < 3.0) {
+          pumpHalo.style.opacity = '0';
+          dischargeGlow.style.strokeDashoffset = dischargeLen;
+          dischargeCore.style.strokeDashoffset = dischargeLen;
+          dischargeGlow.style.opacity = '0';
+          dischargeCore.style.opacity = '0';
+        } else if (currentTime <= 3.8) {
+          // Motor starting up, fluid waiting for operational head
+          const startupP = (currentTime - 3.0) / 0.8;
+          pumpHalo.style.opacity = String(0.45 * startupP);
+          dischargeGlow.style.strokeDashoffset = dischargeLen;
+          dischargeCore.style.strokeDashoffset = dischargeLen;
+          dischargeGlow.style.opacity = '0';
+          dischargeCore.style.opacity = '0';
+        } else if (currentTime <= 5.4) {
+          // Fluid advancing through discharge pipe to vessel bottom flange (230, 345)
+          pumpHalo.style.opacity = '0.55';
+          const p2 = clamp((currentTime - 3.8) / 1.6, 0, 1);
+          const e2 = easeOutCubic(p2);
+          const offset2 = dischargeLen * (1 - e2);
+          dischargeGlow.style.strokeDashoffset = offset2;
+          dischargeCore.style.strokeDashoffset = offset2;
+          dischargeGlow.style.opacity = '0.8';
+          dischargeCore.style.opacity = '1';
+        } else {
+          pumpHalo.style.opacity = '0.55';
+          dischargeGlow.style.strokeDashoffset = '0';
+          dischargeCore.style.strokeDashoffset = '0';
+          dischargeGlow.style.opacity = '0.8';
+          dischargeCore.style.opacity = '1';
+        }
+
+        // -------------------------------------------------------------
+        // BEAT 3: Heater Vessel Fill & Thermal Accumulation (t = 5.4 .. 9.6s)
+        // -------------------------------------------------------------
+        if (currentTime < 5.4) {
+          heaterFluidFill.setAttribute('height', 0);
+          heaterFluidFill.setAttribute('y', 344);
+          heaterFluidMeniscus.style.opacity = '0';
+          heaterThermalCore.setAttribute('fill', 'rgba(245, 158, 11, 0.07)');
+          heaterThermalCore.setAttribute('stroke', 'rgba(245, 158, 11, 0.22)');
+          heaterThermalCross.setAttribute('stroke', 'rgba(245, 158, 11, 0.3)');
+        } else if (currentTime <= 8.4) {
+          // Upward fluid fill inside vessel core
+          const pFill = clamp((currentTime - 5.4) / 3.0, 0, 1);
+          const eFill = easeInOutQuad(pFill);
+          const h = 143 * eFill;
+          const curY = 344 - h;
+          heaterFluidFill.setAttribute('height', h);
+          heaterFluidFill.setAttribute('y', curY);
+          heaterFluidMeniscus.setAttribute('y1', curY);
+          heaterFluidMeniscus.setAttribute('y2', curY);
+          heaterFluidMeniscus.style.opacity = (pFill > 0 && pFill < 0.98) ? '0.65' : '0';
+
+          // Thermal zone begins subtle heating as fluid reaches Y <= 330 (approx t >= 6.4s)
+          if (currentTime >= 6.4) {
+            const pHeat = clamp((currentTime - 6.4) / 3.0, 0, 1);
+            const eHeat = easeInOutQuad(pHeat);
+            heaterThermalCore.setAttribute('fill', `rgba(245, 158, 11, ${0.07 + 0.20 * eHeat})`);
+            heaterThermalCore.setAttribute('stroke', `rgba(245, 158, 11, ${0.22 + 0.40 * eHeat})`);
+            heaterThermalCross.setAttribute('stroke', `rgba(245, 158, 11, ${0.30 + 0.45 * eHeat})`);
+          } else {
+            heaterThermalCore.setAttribute('fill', 'rgba(245, 158, 11, 0.07)');
+            heaterThermalCore.setAttribute('stroke', 'rgba(245, 158, 11, 0.22)');
+            heaterThermalCross.setAttribute('stroke', 'rgba(245, 158, 11, 0.3)');
+          }
+        } else if (currentTime <= 9.6) {
+          // Vessel full, thermal accumulation establishes steady hot operating condition
+          heaterFluidFill.setAttribute('height', 143);
+          heaterFluidFill.setAttribute('y', 201);
+          heaterFluidMeniscus.style.opacity = '0';
+
+          const pHeat = clamp((currentTime - 6.4) / 3.0, 0, 1);
+          const eHeat = easeInOutQuad(pHeat);
+          heaterThermalCore.setAttribute('fill', `rgba(245, 158, 11, ${0.07 + 0.22 * eHeat})`);
+          heaterThermalCore.setAttribute('stroke', `rgba(245, 158, 11, ${0.22 + 0.48 * eHeat})`);
+          heaterThermalCross.setAttribute('stroke', `rgba(245, 158, 11, ${0.30 + 0.55 * eHeat})`);
+        } else {
+          // Fully heated operating state
+          heaterFluidFill.setAttribute('height', 143);
+          heaterFluidFill.setAttribute('y', 201);
+          heaterFluidMeniscus.style.opacity = '0';
+          heaterThermalCore.setAttribute('fill', 'rgba(245, 158, 11, 0.29)');
+          heaterThermalCore.setAttribute('stroke', 'rgba(245, 158, 11, 0.70)');
+          heaterThermalCross.setAttribute('stroke', 'rgba(245, 158, 11, 0.85)');
+        }
+
+        // -------------------------------------------------------------
+        // BEATS 4, 5, 6: Overhead Transfer Line & Throttling Approach
+        // -------------------------------------------------------------
+        if (currentTime < 9.6) {
+          // Zero fluid in overhead piping
+          overheadGlow.style.strokeDashoffset = overheadLen;
+          overheadCore.style.strokeDashoffset = overheadLen;
+          overheadInner.style.strokeDashoffset = overheadLen;
+          overheadGlow.style.opacity = '0';
+          overheadCore.style.opacity = '0';
+          overheadInner.style.opacity = '0';
+
+          // Instruments at rest
+          gaugeNeedleGroup.setAttribute('transform', 'rotate(-50 410 92)');
+          tempSensorDot.setAttribute('fill', 'var(--cyan-tech)');
+          tempSensorHalo.style.opacity = '0';
+          tempSensorStem.setAttribute('stroke', 'var(--line-steel)');
+
+          // Valve clear
+          valveInletFluid.setAttribute('fill', 'rgba(245, 158, 11, 0)');
+          valveHandwheelNotch.setAttribute('stroke', 'rgba(255, 255, 255, 0.4)');
+        } else {
+          // Fluid advances along overhead line
+          let overheadFraction = 0;
+          if (currentTime <= 11.0) {
+            // Beat 4: Top outlet handoff (243, 200) to apex (258, 130), ~78.6px
+            const p4 = clamp((currentTime - 9.6) / 1.4, 0, 1);
+            overheadFraction = (78.6 / overheadLen) * easeInOutQuad(p4);
+          } else if (currentTime <= 15.0) {
+            // Beat 5: Overhead transfer along horizontal pipe and down vertical drop
+            const p5 = clamp((currentTime - 11.0) / 4.0, 0, 1);
+            const apexFrac = 78.6 / overheadLen;
+            const preValveFrac = (overheadLen - 24) / overheadLen;
+            overheadFraction = apexFrac + (preValveFrac - apexFrac) * p5;
+          } else {
+            // Beat 6: Approach into throttling valve and stop right at restriction node
+            const p6 = clamp((currentTime - 15.0) / 1.8, 0, 1);
+            const preValveFrac = (overheadLen - 24) / overheadLen;
+            overheadFraction = preValveFrac + (1 - preValveFrac) * easeOutCubic(p6);
+          }
+
+          const offsetOH = overheadLen * (1 - overheadFraction);
+          overheadGlow.style.strokeDashoffset = offsetOH;
+          overheadCore.style.strokeDashoffset = offsetOH;
+          overheadInner.style.strokeDashoffset = offsetOH;
+          overheadGlow.style.opacity = '0.85';
+          overheadCore.style.opacity = '1';
+          overheadInner.style.opacity = '0.9';
+
+          // Bourdon Gauge Response (X = 410 passed at t approx 12.3s)
+          if (currentTime < 12.3) {
+            gaugeNeedleGroup.setAttribute('transform', 'rotate(-50 410 92)');
+          } else {
+            const pGauge = clamp((currentTime - 12.3) / 1.4, 0, 1);
+            const eGauge = easeOutCubic(pGauge);
+            const curAngle = -50 + (38 * eGauge); // -50 deg to -12 deg (~2 o'clock)
+            gaugeNeedleGroup.setAttribute('transform', `rotate(${curAngle} 410 92)`);
+          }
+
+          // Temperature Sensor Port Response (X = 450 passed at t approx 13.1s)
+          if (currentTime < 13.1) {
+            tempSensorDot.setAttribute('fill', 'var(--cyan-tech)');
+            tempSensorHalo.style.opacity = '0';
+            tempSensorStem.setAttribute('stroke', 'var(--line-steel)');
+          } else {
+            const pTemp = clamp((currentTime - 13.1) / 1.4, 0, 1);
+            const eTemp = easeInOutQuad(pTemp);
+            tempSensorDot.setAttribute('fill', eTemp > 0.6 ? 'var(--amber-warm)' : '#60a5fa');
+            tempSensorHalo.style.opacity = String(0.75 * eTemp);
+            tempSensorStem.setAttribute('stroke', `rgba(245, 158, 11, ${0.2 + 0.6 * eTemp})`);
+          }
+
+          // Throttling Valve Inlet Cavity & Primed Hold (Beat 6, t >= 15.0s)
+          if (currentTime < 15.0) {
+            valveInletFluid.setAttribute('fill', 'rgba(245, 158, 11, 0)');
+            valveHandwheelNotch.setAttribute('stroke', 'rgba(255, 255, 255, 0.4)');
+            overheadGlow.setAttribute('stroke-width', '6');
+          } else {
+            const pValve = clamp((currentTime - 15.0) / 1.8, 0, 1);
+            const eValve = easeOutCubic(pValve);
+            valveInletFluid.setAttribute('fill', `rgba(245, 158, 11, ${0.85 * eValve})`);
+
+            // Subtle hydraulic upstream compression as fluid halts against restriction node
+            if (currentTime >= 16.2) {
+              const pComp = clamp((currentTime - 16.2) / 1.0, 0, 1);
+              const eComp = easeOutCubic(pComp);
+              overheadGlow.setAttribute('stroke-width', String(6 + 1.2 * eComp));
+              valveHandwheelNotch.setAttribute('stroke', `rgba(255, 255, 255, ${0.4 + 0.5 * eComp})`);
+            } else {
+              overheadGlow.setAttribute('stroke-width', '6');
+              valveHandwheelNotch.setAttribute('stroke', 'rgba(255, 255, 255, 0.4)');
+            }
+          }
+        }
+
+        // -------------------------------------------------------------
+        // UI & Meta Displays Update
+        // -------------------------------------------------------------
+        scrubber.value = currentTime;
+        const mins = Math.floor(currentTime / 60);
+        const secs = (currentTime % 60).toFixed(1).padStart(4, '0');
+        timecodeDisplay.textContent = `0${mins}:${secs} / 00:17.5`;
+
+        // Determine current beat
+        let activeBeat = BEATS[0];
+        for (let i = BEATS.length - 1; i >= 0; i--) {
+          if (currentTime >= BEATS[i].time) {
+            activeBeat = BEATS[i];
+            break;
+          }
+        }
+        beatLabelDisplay.textContent = activeBeat.name;
+        statusPill.textContent = activeBeat.pill;
+
+        // Active state for beat stepper buttons
+        beatBtns.forEach(btn => {
+          const bNum = parseInt(btn.dataset.beat, 10);
+          if (activeBeat.id === bNum) {
+            btn.classList.add('is-active');
+          } else {
+            btn.classList.remove('is-active');
+          }
+        });
+      }
+
+      // Playback Loop
+      function tick(now) {
+        if (!isPlaying) return;
+        if (lastRafTime === null) lastRafTime = now;
+        const delta = (now - lastRafTime) / 1000;
+        lastRafTime = now;
+
+        currentTime += delta;
+        if (currentTime >= DURATION) {
+          currentTime = DURATION;
+          render(currentTime);
+          pause();
+          return;
+        }
+
+        render(currentTime);
+        rafId = requestAnimationFrame(tick);
+      }
+
+      function play() {
+        if (currentTime >= DURATION) currentTime = 0;
+        isPlaying = true;
+        lastRafTime = null;
+        btnPlayPause.classList.add('is-primary');
+        playText.textContent = 'PAUSE';
+        rafId = requestAnimationFrame(tick);
+      }
+
+      function pause() {
+        isPlaying = false;
+        btnPlayPause.classList.remove('is-primary');
+        playText.textContent = 'PLAY';
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+        lastRafTime = null;
+      }
+
+      function restart() {
+        pause();
+        render(0);
+        play();
+      }
+
+      function seek(timeSec) {
+        pause();
+        render(timeSec);
+      }
+
+      function goToBeat(beatId) {
+        const beat = BEATS.find(b => b.id === beatId);
+        if (beat) {
+          seek(beat.time);
+        }
+      }
+
+      // Event Listeners
+      btnPlayPause.addEventListener('click', () => {
+        if (isPlaying) pause();
+        else play();
+      });
+
+      btnRestart.addEventListener('click', () => {
+        restart();
+      });
+
+      scrubber.addEventListener('input', (e) => {
+        seek(parseFloat(e.target.value));
+      });
+
+      beatBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const bNum = parseInt(btn.dataset.beat, 10);
+          goToBeat(bNum);
+        });
+      });
+
+      // Stage Click Interaction (toggle play/pause or restart if settled)
+      stageSvg.addEventListener('click', () => {
+        if (currentTime >= DURATION) {
+          restart();
+        } else if (isPlaying) {
+          pause();
+        } else {
+          play();
+        }
+      });
+
+      // Keyboard Shortcuts
+      window.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT') return;
+        if (e.code === 'Space') {
+          e.preventDefault();
+          if (isPlaying) pause();
+          else play();
+        } else if (e.code === 'KeyR') {
+          e.preventDefault();
+          restart();
+        } else if (e.code === 'ArrowRight') {
+          e.preventDefault();
+          let nextBeat = BEATS.find(b => b.time > currentTime + 0.1);
+          if (nextBeat) seek(nextBeat.time);
+        } else if (e.code === 'ArrowLeft') {
+          e.preventDefault();
+          let prevBeats = BEATS.filter(b => b.time < currentTime - 0.2);
+          if (prevBeats.length > 0) seek(prevBeats[prevBeats.length - 1].time);
+          else seek(0);
+        }
+      });
+
+      // Expose globally for programmatic verification & inspection
+      window.scene05Player = {
+        play,
+        pause,
+        restart,
+        seek,
+        goToBeat,
+        getState: () => ({
+          currentTime,
+          isPlaying,
+          totalDuration: DURATION,
+          activeBeat: BEATS.find(b => b.time <= currentTime)
+        })
+      };
+
+      // Initial Render at rest
+      render(0);
+    })();
   </script>
 </body>
 </html>
