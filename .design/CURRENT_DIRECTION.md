@@ -149,8 +149,11 @@ Chapter 02 ("College Years / Foundations to Real World") is structured into five
    - Preservation Rule: All current Scene 03 implementation files in `prototypes/new-portfolio-animation-first/` are preserved exactly as the active baseline. Further Scene 03 refinements or polish are deferred unless explicitly requested by the owner. Do not proceed to Scene 04 without separate instructions.
 
 4. **Scene 04: Journey to Tokyo / Tokyo Tech**
-   - Status: **NEXT ACTIVE DEVELOPMENT TARGET — Return to Refinement**.
-   - Focus: Refine independently until reaching maturity comparable to Scenes 01, 03, and 05.
+   - Status: **ACTIVE REFINEMENT (04.A APPROVED BASELINE; 04.B+ PENDING)**.
+   - Scene 04.A (Outreach Field): **OWNER APPROVED — CURRENT 04.A ANIMATION BASELINE**.
+     - Approved Workspace: `prototypes/scene-04-outreach-explorations/index.html`.
+     - Baseline Characteristics: Pure visual text-free canvas, warm Jakarta origin beacon (0.4 Hz breathing aura), 8 anonymous cold slate celestial candidate nodes (zero Tokyo privilege, zero cyan), 6 quadratic inquiry filaments, sequential non-metronomic inquiry pulses depositing transverse ticks, 0.6s silence hold (Beat A3), and final quiet dormancy state ready for 04.B bilateral resonance.
+     - Commute Sequence: Preserved and quarantined in `prototypes/new-portfolio-animation-first/scene-04.*`.
 
 5. **Scene 05: Engineering Undergraduate Thesis / Synthesis**
    - Status: **APPROVED — CURRENT SCENE-LEVEL BASELINE (COMPRESSED 25.0s & COMPLETED)** (re-frozen as current scene authority; includes full physical apparatus, compressed 25.0s process flow animation across 31 discrete beats, and completed Distillate Collection Bottle [12] filling endpoint).
@@ -182,6 +185,6 @@ Keep these states distinct:
 - Scene 01: Owner approved (frozen).
 - Scene 02: Semi-approved (retained as-is for chapter review).
 - Scene 03: Owner approved baseline (frozen for current phase; further refinements deferred unless owner-requested).
-- Scene 04: Next active development target (refinement).
+- Scene 04: Active refinement (Scene 04.A: **OWNER APPROVED — CURRENT 04.A ANIMATION BASELINE**; 04.B+ pending).
 - Scene 05: **APPROVED — CURRENT SCENE-LEVEL BASELINE (COMPRESSED 25.0s & COMPLETED)** (re-frozen; compressed physical apparatus, 25.0s process flow animation, and completed distillate collection in `prototypes/scene-05-apparatus-explorations/`).
 

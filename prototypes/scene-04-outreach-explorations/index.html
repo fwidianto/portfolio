@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scene 04.A: Academic Outreach Field — Motion Choreography</title>
+  <meta name="description" content="Motion choreography for Chapter 02 Scene 04.A: Repeated academic outreach into a quiet field of possibilities, pre-response.">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-space: #030712;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(251, 146, 60, 0.50);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-faint: rgba(148, 163, 184, 0.45);
+      --accent-warm: #fb923c;
+      --accent-warm-dim: rgba(251, 146, 60, 0.25);
+      --node-cold: rgba(148, 163, 184, 0.40);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-space);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Background Atmospheric Night Sky */
+    .sky-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Reviewer Toolbar */
+    .study-toolbar {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 15, 26, 0.88);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    .toolbar-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-right: 8px;
+      border-right: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .study-selector {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .study-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .study-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .study-btn.is-active {
+      color: #fff;
+      background: rgba(251, 146, 60, 0.14);
+      border-color: var(--border-active);
+      box-shadow: 0 0 16px rgba(251, 146, 60, 0.2);
+    }
+
+    .study-btn kbd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    /* Main Exploration Canvas Stage */
+    .stage-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+
+    #outreach-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Playback & Timeline Scrubber Bar */
+    .playback-bar {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 25;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 15, 26, 0.90);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 7px 16px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+      width: calc(100% - 48px);
+      max-width: 760px;
+      transition: opacity 0.3s ease;
+    }
+
+    .playback-bar.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .ctrl-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .ctrl-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .ctrl-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .scrubber-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 120px;
+    }
+
+    .time-slider {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .time-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-warm);
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(251, 146, 60, 0.7);
+      transition: transform 0.15s ease;
+    }
+
+    .time-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+    }
+
+    .timeline-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--text-faint);
+    }
+
+    .current-beat-label {
+      color: #fed7aa;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .time-display {
+      color: var(--text-muted);
+      white-space: nowrap;
+      margin-left: 8px;
+    }
+
+    .speed-group {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      border-left: 1px solid var(--border-subtle);
+      padding-left: 10px;
+    }
+
+    .speed-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 3px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .speed-btn:hover {
+      color: #fff;
+    }
+
+    .speed-btn.is-active {
+      color: #fff;
+      background: rgba(251, 146, 60, 0.2);
+      font-weight: 600;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .study-toolbar {
+        top: 10px;
+        width: calc(100% - 24px);
+        justify-content: space-between;
+        padding: 6px 10px;
+      }
+      .toolbar-title {
+        display: none;
+      }
+      .study-btn {
+        font-size: 10.5px;
+        padding: 4px 8px;
+      }
+      .study-btn kbd {
+        display: none;
+      }
+      .playback-bar {
+        bottom: 12px;
+        padding: 5px 12px;
+        gap: 8px;
+        width: calc(100% - 20px);
+      }
+      .speed-group {
+        display: none;
+      }
+      .timeline-meta {
+        font-size: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Ambient Night Sky SVG background -->
+  <svg class="sky-canvas" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="120" cy="80" r="1.2" fill="#ffffff" opacity="0.65"/>
+    <circle cx="280" cy="140" r="0.9" fill="#fdf4dc" opacity="0.45"/>
+    <circle cx="450" cy="90" r="1.4" fill="#fffaf0" opacity="0.7"/>
+    <circle cx="780" cy="70" r="1.0" fill="#eaf0f8" opacity="0.5"/>
+    <circle cx="1040" cy="110" r="1.3" fill="#ffe8d0" opacity="0.6"/>
+    <circle cx="1320" cy="85" r="1.1" fill="#ffffff" opacity="0.55"/>
+    <circle cx="90" cy="320" r="0.9" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="180" cy="540" r="1.1" fill="#ffe4cc" opacity="0.5"/>
+    <circle cx="1350" cy="380" r="1.2" fill="#fffaf0" opacity="0.6"/>
+    <circle cx="1260" cy="620" r="1.0" fill="#ffffff" opacity="0.45"/>
+    <circle cx="340" cy="780" r="1.1" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="1180" cy="790" r="1.3" fill="#ffe8d0" opacity="0.55"/>
+  </svg>
+
+  <!-- Reviewer Header Toolbar -->
+  <header class="study-toolbar" role="region" aria-label="Scene 04.A Study Switcher">
+    <span class="toolbar-title">04.A Outreach Field</span>
+    <div class="study-selector" role="tablist">
+      <button type="button" class="study-btn is-active" id="btn-study-a" role="tab" aria-selected="true" data-study="A">
+        <span>04.A: Constellation Field</span>
+        <kbd>1</kbd>
+      </button>
+      <button type="button" class="study-btn" id="btn-study-b" role="tab" aria-selected="false" data-study="B">
+        <span>Alternative: Radial Corridors</span>
+        <kbd>2</kbd>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Canvas Stage -->
+  <main class="stage-container" id="stage-container">
+    <canvas id="outreach-canvas" role="img" aria-label="Visual simulation of repeated international academic outreach into a quiet field of possibilities, pre-response"></canvas>
+  </main>
+
+  <!-- Playback & Scrubbing Controller -->
+  <footer class="playback-bar" id="playback-bar" role="region" aria-label="Timeline scrubber">
+    <button type="button" class="ctrl-btn" id="btn-play-pause" aria-label="Play or pause animation" title="Play / Pause (Space)">
+      <svg viewBox="0 0 24 24" id="icon-play" style="display:none;"><polygon points="6,4 20,12 6,20"/></svg>
+      <svg viewBox="0 0 24 24" id="icon-pause"><rect x="5" y="4" width="4" height="16"/><rect x="15" y="4" width="4" height="16"/></svg>
+    </button>
+    <button type="button" class="ctrl-btn" id="btn-restart" aria-label="Restart animation" title="Restart (R)">
+      <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+    </button>
+    <div class="scrubber-wrap">
+      <input type="range" class="time-slider" id="time-slider" min="0" max="7.5" step="0.01" value="0" aria-label="Timeline slider">
+      <div class="timeline-meta">
+        <span class="current-beat-label" id="beat-label">Beat A1: Arrival / Readiness</span>
+        <span class="time-display" id="time-display">0.00s / 7.50s</span>
+      </div>
+    </div>
+    <div class="speed-group" role="group" aria-label="Playback speed">
+      <button type="button" class="speed-btn is-active" data-speed="1.0">1.0×</button>
+      <button type="button" class="speed-btn" data-speed="0.5">0.5×</button>
+      <button type="button" class="speed-btn" data-speed="0.25">0.25×</button>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const canvas = document.getElementById('outreach-canvas');
+      const ctx = canvas.getContext('2d');
+      const btnStudyA = document.getElementById('btn-study-a');
+      const btnStudyB = document.getElementById('btn-study-b');
+
+      let activeStudy = 'A'; // 'A' | 'B'
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+
+      // ======================================================================
+      // STUDY A: CONSTELLATION INQUIRY FIELD (APPROVED DIRECTION)
+      // Sparse research nodes scattered across a deep sky.
+      // Warm exploratory signal reaches from lower-left; filaments fade out;
+      // unvisited and unanswered nodes remain cold, quiet, and unlit.
+      // Incorporates subtle discrete attempt ticks to signify repeated outreach over time.
+      // ======================================================================
+      const STUDY_A_DATA = {
+        origin: { xRel: 0.18, yRel: 0.78, label: 'ORIGIN // JAKARTA (UI)', sub: 'Mechanical Engineering · 2018' },
+        // 8 prospective research laboratory nodes
+        nodes: [
+          { id: 'node_1', xRel: 0.38, yRel: 0.28, label: 'LAB · THERMAL SYSTEMS', attempted: true, attempts: [0.32, 0.62], dist: 'Tier II' },
+          { id: 'node_2', xRel: 0.54, yRel: 0.18, label: 'LAB · MICROSCALE TRANSPORT', attempted: true, attempts: [0.25, 0.48, 0.72], dist: 'Tier II' },
+          { id: 'node_3', xRel: 0.76, yRel: 0.25, label: 'LAB · CONDENSATION & ENERGY', attempted: true, attempts: [0.24, 0.46, 0.68], dist: 'Tier II' }, // Future Tokyo Tech locus (strictly unprivileged)
+          { id: 'node_4', xRel: 0.88, yRel: 0.16, label: 'LAB · FLUID DYNAMICS', attempted: false, attempts: [], dist: 'Tier III' },
+          { id: 'node_5', xRel: 0.34, yRel: 0.52, label: 'LAB · HEAT TRANSFER', attempted: true, attempts: [0.38, 0.70], dist: 'Tier I' },
+          { id: 'node_6', xRel: 0.62, yRel: 0.46, label: 'LAB · THERMAL PHYSICS', attempted: true, attempts: [0.26, 0.50, 0.74], dist: 'Tier II' },
+          { id: 'node_7', xRel: 0.84, yRel: 0.42, label: 'LAB · APPLIED ENERGETICS', attempted: false, attempts: [], dist: 'Tier II' },
+          { id: 'node_8', xRel: 0.70, yRel: 0.68, label: 'LAB · ENERGY SYSTEMS', attempted: true, attempts: [0.35, 0.68], dist: 'Tier I' }
+        ]
+      };
+
+      // ======================================================================
+      // STUDY B: RADIAL HORIZON CORRIDORS (CONCENTRIC EXPLORATION)
+      // Centered lower anchor emitting concentric distance horizons.
+      // Directional inquiry corridors radiate outward.
+      // Discrete attempts accumulate along bearing rays; distant nodes silent.
+      // ======================================================================
+      const STUDY_B_DATA = {
+        origin: { xRel: 0.50, yRel: 0.82, label: 'ORIGIN // JAKARTA (UI)', sub: 'Proactive Outreach Center · 2018' },
+        // 3 concentric distance tiers
+        tiers: [
+          { rRel: 0.26, label: 'TIER I · REGIONAL CORRIDOR (~1,000–2,500 KM)' },
+          { rRel: 0.48, label: 'TIER II · EAST ASIAN MARITIME (~3,000–5,800 KM)' },
+          { rRel: 0.70, label: 'TIER III · GLOBAL FRONTIER (>6,000 KM)' }
+        ],
+        // 5 directional bearing rays (-42°, -18°, 0°, +22°, +42°)
+        bearings: [
+          {
+            angleDeg: -42,
+            label: 'BEARING 318° NW',
+            attempts: [0.18, 0.32, 0.45],
+            node: { rRel: 0.48, label: 'LAB · CONTINENTAL ENERGY' }
+          },
+          {
+            angleDeg: -18,
+            label: 'BEARING 342° NNW',
+            attempts: [0.15, 0.28, 0.42, 0.62],
+            node: { rRel: 0.48, label: 'LAB · ADVANCED HEAT' }
+          },
+          {
+            angleDeg: 0,
+            label: 'BEARING 000° N',
+            attempts: [0.12, 0.22, 0.36],
+            node: { rRel: 0.26, label: 'LAB · REGIONAL TRANSPORT' }
+          },
+          {
+            angleDeg: 22,
+            label: 'BEARING 022° NNE',
+            attempts: [0.14, 0.26, 0.38, 0.48], // Future Tokyo Tech locus (strictly unprivileged)
+            node: { rRel: 0.48, label: 'LAB · CONDENSATION PHYSICS' }
+          },
+          {
+            angleDeg: 42,
+            label: 'BEARING 042° NE',
+            attempts: [0.20, 0.35, 0.55],
+            node: { rRel: 0.70, label: 'LAB · FLUID INTERFACES' }
+          }
+        ]
+      };
+
+      // ----------------------------------------------------------------------
+      // TIMELINE & CHOREOGRAPHY CONSTANTS (04.A NARRATIVE)
+      // ----------------------------------------------------------------------
+      const DURATION = 7.5; // Total duration in seconds
+      let simTime = 0.0;
+      let isPlaying = true;
+      let playbackSpeed = 1.0;
+      let lastTimestamp = null;
+      let rafId = null;
+
+      // 6 Sequential Inquiries (Non-Metronomic Departure Cadence)
+      const INQUIRY_SCHEDULE = [
+        // Beat A2: First Inquiry (Regional corridor)
+        {
+          id: 'inq_1',
+          targetId: 'node_5', // LAB · HEAT TRANSFER
+          tStart: 1.0,
+          tDuration: 0.85,
+          attempts: [0.38, 0.70]
+        },
+        // Beat A4: Repeated Sequential Inquiries
+        {
+          id: 'inq_2',
+          targetId: 'node_1', // LAB · THERMAL SYSTEMS
+          tStart: 2.6,
+          tDuration: 0.85,
+          attempts: [0.32, 0.62]
+        },
+        {
+          id: 'inq_3',
+          targetId: 'node_6', // LAB · THERMAL PHYSICS
+          tStart: 3.1,
+          tDuration: 0.90,
+          attempts: [0.26, 0.50, 0.74]
+        },
+        {
+          id: 'inq_4',
+          targetId: 'node_2', // LAB · MICROSCALE TRANSPORT
+          tStart: 3.7,
+          tDuration: 1.00,
+          attempts: [0.25, 0.48, 0.72]
+        },
+        {
+          id: 'inq_5',
+          targetId: 'node_8', // LAB · ENERGY SYSTEMS
+          tStart: 4.2,
+          tDuration: 0.85,
+          attempts: [0.35, 0.68]
+        },
+        {
+          id: 'inq_6',
+          targetId: 'node_3', // LAB · CONDENSATION & ENERGY (Tokyo Tech candidate - strictly unprivileged)
+          tStart: 4.7,
+          tDuration: 1.05,
+          attempts: [0.24, 0.46, 0.68]
+        }
+      ];
+
+      function getBeatInfo(t) {
+        if (t < 1.0) return { id: 'A1', name: 'Beat A1: Arrival / Readiness' };
+        if (t < 2.0) return { id: 'A2', name: 'Beat A2: First Inquiry' };
+        if (t < 2.6) return { id: 'A3', name: 'Beat A3: Silence (Unanswered Hold)' };
+        if (t < 5.2) return { id: 'A4', name: 'Beat A4: Repeated Inquiries' };
+        if (t < 6.4) return { id: 'A5', name: 'Beat A5: Accumulated Effort' };
+        return { id: 'A6', name: 'Beat A6: Quiet Dormancy (04.B Pre-Response)' };
+      }
+
+      function easeOutCubic(x) {
+        return 1 - Math.pow(1 - x, 3);
+      }
+
+      // UI Control Elements
+      const playbackBar = document.getElementById('playback-bar');
+      const btnPlayPause = document.getElementById('btn-play-pause');
+      const iconPlay = document.getElementById('icon-play');
+      const iconPause = document.getElementById('icon-pause');
+      const btnRestart = document.getElementById('btn-restart');
+      const timeSlider = document.getElementById('time-slider');
+      const beatLabel = document.getElementById('beat-label');
+      const timeDisplay = document.getElementById('time-display');
+      const speedBtns = document.querySelectorAll('.speed-btn');
+
+      function updateUIControls() {
+        if (timeSlider && document.activeElement !== timeSlider) {
+          timeSlider.value = simTime;
+        }
+        if (beatLabel) {
+          beatLabel.textContent = getBeatInfo(simTime).name;
+        }
+        if (timeDisplay) {
+          timeDisplay.textContent = `${simTime.toFixed(2)}s / ${DURATION.toFixed(2)}s`;
+        }
+        if (iconPlay && iconPause) {
+          iconPlay.style.display = isPlaying ? 'none' : 'block';
+          iconPause.style.display = isPlaying ? 'block' : 'none';
+        }
+      }
+
+      function resize() {
+        const container = document.getElementById('stage-container');
+        width = container.clientWidth || window.innerWidth;
+        height = container.clientHeight || window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        render();
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+
+        if (activeStudy === 'A') {
+          renderStudyA();
+        } else {
+          renderStudyB();
+        }
+
+        updateUIControls();
+      }
+
+      // ----------------------------------------------------------------------
+      // RENDER STUDY A: CONSTELLATION INQUIRY FIELD (MOTION CHOREOGRAPHY)
+      // ----------------------------------------------------------------------
+      function renderStudyA() {
+        const isMobile = width < 640;
+        const ox = width * (isMobile ? 0.22 : STUDY_A_DATA.origin.xRel);
+        const oy = height * (isMobile ? 0.82 : STUDY_A_DATA.origin.yRel);
+
+        // 1. Text-free canvas: No literal labels, counters, or explanatory metadata on main canvas
+        // Canvas communicates visually: warm origin -> anonymous distant nodes -> inquiry pulses -> silence -> accumulated traces
+
+        // 2. Filaments, Active Inquiries & Accumulated Effort Ticks
+        INQUIRY_SCHEDULE.forEach(inq => {
+          const node = STUDY_A_DATA.nodes.find(n => n.id === inq.targetId);
+          if (!node) return;
+
+          const nx = width * (isMobile ? 0.15 + node.xRel * 0.75 : node.xRel);
+          const ny = height * (isMobile ? 0.12 + node.yRel * 0.72 : node.yRel);
+
+          // Quadratic control point
+          const midX = (ox + nx) * 0.5 - (ny - oy) * 0.08;
+          const midY = (oy + ny) * 0.5 + (nx - ox) * 0.06;
+
+          // Check inquiry timeline status
+          const hasStarted = simTime >= inq.tStart;
+          if (!hasStarted) return; // Not active yet in early beats
+
+          const tElapsed = simTime - inq.tStart;
+          const isFlying = tElapsed < inq.tDuration;
+          const uRaw = isFlying ? Math.min(1.0, Math.max(0, tElapsed / inq.tDuration)) : 1.0;
+          const p = easeOutCubic(uRaw);
+
+          // Filament line growth & fading gradient
+          const sCut = isFlying ? Math.min(1.0, p * 1.15) : 1.0;
+
+          if (sCut > 0.01) {
+            // Cut quadratic curve mathematically
+            const q0x = ox;
+            const q0y = oy;
+            const qmidx = (1 - sCut) * ox + sCut * midX;
+            const qmidy = (1 - sCut) * oy + sCut * midY;
+            const q1x = (1 - sCut) * (1 - sCut) * ox + 2 * (1 - sCut) * sCut * midX + sCut * sCut * nx;
+            const q1y = (1 - sCut) * (1 - sCut) * oy + 2 * (1 - sCut) * sCut * midY + sCut * sCut * ny;
+
+            const grad = ctx.createLinearGradient(ox, oy, q1x, q1y);
+            grad.addColorStop(0, 'rgba(251, 146, 60, 0.42)');
+            grad.addColorStop(0.35, 'rgba(251, 146, 60, 0.20)');
+            grad.addColorStop(0.75, 'rgba(148, 163, 184, 0.10)');
+            grad.addColorStop(1, 'rgba(148, 163, 184, 0.03)');
+
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = isMobile ? 1.0 : 1.2;
+            ctx.beginPath();
+            ctx.moveTo(q0x, q0y);
+            ctx.quadraticCurveTo(qmidx, qmidy, q1x, q1y);
+            ctx.stroke();
+          }
+
+          // Deposited Ticks (Effort Evidence remaining along the path)
+          inq.attempts.forEach(tProbe => {
+            if (p >= tProbe) {
+              const tickX = (1 - tProbe) * (1 - tProbe) * ox + 2 * (1 - tProbe) * tProbe * midX + tProbe * tProbe * nx;
+              const tickY = (1 - tProbe) * (1 - tProbe) * oy + 2 * (1 - tProbe) * tProbe * midY + tProbe * tProbe * ny;
+
+              // Tangent angle
+              const dx = 2 * (1 - tProbe) * (midX - ox) + 2 * tProbe * (nx - midX);
+              const dy = 2 * (1 - tProbe) * (midY - oy) + 2 * tProbe * (ny - midY);
+              const angle = Math.atan2(dy, dx);
+
+              // Alpha ramps in smoothly as pulse crosses it
+              const tickAlpha = Math.min(1.0, (p - tProbe) / 0.12) * 0.45;
+
+              const tickLen = isMobile ? 3.0 : 4.0;
+              ctx.strokeStyle = `rgba(251, 146, 60, ${tickAlpha})`;
+              ctx.lineWidth = 1.0;
+              ctx.beginPath();
+              ctx.moveTo(tickX - Math.sin(angle) * tickLen, tickY + Math.cos(angle) * tickLen);
+              ctx.lineTo(tickX + Math.sin(angle) * tickLen, tickY - Math.cos(angle) * tickLen);
+              ctx.stroke();
+
+              ctx.fillStyle = `rgba(251, 146, 60, ${tickAlpha * 1.2})`;
+              ctx.beginPath();
+              ctx.arc(tickX, tickY, isMobile ? 1.0 : 1.3, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          });
+
+          // Active Exploratory Pulse (Fauzan's warm inquiry signal in flight)
+          if (isFlying) {
+            const px = (1 - p) * (1 - p) * ox + 2 * (1 - p) * p * midX + p * p * nx;
+            const py = (1 - p) * (1 - p) * oy + 2 * (1 - p) * p * midY + p * p * ny;
+
+            // Energy decay: stays strong early, gradually dims into distance, dissolves before reaching node
+            let pulseAlpha = 1.0;
+            if (p > 0.45) {
+              pulseAlpha = Math.max(0, 1.0 - (p - 0.45) / 0.45);
+            }
+
+            if (pulseAlpha > 0.01) {
+              // Outer warm aura
+              ctx.fillStyle = `rgba(251, 146, 60, ${0.28 * pulseAlpha})`;
+              ctx.beginPath();
+              ctx.arc(px, py, isMobile ? 4.5 : 6.0, 0, Math.PI * 2);
+              ctx.fill();
+
+              // Bright exploratory core
+              ctx.fillStyle = `rgba(255, 237, 213, ${0.95 * pulseAlpha})`;
+              ctx.beginPath();
+              ctx.arc(px, py, isMobile ? 1.5 : 2.0, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        });
+
+        // 3. Candidate Research Laboratory Nodes (Dormant, Cold Slate, Hollow)
+        STUDY_A_DATA.nodes.forEach(node => {
+          const nx = width * (isMobile ? 0.15 + node.xRel * 0.75 : node.xRel);
+          const ny = height * (isMobile ? 0.12 + node.yRel * 0.72 : node.yRel);
+
+          // All nodes rest at cold unlit styling at all times in 04.A (zero cyan, zero glow)
+          // Outer faint ring
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.22)';
+          ctx.lineWidth = 1.0;
+          ctx.beginPath();
+          ctx.arc(nx, ny, isMobile ? 6.5 : 8.0, 0, Math.PI * 2);
+          ctx.stroke();
+
+          // Dark core
+          ctx.fillStyle = '#0a0f1d';
+          ctx.beginPath();
+          ctx.arc(nx, ny, isMobile ? 3.5 : 4.5, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Inner silent dot
+          ctx.fillStyle = 'rgba(148, 163, 184, 0.55)';
+          ctx.beginPath();
+          ctx.arc(nx, ny, 1.5, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Anonymous destination node: No literal labels, keeping nodes purely visual and unprivileged
+        });
+
+        // 4. Origin Beacon: Jakarta / UI Student Locus (Warm Amber Continuity Signal)
+        drawOriginBeacon(ox, oy, STUDY_A_DATA.origin.label, STUDY_A_DATA.origin.sub, isMobile, simTime);
+      }
+
+      // ----------------------------------------------------------------------
+      // RENDER STUDY B: RADIAL HORIZON CORRIDORS (STATIC ALTERNATIVE)
+      // ----------------------------------------------------------------------
+      function renderStudyB() {
+        const isMobile = width < 640;
+        const ox = width * (isMobile ? 0.50 : STUDY_B_DATA.origin.xRel);
+        const oy = height * (isMobile ? 0.85 : STUDY_B_DATA.origin.yRel);
+        const maxR = Math.min(width, height) * (isMobile ? 0.82 : 0.72);
+
+        // Concentric Distance Horizons (Range Tiers - visual arcs only)
+        STUDY_B_DATA.tiers.forEach(tier => {
+          const r = maxR * (tier.rRel / 0.70);
+
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.12)';
+          ctx.lineWidth = 1.0;
+          ctx.setLineDash([3, 5]);
+          ctx.beginPath();
+          ctx.arc(ox, oy, r, -Math.PI * 0.5 - 1.1, -Math.PI * 0.5 + 1.1);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        });
+
+        // Directional Bearing Rays & Accumulated Inquiries (Visual rays & ticks only)
+        STUDY_B_DATA.bearings.forEach(b => {
+          const rad = (b.angleDeg - 90) * (Math.PI / 180);
+          const rayLen = maxR * 1.05;
+          const rx = ox + Math.cos(rad) * rayLen;
+          const ry = oy + Math.sin(rad) * rayLen;
+
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.14)';
+          ctx.lineWidth = 1.0;
+          ctx.beginPath();
+          ctx.moveTo(ox, oy);
+          ctx.lineTo(rx, ry);
+          ctx.stroke();
+
+          b.attempts.forEach((frac, idx) => {
+            const dist = maxR * frac;
+            const ax = ox + Math.cos(rad) * dist;
+            const ay = oy + Math.sin(rad) * dist;
+
+            const normal = rad + Math.PI * 0.5;
+            const tickL = isMobile ? 3.0 : 4.5;
+            ctx.strokeStyle = `rgba(251, 146, 60, ${0.40 - idx * 0.06})`;
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(ax - Math.cos(normal) * tickL, ay - Math.sin(normal) * tickL);
+            ctx.lineTo(ax + Math.cos(normal) * tickL, ay + Math.sin(normal) * tickL);
+            ctx.stroke();
+
+            ctx.fillStyle = 'rgba(251, 146, 60, 0.55)';
+            ctx.beginPath();
+            ctx.arc(ax, ay, 1.2, 0, Math.PI * 2);
+            ctx.fill();
+          });
+
+          const nodeDist = maxR * (b.node.rRel / 0.70);
+          const nx = ox + Math.cos(rad) * nodeDist;
+          const ny = oy + Math.sin(rad) * nodeDist;
+
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.28)';
+          ctx.lineWidth = 1.0;
+          ctx.beginPath();
+          ctx.arc(nx, ny, isMobile ? 6.0 : 7.5, 0, Math.PI * 2);
+          ctx.stroke();
+
+          ctx.fillStyle = '#0a0f1d';
+          ctx.beginPath();
+          ctx.arc(nx, ny, isMobile ? 3.0 : 4.0, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = 'rgba(148, 163, 184, 0.45)';
+          ctx.beginPath();
+          ctx.arc(nx, ny, 1.5, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        drawOriginBeacon(ox, oy, STUDY_B_DATA.origin.label, STUDY_B_DATA.origin.sub, isMobile, 99.0);
+      }
+
+      // ----------------------------------------------------------------------
+      // HELPER: ORIGIN BEACON (Warm Amber Locus with Arrival & Idle Breathing)
+      // ----------------------------------------------------------------------
+      function drawOriginBeacon(x, y, title, subtitle, isMobile, t) {
+        // Beat A1 Arrival Animation (0.0s -> 0.5s condensation from incoming signal)
+        let scale = 1.0;
+        let alpha = 1.0;
+
+        if (t < 0.5) {
+          const arrivalProgress = Math.min(1.0, Math.max(0, t / 0.45));
+          scale = easeOutCubic(arrivalProgress);
+          alpha = arrivalProgress;
+
+          // Inbound continuity spark moving toward Jakarta coordinate
+          const inX = x - (1 - arrivalProgress) * 70;
+          const inY = y + (1 - arrivalProgress) * 25;
+          ctx.fillStyle = `rgba(255, 237, 213, ${0.9 * (1 - arrivalProgress)})`;
+          ctx.beginPath();
+          ctx.arc(inX, inY, 2.0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (alpha < 0.02) return;
+
+        // Subtle resting breathing aura
+        const breathing = t > 0.5 ? Math.sin(t * 2.5) * 0.12 : 0;
+        const auraR = (isMobile ? 18 : 24) * (1 + breathing) * scale;
+
+        const aura = ctx.createRadialGradient(x, y, 1, x, y, Math.max(1, auraR));
+        aura.addColorStop(0, `rgba(251, 146, 60, ${0.28 * alpha})`);
+        aura.addColorStop(0.6, `rgba(251, 146, 60, ${0.06 * alpha})`);
+        aura.addColorStop(1, 'rgba(251, 146, 60, 0)');
+        ctx.fillStyle = aura;
+        ctx.beginPath();
+        ctx.arc(x, y, Math.max(1, auraR), 0, Math.PI * 2);
+        ctx.fill();
+
+        // Concentric beacon rings
+        ctx.strokeStyle = `rgba(251, 146, 60, ${0.45 * alpha})`;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.arc(x, y, (isMobile ? 7.5 : 9.5) * scale, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.fillStyle = '#0a0f1d';
+        ctx.beginPath();
+        ctx.arc(x, y, (isMobile ? 4.5 : 5.5) * scale, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#fb923c';
+        ctx.beginPath();
+        ctx.arc(x, y, (isMobile ? 2.2 : 2.8) * scale, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Origin beacon is purely visual: warm amber anchor without explanatory text
+      }
+
+      // ----------------------------------------------------------------------
+      // PLAYBACK LOOP & CONTROLLER
+      // ----------------------------------------------------------------------
+      function tick(now) {
+        if (!lastTimestamp) lastTimestamp = now;
+        const delta = Math.min(0.1, (now - lastTimestamp) / 1000);
+        lastTimestamp = now;
+
+        if (isPlaying && activeStudy === 'A') {
+          simTime += delta * playbackSpeed;
+          if (simTime >= DURATION) {
+            simTime = DURATION;
+            isPlaying = false; // Hold peacefully at 04.B pre-response state
+            updateUIControls();
+          }
+          render();
+        }
+
+        rafId = requestAnimationFrame(tick);
+      }
+
+      function startPlayback() {
+        if (simTime >= DURATION) simTime = 0.0;
+        isPlaying = true;
+        lastTimestamp = null;
+        updateUIControls();
+      }
+
+      function pausePlayback() {
+        isPlaying = false;
+        lastTimestamp = null;
+        updateUIControls();
+      }
+
+      function togglePlayback() {
+        if (isPlaying) {
+          pausePlayback();
+        } else {
+          startPlayback();
+        }
+      }
+
+      function restartPlayback() {
+        simTime = 0.0;
+        isPlaying = true;
+        lastTimestamp = null;
+        render();
+      }
+
+      // Event Listeners for UI Controls
+      if (btnPlayPause) {
+        btnPlayPause.addEventListener('click', togglePlayback);
+      }
+
+      if (btnRestart) {
+        btnRestart.addEventListener('click', restartPlayback);
+      }
+
+      if (timeSlider) {
+        timeSlider.addEventListener('input', (e) => {
+          simTime = parseFloat(e.target.value);
+          pausePlayback();
+          render();
+        });
+      }
+
+      speedBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          speedBtns.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          playbackSpeed = parseFloat(btn.dataset.speed || '1.0');
+        });
+      });
+
+      // Study Switcher Events
+      btnStudyA.addEventListener('click', () => {
+        activeStudy = 'A';
+        btnStudyA.classList.add('is-active');
+        btnStudyB.classList.remove('is-active');
+        btnStudyA.setAttribute('aria-selected', 'true');
+        btnStudyB.setAttribute('aria-selected', 'false');
+        if (playbackBar) playbackBar.classList.remove('is-hidden');
+        render();
+      });
+
+      btnStudyB.addEventListener('click', () => {
+        activeStudy = 'B';
+        btnStudyB.classList.add('is-active');
+        btnStudyA.classList.remove('is-active');
+        btnStudyB.setAttribute('aria-selected', 'true');
+        btnStudyA.setAttribute('aria-selected', 'false');
+        if (playbackBar) playbackBar.classList.add('is-hidden');
+        render();
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') {
+          e.preventDefault();
+          togglePlayback();
+        } else if (e.key === 'r' || e.key === 'R') {
+          e.preventDefault();
+          restartPlayback();
+        } else if (e.key === '1') {
+          btnStudyA.click();
+        } else if (e.key === '2') {
+          btnStudyB.click();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          pausePlayback();
+          simTime = Math.max(0, simTime - 0.1);
+          render();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          pausePlayback();
+          simTime = Math.min(DURATION, simTime + 0.1);
+          render();
+        }
+      });
+
+      window.addEventListener('resize', resize);
+
+      // Programmatic controller for headless verification & CDP
+      window.scene04AController = {
+        setStudy: function (study) {
+          if (study === 'A') btnStudyA.click();
+          else btnStudyB.click();
+        },
+        setTime: function (t) {
+          pausePlayback();
+          simTime = Math.max(0, Math.min(DURATION, t));
+          render();
+        },
+        getTime: function () {
+          return simTime;
+        },
+        play: startPlayback,
+        pause: pausePlayback,
+        togglePlay: togglePlayback,
+        restart: restartPlayback,
+        setSpeed: function (s) {
+          playbackSpeed = s;
+        }
+      };
+
+      // Initial layout & start playback loop
+      resize();
+      rafId = requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>
