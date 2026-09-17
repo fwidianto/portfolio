@@ -69,10 +69,10 @@ Chapter 02 ("College Years / Foundations to Real World") is structured into five
    - Status: **Planned** (the journey to the other side of the world, Tokyo Institute of Technology lab).
 
 5. **Scene 05: Engineering Undergraduate Thesis / Synthesis**
-   - Status: **Scene 05.1A & 05.1B-1 Owner-approved baseline (frozen)**; 05.1B-2+ planned.
+   - Status: **Scene 05.1A, 05.1B-1 & 05.1B-2A Owner-approved baseline (frozen)**; 05.1B-2B (separation & condensation) planned.
    - Authority Brief: `.design/CHAPTER_02_SCENE_05_BRIEF.md`.
-   - Approved Exploratory Workspace: `prototypes/scene-05-apparatus-explorations/index.html` (Study C: 2D orthographic editorial representation of Universitas Indonesia test rig with approved 05.1B-1 fluid feed, pump engagement, vessel heating, overhead transfer, and throttling restriction hold).
-   - Scope Rule: All major equipment positions, piping topology, supports, and causal motion up to the throttling restriction node are frozen baseline. Section 05.1B-2 (flash evaporation) has not started.
+   - Approved Exploratory Workspace: `prototypes/scene-05-apparatus-explorations/index.html` (Study C: 2D orthographic editorial representation of Universitas Indonesia test rig with approved 05.1B-1 feed/heating/throttling approach and 05.1B-2A isenthalpic throttling restriction crossing, restrained incipient spool flashing, and flash vessel inlet onset).
+   - Scope Rule: All major equipment positions, piping topology, supports, and causal motion up to the unresolved flash onset hold ($t = 24.5\,\text{s}$) are frozen baseline. Section 05.1B-2B (macroscopic vapor separation, dome rise, brine drainage, and condenser operation) has not started.
 
 ## Scope
 
@@ -94,5 +94,5 @@ Keep these states distinct:
 - Scene 01: Owner approved (frozen).
 - Scene 02: Semi-approved (retained as-is for chapter review).
 - Scene 03: Owner approved baseline (frozen for current phase; further refinements deferred unless owner-requested).
-- Scene 05.1A / 05.1B-1: Owner approved baseline (frozen; physical apparatus composition and feed/heating/throttling motion in `prototypes/scene-05-apparatus-explorations/`).
+- Scene 05.1A / 05.1B-1 / 05.1B-2A: Owner approved baseline (frozen; physical apparatus composition, feed/heating/throttling, and throttling crossing / flash onset in `prototypes/scene-05-apparatus-explorations/`).
 

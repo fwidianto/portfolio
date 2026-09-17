@@ -2,11 +2,38 @@
 
 ## Status
 - **Scene**: Chapter 02, Scene 05 (Undergraduate Thesis / Synthesis)
-- **Sub-Phase**: **05.1B-1 — Feed, Heating & Throttling Approach** (05.1A apparatus geometry frozen at commit `1b63681`).
-- **Current Status**: **Owner-approved baseline** (frozen for current phase; 05.1B-2 flash evaporation has not started).
+- **Sub-Phase**: **05.1B-2A — Throttling Crossing & Flash Onset** (05.1A apparatus geometry frozen at commit `1b63681`, 05.1B-1 baseline frozen at `618c689`).
+- **Current Status**: **Owner-approved baseline** (frozen for current phase; 05.1B-2B macroscopic phase separation has not started).
 - **Approved Workspace**: `prototypes/scene-05-apparatus-explorations/index.html` (Study C — Hybrid Technical Silhouette + Selective Process Visibility).
 - **Primary Factual Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_experiment_setup.png` (Universitas Indonesia Mechanical Engineering laboratory test rig, 2018–2019).
 - **Supporting Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_system_diagram.png` (system architecture and broader cycle context).
+
+---
+
+## Approved 05.1B-2A Baseline Scope (Throttling Crossing & Flash Onset)
+
+1. **Scope Boundary & Fixed Stop**:
+   - Covers the physical sequence from primed valve hold ($t = 17.5\,\text{s}$), restriction node `(0, 0)` crossing ($t = 18.3\,\text{s}$), valve outlet cavity fill ($X = 540 \to 552$), incipient flashing along downstream spool ($X = 552 \to 620$), localized flash plume expansion into Flash Vessel `[8]` inlet zone ($X = 620 \to 656$), to unresolved two-phase hold ($t = 24.5\,\text{s}$).
+   - Halts strictly before macroscopic vapor/liquid phase separation develops.
+
+2. **Thermodynamic Terminology**:
+   - Framed strictly as *isenthalpic throttling followed by flash onset caused by the pressure reduction*.
+   - Never described as "Joule-Thomson expansion". $h_1 \approx h_2$ remains solely an internal design/engineering note, excluded from visible UI. Zero gratuitous equations or numerical telemetry.
+
+3. **Stationary Valve Geometry**:
+   - External valve body, stem, and handwheel remain physically stationary throughout the sequence.
+   - Fluid crossing the restriction throat node `(0, 0)` ($X = 540$) is the causal event, eliminating artificial handwheel rotation or stem-unseating motions.
+
+4. **Restrained Downstream Spool (Incipient Flashing)**:
+   - Downstream interconnecting spool ($X = 552 \to 620$) exhibits incipient flashing rather than a fully developed two-phase stream: narrow vapor sheath ($3.6\,\text{px}$), restrained opacity ($0.45$), low micro-void density (`stroke-dasharray="1.5 6"`), and a continuous liquid core ($2.0\,\text{px}$).
+   - Stronger two-phase flash plume emerges only inside Flash Vessel `[8]`'s ghosted phase-change expansion zone ($X = 625 \to 665, Y = 214 \to 242$).
+
+5. **Strict Downstream Dry Boundary**:
+   - Flash vessel upper dome ($Y = 165$), overhead vapor duct ($Y = 125$), lower funnel ($Y = 325\dots 365$), and brine catchment basin `[9]` contain zero fluid or vapor.
+   - Condenser `[10]`, extraction pump `[11]`, and aquadest collection bottle `[12]` remain 100% dry and inactive.
+
+6. **Sub-Phase 05.1B-2B Confirmation**:
+   - Sub-phase 05.1B-2B (vapor rising to dome, liquid draining to funnel, condenser operation, distillate yield) has **not started**.
 
 ---
 

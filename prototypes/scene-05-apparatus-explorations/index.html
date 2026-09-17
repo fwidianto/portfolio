@@ -527,8 +527,8 @@
       .beat-steppers {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 2px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3px;
       }
 
       .beat-btn {
@@ -571,15 +571,15 @@
 
   <header class="editorial-header">
     <div class="header-text">
-      <div class="kicker">02.05 // UNDERGRADUATE THESIS (2018–2019) · SECTION 05.1B-1</div>
-      <h1>Feed, Heating &amp; Throttling Approach</h1>
-      <p class="subtitle">Physical process flow animation through frozen 05.1A apparatus baseline: Intake → Feed Pump → Heated Vessel → Overhead Transfer → Throttling Valve Restriction</p>
+      <div class="kicker">02.05 // UNDERGRADUATE THESIS (2018–2019) · SECTION 05.1B-2A</div>
+      <h1>Throttling Crossing &amp; Flash Onset</h1>
+      <p class="subtitle">Physical process flow animation through frozen 05.1A apparatus baseline: Primed Valve Hold → Restriction Crossing → Incipient Downstream State Change → Flash Vessel Inlet Onset</p>
     </div>
 
     <div class="study-tabs" role="tablist">
       <button class="study-btn" data-target="study-a">Study A · Orthographic</button>
       <button class="study-btn" data-target="study-b">Study B · Isometric</button>
-      <button class="study-btn is-active" data-target="study-c">Study C · Process Flow 05.1B-1 (Approved Baseline)</button>
+      <button class="study-btn is-active" data-target="study-c">Study C · Process Flow 05.1B-2A (Flash Onset)</button>
     </div>
   </header>
 
@@ -921,11 +921,11 @@
          ========================================================================= -->
     <div class="study-card is-active" id="study-c">
       <div class="study-meta">
-        <span class="study-badge">STUDY C · SECTION 05.1B-1 PROCESS FLOW (FROZEN BASELINE)</span>
+        <span class="study-badge">STUDY C · SECTION 05.1B-2A PROCESS FLOW (FLASH ONSET)</span>
         <span id="study-c-status-pill" class="status-pill">STATUS: RIG AT REST</span>
       </div>
 
-      <!-- Playback Controls HUD for Section 05.1B-1 -->
+      <!-- Playback Controls HUD for Section 05.1B-2A -->
       <div class="playback-bar" id="playback-bar">
         <div class="playback-actions">
           <button id="btn-play-pause" class="ctrl-btn is-primary" title="Toggle Play / Pause (Space)">
@@ -943,13 +943,15 @@
             <button class="beat-btn" data-beat="4" title="Beat 4: Top Outlet Continuity">4·Exit</button>
             <button class="beat-btn" data-beat="5" title="Beat 5: Overhead Transfer &amp; Sensors">5·Pipe</button>
             <button class="beat-btn" data-beat="6" title="Beat 6: Throttling Approach &amp; Hold">6·Valve</button>
+            <button class="beat-btn" data-beat="7" title="Beat 7: Throttling Restriction Crossing &amp; Incipient Flashing">7·Cross</button>
+            <button class="beat-btn" data-beat="8" title="Beat 8: Flash Inset Plume">8·Flash</button>
           </div>
         </div>
 
         <div class="timeline-container">
-          <input type="range" id="timeline-scrubber" class="timeline-scrubber" min="0" max="17.5" step="0.05" value="0">
+          <input type="range" id="timeline-scrubber" class="timeline-scrubber" min="0" max="24.5" step="0.05" value="0">
           <div class="timeline-meta">
-            <span id="timecode-display" class="timecode">00:00.0 / 00:17.5</span>
+            <span id="timecode-display" class="timecode">00:00.0 / 00:24.5</span>
             <span id="beat-label-display" class="beat-label">RIG AT REST</span>
           </div>
         </div>
@@ -991,6 +993,16 @@
           <!-- Clip Path for Flow Meter Sight Glass -->
           <clipPath id="clip-flow-meter">
             <rect x="81" y="381" width="12" height="43" rx="1.5"/>
+          </clipPath>
+
+          <!-- Clip Path for Flash Vessel Interior -->
+          <clipPath id="clip-flash-vessel">
+            <rect x="620" y="190" width="50" height="135" rx="4"/>
+          </clipPath>
+
+          <!-- Clip Path for Flash Inlet Plume Expansion -->
+          <clipPath id="clip-flash-plume">
+            <rect id="plume-clip-rect" x="620" y="214" width="0" height="28"/>
           </clipPath>
         </defs>
 
@@ -1093,19 +1105,33 @@
           <polygon points="-12,-8 0,0 -12,8" fill="#1f2937" stroke="var(--line-crisp)" stroke-width="1.2"/>
           <polygon id="valve-inlet-fluid" points="-12,-7 0,0 -12,7" fill="rgba(245, 158, 11, 0)" stroke="none"/>
           <polygon points="12,-8 0,0 12,8" fill="#1f2937" stroke="var(--line-crisp)" stroke-width="1.2"/>
+          <polygon id="valve-outlet-fluid" points="0,0 12,-7 12,7" fill="rgba(245, 158, 11, 0)" stroke="none"/>
           <!-- Abstract Restriction Node -->
           <circle id="valve-restriction-node" cx="0" cy="0" r="1.5" fill="var(--valve-red)"/>
+          <circle id="valve-restriction-halo" cx="0" cy="0" r="3.5" fill="none" stroke="var(--amber-warm)" stroke-width="1" opacity="0"/>
           
-          <line x1="0" y1="0" x2="0" y2="-16" stroke="var(--line-crisp)" stroke-width="1.5"/>
-          <ellipse id="valve-handwheel" cx="0" cy="-16" rx="10" ry="3.5" fill="var(--valve-red)" stroke="#b91c1c" stroke-width="1"/>
-          <line id="valve-handwheel-notch" x1="0" y1="-19.5" x2="0" y2="-12.5" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1"/>
+          <g id="valve-handwheel-assembly">
+            <line x1="0" y1="0" x2="0" y2="-16" stroke="var(--line-crisp)" stroke-width="1.5"/>
+            <ellipse id="valve-handwheel" cx="0" cy="-16" rx="10" ry="3.5" fill="var(--valve-red)" stroke="#b91c1c" stroke-width="1"/>
+            <line id="valve-handwheel-notch" x1="0" y1="-19.5" x2="0" y2="-12.5" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1"/>
+          </g>
           
           <text x="0" y="-24" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="var(--valve-red)" text-anchor="middle">THROTTLING VALVE [7]</text>
           <text x="0" y="18" font-family="'JetBrains Mono', monospace" font-size="7" fill="var(--text-muted)" text-anchor="middle">MANUAL RESTRICTION</text>
         </g>
 
-        <!-- Interconnecting Pipe into Flash Vessel (Remains 100% dry and inactive in 05.1B-1) -->
+        <!-- Interconnecting Pipe into Flash Vessel -->
+        <path d="M 552 226 L 620 226" stroke="#1b2331" stroke-width="8" stroke-linecap="round" fill="none"/>
         <path d="M 552 226 L 620 226" stroke="var(--line-crisp)" stroke-width="1.5" fill="none"/>
+        <path d="M 552 226 L 620 226" stroke="rgba(245, 158, 11, 0.25)" stroke-width="1" stroke-dasharray="2 2" fill="none"/>
+
+        <!-- Dynamic Downstream Spool Fluid Overlays (Beats 7 & 8: Incipient Flashing) -->
+        <path id="fluid-spool-glow" d="M 540 226 L 620 226" 
+              stroke="rgba(245, 158, 11, 0.45)" stroke-width="3.6" stroke-linecap="round" fill="none" opacity="0"/>
+        <path id="fluid-spool-core" d="M 540 226 L 620 226" 
+              stroke="#f59e0b" stroke-width="2.0" stroke-linecap="round" fill="none" opacity="0"/>
+        <path id="fluid-spool-voids" d="M 540 226 L 620 226" 
+              stroke="#fef3c7" stroke-width="1" stroke-dasharray="1.5 6" stroke-linecap="round" fill="none" opacity="0"/>
 
         <!-- ==================== 4. FLASH CHAMBER & REGION [8, 9] ==================== -->
         <!-- Tall Tripod Support Legs -->
@@ -1118,7 +1144,35 @@
         <polygon points="620,325 670,325 655,365 635,365" fill="#121620" stroke="var(--line-crisp)" stroke-width="1.2"/>
 
         <!-- Ghosted Phase-Change Expansion Region (Immediate Downstream Flash Zone) -->
-        <rect x="625" y="214" width="40" height="28" rx="2" fill="rgba(255, 255, 255, 0.03)" stroke="rgba(255, 255, 255, 0.18)" stroke-width="1" stroke-dasharray="2 2"/>
+        <rect id="flash-phase-region" x="625" y="214" width="40" height="28" rx="2" fill="rgba(255, 255, 255, 0.03)" stroke="rgba(255, 255, 255, 0.18)" stroke-width="1" stroke-dasharray="2 2"/>
+
+        <!-- Dynamic Flash Inset Plume (Beat 8: Flash Onset Only - Stops strictly before separation) -->
+        <g id="flash-inlet-plume" clip-path="url(#clip-flash-vessel)">
+          <g clip-path="url(#clip-flash-plume)">
+            <!-- Expanding diffuse vapor envelope -->
+            <path id="plume-vapor-envelope" d="M 620 224 Q 638 217 655 218 Q 658 226 655 233 Q 638 234 620 228 Z" 
+                  fill="rgba(245, 158, 11, 0.16)"/>
+            <!-- Forward liquid core -->
+            <path id="plume-liquid-core" d="M 620 226 L 655 226" 
+                  stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <!-- Upper fine vapor streaks -->
+            <path id="plume-vapor-streak-1" d="M 622 222 Q 636 219 652 219" 
+                  stroke="rgba(254, 243, 199, 0.55)" stroke-width="0.8" stroke-dasharray="2 2" fill="none"/>
+            <path id="plume-vapor-streak-2" d="M 624 220 Q 640 217 650 218" 
+                  stroke="rgba(245, 158, 11, 0.35)" stroke-width="0.7" stroke-dasharray="1.5 2" fill="none"/>
+            <!-- Lower denser liquid edge -->
+            <path id="plume-liquid-lower" d="M 622 228.5 Q 636 232 652 232" 
+                  stroke="rgba(245, 158, 11, 0.6)" stroke-width="1.0" stroke-linecap="round" fill="none"/>
+            <!-- Micro-void nucleation texture -->
+            <g id="plume-micro-voids">
+              <circle cx="630" cy="223" r="0.7" fill="#fef3c7"/>
+              <circle cx="637" cy="221" r="0.9" fill="#fef3c7"/>
+              <circle cx="644" cy="225" r="0.7" fill="#fef3c7"/>
+              <circle cx="648" cy="220" r="1.0" fill="#fef3c7"/>
+              <circle cx="652" cy="227" r="0.8" fill="#fef3c7"/>
+            </g>
+          </g>
+        </g>
 
         <!-- Unobstructed Label: Positioned to the right of vapor riser -->
         <text x="680" y="165" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="var(--text-primary)" text-anchor="start">FLASH VESSEL [8]</text>
@@ -1182,7 +1236,7 @@
 
         <!-- System Flow Boundary Label -->
         <text x="243" y="495" font-family="'JetBrains Mono', monospace" font-size="8.5" fill="var(--amber-warm)" text-anchor="middle">1. HEATED PRESSURIZATION</text>
-        <text x="580" y="495" font-family="'JetBrains Mono', monospace" font-size="8.5" fill="var(--valve-red)" text-anchor="middle">2. SUDDEN EXPANSION</text>
+        <text x="580" y="495" font-family="'JetBrains Mono', monospace" font-size="8.5" fill="var(--valve-red)" text-anchor="middle">2. ISENTHALPIC THROTTLING &amp; FLASH ONSET</text>
         <text x="865" y="495" font-family="'JetBrains Mono', monospace" font-size="8.5" fill="var(--cyan-tech)" text-anchor="middle">3. PHASE CONDENSATION</text>
       </svg>
     </div>
@@ -1250,7 +1304,7 @@
     // =========================================================================
     (function initScene05Animation() {
       // Configuration & Timeline Timestamps (seconds)
-      const DURATION = 17.5;
+      const DURATION = 24.5;
       const BEATS = [
         { id: 0, time: 0.0, name: 'RIG AT REST (INACTIVE)', pill: 'STATUS: RIG AT REST' },
         { id: 1, time: 1.2, name: 'BEAT 1 · FEED INTAKE & SIGHT GLASS ACTIVATION', pill: 'BEAT 1: INTAKE ACTIVE' },
@@ -1258,7 +1312,9 @@
         { id: 3, time: 5.4, name: 'BEAT 3 · HEATER VESSEL FILL & THERMAL ACCUMULATION', pill: 'BEAT 3: HEATING CORE' },
         { id: 4, time: 9.6, name: 'BEAT 4 · TOP OUTLET CONTINUOUS TRACEABLE HANDOFF', pill: 'BEAT 4: TOP OUTLET' },
         { id: 5, time: 11.0, name: 'BEAT 5 · OVERHEAD TRANSFER, GAUGE & SENSOR RESPONSE', pill: 'BEAT 5: OVERHEAD TRANSFER' },
-        { id: 6, time: 15.0, name: 'BEAT 6 · THROTTLING VALVE APPROACH & PRIMED HOLD', pill: 'BEAT 6: THROTTLING PRIMED' }
+        { id: 6, time: 15.0, name: 'BEAT 6 · THROTTLING VALVE APPROACH & PRIMED HOLD', pill: 'BEAT 6: THROTTLING PRIMED' },
+        { id: 7, time: 18.3, name: 'BEAT 7 · THROTTLING RESTRICTION CROSSING & INCIPIENT FLASHING', pill: 'BEAT 7: INCIPIENT FLASHING' },
+        { id: 8, time: 21.0, name: 'BEAT 8 · FLASH VESSEL INLET ONSET (TWO-PHASE HOLD)', pill: 'BEAT 8: FLASH ONSET ACTIVE' }
       ];
 
       // DOM Elements
@@ -1293,14 +1349,24 @@
       const tempSensorHalo = document.getElementById('temp-sensor-halo');
       const tempSensorStem = document.getElementById('temp-sensor-stem');
       const valveInletFluid = document.getElementById('valve-inlet-fluid');
+      const valveOutletFluid = document.getElementById('valve-outlet-fluid');
       const valveRestrictionNode = document.getElementById('valve-restriction-node');
+      const valveRestrictionHalo = document.getElementById('valve-restriction-halo');
       const valveHandwheel = document.getElementById('valve-handwheel');
       const valveHandwheelNotch = document.getElementById('valve-handwheel-notch');
+      const valveHandwheelAssembly = document.getElementById('valve-handwheel-assembly');
+      const fluidSpoolGlow = document.getElementById('fluid-spool-glow');
+      const fluidSpoolCore = document.getElementById('fluid-spool-core');
+      const fluidSpoolVoids = document.getElementById('fluid-spool-voids');
+      const flashPhaseRegion = document.getElementById('flash-phase-region');
+      const plumeClipRect = document.getElementById('plume-clip-rect');
+      const flashInletPlume = document.getElementById('flash-inlet-plume');
 
       // Compute exact geometric path lengths
       const suctionLen = suctionCore.getTotalLength();
       const dischargeLen = dischargeCore.getTotalLength();
       const overheadLen = overheadCore.getTotalLength();
+      const spoolLen = fluidSpoolCore.getTotalLength();
 
       // Initialize path dasharrays
       suctionGlow.style.strokeDasharray = `${suctionLen} ${suctionLen}`;
@@ -1310,6 +1376,9 @@
       overheadGlow.style.strokeDasharray = `${overheadLen} ${overheadLen}`;
       overheadCore.style.strokeDasharray = `${overheadLen} ${overheadLen}`;
       overheadInner.style.strokeDasharray = `${overheadLen} ${overheadLen}`;
+      fluidSpoolGlow.style.strokeDasharray = `${spoolLen} ${spoolLen}`;
+      fluidSpoolCore.style.strokeDasharray = `${spoolLen} ${spoolLen}`;
+      fluidSpoolVoids.style.strokeDasharray = `${spoolLen} ${spoolLen}`;
 
       // Animation State
       let currentTime = 0;
@@ -1560,12 +1629,12 @@
             tempSensorStem.setAttribute('stroke', `rgba(245, 158, 11, ${0.2 + 0.6 * eTemp})`);
           }
 
-          // Throttling Valve Inlet Cavity & Primed Hold (Beat 6, t >= 15.0s)
+          // Throttling Valve Inlet Cavity & Upstream Compression
           if (currentTime < 15.0) {
             valveInletFluid.setAttribute('fill', 'rgba(245, 158, 11, 0)');
             valveHandwheelNotch.setAttribute('stroke', 'rgba(255, 255, 255, 0.4)');
             overheadGlow.setAttribute('stroke-width', '6');
-          } else {
+          } else if (currentTime < 18.3) {
             const pValve = clamp((currentTime - 15.0) / 1.8, 0, 1);
             const eValve = easeOutCubic(pValve);
             valveInletFluid.setAttribute('fill', `rgba(245, 158, 11, ${0.85 * eValve})`);
@@ -1580,6 +1649,134 @@
               overheadGlow.setAttribute('stroke-width', '6');
               valveHandwheelNotch.setAttribute('stroke', 'rgba(255, 255, 255, 0.4)');
             }
+          } else {
+            // Flow has crossed restriction: upstream line at steady flowing head, compression relieved
+            valveInletFluid.setAttribute('fill', 'rgba(245, 158, 11, 0.85)');
+            overheadGlow.setAttribute('stroke-width', '6');
+            valveHandwheelNotch.setAttribute('stroke', 'rgba(255, 255, 255, 0.8)');
+          }
+
+          // -------------------------------------------------------------
+          // -------------------------------------------------------------
+          // BEATS 7 & 8: Throttling Crossing, Incipient Spool & Flash Onset
+          // Note: Valve handwheel and stem remain physically stationary (causal event is restriction crossing)
+          // -------------------------------------------------------------
+          if (currentTime < 18.3) {
+            // Downstream remains 100% dry and inactive
+            valveOutletFluid.setAttribute('fill', 'rgba(245, 158, 11, 0)');
+            valveRestrictionHalo.style.opacity = '0';
+            valveHandwheelAssembly.removeAttribute('transform');
+            valveHandwheelNotch.removeAttribute('transform');
+            fluidSpoolGlow.style.strokeDashoffset = spoolLen;
+            fluidSpoolCore.style.strokeDashoffset = spoolLen;
+            fluidSpoolVoids.style.strokeDashoffset = spoolLen;
+            fluidSpoolGlow.style.opacity = '0';
+            fluidSpoolCore.style.opacity = '0';
+            fluidSpoolVoids.style.opacity = '0';
+            plumeClipRect.setAttribute('width', '0');
+            flashInletPlume.style.opacity = '0';
+            flashPhaseRegion.setAttribute('stroke', 'rgba(255, 255, 255, 0.18)');
+            flashPhaseRegion.setAttribute('fill', 'rgba(255, 255, 255, 0.03)');
+          } else if (currentTime < 19.5) {
+            // Beat 7A: Fluid crosses restriction throat into outlet cavity (X = 540 to 552)
+            // Valve handwheel remains completely stationary (no artificial unseating)
+            valveHandwheelAssembly.removeAttribute('transform');
+            valveHandwheelNotch.removeAttribute('transform');
+
+            // Restriction throat pulse as fluid breaches restriction node (0, 0)
+            const pPulse = clamp((currentTime - 18.3) / 0.9, 0, 1);
+            const pulseOp = Math.sin(pPulse * Math.PI);
+            valveRestrictionHalo.style.opacity = String(0.7 * pulseOp);
+            valveRestrictionHalo.setAttribute('r', String(2.2 + 1.6 * pPulse));
+
+            // Fluid fills valve outlet cavity (X = 540 to 552)
+            const pCross = clamp((currentTime - 18.3) / 1.2, 0, 1);
+            const eCross = easeOutCubic(pCross);
+            valveOutletFluid.setAttribute('fill', `rgba(245, 158, 11, ${0.85 * eCross})`);
+
+            // Incipient spool entry: reveals initial 12px (fraction 12 / 80 = 0.15)
+            // Restrained incipient flashing: narrow sheath (3.6px), low opacity (0.45), clear liquid core (2.0px)
+            const crossFrac = 0.15 * eCross;
+            const offsetSpool = spoolLen * (1 - crossFrac);
+            fluidSpoolGlow.style.strokeDashoffset = offsetSpool;
+            fluidSpoolCore.style.strokeDashoffset = offsetSpool;
+            fluidSpoolVoids.style.strokeDashoffset = offsetSpool;
+            fluidSpoolGlow.style.opacity = String(0.45 * eCross);
+            fluidSpoolCore.style.opacity = String(0.9 * eCross);
+            fluidSpoolVoids.style.opacity = String(0.35 * eCross);
+
+            plumeClipRect.setAttribute('width', '0');
+            flashInletPlume.style.opacity = '0';
+            flashPhaseRegion.setAttribute('stroke', 'rgba(255, 255, 255, 0.18)');
+            flashPhaseRegion.setAttribute('fill', 'rgba(255, 255, 255, 0.03)');
+          } else if (currentTime < 21.0) {
+            // Beat 7B: Spool traversal (X = 552 to 620) with incipient flashing
+            valveHandwheelAssembly.removeAttribute('transform');
+            valveHandwheelNotch.removeAttribute('transform');
+            valveRestrictionHalo.style.opacity = '0.25';
+            valveRestrictionHalo.setAttribute('r', '2.2');
+            valveOutletFluid.setAttribute('fill', 'rgba(245, 158, 11, 0.85)');
+
+            const pSpool = clamp((currentTime - 19.5) / 1.5, 0, 1);
+            const eSpool = easeInOutQuad(pSpool);
+            const spoolFrac = 0.15 + (0.85 * eSpool);
+            const offsetSpool = spoolLen * (1 - spoolFrac);
+
+            fluidSpoolGlow.style.strokeDashoffset = offsetSpool;
+            fluidSpoolCore.style.strokeDashoffset = offsetSpool;
+            fluidSpoolVoids.style.strokeDashoffset = offsetSpool;
+            fluidSpoolGlow.style.opacity = '0.45';
+            fluidSpoolCore.style.opacity = '0.9';
+            fluidSpoolVoids.style.opacity = '0.35';
+
+            plumeClipRect.setAttribute('width', '0');
+            flashInletPlume.style.opacity = '0';
+            flashPhaseRegion.setAttribute('stroke', 'rgba(255, 255, 255, 0.18)');
+            flashPhaseRegion.setAttribute('fill', 'rgba(255, 255, 255, 0.03)');
+          } else if (currentTime < 22.8) {
+            // Beat 8A: Entry into flash vessel phase region & localized plume expansion
+            valveHandwheelAssembly.removeAttribute('transform');
+            valveHandwheelNotch.removeAttribute('transform');
+            valveRestrictionHalo.style.opacity = '0.25';
+            valveRestrictionHalo.setAttribute('r', '2.2');
+            valveOutletFluid.setAttribute('fill', 'rgba(245, 158, 11, 0.85)');
+
+            fluidSpoolGlow.style.strokeDashoffset = '0';
+            fluidSpoolCore.style.strokeDashoffset = '0';
+            fluidSpoolVoids.style.strokeDashoffset = '0';
+            fluidSpoolGlow.style.opacity = '0.45';
+            fluidSpoolCore.style.opacity = '0.9';
+            fluidSpoolVoids.style.opacity = '0.35';
+
+            // Plume horizontal expansion strictly inside vessel inlet region (X = 620 to 656, 36px)
+            const pPlume = clamp((currentTime - 21.0) / 1.8, 0, 1);
+            const ePlume = easeOutCubic(pPlume);
+            plumeClipRect.setAttribute('width', String(36 * ePlume));
+            flashInletPlume.style.opacity = String(0.3 + 0.7 * ePlume);
+
+            // Flash phase region boundary subtle illumination
+            flashPhaseRegion.setAttribute('stroke', `rgba(245, 158, 11, ${0.18 + 0.18 * ePlume})`);
+            flashPhaseRegion.setAttribute('fill', `rgba(245, 158, 11, ${0.03 + 0.04 * ePlume})`);
+          } else {
+            // Beat 8B: Unresolved two-phase hold (steady state before macroscopic phase separation)
+            // Downstream boundary strictly preserved: dome, riser, funnel, catchment, condenser remain dry
+            valveHandwheelAssembly.removeAttribute('transform');
+            valveHandwheelNotch.removeAttribute('transform');
+            valveRestrictionHalo.style.opacity = '0.25';
+            valveRestrictionHalo.setAttribute('r', '2.2');
+            valveOutletFluid.setAttribute('fill', 'rgba(245, 158, 11, 0.85)');
+
+            fluidSpoolGlow.style.strokeDashoffset = '0';
+            fluidSpoolCore.style.strokeDashoffset = '0';
+            fluidSpoolVoids.style.strokeDashoffset = '0';
+            fluidSpoolGlow.style.opacity = '0.45';
+            fluidSpoolCore.style.opacity = '0.9';
+            fluidSpoolVoids.style.opacity = '0.35';
+
+            plumeClipRect.setAttribute('width', '36');
+            flashInletPlume.style.opacity = '1';
+            flashPhaseRegion.setAttribute('stroke', 'rgba(245, 158, 11, 0.36)');
+            flashPhaseRegion.setAttribute('fill', 'rgba(245, 158, 11, 0.07)');
           }
         }
 
@@ -1589,7 +1786,7 @@
         scrubber.value = currentTime;
         const mins = Math.floor(currentTime / 60);
         const secs = (currentTime % 60).toFixed(1).padStart(4, '0');
-        timecodeDisplay.textContent = `0${mins}:${secs} / 00:17.5`;
+        timecodeDisplay.textContent = `0${mins}:${secs} / 00:24.5`;
 
         // Determine current beat
         let activeBeat = BEATS[0];
@@ -1735,7 +1932,7 @@
           currentTime,
           isPlaying,
           totalDuration: DURATION,
-          activeBeat: BEATS.find(b => b.time <= currentTime)
+          activeBeat: BEATS.slice().reverse().find(b => b.time <= currentTime)
         })
       };
 
