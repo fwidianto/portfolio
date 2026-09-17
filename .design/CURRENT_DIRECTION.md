@@ -69,10 +69,10 @@ Chapter 02 ("College Years / Foundations to Real World") is structured into five
    - Status: **Planned** (the journey to the other side of the world, Tokyo Institute of Technology lab).
 
 5. **Scene 05: Engineering Undergraduate Thesis / Synthesis**
-   - Status: **Scene 05.1A, 05.1B-1, 05.1B-2A, 05.1B-2B & 05.1B-3A Owner-approved baseline (frozen)**; 05.1B-3B (condenser cooling, condensation, extraction pump & distillate collection) planned.
+   - Status: **Scene 05.1A, 05.1B-1, 05.1B-2A, 05.1B-2B, 05.1B-3A & 05.1B-3B Owner-approved baseline (frozen)**; 05.1B-3C (distillate extraction pump & collection bottle fill) planned.
    - Authority Brief: `.design/CHAPTER_02_SCENE_05_BRIEF.md`.
-   - Approved Exploratory Workspace: `prototypes/scene-05-apparatus-explorations/index.html` (Study C: 2D orthographic editorial representation of Universitas Indonesia test rig with approved 05.1B-1 feed/heating/throttling approach, 05.1B-2A isenthalpic throttling restriction crossing/flash onset, 05.1B-2B flash vessel phase separation, and 05.1B-3A pressure-driven vapor transport to condenser inlet).
-   - Scope Rule: All major equipment positions, piping topology, supports, and causal motion up to the condenser inlet readiness hold ($t = 46.5\,\text{s}$) are frozen baseline. Section 05.1B-3B (condenser cooling, condensation, extraction pump, and aquadest collection) has not started.
+   - Approved Exploratory Workspace: `prototypes/scene-05-apparatus-explorations/index.html` (Study C: 2D orthographic editorial representation of Universitas Indonesia test rig with approved 05.1B-1 feed/heating/throttling approach, 05.1B-2A isenthalpic throttling restriction crossing/flash onset, 05.1B-2B flash vessel phase separation, 05.1B-3A pressure-driven vapor transport, and 05.1B-3B condensation across illustrative cooling path).
+   - Scope Rule: All major equipment positions, piping topology, supports, and causal motion up to the condenser outlet readiness hold ($t = 61.5\,\text{s}$) are frozen baseline. Section 05.1B-3C (extraction pump, aquadest collection, and thesis results) has not started.
 
 ## Scope
 
@@ -94,5 +94,5 @@ Keep these states distinct:
 - Scene 01: Owner approved (frozen).
 - Scene 02: Semi-approved (retained as-is for chapter review).
 - Scene 03: Owner approved baseline (frozen for current phase; further refinements deferred unless owner-requested).
-- Scene 05.1A / 05.1B-1 / 05.1B-2A / 05.1B-2B / 05.1B-3A: Owner approved baseline (frozen; physical apparatus composition, feed/heating/throttling, throttling crossing / flash onset, flash vessel phase separation, and vapor transport to condenser inlet in `prototypes/scene-05-apparatus-explorations/`).
+- Scene 05.1A / 05.1B-1 / 05.1B-2A / 05.1B-2B / 05.1B-3A / 05.1B-3B: Owner approved baseline (frozen; physical apparatus composition, feed/heating/throttling, throttling crossing / flash onset, flash vessel phase separation, vapor transport to condenser inlet, and condensation inside condenser in `prototypes/scene-05-apparatus-explorations/`).
 

@@ -2,11 +2,47 @@
 
 ## Status
 - **Scene**: Chapter 02, Scene 05 (Undergraduate Thesis / Synthesis)
-- **Sub-Phase**: **05.1B-3A — Vapor Transport to Condenser Inlet** (05.1A apparatus geometry frozen at commit `1b63681`, 05.1B-1 baseline frozen at `618c689`, 05.1B-2A baseline frozen at `f6a7dde`, 05.1B-2B baseline frozen at `7838d00`, current 05.1B-3A implementation approved).
-- **Current Status**: **05.1B-3A — Owner-approved / frozen** (frozen for current phase; 05.1B-3B has not started).
+- **Sub-Phase**: **05.1B-3B — Condensation Inside Condenser** (05.1A apparatus geometry frozen at commit `1b63681`, 05.1B-1 baseline frozen at `618c689`, 05.1B-2A baseline frozen at `f6a7dde`, 05.1B-2B baseline frozen at `7838d00`, 05.1B-3A baseline frozen at `42ba6b1`, current 05.1B-3B implementation approved).
+- **Current Status**: **05.1B-3B — Owner-approved / frozen** (frozen for current phase; 05.1B-3C has not started).
 - **Approved Workspace**: `prototypes/scene-05-apparatus-explorations/index.html` (Study C — Hybrid Technical Silhouette + Selective Process Visibility).
 - **Primary Factual Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_experiment_setup.png` (Universitas Indonesia Mechanical Engineering laboratory test rig, 2018–2019).
 - **Supporting Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_system_diagram.png` (system architecture and broader cycle context).
+
+---
+
+## Approved 05.1B-3B Baseline Scope (Condensation Inside Condenser)
+
+1. **Scope Boundary & Fixed Stop**:
+   - Covers the physical condensation sequence inside Condenser `[10]` from $t = 46.5\,\text{s}$ through $61.5\,\text{s}$:
+     `vapor at condenser inlet → condenser cooling activation → illustrative cooling path entry → progressive phase transformation → distillate liquid emergence → condenser outlet ready hold`.
+   - Halts strictly at the bottom outlet flange boundary ($X = 870, Y = 275$) with pure distillate liquid condensate held in an operating meniscus state.
+   - Sub-phase 05.1B-3C (Extraction Pump `[11]`, Aquadest Collection Bottle `[12]`, and thesis distillate yield) has **not started**.
+
+2. **Illustrative Cooling Path Factual Boundary**:
+   - The internal serpentine route inside Condenser `[10]` is an **illustrative process visualization / cooling path**, not a verified literal construction of the internal tubes.
+   - Neither exactly four passes nor specific internal bend radii are asserted as factual physical apparatus internals.
+   - The external condenser cabinet, radiator fins, axial fan assembly, and relative dimensions remain physically factual; the internal fluid visualization remains an abstraction for process flow readability.
+
+3. **Continuous Working-Fluid Material Identity**:
+   - The material identity remains strictly continuous across the vapor-to-liquid phase transformation: the viewer observes the same working fluid condensing into liquid, rather than warm material disappearing and unrelated blue liquid appearing.
+   - Phase transition is communicated through physical and optical behavior:
+     - **Path Entry ($t = 49.0 \to 52.0\,\text{s}$, Beat 20)**: Gaseous vapor with warm-white core (`rgba(254, 243, 199, 0.65)`), soft amber thermal halo (`rgba(245, 158, 11, 0.28)`), and moving dash drift continuous with the upstream line.
+     - **Progressive Condensation ($t = 52.0 \to 55.5\,\text{s}$, Beat 21)**: Heat rejection to the radiator fins causes vapor volume and diffusion to contract; the halo contracts from 6.0px to 3.2px and desaturates toward a warm off-white/pearl tone; the gaseous dash spacing tightens and fades; a coherent warm-neutral liquid core emerges.
+     - **Liquid Distillate Emergence ($t = 55.5 \to 58.5\,\text{s}$, Beat 22)**: Gaseous softness fully condenses into a coherent, dense warm-neutral clear distillate liquid stream (`#f1f5f9`, width 2.2px) with a restrained specular meniscus highlight (`#ffffff`, width 0.8px).
+     - **Outlet Ready Hold ($t = 58.5 \to 61.5\,\text{s}$, Beat 23)**: Pure liquid condensate reaches the bottom outlet flange ($X = 870, Y = 275$), forming an operational holding meniscus (`#f1f5f9` with `#ffffff` border).
+   - Zero separate cyan mist, bright blue infographic water (`#38bdf8`), or theatrical cold auras are introduced.
+
+4. **Restrained Mechanical Cooling Activation**:
+   - The condenser axial cooling fan starts gently after a brief readiness hold ($t = 46.5 \to 47.2\,\text{s}$ pause, accelerating smoothly from $47.2 \to 49.0\,\text{s}$ to $360^\circ/\text{s}$).
+   - Rendered using muted structural steel line weights (`rgba(148, 163, 184, 0.2)` to `0.35`) without theatrical vibration, glowing rings, or saturation spikes.
+   - Serpentine cooling path remains completely dry until vapor physically crosses the inlet threshold at $t = 49.0\,\text{s}$.
+
+5. **Hard Downstream Boundary (Exact Frozen Handoff State for 05.1B-3C)**:
+   - Pure liquid distillate condensate is established and held at Condenser `[10]` outlet flange ($X = 870, Y = 275$);
+   - Extraction line (`M 870 275 L 812 275 L 812 285`) remains **100% dry and unilluminated steel**;
+   - Extraction Pump `[11]` remains **powered off** (zero impeller rotation);
+   - Aquadest Collection Bottle `[12]` remains **100% empty and dry**;
+   - All upstream apparatus components (feed pump, heater, throttling valve, flash vessel, brine basin, overhead vapor line) remain in steady continuous operation.
 
 ---
 
