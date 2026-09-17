@@ -2,11 +2,54 @@
 
 ## Status
 - **Scene**: Chapter 02, Scene 05 (Undergraduate Thesis / Synthesis)
-- **Sub-Phase**: **05.1B-2A — Throttling Crossing & Flash Onset** (05.1A apparatus geometry frozen at commit `1b63681`, 05.1B-1 baseline frozen at `618c689`).
-- **Current Status**: **Owner-approved baseline** (frozen for current phase; 05.1B-2B macroscopic phase separation has not started).
+- **Sub-Phase**: **05.1B-2B — Flash Vessel Phase Separation** (05.1A apparatus geometry frozen at commit `1b63681`, 05.1B-1 baseline frozen at `618c689`, 05.1B-2A baseline frozen at `f6a7dde`, current 05.1B-2B implementation approved).
+- **Current Status**: **05.1B-2B — Owner-approved / frozen** (frozen for current phase; 05.1B-3 has not started).
 - **Approved Workspace**: `prototypes/scene-05-apparatus-explorations/index.html` (Study C — Hybrid Technical Silhouette + Selective Process Visibility).
 - **Primary Factual Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_experiment_setup.png` (Universitas Indonesia Mechanical Engineering laboratory test rig, 2018–2019).
 - **Supporting Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_system_diagram.png` (system architecture and broader cycle context).
+
+---
+
+## Approved 05.1B-2B Baseline Scope (Flash Vessel Phase Separation)
+
+1. **Scope Boundary & Fixed Stop**:
+   - Covers the physical phase-separation sequence inside Flash Vessel `[8]` and Brine Catchment Basin `[9]` from $t = 24.5\,\text{s}$ through $36.0\,\text{s}$.
+   - Halts strictly with buoyant vapor resting at the top flash-vessel outlet nozzle ($X = 645, Y = 165$) and drained brine accumulated in Basin `[9]`.
+   - Sub-phase 05.1B-3 (vapor traversal through overhead line, condenser operation, distillate extraction pump, and aquadest collection) has **not started**.
+
+2. **Approved Causal Choreography**:
+   - **Existing Inlet Two-Phase State ($t = 24.5\,\text{s}$)**: Seamless continuation from the exact hold state of `f6a7dde` with plume occupying the inlet region.
+   - **Horizontal Momentum Decays ($t = 24.5 \to 26.5\,\text{s}$, Beat 9)**: Plume loses forward jet velocity inside the expanded vessel chamber without unnatural wall bounce.
+   - **Phase Disengagement ($t = 26.5 \to 28.5\,\text{s}$, Beat 10)**: Progressive divergence where vapor fraction expands and begins upward migration, while residual liquid loses upward momentum and settles downward under gravity.
+   - **Buoyant Vapor Rise & Liquid Gravity Settling ($t = 28.5 \to 31.0\,\text{s}$, Beat 11)**:
+     - Vapor cloud and subtle rising wisps ascend into the upper dome, pooling at the top outlet nozzle ($X = 645, Y = 165$).
+     - Residual liquid falls down the conical hopper walls ($Y = 325 \to 365$) and pools at the apex drain.
+   - **Residual Liquid Drainage ($t = 31.0 \to 33.5\,\text{s}$, Beat 12)**:
+     - Bottom drain activates only after liquid physically reaches the hopper apex.
+     - Falling liquid descends in a vertical gravity stream into Brine Catchment Basin `[9]`.
+     - Basin `[9]` begins filling only after physical liquid impact ($t \approx 31.8\,\text{s}$), forming an amber pool with localized ripples and a rising meniscus.
+   - **Vapor Outlet Readiness & Separation Hold ($t = 33.5 \to 36.0\,\text{s}$, Beat 13)**:
+     - Stable separated hold: vapor charged at the vessel outlet threshold; liquid accumulated in Basin `[9]`; system holds ready for 05.1B-3 handoff.
+
+3. **Factual Interpretation Boundary**:
+   - **Vapor Abstraction Boundary**: Vapor wisps and diffuse vapor geometry are a visual abstraction of vapor-phase disengagement, not a literal claim that visible smoke exists inside the actual vessel.
+   - **No Undocumented Internals**: No undocumented demister pads, trays, baffles, or internal mechanical separators are implied.
+   - **Drainage Geometry**: Residual-liquid drainage is represented only through the documented lower vessel conical hopper and vertical discharge into Basin `[9]`.
+   - **Basin Arrival Rule**: Basin `[9]` must remain 100% empty until actual drainage arrives and impacts the floor.
+
+4. **Hard Downstream Boundary (Exact Frozen Handoff State for 05.1B-3)**:
+   - Vapor is present at the flash-vessel outlet ($X = 645, Y = 165$);
+   - Residual liquid has separated downward;
+   - Drained liquid is present in Brine Basin `[9]`;
+   - The overhead line beyond the vessel outlet ($Y < 165$) remains completely dry;
+   - Condenser `[10]` remains inactive;
+   - Condenser fan remains inactive;
+   - Extraction Pump `[11]` remains inactive;
+   - Aquadest Collection Bottle `[12]` remains unchanged/dry.
+
+5. **Review Tooling Boundary**:
+   - The development HUD, timeline scrubber, 13 beat selectors (`1·Feed` through `13·Hold`), keyboard controls, and `window.scene05Player` API are non-production review tooling only.
+   - They must not be treated as portfolio UI.
 
 ---
 
