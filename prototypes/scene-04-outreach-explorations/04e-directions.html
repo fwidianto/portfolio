@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scene 04.E: Tokyo Tech / Fushinobu Lab Resolution — Static Design Exploration</title>
+  <meta name="description" content="Static design exploration for Chapter 02 Scene 04.E: Tokyo Tech / Fushinobu Lab Resolution. Comparing 3 restrained visual directions: Institutional Campus Aperture, Research-Focus Micro-Condensation, and Archival Research Crucible.">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-space: #030712;
+      --bg-surface: rgba(15, 23, 42, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(56, 189, 248, 0.50);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-faint: rgba(148, 163, 184, 0.45);
+      --accent-warm: #fb923c;
+      --accent-warm-dim: rgba(251, 146, 60, 0.25);
+      --accent-cyan: #38bdf8;
+      --accent-cyan-dim: rgba(56, 189, 248, 0.25);
+      --accent-violet: #818cf8;
+      --node-cold: rgba(148, 163, 184, 0.35);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-space);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Night Sky SVG background */
+    .sky-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Top Reviewer Study Header */
+    .study-toolbar {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+      max-width: 95vw;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .study-toolbar::-webkit-scrollbar { display: none; }
+
+    .toolbar-brand {
+      display: flex;
+      flex-direction: column;
+      margin-right: 4px;
+    }
+
+    .toolbar-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .toolbar-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .toolbar-divider {
+      width: 1px;
+      height: 22px;
+      background: var(--border-subtle);
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
+
+    .dir-selector, .view-selector {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .dir-btn, .view-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 5px 11px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .dir-btn:hover, .view-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .dir-btn.is-active {
+      background: rgba(56, 189, 248, 0.16);
+      border-color: rgba(56, 189, 248, 0.45);
+      color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+    }
+
+    .view-btn.is-active {
+      background: rgba(251, 146, 60, 0.16);
+      border-color: rgba(251, 146, 60, 0.45);
+      color: #fb923c;
+    }
+
+    /* Main Stage Container */
+    .stage-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+
+    .stage-viewport {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: width 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      background: var(--bg-space);
+    }
+
+    .stage-viewport.is-desktop-framed {
+      width: 1440px;
+      height: 900px;
+      max-width: 96vw;
+      max-height: 86vh;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 8px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+    }
+
+    .stage-viewport.is-mobile-framed {
+      width: 390px;
+      height: 844px;
+      max-width: 90vw;
+      max-height: 88vh;
+      border: 1px solid rgba(148, 163, 184, 0.30);
+      border-radius: 36px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.90);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Bottom Information HUD (Text-Free Main Canvas Rule Maintained) */
+    .hud-bar {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    .hud-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #38bdf8;
+      letter-spacing: 0.05em;
+    }
+
+    .hud-tag::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+    }
+
+    .hud-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .hud-slider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-left: 1px solid var(--border-subtle);
+      padding-left: 12px;
+    }
+
+    .hud-slider-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .map-dim-slider {
+      width: 70px;
+      height: 3px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    .map-dim-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #38bdf8;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .toolbar-title { display: none; }
+      .study-toolbar { top: 8px; padding: 4px 10px; gap: 6px; }
+      .dir-btn, .view-btn { font-size: 9px; padding: 3px 7px; }
+      .hud-bar { bottom: 10px; padding: 4px 12px; max-width: 90vw; }
+      .hud-desc { display: none; }
+      .hud-slider-wrap { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Starfield -->
+  <svg class="sky-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="120" cy="80" r="1.2" fill="#ffffff" opacity="0.65"/>
+    <circle cx="280" cy="140" r="0.9" fill="#fdf4dc" opacity="0.45"/>
+    <circle cx="450" cy="90" r="1.4" fill="#fffaf0" opacity="0.7"/>
+    <circle cx="780" cy="70" r="1.0" fill="#eaf0f8" opacity="0.5"/>
+    <circle cx="1040" cy="110" r="1.3" fill="#ffe8d0" opacity="0.6"/>
+    <circle cx="1320" cy="85" r="1.1" fill="#ffffff" opacity="0.55"/>
+    <circle cx="90" cy="320" r="0.9" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="180" cy="540" r="1.1" fill="#ffe4cc" opacity="0.5"/>
+    <circle cx="1350" cy="380" r="1.2" fill="#fffaf0" opacity="0.6"/>
+  </svg>
+
+  <!-- Reviewer Header Toolbar -->
+  <header class="study-toolbar" role="toolbar" aria-label="Scene 04.E Direction Switcher">
+    <div class="toolbar-brand">
+      <span class="toolbar-title">04.E Fushinobu Lab</span>
+      <span class="toolbar-subtitle">Static Exploration</span>
+    </div>
+
+    <div class="toolbar-divider"></div>
+
+    <div class="dir-selector" role="group" aria-label="Design Directions">
+      <button type="button" class="dir-btn is-active" data-dir="A">A · Institutional Aperture</button>
+      <button type="button" class="dir-btn" data-dir="B">B · Research Micro-Condensation</button>
+      <button type="button" class="dir-btn" data-dir="C">C · Archival Crucible</button>
+      <button type="button" class="dir-btn" data-dir="compare">⊞ Split Grid</button>
+    </div>
+
+    <div class="toolbar-divider"></div>
+
+    <div class="view-selector" role="group" aria-label="Framing Viewport">
+      <button type="button" class="view-btn is-active" data-view="fill">Fill</button>
+      <button type="button" class="view-btn" data-view="desktop">1440×900</button>
+      <button type="button" class="view-btn" data-view="mobile">390×844</button>
+    </div>
+  </header>
+
+  <!-- Stage Container -->
+  <main class="stage-wrapper">
+    <div class="stage-viewport" id="stage-viewport">
+      <canvas id="main-canvas" role="img" aria-label="Scene 04.E Static Exploration Canvas"></canvas>
+    </div>
+  </main>
+
+  <!-- Bottom Reviewer HUD -->
+  <footer class="hud-bar" role="region" aria-label="Direction Summary">
+    <span class="hud-tag" id="hud-tag">DIRECTION A</span>
+    <span class="hud-desc" id="hud-desc">Institutional Campus Aperture — Ookayama precinct plan, architectural quadrangle & laboratory coordinates</span>
+    <div class="hud-slider-wrap">
+      <span class="hud-slider-label">Map Dim</span>
+      <input type="range" class="map-dim-slider" id="map-dim-slider" min="0.05" max="1.0" step="0.05" value="0.35" aria-label="Background Map Opacity">
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const canvas = document.getElementById('main-canvas');
+      const ctx = canvas.getContext('2d');
+      const viewport = document.getElementById('stage-viewport');
+
+      const hudTag = document.getElementById('hud-tag');
+      const hudDesc = document.getElementById('hud-desc');
+      const mapDimSlider = document.getElementById('map-dim-slider');
+      const dirBtns = document.querySelectorAll('.dir-btn');
+      const viewBtns = document.querySelectorAll('.view-btn');
+
+      let currentDirection = 'A'; // 'A' | 'B' | 'C' | 'compare'
+      let currentViewport = 'fill'; // 'fill' | 'desktop' | 'mobile'
+      let mapDimAlpha = 0.35;
+
+      const DEG2RAD = Math.PI / 180;
+      const PLACE_LON = 139.598002, PLACE_LAT = 35.612519; // Kuji Residence, Takatsu, Kawasaki
+      const UNIV_LON = 139.682898, UNIV_LAT = 35.606003;   // Tokyo Tech Ookayama Campus
+
+      // Exact Commute Route Datasets (Inherited from 04.D)
+      const COMMUTE_OUTBOUND_COORDS = [[139.598002, 35.612519], [139.598653, 35.612288], [139.599332, 35.61217], [139.600011, 35.612052], [139.600678, 35.611899], [139.60129, 35.611635], [139.601856, 35.611307], [139.602411, 35.610968], [139.602963, 35.610625], [139.603515, 35.610282], [139.60407, 35.609942], [139.604626, 35.609604], [139.605183, 35.609267], [139.605739, 35.608929], [139.606292, 35.608587], [139.606847, 35.608247], [139.6074, 35.607905], [139.607952, 35.607563], [139.608193, 35.60713], [139.60821, 35.606688], [139.608859, 35.606568], [139.60942, 35.60625], [139.610026, 35.606206], [139.610603, 35.606037], [139.611741, 35.605389], [139.612867, 35.604727], [139.613966, 35.604038], [139.615181, 35.604322], [139.616382, 35.604889], [139.617604, 35.605425], [139.618787, 35.606018], [139.61946, 35.606392], [139.620567, 35.607071], [139.621666, 35.607761], [139.623006, 35.607972], [139.624111, 35.607511], [139.625263, 35.606881], [139.6264, 35.606233], [139.627518, 35.605562], [139.628635, 35.604891], [139.629742, 35.604208], [139.630819, 35.603495], [139.631899, 35.602785], [139.632976, 35.602071], [139.634049, 35.601354], [139.635112, 35.600627], [139.636172, 35.599898], [139.637238, 35.599173], [139.6383, 35.598445], [139.63939, 35.597745], [139.640481, 35.597045], [139.641556, 35.596331], [139.642638, 35.595622], [139.643733, 35.594928], [139.644845, 35.594252], [139.645953, 35.59357], [139.647165, 35.592886], [139.648308, 35.592244], [139.649434, 35.591583], [139.650471, 35.590834], [139.651516, 35.590091], [139.652694, 35.589498], [139.653969, 35.589051], [139.655272, 35.588659], [139.656607, 35.588348], [139.657955, 35.588074], [139.659285, 35.587766], [139.660594, 35.587389], [139.661839, 35.58689], [139.663016, 35.586293], [139.663311, 35.58528], [139.663308, 35.58415], [139.663852, 35.583277], [139.665046, 35.583661], [139.666284, 35.584173], [139.667485, 35.58474], [139.668686, 35.585307], [139.669884, 35.585879], [139.671127, 35.586376], [139.672457, 35.586703], [139.673702, 35.587198], [139.674914, 35.58775], [139.676124, 35.588304], [139.677032, 35.589454], [139.676681, 35.590518], [139.676062, 35.591517], [139.675377, 35.5925], [139.674695, 35.593484], [139.675821, 35.594081], [139.676971, 35.594715], [139.678071, 35.595404], [139.677684, 35.596667], [139.678593, 35.597143], [139.67888, 35.598248], [139.679033, 35.599231], [139.678892, 35.600355], [139.678755, 35.601478], [139.678611, 35.602602], [139.678452, 35.603724], [139.678266, 35.604843], [139.678877, 35.605541], [139.6802, 35.605883], [139.681568, 35.606072], [139.682844, 35.606516], [139.682898, 35.606003]];
+      const COMMUTE_RETURN_COORDS = [[139.682898, 35.606003], [139.683318, 35.606232], [139.682574, 35.606437], [139.681553, 35.606067], [139.680452, 35.60592], [139.679558, 35.605969], [139.678684, 35.606409], [139.678014, 35.605702], [139.676941, 35.605453], [139.675827, 35.605387], [139.674713, 35.605306], [139.6736, 35.605228], [139.672485, 35.60517], [139.671681, 35.604532], [139.671792, 35.604018], [139.670764, 35.603887], [139.669671, 35.604053], [139.66859, 35.604282], [139.667509, 35.604513], [139.666426, 35.604737], [139.665343, 35.604961], [139.664261, 35.605188], [139.663179, 35.605418], [139.662096, 35.605642], [139.661021, 35.60589], [139.660443, 35.605437], [139.659736, 35.605171], [139.658661, 35.605421], [139.657697, 35.605723], [139.657977, 35.606602], [139.656917, 35.60686], [139.655843, 35.607113], [139.654769, 35.607365], [139.653696, 35.607619], [139.652623, 35.607873], [139.65155, 35.608128], [139.650477, 35.60838], [139.649403, 35.608634], [139.64833, 35.608887], [139.647361, 35.608986], [139.647078, 35.608108], [139.646337, 35.607897], [139.64523, 35.607952], [139.644118, 35.608041], [139.64304, 35.608248], [139.642153, 35.608783], [139.641787, 35.609633], [139.641576, 35.610525], [139.641479, 35.611428], [139.640463, 35.611807], [139.639486, 35.612232], [139.638601, 35.612049], [139.637778, 35.611439], [139.636859, 35.610927], [139.635949, 35.610411], [139.635201, 35.60974], [139.634219, 35.610071], [139.633425, 35.610671], [139.632467, 35.611103], [139.631621, 35.610932], [139.630693, 35.61139], [139.629813, 35.611921], [139.629103, 35.612623], [139.628152, 35.613068], [139.62719, 35.613231], [139.626819, 35.612381], [139.626182, 35.61164], [139.625569, 35.61088], [139.624956, 35.61012], [139.624343, 35.60936], [139.62373, 35.608601], [139.622953, 35.608174], [139.621988, 35.608633], [139.621017, 35.609082], [139.620028, 35.609505], [139.619014, 35.609886], [139.617995, 35.609654], [139.616977, 35.609279], [139.615928, 35.608983], [139.615294, 35.608439], [139.61551, 35.607563], [139.614639, 35.607134], [139.613836, 35.606719], [139.612723, 35.606652], [139.612055, 35.606982], [139.611108, 35.606499], [139.610171, 35.606282], [139.60925, 35.606797], [139.608338, 35.607322], [139.60745, 35.607874], [139.606557, 35.60842], [139.605669, 35.608972], [139.604773, 35.609515], [139.603877, 35.610059], [139.602988, 35.61061], [139.6021, 35.611161], [139.601191, 35.61169], [139.60016, 35.612027], [139.599066, 35.612216], [139.598002, 35.612519]];
+
+      const DEFAULT_TRANSIT_STATIONS = [
+        {"id":"kuji","name":"Kuji","line":"JR Nambu Line","lon":139.592502,"lat":35.610598,"role":"origin_station"},
+        {"id":"tsudayama","name":"Tsudayama","line":"JR Nambu Line","lon":139.6006,"lat":35.6041,"role":"waypoint"},
+        {"id":"mizonokuchi","name":"Mizonokuchi","line":"Transfer Hub","lon":139.610874,"lat":35.599583,"role":"transfer_station"},
+        {"id":"futako_tamagawa","name":"Futako-Tamagawa","line":"Tokyu Oimachi Line","lon":139.6268,"lat":35.61179,"role":"station"},
+        {"id":"jiyugaoka","name":"Jiyugaoka","line":"Tokyu Oimachi Line","lon":139.668828,"lat":35.607538,"role":"station"},
+        {"id":"ookayama","name":"Ookayama","line":"Tokyu Oimachi Line","lon":139.685701,"lat":35.607416,"role":"dest_station"}
+      ];
+      const TRANSIT_WALK_ORIGIN_COORDS = [[139.598002,35.612519],[139.5968,35.6121],[139.5948,35.6113],[139.592502,35.610598]];
+      const TRANSIT_RAIL_NAMBU_COORDS = [[139.592364,35.610555],[139.593619,35.60984],[139.594863,35.609117],[139.595965,35.608029],[139.6006,35.6041],[139.605,35.6015],[139.610874,35.599583]];
+      const TRANSIT_RAIL_OIMACHI_COORDS = [[139.610874,35.599583],[139.615,35.6025],[139.620,35.605],[139.6268,35.61179],[139.633,35.612],[139.645,35.609],[139.658,35.606],[139.668828,35.607538],[139.675,35.6075],[139.685701,35.607416]];
+      const TRANSIT_WALK_DEST_COORDS = [[139.685701,35.607416],[139.6845,35.6068],[139.682898,35.606003]];
+
+      let tokyoRoadsData = null;
+      let tokyoBoundariesData = null;
+      let cachedRoadsCanvas = null;
+      let cachedRoadsWidth = 0;
+      let cachedRoadsHeight = 0;
+
+      const tokyoTechLogoImg = new Image();
+      tokyoTechLogoImg.src = 'assets/tokyo-tech-logo.png';
+
+      const groupPhotoImg = new Image();
+      groupPhotoImg.src = 'assets/tokyo-lab-group.jpg';
+
+      async function loadDatasets() {
+        try {
+          const [roads, boundaries] = await Promise.all([
+            fetch('assets/tokyo-commute-roads.json').then(r => r.ok ? r.json() : null),
+            fetch('assets/tokyo-commute-boundaries.json').then(r => r.ok ? r.json() : null)
+          ]);
+          tokyoRoadsData = roads;
+          tokyoBoundariesData = boundaries;
+          invalidateRoadsCache();
+          render();
+        } catch (e) {
+          console.warn('Dataset load error', e);
+        }
+      }
+      loadDatasets();
+
+      function invalidateRoadsCache() {
+        cachedRoadsCanvas = null;
+        cachedRoadsWidth = 0;
+        cachedRoadsHeight = 0;
+      }
+
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      function resize() {
+        const rect = viewport.getBoundingClientRect();
+        width = Math.floor(rect.width);
+        height = Math.floor(rect.height);
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        invalidateRoadsCache();
+        render();
+      }
+      window.addEventListener('resize', resize);
+
+      // Tokyo Mercator Projection (Exact 04.D match)
+      function getTokyoMercatorParams() {
+        const isMobile = width < 768;
+        const centerLon = 139.6405;
+        const centerLat = 35.5985;
+        const zoom = isMobile ? 12.2 : 13.4;
+        const s = 256 * Math.pow(2, zoom);
+
+        function lonToWorldX(lon) { return ((lon + 180) / 360) * s; }
+        function latToWorldY(lat) {
+          const sinLat = Math.sin(lat * DEG2RAD);
+          const clampedSin = Math.max(-0.9999, Math.min(0.9999, sinLat));
+          const rad = Math.log((1 + clampedSin) / (1 - clampedSin));
+          return (0.5 - rad / (4 * Math.PI)) * s;
+        }
+
+        const centerWorldX = lonToWorldX(centerLon);
+        const centerWorldY = latToWorldY(centerLat);
+        const originX = width * 0.5 - centerWorldX;
+        const originY = height * (isMobile ? 0.48 : 0.50) - centerWorldY;
+
+        return { originX, originY, lonToWorldX, latToWorldY };
+      }
+
+      function projectTokyo(lon, lat) {
+        const { originX, originY, lonToWorldX, latToWorldY } = getTokyoMercatorParams();
+        return {
+          x: originX + lonToWorldX(lon),
+          y: originY + latToWorldY(lat)
+        };
+      }
+
+      // Build Cached Roadbeds & Waterways (C1 + C2 Bridges)
+      function buildCachedRoadsCanvas() {
+        if (!cachedRoadsCanvas) {
+          cachedRoadsCanvas = document.createElement('canvas');
+        }
+        cachedRoadsCanvas.width = Math.floor(width * dpr);
+        cachedRoadsCanvas.height = Math.floor(height * dpr);
+        const cctx = cachedRoadsCanvas.getContext('2d');
+        cctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cctx.clearRect(0, 0, width, height);
+
+        const isMobile = width < 768;
+
+        // Municipal Ward Boundaries
+        if (tokyoBoundariesData) {
+          cctx.save();
+          cctx.fillStyle = 'rgba(18, 26, 44, 0.45)';
+          cctx.strokeStyle = 'rgba(148, 163, 184, 0.12)';
+          cctx.lineWidth = 0.8;
+          cctx.setLineDash([4, 4]);
+
+          const renderWard = (w) => {
+            if (!w.coordinates) return;
+            w.coordinates.forEach(poly => {
+              poly.forEach(ring => {
+                if (!ring || ring.length < 3) return;
+                const p0 = projectTokyo(ring[0][0], ring[0][1]);
+                cctx.beginPath();
+                cctx.moveTo(p0.x, p0.y);
+                for (let i = 1; i < ring.length; i++) {
+                  const pi = projectTokyo(ring[i][0], ring[i][1]);
+                  cctx.lineTo(pi.x, pi.y);
+                }
+                cctx.closePath();
+                cctx.fill();
+                cctx.stroke();
+              });
+            });
+          };
+
+          if (tokyoBoundariesData.kawasakiWards) tokyoBoundariesData.kawasakiWards.forEach(renderWard);
+          if (tokyoBoundariesData.tokyoWards) tokyoBoundariesData.tokyoWards.forEach(renderWard);
+          cctx.restore();
+        }
+
+        if (tokyoRoadsData) {
+          // Tama River Polygons
+          cctx.save();
+          if (tokyoRoadsData.riverPolygons && tokyoRoadsData.riverPolygons.length > 0) {
+            cctx.fillStyle = 'rgba(56, 189, 248, 0.12)';
+            cctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+            cctx.lineWidth = 1.0;
+            tokyoRoadsData.riverPolygons.forEach(ring => {
+              if (!ring || ring.length < 3) return;
+              cctx.beginPath();
+              const p0 = projectTokyo(ring[0][0], ring[0][1]);
+              cctx.moveTo(p0.x, p0.y);
+              for (let i = 1; i < ring.length; i++) {
+                const pi = projectTokyo(ring[i][0], ring[i][1]);
+                cctx.lineTo(pi.x, pi.y);
+              }
+              cctx.closePath();
+              cctx.fill();
+              cctx.stroke();
+            });
+          }
+
+          // Tributaries
+          if (tokyoRoadsData.tributaries && tokyoRoadsData.tributaries.length > 0) {
+            cctx.strokeStyle = 'rgba(56, 189, 248, 0.20)';
+            cctx.lineWidth = 0.85;
+            cctx.beginPath();
+            tokyoRoadsData.tributaries.forEach(seg => {
+              if (seg.length < 2) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1]);
+              cctx.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1]);
+                cctx.lineTo(pi.x, pi.y);
+              }
+            });
+            cctx.stroke();
+          }
+
+          // Tama Main Line
+          const tamaMain = tokyoRoadsData.tamaMainLines || tokyoRoadsData.riverLines || [];
+          if (tamaMain.length > 0) {
+            cctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+            cctx.lineWidth = 1.3;
+            cctx.beginPath();
+            tamaMain.forEach(seg => {
+              if (seg.length < 2) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1]);
+              cctx.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1]);
+                cctx.lineTo(pi.x, pi.y);
+              }
+            });
+            cctx.stroke();
+          }
+          cctx.restore();
+
+          // Engineered Bridges (C2 style)
+          cctx.save();
+          const marukoPt = projectTokyo(139.6645, 35.5835);
+          const futakoPt = projectTokyo(139.6268, 35.6118);
+          const viaductPt = projectTokyo(139.6285, 35.6122);
+
+          const drawBridge = (pt, angle, w = 26) => {
+            cctx.save();
+            cctx.translate(pt.x, pt.y);
+            cctx.rotate(angle);
+            cctx.fillStyle = '#1e293b';
+            cctx.strokeStyle = 'rgba(241, 245, 249, 0.65)';
+            cctx.lineWidth = 1.4;
+            cctx.beginPath();
+            cctx.rect(-w * 0.5, -3, w, 6);
+            cctx.fill();
+            cctx.stroke();
+            cctx.fillStyle = '#38bdf8';
+            cctx.fillRect(-w * 0.45, -4.5, 3, 9);
+            cctx.fillRect(w * 0.45 - 3, -4.5, 3, 9);
+            cctx.restore();
+          };
+          drawBridge(marukoPt, 0.85, 28);
+          drawBridge(futakoPt, -0.45, 24);
+          drawBridge(viaductPt, -0.35, 26);
+          cctx.restore();
+
+          // Secondary & Tertiary Streets
+          cctx.save();
+          const secondaryRoads = (tokyoRoadsData.secondary || []).filter(seg => seg.length >= 3);
+          const tertiaryRoads = (tokyoRoadsData.tertiary || []).filter(seg => seg.length >= 4);
+
+          cctx.strokeStyle = 'rgba(148, 163, 184, 0.08)';
+          cctx.lineWidth = 0.55;
+          cctx.beginPath();
+          secondaryRoads.forEach(seg => {
+            const p0 = projectTokyo(seg[0][0], seg[0][1]);
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < seg.length; i++) {
+              const pi = projectTokyo(seg[i][0], seg[i][1]);
+              cctx.lineTo(pi.x, pi.y);
+            }
+          });
+          tertiaryRoads.forEach(seg => {
+            const p0 = projectTokyo(seg[0][0], seg[0][1]);
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < seg.length; i++) {
+              const pi = projectTokyo(seg[i][0], seg[i][1]);
+              cctx.lineTo(pi.x, pi.y);
+            }
+          });
+          cctx.stroke();
+
+          // Primary Arterials
+          if (tokyoRoadsData.primary && tokyoRoadsData.primary.length > 0) {
+            cctx.strokeStyle = 'rgba(148, 163, 184, 0.22)';
+            cctx.lineWidth = 1.15;
+            cctx.beginPath();
+            tokyoRoadsData.primary.forEach(seg => {
+              if (seg.length < 4) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1]);
+              cctx.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1]);
+                cctx.lineTo(pi.x, pi.y);
+              }
+            });
+            cctx.stroke();
+          }
+
+          // Railways Context
+          if (tokyoRoadsData.railways && tokyoRoadsData.railways.length > 0) {
+            cctx.strokeStyle = 'rgba(129, 140, 248, 0.15)';
+            cctx.lineWidth = 1.0;
+            cctx.setLineDash([3, 4]);
+            cctx.beginPath();
+            tokyoRoadsData.railways.filter(seg => seg.length >= 3).forEach(seg => {
+              const p0 = projectTokyo(seg[0][0], seg[0][1]);
+              cctx.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1]);
+                cctx.lineTo(pi.x, pi.y);
+              }
+            });
+            cctx.stroke();
+            cctx.setLineDash([]);
+          }
+          cctx.restore();
+
+          // Active Roadbeds & Trackbeds (Settled Baseline Memory)
+          // Outbound Nakahara-kaido
+          cctx.strokeStyle = 'rgba(241, 245, 249, 0.45)';
+          cctx.lineWidth = 1.8;
+          cctx.beginPath();
+          const pOut0 = projectTokyo(COMMUTE_OUTBOUND_COORDS[0][0], COMMUTE_OUTBOUND_COORDS[0][1]);
+          cctx.moveTo(pOut0.x, pOut0.y);
+          for (let i = 1; i < COMMUTE_OUTBOUND_COORDS.length; i++) {
+            const pi = projectTokyo(COMMUTE_OUTBOUND_COORDS[i][0], COMMUTE_OUTBOUND_COORDS[i][1]);
+            cctx.lineTo(pi.x, pi.y);
+          }
+          cctx.stroke();
+
+          // Return Todoroki-dori
+          cctx.strokeStyle = 'rgba(147, 197, 253, 0.38)';
+          cctx.lineWidth = 1.6;
+          cctx.setLineDash([5, 5]);
+          cctx.beginPath();
+          const pRet0 = projectTokyo(COMMUTE_RETURN_COORDS[0][0], COMMUTE_RETURN_COORDS[0][1]);
+          cctx.moveTo(pRet0.x, pRet0.y);
+          for (let i = 1; i < COMMUTE_RETURN_COORDS.length; i++) {
+            const pi = projectTokyo(COMMUTE_RETURN_COORDS[i][0], COMMUTE_RETURN_COORDS[i][1]);
+            cctx.lineTo(pi.x, pi.y);
+          }
+          cctx.stroke();
+          cctx.setLineDash([]);
+
+          // JR Nambu Trackbed
+          cctx.strokeStyle = 'rgba(129, 140, 248, 0.40)';
+          cctx.lineWidth = 1.8;
+          cctx.beginPath();
+          const pNam0 = projectTokyo(TRANSIT_RAIL_NAMBU_COORDS[0][0], TRANSIT_RAIL_NAMBU_COORDS[0][1]);
+          cctx.moveTo(pNam0.x, pNam0.y);
+          for (let i = 1; i < TRANSIT_RAIL_NAMBU_COORDS.length; i++) {
+            const pi = projectTokyo(TRANSIT_RAIL_NAMBU_COORDS[i][0], TRANSIT_RAIL_NAMBU_COORDS[i][1]);
+            cctx.lineTo(pi.x, pi.y);
+          }
+          cctx.stroke();
+
+          // Tokyu Oimachi Trackbed
+          cctx.strokeStyle = 'rgba(6, 182, 212, 0.50)';
+          cctx.lineWidth = 2.0;
+          cctx.beginPath();
+          const pOim0 = projectTokyo(TRANSIT_RAIL_OIMACHI_COORDS[0][0], TRANSIT_RAIL_OIMACHI_COORDS[0][1]);
+          cctx.moveTo(pOim0.x, pOim0.y);
+          for (let i = 1; i < TRANSIT_RAIL_OIMACHI_COORDS.length; i++) {
+            const pi = projectTokyo(TRANSIT_RAIL_OIMACHI_COORDS[i][0], TRANSIT_RAIL_OIMACHI_COORDS[i][1]);
+            cctx.lineTo(pi.x, pi.y);
+          }
+          cctx.stroke();
+
+          // Walking traces
+          cctx.strokeStyle = 'rgba(241, 245, 249, 0.35)';
+          cctx.lineWidth = 1.2;
+          cctx.setLineDash([2, 3]);
+          cctx.beginPath();
+          const pW0 = projectTokyo(TRANSIT_WALK_DEST_COORDS[0][0], TRANSIT_WALK_DEST_COORDS[0][1]);
+          cctx.moveTo(pW0.x, pW0.y);
+          for (let i = 1; i < TRANSIT_WALK_DEST_COORDS.length; i++) {
+            const pi = projectTokyo(TRANSIT_WALK_DEST_COORDS[i][0], TRANSIT_WALK_DEST_COORDS[i][1]);
+            cctx.lineTo(pi.x, pi.y);
+          }
+          cctx.stroke();
+          cctx.setLineDash([]);
+        }
+
+        // Soft Vignette Mask
+        const cx = width * 0.5;
+        const cy = height * (isMobile ? 0.48 : 0.50);
+        const minR = Math.min(width, height) * 0.22;
+        const maxR = Math.min(width, height) * 0.50;
+        const vignetteGrad = cctx.createRadialGradient(cx, cy, minR, cx, cy, maxR);
+        vignetteGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+        vignetteGrad.addColorStop(0.60, 'rgba(0, 0, 0, 0.15)');
+        vignetteGrad.addColorStop(0.88, 'rgba(0, 0, 0, 0.85)');
+        vignetteGrad.addColorStop(1.0, 'rgba(0, 0, 0, 1.0)');
+
+        cctx.globalCompositeOperation = 'destination-out';
+        cctx.fillStyle = vignetteGrad;
+        cctx.fillRect(0, 0, width, height);
+        cctx.globalCompositeOperation = 'source-over';
+
+        cachedRoadsWidth = width;
+        cachedRoadsHeight = height;
+      }
+
+      // Draw Settled Geographic Labels
+      function drawAreaContextLabels(c, isMobile) {
+        c.save();
+        const mainFont = "500 " + (isMobile ? 8.5 : 9.5) + "px 'Inter', sans-serif";
+        const subFont = "500 " + (isMobile ? 7.0 : 8.0) + "px 'Inter', sans-serif";
+
+        const kujiPt = projectTokyo(139.598, 35.617);
+        c.fillStyle = 'rgba(226, 232, 240, 0.35)';
+        c.font = mainFont;
+        c.fillText('KUJI', kujiPt.x, kujiPt.y);
+        c.fillStyle = 'rgba(148, 163, 184, 0.22)';
+        c.font = subFont;
+        c.fillText('KAWASAKI', kujiPt.x, kujiPt.y + 11);
+
+        const ookaPt = projectTokyo(139.684, 35.6135);
+        c.fillStyle = 'rgba(226, 232, 240, 0.35)';
+        c.font = mainFont;
+        c.fillText('OOKAYAMA', ookaPt.x, ookaPt.y);
+        c.fillStyle = 'rgba(148, 163, 184, 0.22)';
+        c.font = subFont;
+        c.fillText('TOKYO', ookaPt.x, ookaPt.y + 11);
+
+        const tamaPt = projectTokyo(139.638, 35.6035);
+        c.save();
+        c.translate(tamaPt.x, tamaPt.y);
+        c.rotate(-0.55);
+        c.fillStyle = 'rgba(56, 189, 248, 0.25)';
+        c.font = "italic 500 " + (isMobile ? 7.5 : 8.5) + "px 'Inter', sans-serif";
+        c.textAlign = 'center';
+        c.fillText('TAMA RIVER', 0, -8);
+        c.restore();
+        c.restore();
+      }
+
+      // Draw Tokens (Home & Tokyo Tech Initial Anchor)
+      function drawSettledTokens(c, isMobile) {
+        const placePt = projectTokyo(PLACE_LON, PLACE_LAT);
+        const univPt = projectTokyo(UNIV_LON, UNIV_LAT);
+        const tokenR = isMobile ? 9.5 : 11.5;
+
+        // Residence Token (Quiet Amber Settle)
+        c.save();
+        c.fillStyle = 'rgba(10, 15, 26, 0.92)';
+        c.strokeStyle = '#fb923c';
+        c.lineWidth = 1.2;
+        c.beginPath();
+        c.arc(placePt.x, placePt.y, tokenR, 0, Math.PI * 2);
+        c.fill();
+        c.stroke();
+
+        // Simple Home Glyph
+        c.strokeStyle = '#fb923c';
+        c.lineWidth = 1.2;
+        c.beginPath();
+        c.moveTo(placePt.x - 4, placePt.y + 3);
+        c.lineTo(placePt.x - 4, placePt.y - 1);
+        c.lineTo(placePt.x, placePt.y - 5);
+        c.lineTo(placePt.x + 4, placePt.y - 1);
+        c.lineTo(placePt.x + 4, placePt.y + 3);
+        c.closePath();
+        c.stroke();
+        c.restore();
+
+        // Tokyo Tech Origin Token
+        c.save();
+        c.fillStyle = 'rgba(10, 15, 26, 0.92)';
+        c.strokeStyle = '#38bdf8';
+        c.lineWidth = 1.2;
+        c.beginPath();
+        c.arc(univPt.x, univPt.y, tokenR, 0, Math.PI * 2);
+        c.fill();
+        c.stroke();
+
+        const crestSize = isMobile ? 12 : 14;
+        if (tokyoTechLogoImg.complete && tokyoTechLogoImg.naturalWidth > 0) {
+          c.drawImage(tokyoTechLogoImg, 38, 0, 125, 126, univPt.x - crestSize * 0.5, univPt.y - crestSize * 0.5, crestSize, crestSize);
+        }
+        c.restore();
+      }
+
+      // ======================================================================
+      // DIRECTION A: INSTITUTIONAL CAMPUS APERTURE REVEAL
+      // ======================================================================
+      function drawDirectionA(c, isMobile) {
+        const univPt = projectTokyo(UNIV_LON, UNIV_LAT);
+
+        // Framing dimensions for the Campus Precinct Blueprint
+        const cardW = isMobile ? 290 : 380;
+        const cardH = isMobile ? 220 : 270;
+        // Positioned adjacent/over Tokyo Tech locus
+        const cardX = isMobile ? (width * 0.5 - cardW * 0.5) : Math.min(width - cardW - 30, Math.max(30, univPt.x - cardW * 0.40));
+        const cardY = isMobile ? (height * 0.45 - cardH * 0.5) : Math.max(70, Math.min(height - cardH - 80, univPt.y - cardH * 0.45));
+
+        c.save();
+
+        // Atmospheric connector ray from Ookayama Station Gate to Precinct Card
+        c.strokeStyle = 'rgba(56, 189, 248, 0.40)';
+        c.lineWidth = 1.0;
+        c.setLineDash([3, 4]);
+        c.beginPath();
+        c.moveTo(univPt.x, univPt.y);
+        c.lineTo(cardX + cardW * 0.25, cardY + cardH * 0.85);
+        c.stroke();
+        c.setLineDash([]);
+
+        // Precinct Blueprint Baseplate
+        c.fillStyle = 'rgba(10, 15, 28, 0.88)';
+        c.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+        c.lineWidth = 1.2;
+        c.beginPath();
+        c.rect(cardX, cardY, cardW, cardH);
+        c.fill();
+        c.stroke();
+
+        // Precision Corner Registration Brackets
+        const bkLen = 8;
+        c.strokeStyle = '#38bdf8';
+        c.lineWidth = 1.5;
+        // TL
+        c.beginPath();
+        c.moveTo(cardX, cardY + bkLen); c.lineTo(cardX, cardY); c.lineTo(cardX + bkLen, cardY);
+        // TR
+        c.moveTo(cardX + cardW - bkLen, cardY); c.lineTo(cardX + cardW, cardY); c.lineTo(cardX + cardW, cardY + bkLen);
+        // BR
+        c.moveTo(cardX + cardW, cardY + cardH - bkLen); c.lineTo(cardX + cardW, cardY + cardH); c.lineTo(cardX + cardW - bkLen, cardY + cardH);
+        // BL
+        c.moveTo(cardX + bkLen, cardY + cardH); c.lineTo(cardX, cardY + cardH); c.lineTo(cardX, cardY + cardH - bkLen);
+        c.stroke();
+
+        // Architectural Grid Coordinates
+        if (isMobile) {
+          c.font = "500 7.5px 'JetBrains Mono', monospace";
+          c.fillStyle = 'rgba(148, 163, 184, 0.65)';
+          c.textAlign = 'left';
+          c.fillText('35°36\'N · 139°41\'E', cardX + 12, cardY + 16);
+          c.textAlign = 'right';
+          c.fillText('OOKAYAMA PRECINCT', cardX + cardW - 12, cardY + 16);
+        } else {
+          c.font = "500 8.5px 'JetBrains Mono', monospace";
+          c.fillStyle = 'rgba(148, 163, 184, 0.65)';
+          c.textAlign = 'left';
+          c.fillText('35°36\'12"N · 139°41\'04"E', cardX + 12, cardY + 16);
+          c.textAlign = 'right';
+          c.fillText('OOKAYAMA CAMPUS // PRECINCT PLAN', cardX + cardW - 12, cardY + 16);
+        }
+
+        // Internal Fine Architectural Grid
+        c.strokeStyle = 'rgba(148, 163, 184, 0.08)';
+        c.lineWidth = 0.6;
+        for (let gx = cardX + 24; gx < cardX + cardW - 12; gx += 28) {
+          c.beginPath(); c.moveTo(gx, cardY + 24); c.lineTo(gx, cardY + cardH - 24); c.stroke();
+        }
+        for (let gy = cardY + 24; gy < cardY + cardH - 12; gy += 28) {
+          c.beginPath(); c.moveTo(cardX + 12, gy); c.lineTo(cardX + cardW - 12, gy); c.stroke();
+        }
+
+        // --- CAMPUS ARCHITECTURAL FOOTPRINTS ---
+        // 1. Campus Central Promenade (Main Axis)
+        c.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+        c.lineWidth = 1.6;
+        c.beginPath();
+        c.moveTo(cardX + cardW * 0.25, cardY + cardH * 0.88);
+        c.lineTo(cardX + cardW * 0.52, cardY + cardH * 0.40);
+        c.stroke();
+
+        // Stippled Promenade Trees
+        c.fillStyle = 'rgba(148, 163, 184, 0.35)';
+        for (let t = 0.15; t <= 0.85; t += 0.14) {
+          const tx = (cardX + cardW * 0.25) + ((cardX + cardW * 0.52) - (cardX + cardW * 0.25)) * t;
+          const ty = (cardY + cardH * 0.88) + ((cardY + cardH * 0.40) - (cardY + cardH * 0.88)) * t;
+          c.beginPath(); c.arc(tx - 6, ty - 3, 1.8, 0, Math.PI * 2); c.fill();
+          c.beginPath(); c.arc(tx + 6, ty + 3, 1.8, 0, Math.PI * 2); c.fill();
+        }
+
+        // 2. Centennial Hall (Kazuo Shinohara's Angular Landmark)
+        const chX = cardX + cardW * 0.28, chY = cardY + cardH * 0.72;
+        c.fillStyle = 'rgba(30, 41, 59, 0.75)';
+        c.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+        c.lineWidth = 1.0;
+        c.beginPath();
+        c.moveTo(chX - 14, chY + 8);
+        c.lineTo(chX + 6, chY + 16);
+        c.lineTo(chX + 16, chY - 10);
+        c.lineTo(chX - 4, chY - 18);
+        c.closePath();
+        c.fill();
+        c.stroke();
+        c.fillStyle = 'rgba(148, 163, 184, 0.55)';
+        c.font = "400 7px 'JetBrains Mono', monospace";
+        c.textAlign = 'center';
+        c.fillText('CENTENNIAL', chX, chY);
+
+        // 3. Main Building (Courtyard Quadrangle)
+        const mbX = cardX + cardW * 0.54, mbY = cardY + cardH * 0.36;
+        const mbW = isMobile ? 64 : 85, mbH = isMobile ? 40 : 52;
+        c.fillStyle = 'rgba(24, 34, 54, 0.80)';
+        c.strokeStyle = 'rgba(56, 189, 248, 0.55)';
+        c.lineWidth = 1.1;
+        c.strokeRect(mbX - mbW * 0.5, mbY - mbH * 0.5, mbW, mbH);
+        c.fillRect(mbX - mbW * 0.5, mbY - mbH * 0.5, mbW, mbH);
+
+        // Inner Courtyard
+        c.strokeRect(mbX - mbW * 0.25, mbY - mbH * 0.25, mbW * 0.5, mbH * 0.5);
+        c.fillStyle = 'rgba(10, 15, 26, 0.95)';
+        c.fillRect(mbX - mbW * 0.25, mbY - mbH * 0.25, mbW * 0.5, mbH * 0.5);
+
+        c.fillStyle = 'rgba(241, 245, 249, 0.85)';
+        c.font = "500 7.5px 'JetBrains Mono', monospace";
+        c.textAlign = 'center';
+        c.fillText('MAIN BLDG (本館)', mbX, mbY + 2.5);
+
+        // 4. Ishikawadai Building 4 / Engineering Research Precinct (Fushinobu Lab)
+        const ishX = cardX + cardW * 0.78, ishY = cardY + cardH * 0.58;
+        const ishW = isMobile ? 54 : 70, ishH = isMobile ? 36 : 46;
+
+        c.fillStyle = 'rgba(56, 189, 248, 0.12)';
+        c.strokeStyle = '#38bdf8';
+        c.lineWidth = 1.4;
+        c.strokeRect(ishX - ishW * 0.5, ishY - ishH * 0.5, ishW, ishH);
+        c.fillRect(ishX - ishW * 0.5, ishY - ishH * 0.5, ishW, ishH);
+
+        // Highlighted Active Research Locus within Ishikawadai 4
+        c.fillStyle = '#38bdf8';
+        c.beginPath();
+        c.arc(ishX, ishY - 2, 4.0, 0, Math.PI * 2);
+        c.fill();
+        c.strokeStyle = 'rgba(56, 189, 248, 0.55)';
+        c.lineWidth = 1.0;
+        c.beginPath();
+        c.arc(ishX, ishY - 2, 8.5, 0, Math.PI * 2);
+        c.stroke();
+
+        // Callout Tag to Fushinobu Laboratory
+        c.strokeStyle = '#38bdf8';
+        c.lineWidth = 1.0;
+        c.beginPath();
+        c.moveTo(ishX, ishY + 7);
+        c.lineTo(ishX, ishY + 22);
+        c.lineTo(cardX + cardW - 14, ishY + 22);
+        c.stroke();
+
+        c.textAlign = 'right';
+        c.font = "600 8.5px 'JetBrains Mono', monospace";
+        c.fillStyle = '#38bdf8';
+        c.fillText('FUSHINOBU LABORATORY', cardX + cardW - 14, ishY + 34);
+        c.font = "400 7.5px 'JetBrains Mono', monospace";
+        c.fillStyle = 'rgba(226, 232, 240, 0.70)';
+        c.fillText('THERMAL ENERGY & CONDENSATION', cardX + cardW - 14, ishY + 45);
+
+        // Institutional Swallow Crest in Blueprint Header
+        const emblemX = cardX + 32, emblemY = cardY + cardH * 0.38;
+        c.strokeStyle = 'rgba(56, 189, 248, 0.40)';
+        c.lineWidth = 0.8;
+        c.beginPath();
+        c.arc(emblemX, emblemY, 18, 0, Math.PI * 2);
+        c.stroke();
+        c.beginPath();
+        c.arc(emblemX, emblemY, 21, 0, Math.PI * 2);
+        c.stroke();
+
+        if (tokyoTechLogoImg.complete && tokyoTechLogoImg.naturalWidth > 0) {
+          c.drawImage(tokyoTechLogoImg, 38, 0, 125, 126, emblemX - 12, emblemY - 12, 24, 24);
+        }
+
+        c.restore();
+      }
+
+      // ======================================================================
+      // DIRECTION B: RESEARCH-FOCUS MICRO-CONDENSATION REVEAL
+      // ======================================================================
+      function drawDirectionB(c, isMobile) {
+        const univPt = projectTokyo(UNIV_LON, UNIV_LAT);
+
+        // Optical Reticle Dimensions
+        const retR = isMobile ? 95 : 125;
+        const retX = isMobile ? width * 0.5 : Math.min(width - retR - 35, Math.max(retR + 35, univPt.x + 40));
+        const retY = isMobile ? height * 0.46 : Math.max(retR + 50, Math.min(height - retR - 60, univPt.y));
+
+        c.save();
+
+        // Laser Diagnostics Alignment Ray
+        c.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+        c.lineWidth = 1.0;
+        c.setLineDash([2, 3]);
+        c.beginPath();
+        c.moveTo(univPt.x, univPt.y);
+        c.lineTo(retX - retR, retY);
+        c.stroke();
+        c.setLineDash([]);
+
+        // Circular Dark Specimen Background
+        c.fillStyle = '#060a14';
+        c.beginPath();
+        c.arc(retX, retY, retR, 0, Math.PI * 2);
+        c.fill();
+
+        // Precision Outer Bezel Rings
+        c.strokeStyle = 'rgba(56, 189, 248, 0.65)';
+        c.lineWidth = 1.4;
+        c.beginPath();
+        c.arc(retX, retY, retR, 0, Math.PI * 2);
+        c.stroke();
+
+        c.strokeStyle = 'rgba(148, 163, 184, 0.28)';
+        c.lineWidth = 0.8;
+        c.beginPath();
+        c.arc(retX, retY, retR - 5, 0, Math.PI * 2);
+        c.stroke();
+
+        c.beginPath();
+        c.arc(retX, retY, retR + 6, 0, Math.PI * 2);
+        c.stroke();
+
+        // Angular Degree Vernier Calibration Ticks (Every 10 degrees)
+        for (let a = 0; a < 360; a += 10) {
+          const rad = a * DEG2RAD;
+          const isMajor = (a % 90 === 0);
+          const isSemi = (a % 30 === 0);
+          const len = isMajor ? 9 : (isSemi ? 5.5 : 3.0);
+
+          const rIn = retR - 5;
+          const rOut = rIn - len;
+          c.strokeStyle = isMajor ? '#38bdf8' : (isSemi ? 'rgba(56, 189, 248, 0.60)' : 'rgba(148, 163, 184, 0.35)');
+          c.lineWidth = isMajor ? 1.4 : 0.75;
+          c.beginPath();
+          c.moveTo(retX + Math.cos(rad) * rIn, retY + Math.sin(rad) * rIn);
+          c.lineTo(retX + Math.cos(rad) * rOut, retY + Math.sin(rad) * rOut);
+          c.stroke();
+
+          // Cardinal Degree Labels
+          if (isMajor) {
+            c.font = "500 7px 'JetBrains Mono', monospace";
+            c.fillStyle = '#38bdf8';
+            c.textAlign = 'center';
+            c.textBaseline = 'middle';
+            const rText = retR - 16;
+            c.fillText(`${a}°`, retX + Math.cos(rad) * rText, retY + Math.sin(rad) * rText);
+          }
+        }
+
+        // Crosshairs with Center Circular Cutout
+        c.strokeStyle = 'rgba(56, 189, 248, 0.25)';
+        c.lineWidth = 0.8;
+        c.setLineDash([4, 4]);
+        c.beginPath();
+        // Horiz
+        c.moveTo(retX - retR + 15, retY); c.lineTo(retX - 25, retY);
+        c.moveTo(retX + 25, retY); c.lineTo(retX + retR - 15, retY);
+        // Vert
+        c.moveTo(retX, retY - retR + 15); c.lineTo(retX, retY - 25);
+        c.moveTo(retX, retY + 25); c.lineTo(retX, retY + retR - 15);
+        c.stroke();
+        c.setLineDash([]);
+
+        // --- MICRO-SCALE DROPWISE CONDENSATION PHENOMENON ---
+        // Clip to internal circular specimen area
+        c.save();
+        c.beginPath();
+        c.arc(retX, retY, retR - 10, 0, Math.PI * 2);
+        c.clip();
+
+        // 1. Hydrophobic Micro-Structured Silicon Substrate (Micro-pillars)
+        const subY = retY + (isMobile ? 32 : 42);
+        c.fillStyle = 'rgba(15, 23, 42, 0.95)';
+        c.fillRect(retX - retR, subY, retR * 2, retR);
+
+        // Substrate Base Line
+        c.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+        c.lineWidth = 1.2;
+        c.beginPath();
+        c.moveTo(retX - retR, subY);
+        c.lineTo(retX + retR, subY);
+        c.stroke();
+
+        // Periodic Micro-Pillars (11 pillars)
+        const numPillars = 11;
+        const pW = isMobile ? 6 : 8;
+        const pH = isMobile ? 12 : 16;
+        const pSpacing = (retR * 1.6) / numPillars;
+        const pStartX = retX - (numPillars * 0.5) * pSpacing;
+
+        c.fillStyle = 'rgba(30, 41, 59, 0.90)';
+        c.strokeStyle = '#38bdf8';
+        c.lineWidth = 0.9;
+
+        for (let i = 0; i < numPillars; i++) {
+          const px = pStartX + i * pSpacing;
+          c.fillRect(px, subY - pH, pW, pH);
+          c.strokeRect(px, subY - pH, pW, pH);
+
+          // Hydrophobic surface coating accent on pillar top
+          c.fillStyle = '#38bdf8';
+          c.fillRect(px, subY - pH, pW, 1.8);
+          c.fillStyle = 'rgba(30, 41, 59, 0.90)';
+        }
+
+        // 2. Discrete Dropwise Condensation Liquid Droplets
+        // Realistic surface tension contact angle (~115° hydrophobic profile)
+        const droplets = [
+          { xRel: -0.42, r: isMobile ? 11 : 15, hRatio: 1.25 },
+          { xRel: -0.22, r: isMobile ? 6 : 8, hRatio: 1.15 },
+          { xRel: -0.02, r: isMobile ? 18 : 24, hRatio: 1.35 }, // Primary mature droplet
+          { xRel: 0.22, r: isMobile ? 9 : 12, hRatio: 1.22 },
+          { xRel: 0.42, r: isMobile ? 5 : 7, hRatio: 1.10 }
+        ];
+
+        droplets.forEach(d => {
+          const dx = retX + d.xRel * (retR * 1.5);
+          const dy = subY - pH; // Sits on top of micro-pillars
+          const dr = d.r;
+
+          // Droplet Meniscus Bulb
+          c.save();
+          c.beginPath();
+          // Circular arc with truncated flat/concave contact base
+          c.arc(dx, dy - dr * 0.75, dr, 0.15 * Math.PI, 0.85 * Math.PI, true);
+          c.closePath();
+
+          // Fluid Gradient (Cold cyan liquid with refractive density)
+          const dropGrad = c.createRadialGradient(dx - dr * 0.25, dy - dr * 0.85, 2, dx, dy - dr * 0.5, dr);
+          dropGrad.addColorStop(0, 'rgba(186, 230, 253, 0.95)');
+          dropGrad.addColorStop(0.4, 'rgba(56, 189, 248, 0.65)');
+          dropGrad.addColorStop(0.85, 'rgba(14, 116, 144, 0.45)');
+          dropGrad.addColorStop(1, 'rgba(6, 182, 212, 0.85)');
+          c.fillStyle = dropGrad;
+          c.fill();
+
+          // Meniscus Surface Tension Boundary Stroke
+          c.strokeStyle = '#38bdf8';
+          c.lineWidth = 1.3;
+          c.stroke();
+
+          // Optical Specular Highlight Arc
+          c.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+          c.lineWidth = 1.0;
+          c.beginPath();
+          c.arc(dx - dr * 0.28, dy - dr * 0.90, dr * 0.45, 1.2 * Math.PI, 1.65 * Math.PI);
+          c.stroke();
+
+          c.restore();
+        });
+
+        // 3. Thermal Boundary Layer Isotherms (Vapor -> Condensate Temperature Gradient)
+        const isothermYBase = subY - pH - (isMobile ? 24 : 32);
+        for (let iso = 0; iso < 3; iso++) {
+          const isoY = isothermYBase - iso * (isMobile ? 12 : 16);
+          const isoAlpha = 0.45 - iso * 0.12;
+
+          // Color transition: cold cyan near drops -> warm amber into ambient vapor
+          c.strokeStyle = iso === 0 ? `rgba(56, 189, 248, ${isoAlpha})` : `rgba(251, 146, 60, ${isoAlpha})`;
+          c.lineWidth = 0.9;
+          c.setLineDash([4, 4]);
+          c.beginPath();
+          c.moveTo(retX - retR, isoY + 4);
+          c.bezierCurveTo(
+            retX - retR * 0.4, isoY - 6,
+            retX, isoY - 14,
+            retX + retR * 0.4, isoY - 5
+          );
+          c.lineTo(retX + retR, isoY);
+          c.stroke();
+          c.setLineDash([]);
+        }
+
+        // 4. Heat Flux Vector Indicator (Micro-ticks pointing into cold substrate)
+        c.strokeStyle = 'rgba(56, 189, 248, 0.55)';
+        c.lineWidth = 0.85;
+        for (let fx = retX - 50; fx <= retX + 50; fx += 25) {
+          c.beginPath();
+          c.moveTo(fx, subY - pH - 45);
+          c.lineTo(fx, subY - pH - 32);
+          c.lineTo(fx - 2, subY - pH - 35);
+          c.moveTo(fx, subY - pH - 32);
+          c.lineTo(fx + 2, subY - pH - 35);
+          c.stroke();
+        }
+
+        c.restore(); // End clipping
+
+        // Micrometer Scale Bar
+        const sbW = 45;
+        const sbX = retX - sbW * 0.5;
+        const sbY = retY + retR - 22;
+        c.strokeStyle = '#f8fafc';
+        c.lineWidth = 1.2;
+        c.beginPath();
+        c.moveTo(sbX, sbY - 3); c.lineTo(sbX, sbY); c.lineTo(sbX + sbW, sbY); c.lineTo(sbX + sbW, sbY - 3);
+        c.stroke();
+        c.font = "500 7.5px 'JetBrains Mono', monospace";
+        c.fillStyle = '#f8fafc';
+        c.textAlign = 'center';
+        c.fillText('50 μm', retX, sbY - 4);
+
+        // Technical Monospace Caption
+        c.font = "600 8.5px 'JetBrains Mono', monospace";
+        c.fillStyle = '#38bdf8';
+        c.textAlign = 'center';
+        c.fillText('DROPWISE CONDENSATION // PHASE CHANGE', retX, retY + retR + 18);
+
+        c.font = "400 7.5px 'JetBrains Mono', monospace";
+        c.fillStyle = 'rgba(226, 232, 240, 0.70)';
+        c.fillText('MICRO-STRUCTURED INTERFACE · FUSHINOBU LAB', retX, retY + retR + 29);
+
+        c.restore();
+      }
+
+      // ======================================================================
+      // DIRECTION C: ARCHIVAL RESEARCH CRUCIBLE FRAME REVEAL
+      // ======================================================================
+      function drawDirectionC(c, isMobile) {
+        const univPt = projectTokyo(UNIV_LON, UNIV_LAT);
+
+        // Frame Dimensions
+        const frmW = isMobile ? 290 : 370;
+        const frmH = isMobile ? 200 : 255;
+        const frmX = isMobile ? (width * 0.5 - frmW * 0.5) : Math.min(width - frmW - 35, Math.max(35, univPt.x - frmW * 0.45));
+        const frmY = isMobile ? (height * 0.45 - frmH * 0.5) : Math.max(70, Math.min(height - frmH - 80, univPt.y - frmH * 0.45));
+
+        c.save();
+
+        // Connector Datum Ray
+        c.strokeStyle = 'rgba(251, 146, 60, 0.40)';
+        c.lineWidth = 1.0;
+        c.setLineDash([3, 3]);
+        c.beginPath();
+        c.moveTo(univPt.x, univPt.y);
+        c.lineTo(frmX + frmW * 0.5, frmY + frmH);
+        c.stroke();
+        c.setLineDash([]);
+
+        // Outer Crucible Chassis
+        c.fillStyle = 'rgba(10, 15, 26, 0.92)';
+        c.strokeStyle = 'rgba(148, 163, 184, 0.35)';
+        c.lineWidth = 1.2;
+        c.beginPath();
+        c.rect(frmX, frmY, frmW, frmH);
+        c.fill();
+        c.stroke();
+
+        // Corner Engineering Datum Brackets
+        const bkLen = 10;
+        c.strokeStyle = '#fb923c';
+        c.lineWidth = 1.5;
+        c.beginPath();
+        // TL
+        c.moveTo(frmX, frmY + bkLen); c.lineTo(frmX, frmY); c.lineTo(frmX + bkLen, frmY);
+        // TR
+        c.moveTo(frmX + frmW - bkLen, frmY); c.lineTo(frmX + frmW, frmY); c.lineTo(frmX + frmW, frmY + bkLen);
+        // BR
+        c.moveTo(frmX + frmW, frmY + frmH - bkLen); c.lineTo(frmX + frmW, frmY + frmH); c.lineTo(frmX + frmW - bkLen, frmY + frmH);
+        // BL
+        c.moveTo(frmX + bkLen, frmY + frmH); c.lineTo(frmX, frmY + frmH); c.lineTo(frmX, frmY + frmH - bkLen);
+        c.stroke();
+
+        // Archival Specimen Header Plate
+        c.font = "600 8.5px 'JetBrains Mono', monospace";
+        c.fillStyle = '#fb923c';
+        c.textAlign = 'left';
+        c.fillText('FIELD SPECIMEN // RECORD TIT-2018-ME', frmX + 12, frmY + 16);
+
+        // Inspect Beacon Point (Warm Amber Pulse)
+        c.fillStyle = '#fb923c';
+        c.beginPath();
+        c.arc(frmX + frmW - 16, frmY + 14, 3.5, 0, Math.PI * 2);
+        c.fill();
+        c.strokeStyle = 'rgba(251, 146, 60, 0.45)';
+        c.lineWidth = 1.0;
+        c.beginPath();
+        c.arc(frmX + frmW - 16, frmY + 14, 7.0, 0, Math.PI * 2);
+        c.stroke();
+
+        c.font = "500 7.5px 'JetBrains Mono', monospace";
+        c.fillStyle = 'rgba(251, 146, 60, 0.85)';
+        c.textAlign = 'right';
+        c.fillText('[◉ INSPECT]', frmX + frmW - 28, frmY + 16);
+
+        // --- PHOTOGRAPHIC SPECIMEN MOUNT ---
+        const imgInsetX = frmX + 12;
+        const imgInsetY = frmY + 26;
+        const imgW = frmW - 24;
+        const imgH = frmH - 64;
+
+        c.fillStyle = '#030712';
+        c.fillRect(imgInsetX, imgInsetY, imgW, imgH);
+        c.strokeStyle = 'rgba(148, 163, 184, 0.20)';
+        c.lineWidth = 0.8;
+        c.strokeRect(imgInsetX, imgInsetY, imgW, imgH);
+
+        // Draw Editorial Duotone Photographic Evidence with centered cover crop
+        if (groupPhotoImg.complete && groupPhotoImg.naturalWidth > 0) {
+          c.save();
+          // Clip strictly to photographic frame
+          c.beginPath();
+          c.rect(imgInsetX, imgInsetY, imgW, imgH);
+          c.clip();
+
+          // Centered cover calculation
+          const imgRatio = groupPhotoImg.naturalWidth / groupPhotoImg.naturalHeight;
+          const targetRatio = imgW / imgH;
+          let sx = 0, sy = 0, sw = groupPhotoImg.naturalWidth, sh = groupPhotoImg.naturalHeight;
+          if (imgRatio > targetRatio) {
+            sw = groupPhotoImg.naturalHeight * targetRatio;
+            sx = (groupPhotoImg.naturalWidth - sw) * 0.5;
+          } else {
+            sh = groupPhotoImg.naturalWidth / targetRatio;
+            sy = (groupPhotoImg.naturalHeight - sh) * 0.5;
+          }
+
+          c.drawImage(groupPhotoImg, sx, sy, sw, sh, imgInsetX, imgInsetY, imgW, imgH);
+
+          // Apply Museum-Grade Editorial Duotone Wash (Night-sky slate & cyan harmony)
+          c.globalCompositeOperation = 'color';
+          c.fillStyle = 'rgba(56, 189, 248, 0.30)';
+          c.fillRect(imgInsetX, imgInsetY, imgW, imgH);
+
+          c.globalCompositeOperation = 'multiply';
+          c.fillStyle = 'rgba(15, 23, 42, 0.40)';
+          c.fillRect(imgInsetX, imgInsetY, imgW, imgH);
+
+          c.globalCompositeOperation = 'source-over';
+          c.restore();
+        } else {
+          // Placeholder if image still loading
+          c.font = "400 9px 'JetBrains Mono', monospace";
+          c.fillStyle = 'rgba(148, 163, 184, 0.60)';
+          c.textAlign = 'center';
+          c.fillText('[TOKYO TECH RESEARCH COHORT PHOTO]', imgInsetX + imgW * 0.5, imgInsetY + imgH * 0.5);
+        }
+
+        // Archival Provenance Plate Footer
+        const footY = frmY + frmH - 24;
+        c.strokeStyle = 'rgba(148, 163, 184, 0.15)';
+        c.lineWidth = 0.8;
+        c.beginPath();
+        c.moveTo(frmX + 12, footY);
+        c.lineTo(frmX + frmW - 12, footY);
+        c.stroke();
+
+        if (isMobile) {
+          c.font = "600 7.5px 'JetBrains Mono', monospace";
+          c.fillStyle = 'rgba(241, 245, 249, 0.90)';
+          c.textAlign = 'left';
+          c.fillText('FUSHINOBU LAB · TOKYO TECH (2018)', frmX + 14, footY + 14);
+        } else {
+          c.font = "600 8.0px 'JetBrains Mono', monospace";
+          c.fillStyle = 'rgba(241, 245, 249, 0.90)';
+          c.textAlign = 'left';
+          c.fillText('FUSHINOBU LABORATORY · TOKYO TECH (2018)', frmX + 14, footY + 14);
+
+          c.font = "400 7.5px 'JetBrains Mono', monospace";
+          c.fillStyle = 'rgba(148, 163, 184, 0.65)';
+          c.textAlign = 'right';
+          c.fillText('HEAT TRANSFER & CONDENSATION', frmX + frmW - 14, footY + 14);
+        }
+
+        c.restore();
+      }
+
+      // ======================================================================
+      // SIDE-BY-SIDE COMPARISON MODE
+      // ======================================================================
+      function drawComparisonMode(c, isMobile) {
+        c.save();
+        const numCols = isMobile ? 1 : 3;
+        const colW = width / numCols;
+
+        for (let i = 0; i < 3; i++) {
+          const colX = isMobile ? 0 : i * colW;
+          const colY = isMobile ? (i * (height / 3)) : 0;
+          const panelW = colW;
+          const panelH = isMobile ? (height / 3) : height;
+
+          c.save();
+          c.beginPath();
+          c.rect(colX, colY, panelW, panelH);
+          c.clip();
+
+          // Panel Divider Line
+          if (i > 0) {
+            c.strokeStyle = 'rgba(148, 163, 184, 0.20)';
+            c.lineWidth = 1.0;
+            c.beginPath();
+            if (isMobile) {
+              c.moveTo(0, colY); c.lineTo(width, colY);
+            } else {
+              c.moveTo(colX, 0); c.lineTo(colX, height);
+            }
+            c.stroke();
+          }
+
+          // Header Tag for each panel
+          c.fillStyle = 'rgba(15, 23, 42, 0.85)';
+          c.fillRect(colX + 10, colY + 12, panelW - 20, 26);
+          c.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+          c.lineWidth = 0.8;
+          c.strokeRect(colX + 10, colY + 12, panelW - 20, 26);
+
+          c.font = "600 9px 'JetBrains Mono', monospace";
+          c.fillStyle = '#38bdf8';
+          c.textAlign = 'left';
+          const labels = [
+            'DIR A: INSTITUTIONAL APERTURE',
+            'DIR B: RESEARCH CONDENSATION',
+            'DIR C: ARCHIVAL CRUCIBLE'
+          ];
+          c.fillText(labels[i], colX + 18, colY + 28);
+
+          // Render Direction in Panel with adjusted translation
+          c.save();
+          c.translate(colX - (width * 0.5) + (panelW * 0.5), isMobile ? (colY - (height * 0.5) + (panelH * 0.5)) : 0);
+
+          if (i === 0) drawDirectionA(c, isMobile);
+          else if (i === 1) drawDirectionB(c, isMobile);
+          else drawDirectionC(c, isMobile);
+
+          c.restore();
+
+          c.restore();
+        }
+        c.restore();
+      }
+
+      // ======================================================================
+      // MAIN RENDER LOOP (STATIC ENGINE)
+      // ======================================================================
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+        const isMobile = width < 768;
+
+        // 1. Render Base Settled Commute Map (Inherited 04.D State)
+        if (!cachedRoadsCanvas || cachedRoadsWidth !== width || cachedRoadsHeight !== height) {
+          buildCachedRoadsCanvas();
+        }
+        if (cachedRoadsCanvas) {
+          ctx.save();
+          ctx.globalAlpha = mapDimAlpha;
+          ctx.drawImage(cachedRoadsCanvas, 0, 0, width, height);
+          drawAreaContextLabels(ctx, isMobile);
+          ctx.restore();
+        }
+
+        // 2. Render Settled Tokens (Residence & Tokyo Tech origin)
+        drawSettledTokens(ctx, isMobile);
+
+        // 3. Render Chosen Static Exploration Direction
+        if (currentDirection === 'A') {
+          drawDirectionA(ctx, isMobile);
+        } else if (currentDirection === 'B') {
+          drawDirectionB(ctx, isMobile);
+        } else if (currentDirection === 'C') {
+          drawDirectionC(ctx, isMobile);
+        } else if (currentDirection === 'compare') {
+          drawComparisonMode(ctx, isMobile);
+        }
+      }
+
+      // UI Direction Update
+      function updateDirection(dir) {
+        currentDirection = dir;
+        dirBtns.forEach(b => {
+          if (b.dataset.dir === dir) b.classList.add('is-active');
+          else b.classList.remove('is-active');
+        });
+
+        if (dir === 'A') {
+          hudTag.textContent = 'DIRECTION A';
+          hudDesc.textContent = 'Institutional Campus Aperture — Ookayama precinct plan, architectural quadrangle & laboratory coordinates';
+        } else if (dir === 'B') {
+          hudTag.textContent = 'DIRECTION B';
+          hudDesc.textContent = 'Research-Focus Micro-Condensation — Micro-structured surface, dropwise condensation meniscus & thermal flux isotherms';
+        } else if (dir === 'C') {
+          hudTag.textContent = 'DIRECTION C';
+          hudDesc.textContent = 'Archival Research Crucible — Editorial specimen frame, documentary group photo with Prof. Fushinobu & inspection beacon';
+        } else if (dir === 'compare') {
+          hudTag.textContent = 'SPLIT GRID';
+          hudDesc.textContent = 'Side-by-side comparison across all 3 visual directions';
+        }
+
+        render();
+      }
+
+      // Viewport Switcher
+      function updateViewport(v) {
+        currentViewport = v;
+        viewBtns.forEach(b => {
+          if (b.dataset.view === v) b.classList.add('is-active');
+          else b.classList.remove('is-active');
+        });
+
+        viewport.classList.remove('is-desktop-framed', 'is-mobile-framed');
+        if (v === 'desktop') viewport.classList.add('is-desktop-framed');
+        else if (v === 'mobile') viewport.classList.add('is-mobile-framed');
+
+        resize();
+      }
+
+      // Event Listeners
+      dirBtns.forEach(b => b.addEventListener('click', () => updateDirection(b.dataset.dir)));
+      viewBtns.forEach(b => b.addEventListener('click', () => updateViewport(b.dataset.view)));
+
+      mapDimSlider.addEventListener('input', (e) => {
+        mapDimAlpha = parseFloat(e.target.value);
+        render();
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === '1') updateDirection('A');
+        else if (e.key === '2') updateDirection('B');
+        else if (e.key === '3') updateDirection('C');
+        else if (e.key === '4') updateDirection('compare');
+        else if (e.key === 'd' || e.key === 'D') updateViewport('desktop');
+        else if (e.key === 'm' || e.key === 'M') updateViewport('mobile');
+        else if (e.key === 'f' || e.key === 'F') updateViewport('fill');
+      });
+
+      // Public API for Programmatic Verification
+      window.scene04EDirections = {
+        setDirection: updateDirection,
+        getDirection: () => currentDirection,
+        setViewport: updateViewport,
+        getViewport: () => currentViewport,
+        setMapDim: (val) => { mapDimAlpha = val; mapDimSlider.value = val; render(); },
+        render: render
+      };
+
+      // Initial Render
+      resize();
+    })();
+  </script>
+</body>
+</html>

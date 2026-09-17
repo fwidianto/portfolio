@@ -149,7 +149,7 @@ Chapter 02 ("College Years / Foundations to Real World") is structured into five
    - Preservation Rule: All current Scene 03 implementation files in `prototypes/new-portfolio-animation-first/` are preserved exactly as the active baseline. Further Scene 03 refinements or polish are deferred unless explicitly requested by the owner. Do not proceed to Scene 04 without separate instructions.
 
 4. **Scene 04: Journey to Tokyo / Tokyo Tech**
-   - Status: **ACTIVE REFINEMENT (04.A, 04.B, 04.C & 04.D APPROVED BASELINES; 04.E RESOLUTION PENDING)**.
+   - Status: **ACTIVE REFINEMENT (04.A, 04.B, 04.C, 04.D & 04.E APPROVED BASELINES; FULL END-TO-END INTEGRATION AUDIT PENDING)**.
    - Scene 04.A (Outreach Field): **OWNER APPROVED — CURRENT 04.A ANIMATION BASELINE**.
      - Approved Workspace: `prototypes/scene-04-outreach-explorations/index.html`.
      - Baseline Characteristics: Pure visual text-free canvas, warm Jakarta origin beacon (0.4 Hz breathing aura), 8 anonymous cold slate celestial candidate nodes (zero Tokyo privilege, zero cyan), 6 quadratic inquiry filaments, sequential non-metronomic inquiry pulses depositing transverse ticks, 0.6s silence hold (Beat A3), and final quiet dormancy state ready for 04.B bilateral resonance.
@@ -162,6 +162,9 @@ Chapter 02 ("College Years / Foundations to Real World") is structured into five
    - Scene 04.D (Commute Integration): **OWNER APPROVED — CURRENT 04.D ANIMATION BASELINE**.
      - Approved Workspace: `prototypes/scene-04-outreach-explorations/04d-integration.html`.
      - Baseline Characteristics: Fully integrated 28.5s continuous macro-to-micro narrative sequence. True-north conformal flight atlas (Direction F2) grounded from frame 0 (`geoAlpha = 1.0`, solid slate landmasses `rgba(24, 34, 54, 0.80)`, illuminated archipelagos, authentic Great-Circle geodesic trajectory), complete elimination of premature approach aperture artifacts, continuous optical camera dive centered into Tokyo (`zReg: 1.0 → 4.5`, Tokyo Bay expansion, commute scaling `0.60 → 1.0` anchored on arrival geography with connecting amber thread to Takatsu Residence), refined editorial commute cartography (Direction C1 hydro-topographic + C2 bridge spans, grounded municipal ward tone `rgba(18, 26, 44, 0.45)`, filtered secondary/tertiary roads with soft radial vignette preventing cut wires, dominant active roadbeds/trackbeds), preserved mature bicycle and commuter rail kinematics (banking lean, wheel rotation, station platform dwells, concourse pedestrian transfer causality, elevated viaduct crossing), strictly text-free main canvas.
+   - Scene 04.E (Return to Jakarta): **OWNER APPROVED — CURRENT 04.E ANIMATION BASELINE**.
+     - Approved Workspace: `prototypes/scene-04-outreach-explorations/04e-return-integration.html`.
+     - Baseline Characteristics: 11.5s return flight sequence concluding Scene 04 (`28.5s – 40.0s`). Lived Tokyo tenure complete with dimmed commute routes (45% resting memory) and Ookayama harmonic farewell ripple (Beat E0); smooth zero-reset optical regional ascent and continental elevation (`zReg: 4.5 → 1.0`) transitioning from local street grid into True-North conformal atlas (Beat E1); twin-engine vector airliner liftoff from Haneda south-southwest (`~220°` heading) along reverse Great-Circle corridor with twin wing contrails and active waypoint ticks (Beats E2–E4); touchdown and soft dissolution at the general Jakarta / Indonesia arrival anchor with expanding warm amber arrival pulse and resting halo (Beat E5), concluding Scene 04 and geographically re-establishing Indonesia without conflating with Universitas Indonesia (which Scene 05 will establish separately). Strictly text-free canvas.
 
 5. **Scene 05: Engineering Undergraduate Thesis / Synthesis**
    - Status: **APPROVED — CURRENT SCENE-LEVEL BASELINE (COMPRESSED 25.0s & COMPLETED)** (re-frozen as current scene authority; includes full physical apparatus, compressed 25.0s process flow animation across 31 discrete beats, and completed Distillate Collection Bottle [12] filling endpoint).
@@ -178,7 +181,7 @@ Chapter 02 ("College Years / Foundations to Real World") is structured into five
 - Historical Editorial Systems / Connect-Integrate-Output animation work is not current Hero design authority.
 - Supporting visual references may inform visual judgment, but they are lessons rather than templates and do not override approved owner decisions.
 - Desktop and mobile rendered evidence are required for owner acceptance of materially visual changes.
-- Next active focus is Scene 04.E (Tokyo Tech / Fushinobu Lab resolution).
+- Next active focus is full Scene 04 end-to-end review (04.A → 04.B → 04.C → 04.D → 04.E).
 
 ## Acceptance
 
@@ -193,6 +196,6 @@ Keep these states distinct:
 - Scene 01: Owner approved (frozen).
 - Scene 02: Semi-approved (retained as-is for chapter review).
 - Scene 03: Owner approved baseline (frozen for current phase; further refinements deferred unless owner-requested).
-- Scene 04: Active refinement (Scene 04.A, 04.B, 04.C & 04.D: **OWNER APPROVED BASELINES**; Scene 04.E pending).
+- Scene 04: Active refinement (Scenes 04.A, 04.B, 04.C, 04.D & 04.E: **OWNER APPROVED BASELINES**; full end-to-end integration audit pending).
 - Scene 05: **APPROVED — CURRENT SCENE-LEVEL BASELINE (COMPRESSED 25.0s & COMPLETED)** (re-frozen; compressed physical apparatus, 25.0s process flow animation, and completed distillate collection in `prototypes/scene-05-apparatus-explorations/`).
 
