@@ -23,7 +23,7 @@ Do not reconstruct historical design explorations or animation authorities unles
   - **Scene 01**: Universitas Indonesia Entry (Approved baseline, frozen).
   - **Scene 02**: College Engineering Foundations (Semi-approved, retained as-is for chapter review; implementation brief in `../.design/CHAPTER_02_SCENE_02_V2_BRIEF.md`).
   - **Scene 03**: Astra Agro Lestari Palm Oil Mill Internship (Owner-approved baseline, frozen for current phase. Accepted scope: causal 6-stage palm-oil batch transformation, click-to-restart stage behavior, industrial routing and geometry cleanup, personal evidence inspect node with on-site photo, and dedicated process-explainer inspect node. Further refinements deferred unless owner-requested).
-  - **Scene 04**: Journey to Tokyo / Tokyo Tech (**Next active development target** — returning to refinement).
+  - **Scene 04**: Journey to Tokyo / Tokyo Tech (Active refinement; Scenes 04.A, 04.B, 04.C & 04.D owner-approved baselines; Scene 04.E resolution pending).
   - **Scene 05**: Undergraduate Thesis / Synthesis (**APPROVED — CURRENT SCENE-LEVEL BASELINE (COMPRESSED 25.0s & COMPLETED)**; full physical apparatus, compressed 25.0s process flow animation across 31 discrete beats, and completed Distillate Collection Bottle [12] filling endpoint in `../prototypes/scene-05-apparatus-explorations/index.html`; governance authority in `../.design/CHAPTER_02_SCENE_05_BRIEF.md`; deferred roadmap in `../.design/SCENE_05_DEFERRED_ROADMAP.md`).
 - `../Projects/Odoo-ERP-Analytics.html` is the current flagship case-study page.
 - `../prototypes/editorial-systems/` is older animation work and is not Red Dwarf Hero authority by default.

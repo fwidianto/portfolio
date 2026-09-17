@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scene 04.D: Lived Tokyo Commute — Zero-Reset Integration</title>
+  <meta name="description" content="Integrated motion choreography for Chapter 02 Scene 04.D: Continuous zero-reset camera handoff from international flight arrival into the lived daily commute between Takatsu, Kawasaki and Tokyo Tech Ookayama.">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-space: #030712;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(56, 189, 248, 0.50);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-faint: rgba(148, 163, 184, 0.45);
+      --accent-warm: #fb923c;
+      --accent-warm-dim: rgba(251, 146, 60, 0.25);
+      --accent-cyan: #38bdf8;
+      --accent-cyan-dim: rgba(56, 189, 248, 0.25);
+      --accent-violet: #818cf8;
+      --node-cold: rgba(148, 163, 184, 0.35);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-space);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Night Sky SVG background */
+    .sky-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Top Reviewer Header Toolbar */
+    .study-toolbar {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 15, 26, 0.88);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      max-width: 95vw;
+      overflow-x: auto;
+    }
+
+    .toolbar-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-right: 8px;
+      border-right: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .beat-selector {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .beat-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 9px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .beat-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .beat-btn.is-active {
+      background: rgba(56, 189, 248, 0.14);
+      border-color: rgba(56, 189, 248, 0.40);
+      color: #38bdf8;
+    }
+
+    /* Mode Selector in Toolbar */
+    .mode-selector {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding-left: 8px;
+      border-left: 1px solid var(--border-subtle);
+    }
+
+    .mode-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .mode-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .mode-btn.is-active {
+      background: rgba(251, 146, 60, 0.16);
+      border-color: rgba(251, 146, 60, 0.45);
+      color: #fb923c;
+    }
+
+    /* Main Canvas Stage (Strictly Text-Free) */
+    .stage-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Floating Timeline Playback Controls */
+    .playback-bar {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 15, 26, 0.90);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 7px 18px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+      width: calc(100% - 48px);
+      max-width: 840px;
+    }
+
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(255, 255, 255, 0.20);
+    }
+
+    .ctrl-btn svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    .slider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-grow: 1;
+    }
+
+    .beat-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      padding: 2px 8px;
+      border-radius: 9999px;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+
+    .time-slider {
+      flex-grow: 1;
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .time-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #38bdf8;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+      border: 2px solid #030712;
+      transition: transform 0.1s ease;
+    }
+
+    .time-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .time-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      min-width: 96px;
+      text-align: right;
+    }
+
+    .speed-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .speed-btn:hover {
+      color: var(--text-main);
+    }
+
+    .speed-btn.is-active {
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.35);
+      background: rgba(56, 189, 248, 0.10);
+    }
+
+    @media (max-width: 768px) {
+      .toolbar-title { display: none; }
+      .study-toolbar { top: 8px; padding: 4px 10px; }
+      .beat-btn { font-size: 10px; padding: 3px 7px; }
+      .playback-bar { bottom: 12px; padding: 6px 12px; gap: 8px; width: calc(100% - 24px); }
+      .beat-pill { display: none; }
+      .speed-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background SVG Ambient Starfield -->
+  <svg class="sky-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="120" cy="80" r="1.2" fill="#ffffff" opacity="0.65"/>
+    <circle cx="280" cy="140" r="0.9" fill="#fdf4dc" opacity="0.45"/>
+    <circle cx="450" cy="90" r="1.4" fill="#fffaf0" opacity="0.7"/>
+    <circle cx="780" cy="70" r="1.0" fill="#eaf0f8" opacity="0.5"/>
+    <circle cx="1040" cy="110" r="1.3" fill="#ffe8d0" opacity="0.6"/>
+    <circle cx="1320" cy="85" r="1.1" fill="#ffffff" opacity="0.55"/>
+    <circle cx="90" cy="320" r="0.9" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="180" cy="540" r="1.1" fill="#ffe4cc" opacity="0.5"/>
+    <circle cx="1350" cy="380" r="1.2" fill="#fffaf0" opacity="0.6"/>
+    <circle cx="1260" cy="620" r="1.0" fill="#ffffff" opacity="0.45"/>
+    <circle cx="340" cy="780" r="1.1" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="1180" cy="790" r="1.3" fill="#ffe8d0" opacity="0.55"/>
+  </svg>
+
+  <!-- Top Beat Navigation Toolbar -->
+  <header class="study-toolbar" role="region" aria-label="Scene 04.D Navigation">
+    <span class="toolbar-title">04.D Commute Integration</span>
+    <nav class="beat-selector" aria-label="Beat Selection">
+      <button type="button" class="beat-btn is-active" data-t="0.0">Flight</button>
+      <button type="button" class="beat-btn" data-t="8.0">Bridge & Handoff</button>
+      <button type="button" class="beat-btn" data-t="10.5">Bike Outbound</button>
+      <button type="button" class="beat-btn" data-t="14.5">Campus Dwell</button>
+      <button type="button" class="beat-btn" data-t="15.5">Bike Return</button>
+      <button type="button" class="beat-btn" data-t="18.8">Rail Departure</button>
+      <button type="button" class="beat-btn" data-t="22.8">Transfer</button>
+      <button type="button" class="beat-btn" data-t="24.0">Viaduct</button>
+      <button type="button" class="beat-btn" data-t="27.2">Arrival</button>
+    </nav>
+    <div class="mode-selector" aria-label="Commute Mode">
+      <button type="button" class="mode-btn is-active" data-mode="continuous">Continuous</button>
+      <button type="button" class="mode-btn" data-mode="bike">Bike Only</button>
+      <button type="button" class="mode-btn" data-mode="train">Rail Only</button>
+    </div>
+  </header>
+
+  <!-- Main Canvas Stage (Strictly Text-Free) -->
+  <main class="stage-container" id="stage-container">
+    <canvas id="commute-canvas" role="img" aria-label="Integrated motion choreography of Scene 04.D zero-reset handoff and lived commute between Takatsu Kawasaki and Tokyo Tech Ookayama"></canvas>
+  </main>
+
+  <!-- Floating Timeline Playback Controls -->
+  <footer class="playback-bar" id="playback-bar" role="region" aria-label="Timeline Scrubber">
+    <button type="button" class="ctrl-btn" id="btn-play-pause" aria-label="Play or Pause">
+      <svg id="icon-play" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <svg id="icon-pause" viewBox="0 0 24 24" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+    <button type="button" class="ctrl-btn" id="btn-restart" aria-label="Restart Animation">
+      <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+    </button>
+
+    <div class="slider-wrap">
+      <span class="beat-pill" id="beat-label">C · FLIGHT DEPARTURE</span>
+      <input type="range" class="time-slider" id="time-slider" min="0" max="28.5" step="0.01" value="0" aria-label="Animation Timeline Scrubber">
+      <span class="time-display" id="time-display">0.00s / 28.50s</span>
+    </div>
+
+    <button type="button" class="speed-btn is-active" data-speed="1.0">1.0×</button>
+    <button type="button" class="speed-btn" data-speed="0.5">0.5×</button>
+    <button type="button" class="speed-btn" data-speed="0.25">0.25×</button>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const canvas = document.getElementById('commute-canvas');
+      const ctx = canvas.getContext('2d');
+
+      // Timeline Boundaries
+      const T_FLIGHT_END = 8.0;      // Airliner touches down at Tokyo Tech
+      const T_BRIDGE_START = 8.0;    // Camera begins magnification & origin handoff
+      const T_BRIDGE_END = 10.5;     // Metropolitan commute corridor fully settled, residence awakens
+      const T_BIKE_START = 10.5;     // Cyclist departs Kuji along Nakahara-kaido
+      const T_BIKE_DWELL = 14.5;     // Arrival & dwell at Tokyo Tech
+      const T_BIKE_RETURN = 15.5;    // Return cycling along Todoroki-dori
+      const T_BIKE_END = 18.8;       // Bicycle returns to Kuji
+      const T_TRAIN_START = 18.8;    // Commuter walks to Kuji Station
+      const T_TRAIN_NAMBU = 20.2;    // JR Nambu train departs
+      const T_TRAIN_TRANSFER = 22.8; // Concourse transfer at Mizonokuchi
+      const T_TRAIN_OIMACHI = 24.0;  // Tokyu Oimachi train crosses Tama River viaduct
+      const T_TRAIN_ARRIVAL = 27.2;  // Walk across Ookayama plaza
+      const TOTAL_DURATION = 28.5;   // Full continuous choreography
+
+      let currentTime = 0.0;
+      let isPlaying = true;
+      let playSpeed = 1.0;
+      let lastTimestamp = null;
+      let currentMode = 'continuous'; // 'continuous' | 'bike' | 'train'
+
+      // Reviewer UI Elements
+      const timeSlider = document.getElementById('time-slider');
+      const timeDisplay = document.getElementById('time-display');
+      const beatLabel = document.getElementById('beat-label');
+      const btnPlayPause = document.getElementById('btn-play-pause');
+      const iconPlay = document.getElementById('icon-play');
+      const iconPause = document.getElementById('icon-pause');
+      const btnRestart = document.getElementById('btn-restart');
+      const beatBtns = document.querySelectorAll('.beat-btn');
+      const speedBtns = document.querySelectorAll('.speed-btn');
+      const modeBtns = document.querySelectorAll('.mode-btn');
+
+      // Frozen Geographic & Anchor Constants
+      const DEG2RAD = Math.PI / 180;
+      const CGK_LON = 106.8456, CGK_LAT = -6.2088; // Jakarta Soekarno-Hatta
+      const HND_LON = 139.7671, HND_LAT = 35.6895; // Tokyo Haneda
+      const PLACE_LON = 139.598002, PLACE_LAT = 35.612519; // Kuji Residence, Takatsu, Kawasaki
+      const UNIV_LON = 139.682898, UNIV_LAT = 35.606003;   // Tokyo Tech Ookayama Campus
+
+      // Frozen 04.A / 04.B Anchor Positions (Exact 04.B Authority)
+      const SCENE_DATA = {
+        origin: { xRel: 0.18, yRel: 0.78 }, // Jakarta
+        nodes: [
+          { id: 'node_1', xRel: 0.38, yRel: 0.28, attempted: true },
+          { id: 'node_2', xRel: 0.54, yRel: 0.18, attempted: true },
+          { id: 'node_3', xRel: 0.76, yRel: 0.25, isTokyo: true }, // Tokyo Tech Locus
+          { id: 'node_4', xRel: 0.88, yRel: 0.16, attempted: false },
+          { id: 'node_5', xRel: 0.34, yRel: 0.52, attempted: true },
+          { id: 'node_6', xRel: 0.62, yRel: 0.46, attempted: true },
+          { id: 'node_7', xRel: 0.84, yRel: 0.42, attempted: false },
+          { id: 'node_8', xRel: 0.70, yRel: 0.68, attempted: true }
+        ],
+        commute: {
+          residence: { xRel: 0.67, yRel: 0.32 },
+          lab: { xRel: 0.76, yRel: 0.25 }
+        }
+      };
+
+      // Exact OpenStreetMap Road Centerlines (OSRM 201-pt bike routing)
+      const COMMUTE_OUTBOUND_COORDS = [[139.598002, 35.612519], [139.598653, 35.612288], [139.599332, 35.61217], [139.600011, 35.612052], [139.600678, 35.611899], [139.60129, 35.611635], [139.601856, 35.611307], [139.602411, 35.610968], [139.602963, 35.610625], [139.603515, 35.610282], [139.60407, 35.609942], [139.604626, 35.609604], [139.605183, 35.609267], [139.605739, 35.608929], [139.606292, 35.608587], [139.606847, 35.608247], [139.6074, 35.607905], [139.607952, 35.607563], [139.608193, 35.60713], [139.60821, 35.606688], [139.608859, 35.606568], [139.60942, 35.60625], [139.610026, 35.606206], [139.610603, 35.606037], [139.611176, 35.605717], [139.611741, 35.605389], [139.612301, 35.605054], [139.612867, 35.604727], [139.613413, 35.604379], [139.613966, 35.604038], [139.614566, 35.604059], [139.615181, 35.604322], [139.615783, 35.604603], [139.616382, 35.604889], [139.616992, 35.605159], [139.617604, 35.605425], [139.618196, 35.605721], [139.618787, 35.606018], [139.619254, 35.605918], [139.619741, 35.605648], [139.619652, 35.605636], [139.619176, 35.606021], [139.61946, 35.606392], [139.620031, 35.606713], [139.620567, 35.607071], [139.621107, 35.607427], [139.621666, 35.607761], [139.622315, 35.607912], [139.623006, 35.607972], [139.623547, 35.607841], [139.624111, 35.607511], [139.624686, 35.607195], [139.625263, 35.606881], [139.62584, 35.606566], [139.6264, 35.606233], [139.626958, 35.608587], [139.627518, 35.605562], [139.628079, 35.605229], [139.628635, 35.604891], [139.62919, 35.604551], [139.629742, 35.604208], [139.630284, 35.603856], [139.630819, 35.603495], [139.631361, 35.603142], [139.631899, 35.602785], [139.632437, 35.602427], [139.632976, 35.602071], [139.633513, 35.601714], [139.634049, 35.601354], [139.634586, 35.600996], [139.635112, 35.600627], [139.635642, 35.600262], [139.636172, 35.599898], [139.636706, 35.599537], [139.637238, 35.599173], [139.637766, 35.598806], [139.6383, 35.598445], [139.638844, 35.598094], [139.63939, 35.597745], [139.639936, 35.597395], [139.640481, 35.597045], [139.641019, 35.596689], [139.641556, 35.596331], [139.642097, 35.595976], [139.642638, 35.595622], [139.643178, 35.595267], [139.643733, 35.594928], [139.644296, 35.594597], [139.644845, 35.594252], [139.6454, 35.593911], [139.645953, 35.59357], [139.645636, 35.593093], [139.645146, 35.592695], [139.644568, 35.592389], [139.645135, 35.592062], [139.645111, 35.592076], [139.644587, 35.592403], [139.645169, 35.592709], [139.645655, 35.593111], [139.646024, 35.59353], [139.646595, 35.593208], [139.647165, 35.592886], [139.647737, 35.592565], [139.648308, 35.592244], [139.648881, 35.591924], [139.649434, 35.591583], [139.649966, 35.591221], [139.650471, 35.590834], [139.650973, 35.590443], [139.651516, 35.590091], [139.652081, 35.589763], [139.652694, 35.589498], [139.65333, 35.589271], [139.653969, 35.589051], [139.654615, 35.588843], [139.655272, 35.588659], [139.655939, 35.588501], [139.656607, 35.588348], [139.65728, 35.588208], [139.657955, 35.588074], [139.658613, 35.587903], [139.659285, 35.587766], [139.659942, 35.587582], [139.660594, 35.587389], [139.661227, 35.587156], [139.661839, 35.58689], [139.662445, 35.586614], [139.663016, 35.586293], [139.663313, 35.585845], [139.663311, 35.58528], [139.66331, 35.584715], [139.663308, 35.58415], [139.663054, 35.583785], [139.663163, 35.583295], [139.663852, 35.583277], [139.664412, 35.583432], [139.665046, 35.583661], [139.665674, 35.583903], [139.666284, 35.584173], [139.666885, 35.584456], [139.667485, 35.58474], [139.668086, 35.585024], [139.668686, 35.585307], [139.669286, 35.585593], [139.669884, 35.585879], [139.670485, 35.586162], [139.671127, 35.586376], [139.671791, 35.586542], [139.672457, 35.586703], [139.673096, 35.586922], [139.673702, 35.587198], [139.674307, 35.587474], [139.674914, 35.58775], [139.675518, 35.588028], [139.676124, 35.588304], [139.676728, 35.588582], [139.677158, 35.588905], [139.677032, 35.589454], [139.676987, 35.590017], [139.676681, 35.590518], [139.676423, 35.591035], [139.676062, 35.591517], [139.675714, 35.592006], [139.675377, 35.5925], [139.675039, 35.592993], [139.674695, 35.593484], [139.675237, 35.593777], [139.675821, 35.594081], [139.676397, 35.594397], [139.676971, 35.594715], [139.677529, 35.595051], [139.678071, 35.595404], [139.677954, 35.595826], [139.677541, 35.596279], [139.677684, 35.596667], [139.678235, 35.596924], [139.678593, 35.597143], [139.678736, 35.597696], [139.67888, 35.598248], [139.6791, 35.598669], [139.679033, 35.599231], [139.678965, 35.599793], [139.678892, 35.600355], [139.67882, 35.600916], [139.678755, 35.601478], [139.67868, 35.60204], [139.678611, 35.602602], [139.678534, 35.603163], [139.678452, 35.603724], [139.678359, 35.604284], [139.678266, 35.604843], [139.67821, 35.605384], [139.678877, 35.605541], [139.679536, 35.605719], [139.6802, 35.605883], [139.680886, 35.605971], [139.681568, 35.606072], [139.682197, 35.606311], [139.682844, 35.606516], [139.683278, 35.606337], [139.682898, 35.606003]];
+      const COMMUTE_RETURN_COORDS = [[139.682898, 35.606003], [139.683318, 35.606232], [139.683102, 35.606586], [139.682574, 35.606437], [139.68206, 35.606259], [139.681553, 35.606067], [139.681005, 35.605983], [139.680452, 35.60592], [139.679908, 35.605818], [139.679558, 35.605969], [139.679166, 35.606287], [139.678684, 35.606409], [139.678375, 35.60603], [139.678014, 35.605702], [139.67748, 35.605571], [139.676941, 35.605453], [139.676384, 35.605417], [139.675827, 35.605387], [139.67527, 35.605345], [139.674713, 35.605306], [139.674157, 35.605264], [139.6736, 35.605228], [139.673042, 35.605198], [139.672485, 35.60517], [139.671927, 35.605143], [139.671582, 35.604979], [139.671681, 35.604532], [139.671777, 35.604084], [139.672255, 35.60413], [139.671792, 35.604018], [139.671321, 35.603926], [139.670764, 35.603887], [139.670213, 35.603941], [139.669671, 35.604053], [139.66913, 35.604167], [139.66859, 35.604282], [139.66805, 35.604398], [139.667509, 35.604513], [139.666967, 35.604625], [139.666426, 35.604737], [139.665884, 35.604847], [139.665343, 35.604961], [139.664802, 35.605075], [139.664261, 35.605188], [139.663719, 35.605301], [139.663179, 35.605418], [139.662638, 35.605532], [139.662096, 35.605642], [139.661556, 35.60576], [139.661021, 35.60589], [139.660584, 35.605877], [139.660443, 35.605437], [139.660271, 35.605042], [139.659736, 35.605171], [139.659197, 35.605293], [139.658661, 35.605421], [139.658124, 35.605547], [139.657697, 35.605723], [139.657837, 35.606162], [139.657977, 35.606602], [139.657454, 35.606734], [139.656917, 35.60686], [139.65638, 35.606986], [139.655843, 35.607113], [139.655306, 35.607239], [139.654769, 35.607365], [139.654233, 35.607491], [139.653696, 35.607619], [139.65316, 35.607746], [139.652623, 35.607873], [139.652087, 35.608001], [139.65155, 35.608128], [139.651014, 35.608254], [139.650477, 35.60838], [139.64994, 35.608507], [139.649403, 35.608634], [139.648866, 35.60876], [139.64833, 35.608887], [139.647794, 35.609016], [139.647361, 35.608986], [139.64722, 35.608547], [139.647078, 35.608108], [139.646883, 35.6078], [139.646337, 35.607897], [139.645786, 35.607939], [139.64523, 35.607952], [139.644674, 35.607997], [139.644118, 35.608041], [139.643562, 35.608089], [139.64304, 35.608248], [139.642554, 35.608466], [139.642153, 35.608783], [139.64191, 35.609192], [139.641787, 35.609633], [139.641682, 35.610079], [139.641576, 35.610525], [139.64153, 35.610978], [139.641479, 35.611428], [139.640972, 35.611618], [139.640463, 35.611807], [139.639947, 35.611975], [139.639486, 35.612232], [139.639043, 35.612327], [139.638601, 35.612049], [139.638189, 35.611747], [139.637778, 35.611439], [139.637306, 35.611197], [139.636859, 35.610927], [139.636438, 35.610628], [139.635949, 35.610411], [139.635555, 35.610091], [139.635201, 35.60974], [139.634846, 35.609389], [139.63453, 35.609693], [139.634219, 35.610071], [139.633907, 35.610448], [139.633425, 35.610671], [139.632943, 35.610902], [139.632467, 35.611103], [139.632004, 35.610848], [139.631621, 35.610932], [139.631218, 35.61124], [139.630693, 35.61139], [139.630194, 35.61159], [139.629813, 35.611921], [139.629456, 35.61227], [139.629103, 35.612623], [139.628673, 35.612905], [139.628152, 35.613068], [139.627625, 35.61322], [139.62719, 35.613231], [139.627064, 35.612788], [139.626819, 35.612381], [139.626488, 35.61202], [139.626182, 35.61164], [139.625876, 35.61126], [139.625569, 35.61088], [139.625263, 35.6105], [139.624956, 35.61012], [139.62465, 35.60974], [139.624343, 35.60936], [139.624036, 35.60898], [139.62373, 35.608601], [139.623421, 35.608223], [139.622953, 35.608174], [139.622473, 35.608406], [139.621988, 35.608633], [139.621503, 35.608858], [139.621017, 35.609082], [139.620528, 35.609302], [139.620028, 35.609505], [139.619525, 35.609703], [139.619014, 35.609886], [139.618506, 35.609838], [139.617995, 35.609654], [139.617487, 35.609465], [139.616977, 35.609279], [139.616441, 35.609162], [139.615928, 35.608983], [139.615436, 35.608768], [139.615294, 35.608439], [139.615434, 35.607999], [139.61551, 35.607563], [139.615178, 35.607254], [139.614639, 35.607134], [139.614103, 35.607008], [139.613836, 35.606719], [139.613279, 35.606691], [139.612723, 35.606652], [139.612254, 35.60671], [139.612055, 35.606982], [139.611581, 35.606741], [139.611108, 35.606499], [139.610636, 35.606256], [139.610171, 35.606282], [139.609714, 35.606544], [139.60925, 35.606797], [139.608795, 35.607061], [139.608338, 35.607322], [139.607895, 35.607599], [139.60745, 35.607874], [139.607006, 35.60815], [139.606557, 35.60842], [139.606115, 35.608698], [139.605669, 35.608972], [139.605221, 35.609243], [139.604773, 35.609515], [139.604325, 35.609787], [139.603877, 35.610059], [139.603432, 35.610333], [139.602988, 35.61061], [139.602544, 35.610885], [139.6021, 35.611161], [139.601649, 35.611429], [139.601191, 35.61169], [139.600693, 35.611894], [139.60016, 35.612027], [139.599613, 35.612121], [139.599066, 35.612216], [139.59852, 35.612311], [139.598002, 35.612519]];
+
+      let COMMUTE_PATH = COMMUTE_OUTBOUND_COORDS.map(p => ({ lon: p[0], lat: p[1] }));
+      let RETURN_PATH = COMMUTE_RETURN_COORDS.map(p => ({ lon: p[0], lat: p[1] }));
+
+      // Public Transit Coordinates (Google Maps Verified: JR Nambu Line + Tokyu Oimachi Line)
+      const DEFAULT_TRANSIT_STATIONS = [
+        {"id":"kuji","name":"Kuji","line":"JR Nambu Line","lon":139.592502,"lat":35.610598,"role":"origin_station"},
+        {"id":"tsudayama","name":"Tsudayama","line":"JR Nambu Line","lon":139.6006,"lat":35.6041,"role":"waypoint"},
+        {"id":"mizonokuchi","name":"Mizonokuchi","line":"Transfer Hub","lon":139.610874,"lat":35.599583,"role":"transfer_station"},
+        {"id":"futako_tamagawa","name":"Futako-Tamagawa","line":"Tokyu Oimachi Line","lon":139.6268,"lat":35.61179,"role":"station"},
+        {"id":"jiyugaoka","name":"Jiyugaoka","line":"Tokyu Oimachi Line","lon":139.668828,"lat":35.607538,"role":"station"},
+        {"id":"ookayama","name":"Ookayama","line":"Tokyu Oimachi Line","lon":139.685701,"lat":35.607416,"role":"dest_station"}
+      ];
+      const TRANSIT_WALK_ORIGIN_COORDS = [[139.598002,35.612519],[139.5968,35.6121],[139.5948,35.6113],[139.592502,35.610598]];
+      const TRANSIT_RAIL_NAMBU_COORDS = [[139.592364,35.610555],[139.592614,35.610412],[139.592864,35.610268],[139.593116,35.610125],[139.593367,35.609982],[139.593619,35.60984],[139.59387,35.609697],[139.594122,35.609554],[139.594373,35.609411],[139.594625,35.609268],[139.594863,35.609117],[139.595087,35.608955],[139.595302,35.608789],[139.595494,35.608609],[139.595672,35.608424],[139.595825,35.608229],[139.595965,35.608029],[139.6006,35.6041],[139.605,35.6015],[139.610874,35.599583]];
+      const TRANSIT_RAIL_OIMACHI_COORDS = [[139.610874,35.599583],[139.615,35.6025],[139.620,35.605],[139.6268,35.61179],[139.633,35.612],[139.645,35.609],[139.658,35.606],[139.668828,35.607538],[139.675,35.6075],[139.685701,35.607416]];
+      const TRANSIT_WALK_DEST_COORDS = [[139.685701,35.607416],[139.6845,35.6068],[139.682898,35.606003]];
+
+      let transitStations = DEFAULT_TRANSIT_STATIONS;
+      let transitWalkOrigin = TRANSIT_WALK_ORIGIN_COORDS.map(p => ({ lon: p[0], lat: p[1] }));
+      let transitRailNambu = TRANSIT_RAIL_NAMBU_COORDS.map(p => ({ lon: p[0], lat: p[1] }));
+      let transitRailOimachi = TRANSIT_RAIL_OIMACHI_COORDS.map(p => ({ lon: p[0], lat: p[1] }));
+      let transitWalkDest = TRANSIT_WALK_DEST_COORDS.map(p => ({ lon: p[0], lat: p[1] }));
+
+      // External Datasets
+      let realCountriesData = null;
+      let tokyoRoadsData = null;
+      let tokyoBoundariesData = null;
+      let cachedRoadsCanvas = null;
+      let cachedRoadsWidth = 0;
+      let cachedRoadsHeight = 0;
+
+      const tokyoTechLogoImg = new Image();
+      tokyoTechLogoImg.src = 'assets/tokyo-tech-logo.png';
+
+      async function loadDatasets() {
+        try {
+          const [countries, roads, boundaries, transit] = await Promise.all([
+            fetch('assets/real-earth-countries.json').then(r => r.ok ? r.json() : null),
+            fetch('assets/tokyo-commute-roads.json').then(r => r.ok ? r.json() : null),
+            fetch('assets/tokyo-commute-boundaries.json').then(r => r.ok ? r.json() : null),
+            fetch('assets/tokyo-transit-routes.json').then(r => r.ok ? r.json() : null)
+          ]);
+          realCountriesData = countries;
+          tokyoRoadsData = roads;
+          tokyoBoundariesData = boundaries;
+          if (roads) {
+            if (roads.commuteOutbound && roads.commuteOutbound.length > 1) {
+              COMMUTE_PATH = roads.commuteOutbound.map(p => ({ lon: p[0], lat: p[1] }));
+            }
+            if (roads.commuteReturn && roads.commuteReturn.length > 1) {
+              RETURN_PATH = roads.commuteReturn.map(p => ({ lon: p[0], lat: p[1] }));
+            }
+          }
+          if (transit) {
+            if (transit.stations && transit.stations.length > 0) transitStations = transit.stations;
+            if (transit.walkOrigin && transit.walkOrigin.length > 0) transitWalkOrigin = transit.walkOrigin.map(p => ({ lon: p[0], lat: p[1] }));
+            if (transit.railNambu && transit.railNambu.length > 0) transitRailNambu = transit.railNambu.map(p => ({ lon: p[0], lat: p[1] }));
+            if (transit.railOimachi && transit.railOimachi.length > 0) transitRailOimachi = transit.railOimachi.map(p => ({ lon: p[0], lat: p[1] }));
+            if (transit.walkDest && transit.walkDest.length > 0) transitWalkDest = transit.walkDest.map(p => ({ lon: p[0], lat: p[1] }));
+          }
+          window.datasetsReady = true;
+          invalidateRoadsCache();
+        } catch (e) {
+          console.warn('Dataset load error', e);
+        }
+      }
+      loadDatasets();
+
+      function invalidateRoadsCache() {
+        cachedRoadsCanvas = null;
+        cachedRoadsWidth = 0;
+        cachedRoadsHeight = 0;
+      }
+
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      function resize() {
+        const container = document.getElementById('stage-container') || document.body;
+        width = container.clientWidth || window.innerWidth;
+        height = container.clientHeight || window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        invalidateRoadsCache();
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      // UI Controls Event Listeners
+      function updatePlayPauseUI() {
+        if (isPlaying) {
+          iconPlay.style.display = 'none';
+          iconPause.style.display = 'block';
+        } else {
+          iconPlay.style.display = 'block';
+          iconPause.style.display = 'none';
+        }
+      }
+
+      btnPlayPause.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        updatePlayPauseUI();
+        if (isPlaying) lastTimestamp = null;
+      });
+
+      btnRestart.addEventListener('click', () => {
+        currentTime = currentMode === 'bike' ? T_BIKE_START : (currentMode === 'train' ? T_TRAIN_START : 0.0);
+        isPlaying = true;
+        updatePlayPauseUI();
+        lastTimestamp = null;
+      });
+
+      timeSlider.addEventListener('input', (e) => {
+        currentTime = parseFloat(e.target.value);
+        isPlaying = false;
+        updatePlayPauseUI();
+      });
+
+      beatBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentTime = parseFloat(btn.dataset.t);
+          isPlaying = false;
+          updatePlayPauseUI();
+        });
+      });
+
+      speedBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          speedBtns.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          playSpeed = parseFloat(btn.dataset.speed);
+        });
+      });
+
+      modeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          modeBtns.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          currentMode = btn.dataset.mode;
+          if (currentMode === 'bike') {
+            currentTime = T_BIKE_START;
+            timeSlider.min = T_BIKE_START;
+            timeSlider.max = T_BIKE_END;
+          } else if (currentMode === 'train') {
+            currentTime = T_TRAIN_START;
+            timeSlider.min = T_TRAIN_START;
+            timeSlider.max = TOTAL_DURATION;
+          } else {
+            timeSlider.min = 0.0;
+            timeSlider.max = TOTAL_DURATION;
+          }
+          isPlaying = false;
+          updatePlayPauseUI();
+        });
+      });
+
+      // ======================================================================
+      // MATHEMATICAL HELPER FUNCTIONS
+      // ======================================================================
+      function clamp(v, min, max) {
+        return Math.max(min, Math.min(max, v));
+      }
+
+      function easeInOutQuad(val) {
+        return val < 0.5 ? 2 * val * val : 1 - Math.pow(-2 * val + 2, 2) / 2;
+      }
+
+      function mapSegmentProgress(val, uStart, uEnd, sStart, sEnd) {
+        if (val <= uStart) return sStart;
+        if (val >= uEnd) return sEnd;
+        const t = (val - uStart) / (uEnd - uStart);
+        return sStart + (sEnd - sStart) * easeInOutQuad(t);
+      }
+
+      function getControlPoint(x1, y1, x2, y2) {
+        const mx = (x1 + x2) * 0.5;
+        const my = (y1 + y2) * 0.5;
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const len = Math.hypot(dx, dy) || 1;
+        const nx = -dy / len;
+        const ny = dx / len;
+        const bow = len * 0.08;
+        return { x: mx + nx * bow, y: my + ny * bow };
+      }
+
+      function getBezierPoint(p0, p1, p2, u) {
+        const t = clamp(u, 0, 1);
+        const mt = 1 - t;
+        return {
+          x: mt * mt * p0.x + 2 * mt * t * p1.x + t * t * p2.x,
+          y: mt * mt * p0.y + 2 * mt * t * p1.y + t * t * p2.y
+        };
+      }
+
+      function getBezierTangent(p0, p1, p2, u) {
+        const t = clamp(u, 0, 1);
+        const mt = 1 - t;
+        const dx = 2 * mt * (p1.x - p0.x) + 2 * t * (p2.x - p1.x);
+        const dy = 2 * mt * (p1.y - p0.y) + 2 * t * (p2.y - p1.y);
+        return Math.atan2(dy, dx);
+      }
+
+      function getPathPointAndHeading(path, exactIdx) {
+        const N = path.length;
+        const iLow = Math.max(0, Math.min(N - 1, Math.floor(exactIdx)));
+        const iHigh = Math.max(0, Math.min(N - 1, iLow + 1));
+        const frac = exactIdx - iLow;
+
+        const x = path[iLow].x + (path[iHigh].x - path[iLow].x) * frac;
+        const y = path[iLow].y + (path[iHigh].y - path[iLow].y) * frac;
+
+        const iAhead = Math.min(N - 1, iLow + 2);
+        const iBehind = Math.max(0, iLow - 1);
+        const dx = path[iAhead].x - path[iBehind].x;
+        const dy = path[iAhead].y - path[iBehind].y;
+        const angle = Math.atan2(dy, dx);
+
+        const dxAhead = path[iAhead].x - path[iLow].x;
+        const dyAhead = path[iAhead].y - path[iLow].y;
+        const angleAhead = Math.atan2(dyAhead, dxAhead);
+
+        const dxBehind = path[iLow].x - path[iBehind].x;
+        const dyBehind = path[iLow].y - path[iBehind].y;
+        const angleBehind = Math.atan2(dyBehind, dxBehind);
+
+        let dAngle = angleAhead - angleBehind;
+        while (dAngle > Math.PI) dAngle -= Math.PI * 2;
+        while (dAngle < -Math.PI) dAngle += Math.PI * 2;
+
+        const tilt = clamp(dAngle * 3.2, -0.21, 0.21);
+        return { x, y, angle, tilt };
+      }
+
+      // ======================================================================
+      // CAMERA & COORDINATE PROJECTION ENGINE
+      // ======================================================================
+      function getTokyoMercatorParams() {
+        const isMobile = width < 768;
+        const centerLon = 139.6405;
+        const centerLat = 35.5985;
+        const zoom = isMobile ? 12.2 : 13.4;
+        const s = 256 * Math.pow(2, zoom);
+
+        function lonToWorldX(lon) { return ((lon + 180) / 360) * s; }
+        function latToWorldY(lat) {
+          const sinLat = Math.sin(lat * DEG2RAD);
+          const clampedSin = clamp(sinLat, -0.9999, 0.9999);
+          const rad = Math.log((1 + clampedSin) / (1 - clampedSin));
+          return (0.5 - rad / (4 * Math.PI)) * s;
+        }
+
+        const centerWorldX = lonToWorldX(centerLon);
+        const centerWorldY = latToWorldY(centerLat);
+        const originX = width * 0.5 - centerWorldX;
+        const originY = height * (isMobile ? 0.48 : 0.50) - centerWorldY;
+
+        return { originX, originY, lonToWorldX, latToWorldY };
+      }
+
+      function projectTokyo(lon, lat) {
+        const { originX, originY, lonToWorldX, latToWorldY } = getTokyoMercatorParams();
+        return {
+          x: originX + lonToWorldX(lon),
+          y: originY + latToWorldY(lat)
+        };
+      }
+
+      // ======================================================================
+      // APPROVED F2 EDITORIAL TRUE-NORTH ATLAS PROJECTION (Jakarta -> Tokyo)
+      // ======================================================================
+      function toMercator(lon, lat) {
+        const x = lon * DEG2RAD;
+        const sinLat = Math.sin(lat * DEG2RAD);
+        const clampedSin = clamp(sinLat, -0.9999, 0.9999);
+        const y = Math.log((1 + clampedSin) / (1 - clampedSin)) * 0.5;
+        return { x, y };
+      }
+
+      function projectTrueNorthAtlas(lon, lat) {
+        const isMobile = width < 768;
+        const centerLon = isMobile ? 123.8 : 121.5;
+        const centerLat = isMobile ? 15.0 : 16.0;
+        const mCenter = toMercator(centerLon, centerLat);
+
+        const mPt = toMercator(lon, lat);
+        const scale = isMobile ? (height * 0.72) : (height * 1.02);
+
+        const cx = width * 0.50;
+        const cy = height * (isMobile ? 0.50 : 0.52);
+
+        return {
+          x: cx + (mPt.x - mCenter.x) * scale,
+          y: cy - (mPt.y - mCenter.y) * scale
+        };
+      }
+
+      // ======================================================================
+      // RENDERING MODULE: CACHED ROADBEDS & WATERWAYS (C1 + C2 Bridges)
+      // ======================================================================
+      function buildCachedRoadsCanvas() {
+        if (!cachedRoadsCanvas) {
+          cachedRoadsCanvas = document.createElement('canvas');
+        }
+        cachedRoadsCanvas.width = Math.floor(width * dpr);
+        cachedRoadsCanvas.height = Math.floor(height * dpr);
+        const cctx = cachedRoadsCanvas.getContext('2d');
+        cctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cctx.clearRect(0, 0, width, height);
+        const isMobile = width < 768;
+
+        // 1. Municipal Ward Territories (Kawasaki City & Tokyo Metropolis Grounding)
+        if (tokyoBoundariesData) {
+          cctx.save();
+          cctx.fillStyle = 'rgba(18, 26, 44, 0.45)';
+          cctx.strokeStyle = 'rgba(148, 163, 184, 0.12)';
+          cctx.lineWidth = 0.8;
+          cctx.setLineDash([4, 4]);
+
+          const renderWard = (w) => {
+            if (!w.coordinates) return;
+            w.coordinates.forEach(poly => {
+              poly.forEach(ring => {
+                if (!ring || ring.length < 3) return;
+                const p0 = projectTokyo(ring[0][0], ring[0][1]);
+                cctx.beginPath();
+                cctx.moveTo(p0.x, p0.y);
+                for (let i = 1; i < ring.length; i++) {
+                  const pi = projectTokyo(ring[i][0], ring[i][1]);
+                  cctx.lineTo(pi.x, pi.y);
+                }
+                cctx.closePath();
+                cctx.fill();
+                cctx.stroke();
+              });
+            });
+          };
+
+          if (tokyoBoundariesData.kawasakiWards) tokyoBoundariesData.kawasakiWards.forEach(renderWard);
+          if (tokyoBoundariesData.tokyoWards) tokyoBoundariesData.tokyoWards.forEach(renderWard);
+          cctx.restore();
+        }
+
+        if (tokyoRoadsData) {
+          // 2. Tama River Fluvial Morphology (C1 Riverbed Polygons + Tributaries + Main Line)
+          cctx.save();
+          if (tokyoRoadsData.riverPolygons && tokyoRoadsData.riverPolygons.length > 0) {
+            cctx.fillStyle = 'rgba(56, 189, 248, 0.12)';
+            cctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+            cctx.lineWidth = 1.0;
+            tokyoRoadsData.riverPolygons.forEach(ring => {
+              if (!ring || ring.length < 3) return;
+              cctx.beginPath();
+              const p0 = projectTokyo(ring[0][0], ring[0][1]);
+              cctx.moveTo(p0.x, p0.y);
+              for (let i = 1; i < ring.length; i++) {
+                const pi = projectTokyo(ring[i][0], ring[i][1]);
+                cctx.lineTo(pi.x, pi.y);
+              }
+              cctx.closePath();
+              cctx.fill();
+              cctx.stroke();
+            });
+          }
+
+          if (tokyoRoadsData.tributaries && tokyoRoadsData.tributaries.length > 0) {
+            cctx.strokeStyle = 'rgba(56, 189, 248, 0.20)';
+            cctx.lineWidth = 0.85;
+            cctx.beginPath();
+            tokyoRoadsData.tributaries.forEach(seg => {
+              if (seg.length < 2) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1]);
+              cctx.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1]);
+                cctx.lineTo(pi.x, pi.y);
+              }
+            });
+            cctx.stroke();
+          }
+
+          const tamaMain = tokyoRoadsData.tamaMainLines || tokyoRoadsData.riverLines || [];
+          if (tamaMain.length > 0) {
+            cctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+            cctx.lineWidth = 1.3;
+            cctx.beginPath();
+            tamaMain.forEach(seg => {
+              if (seg.length < 2) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1]);
+              cctx.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1]);
+                cctx.lineTo(pi.x, pi.y);
+              }
+            });
+            cctx.stroke();
+          }
+          cctx.restore();
+
+          // 3. C2-Style Engineered Bridge Spans at Critical River Crossings
+          cctx.save();
+          const marukoPt = projectTokyo(139.6645, 35.5835);
+          const futakoPt = projectTokyo(139.6268, 35.6118);
+          const viaductPt = projectTokyo(139.6285, 35.6122);
+
+          const drawBridgeStructure = (pt, angle, bridgeWidth = 26) => {
+            cctx.save();
+            cctx.translate(pt.x, pt.y);
+            cctx.rotate(angle);
+            cctx.fillStyle = '#1e293b';
+            cctx.strokeStyle = 'rgba(241, 245, 249, 0.65)';
+            cctx.lineWidth = 1.4;
+            cctx.beginPath();
+            cctx.rect(-bridgeWidth * 0.5, -3, bridgeWidth, 6);
+            cctx.fill();
+            cctx.stroke();
+            cctx.fillStyle = '#38bdf8';
+            cctx.fillRect(-bridgeWidth * 0.45, -4.5, 3, 9);
+            cctx.fillRect(bridgeWidth * 0.45 - 3, -4.5, 3, 9);
+            cctx.restore();
+          };
+
+          drawBridgeStructure(marukoPt, 0.85, 28);   // Maruko Bridge (Nakahara-kaido bike crossing)
+          drawBridgeStructure(futakoPt, -0.45, 24);  // Futako Bridge (Route 246)
+          drawBridgeStructure(viaductPt, -0.35, 26); // Tokyu Oimachi rail viaduct
+          cctx.restore();
+
+          // 4. Metropolitan Street Grain (Secondary & Tertiary Roads)
+          cctx.save();
+          const secondaryRoads = (tokyoRoadsData.secondary || []).filter(seg => seg.length >= 3);
+          const tertiaryRoads = (tokyoRoadsData.tertiary || []).filter(seg => {
+            if (seg.length < 3) return false;
+            const midLon = seg[Math.floor(seg.length / 2)][0];
+            const midLat = seg[Math.floor(seg.length / 2)][1];
+            return midLon >= 139.59 && midLon <= 139.70 && midLat >= 35.58 && midLat <= 35.63;
+          });
+          cctx.strokeStyle = 'rgba(148, 163, 184, 0.08)';
+          cctx.lineWidth = 0.55;
+          cctx.beginPath();
+          [...secondaryRoads, ...tertiaryRoads].forEach(seg => {
+            const p0 = projectTokyo(seg[0][0], seg[0][1]);
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < seg.length; i++) {
+              const pi = projectTokyo(seg[i][0], seg[i][1]);
+              cctx.lineTo(pi.x, pi.y);
+            }
+          });
+          cctx.stroke();
+
+          // 5. Selected Primary Arterials (Route 246, Meguro-dori, Kan-nana)
+          if (tokyoRoadsData.primary && tokyoRoadsData.primary.length > 0) {
+            cctx.strokeStyle = 'rgba(148, 163, 184, 0.22)';
+            cctx.lineWidth = 1.15;
+            cctx.beginPath();
+            tokyoRoadsData.primary.forEach(seg => {
+              if (seg.length < 4) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1]);
+              cctx.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1]);
+                cctx.lineTo(pi.x, pi.y);
+              }
+            });
+            cctx.stroke();
+          }
+
+          // 6. Contextual Railway Network (Tokyu lines & JR tracks)
+          if (tokyoRoadsData.railways && tokyoRoadsData.railways.length > 0) {
+            cctx.strokeStyle = 'rgba(129, 140, 248, 0.15)';
+            cctx.lineWidth = 1.0;
+            cctx.setLineDash([3, 4]);
+            cctx.beginPath();
+            tokyoRoadsData.railways.filter(seg => seg.length >= 3).forEach(seg => {
+              const p0 = projectTokyo(seg[0][0], seg[0][1]);
+              cctx.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1]);
+                cctx.lineTo(pi.x, pi.y);
+              }
+            });
+            cctx.stroke();
+            cctx.setLineDash([]);
+          }
+          cctx.restore();
+
+          // 7. Active Commute Physical Roadbeds (Hierarchy & Dominance)
+          const outRoad = (tokyoRoadsData.commuteOutbound && tokyoRoadsData.commuteOutbound.length > 1)
+            ? tokyoRoadsData.commuteOutbound : COMMUTE_OUTBOUND_COORDS;
+          const retRoad = (tokyoRoadsData.commuteReturn && tokyoRoadsData.commuteReturn.length > 1)
+            ? tokyoRoadsData.commuteReturn : COMMUTE_RETURN_COORDS;
+
+          // Road Outer Casing (Prominent framing)
+          cctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+          cctx.lineWidth = 3.8;
+          cctx.lineCap = 'round';
+          cctx.lineJoin = 'round';
+          cctx.beginPath();
+          if (outRoad.length > 1) {
+            const p0 = projectTokyo(outRoad[0][0], outRoad[0][1]);
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < outRoad.length; i++) {
+              const pi = projectTokyo(outRoad[i][0], outRoad[i][1]);
+              cctx.lineTo(pi.x, pi.y);
+            }
+          }
+          if (retRoad.length > 1) {
+            const p0 = projectTokyo(retRoad[0][0], retRoad[0][1]);
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < retRoad.length; i++) {
+              const pi = projectTokyo(retRoad[i][0], retRoad[i][1]);
+              cctx.lineTo(pi.x, pi.y);
+            }
+          }
+          cctx.stroke();
+
+          // Outbound Roadbed: Silver-white solid
+          cctx.strokeStyle = 'rgba(241, 245, 249, 0.45)';
+          cctx.lineWidth = 1.8;
+          cctx.beginPath();
+          if (outRoad.length > 1) {
+            const p0 = projectTokyo(outRoad[0][0], outRoad[0][1]);
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < outRoad.length; i++) {
+              const pi = projectTokyo(outRoad[i][0], outRoad[i][1]);
+              cctx.lineTo(pi.x, pi.y);
+            }
+          }
+          cctx.stroke();
+
+          // Return Roadbed: Luminous cyan-slate dashes
+          cctx.strokeStyle = 'rgba(147, 197, 253, 0.38)';
+          cctx.lineWidth = 1.6;
+          cctx.setLineDash([5, 5]);
+          cctx.beginPath();
+          if (retRoad.length > 1) {
+            const p0 = projectTokyo(retRoad[0][0], retRoad[0][1]);
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < retRoad.length; i++) {
+              const pi = projectTokyo(retRoad[i][0], retRoad[i][1]);
+              cctx.lineTo(pi.x, pi.y);
+            }
+          }
+          cctx.stroke();
+          cctx.setLineDash([]);
+
+          // 8. Commuter Transit Trackbeds
+          // 8a. JR Nambu Line Trackbed
+          if (transitRailNambu && transitRailNambu.length > 1) {
+            cctx.strokeStyle = 'rgba(129, 140, 248, 0.20)';
+            cctx.lineWidth = 3.4;
+            cctx.lineCap = 'round';
+            cctx.beginPath();
+            const p0 = projectTokyo(transitRailNambu[0].lon, transitRailNambu[0].lat);
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < transitRailNambu.length; i++) {
+              const pi = projectTokyo(transitRailNambu[i].lon, transitRailNambu[i].lat);
+              cctx.lineTo(pi.x, pi.y);
+            }
+            cctx.stroke();
+
+            // Track dashes
+            cctx.strokeStyle = 'rgba(129, 140, 248, 0.40)';
+            cctx.lineWidth = 1.5;
+            cctx.setLineDash([4, 3]);
+            cctx.beginPath();
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < transitRailNambu.length; i++) {
+              const pi = projectTokyo(transitRailNambu[i].lon, transitRailNambu[i].lat);
+              cctx.lineTo(pi.x, pi.y);
+            }
+            cctx.stroke();
+            cctx.setLineDash([]);
+          }
+
+          // 8b. Tokyu Oimachi Line Trackbed
+          if (transitRailOimachi && transitRailOimachi.length > 1) {
+            cctx.strokeStyle = 'rgba(6, 182, 212, 0.20)';
+            cctx.lineWidth = 3.4;
+            cctx.lineCap = 'round';
+            cctx.beginPath();
+            const p0 = projectTokyo(transitRailOimachi[0].lon, transitRailOimachi[0].lat);
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < transitRailOimachi.length; i++) {
+              const pi = projectTokyo(transitRailOimachi[i].lon, transitRailOimachi[i].lat);
+              cctx.lineTo(pi.x, pi.y);
+            }
+            cctx.stroke();
+
+            // Track dashes
+            cctx.strokeStyle = 'rgba(6, 182, 212, 0.40)';
+            cctx.lineWidth = 1.5;
+            cctx.setLineDash([4, 3]);
+            cctx.beginPath();
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < transitRailOimachi.length; i++) {
+              const pi = projectTokyo(transitRailOimachi[i].lon, transitRailOimachi[i].lat);
+              cctx.lineTo(pi.x, pi.y);
+            }
+            cctx.stroke();
+            cctx.setLineDash([]);
+          }
+
+          // 8c. Walking Connectors
+          if (transitWalkOrigin && transitWalkOrigin.length > 1) {
+            cctx.strokeStyle = 'rgba(241, 245, 249, 0.22)';
+            cctx.lineWidth = 1.2;
+            cctx.setLineDash([2, 3]);
+            cctx.beginPath();
+            const p0 = projectTokyo(transitWalkOrigin[0].lon, transitWalkOrigin[0].lat);
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < transitWalkOrigin.length; i++) {
+              const pi = projectTokyo(transitWalkOrigin[i].lon, transitWalkOrigin[i].lat);
+              cctx.lineTo(pi.x, pi.y);
+            }
+            cctx.stroke();
+            cctx.setLineDash([]);
+          }
+
+          if (transitWalkDest && transitWalkDest.length > 1) {
+            cctx.strokeStyle = 'rgba(241, 245, 249, 0.22)';
+            cctx.lineWidth = 1.2;
+            cctx.setLineDash([2, 3]);
+            cctx.beginPath();
+            const p0 = projectTokyo(transitWalkDest[0].lon, transitWalkDest[0].lat);
+            cctx.moveTo(p0.x, p0.y);
+            for (let i = 1; i < transitWalkDest.length; i++) {
+              const pi = projectTokyo(transitWalkDest[i].lon, transitWalkDest[i].lat);
+              cctx.lineTo(pi.x, pi.y);
+            }
+            cctx.stroke();
+            cctx.setLineDash([]);
+          }
+        }
+
+        // 9. Soft Atmospheric Edge Vignette (Editorial radial falloff - eliminates cutoffs)
+        const cx = width * 0.5;
+        const cy = height * (isMobile ? 0.48 : 0.50);
+        const minR = Math.min(width, height) * 0.22;
+        const maxR = Math.min(width, height) * 0.50;
+        const vignetteGrad = cctx.createRadialGradient(cx, cy, minR, cx, cy, maxR);
+        vignetteGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+        vignetteGrad.addColorStop(0.60, 'rgba(0, 0, 0, 0.15)');
+        vignetteGrad.addColorStop(0.88, 'rgba(0, 0, 0, 0.85)');
+        vignetteGrad.addColorStop(1.0, 'rgba(0, 0, 0, 1.0)');
+
+        cctx.globalCompositeOperation = 'destination-out';
+        cctx.fillStyle = vignetteGrad;
+        cctx.fillRect(0, 0, width, height);
+        cctx.globalCompositeOperation = 'source-over';
+
+        cachedRoadsWidth = width;
+        cachedRoadsHeight = height;
+      }
+
+      // Subtle Geographic Watermarks (Strictly minimal editorial reference)
+      function drawAreaContextLabels(c, isMobile) {
+        c.save();
+        const mainFont = "500 " + (isMobile ? 8.5 : 9.5) + "px 'Inter', sans-serif";
+        const subFont = "500 " + (isMobile ? 7.0 : 8.0) + "px 'Inter', sans-serif";
+
+        // Kuji / Kawasaki
+        const kujiPt = projectTokyo(139.598, 35.617);
+        c.fillStyle = 'rgba(226, 232, 240, 0.45)';
+        c.font = mainFont;
+        c.textAlign = 'left';
+        c.fillText('KUJI', kujiPt.x, kujiPt.y);
+        c.fillStyle = 'rgba(148, 163, 184, 0.32)';
+        c.font = subFont;
+        c.fillText('KAWASAKI', kujiPt.x, kujiPt.y + 11);
+
+        // Ookayama / Tokyo
+        const ookaPt = projectTokyo(139.684, 35.6135);
+        c.fillStyle = 'rgba(226, 232, 240, 0.45)';
+        c.font = mainFont;
+        c.fillText('OOKAYAMA', ookaPt.x, ookaPt.y);
+        c.fillStyle = 'rgba(148, 163, 184, 0.32)';
+        c.font = subFont;
+        c.fillText('TOKYO', ookaPt.x, ookaPt.y + 11);
+
+        // Tama River
+        const tamaPt = projectTokyo(139.638, 35.6035);
+        c.save();
+        c.translate(tamaPt.x, tamaPt.y);
+        c.rotate(-0.55);
+        c.fillStyle = 'rgba(56, 189, 248, 0.30)';
+        c.font = "italic 500 " + (isMobile ? 7.5 : 8.5) + "px 'Inter', sans-serif";
+        c.textAlign = 'center';
+        c.fillText('TAMA RIVER', 0, -8);
+        c.restore();
+
+        c.restore();
+      }
+
+      // ======================================================================
+      // VECTOR VEHICLE DRAWING ROUTINES
+      // ======================================================================
+
+      // 1. Home / Residence Icon
+      function drawHomeIcon(x, y, scale = 1.0, color = '#fb923c') {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(scale, scale);
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.8;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-10, -1);
+        ctx.lineTo(0, -10);
+        ctx.lineTo(10, -1);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(5, -6);
+        ctx.lineTo(5, -11);
+        ctx.lineTo(8, -11);
+        ctx.lineTo(8, -3);
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(255, 170, 112, 0.18)';
+        ctx.beginPath();
+        ctx.moveTo(-8, 0);
+        ctx.lineTo(-8, 9);
+        ctx.lineTo(8, 9);
+        ctx.lineTo(8, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.roundRect(-2.5, 3.5, 5, 5.5, [1, 1, 0, 0]);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // 2. Stylized Bicycle Commuter (Physical wheel rotation, pedaling cadence, lean angle)
+      function drawBicycleCommuter(c, x, y, angle, tiltAngle, wheelRot, isResting, isMobile, themeColor = '#fb923c') {
+        c.save();
+        c.translate(x, y);
+
+        let drawAngle = angle;
+        let flipX = false;
+        if (Math.cos(angle) < 0) {
+          drawAngle = angle - Math.PI;
+          flipX = true;
+        }
+        c.rotate(drawAngle);
+        if (flipX) c.scale(-1, 1);
+        if (tiltAngle) c.rotate(tiltAngle);
+
+        const s = isMobile ? 0.95 : 1.12;
+        c.scale(s, s);
+
+        // Ground Aura
+        const auraR = isMobile ? 15 : 20;
+        const aura = c.createRadialGradient(0, -3, 1, 0, -3, auraR);
+        if (themeColor === '#38bdf8') {
+          aura.addColorStop(0, 'rgba(56, 189, 248, 0.20)');
+          aura.addColorStop(0.65, 'rgba(56, 189, 248, 0.05)');
+          aura.addColorStop(1, 'rgba(56, 189, 248, 0)');
+        } else {
+          aura.addColorStop(0, 'rgba(249, 115, 22, 0.20)');
+          aura.addColorStop(0.65, 'rgba(249, 115, 22, 0.05)');
+          aura.addColorStop(1, 'rgba(249, 115, 22, 0)');
+        }
+        c.fillStyle = aura;
+        c.beginPath();
+        c.arc(0, -3, auraR, 0, Math.PI * 2);
+        c.fill();
+
+        // Forward Headlight Beam
+        if (!isResting) {
+          const hGrad = c.createRadialGradient(8, 0, 1, 26, 0, 16);
+          hGrad.addColorStop(0, 'rgba(255, 245, 215, 0.40)');
+          hGrad.addColorStop(0.5, 'rgba(255, 225, 175, 0.12)');
+          hGrad.addColorStop(1, 'rgba(255, 225, 175, 0)');
+          c.fillStyle = hGrad;
+          c.beginPath();
+          c.moveTo(8, -1.5);
+          c.lineTo(28, -9);
+          c.lineTo(28, 9);
+          c.lineTo(8, 1.5);
+          c.closePath();
+          c.fill();
+        }
+
+        // Spoked Wheels
+        const wheelR = 6.2;
+        const rX = -8.5, rY = 2.5;
+        const fX = 8.5, fY = 2.5;
+
+        c.strokeStyle = '#94a3b8';
+        c.lineWidth = 1.2;
+        c.beginPath();
+        c.arc(rX, rY, wheelR, 0, Math.PI * 2);
+        c.arc(fX, fY, wheelR, 0, Math.PI * 2);
+        c.stroke();
+
+        c.strokeStyle = 'rgba(203, 213, 225, 0.55)';
+        c.lineWidth = 0.75;
+        c.beginPath();
+        for (let i = 0; i < 4; i++) {
+          const a = wheelRot + (i * Math.PI) / 2;
+          const cosA = Math.cos(a) * (wheelR - 0.5);
+          const sinA = Math.sin(a) * (wheelR - 0.5);
+          c.moveTo(rX - cosA, rY - sinA);
+          c.lineTo(rX + cosA, rY + sinA);
+          c.moveTo(fX - cosA, fY - sinA);
+          c.lineTo(fX + cosA, fY + sinA);
+        }
+        c.stroke();
+
+        c.fillStyle = themeColor;
+        c.beginPath();
+        c.arc(rX, rY, 1.2, 0, Math.PI * 2);
+        c.arc(fX, fY, 1.2, 0, Math.PI * 2);
+        c.fill();
+
+        // Bicycle Frame
+        const bbX = 0, bbY = 2.5;
+        const seatX = -3.0, seatY = -6.5;
+        const headX = 5.5, headY = -6.5;
+
+        c.strokeStyle = themeColor === '#38bdf8' ? 'rgba(56, 189, 248, 0.95)' : 'rgba(251, 146, 60, 0.98)';
+        c.lineWidth = 1.35;
+        c.lineCap = 'round';
+        c.lineJoin = 'round';
+        c.beginPath();
+        c.moveTo(bbX, bbY); c.lineTo(rX, rY);
+        c.moveTo(seatX, seatY); c.lineTo(rX, rY);
+        c.moveTo(bbX, bbY); c.lineTo(seatX, seatY);
+        c.moveTo(bbX, bbY); c.lineTo(headX, headY);
+        c.moveTo(seatX, seatY); c.lineTo(headX, headY);
+        c.moveTo(headX, headY); c.lineTo(fX, fY);
+        c.stroke();
+
+        // Saddle & Handlebars
+        c.strokeStyle = '#f8fafc';
+        c.lineWidth = 1.6;
+        c.beginPath();
+        c.moveTo(seatX - 2.5, seatY - 1.0);
+        c.lineTo(seatX + 1.8, seatY - 0.8);
+        c.stroke();
+
+        c.lineWidth = 1.4;
+        c.beginPath();
+        c.moveTo(headX, headY);
+        c.lineTo(headX + 1.2, headY - 2.5);
+        c.lineTo(headX + 2.8, headY - 1.8);
+        c.stroke();
+
+        // Cyclist Silhouette
+        const hipX = seatX, hipY = seatY - 1.5;
+        const shoulderX = 2.4, shoulderY = -12.5;
+
+        c.strokeStyle = '#ffffff';
+        c.lineWidth = 2.4;
+        c.beginPath();
+        c.moveTo(hipX, hipY);
+        c.lineTo(shoulderX, shoulderY);
+        c.stroke();
+
+        c.fillStyle = '#ffffff';
+        c.beginPath();
+        c.arc(shoulderX + 1.4, shoulderY - 3.2, 2.4, 0, Math.PI * 2);
+        c.fill();
+
+        c.strokeStyle = 'rgba(241, 245, 249, 0.90)';
+        c.lineWidth = 1.3;
+        c.beginPath();
+        c.moveTo(shoulderX, shoulderY + 0.5);
+        c.lineTo(headX + 2.2, headY - 2.0);
+        c.stroke();
+
+        // Pedaling Legs
+        const crankAngle = isResting ? (Math.PI * 0.5) : (wheelRot * 0.5);
+        const crankL = 2.5;
+        const pedalX = bbX + Math.cos(crankAngle) * crankL;
+        const pedalY = bbY + Math.sin(crankAngle) * crankL;
+        const kneeX = (hipX + pedalX) * 0.5 + 2.8;
+        const kneeY = (hipY + pedalY) * 0.5 - 1.8;
+
+        c.strokeStyle = themeColor === '#38bdf8' ? 'rgba(186, 230, 253, 0.95)' : 'rgba(255, 205, 150, 0.95)';
+        c.lineWidth = 1.5;
+        c.beginPath();
+        c.moveTo(hipX, hipY);
+        c.lineTo(kneeX, kneeY);
+        c.lineTo(pedalX, pedalY);
+        c.stroke();
+
+        c.restore();
+      }
+
+      // 3. Commuter Train EMU Silhouette (JR Nambu / Tokyu Oimachi)
+      function drawMetroTrain(c, x, y, angle, color = '#818cf8', isMoving = true, isMobile = false) {
+        c.save();
+        c.translate(x, y);
+        c.rotate(angle);
+
+        const s = isMobile ? 0.95 : 1.15;
+        c.scale(s, s);
+
+        // Ground Aura
+        const auraR = 18;
+        const aura = c.createRadialGradient(0, 0, 1, 0, 0, auraR);
+        if (color === '#06b6d4' || color === '#38bdf8') {
+          aura.addColorStop(0, 'rgba(6, 182, 212, 0.32)');
+          aura.addColorStop(0.6, 'rgba(6, 182, 212, 0.08)');
+          aura.addColorStop(1, 'rgba(6, 182, 212, 0)');
+        } else {
+          aura.addColorStop(0, 'rgba(129, 140, 248, 0.32)');
+          aura.addColorStop(0.6, 'rgba(129, 140, 248, 0.08)');
+          aura.addColorStop(1, 'rgba(129, 140, 248, 0)');
+        }
+        c.fillStyle = aura;
+        c.beginPath();
+        c.arc(0, 0, auraR, 0, Math.PI * 2);
+        c.fill();
+
+        // Forward Headlight Beam
+        if (isMoving) {
+          const hGrad = c.createRadialGradient(14, 0, 1, 34, 0, 14);
+          hGrad.addColorStop(0, 'rgba(255, 250, 225, 0.50)');
+          hGrad.addColorStop(0.5, 'rgba(255, 235, 180, 0.16)');
+          hGrad.addColorStop(1, 'rgba(255, 235, 180, 0)');
+          c.fillStyle = hGrad;
+          c.beginPath();
+          c.moveTo(14, -2.5);
+          c.lineTo(36, -9);
+          c.lineTo(36, 9);
+          c.lineTo(14, 2.5);
+          c.closePath();
+          c.fill();
+        }
+
+        // Train Car Chassis
+        const carL = 26;
+        const carW = 9.2;
+        const halfL = carL * 0.5;
+        const halfW = carW * 0.5;
+
+        c.fillStyle = '#cbd5e1';
+        c.strokeStyle = '#f8fafc';
+        c.lineWidth = 0.8;
+        c.beginPath();
+        c.roundRect(-halfL, -halfW, carL, carW, [2, 4.5, 4.5, 2]);
+        c.fill();
+        c.stroke();
+
+        // Line accent stripe
+        c.fillStyle = color;
+        c.fillRect(-halfL + 2, -halfW + 1.2, carL - 4, 1.8);
+        c.fillRect(-halfL + 2, halfW - 3.0, carL - 4, 1.8);
+
+        // Windshield
+        c.fillStyle = '#0f172a';
+        c.beginPath();
+        c.roundRect(halfL - 5.5, -halfW + 1.5, 4.5, carW - 3, [1, 3, 3, 1]);
+        c.fill();
+
+        c.strokeStyle = 'rgba(255, 255, 255, 0.65)';
+        c.lineWidth = 0.7;
+        c.beginPath();
+        c.moveTo(halfL - 4, -halfW + 2.5);
+        c.lineTo(halfL - 2, 0);
+        c.stroke();
+
+        // Passenger Windows
+        c.fillStyle = '#1e293b';
+        c.fillRect(-halfL + 4, -halfW + 2.0, 3.5, 1.6);
+        c.fillRect(-halfL + 9.5, -halfW + 2.0, 3.5, 1.6);
+        c.fillRect(-halfL + 15, -halfW + 2.0, 3.5, 1.6);
+        c.fillRect(-halfL + 4, halfW - 3.6, 3.5, 1.6);
+        c.fillRect(-halfL + 9.5, halfW - 3.6, 3.5, 1.6);
+        c.fillRect(-halfL + 15, halfW - 3.6, 3.5, 1.6);
+
+        // Rooftop AC Module
+        c.fillStyle = '#64748b';
+        c.fillRect(-4, -1.8, 8, 3.6);
+
+        c.restore();
+      }
+
+      // 4. Vector Airliner (From frozen 04.C)
+      function drawVectorAirliner(x, y, angle, altitudeNorm, isMobile, dissolutionAlpha = 1.0) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+
+        const baseScale = isMobile ? 0.65 : 0.85;
+        const altScale = baseScale * (0.65 + 0.35 * altitudeNorm);
+        ctx.scale(altScale, altScale);
+        ctx.globalAlpha = dissolutionAlpha;
+
+        // Shadow
+        if (altitudeNorm > 0.05) {
+          ctx.save();
+          const shadowOffsetX = 12 * altitudeNorm;
+          const shadowOffsetY = 16 * altitudeNorm;
+          ctx.translate(shadowOffsetX, shadowOffsetY);
+          ctx.scale(0.85, 0.85);
+          ctx.fillStyle = `rgba(3, 7, 18, ${0.45 * altitudeNorm})`;
+          ctx.beginPath();
+          ctx.moveTo(0, -16);
+          ctx.lineTo(16, 5);
+          ctx.lineTo(0, 14);
+          ctx.lineTo(-16, 5);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+        }
+
+        // Wings
+        ctx.fillStyle = '#e2e8f0';
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.0;
+        ctx.beginPath();
+        ctx.moveTo(0, -14);
+        ctx.lineTo(-1, -1);
+        ctx.lineTo(-17, 7);
+        ctx.lineTo(-17, 5);
+        ctx.lineTo(-2, -5);
+        ctx.lineTo(2, -5);
+        ctx.lineTo(17, 5);
+        ctx.lineTo(17, 7);
+        ctx.lineTo(1, -1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Winglets
+        ctx.fillStyle = '#fb923c';
+        ctx.fillRect(-18, 3, 2, 4);
+        ctx.fillRect(16, 3, 2, 4);
+
+        // Turbofans
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillRect(-7.5, 0, 3, 6);
+        ctx.fillRect(4.5, 0, 3, 6);
+
+        // Horizontal Stabilizers
+        ctx.fillStyle = '#cbd5e1';
+        ctx.beginPath();
+        ctx.moveTo(-1, 9);
+        ctx.lineTo(-8, 14);
+        ctx.lineTo(-8, 16);
+        ctx.lineTo(0, 13);
+        ctx.lineTo(8, 16);
+        ctx.lineTo(8, 14);
+        ctx.lineTo(1, 9);
+        ctx.closePath();
+        ctx.fill();
+
+        // Fuselage
+        ctx.fillStyle = '#f8fafc';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.lineWidth = 0.9;
+        ctx.beginPath();
+        ctx.moveTo(0, -16);
+        ctx.bezierCurveTo(2.8, -12, 3.2, 5, 2.0, 13);
+        ctx.lineTo(0, 16);
+        ctx.lineTo(-2.0, 13);
+        ctx.bezierCurveTo(-3.2, 5, -2.8, -12, 0, -16);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Windshield
+        ctx.fillStyle = '#0f172a';
+        ctx.beginPath();
+        ctx.moveTo(0, -13);
+        ctx.lineTo(1.8, -10.5);
+        ctx.lineTo(-1.8, -10.5);
+        ctx.closePath();
+        ctx.fill();
+
+        // Strobes
+        const flashPhase = (Date.now() % 1000) / 1000;
+        const strobeOn = flashPhase < 0.20;
+        ctx.fillStyle = strobeOn ? '#ef4444' : 'rgba(239, 68, 68, 0.3)';
+        ctx.beginPath();
+        ctx.arc(-17, 5.5, strobeOn ? 2.2 : 1.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = strobeOn ? '#10b981' : 'rgba(16, 185, 129, 0.3)';
+        ctx.beginPath();
+        ctx.arc(17, 5.5, strobeOn ? 2.2 : 1.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        const beaconPulse = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(Date.now() * 0.007));
+        ctx.fillStyle = `rgba(245, 158, 11, ${beaconPulse})`;
+        ctx.beginPath();
+        ctx.arc(0, -2, 2.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // 5. Dual Aerodynamic Contrails
+      function drawDualContrails(p0, p1, p2, uCurrent, altitudeNorm, isMobile) {
+        if (uCurrent <= 0.02 || altitudeNorm <= 0.05) return;
+        const maxContrailU = 0.28;
+        const uStart = Math.max(0.0, uCurrent - maxContrailU);
+        const steps = 36;
+        const engineOffset = (isMobile ? 0.95 : 1.20) * 6.0;
+
+        for (let side = -1; side <= 1; side += 2) {
+          ctx.beginPath();
+          for (let i = 0; i <= steps; i++) {
+            const uStep = uStart + (uCurrent - uStart) * (i / steps);
+            const pt = getBezierPoint(p0, p1, p2, uStep);
+            const tangent = getBezierTangent(p0, p1, p2, uStep);
+            const nx = -Math.sin(tangent);
+            const ny = Math.cos(tangent);
+            const ex = pt.x + side * nx * engineOffset;
+            const ey = pt.y + side * ny * engineOffset;
+            if (i === 0) ctx.moveTo(ex, ey);
+            else ctx.lineTo(ex, ey);
+          }
+          ctx.strokeStyle = `rgba(224, 242, 254, ${0.38 * altitudeNorm})`;
+          ctx.lineWidth = 1.25;
+          ctx.stroke();
+        }
+      }
+
+      // ======================================================================
+      // TRANSIT STATIONS DRAWING ROUTINE
+      // ======================================================================
+      function drawTransitStations(c, activeStationId, t, isMobile) {
+        transitStations.forEach(st => {
+          const pt = projectTokyo(st.lon, st.lat);
+          const isCurrent = (st.id === activeStationId);
+
+          c.save();
+          if (st.role === 'transfer_station') {
+            // Mizonokuchi Transfer Hub
+            c.fillStyle = 'rgba(15, 23, 42, 0.92)';
+            c.strokeStyle = 'rgba(165, 180, 252, 0.85)';
+            c.lineWidth = 1.2;
+            c.beginPath();
+            c.roundRect(pt.x - 10, pt.y - 5.5, 20, 11, 5.5);
+            c.fill();
+            c.stroke();
+
+            // JR Violet + Tokyu Cyan Dots
+            c.fillStyle = '#818cf8';
+            c.beginPath();
+            c.arc(pt.x - 4.5, pt.y, 2.3, 0, Math.PI * 2);
+            c.fill();
+
+            c.fillStyle = '#06b6d4';
+            c.beginPath();
+            c.arc(pt.x + 4.5, pt.y, 2.3, 0, Math.PI * 2);
+            c.fill();
+
+            c.fillStyle = isCurrent ? '#ffffff' : '#e2e8f0';
+            c.font = `600 ${isMobile ? 8.5 : 9.5}px 'Inter', sans-serif`;
+            c.textAlign = 'center';
+            c.textBaseline = 'top';
+            c.shadowColor = 'rgba(3, 5, 8, 0.95)';
+            c.shadowBlur = 4;
+            c.fillText('Mizonokuchi', pt.x, pt.y + 9);
+            c.shadowBlur = 0;
+
+          } else {
+            // Standard Station Waypoint
+            const isOrigin = (st.role === 'origin_station');
+            const isDest = (st.role === 'dest_station');
+            const themeColor = (st.line === 'JR Nambu Line') ? '#818cf8' : '#06b6d4';
+            const pulse = isCurrent ? (Math.sin(t * 5.0) + 1) * 0.5 : 0;
+
+            if (isCurrent) {
+              c.strokeStyle = themeColor === '#06b6d4' ? `rgba(6, 182, 212, ${0.4 + pulse * 0.4})` : `rgba(129, 140, 248, ${0.4 + pulse * 0.4})`;
+              c.lineWidth = 1.6;
+              c.beginPath();
+              c.arc(pt.x, pt.y, 7 + pulse * 4, 0, Math.PI * 2);
+              c.stroke();
+            }
+
+            c.fillStyle = 'rgba(15, 23, 42, 0.9)';
+            c.strokeStyle = themeColor;
+            c.lineWidth = 1.3;
+            c.beginPath();
+            c.arc(pt.x, pt.y, isOrigin || isDest ? 4.5 : 3.5, 0, Math.PI * 2);
+            c.fill();
+            c.stroke();
+
+            c.fillStyle = themeColor;
+            c.beginPath();
+            c.arc(pt.x, pt.y, isOrigin || isDest ? 2.2 : 1.6, 0, Math.PI * 2);
+            c.fill();
+
+            c.fillStyle = isCurrent ? '#ffffff' : 'rgba(226, 232, 240, 0.85)';
+            c.font = `500 ${isMobile ? 8.0 : 9.0}px 'Inter', sans-serif`;
+            c.shadowColor = 'rgba(3, 5, 8, 0.95)';
+            c.shadowBlur = 4;
+
+            if (st.id === 'kuji') {
+              c.textAlign = 'right';
+              c.textBaseline = 'middle';
+              c.fillText('Kuji', pt.x - 8, pt.y - 1);
+            } else if (st.id === 'tsudayama' && !isMobile) {
+              c.textAlign = 'left';
+              c.textBaseline = 'top';
+              c.fillText('Tsudayama', pt.x + 6, pt.y + 4);
+            } else if (st.id === 'futako_tamagawa') {
+              c.textAlign = 'center';
+              c.textBaseline = 'bottom';
+              c.fillText('Futako-Tamagawa', pt.x, pt.y - 7);
+            } else if (st.id === 'jiyugaoka') {
+              c.textAlign = 'center';
+              c.textBaseline = isMobile ? 'top' : 'bottom';
+              c.fillText('Jiyugaoka', pt.x, isMobile ? pt.y + 7 : pt.y - 7);
+            } else if (st.id === 'ookayama') {
+              c.textAlign = 'left';
+              c.textBaseline = isMobile ? 'top' : 'middle';
+              c.fillText('Ookayama', isMobile ? pt.x + 6 : pt.x + 8, isMobile ? pt.y + 6 : pt.y - 1);
+            }
+            c.shadowBlur = 0;
+          }
+          c.restore();
+        });
+      }
+
+      // Station-by-station progression helpers
+      function getNambuStationProgress(u) {
+        if (u < 0.38) {
+          const s = mapSegmentProgress(u, 0.0, 0.38, 0.0, 0.50);
+          return { s, isMoving: true, stationId: (u > 0.22 ? 'tsudayama' : 'kuji') };
+        } else if (u < 0.52) {
+          return { s: 0.50, isMoving: false, stationId: 'tsudayama' };
+        } else if (u < 0.94) {
+          const s = mapSegmentProgress(u, 0.52, 0.94, 0.50, 1.0);
+          return { s, isMoving: true, stationId: (u > 0.78 ? 'mizonokuchi' : 'tsudayama') };
+        } else {
+          return { s: 1.0, isMoving: false, stationId: 'mizonokuchi' };
+        }
+      }
+
+      function getOimachiStationProgress(u) {
+        if (u < 0.26) {
+          const s = mapSegmentProgress(u, 0.0, 0.26, 0.0, 0.275);
+          return { s, isMoving: true, stationId: (u > 0.16 ? 'futako_tamagawa' : 'mizonokuchi') };
+        } else if (u < 0.36) {
+          return { s: 0.275, isMoving: false, stationId: 'futako_tamagawa' };
+        } else if (u < 0.68) {
+          const s = mapSegmentProgress(u, 0.36, 0.68, 0.275, 0.80);
+          return { s, isMoving: true, stationId: (u > 0.54 ? 'jiyugaoka' : 'futako_tamagawa') };
+        } else if (u < 0.78) {
+          return { s: 0.80, isMoving: false, stationId: 'jiyugaoka' };
+        } else if (u < 0.95) {
+          const s = mapSegmentProgress(u, 0.78, 0.95, 0.80, 1.0);
+          return { s, isMoving: true, stationId: (u > 0.88 ? 'ookayama' : 'jiyugaoka') };
+        } else {
+          return { s: 1.0, isMoving: false, stationId: 'ookayama' };
+        }
+      }
+
+      // ======================================================================
+      // MAIN ANIMATION RENDER PIPELINE
+      // ======================================================================
+      function render(t) {
+        ctx.clearRect(0, 0, width, height);
+        const isMobile = width < 768;
+
+        // Origin & Destination in Approved F2 Editorial True-North Atlas (CGK -> HND)
+        const originPt = projectTrueNorthAtlas(CGK_LON, CGK_LAT);
+        const targetPt = projectTrueNorthAtlas(HND_LON, HND_LAT);
+        const mainCp = getControlPoint(originPt.x, originPt.y, targetPt.x, targetPt.y, 0.10);
+
+        // Metropolitan Commute Anchors
+        const placePt = projectTokyo(PLACE_LON, PLACE_LAT);
+        const univPt = projectTokyo(UNIV_LON, UNIV_LAT);
+
+        let currentBeatText = 'C · FLIGHT DEPARTURE';
+
+        // --------------------------------------------------------------------
+        // PHASE 1: INTERNATIONAL FLIGHT JOURNEY (t = 0.0s – 8.0s)
+        // --------------------------------------------------------------------
+        if (t <= T_BRIDGE_START) {
+          const uFlightTime = t / T_FLIGHT_END;
+          let uFlight = 0.0;
+          let altitudeNorm = 0.0;
+          let geoAlpha = 1.0;
+          let corridorAlpha = 0.70;
+
+          if (t < 0.8) {
+            currentBeatText = 'C0 · FLIGHT DEPARTURE';
+            uFlight = 0.0;
+            altitudeNorm = 0.0;
+          } else if (t < 2.4) {
+            currentBeatText = 'C1 · ASCENT & CLIMB';
+            const p = (t - 0.8) / 1.6;
+            uFlight = 0.22 * Math.pow(p, 1.8);
+            altitudeNorm = Math.min(1.0, p * 1.08);
+          } else if (t < 5.0) {
+            currentBeatText = 'C2 · RESONANT CRUISE';
+            const p = (t - 2.4) / 2.6;
+            uFlight = 0.22 + 0.46 * p;
+            altitudeNorm = 1.0;
+          } else if (t < 7.2) {
+            currentBeatText = 'C3 · TOKYO DESCENT';
+            const p = (t - 5.0) / 2.2;
+            const easeOut = 1 - Math.pow(1 - p, 2.2);
+            uFlight = 0.68 + 0.30 * easeOut;
+            altitudeNorm = Math.max(0.15, 1.0 - p * 0.85);
+            corridorAlpha = 0.70 - p * 0.35;
+          } else {
+            currentBeatText = 'C4 · TOKYO TOUCHDOWN';
+            uFlight = 1.0;
+            altitudeNorm = 0.0;
+            corridorAlpha = 0.22;
+          }
+
+          // 1. Editorial True-North Graticule Grid (meridians and parallels)
+          if (geoAlpha > 0.01) {
+            ctx.save();
+            ctx.strokeStyle = `rgba(148, 163, 184, ${0.07 * geoAlpha})`;
+            ctx.lineWidth = 0.65;
+
+            for (let lat = -10; lat <= 45; lat += 10) {
+              ctx.beginPath();
+              for (let lon = 95; lon <= 150; lon += 5) {
+                const pt = projectTrueNorthAtlas(lon, lat);
+                if (lon === 95) ctx.moveTo(pt.x, pt.y);
+                else ctx.lineTo(pt.x, pt.y);
+              }
+              ctx.stroke();
+            }
+
+            for (let lon = 100; lon <= 150; lon += 10) {
+              ctx.beginPath();
+              for (let lat = -10; lat <= 45; lat += 5) {
+                const pt = projectTrueNorthAtlas(lon, lat);
+                if (lat === -10) ctx.moveTo(pt.x, pt.y);
+                else ctx.lineTo(pt.x, pt.y);
+              }
+              ctx.stroke();
+            }
+            ctx.restore();
+          }
+
+          // 2. Undistorted Solid Charcoal Landmasses with Archipelago Accents
+          if (realCountriesData) {
+            ctx.save();
+            realCountriesData.forEach(country => {
+              const isOriginCountry = (country.name === 'Indonesia');
+              const isDestCountry = (country.name === 'Japan');
+              const isInterCountry = (country.name === 'Philippines' || country.name === 'Taiwan');
+
+              ctx.fillStyle = isOriginCountry ? 'rgba(251, 146, 60, 0.12)'
+                : isDestCountry ? 'rgba(56, 189, 248, 0.12)'
+                : isInterCountry ? 'rgba(30, 45, 72, 0.85)'
+                : 'rgba(24, 34, 54, 0.80)';
+
+              ctx.strokeStyle = isOriginCountry ? 'rgba(251, 146, 60, 0.55)'
+                : isDestCountry ? 'rgba(56, 189, 248, 0.55)'
+                : isInterCountry ? 'rgba(148, 163, 184, 0.38)'
+                : 'rgba(148, 163, 184, 0.28)';
+              ctx.lineWidth = 0.85;
+
+              const renderPolygon = (poly) => {
+                ctx.beginPath();
+                poly.forEach((ring) => {
+                  if (!ring || ring.length < 3) return;
+                  const p0 = projectTrueNorthAtlas(ring[0][0], ring[0][1]);
+                  ctx.moveTo(p0.x, p0.y);
+                  for (let i = 1; i < ring.length; i++) {
+                    const pi = projectTrueNorthAtlas(ring[i][0], ring[i][1]);
+                    ctx.lineTo(pi.x, pi.y);
+                  }
+                  ctx.closePath();
+                });
+                ctx.fill();
+                ctx.stroke();
+              };
+
+              if (country.type === 'Polygon') {
+                renderPolygon(country.coordinates);
+              } else if (country.type === 'MultiPolygon') {
+                country.coordinates.forEach(poly => renderPolygon(poly));
+              }
+            });
+            ctx.restore();
+          }
+
+          // 3. Great-Circle Flight Corridor & Waypoint Ticks
+          ctx.save();
+          const railOffset = isMobile ? 3.0 : 4.0;
+          const dx = targetPt.x - originPt.x;
+          const dy = targetPt.y - originPt.y;
+          const dist = Math.hypot(dx, dy) || 1;
+          const nx = -dy / dist;
+          const ny = dx / dist;
+
+          // Bilateral standing wave corridor fading out
+          ctx.strokeStyle = `rgba(56, 189, 248, ${corridorAlpha * 0.45})`;
+          ctx.lineWidth = 0.85;
+          ctx.beginPath();
+          ctx.moveTo(originPt.x - nx * railOffset, originPt.y - ny * railOffset);
+          ctx.quadraticCurveTo(mainCp.x - nx * railOffset, mainCp.y - ny * railOffset, targetPt.x - nx * railOffset, targetPt.y - ny * railOffset);
+          ctx.stroke();
+
+          ctx.strokeStyle = `rgba(251, 146, 60, ${corridorAlpha * 0.45})`;
+          ctx.lineWidth = 0.85;
+          ctx.beginPath();
+          ctx.moveTo(originPt.x + nx * railOffset, originPt.y + ny * railOffset);
+          ctx.quadraticCurveTo(mainCp.x + nx * railOffset, mainCp.y + ny * railOffset, targetPt.x + nx * railOffset, targetPt.y + ny * railOffset);
+          ctx.stroke();
+
+          // Authentic Great-Circle centerline
+          ctx.strokeStyle = `rgba(56, 189, 248, ${corridorAlpha * 0.60})`;
+          ctx.lineWidth = 1.3;
+          ctx.beginPath();
+          ctx.moveTo(originPt.x, originPt.y);
+          ctx.quadraticCurveTo(mainCp.x, mainCp.y, targetPt.x, targetPt.y);
+          ctx.stroke();
+
+          // Waypoint crossbar ticks
+          for (let uCross of [0.20, 0.45, 0.70]) {
+            const pt = getBezierPoint(originPt, mainCp, targetPt, uCross);
+            const tangent = getBezierTangent(originPt, mainCp, targetPt, uCross);
+            const gnx = -Math.sin(tangent);
+            const gny = Math.cos(tangent);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${corridorAlpha * 0.65})`;
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(pt.x - gnx * 5, pt.y - gny * 5);
+            ctx.lineTo(pt.x + gnx * 5, pt.y + gny * 5);
+            ctx.stroke();
+          }
+          ctx.restore();
+
+          // Jakarta Origin & Tokyo Destination Anchors
+          ctx.fillStyle = '#fb923c';
+          ctx.beginPath();
+          ctx.arc(originPt.x, originPt.y, 4.0, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#38bdf8';
+          ctx.beginPath();
+          ctx.arc(targetPt.x, targetPt.y, 4.0, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Contrails & Airliner
+          drawDualContrails(originPt, mainCp, targetPt, uFlight, altitudeNorm, isMobile);
+          const planePos = getBezierPoint(originPt, mainCp, targetPt, uFlight);
+          const planeAngle = getBezierTangent(originPt, mainCp, targetPt, uFlight) + Math.PI / 2;
+          drawVectorAirliner(planePos.x, planePos.y, planeAngle, altitudeNorm, isMobile, 1.0);
+        }
+
+        // --------------------------------------------------------------------
+        // PHASE 2: CONTINUOUS OPTICAL CAMERA DIVE & ORIGIN HANDOFF (t = 8.0s – 10.5s)
+        // --------------------------------------------------------------------
+        else if (t < T_BRIDGE_END) {
+          currentBeatText = 'BRIDGE · CONTINUOUS OPTICAL DIVE & RESIDENCE AWAKENING';
+          const sBridge = (t - T_BRIDGE_START) / (T_BRIDGE_END - T_BRIDGE_START);
+          // Smooth cubic ease-in-out
+          const easeBridge = sBridge < 0.5
+            ? 4 * sBridge * sBridge * sBridge
+            : 1 - Math.pow(-2 * sBridge + 2, 3) / 2;
+
+          // 1. Regional Layer: Continuous Optical Zoom centered into Tokyo (targetPt)
+          const regionalAlpha = Math.max(0.0, 1.0 - easeBridge * 1.35);
+          if (regionalAlpha > 0.01 && realCountriesData) {
+            ctx.save();
+            ctx.globalAlpha = regionalAlpha;
+            const zReg = 1.0 + easeBridge * 3.5;
+            ctx.translate(targetPt.x, targetPt.y);
+            ctx.scale(zReg, zReg);
+            ctx.translate(-targetPt.x, -targetPt.y);
+
+            // Regional landmasses expanding outward from Tokyo
+            realCountriesData.forEach(country => {
+              const isDestCountry = (country.name === 'Japan');
+              if (!isDestCountry && easeBridge > 0.45) return;
+
+              ctx.fillStyle = isDestCountry ? 'rgba(56, 189, 248, 0.12)' : 'rgba(24, 34, 54, 0.80)';
+              ctx.strokeStyle = isDestCountry ? 'rgba(56, 189, 248, 0.55)' : 'rgba(148, 163, 184, 0.28)';
+              ctx.lineWidth = 0.85 / zReg;
+
+              const renderPolygon = (poly) => {
+                ctx.beginPath();
+                poly.forEach((ring) => {
+                  if (!ring || ring.length < 3) return;
+                  const p0 = projectTrueNorthAtlas(ring[0][0], ring[0][1]);
+                  ctx.moveTo(p0.x, p0.y);
+                  for (let i = 1; i < ring.length; i++) {
+                    const pi = projectTrueNorthAtlas(ring[i][0], ring[i][1]);
+                    ctx.lineTo(pi.x, pi.y);
+                  }
+                  ctx.closePath();
+                });
+                ctx.fill();
+                ctx.stroke();
+              };
+
+              if (country.type === 'Polygon') {
+                renderPolygon(country.coordinates);
+              } else if (country.type === 'MultiPolygon') {
+                country.coordinates.forEach(poly => renderPolygon(poly));
+              }
+            });
+
+            // Flight Corridor fading
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.40 * (1 - easeBridge)})`;
+            ctx.lineWidth = 1.0 / zReg;
+            ctx.beginPath();
+            ctx.moveTo(originPt.x, originPt.y);
+            ctx.quadraticCurveTo(mainCp.x, mainCp.y, targetPt.x, targetPt.y);
+            ctx.stroke();
+
+            // Airliner touchdown settling
+            if (t < 8.6) {
+              const planeAlpha = Math.max(0.0, 1.0 - (t - 8.0) / 0.6);
+              const planeAngle = getBezierTangent(originPt, mainCp, targetPt, 1.0) + Math.PI / 2;
+              drawVectorAirliner(targetPt.x, targetPt.y, planeAngle, 0.0, isMobile, planeAlpha);
+            }
+            ctx.restore();
+          }
+
+          // 2. Commute Layer: Smoothly zooms into metropolitan Tokyo with unified spatial orientation
+          const scaleCommute = 0.60 + 0.40 * easeBridge;
+          const curAnchorX = targetPt.x + (univPt.x - targetPt.x) * easeBridge;
+          const curAnchorY = targetPt.y + (univPt.y - targetPt.y) * easeBridge;
+          const commuteAlpha = Math.min(1.0, easeBridge * 1.35);
+
+          if (commuteAlpha > 0.01) {
+            ctx.save();
+            ctx.translate(curAnchorX, curAnchorY);
+            ctx.scale(scaleCommute, scaleCommute);
+            ctx.translate(-univPt.x, -univPt.y);
+
+            // 2a. Roadbed & Waterway Network
+            if (!cachedRoadsCanvas || cachedRoadsWidth !== width || cachedRoadsHeight !== height) {
+              buildCachedRoadsCanvas();
+            }
+            if (cachedRoadsCanvas) {
+              ctx.save();
+              ctx.globalAlpha = commuteAlpha;
+              ctx.drawImage(cachedRoadsCanvas, 0, 0, width, height);
+              drawAreaContextLabels(ctx, isMobile);
+              ctx.restore();
+            }
+
+            // 2b. Luminous Touchdown Beacon Spark at Tokyo Tech
+            const sparkRadius = (6.0 + 8.0 * (1 - easeBridge)) / scaleCommute;
+            ctx.fillStyle = `rgba(56, 189, 248, ${0.55 * commuteAlpha})`;
+            ctx.beginPath();
+            ctx.arc(univPt.x, univPt.y, sparkRadius, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 2c. Connective Amber Thread: Traces from Tokyo Tech southwest across Tama River to Kuji
+            const threadProgress = clamp((t - 8.2) / 1.8, 0.0, 1.0);
+            if (threadProgress > 0.0) {
+              const curThreadX = univPt.x + (placePt.x - univPt.x) * threadProgress;
+              const curThreadY = univPt.y + (placePt.y - univPt.y) * threadProgress;
+              const threadMidX = (univPt.x + placePt.x) * 0.5;
+              const threadMidY = (univPt.y + placePt.y) * 0.5 - 20;
+
+              ctx.strokeStyle = `rgba(251, 146, 60, ${0.90 * commuteAlpha})`;
+              ctx.lineWidth = 2.0;
+              ctx.shadowColor = 'rgba(251, 146, 60, 0.5)';
+              ctx.shadowBlur = 6;
+              ctx.beginPath();
+              ctx.moveTo(univPt.x, univPt.y);
+              ctx.quadraticCurveTo(threadMidX, threadMidY, curThreadX, curThreadY);
+              ctx.stroke();
+              ctx.shadowBlur = 0;
+
+              // Traveling Energy Pulse
+              ctx.fillStyle = '#f8fafc';
+              ctx.beginPath();
+              ctx.arc(curThreadX, curThreadY, 3.2, 0, Math.PI * 2);
+              ctx.fill();
+            }
+
+            // 2d. Tokyo Tech Token
+            const tokenR = isMobile ? 9.5 : 11.5;
+            ctx.save();
+            ctx.globalAlpha = commuteAlpha;
+            ctx.fillStyle = 'rgba(10, 15, 26, 0.92)';
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.arc(univPt.x, univPt.y, tokenR, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            const crestSize = isMobile ? 12 : 14;
+            if (tokyoTechLogoImg.complete && tokyoTechLogoImg.naturalWidth > 0) {
+              ctx.drawImage(tokyoTechLogoImg, 38, 0, 125, 126, univPt.x - crestSize * 0.5, univPt.y - crestSize * 0.5, crestSize, crestSize);
+            } else {
+              ctx.fillStyle = '#38bdf8';
+              ctx.beginPath();
+              ctx.arc(univPt.x, univPt.y, 2.5, 0, Math.PI * 2);
+              ctx.fill();
+            }
+            ctx.restore();
+
+            // 2e. Kuji Residence Awakening (Begins as thread approaches at t = 9.4s)
+            const resAwakenAlpha = clamp((t - 9.4) / 0.8, 0.0, 1.0);
+            if (resAwakenAlpha > 0.05) {
+              ctx.save();
+              ctx.globalAlpha = resAwakenAlpha;
+              const pulse = (Math.sin(t * 5.0) + 1) * 0.5;
+              ctx.strokeStyle = `rgba(251, 146, 60, ${0.35 + pulse * 0.45 * resAwakenAlpha})`;
+              ctx.lineWidth = 1.2;
+              ctx.beginPath();
+              ctx.arc(placePt.x, placePt.y, tokenR + 4 + pulse * 3, 0, Math.PI * 2);
+              ctx.stroke();
+
+              ctx.fillStyle = 'rgba(10, 15, 26, 0.92)';
+              ctx.strokeStyle = '#fb923c';
+              ctx.lineWidth = 1.2;
+              ctx.beginPath();
+              ctx.arc(placePt.x, placePt.y, tokenR, 0, Math.PI * 2);
+              ctx.fill();
+              ctx.stroke();
+              drawHomeIcon(placePt.x, placePt.y - 0.5, isMobile ? 0.55 : 0.65, '#fb923c');
+              ctx.restore();
+            }
+
+            ctx.restore();
+          }
+        }
+
+        // --------------------------------------------------------------------
+        // PHASE 3: CYCLE 1 — BICYCLE COMMUTE ROUTINE (t = 10.5s – 18.8s)
+        // --------------------------------------------------------------------
+        else if (t < T_BIKE_END) {
+          // 0. Roadbed & Waterway Network
+          if (!cachedRoadsCanvas || cachedRoadsWidth !== width || cachedRoadsHeight !== height) {
+            buildCachedRoadsCanvas();
+          }
+          if (cachedRoadsCanvas) {
+            ctx.drawImage(cachedRoadsCanvas, 0, 0, width, height);
+          }
+          drawAreaContextLabels(ctx, isMobile);
+
+          const outScreen = COMMUTE_PATH.map(p => projectTokyo(p.lon, p.lat));
+          const retScreen = RETURN_PATH.map(p => projectTokyo(p.lon, p.lat));
+          const N_out = outScreen.length;
+          const N_ret = retScreen.length;
+
+          if (t < T_BIKE_DWELL) {
+            // Outbound Journey (10.5s – 14.5s)
+            currentBeatText = 'BIKE · OUTBOUND VIA NAKAHARA-KAIDO';
+            const u = (t - T_BIKE_START) / (T_BIKE_DWELL - T_BIKE_START);
+            const curExactIdx = u * (N_out - 1);
+            const activeIdx = Math.min(N_out - 1, Math.floor(curExactIdx));
+            const bike = getPathPointAndHeading(outScreen, curExactIdx);
+
+            // Active illuminated orange roadbed (strictly behind rear wheel)
+            ctx.strokeStyle = 'rgba(249, 115, 22, 0.96)';
+            ctx.lineWidth = 3.2;
+            ctx.shadowColor = 'rgba(249, 115, 22, 0.40)';
+            ctx.shadowBlur = 4;
+            ctx.beginPath();
+            ctx.moveTo(outScreen[0].x, outScreen[0].y);
+            for (let i = 1; i <= activeIdx; i++) ctx.lineTo(outScreen[i].x, outScreen[i].y);
+            ctx.lineTo(bike.x, bike.y);
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            const wheelRot = u * 48.0;
+            drawBicycleCommuter(ctx, bike.x, bike.y, bike.angle, bike.tilt, wheelRot, false, isMobile, '#fb923c');
+
+          } else if (t < T_BIKE_RETURN) {
+            // Campus Dwell (14.5s – 15.5s)
+            currentBeatText = 'BIKE · OOKAYAMA CAMPUS DWELL';
+            ctx.strokeStyle = 'rgba(249, 115, 22, 0.55)';
+            ctx.lineWidth = 2.4;
+            ctx.beginPath();
+            ctx.moveTo(outScreen[0].x, outScreen[0].y);
+            for (let i = 1; i < N_out; i++) ctx.lineTo(outScreen[i].x, outScreen[i].y);
+            ctx.stroke();
+
+            const endBike = getPathPointAndHeading(outScreen, N_out - 1);
+            drawBicycleCommuter(ctx, univPt.x - 3, univPt.y, endBike.angle, 0, 0, true, isMobile, '#38bdf8');
+
+            // Swallow Crest Ripple
+            const ripplePhase = (t - T_BIKE_DWELL) / (T_BIKE_RETURN - T_BIKE_DWELL);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.6 * (1 - ripplePhase)})`;
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.arc(univPt.x, univPt.y, 14 + ripplePhase * 22, 0, Math.PI * 2);
+            ctx.stroke();
+
+          } else {
+            // Return Journey (15.5s – 18.8s)
+            currentBeatText = 'BIKE · RETURN VIA TODOROKI-DORI';
+            const u = (t - T_BIKE_RETURN) / (T_BIKE_END - T_BIKE_RETURN);
+
+            // Outbound trace remains as memory
+            ctx.strokeStyle = 'rgba(249, 115, 22, 0.18)';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.moveTo(outScreen[0].x, outScreen[0].y);
+            for (let i = 1; i < N_out; i++) ctx.lineTo(outScreen[i].x, outScreen[i].y);
+            ctx.stroke();
+
+            const curExactIdx = u * (N_ret - 1);
+            const activeIdx = Math.min(N_ret - 1, Math.floor(curExactIdx));
+            const bike = getPathPointAndHeading(retScreen, curExactIdx);
+
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.95)';
+            ctx.lineWidth = 3.2;
+            ctx.shadowColor = 'rgba(56, 189, 248, 0.40)';
+            ctx.shadowBlur = 4;
+            ctx.beginPath();
+            ctx.moveTo(retScreen[0].x, retScreen[0].y);
+            for (let i = 1; i <= activeIdx; i++) ctx.lineTo(retScreen[i].x, retScreen[i].y);
+            ctx.lineTo(bike.x, bike.y);
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            const wheelRot = u * 48.0;
+            drawBicycleCommuter(ctx, bike.x, bike.y, bike.angle, bike.tilt, wheelRot, false, isMobile, '#38bdf8');
+          }
+
+          // Tokens
+          const tokenR = isMobile ? 9.5 : 11.5;
+          ctx.fillStyle = 'rgba(10, 15, 26, 0.92)';
+          ctx.strokeStyle = '#fb923c';
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.arc(placePt.x, placePt.y, tokenR, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          drawHomeIcon(placePt.x, placePt.y - 0.5, isMobile ? 0.55 : 0.65, '#fb923c');
+
+          ctx.strokeStyle = '#38bdf8';
+          ctx.beginPath();
+          ctx.arc(univPt.x, univPt.y, tokenR, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          const crestSize = isMobile ? 12 : 14;
+          if (tokyoTechLogoImg.complete && tokyoTechLogoImg.naturalWidth > 0) {
+            ctx.drawImage(tokyoTechLogoImg, 38, 0, 125, 126, univPt.x - crestSize * 0.5, univPt.y - crestSize * 0.5, crestSize, crestSize);
+          }
+        }
+
+        // --------------------------------------------------------------------
+        // PHASE 4: CYCLE 2 — COMMUTER RAIL ROUTINE (t = 18.8s – 28.5s)
+        // --------------------------------------------------------------------
+        else {
+          // 0. Roadbed & Waterway Network
+          if (!cachedRoadsCanvas || cachedRoadsWidth !== width || cachedRoadsHeight !== height) {
+            buildCachedRoadsCanvas();
+          }
+          if (cachedRoadsCanvas) {
+            ctx.drawImage(cachedRoadsCanvas, 0, 0, width, height);
+          }
+          drawAreaContextLabels(ctx, isMobile);
+
+          const walkOrigScreen = transitWalkOrigin.map(p => projectTokyo(p.lon, p.lat));
+          const nambuScreen = transitRailNambu.map(p => projectTokyo(p.lon, p.lat));
+          const oimachiScreen = transitRailOimachi.map(p => projectTokyo(p.lon, p.lat));
+          const walkDestScreen = transitWalkDest.map(p => projectTokyo(p.lon, p.lat));
+
+          const N_wOrig = walkOrigScreen.length;
+          const N_nambu = nambuScreen.length;
+          const N_oimachi = oimachiScreen.length;
+          const N_wDest = walkDestScreen.length;
+
+          let activeStationId = null;
+
+          if (t < T_TRAIN_NAMBU) {
+            // Leg 1: Walk to Kuji Station (18.8s – 20.2s)
+            currentBeatText = 'RAIL · WALK TO KUJI STATION';
+            const w = (t - T_TRAIN_START) / (T_TRAIN_NAMBU - T_TRAIN_START);
+            const curExactIdx = w * (N_wOrig - 1);
+            const activeIdx = Math.min(N_wOrig - 1, Math.floor(curExactIdx));
+            const walker = getPathPointAndHeading(walkOrigScreen, curExactIdx);
+
+            ctx.strokeStyle = 'rgba(241, 245, 249, 0.90)';
+            ctx.lineWidth = 2.2;
+            ctx.setLineDash([3, 3]);
+            ctx.beginPath();
+            ctx.moveTo(walkOrigScreen[0].x, walkOrigScreen[0].y);
+            for (let i = 1; i <= activeIdx; i++) ctx.lineTo(walkOrigScreen[i].x, walkOrigScreen[i].y);
+            ctx.lineTo(walker.x, walker.y);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#f8fafc';
+            ctx.beginPath();
+            ctx.arc(walker.x, walker.y, 3.0, 0, Math.PI * 2);
+            ctx.fill();
+
+            activeStationId = (w > 0.70) ? 'kuji' : null;
+
+          } else if (t < T_TRAIN_TRANSFER) {
+            // Leg 2: JR Nambu Line Train (20.2s – 22.8s)
+            currentBeatText = 'RAIL · JR NAMBU LINE (VIOLET)';
+            // Prior walk trace
+            ctx.strokeStyle = 'rgba(241, 245, 249, 0.35)';
+            ctx.lineWidth = 1.6;
+            ctx.setLineDash([2, 3]);
+            ctx.beginPath();
+            ctx.moveTo(walkOrigScreen[0].x, walkOrigScreen[0].y);
+            for (let i = 1; i < N_wOrig; i++) ctx.lineTo(walkOrigScreen[i].x, walkOrigScreen[i].y);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            const w = (t - T_TRAIN_NAMBU) / (T_TRAIN_TRANSFER - T_TRAIN_NAMBU);
+            const nambuMotion = getNambuStationProgress(w);
+            const curExactIdx = nambuMotion.s * (N_nambu - 1);
+            const activeIdx = Math.min(N_nambu - 1, Math.floor(curExactIdx));
+            const train = getPathPointAndHeading(nambuScreen, curExactIdx);
+
+            ctx.strokeStyle = 'rgba(129, 140, 248, 0.95)';
+            ctx.lineWidth = 3.2;
+            ctx.shadowColor = 'rgba(129, 140, 248, 0.45)';
+            ctx.shadowBlur = 4;
+            ctx.beginPath();
+            ctx.moveTo(nambuScreen[0].x, nambuScreen[0].y);
+            for (let i = 1; i <= activeIdx; i++) ctx.lineTo(nambuScreen[i].x, nambuScreen[i].y);
+            ctx.lineTo(train.x, train.y);
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            drawMetroTrain(ctx, train.x, train.y, train.angle, '#818cf8', nambuMotion.isMoving, isMobile);
+            activeStationId = nambuMotion.stationId;
+
+          } else if (t < T_TRAIN_OIMACHI) {
+            // Leg 3: Concourse Transfer at Mizonokuchi (22.8s – 24.0s)
+            currentBeatText = 'RAIL · MIZONOKUCHI CONCOURSE TRANSFER';
+            // Completed JR Nambu line
+            ctx.strokeStyle = 'rgba(129, 140, 248, 0.45)';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.moveTo(nambuScreen[0].x, nambuScreen[0].y);
+            for (let i = 1; i < N_nambu; i++) ctx.lineTo(nambuScreen[i].x, nambuScreen[i].y);
+            ctx.stroke();
+
+            const w = (t - T_TRAIN_TRANSFER) / (T_TRAIN_OIMACHI - T_TRAIN_TRANSFER);
+            const ptMizoJR = nambuScreen[N_nambu - 1];
+            const ptMizoTokyu = oimachiScreen[0];
+            const transX = ptMizoJR.x + (ptMizoTokyu.x - ptMizoJR.x) * w;
+            const transY = ptMizoJR.y + (ptMizoTokyu.y - ptMizoJR.y) * w;
+
+            ctx.strokeStyle = 'rgba(165, 180, 252, 0.85)';
+            ctx.lineWidth = 2.0;
+            ctx.setLineDash([2, 2]);
+            ctx.beginPath();
+            ctx.moveTo(ptMizoJR.x, ptMizoJR.y);
+            ctx.lineTo(transX, transY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#a5b4fc';
+            ctx.beginPath();
+            ctx.arc(transX, transY, 3.2, 0, Math.PI * 2);
+            ctx.fill();
+
+            activeStationId = 'mizonokuchi';
+
+          } else if (t < T_TRAIN_ARRIVAL) {
+            // Leg 4: Tokyu Oimachi Line Train across Tama River (24.0s – 27.2s)
+            currentBeatText = 'RAIL · TOKYU OIMACHI VIADUCT ACROSS TAMA RIVER (CYAN)';
+            // JR Nambu line memory trace
+            ctx.strokeStyle = 'rgba(129, 140, 248, 0.35)';
+            ctx.lineWidth = 2.0;
+            ctx.beginPath();
+            ctx.moveTo(nambuScreen[0].x, nambuScreen[0].y);
+            for (let i = 1; i < N_nambu; i++) ctx.lineTo(nambuScreen[i].x, nambuScreen[i].y);
+            ctx.stroke();
+
+            const w = (t - T_TRAIN_OIMACHI) / (T_TRAIN_ARRIVAL - T_TRAIN_OIMACHI);
+            const oimachiMotion = getOimachiStationProgress(w);
+            const curExactIdx = oimachiMotion.s * (N_oimachi - 1);
+            const activeIdx = Math.min(N_oimachi - 1, Math.floor(curExactIdx));
+            const train = getPathPointAndHeading(oimachiScreen, curExactIdx);
+
+            ctx.strokeStyle = 'rgba(6, 182, 212, 0.95)';
+            ctx.lineWidth = 3.2;
+            ctx.shadowColor = 'rgba(6, 182, 212, 0.45)';
+            ctx.shadowBlur = 4;
+            ctx.beginPath();
+            ctx.moveTo(oimachiScreen[0].x, oimachiScreen[0].y);
+            for (let i = 1; i <= activeIdx; i++) ctx.lineTo(oimachiScreen[i].x, oimachiScreen[i].y);
+            ctx.lineTo(train.x, train.y);
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            drawMetroTrain(ctx, train.x, train.y, train.angle, '#06b6d4', oimachiMotion.isMoving, isMobile);
+            activeStationId = oimachiMotion.stationId;
+
+          } else {
+            // Leg 5: Walk from Ookayama Station to Main Gate (27.2s – 28.5s)
+            currentBeatText = 'RAIL · ARRIVAL AT TOKYO TECH MAIN GATE';
+            ctx.strokeStyle = 'rgba(6, 182, 212, 0.45)';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.moveTo(oimachiScreen[0].x, oimachiScreen[0].y);
+            for (let i = 1; i < N_oimachi; i++) ctx.lineTo(oimachiScreen[i].x, oimachiScreen[i].y);
+            ctx.stroke();
+
+            const w = (t - T_TRAIN_ARRIVAL) / (TOTAL_DURATION - T_TRAIN_ARRIVAL);
+            const curExactIdx = w * (N_wDest - 1);
+            const activeIdx = Math.min(N_wDest - 1, Math.floor(curExactIdx));
+            const walker = getPathPointAndHeading(walkDestScreen, curExactIdx);
+
+            ctx.strokeStyle = 'rgba(241, 245, 249, 0.90)';
+            ctx.lineWidth = 2.2;
+            ctx.setLineDash([3, 3]);
+            ctx.beginPath();
+            ctx.moveTo(walkDestScreen[0].x, walkDestScreen[0].y);
+            for (let i = 1; i <= activeIdx; i++) ctx.lineTo(walkDestScreen[i].x, walkDestScreen[i].y);
+            ctx.lineTo(walker.x, walker.y);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#38bdf8';
+            ctx.beginPath();
+            ctx.arc(walker.x, walker.y, 3.2, 0, Math.PI * 2);
+            ctx.fill();
+
+            const ptTrainEnd = oimachiScreen[N_oimachi - 1];
+            const headingEnd = getPathPointAndHeading(oimachiScreen, N_oimachi - 1);
+            drawMetroTrain(ctx, ptTrainEnd.x, ptTrainEnd.y, headingEnd.angle, '#06b6d4', false, isMobile);
+            activeStationId = 'ookayama';
+          }
+
+          drawTransitStations(ctx, activeStationId, t, isMobile);
+
+          // Tokens
+          const tokenR = isMobile ? 9.5 : 11.5;
+          ctx.fillStyle = 'rgba(10, 15, 26, 0.92)';
+          ctx.strokeStyle = '#fb923c';
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.arc(placePt.x, placePt.y, tokenR, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          drawHomeIcon(placePt.x, placePt.y - 0.5, isMobile ? 0.55 : 0.65, '#fb923c');
+
+          ctx.strokeStyle = '#38bdf8';
+          ctx.beginPath();
+          ctx.arc(univPt.x, univPt.y, tokenR, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          const crestSize = isMobile ? 12 : 14;
+          if (tokyoTechLogoImg.complete && tokyoTechLogoImg.naturalWidth > 0) {
+            ctx.drawImage(tokyoTechLogoImg, 38, 0, 125, 126, univPt.x - crestSize * 0.5, univPt.y - crestSize * 0.5, crestSize, crestSize);
+          }
+        }
+
+        // Update Review UI HUD
+        beatLabel.textContent = currentBeatText;
+        timeSlider.value = t.toFixed(2);
+        timeDisplay.textContent = `${t.toFixed(2)}s / ${TOTAL_DURATION.toFixed(2)}s`;
+
+        beatBtns.forEach(btn => {
+          const bt = parseFloat(btn.dataset.t);
+          if (Math.abs(t - bt) < 0.6) btn.classList.add('is-active');
+          else btn.classList.remove('is-active');
+        });
+      }
+
+      // Animation Tick Loop
+      function tick(now) {
+        if (!lastTimestamp) lastTimestamp = now;
+        const delta = (now - lastTimestamp) / 1000;
+        lastTimestamp = now;
+
+        if (isPlaying) {
+          currentTime += delta * playSpeed;
+          if (currentMode === 'bike' && currentTime > T_BIKE_END) {
+            currentTime = T_BIKE_START;
+          } else if (currentMode === 'train' && currentTime > TOTAL_DURATION) {
+            currentTime = T_TRAIN_START;
+          } else if (currentTime > TOTAL_DURATION) {
+            currentTime = 0.0;
+          }
+        }
+
+        render(currentTime);
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      // Expose Automation API for CDP verification
+      window.scene04DIntegration = {
+        seek: function (t) {
+          currentTime = clamp(t, 0, TOTAL_DURATION);
+          isPlaying = false;
+          updatePlayPauseUI();
+          render(currentTime);
+        },
+        play: function () {
+          isPlaying = true;
+          lastTimestamp = null;
+          updatePlayPauseUI();
+        },
+        pause: function () {
+          isPlaying = false;
+          updatePlayPauseUI();
+        },
+        getCurrentTime: function () {
+          return currentTime;
+        },
+        setSpeed: function (s) {
+          playSpeed = s;
+        },
+        setMode: function (m) {
+          currentMode = m;
+        }
+      };
+      window.scene04DController = window.scene04DIntegration;
+
+    })();
+  </script>
+</body>
+</html>

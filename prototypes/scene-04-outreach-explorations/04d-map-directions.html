@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scene 04.D — Map Visual Language Directions (Flight & Commute)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #030712;
+      --bg-surface: #0a0f1d;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(56, 189, 248, 0.45);
+      --text-main: #f3f4f6;
+      --text-muted: #94a3b8;
+      --accent-amber: #fb923c;
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #818cf8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sky-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .study-toolbar {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 15, 29, 0.92);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      max-width: 95vw;
+    }
+
+    .toolbar-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--accent-cyan);
+      padding-right: 10px;
+      border-right: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-toggle {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .btn-toggle:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-toggle.is-active {
+      background: rgba(56, 189, 248, 0.14);
+      border-color: var(--border-active);
+      color: var(--accent-cyan);
+    }
+
+    .btn-toggle.is-active-amber {
+      background: rgba(251, 146, 60, 0.14);
+      border-color: rgba(251, 146, 60, 0.45);
+      color: var(--accent-amber);
+    }
+
+    .divider {
+      width: 1px;
+      height: 16px;
+      background: var(--border-subtle);
+      margin: 0 4px;
+    }
+
+    .stage-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .dossier-card {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      z-index: 25;
+      background: rgba(10, 15, 29, 0.94);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px 18px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75);
+      max-width: 440px;
+      transition: all 0.25s ease;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .dossier-card.is-minimized {
+      transform: translateY(calc(100% - 38px));
+      opacity: 0.85;
+    }
+
+    .dossier-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 8px;
+    }
+
+    .dossier-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--accent-cyan);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .dossier-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .dossier-thesis {
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    .dossier-desc {
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .dossier-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .dossier-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: #cbd5e1;
+    }
+
+    .split-indicator {
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      pointer-events: none;
+    }
+
+    .split-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(10, 15, 29, 0.85);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(8px);
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .toolbar-title { display: none; }
+      .study-toolbar { top: 10px; padding: 4px 8px; }
+      .btn-toggle { font-size: 10px; padding: 3px 7px; }
+      .dossier-card {
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        max-width: none;
+        padding: 10px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <svg class="sky-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="120" cy="80" r="1.2" fill="#ffffff" opacity="0.65"/>
+    <circle cx="280" cy="140" r="0.9" fill="#fdf4dc" opacity="0.45"/>
+    <circle cx="450" cy="90" r="1.4" fill="#fffaf0" opacity="0.7"/>
+    <circle cx="780" cy="70" r="1.0" fill="#eaf0f8" opacity="0.5"/>
+    <circle cx="1040" cy="110" r="1.3" fill="#ffe8d0" opacity="0.6"/>
+    <circle cx="1320" cy="85" r="1.1" fill="#ffffff" opacity="0.55"/>
+    <circle cx="90" cy="320" r="0.9" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="180" cy="540" r="1.1" fill="#ffe4cc" opacity="0.5"/>
+    <circle cx="1350" cy="380" r="1.2" fill="#fffaf0" opacity="0.6"/>
+    <circle cx="1260" cy="620" r="1.0" fill="#ffffff" opacity="0.45"/>
+  </svg>
+
+  <header class="study-toolbar" role="region" aria-label="Scene 04.D Map Direction Selection">
+    <span class="toolbar-title">04.D Map Directions</span>
+    <div class="nav-group" aria-label="Category Selection">
+      <button type="button" class="btn-toggle is-active" id="btn-cat-flight" data-category="flight">✈ Flight Map</button>
+      <button type="button" class="btn-toggle" id="btn-cat-commute" data-category="commute">🚲 Commute Map</button>
+    </div>
+    <div class="divider"></div>
+    <div class="nav-group" id="direction-group" aria-label="Direction Selection"></div>
+    <div class="divider"></div>
+    <div class="nav-group" aria-label="Layout Selection">
+      <button type="button" class="btn-toggle is-active" id="btn-view-single">Single</button>
+      <button type="button" class="btn-toggle" id="btn-view-split">⇄ Side-by-Side</button>
+    </div>
+  </header>
+
+  <div class="split-indicator" id="split-indicator">
+    <span class="split-badge" id="split-badge-left">Direction 1</span>
+    <span class="split-badge" id="split-badge-right">Direction 2</span>
+  </div>
+
+  <main class="stage-container" id="stage-container">
+    <canvas id="map-canvas" role="img" aria-label="Cartographic visual language comparison canvas for Scene 04.D"></canvas>
+  </main>
+
+  <aside class="dossier-card" id="dossier-card" role="complementary" aria-label="Design Rationale">
+    <div class="dossier-header" id="dossier-header">
+      <span class="dossier-title" id="dossier-subtitle">DIRECTION F1 · CONFORMAL OBLIQUE CORRIDOR</span>
+      <button type="button" class="dossier-toggle-btn" id="dossier-toggle" aria-label="Toggle Dossier">▼</button>
+    </div>
+    <div class="dossier-body" id="dossier-body">
+      <div class="dossier-thesis" id="dossier-thesis">True physical landmass shapes aligned seamlessly along the bilateral flight diagonal.</div>
+      <p class="dossier-desc" id="dossier-desc">Eliminates the previous 2.22x horizontal distortion by using an isotropic similarity transform. Japan, Taiwan, and the Philippines retain their true geographical proportions while preserving the airliner route.</p>
+      <div class="dossier-tags" id="dossier-tags">
+        <span class="dossier-tag">Isotropic Scale</span>
+        <span class="dossier-tag">Zero Squish</span>
+        <span class="dossier-tag">Solid Charcoal Fills</span>
+        <span class="dossier-tag">Subtle Bathymetry</span>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const canvas = document.getElementById('map-canvas');
+      const ctx = canvas.getContext('2d');
+
+      let currentCategory = 'flight';
+      let currentDirection = 'F1';
+      let isSplitView = false;
+
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      let realCountriesData = null;
+      let tokyoRoadsData = null;
+      let tokyoBoundariesData = null;
+      let tokyoTransitData = null;
+
+      const DEG2RAD = Math.PI / 180;
+      const CGK_LON = 106.8456, CGK_LAT = -6.2088;
+      const HND_LON = 139.7671, HND_LAT = 35.6895;
+      const PLACE_LON = 139.598002, PLACE_LAT = 35.612519;
+      const UNIV_LON = 139.682898, UNIV_LAT = 35.606003;
+
+      async function loadAllDatasets() {
+        try {
+          const [countries, roads, boundaries, transit] = await Promise.all([
+            fetch('assets/real-earth-countries.json').then(r => r.ok ? r.json() : null),
+            fetch('assets/tokyo-commute-roads.json').then(r => r.ok ? r.json() : null),
+            fetch('assets/tokyo-commute-boundaries.json').then(r => r.ok ? r.json() : null),
+            fetch('assets/tokyo-transit-routes.json').then(r => r.ok ? r.json() : null)
+          ]);
+          realCountriesData = countries;
+          tokyoRoadsData = roads;
+          tokyoBoundariesData = boundaries;
+          tokyoTransitData = transit;
+          requestRender();
+        } catch (e) {
+          console.error('Error loading cartographic datasets', e);
+        }
+      }
+      loadAllDatasets();
+
+      function resize() {
+        const container = document.getElementById('stage-container') || document.body;
+        width = container.clientWidth || window.innerWidth;
+        height = container.clientHeight || window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        requestRender();
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      function toMercator(lon, lat) {
+        const x = lon * DEG2RAD;
+        const sinLat = Math.sin(lat * DEG2RAD);
+        const clampedSin = Math.max(-0.9999, Math.min(0.9999, sinLat));
+        const y = Math.log((1 + clampedSin) / (1 - clampedSin)) * 0.5;
+        return { x, y };
+      }
+
+      function projectObliqueCorridor(lon, lat, viewport) {
+        const isMobile = viewport.w < 768;
+        const ox = viewport.x + viewport.w * (isMobile ? 0.20 : 0.18);
+        const oy = viewport.y + viewport.h * (isMobile ? 0.82 : 0.78);
+        const tx = viewport.x + viewport.w * (isMobile ? 0.80 : 0.76);
+        const ty = viewport.y + viewport.h * (isMobile ? 0.22 : 0.25);
+
+        const mCGK = toMercator(CGK_LON, CGK_LAT);
+        const mHND = toMercator(HND_LON, HND_LAT);
+        const mPt = toMercator(lon, lat);
+
+        const dmx = mHND.x - mCGK.x;
+        const dmy = mHND.y - mCGK.y;
+        const mercDist = Math.hypot(dmx, dmy);
+        const mercAngle = Math.atan2(dmy, dmx);
+
+        const sdx = tx - ox;
+        const sdy = ty - oy;
+        const screenDist = Math.hypot(sdx, sdy);
+        const screenAngle = Math.atan2(sdy, sdx);
+
+        const scale = screenDist / mercDist;
+        const rotAngle = screenAngle - mercAngle;
+
+        const rx = (mPt.x - mCGK.x) * scale;
+        const ry = (mPt.y - mCGK.y) * scale;
+
+        const cosR = Math.cos(rotAngle);
+        const sinR = Math.sin(rotAngle);
+
+        return {
+          x: ox + (rx * cosR - ry * sinR),
+          y: oy + (rx * sinR + ry * cosR)
+        };
+      }
+
+      function projectTrueNorthAtlas(lon, lat, viewport) {
+        const isMobile = viewport.w < 768;
+        const centerLon = 124.0;
+        const centerLat = 15.0;
+        const mCenter = toMercator(centerLon, centerLat);
+
+        const mPt = toMercator(lon, lat);
+        const scale = isMobile ? (viewport.h * 0.95) : (viewport.h * 1.05);
+
+        const cx = viewport.x + viewport.w * 0.50;
+        const cy = viewport.y + viewport.h * 0.52;
+
+        return {
+          x: cx + (mPt.x - mCenter.x) * scale,
+          y: cy - (mPt.y - mCenter.y) * scale
+        };
+      }
+
+      function getTokyoMercatorParams(viewport) {
+        const isMobile = viewport.w < 768;
+        const centerLon = 139.6405;
+        const centerLat = 35.5985;
+        const zoom = isMobile ? 12.2 : 13.4;
+        const s = 256 * Math.pow(2, zoom);
+
+        function lonToWorldX(lon) { return ((lon + 180) / 360) * s; }
+        function latToWorldY(lat) {
+          const sinLat = Math.sin(lat * DEG2RAD);
+          const clampedSin = Math.max(-0.9999, Math.min(0.9999, sinLat));
+          const rad = Math.log((1 + clampedSin) / (1 - clampedSin));
+          return (0.5 - rad / (4 * Math.PI)) * s;
+        }
+
+        const centerWorldX = lonToWorldX(centerLon);
+        const centerWorldY = latToWorldY(centerLat);
+        const originX = viewport.x + viewport.w * 0.5 - centerWorldX;
+        const originY = viewport.y + viewport.h * (isMobile ? 0.48 : 0.50) - centerWorldY;
+
+        return { originX, originY, lonToWorldX, latToWorldY };
+      }
+
+      function projectTokyo(lon, lat, viewport) {
+        const { originX, originY, lonToWorldX, latToWorldY } = getTokyoMercatorParams(viewport);
+        return {
+          x: originX + lonToWorldX(lon),
+          y: originY + latToWorldY(lat)
+        };
+      }
+
+      function getControlPoint(x1, y1, x2, y2, bowFactor = 0.08) {
+        const mx = (x1 + x2) * 0.5;
+        const my = (y1 + y2) * 0.5;
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const len = Math.hypot(dx, dy) || 1;
+        const nx = -dy / len;
+        const ny = dx / len;
+        return { x: mx + nx * len * bowFactor, y: my + ny * len * bowFactor };
+      }
+
+      function getBezierPoint(p0, p1, p2, t) {
+        const mt = 1 - t;
+        return {
+          x: mt * mt * p0.x + 2 * mt * t * p1.x + t * t * p2.x,
+          y: mt * mt * p0.y + 2 * mt * t * p1.y + t * t * p2.y
+        };
+      }
+
+      function getBezierTangent(p0, p1, p2, t) {
+        const mt = 1 - t;
+        const dx = 2 * mt * (p1.x - p0.x) + 2 * t * (p2.x - p1.x);
+        const dy = 2 * mt * (p1.y - p0.y) + 2 * t * (p2.y - p1.y);
+        return Math.atan2(dy, dx);
+      }
+
+      function drawVectorAirliner(c, x, y, heading, scale = 1.0) {
+        c.save();
+        c.translate(x, y);
+        c.rotate(heading);
+        c.scale(scale, scale);
+
+        c.fillStyle = 'rgba(0, 0, 0, 0.45)';
+        c.beginPath();
+        c.ellipse(2, 6, 12, 4, 0, 0, Math.PI * 2);
+        c.fill();
+
+        c.fillStyle = '#e2e8f0';
+        c.strokeStyle = '#94a3b8';
+        c.lineWidth = 0.7;
+        c.beginPath();
+        c.moveTo(0, -6);
+        c.lineTo(19, 6);
+        c.lineTo(19, 8);
+        c.lineTo(4, 2);
+        c.lineTo(3, 11);
+        c.lineTo(8, 14);
+        c.lineTo(8, 15.5);
+        c.lineTo(0, 14.5);
+        c.lineTo(-8, 15.5);
+        c.lineTo(-8, 14);
+        c.lineTo(-3, 11);
+        c.lineTo(-4, 2);
+        c.lineTo(-19, 8);
+        c.lineTo(-19, 6);
+        c.closePath();
+        c.fill();
+        c.stroke();
+
+        c.fillStyle = '#f8fafc';
+        c.strokeStyle = '#64748b';
+        c.lineWidth = 0.8;
+        c.beginPath();
+        c.moveTo(0, -16);
+        c.bezierCurveTo(2.8, -12, 3.2, 5, 2.0, 13);
+        c.lineTo(0, 16);
+        c.lineTo(-2.0, 13);
+        c.bezierCurveTo(-3.2, 5, -2.8, -12, 0, -16);
+        c.closePath();
+        c.fill();
+        c.stroke();
+
+        c.fillStyle = '#0f172a';
+        c.beginPath();
+        c.moveTo(0, -13);
+        c.lineTo(1.8, -10.5);
+        c.lineTo(-1.8, -10.5);
+        c.closePath();
+        c.fill();
+
+        c.fillStyle = '#ef4444';
+        c.beginPath();
+        c.arc(-19, 6.5, 1.8, 0, Math.PI * 2);
+        c.fill();
+
+        c.fillStyle = '#10b981';
+        c.beginPath();
+        c.arc(19, 6.5, 1.8, 0, Math.PI * 2);
+        c.fill();
+
+        c.fillStyle = '#f59e0b';
+        c.beginPath();
+        c.arc(0, -2, 2.0, 0, Math.PI * 2);
+        c.fill();
+
+        c.restore();
+      }
+
+      function drawContrailLines(c, p0, p1, p2, uCurrent, offset = 6.0) {
+        if (uCurrent <= 0.05) return;
+        const uStart = Math.max(0.0, uCurrent - 0.35);
+        const steps = 30;
+
+        for (let side of [-1, 1]) {
+          c.beginPath();
+          for (let i = 0; i <= steps; i++) {
+            const u = uStart + (uCurrent - uStart) * (i / steps);
+            const pt = getBezierPoint(p0, p1, p2, u);
+            const tangent = getBezierTangent(p0, p1, p2, u);
+            const nx = -Math.sin(tangent);
+            const ny = Math.cos(tangent);
+            const ex = pt.x + side * nx * offset;
+            const ey = pt.y + side * ny * offset;
+            if (i === 0) c.moveTo(ex, ey);
+            else c.lineTo(ex, ey);
+          }
+          c.strokeStyle = 'rgba(224, 242, 254, 0.32)';
+          c.lineWidth = 1.2;
+          c.stroke();
+        }
+      }
+
+      function renderFlightF1(c, viewport) {
+        const isMobile = viewport.w < 768;
+        const originPt = projectObliqueCorridor(CGK_LON, CGK_LAT, viewport);
+        const targetPt = projectObliqueCorridor(HND_LON, HND_LAT, viewport);
+        const cp = getControlPoint(originPt.x, originPt.y, targetPt.x, targetPt.y, 0.05);
+
+        c.save();
+        for (let rKm = 1500; rKm <= 5500; rKm += 1200) {
+          const rPx = (rKm / 5800) * Math.hypot(targetPt.x - originPt.x, targetPt.y - originPt.y);
+          c.strokeStyle = 'rgba(56, 189, 248, 0.04)';
+          c.lineWidth = 0.8;
+          c.setLineDash([3, 6]);
+          c.beginPath();
+          c.arc(originPt.x, originPt.y, rPx, -Math.PI * 0.45, Math.PI * 0.15);
+          c.stroke();
+        }
+        c.restore();
+
+        if (realCountriesData) {
+          c.save();
+          realCountriesData.forEach(country => {
+            const isOriginCountry = (country.name === 'Indonesia');
+            const isDestCountry = (country.name === 'Japan');
+
+            c.fillStyle = isOriginCountry ? 'rgba(30, 24, 18, 0.75)'
+                        : isDestCountry ? 'rgba(12, 28, 44, 0.75)'
+                        : 'rgba(15, 23, 42, 0.60)';
+
+            c.strokeStyle = isOriginCountry ? 'rgba(251, 146, 60, 0.40)'
+                          : isDestCountry ? 'rgba(56, 189, 248, 0.45)'
+                          : 'rgba(148, 163, 184, 0.24)';
+            c.lineWidth = 0.85;
+
+            const renderPolygon = (poly) => {
+              c.beginPath();
+              poly.forEach((ring) => {
+                if (!ring || ring.length < 3) return;
+                const p0 = projectObliqueCorridor(ring[0][0], ring[0][1], viewport);
+                c.moveTo(p0.x, p0.y);
+                for (let i = 1; i < ring.length; i++) {
+                  const pi = projectObliqueCorridor(ring[i][0], ring[i][1], viewport);
+                  c.lineTo(pi.x, pi.y);
+                }
+                c.closePath();
+              });
+              c.fill();
+              c.stroke();
+            };
+
+            if (country.type === 'Polygon') {
+              renderPolygon(country.coordinates);
+            } else if (country.type === 'MultiPolygon') {
+              country.coordinates.forEach(poly => renderPolygon(poly));
+            }
+          });
+          c.restore();
+        }
+
+        c.save();
+        const railOffset = isMobile ? 3.2 : 4.0;
+        const dx = targetPt.x - originPt.x;
+        const dy = targetPt.y - originPt.y;
+        const dist = Math.hypot(dx, dy);
+        const nx = -dy / dist;
+        const ny = dx / dist;
+
+        c.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+        c.lineWidth = 1.0;
+        for (let side of [-1, 1]) {
+          c.beginPath();
+          c.moveTo(originPt.x + side * nx * railOffset, originPt.y + side * ny * railOffset);
+          c.quadraticCurveTo(
+            cp.x + side * nx * railOffset,
+            cp.y + side * ny * railOffset,
+            targetPt.x + side * nx * railOffset,
+            targetPt.y + side * ny * railOffset
+          );
+          c.stroke();
+        }
+
+        for (let uGate of [0.25, 0.50, 0.75]) {
+          const pt = getBezierPoint(originPt, cp, targetPt, uGate);
+          const tangent = getBezierTangent(originPt, cp, targetPt, uGate);
+          const gnx = -Math.sin(tangent);
+          const gny = Math.cos(tangent);
+          c.strokeStyle = 'rgba(56, 189, 248, 0.50)';
+          c.lineWidth = 1.2;
+          c.beginPath();
+          c.moveTo(pt.x - gnx * 7, pt.y - gny * 7);
+          c.lineTo(pt.x + gnx * 7, pt.y + gny * 7);
+          c.stroke();
+        }
+        c.restore();
+
+        const uCurrent = 0.55;
+        const planePt = getBezierPoint(originPt, cp, targetPt, uCurrent);
+        const planeAngle = getBezierTangent(originPt, cp, targetPt, uCurrent);
+        drawContrailLines(c, originPt, cp, targetPt, uCurrent, isMobile ? 5.0 : 6.5);
+        drawVectorAirliner(c, planePt.x, planePt.y, planeAngle + Math.PI / 2, isMobile ? 0.95 : 1.15);
+
+        c.save();
+        c.fillStyle = '#fb923c';
+        c.beginPath();
+        c.arc(originPt.x, originPt.y, 4.5, 0, Math.PI * 2);
+        c.fill();
+        c.strokeStyle = 'rgba(251, 146, 60, 0.35)';
+        c.lineWidth = 1.5;
+        c.beginPath();
+        c.arc(originPt.x, originPt.y, 9.5, 0, Math.PI * 2);
+        c.stroke();
+
+        c.fillStyle = '#38bdf8';
+        c.beginPath();
+        c.arc(targetPt.x, targetPt.y, 4.5, 0, Math.PI * 2);
+        c.fill();
+        c.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+        c.beginPath();
+        c.arc(targetPt.x, targetPt.y, 9.5, 0, Math.PI * 2);
+        c.stroke();
+        c.restore();
+      }
+
+      function renderFlightF2(c, viewport) {
+        const isMobile = viewport.w < 768;
+        const originPt = projectTrueNorthAtlas(CGK_LON, CGK_LAT, viewport);
+        const targetPt = projectTrueNorthAtlas(HND_LON, HND_LAT, viewport);
+        const cp = getControlPoint(originPt.x, originPt.y, targetPt.x, targetPt.y, 0.10);
+
+        c.save();
+        c.strokeStyle = 'rgba(148, 163, 184, 0.08)';
+        c.lineWidth = 0.65;
+
+        for (let lat = -10; lat <= 45; lat += 10) {
+          c.beginPath();
+          for (let lon = 95; lon <= 150; lon += 5) {
+            const pt = projectTrueNorthAtlas(lon, lat, viewport);
+            if (lon === 95) c.moveTo(pt.x, pt.y);
+            else c.lineTo(pt.x, pt.y);
+          }
+          c.stroke();
+        }
+
+        for (let lon = 100; lon <= 150; lon += 10) {
+          c.beginPath();
+          for (let lat = -10; lat <= 45; lat += 5) {
+            const pt = projectTrueNorthAtlas(lon, lat, viewport);
+            if (lat === -10) c.moveTo(pt.x, pt.y);
+            else c.lineTo(pt.x, pt.y);
+          }
+          c.stroke();
+        }
+        c.restore();
+
+        if (realCountriesData) {
+          c.save();
+          realCountriesData.forEach(country => {
+            const isOriginCountry = (country.name === 'Indonesia');
+            const isDestCountry = (country.name === 'Japan');
+
+            c.fillStyle = isOriginCountry ? 'rgba(251, 146, 60, 0.07)'
+                        : isDestCountry ? 'rgba(56, 189, 248, 0.08)'
+                        : 'rgba(15, 23, 42, 0.55)';
+
+            c.strokeStyle = isOriginCountry ? 'rgba(251, 146, 60, 0.35)'
+                          : isDestCountry ? 'rgba(56, 189, 248, 0.40)'
+                          : 'rgba(148, 163, 184, 0.20)';
+            c.lineWidth = 0.8;
+
+            const renderPolygon = (poly) => {
+              c.beginPath();
+              poly.forEach((ring) => {
+                if (!ring || ring.length < 3) return;
+                const p0 = projectTrueNorthAtlas(ring[0][0], ring[0][1], viewport);
+                c.moveTo(p0.x, p0.y);
+                for (let i = 1; i < ring.length; i++) {
+                  const pi = projectTrueNorthAtlas(ring[i][0], ring[i][1], viewport);
+                  c.lineTo(pi.x, pi.y);
+                }
+                c.closePath();
+              });
+              c.fill();
+              c.stroke();
+            };
+
+            if (country.type === 'Polygon') {
+              renderPolygon(country.coordinates);
+            } else if (country.type === 'MultiPolygon') {
+              country.coordinates.forEach(poly => renderPolygon(poly));
+            }
+          });
+          c.restore();
+        }
+
+        c.save();
+        c.strokeStyle = 'rgba(56, 189, 248, 0.50)';
+        c.lineWidth = 1.3;
+        c.beginPath();
+        c.moveTo(originPt.x, originPt.y);
+        c.quadraticCurveTo(cp.x, cp.y, targetPt.x, targetPt.y);
+        c.stroke();
+
+        for (let uCross of [0.20, 0.45, 0.70]) {
+          const pt = getBezierPoint(originPt, cp, targetPt, uCross);
+          const tangent = getBezierTangent(originPt, cp, targetPt, uCross);
+          const gnx = -Math.sin(tangent);
+          const gny = Math.cos(tangent);
+          c.strokeStyle = 'rgba(56, 189, 248, 0.60)';
+          c.lineWidth = 1.2;
+          c.beginPath();
+          c.moveTo(pt.x - gnx * 5, pt.y - gny * 5);
+          c.lineTo(pt.x + gnx * 5, pt.y + gny * 5);
+          c.stroke();
+        }
+        c.restore();
+
+        const uCurrent = 0.58;
+        const planePt = getBezierPoint(originPt, cp, targetPt, uCurrent);
+        const planeAngle = getBezierTangent(originPt, cp, targetPt, uCurrent);
+        drawContrailLines(c, originPt, cp, targetPt, uCurrent, isMobile ? 4.5 : 6.0);
+        drawVectorAirliner(c, planePt.x, planePt.y, planeAngle + Math.PI / 2, isMobile ? 0.90 : 1.10);
+
+        c.save();
+        c.fillStyle = '#fb923c';
+        c.beginPath();
+        c.arc(originPt.x, originPt.y, 4, 0, Math.PI * 2);
+        c.fill();
+
+        c.fillStyle = '#38bdf8';
+        c.beginPath();
+        c.arc(targetPt.x, targetPt.y, 4, 0, Math.PI * 2);
+        c.fill();
+        c.restore();
+      }
+
+      function renderCommuteC1(c, viewport) {
+        if (tokyoBoundariesData) {
+          c.save();
+          c.strokeStyle = 'rgba(148, 163, 184, 0.14)';
+          c.lineWidth = 0.9;
+          c.setLineDash([4, 4]);
+
+          const renderWard = (w) => {
+            if (!w.coordinates) return;
+            w.coordinates.forEach(poly => {
+              poly.forEach(ring => {
+                if (!ring || ring.length < 3) return;
+                const p0 = projectTokyo(ring[0][0], ring[0][1], viewport);
+                c.beginPath();
+                c.moveTo(p0.x, p0.y);
+                for (let i = 1; i < ring.length; i++) {
+                  const pi = projectTokyo(ring[i][0], ring[i][1], viewport);
+                  c.lineTo(pi.x, pi.y);
+                }
+                c.stroke();
+              });
+            });
+          };
+
+          if (tokyoBoundariesData.kawasakiWards) tokyoBoundariesData.kawasakiWards.forEach(renderWard);
+          if (tokyoBoundariesData.tokyoWards) tokyoBoundariesData.tokyoWards.forEach(renderWard);
+          c.restore();
+        }
+
+        if (tokyoRoadsData) {
+          c.save();
+          if (tokyoRoadsData.riverPolygons && tokyoRoadsData.riverPolygons.length > 0) {
+            c.fillStyle = 'rgba(56, 189, 248, 0.09)';
+            c.strokeStyle = 'rgba(56, 189, 248, 0.28)';
+            c.lineWidth = 0.9;
+            tokyoRoadsData.riverPolygons.forEach(ring => {
+              if (!ring || ring.length < 3) return;
+              c.beginPath();
+              const p0 = projectTokyo(ring[0][0], ring[0][1], viewport);
+              c.moveTo(p0.x, p0.y);
+              for (let i = 1; i < ring.length; i++) {
+                const pi = projectTokyo(ring[i][0], ring[i][1], viewport);
+                c.lineTo(pi.x, pi.y);
+              }
+              c.closePath();
+              c.fill();
+              c.stroke();
+            });
+          }
+
+          if (tokyoRoadsData.tributaries && tokyoRoadsData.tributaries.length > 0) {
+            c.strokeStyle = 'rgba(56, 189, 248, 0.16)';
+            c.lineWidth = 0.75;
+            c.beginPath();
+            tokyoRoadsData.tributaries.forEach(seg => {
+              if (seg.length < 2) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1], viewport);
+              c.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1], viewport);
+                c.lineTo(pi.x, pi.y);
+              }
+            });
+            c.stroke();
+          }
+
+          const tamaMain = tokyoRoadsData.tamaMainLines || tokyoRoadsData.riverLines || [];
+          if (tamaMain.length > 0) {
+            c.strokeStyle = 'rgba(56, 189, 248, 0.38)';
+            c.lineWidth = 1.2;
+            c.beginPath();
+            tamaMain.forEach(seg => {
+              if (seg.length < 2) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1], viewport);
+              c.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1], viewport);
+                c.lineTo(pi.x, pi.y);
+              }
+            });
+            c.stroke();
+          }
+          c.restore();
+
+          c.save();
+          const secondaryRoads = tokyoRoadsData.secondary || [];
+          const tertiaryRoads = (tokyoRoadsData.tertiary || []).slice(0, 300);
+          c.strokeStyle = 'rgba(148, 163, 184, 0.08)';
+          c.lineWidth = 0.55;
+          c.beginPath();
+          [...secondaryRoads, ...tertiaryRoads].forEach(seg => {
+            if (seg.length < 3) return;
+            const p0 = projectTokyo(seg[0][0], seg[0][1], viewport);
+            c.moveTo(p0.x, p0.y);
+            for (let i = 1; i < seg.length; i++) {
+              const pi = projectTokyo(seg[i][0], seg[i][1], viewport);
+              c.lineTo(pi.x, pi.y);
+            }
+          });
+          c.stroke();
+
+          if (tokyoRoadsData.primary && tokyoRoadsData.primary.length > 0) {
+            c.strokeStyle = 'rgba(148, 163, 184, 0.18)';
+            c.lineWidth = 1.1;
+            c.beginPath();
+            tokyoRoadsData.primary.forEach(seg => {
+              if (seg.length < 4) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1], viewport);
+              c.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1], viewport);
+                c.lineTo(pi.x, pi.y);
+              }
+            });
+            c.stroke();
+          }
+
+          if (tokyoRoadsData.railways && tokyoRoadsData.railways.length > 0) {
+            c.strokeStyle = 'rgba(129, 140, 248, 0.14)';
+            c.lineWidth = 1.0;
+            c.setLineDash([3, 4]);
+            c.beginPath();
+            tokyoRoadsData.railways.slice(0, 150).forEach(seg => {
+              if (seg.length < 3) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1], viewport);
+              c.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1], viewport);
+                c.lineTo(pi.x, pi.y);
+              }
+            });
+            c.stroke();
+            c.setLineDash([]);
+          }
+          c.restore();
+        }
+
+        renderCommuteRoutes(c, viewport);
+      }
+
+      function renderCommuteC2(c, viewport) {
+        if (tokyoBoundariesData) {
+          c.save();
+          const renderZoning = (wards, fillStyle) => {
+            c.fillStyle = fillStyle;
+            wards.forEach(w => {
+              if (!w.coordinates) return;
+              w.coordinates.forEach(poly => {
+                poly.forEach(ring => {
+                  if (!ring || ring.length < 3) return;
+                  c.beginPath();
+                  const p0 = projectTokyo(ring[0][0], ring[0][1], viewport);
+                  c.moveTo(p0.x, p0.y);
+                  for (let i = 1; i < ring.length; i++) {
+                    const pi = projectTokyo(ring[i][0], ring[i][1], viewport);
+                    c.lineTo(pi.x, pi.y);
+                  }
+                  c.closePath();
+                  c.fill();
+                });
+              });
+            });
+          };
+
+          if (tokyoBoundariesData.kawasakiWards) renderZoning(tokyoBoundariesData.kawasakiWards, 'rgba(251, 146, 60, 0.025)');
+          if (tokyoBoundariesData.tokyoWards) renderZoning(tokyoBoundariesData.tokyoWards, 'rgba(56, 189, 248, 0.028)');
+          c.restore();
+        }
+
+        if (tokyoRoadsData) {
+          c.save();
+          const tamaMain = tokyoRoadsData.tamaMainLines || tokyoRoadsData.riverLines || [];
+          if (tamaMain.length > 0) {
+            c.strokeStyle = 'rgba(56, 189, 248, 0.14)';
+            c.lineWidth = 14;
+            c.lineCap = 'round';
+            c.lineJoin = 'round';
+            c.beginPath();
+            tamaMain.forEach(seg => {
+              if (seg.length < 2) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1], viewport);
+              c.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1], viewport);
+                c.lineTo(pi.x, pi.y);
+              }
+            });
+            c.stroke();
+
+            c.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+            c.lineWidth = 1.2;
+            c.stroke();
+          }
+
+          const marukoPt = projectTokyo(139.6645, 35.5835, viewport);
+          const futakoPt = projectTokyo(139.6268, 35.6118, viewport);
+          const viaductPt = projectTokyo(139.6285, 35.6122, viewport);
+
+          const drawBridgeStructure = (pt, angle, width = 24) => {
+            c.save();
+            c.translate(pt.x, pt.y);
+            c.rotate(angle);
+            c.fillStyle = '#1e293b';
+            c.strokeStyle = 'rgba(241, 245, 249, 0.65)';
+            c.lineWidth = 1.5;
+            c.beginPath();
+            c.rect(-width * 0.5, -3, width, 6);
+            c.fill();
+            c.stroke();
+            c.fillStyle = '#38bdf8';
+            c.fillRect(-width * 0.45, -4.5, 3, 9);
+            c.fillRect(width * 0.45 - 3, -4.5, 3, 9);
+            c.restore();
+          };
+
+          drawBridgeStructure(marukoPt, 0.85, 26);
+          drawBridgeStructure(futakoPt, -0.45, 22);
+          drawBridgeStructure(viaductPt, -0.35, 24);
+
+          if (tokyoRoadsData.primary) {
+            c.strokeStyle = 'rgba(148, 163, 184, 0.22)';
+            c.lineWidth = 1.2;
+            c.beginPath();
+            tokyoRoadsData.primary.forEach(seg => {
+              if (seg.length < 4) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1], viewport);
+              c.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1], viewport);
+                c.lineTo(pi.x, pi.y);
+              }
+            });
+            c.stroke();
+          }
+
+          if (tokyoRoadsData.railways) {
+            c.strokeStyle = 'rgba(129, 140, 248, 0.20)';
+            c.lineWidth = 2.5;
+            c.beginPath();
+            tokyoRoadsData.railways.slice(0, 100).forEach(seg => {
+              if (seg.length < 3) return;
+              const p0 = projectTokyo(seg[0][0], seg[0][1], viewport);
+              c.moveTo(p0.x, p0.y);
+              for (let i = 1; i < seg.length; i++) {
+                const pi = projectTokyo(seg[i][0], seg[i][1], viewport);
+                c.lineTo(pi.x, pi.y);
+              }
+            });
+            c.stroke();
+
+            c.strokeStyle = 'rgba(129, 140, 248, 0.45)';
+            c.lineWidth = 1.0;
+            c.setLineDash([3, 4]);
+            c.stroke();
+            c.setLineDash([]);
+          }
+          c.restore();
+        }
+
+        renderCommuteRoutes(c, viewport);
+      }
+
+      function renderCommuteRoutes(c, viewport) {
+        if (!tokyoRoadsData) return;
+
+        c.save();
+        const outRoad = tokyoRoadsData.commuteOutbound || [];
+        const retRoad = tokyoRoadsData.commuteReturn || [];
+
+        c.strokeStyle = 'rgba(148, 163, 184, 0.22)';
+        c.lineWidth = 3.6;
+        c.lineCap = 'round';
+        c.lineJoin = 'round';
+        c.beginPath();
+        [outRoad, retRoad].forEach(road => {
+          if (road.length > 1) {
+            const p0 = projectTokyo(road[0][0], road[0][1], viewport);
+            c.moveTo(p0.x, p0.y);
+            for (let i = 1; i < road.length; i++) {
+              const pi = projectTokyo(road[i][0], road[i][1], viewport);
+              c.lineTo(pi.x, pi.y);
+            }
+          }
+        });
+        c.stroke();
+
+        c.strokeStyle = 'rgba(241, 245, 249, 0.65)';
+        c.lineWidth = 1.8;
+        c.beginPath();
+        if (outRoad.length > 1) {
+          const p0 = projectTokyo(outRoad[0][0], outRoad[0][1], viewport);
+          c.moveTo(p0.x, p0.y);
+          for (let i = 1; i < outRoad.length; i++) {
+            const pi = projectTokyo(outRoad[i][0], outRoad[i][1], viewport);
+            c.lineTo(pi.x, pi.y);
+          }
+        }
+        c.stroke();
+
+        c.strokeStyle = 'rgba(147, 197, 253, 0.55)';
+        c.lineWidth = 1.6;
+        c.setLineDash([5, 5]);
+        c.beginPath();
+        if (retRoad.length > 1) {
+          const p0 = projectTokyo(retRoad[0][0], retRoad[0][1], viewport);
+          c.moveTo(p0.x, p0.y);
+          for (let i = 1; i < retRoad.length; i++) {
+            const pi = projectTokyo(retRoad[i][0], retRoad[i][1], viewport);
+            c.lineTo(pi.x, pi.y);
+          }
+        }
+        c.stroke();
+        c.setLineDash([]);
+
+        if (tokyoTransitData) {
+          if (tokyoTransitData.railNambu && tokyoTransitData.railNambu.length > 1) {
+            c.strokeStyle = 'rgba(129, 140, 248, 0.28)';
+            c.lineWidth = 3.6;
+            c.lineCap = 'round';
+            c.beginPath();
+            const p0 = projectTokyo(tokyoTransitData.railNambu[0][0], tokyoTransitData.railNambu[0][1], viewport);
+            c.moveTo(p0.x, p0.y);
+            for (let i = 1; i < tokyoTransitData.railNambu.length; i++) {
+              const pi = projectTokyo(tokyoTransitData.railNambu[i][0], tokyoTransitData.railNambu[i][1], viewport);
+              c.lineTo(pi.x, pi.y);
+            }
+            c.stroke();
+
+            c.strokeStyle = 'rgba(129, 140, 248, 0.65)';
+            c.lineWidth = 1.6;
+            c.setLineDash([4, 3]);
+            c.stroke();
+            c.setLineDash([]);
+          }
+
+          if (tokyoTransitData.railOimachi && tokyoTransitData.railOimachi.length > 1) {
+            c.strokeStyle = 'rgba(6, 182, 212, 0.28)';
+            c.lineWidth = 3.6;
+            c.lineCap = 'round';
+            c.beginPath();
+            const p0 = projectTokyo(tokyoTransitData.railOimachi[0][0], tokyoTransitData.railOimachi[0][1], viewport);
+            c.moveTo(p0.x, p0.y);
+            for (let i = 1; i < tokyoTransitData.railOimachi.length; i++) {
+              const pi = projectTokyo(tokyoTransitData.railOimachi[i][0], tokyoTransitData.railOimachi[i][1], viewport);
+              c.lineTo(pi.x, pi.y);
+            }
+            c.stroke();
+
+            c.strokeStyle = 'rgba(6, 182, 212, 0.65)';
+            c.lineWidth = 1.6;
+            c.setLineDash([4, 3]);
+            c.stroke();
+            c.setLineDash([]);
+          }
+        }
+
+        const placePt = projectTokyo(PLACE_LON, PLACE_LAT, viewport);
+        const univPt = projectTokyo(UNIV_LON, UNIV_LAT, viewport);
+
+        c.fillStyle = 'rgba(15, 23, 42, 0.90)';
+        c.strokeStyle = '#fb923c';
+        c.lineWidth = 1.8;
+        c.beginPath();
+        c.arc(placePt.x, placePt.y, 11, 0, Math.PI * 2);
+        c.fill();
+        c.stroke();
+        c.fillStyle = '#fb923c';
+        c.beginPath();
+        c.arc(placePt.x, placePt.y, 4.5, 0, Math.PI * 2);
+        c.fill();
+
+        c.fillStyle = 'rgba(15, 23, 42, 0.90)';
+        c.strokeStyle = '#38bdf8';
+        c.lineWidth = 1.8;
+        c.beginPath();
+        c.arc(univPt.x, univPt.y, 11, 0, Math.PI * 2);
+        c.fill();
+        c.stroke();
+        c.fillStyle = '#38bdf8';
+        c.beginPath();
+        c.arc(univPt.x, univPt.y, 4.5, 0, Math.PI * 2);
+        c.fill();
+
+        c.restore();
+      }
+
+      function requestRender() {
+        ctx.clearRect(0, 0, width, height);
+
+        if (!isSplitView) {
+          const viewport = { x: 0, y: 0, w: width, h: height };
+          if (currentCategory === 'flight') {
+            if (currentDirection === 'F1') renderFlightF1(ctx, viewport);
+            else renderFlightF2(ctx, viewport);
+          } else {
+            if (currentDirection === 'C1') renderCommuteC1(ctx, viewport);
+            else renderCommuteC2(ctx, viewport);
+          }
+        } else {
+          const halfW = width * 0.5;
+          const vpLeft = { x: 0, y: 0, w: halfW, h: height };
+          const vpRight = { x: halfW, y: 0, w: halfW, h: height };
+
+          ctx.save();
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(halfW, 0);
+          ctx.lineTo(halfW, height);
+          ctx.stroke();
+          ctx.restore();
+
+          if (currentCategory === 'flight') {
+            renderFlightF1(ctx, vpLeft);
+            renderFlightF2(ctx, vpRight);
+          } else {
+            renderCommuteC1(ctx, vpLeft);
+            renderCommuteC2(ctx, vpRight);
+          }
+        }
+      }
+
+      const btnCatFlight = document.getElementById('btn-cat-flight');
+      const btnCatCommute = document.getElementById('btn-cat-commute');
+      const dirGroup = document.getElementById('direction-group');
+      const btnViewSingle = document.getElementById('btn-view-single');
+      const btnViewSplit = document.getElementById('btn-view-split');
+      const splitIndicator = document.getElementById('split-indicator');
+      const splitBadgeLeft = document.getElementById('split-badge-left');
+      const splitBadgeRight = document.getElementById('split-badge-right');
+
+      const dossierSubtitle = document.getElementById('dossier-subtitle');
+      const dossierThesis = document.getElementById('dossier-thesis');
+      const dossierDesc = document.getElementById('dossier-desc');
+      const dossierTags = document.getElementById('dossier-tags');
+      const dossierCard = document.getElementById('dossier-card');
+      const dossierHeader = document.getElementById('dossier-header');
+      const dossierToggle = document.getElementById('dossier-toggle');
+
+      const METADATA = {
+        F1: {
+          title: 'DIRECTION F1 · CONFORMAL OBLIQUE CORRIDOR',
+          thesis: 'True physical landmass shapes rotated rigidly along the bilateral flight diagonal.',
+          desc: 'Eliminates the previous 2.22x horizontal distortion by using an isotropic similarity transform. Japan, Taiwan, and the Philippines retain their true geographical proportions while preserving the airliner route.',
+          tags: ['Isotropic Scale', 'Zero Squish', 'Solid Charcoal Fills', 'Subtle Bathymetry']
+        },
+        F2: {
+          title: 'DIRECTION F2 · EDITORIAL TRUE-NORTH ATLAS',
+          thesis: 'Conformal Mercator with true North pointing Up, framed by delicate celestial graticules.',
+          desc: 'Authentic Swiss/aviation cartographic styling. Real meridian and parallel hairlines provide geographic orientation, while warm Indonesian and cool Japanese archipelago edge glows anchor the journey.',
+          tags: ['True North Up', '10° Graticule Grid', 'Spherical Geodesic', 'Archival Editorial']
+        },
+        C1: {
+          title: 'DIRECTION C1 · HYDRO-TOPOGRAPHIC EDITORIAL',
+          thesis: 'Natural fluvial topography of the Tama River basin backed by organic urban fabric.',
+          desc: 'Uses real OSM river polygons for genuine riverbank morphology and secondary streams (Nikaryo canal, Nogawa). Adds delicate dashed ward boundaries and a quiet 3-tier road hierarchy without street clutter.',
+          tags: ['Real River Polygons', 'Tributary Canals', 'Ward Boundaries', 'Layered Road Hierarchy']
+        },
+        C2: {
+          title: 'DIRECTION C2 · ARCHITECTURAL TRANSIT-DISTRICT',
+          thesis: 'Civic architectural zoning with articulated river bridge engineering spans.',
+          desc: 'Celebrates Tokyo and Kawasaki as two distinct civic territories separated by the Tama River. Focuses on structural bridge spans (Maruko, Futako, Tokyu Viaduct) and high-contrast checkered railway arteries.',
+          tags: ['Civic Zoning Patches', 'Engineered Bridge Spans', 'Checkered Railway Ties', 'High Negative Space']
+        }
+      };
+
+      function updateDossier() {
+        const meta = isSplitView
+          ? (currentCategory === 'flight'
+              ? { title: 'COMPARISON · F1 VS F2', thesis: 'Conformal Oblique Corridor (Left) vs. True-North Atlas (Right)', desc: 'Compare how isotropic scaling preserves true geography versus an unrotated archival atlas.', tags: ['Side-by-Side Review', 'Desktop / Mobile', 'Cartographic Fidelity'] }
+              : { title: 'COMPARISON · C1 VS C2', thesis: 'Hydro-Topographic Editorial (Left) vs. Architectural Transit-District (Right)', desc: 'Compare riverbank/tributary fluvial realism with civic zoning and bridge engineering spans.', tags: ['Side-by-Side Review', 'Metropolitan Fabric', 'Zero Text Clutter'] }
+            )
+          : METADATA[currentDirection];
+
+        dossierSubtitle.textContent = meta.title;
+        dossierThesis.textContent = meta.thesis;
+        dossierDesc.textContent = meta.desc;
+        dossierTags.innerHTML = meta.tags.map(function (t) { return '<span class="dossier-tag">' + t + '</span>'; }).join('');
+      }
+
+      function buildDirectionButtons() {
+        dirGroup.innerHTML = '';
+        if (currentCategory === 'flight') {
+          const btnF1 = document.createElement('button');
+          btnF1.className = 'btn-toggle ' + (currentDirection === 'F1' && !isSplitView ? 'is-active' : '');
+          btnF1.textContent = 'F1: Oblique Corridor';
+          btnF1.onclick = () => { currentDirection = 'F1'; isSplitView = false; updateToolbar(); requestRender(); };
+
+          const btnF2 = document.createElement('button');
+          btnF2.className = 'btn-toggle ' + (currentDirection === 'F2' && !isSplitView ? 'is-active' : '');
+          btnF2.textContent = 'F2: True-North Atlas';
+          btnF2.onclick = () => { currentDirection = 'F2'; isSplitView = false; updateToolbar(); requestRender(); };
+
+          dirGroup.appendChild(btnF1);
+          dirGroup.appendChild(btnF2);
+        } else {
+          const btnC1 = document.createElement('button');
+          btnC1.className = 'btn-toggle ' + (currentDirection === 'C1' && !isSplitView ? 'is-active-amber' : '');
+          btnC1.textContent = 'C1: Hydro-Topographic';
+          btnC1.onclick = () => { currentDirection = 'C1'; isSplitView = false; updateToolbar(); requestRender(); };
+
+          const btnC2 = document.createElement('button');
+          btnC2.className = 'btn-toggle ' + (currentDirection === 'C2' && !isSplitView ? 'is-active-amber' : '');
+          btnC2.textContent = 'C2: Transit-District';
+          btnC2.onclick = () => { currentDirection = 'C2'; isSplitView = false; updateToolbar(); requestRender(); };
+
+          dirGroup.appendChild(btnC1);
+          dirGroup.appendChild(btnC2);
+        }
+      }
+
+      function updateToolbar() {
+        if (currentCategory === 'flight') {
+          btnCatFlight.classList.add('is-active');
+          btnCatCommute.classList.remove('is-active');
+        } else {
+          btnCatFlight.classList.remove('is-active');
+          btnCatCommute.classList.add('is-active');
+        }
+
+        btnViewSingle.classList.toggle('is-active', !isSplitView);
+        btnViewSplit.classList.toggle('is-active', isSplitView);
+
+        if (isSplitView) {
+          splitIndicator.style.display = 'flex';
+          if (currentCategory === 'flight') {
+            splitBadgeLeft.textContent = 'F1: Oblique Corridor';
+            splitBadgeRight.textContent = 'F2: True-North Atlas';
+          } else {
+            splitBadgeLeft.textContent = 'C1: Hydro-Topographic';
+            splitBadgeRight.textContent = 'C2: Transit-District';
+          }
+        } else {
+          splitIndicator.style.display = 'none';
+        }
+
+        buildDirectionButtons();
+        updateDossier();
+      }
+
+      btnCatFlight.onclick = () => {
+        currentCategory = 'flight';
+        currentDirection = 'F1';
+        updateToolbar();
+        requestRender();
+      };
+
+      btnCatCommute.onclick = () => {
+        currentCategory = 'commute';
+        currentDirection = 'C1';
+        updateToolbar();
+        requestRender();
+      };
+
+      btnViewSingle.onclick = () => {
+        isSplitView = false;
+        updateToolbar();
+        requestRender();
+      };
+
+      btnViewSplit.onclick = () => {
+        isSplitView = true;
+        updateToolbar();
+        requestRender();
+      };
+
+      let dossierMinimized = false;
+      dossierHeader.onclick = () => {
+        dossierMinimized = !dossierMinimized;
+        dossierCard.classList.toggle('is-minimized', dossierMinimized);
+        dossierToggle.textContent = dossierMinimized ? '▲' : '▼';
+      };
+
+      window.mapDirectionsController = {
+        setCategory: (cat) => {
+          currentCategory = cat;
+          currentDirection = (cat === 'flight') ? 'F1' : 'C1';
+          updateToolbar();
+          requestRender();
+        },
+        setDirection: (dir) => {
+          currentDirection = dir;
+          currentCategory = (dir.startsWith('F')) ? 'flight' : 'commute';
+          isSplitView = false;
+          updateToolbar();
+          requestRender();
+        },
+        setSplitView: (split) => {
+          isSplitView = split;
+          updateToolbar();
+          requestRender();
+        }
+      };
+
+      updateToolbar();
+      requestRender();
+    })();
+  </script>
+</body>
+</html>
