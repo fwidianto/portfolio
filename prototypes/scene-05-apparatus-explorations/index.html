@@ -572,15 +572,15 @@
 
   <header class="editorial-header">
     <div class="header-text">
-      <div class="kicker">02.05 // UNDERGRADUATE THESIS (2018–2019) · SECTION 05.1B-3B</div>
-      <h1>Condensation Inside Condenser</h1>
-      <p class="subtitle">Physical process flow animation through frozen 05.1A/B-1/B-2/B-3A baselines: Condenser Cooling Activation → Cooling Path Vapor Advance → Progressive Phase Transition → Distillate Liquid Emergence → Condenser Outlet Ready Hold</p>
+      <div class="kicker">02.05 // UNDERGRADUATE THESIS (2018–2019) · SECTION 05.1B-3C-1</div>
+      <h1>Condensate Extraction &amp; Transport to Collection Inlet</h1>
+      <p class="subtitle">Physical process flow animation through frozen 05.1A/B-1/B-2/B-3A/B-3B baselines: Extraction Pump Activation → Progressive Line Fill → Continuous Pump Transport → Downpipe Transport → Bottle Inlet Ready Hold</p>
     </div>
 
     <div class="study-tabs" role="tablist">
       <button class="study-btn" data-target="study-a">Study A · Orthographic</button>
       <button class="study-btn" data-target="study-b">Study B · Isometric</button>
-      <button class="study-btn is-active" data-target="study-c">Study C · Process Flow 05.1B-3B (Condensation)</button>
+      <button class="study-btn is-active" data-target="study-c">Study C · Process Flow 05.1B-3C-1 (Extraction)</button>
     </div>
   </header>
 
@@ -922,11 +922,11 @@
          ========================================================================= -->
     <div class="study-card is-active" id="study-c">
       <div class="study-meta">
-        <span class="study-badge">STUDY C · SECTION 05.1B-3B PROCESS FLOW (CONDENSATION)</span>
+        <span class="study-badge">STUDY C · SECTION 05.1B-3C-1 PROCESS FLOW (EXTRACTION)</span>
         <span id="study-c-status-pill" class="status-pill">STATUS: RIG AT REST</span>
       </div>
 
-      <!-- Playback Controls HUD for Section 05.1B-3B -->
+      <!-- Playback Controls HUD for Section 05.1B-3C-1 -->
       <div class="playback-bar" id="playback-bar">
         <div class="playback-actions">
           <button id="btn-play-pause" class="ctrl-btn is-primary" title="Toggle Play / Pause (Space)">
@@ -961,13 +961,19 @@
             <button class="beat-btn" data-beat="21" title="Beat 21: Progressive Condensation &amp; Transition">21·Cond</button>
             <button class="beat-btn" data-beat="22" title="Beat 22: Liquid Distillate Emergence">22·Liquid</button>
             <button class="beat-btn" data-beat="23" title="Beat 23: Condenser Outlet Arrival &amp; Ready Hold">23·OutReady</button>
+            <button class="beat-btn" data-beat="24" title="Beat 24: Condensate held at condenser outlet; line dry">24·ExReady</button>
+            <button class="beat-btn" data-beat="25" title="Beat 25: Extraction pump becomes operational">25·PumpActive</button>
+            <button class="beat-btn" data-beat="26" title="Beat 26: Condensate begins filling extraction line">26·ExLine</button>
+            <button class="beat-btn" data-beat="27" title="Beat 27: Continuous transport through Pump [11]">27·PumpPass</button>
+            <button class="beat-btn" data-beat="28" title="Beat 28: Downstream collection-line travel">28·Downpipe</button>
+            <button class="beat-btn" data-beat="29" title="Beat 29: Liquid reaches Bottle [12] inlet and stops">29·BotInlet</button>
           </div>
         </div>
 
         <div class="timeline-container">
-          <input type="range" id="timeline-scrubber" class="timeline-scrubber" min="0" max="61.5" step="0.05" value="0">
+          <input type="range" id="timeline-scrubber" class="timeline-scrubber" min="0" max="74.0" step="0.05" value="0">
           <div class="timeline-meta">
-            <span id="timecode-display" class="timecode">00:00.0 / 00:61.5</span>
+            <span id="timecode-display" class="timecode">00:00.0 / 01:14.0</span>
             <span id="beat-label-display" class="beat-label">RIG AT REST</span>
           </div>
         </div>
@@ -1400,20 +1406,49 @@
               fill="none" stroke="rgba(148, 163, 184, 0.25)" stroke-width="1.0" stroke-linecap="round" stroke-dasharray="2 3"/>
         <text x="872" y="295" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="var(--text-primary)" text-anchor="middle">CONDENSER [10]</text>
 
-        <!-- Extraction Pump [11] -->
-        <rect x="798" y="285" width="28" height="20" rx="2" fill="#1a2230" stroke="var(--line-steel)" stroke-width="1"/>
+        <!-- ==================== 6. EXTRACTION CIRCUIT & COLLECTION [11, 12] ==================== -->
+        <!-- Extraction Line Conduit Base Track -->
+        <path d="M 870 275 L 818 275 Q 812 275 812 281 L 812 368" 
+              stroke="#1b2331" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <!-- Extraction Line Conduit Drafting Outline -->
+        <path d="M 870 275 L 818 275 Q 812 275 812 281 L 812 368" 
+              stroke="var(--line-crisp)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M 870 275 L 818 275 Q 812 275 812 281 L 812 368" 
+              stroke="rgba(148, 163, 184, 0.25)" stroke-width="1.0" stroke-linecap="round" stroke-dasharray="2 3" fill="none"/>
+
+        <!-- Extraction Pump [11] (Documented physical unit, abstracted internal transport) -->
+        <rect id="pump-extraction-casing" x="798" y="285" width="28" height="20" rx="2" fill="#1a2230" stroke="var(--line-steel)" stroke-width="1"/>
+        <circle id="pump-extraction-indicator" cx="821" cy="290" r="1.5" fill="rgba(148, 163, 184, 0.25)"/>
         <text x="812" y="315" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-muted)" text-anchor="middle">PUMP [11]</text>
 
-        <!-- Distillate Collection Bottle [12] (Clear Recognizable Vessel Profile) -->
-        <path d="M 808 385 L 808 435 Q 808 445 818 445 L 826 445 Q 836 445 836 435 L 836 385 Q 836 375 828 375 L 828 368 L 816 368 L 816 375 Q 808 375 808 385 Z" 
-              fill="rgba(100, 181, 246, 0.08)" stroke="var(--cyan-tech)" stroke-width="1.2"/>
-        <path d="M 810 408 L 834 408 L 834 435 Q 834 443 826 443 L 818 443 Q 810 443 810 435 Z" 
-              fill="url(#distillate-glow)"/>
+        <!-- Dynamic Animated Condensate Extraction Fluid (Section 05.1B-3C-1) -->
+        <g id="extraction-fluid-group" opacity="0">
+          <!-- Coherent liquid condensate stream (warm-neutral clear liquid #f1f5f9) -->
+          <path id="extraction-liquid-stream" 
+                d="M 870 275 L 818 275 Q 812 275 812 281 L 812 368" 
+                fill="none" stroke="#f1f5f9" stroke-width="2.0" stroke-linecap="round"/>
+          <!-- Specular surface highlight -->
+          <path id="extraction-liquid-highlight" 
+                d="M 870 275 L 818 275 Q 812 275 812 281 L 812 368" 
+                fill="none" stroke="#ffffff" stroke-width="0.8" stroke-linecap="round"/>
+          <!-- Internal fluid motion dashes -->
+          <path id="extraction-liquid-dashes" 
+                d="M 870 275 L 818 275 Q 812 275 812 281 L 812 368" 
+                fill="none" stroke="rgba(254, 243, 199, 0.45)" stroke-width="1.0" stroke-linecap="round" stroke-dasharray="2 4"/>
+          <!-- Bottle inlet holding meniscus at nozzle boundary (812, 368) -->
+          <ellipse id="bottle-inlet-meniscus" cx="812" cy="368" rx="2.5" ry="1.2" 
+                   fill="#f1f5f9" stroke="#ffffff" stroke-width="0.6" opacity="0"/>
+        </g>
 
-        <path d="M 870 275 L 812 275 L 812 285" stroke="var(--cyan-tech)" stroke-width="1.2" fill="none"/>
-        <path d="M 812 305 L 812 368" stroke="var(--cyan-tech)" stroke-width="1.2" fill="none"/>
-        <text x="822" y="460" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="var(--cyan-tech)" text-anchor="middle">AQUADEST [12]</text>
-        <text x="822" y="471" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="rgba(100,181,246,0.7)" text-anchor="middle">COLLECTION [12]</text>
+        <!-- Distillate Collection Bottle [12] (Neutral, 100% Dry Vessel Profile) -->
+        <path d="M 808 385 L 808 435 Q 808 445 818 445 L 826 445 Q 836 445 836 435 L 836 385 Q 836 375 828 375 L 828 368 L 816 368 L 816 375 Q 808 375 808 385 Z" 
+              fill="rgba(255, 255, 255, 0.02)" stroke="var(--line-steel)" stroke-width="1.2"/>
+        <!-- Static puddle explicitly hidden for 05.1B-3C-1 -->
+        <path id="bottle-static-fill" d="M 810 408 L 834 408 L 834 435 Q 834 443 826 443 L 818 443 Q 810 443 810 435 Z" 
+              fill="url(#distillate-glow)" opacity="0"/>
+
+        <text x="822" y="460" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="var(--text-primary)" text-anchor="middle">AQUADEST [12]</text>
+        <text x="822" y="471" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-muted)" text-anchor="middle">COLLECTION [12]</text>
 
         <!-- Controller Box [13] -->
         <rect x="855" y="380" width="65" height="40" rx="3" fill="#1d232e" stroke="var(--line-steel)" stroke-width="1.2"/>
@@ -1492,7 +1527,7 @@
     // =========================================================================
     (function initScene05Animation() {
       // Configuration & Timeline Timestamps (seconds)
-      const DURATION = 61.5;
+      const DURATION = 74.0;
       const BEATS = [
         { id: 0, time: 0.0, name: 'RIG AT REST (INACTIVE)', pill: 'STATUS: RIG AT REST' },
         { id: 1, time: 1.2, name: 'BEAT 1 · FEED INTAKE & SIGHT GLASS ACTIVATION', pill: 'BEAT 1: INTAKE ACTIVE' },
@@ -1517,7 +1552,13 @@
         { id: 20, time: 49.0, name: 'BEAT 20 · VAPOR ENTERS ILLUSTRATIVE COOLING PATH', pill: 'BEAT 20: PATH ENTRY' },
         { id: 21, time: 52.0, name: 'BEAT 21 · PROGRESSIVE CONDENSATION & TRANSITION', pill: 'BEAT 21: CONDENSATION' },
         { id: 22, time: 55.5, name: 'BEAT 22 · LIQUID DISTILLATE EMERGENCE', pill: 'BEAT 22: LIQUID DISTILLATE' },
-        { id: 23, time: 58.5, name: 'BEAT 23 · CONDENSER OUTLET ARRIVAL & READY HOLD', pill: 'BEAT 23: OUTLET READY' }
+        { id: 23, time: 58.5, name: 'BEAT 23 · CONDENSER OUTLET ARRIVAL & READY HOLD', pill: 'BEAT 23: OUTLET READY' },
+        { id: 24, time: 61.5, name: 'BEAT 24 · CONDENSATE EXTRACTION READINESS', pill: 'BEAT 24: EXTRACTION READY' },
+        { id: 25, time: 63.0, name: 'BEAT 25 · EXTRACTION PUMP BECOMES OPERATIONAL', pill: 'BEAT 25: PUMP ACTIVE' },
+        { id: 26, time: 65.0, name: 'BEAT 26 · CONDENSATE ENTERS EXTRACTION LINE', pill: 'BEAT 26: EXTRACTION LINE' },
+        { id: 27, time: 67.5, name: 'BEAT 27 · CONTINUOUS TRANSPORT THROUGH PUMP [11]', pill: 'BEAT 27: PUMP TRANSPORT' },
+        { id: 28, time: 69.5, name: 'BEAT 28 · DOWNSTREAM COLLECTION-LINE TRAVEL', pill: 'BEAT 28: DOWNPIPE' },
+        { id: 29, time: 72.0, name: 'BEAT 29 · LIQUID REACHES BOTTLE [12] INLET & STOPS', pill: 'BEAT 29: INLET READY' }
       ];
 
       // DOM Elements
@@ -1606,6 +1647,16 @@
       const condenserFluidDashes = document.getElementById('condenser-fluid-dashes');
       const condenserOutletMeniscus = document.getElementById('condenser-outlet-meniscus');
 
+      // Dynamic Extraction & Collection Elements (Section 05.1B-3C-1, Beats 24 to 29)
+      const pumpExtractionCasing = document.getElementById('pump-extraction-casing');
+      const pumpExtractionIndicator = document.getElementById('pump-extraction-indicator');
+      const extractionFluidGroup = document.getElementById('extraction-fluid-group');
+      const extractionLiquidStream = document.getElementById('extraction-liquid-stream');
+      const extractionLiquidHighlight = document.getElementById('extraction-liquid-highlight');
+      const extractionLiquidDashes = document.getElementById('extraction-liquid-dashes');
+      const bottleInletMeniscus = document.getElementById('bottle-inlet-meniscus');
+      const bottleStaticFill = document.getElementById('bottle-static-fill');
+
       // Compute exact geometric path lengths
       const suctionLen = suctionCore.getTotalLength();
       const dischargeLen = dischargeCore.getTotalLength();
@@ -1620,6 +1671,7 @@
       const brineDrainLen = brineDrainCore.getTotalLength();
       const vaporOverheadLen = vaporOverheadCore.getTotalLength();
       const condenserPathLen = condenserLiquidStream.getTotalLength();
+      const extractionPathLen = extractionLiquidStream.getTotalLength();
 
       // Initialize path dasharrays
       suctionGlow.style.strokeDasharray = `${suctionLen} ${suctionLen}`;
@@ -1648,6 +1700,9 @@
       condenserLiquidStream.style.strokeDasharray = `${condenserPathLen} ${condenserPathLen}`;
       condenserLiquidHighlight.style.strokeDasharray = `${condenserPathLen} ${condenserPathLen}`;
       condenserFluidDashes.style.strokeDasharray = `${condenserPathLen} ${condenserPathLen}`;
+      extractionLiquidStream.style.strokeDasharray = `${extractionPathLen} ${extractionPathLen}`;
+      extractionLiquidHighlight.style.strokeDasharray = `${extractionPathLen} ${extractionPathLen}`;
+      extractionLiquidDashes.style.strokeDasharray = `${extractionPathLen} ${extractionPathLen}`;
 
       // Animation State
       let currentTime = 0;
@@ -1714,6 +1769,17 @@
       // Render Frame at Time t
       function render(t) {
         currentTime = clamp(t, 0, DURATION);
+
+        if (currentTime < 61.5) {
+          pumpExtractionCasing.setAttribute('stroke', 'var(--line-steel)');
+          pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.25)');
+          extractionFluidGroup.style.opacity = '0';
+          extractionLiquidStream.style.strokeDashoffset = String(extractionPathLen);
+          extractionLiquidHighlight.style.strokeDashoffset = String(extractionPathLen);
+          extractionLiquidDashes.style.strokeDashoffset = String(extractionPathLen);
+          bottleInletMeniscus.style.opacity = '0';
+          bottleStaticFill.style.opacity = '0';
+        }
 
         // -------------------------------------------------------------
         // BEAT 1: Feed Intake & Sight Glass Activation (t = 1.2 .. 3.0s)
@@ -2549,7 +2615,7 @@
                 condenserFluidDashes.style.strokeDashoffset = String(curOff22 - (condDashDrift * 0.4 % 8));
                 condenserFluidDashes.style.opacity = String(0.25 * (1 - e22));
                 condenserOutletMeniscus.style.opacity = '0';
-              } else {
+              } else if (currentTime < 61.5) {
                 // Beat 23: Condenser Outlet Arrival & Ready Hold (t = 58.5s to 61.5s)
                 // Liquid condensate descends vertical outlet drop to bottom flange (870, 275)
                 condenserCoolingTint.style.opacity = '0.4';
@@ -2585,6 +2651,145 @@
                 }
 
                 // Downstream extraction line, Pump [11], and Bottle [12] remain 100% dry and inactive
+                pumpExtractionCasing.setAttribute('stroke', 'var(--line-steel)');
+                pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.25)');
+                extractionFluidGroup.style.opacity = '0';
+                extractionLiquidStream.style.strokeDashoffset = String(extractionPathLen);
+                extractionLiquidHighlight.style.strokeDashoffset = String(extractionPathLen);
+                extractionLiquidDashes.style.strokeDashoffset = String(extractionPathLen);
+                bottleInletMeniscus.style.opacity = '0';
+                bottleStaticFill.style.opacity = '0';
+              } else {
+                // =========================================================================
+                // SECTION 05.1B-3C-1: CONDENSATE EXTRACTION & TRANSPORT TO COLLECTION INLET (t >= 61.5s)
+                // =========================================================================
+                // Upstream condenser maintained in full steady-state operation
+                condenserCoolingTint.style.opacity = '0.4';
+                fanFlowRing.style.opacity = '0.35';
+                condenserFluidGroup.style.opacity = '1';
+                condenserVaporGlow.style.strokeDashoffset = '0';
+                condenserTransCore.style.strokeDashoffset = '0';
+                condenserLiquidStream.style.strokeDashoffset = '0';
+                condenserLiquidHighlight.style.strokeDashoffset = '0';
+                condenserFluidDashes.style.opacity = '0';
+                condenserOutletMeniscus.setAttribute('fill', '#f1f5f9');
+                condenserOutletMeniscus.setAttribute('stroke', '#ffffff');
+                condenserOutletMeniscus.style.opacity = '0.9';
+
+                // Fluid dash drift
+                const extDashDrift = (currentTime - 65.0) * 20;
+
+                // Geometric keypoint fractions along extraction path
+                // Path: M 870 275 L 818 275 Q 812 275 812 281 L 812 368 (~148.4px total)
+                // Flange to pump suction inlet (812, 285): ~65.4px -> frac ~0.441
+                // Through pump body to discharge port (812, 305): ~85.4px -> frac ~0.575
+                // To bottle inlet nozzle (812, 368): ~148.4px -> frac 1.0
+                const fracPumpInlet = 0.441;
+                const fracPumpOutlet = 0.575;
+
+                if (currentTime < 63.0) {
+                  // Beat 24: Condensate Extraction Readiness (t = 61.5s to 63.0s)
+                  // Liquid distillate holds ready at condenser outlet (870, 275).
+                  // Pump [11] is inactive. Extraction line is 100% dry.
+                  pumpExtractionCasing.setAttribute('stroke', 'var(--line-steel)');
+                  pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.25)');
+                  extractionFluidGroup.style.opacity = '0';
+                  extractionLiquidStream.style.strokeDashoffset = String(extractionPathLen);
+                  extractionLiquidHighlight.style.strokeDashoffset = String(extractionPathLen);
+                  extractionLiquidDashes.style.strokeDashoffset = String(extractionPathLen);
+                  bottleInletMeniscus.style.opacity = '0';
+                } else if (currentTime < 65.0) {
+                  // Beat 25: Extraction Pump Becomes Operational (t = 63.0s to 65.0s)
+                  // Restrained operational cue: indicator transitions subtly over 63.0s-64.2s.
+                  // Liquid remains held at condenser outlet to model mechanical response delay
+                  // without asserting unsupported internal priming mechanics.
+                  const p25 = clamp((currentTime - 63.0) / 1.2, 0, 1);
+                  const e25 = easeInOutQuad(p25);
+                  const indAlpha = (0.25 + 0.60 * e25).toFixed(2);
+                  pumpExtractionIndicator.setAttribute('fill', `rgba(148, 163, 184, ${indAlpha})`);
+                  pumpExtractionCasing.setAttribute('stroke', 'rgba(148, 163, 184, 0.45)');
+
+                  extractionFluidGroup.style.opacity = '0';
+                  extractionLiquidStream.style.strokeDashoffset = String(extractionPathLen);
+                  extractionLiquidHighlight.style.strokeDashoffset = String(extractionPathLen);
+                  extractionLiquidDashes.style.strokeDashoffset = String(extractionPathLen);
+                  bottleInletMeniscus.style.opacity = '0';
+                } else if (currentTime < 67.5) {
+                  // Beat 26: Condensate Enters Extraction Line (t = 65.0s to 67.5s)
+                  // Pump operational cue holds active. Liquid crosses outlet flange (870, 275),
+                  // traverses horizontal run to (818, 275), rounds elbow to (812, 281),
+                  // and arrives at pump suction port (812, 285).
+                  pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.85)');
+                  pumpExtractionCasing.setAttribute('stroke', 'rgba(148, 163, 184, 0.45)');
+
+                  extractionFluidGroup.style.opacity = '1';
+                  const p26 = clamp((currentTime - 65.0) / 2.5, 0, 1);
+                  const e26 = easeInOutQuad(p26);
+                  const prog26 = fracPumpInlet * e26;
+                  const curOff26 = extractionPathLen * (1 - prog26);
+
+                  extractionLiquidStream.style.strokeDashoffset = String(curOff26);
+                  extractionLiquidHighlight.style.strokeDashoffset = String(curOff26);
+                  extractionLiquidDashes.style.strokeDashoffset = String(curOff26 - (extDashDrift % 6));
+                  bottleInletMeniscus.style.opacity = '0';
+                } else if (currentTime < 69.5) {
+                  // Beat 27: Continuous Transport Through Pump [11] (t = 67.5s to 69.5s)
+                  // Pump remains operational. Liquid flows continuously through Pump [11] casing
+                  // from suction (812, 285) to discharge port (812, 305). Stream remains 100% visible
+                  // and traceable across the casing without speculative internal machinery.
+                  pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.85)');
+                  pumpExtractionCasing.setAttribute('stroke', 'rgba(148, 163, 184, 0.45)');
+
+                  extractionFluidGroup.style.opacity = '1';
+                  const p27 = clamp((currentTime - 67.5) / 2.0, 0, 1);
+                  const e27 = easeInOutQuad(p27);
+                  const prog27 = fracPumpInlet + (fracPumpOutlet - fracPumpInlet) * e27;
+                  const curOff27 = extractionPathLen * (1 - prog27);
+
+                  extractionLiquidStream.style.strokeDashoffset = String(curOff27);
+                  extractionLiquidHighlight.style.strokeDashoffset = String(curOff27);
+                  extractionLiquidDashes.style.strokeDashoffset = String(curOff27 - (extDashDrift % 6));
+                  bottleInletMeniscus.style.opacity = '0';
+                } else if (currentTime < 72.0) {
+                  // Beat 28: Collection Downpipe Transport (t = 69.5s to 72.0s)
+                  // Pump remains operational. Liquid exits pump discharge (812, 305) and advances downward
+                  // through vertical downpipe toward bottle inlet neck (812, 368). Downstream remains dry.
+                  pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.85)');
+                  pumpExtractionCasing.setAttribute('stroke', 'rgba(148, 163, 184, 0.45)');
+
+                  extractionFluidGroup.style.opacity = '1';
+                  const p28 = clamp((currentTime - 69.5) / 2.5, 0, 1);
+                  const e28 = easeInOutQuad(p28);
+                  const prog28 = fracPumpOutlet + (1.0 - fracPumpOutlet) * e28;
+                  const curOff28 = extractionPathLen * (1 - prog28);
+
+                  extractionLiquidStream.style.strokeDashoffset = String(curOff28);
+                  extractionLiquidHighlight.style.strokeDashoffset = String(curOff28);
+                  extractionLiquidDashes.style.strokeDashoffset = String(curOff28 - (extDashDrift % 6));
+                  bottleInletMeniscus.style.opacity = '0';
+                } else {
+                  // Beat 29: Liquid Reaches Bottle [12] Inlet & Stops (t = 72.0s to 74.0s)
+                  // Liquid front reaches collection bottle inlet nozzle (812, 368) and forms holding meniscus.
+                  // Full extraction path remains charged. Bottle [12] interior remains 100% empty and dry.
+                  pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.85)');
+                  pumpExtractionCasing.setAttribute('stroke', 'rgba(148, 163, 184, 0.45)');
+
+                  extractionFluidGroup.style.opacity = '1';
+                  extractionLiquidStream.style.strokeDashoffset = '0';
+                  extractionLiquidHighlight.style.strokeDashoffset = '0';
+                  extractionLiquidDashes.style.strokeDashoffset = String(-(extDashDrift % 6));
+
+                  if (currentTime < 72.8) {
+                    const p29 = clamp((currentTime - 72.0) / 0.8, 0, 1);
+                    const e29 = easeOutCubic(p29);
+                    bottleInletMeniscus.style.opacity = String(0.9 * e29);
+                  } else {
+                    bottleInletMeniscus.style.opacity = '0.9';
+                  }
+                }
+
+                // Bottle [12] remains strictly empty and dry
+                bottleStaticFill.style.opacity = '0';
               }
             }
           }
@@ -2596,7 +2801,7 @@
         scrubber.value = currentTime;
         const mins = Math.floor(currentTime / 60);
         const secs = (currentTime % 60).toFixed(1).padStart(4, '0');
-        timecodeDisplay.textContent = `0${mins}:${secs} / 00:61.5`;
+        timecodeDisplay.textContent = `0${mins}:${secs} / 01:14.0`;
 
         // Determine current beat
         let activeBeat = BEATS[0];

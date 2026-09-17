@@ -2,11 +2,40 @@
 
 ## Status
 - **Scene**: Chapter 02, Scene 05 (Undergraduate Thesis / Synthesis)
-- **Sub-Phase**: **05.1B-3B — Condensation Inside Condenser** (05.1A apparatus geometry frozen at commit `1b63681`, 05.1B-1 baseline frozen at `618c689`, 05.1B-2A baseline frozen at `f6a7dde`, 05.1B-2B baseline frozen at `7838d00`, 05.1B-3A baseline frozen at `42ba6b1`, current 05.1B-3B implementation approved).
-- **Current Status**: **05.1B-3B — Owner-approved / frozen** (frozen for current phase; 05.1B-3C has not started).
+- **Sub-Phase**: **05.1B-3C-1 — Condensate Extraction & Transport to Collection Inlet** (05.1A apparatus geometry frozen at commit `1b63681`, 05.1B-1 baseline frozen at `618c689`, 05.1B-2A baseline frozen at `f6a7dde`, 05.1B-2B baseline frozen at `7838d00`, 05.1B-3A baseline frozen at `42ba6b1`, 05.1B-3B baseline frozen at `bc79924`, current 05.1B-3C-1 implementation approved).
+- **Current Status**: **05.1B-3C-1 — Owner-approved / frozen** (frozen for current phase; 05.1B-3C-2 has not started).
 - **Approved Workspace**: `prototypes/scene-05-apparatus-explorations/index.html` (Study C — Hybrid Technical Silhouette + Selective Process Visibility).
 - **Primary Factual Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_experiment_setup.png` (Universitas Indonesia Mechanical Engineering laboratory test rig, 2018–2019).
 - **Supporting Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_system_diagram.png` (system architecture and broader cycle context).
+
+---
+
+## Approved 05.1B-3C-1 Baseline Scope (Condensate Extraction & Transport to Collection Inlet)
+
+1. **Scope Boundary & Fixed Stop**:
+   - Covers the physical condensate extraction sequence from Condenser `[10]` outlet flange ($X = 870, Y = 275$) through Extraction Pump `[11]` to the inlet nozzle of Aquadest Collection Bottle `[12]` ($X = 812, Y = 368$) from $t = 61.5\,\text{s}$ through $74.0\,\text{s}$:
+     `condensate held at condenser outlet → pump operational cue & response delay → condensate enters extraction line → continuous transport through pump casing → collection downpipe transport → liquid reaches bottle inlet & holds`.
+   - Halts strictly at the collection bottle inlet nozzle boundary ($X = 812, Y = 368$) with pure distillate liquid condensate held in an operating meniscus state.
+   - Sub-phase 05.1B-3C-2 (Bottle `[12]` filling, distillate accumulation, product reward, and thesis yield conclusion) has **not started**.
+
+2. **Pump `[11]` Factual Interpretation & Abstraction Boundary**:
+   - The external existence, mounting position, and casing of Extraction Pump `[11]` are factual according to the laboratory test rig reference.
+   - The internal pump mechanism is unverified in laboratory records and is treated as an abstraction:
+     - No internal impeller is depicted;
+     - No rotational velocity / RPM claims ($540^\circ/\text{s}$ removed);
+     - No internal volute or chamber geometry is asserted;
+     - No unsupported claims of "suction prime buildup" are made.
+   - Restrained operational cue: status indicator transitions subtly ($t = 63.0 \to 64.2\,\text{s}$) with casing emphasis, followed by a mechanically plausible response delay until $t = 65.0\,\text{s}$.
+   - Transport through Pump `[11]` casing ($t = 67.5 \to 69.5\,\text{s}$, Beat 27) is continuous and traceable; the fluid stream passes through the casing, visually primary, without speculative internal machinery.
+
+3. **Continuous Working-Fluid Material Identity**:
+   - The clear liquid distillate stream (`#f1f5f9`, width 2.2px) with specular highlight (`#ffffff`, width 0.8px) continues seamlessly from Condenser `[10]` outlet through the extraction path to the bottle nozzle.
+   - No separate infographic color language, neon water tint, or artificial saturation is introduced.
+
+4. **Hard Downstream Boundary (Exact Frozen Handoff State for 05.1B-3C-2)**:
+   - Pure liquid distillate is established and held at Collection Bottle `[12]` inlet nozzle ($X = 812, Y = 368$);
+   - Bottle `[12]` interior remains **100% empty and dry** (zero fluid fill, zero internal meniscus, zero droplets, zero reward glow);
+   - All upstream apparatus components (feed pump, heater, throttling valve, flash vessel, brine basin, overhead vapor line, condenser, cooling fan, extraction pump) remain in steady continuous operation.
 
 ---
 
