@@ -45,6 +45,12 @@ In the active prototype `prototypes/new-portfolio-animation-first/index.html`, C
 
 ## Chapter 02 — Architecture and Scene Status
 
+**Chapter 02 Status: CHAPTER 02 — OPEN / NOT YET APPROVED**
+Chapter-level approval must wait until Scene 04 refinement is complete. Afterward, the owner will review Scenes 01–05 together (evaluating narrative progression, inter-scene transitions, pacing, visual consistency, and total duration) before authorizing chapter-level freeze, scene trimming, Scene 05 compression, or transition changes.
+
+The development sequence is:
+`Scene 05 (approved scene baseline) -> Scene 04 (return to refinement) -> Chapter 02 (whole-sequence review)`.
+
 Chapter 02 ("College Years / Foundations to Real World") is structured into five sequential scenes:
 
 1. **Scene 01: Universitas Indonesia Entry (Stars to Campus)**
@@ -66,21 +72,22 @@ Chapter 02 ("College Years / Foundations to Real World") is structured into five
    - Preservation Rule: All current Scene 03 implementation files in `prototypes/new-portfolio-animation-first/` are preserved exactly as the active baseline. Further Scene 03 refinements or polish are deferred unless explicitly requested by the owner. Do not proceed to Scene 04 without separate instructions.
 
 4. **Scene 04: Journey to Tokyo / Tokyo Tech**
-   - Status: **Planned** (the journey to the other side of the world, Tokyo Institute of Technology lab).
+   - Status: **NEXT ACTIVE DEVELOPMENT TARGET — Return to Refinement**.
+   - Focus: Refine independently until reaching maturity comparable to Scenes 01, 03, and 05.
 
 5. **Scene 05: Engineering Undergraduate Thesis / Synthesis**
-   - Status: **Scene 05.1A, 05.1B-1, 05.1B-2A, 05.1B-2B, 05.1B-3A, 05.1B-3B & 05.1B-3C-1 Owner-approved baseline (frozen)**; 05.1B-3C-2 (distillate collection bottle fill & thesis results) planned.
-   - Authority Brief: `.design/CHAPTER_02_SCENE_05_BRIEF.md`.
-   - Approved Exploratory Workspace: `prototypes/scene-05-apparatus-explorations/index.html` (Study C: 2D orthographic editorial representation of Universitas Indonesia test rig with approved 05.1B-1 feed/heating/throttling approach, 05.1B-2A isenthalpic throttling restriction crossing/flash onset, 05.1B-2B flash vessel phase separation, 05.1B-3A pressure-driven vapor transport, 05.1B-3B condensation across illustrative cooling path, and 05.1B-3C-1 condensate extraction and transport to collection bottle inlet).
-   - Scope Rule: All major equipment positions, piping topology, supports, and causal motion up to the collection bottle inlet arrival and empty-bottle hold ($t = 74.0\,\text{s}$) are frozen baseline. Section 05.1B-3C-2 (collection bottle filling, distillate accumulation, and thesis results) has not started.
+   - Status: **APPROVED — CURRENT SCENE-LEVEL BASELINE** (frozen as current scene authority; includes full long-form apparatus and process flow animation up to $t = 74.0\,\text{s}$).
+   - Governance Authority: `.design/CHAPTER_02_SCENE_05_BRIEF.md`; Deferred Roadmap: `.design/SCENE_05_DEFERRED_ROADMAP.md`.
+   - Approved Exploratory Workspace: `prototypes/scene-05-apparatus-explorations/index.html` (Study C: 2D orthographic editorial representation of Universitas Indonesia test rig with approved 05.1A apparatus, 05.1B-1 feed/heating/throttling, 05.1B-2A throttling crossing/flash onset, 05.1B-2B flash vessel phase separation, 05.1B-3A vapor transport, 05.1B-3B condensation, and 05.1B-3C-1 condensate extraction).
+   - Stability & Duration Rule: Scene 05 is now stable and should not be modified unless explicitly reopened. The current long-form duration ($74.0\,\text{s}$) is accepted for now; potential compression (~30s max) and analytical expansions (05.1B-3C-2, 05.2–05.5) are strictly deferred to the Chapter 02 whole-sequence review.
 
 ## Scope
 
 - Root production files (`index.html`, `styles.css`, `main.js`) remain untouched.
 - Chapter 02 main runtime continues in `prototypes/new-portfolio-animation-first/`.
-- Scene 05 apparatus exploration is isolated in `prototypes/scene-05-apparatus-explorations/`.
+- Scene 05 apparatus exploration is isolated in `prototypes/scene-05-apparatus-explorations/` and is frozen.
 - Desktop and mobile rendered evidence are required for owner acceptance of materially visual changes.
-- Do not proceed to Scene 04 until separately instructed.
+- Next active focus is Scene 04 refinement.
 
 ## Acceptance
 
@@ -90,9 +97,11 @@ Keep these states distinct:
 - Technically validated
 - Owner approved
 
+- Chapter 02: **OPEN / NOT YET APPROVED** (whole-chapter review of Scenes 01–05 required before chapter-level freeze).
 - Hero (Red Dwarf): Owner approved (frozen).
 - Scene 01: Owner approved (frozen).
 - Scene 02: Semi-approved (retained as-is for chapter review).
 - Scene 03: Owner approved baseline (frozen for current phase; further refinements deferred unless owner-requested).
-- Scene 05.1A / 05.1B-1 / 05.1B-2A / 05.1B-2B / 05.1B-3A / 05.1B-3B / 05.1B-3C-1: Owner approved baseline (frozen; physical apparatus composition, feed/heating/throttling, throttling crossing / flash onset, flash vessel phase separation, vapor transport to condenser inlet, condensation inside condenser, and condensate extraction and transport to collection bottle inlet in `prototypes/scene-05-apparatus-explorations/`).
+- Scene 04: Next active development target (refinement).
+- Scene 05: **APPROVED — CURRENT SCENE-LEVEL BASELINE** (frozen; long-form physical apparatus and process flow animation in `prototypes/scene-05-apparatus-explorations/`).
 

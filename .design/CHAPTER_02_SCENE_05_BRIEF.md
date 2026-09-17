@@ -2,11 +2,37 @@
 
 ## Status
 - **Scene**: Chapter 02, Scene 05 (Undergraduate Thesis / Synthesis)
-- **Sub-Phase**: **05.1B-3C-1 — Condensate Extraction & Transport to Collection Inlet** (05.1A apparatus geometry frozen at commit `1b63681`, 05.1B-1 baseline frozen at `618c689`, 05.1B-2A baseline frozen at `f6a7dde`, 05.1B-2B baseline frozen at `7838d00`, 05.1B-3A baseline frozen at `42ba6b1`, 05.1B-3B baseline frozen at `bc79924`, current 05.1B-3C-1 implementation approved).
-- **Current Status**: **05.1B-3C-1 — Owner-approved / frozen** (frozen for current phase; 05.1B-3C-2 has not started).
+- **Scene 05 Status**: **APPROVED — CURRENT SCENE-LEVEL BASELINE** (frozen as current scene-level authority; includes full long-form apparatus and process flow animation $t = 0 \to 74.0\,\text{s}$, Beats 1 to 29, at commit `ec1ccdf`).
+- **Chapter 02 Status**: **CHAPTER 02 — OPEN / NOT YET APPROVED** (Scene 04 returns to refinement; complete chapter review of Scenes 01–05 required before chapter-level freeze).
+- **Next Active Target**: **Chapter 02 — Scene 04 Refinement** (independent refinement until reaching comparable maturity).
+- **Deferred Scope**: Scene 05 duration compression (~30s max), 05.1B-3C-2, 05.2 Variables, 05.3 Model/Analysis, 05.4 Model vs Experiment, and 05.5 Thesis Closure are **DEFERRED / NOT CURRENT SCOPE** (governed by `.design/SCENE_05_DEFERRED_ROADMAP.md`).
 - **Approved Workspace**: `prototypes/scene-05-apparatus-explorations/index.html` (Study C — Hybrid Technical Silhouette + Selective Process Visibility).
 - **Primary Factual Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_experiment_setup.png` (Universitas Indonesia Mechanical Engineering laboratory test rig, 2018–2019).
 - **Supporting Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_system_diagram.png` (system architecture and broader cycle context).
+
+---
+
+## Scene 05 Baseline Approval & Chapter 02 Governance
+
+1. **Scene-Level Baseline Approval**:
+   - Scene 05 is approved as the current scene-level animation baseline, covering the full physical apparatus and process flow sequence ($t = 0 \to 74.0\,\text{s}$, Beats 1 to 29).
+   - Scene 05 is now stable and should not be modified unless the owner explicitly reopens it.
+   - Do not compress Scene 05 yet. The current long-form sequence is accepted as the scene authority; possible duration reduction (e.g. ~30s max) belongs to the later Chapter 02 whole-sequence review.
+
+2. **Chapter 02 Open Status & Development Sequence**:
+   - Chapter 02 is **not** yet approved or frozen; it remains an active chapter.
+   - The development sequence is:
+     `Scene 05 (approved scene baseline) -> Scene 04 (return to refinement) -> Chapter 02 (whole-sequence review)`.
+   - After Scene 04 reaches maturity, the owner will review Scenes 01, 02, 03, 04, and 05 together to evaluate narrative progression, inter-scene transitions, pacing, visual consistency, and total duration.
+   - Only that review can authorize:
+     - Chapter 02 freeze;
+     - scene trimming;
+     - Scene 05 compression;
+     - transition changes;
+     - additional Scene 05 analytical development.
+
+3. **Deferred Initiatives**:
+   - Scene 05.1B-3C-2, 05.2 (Variables), 05.3 (Model/Analysis), 05.4 (Model vs Experiment), 05.5 (Thesis Closure), and duration compression remain **DEFERRED / NOT CURRENT SCOPE** (documented in `.design/SCENE_05_DEFERRED_ROADMAP.md`).
 
 ---
 

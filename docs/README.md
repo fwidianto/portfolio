@@ -18,11 +18,12 @@ Do not reconstruct historical design explorations or animation authorities unles
 - `../index.html` and `../CSS/` contain the root production homepage on the current design branch (kept untouched during prototype work).
 - `../prototypes/red-dwarf-animation/index.html` contains the frozen, owner-approved Hero animation authority.
 - `../prototypes/new-portfolio-animation-first/index.html` is the active Chapter 02 prototype workspace:
+  - **Chapter 02 Status**: **OPEN / NOT YET APPROVED** (awaiting Scene 04 refinement and subsequent whole-chapter review of Scenes 01–05).
   - **Scene 01**: Universitas Indonesia Entry (Approved baseline, frozen).
   - **Scene 02**: College Engineering Foundations (Semi-approved, retained as-is for chapter review).
   - **Scene 03**: Astra Agro Lestari Palm Oil Mill Internship (Owner-approved baseline, frozen for current phase. Accepted scope: causal 6-stage palm-oil batch transformation, click-to-restart stage behavior, industrial routing and geometry cleanup, personal evidence inspect node with on-site photo, and dedicated process-explainer inspect node. Further refinements deferred unless owner-requested).
-  - **Scene 04**: Journey to Tokyo / Tokyo Tech (Planned).
-  - **Scene 05**: Undergraduate Thesis / Synthesis (Scene 05.1A physical apparatus composition, 05.1B-1 feed/heating/throttling motion, 05.1B-2A isenthalpic throttling crossing / flash onset, 05.1B-2B flash vessel phase separation, 05.1B-3A vapor transport to condenser inlet, 05.1B-3B condensation across illustrative cooling path, and 05.1B-3C-1 condensate extraction and transport to collection bottle inlet owner-approved and frozen in isolated workspace `../prototypes/scene-05-apparatus-explorations/index.html`; governance authority in `../.design/CHAPTER_02_SCENE_05_BRIEF.md`; 05.1B-3C-2 planned).
+  - **Scene 04**: Journey to Tokyo / Tokyo Tech (**Next active development target** — returning to refinement).
+  - **Scene 05**: Undergraduate Thesis / Synthesis (**APPROVED — CURRENT SCENE-LEVEL BASELINE**; long-form physical apparatus and process flow animation frozen in `../prototypes/scene-05-apparatus-explorations/index.html`; governance authority in `../.design/CHAPTER_02_SCENE_05_BRIEF.md`; deferred roadmap in `../.design/SCENE_05_DEFERRED_ROADMAP.md`).
 - `../Projects/Odoo-ERP-Analytics.html` is the current flagship case-study page.
 - `../prototypes/editorial-systems/` is older animation work and is not Red Dwarf Hero authority by default.
 - `../red-dwarf-animation.html` is an obsolete, incomplete standalone artifact. Its artifact metadata must not be treated as proof of a usable or authoritative Hero implementation. Do not repair or replace it as part of this governance scope.
