@@ -149,10 +149,13 @@ Chapter 02 ("College Years / Foundations to Real World") is structured into five
    - Preservation Rule: All current Scene 03 implementation files in `prototypes/new-portfolio-animation-first/` are preserved exactly as the active baseline. Further Scene 03 refinements or polish are deferred unless explicitly requested by the owner. Do not proceed to Scene 04 without separate instructions.
 
 4. **Scene 04: Journey to Tokyo / Tokyo Tech**
-   - Status: **ACTIVE REFINEMENT (04.A APPROVED BASELINE; 04.B+ PENDING)**.
+   - Status: **ACTIVE REFINEMENT (04.A & 04.B APPROVED BASELINES; 04.C+ PENDING)**.
    - Scene 04.A (Outreach Field): **OWNER APPROVED — CURRENT 04.A ANIMATION BASELINE**.
      - Approved Workspace: `prototypes/scene-04-outreach-explorations/index.html`.
      - Baseline Characteristics: Pure visual text-free canvas, warm Jakarta origin beacon (0.4 Hz breathing aura), 8 anonymous cold slate celestial candidate nodes (zero Tokyo privilege, zero cyan), 6 quadratic inquiry filaments, sequential non-metronomic inquiry pulses depositing transverse ticks, 0.6s silence hold (Beat A3), and final quiet dormancy state ready for 04.B bilateral resonance.
+   - Scene 04.B (Singular Connection): **OWNER APPROVED — CURRENT 04.B ANIMATION BASELINE**.
+     - Approved Workspace: `prototypes/scene-04-outreach-explorations/04b-animation.html`.
+     - Baseline Characteristics: 7.5s calm narrative choreography, exact inherited 04.A dormancy hold (Beat B0), gentle awakening of Tokyo Anchor (`node_3`) with concentric celestial ripple (Beat B1), inbound reciprocal signal wave traveling to Jakarta origin along illuminated cyan filament while shifting traversed ticks (Beat B2), Jakarta reception ripple triggering bilateral split into twin-rail standing wave corridor (Beat B3, representing a confirmed research opportunity / active academic connection), structural perpendicular registration gate lock and graceful background field attenuation to 8–14% (Beat B4), and poised pre-flight resting baseline ready for Scene 04.C flight departure (Beat B5). Main canvas strictly text-free.
      - Commute Sequence: Preserved and quarantined in `prototypes/new-portfolio-animation-first/scene-04.*`.
 
 5. **Scene 05: Engineering Undergraduate Thesis / Synthesis**
@@ -185,6 +188,6 @@ Keep these states distinct:
 - Scene 01: Owner approved (frozen).
 - Scene 02: Semi-approved (retained as-is for chapter review).
 - Scene 03: Owner approved baseline (frozen for current phase; further refinements deferred unless owner-requested).
-- Scene 04: Active refinement (Scene 04.A: **OWNER APPROVED — CURRENT 04.A ANIMATION BASELINE**; 04.B+ pending).
+- Scene 04: Active refinement (Scene 04.A & 04.B: **OWNER APPROVED BASELINES**; Scene 04.C static exploration active).
 - Scene 05: **APPROVED — CURRENT SCENE-LEVEL BASELINE (COMPRESSED 25.0s & COMPLETED)** (re-frozen; compressed physical apparatus, 25.0s process flow animation, and completed distillate collection in `prototypes/scene-05-apparatus-explorations/`).
 

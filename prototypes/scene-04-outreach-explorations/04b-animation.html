@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scene 04.B: Singular Connection — Motion Choreography</title>
+  <meta name="description" content="Motion choreography for Chapter 02 Scene 04.B: One dormant node awakens and achieves bilateral harmonic phase-lock with Jakarta, establishing the physical flight corridor to Tokyo.">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-space: #030712;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(56, 189, 248, 0.50);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-faint: rgba(148, 163, 184, 0.45);
+      --accent-warm: #fb923c;
+      --accent-warm-dim: rgba(251, 146, 60, 0.25);
+      --accent-cyan: #38bdf8;
+      --accent-cyan-dim: rgba(56, 189, 248, 0.25);
+      --node-cold: rgba(148, 163, 184, 0.35);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-space);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Night Sky SVG background */
+    .sky-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Top Reviewer Header Toolbar */
+    .study-toolbar {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 15, 26, 0.88);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    .toolbar-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-right: 8px;
+      border-right: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .beat-selector {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .beat-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 9px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .beat-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .beat-btn.is-active {
+      background: rgba(56, 189, 248, 0.14);
+      border-color: rgba(56, 189, 248, 0.40);
+      color: #38bdf8;
+    }
+
+    /* Main Canvas Stage */
+    .stage-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Floating Timeline Playback Controls */
+    .playback-bar {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 15, 26, 0.90);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 7px 18px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+      width: calc(100% - 48px);
+      max-width: 760px;
+    }
+
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(255, 255, 255, 0.20);
+    }
+
+    .ctrl-btn svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    .slider-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .time-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .time-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+      cursor: pointer;
+    }
+
+    .time-slider::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+      cursor: pointer;
+      border: none;
+    }
+
+    .beat-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 9999px;
+      padding: 3px 9px;
+      white-space: nowrap;
+    }
+
+    .time-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      min-width: 78px;
+      text-align: right;
+    }
+
+    .speed-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .speed-btn.is-active {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    @media (max-width: 640px) {
+      .study-toolbar {
+        top: 10px;
+        width: calc(100% - 20px);
+        padding: 5px 8px;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+      .toolbar-title {
+        display: none;
+      }
+      .beat-btn {
+        font-size: 10px;
+        padding: 3px 7px;
+      }
+      .playback-bar {
+        bottom: 12px;
+        padding: 6px 12px;
+        width: calc(100% - 20px);
+        gap: 8px;
+      }
+      .time-display {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Ambient Night Sky SVG background -->
+  <svg class="sky-canvas" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="120" cy="80" r="1.2" fill="#ffffff" opacity="0.65"/>
+    <circle cx="280" cy="140" r="0.9" fill="#fdf4dc" opacity="0.45"/>
+    <circle cx="450" cy="90" r="1.4" fill="#fffaf0" opacity="0.7"/>
+    <circle cx="780" cy="70" r="1.0" fill="#eaf0f8" opacity="0.5"/>
+    <circle cx="1040" cy="110" r="1.3" fill="#ffe8d0" opacity="0.6"/>
+    <circle cx="1320" cy="85" r="1.1" fill="#ffffff" opacity="0.55"/>
+    <circle cx="90" cy="320" r="0.9" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="180" cy="540" r="1.1" fill="#ffe4cc" opacity="0.5"/>
+    <circle cx="1350" cy="380" r="1.2" fill="#fffaf0" opacity="0.6"/>
+    <circle cx="1260" cy="620" r="1.0" fill="#ffffff" opacity="0.45"/>
+    <circle cx="340" cy="780" r="1.1" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="1180" cy="790" r="1.3" fill="#ffe8d0" opacity="0.55"/>
+  </svg>
+
+  <!-- Top Beat Navigation Toolbar -->
+  <header class="study-toolbar" role="region" aria-label="Scene 04.B Beat Navigation">
+    <span class="toolbar-title">04.B Singular Connection</span>
+    <nav class="beat-selector" aria-label="Beat Selection">
+      <button type="button" class="beat-btn is-active" data-t="0.0">B0 · Inherited</button>
+      <button type="button" class="beat-btn" data-t="1.2">B1 · Awakening</button>
+      <button type="button" class="beat-btn" data-t="3.2">B2 · Inbound Wave</button>
+      <button type="button" class="beat-btn" data-t="4.8">B3 · Phase-Lock</button>
+      <button type="button" class="beat-btn" data-t="5.8">B4 · Field Fade</button>
+      <button type="button" class="beat-btn" data-t="7.0">B5 · Ready Hold</button>
+    </nav>
+  </header>
+
+  <!-- Main Canvas Stage -->
+  <main class="stage-container" id="stage-container">
+    <canvas id="outreach-canvas" role="img" aria-label="Motion choreography of reciprocal academic connection between Jakarta origin and responding Tokyo Tech laboratory"></canvas>
+  </main>
+
+  <!-- Floating Timeline Playback Controls -->
+  <footer class="playback-bar" id="playback-bar" role="region" aria-label="Timeline Scrubber">
+    <button type="button" class="ctrl-btn" id="btn-play-pause" aria-label="Play or Pause">
+      <svg id="icon-play" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <svg id="icon-pause" viewBox="0 0 24 24" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+    <button type="button" class="ctrl-btn" id="btn-restart" aria-label="Restart Animation">
+      <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+    </button>
+
+    <div class="slider-wrap">
+      <span class="beat-pill" id="beat-label">B0 · INHERITED DORMANCY</span>
+      <input type="range" class="time-slider" id="time-slider" min="0" max="7.5" step="0.01" value="0" aria-label="Animation Timeline Scrubber">
+      <span class="time-display" id="time-display">0.00s / 7.50s</span>
+    </div>
+
+    <button type="button" class="speed-btn is-active" data-speed="1.0">1.0×</button>
+    <button type="button" class="speed-btn" data-speed="0.5">0.5×</button>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const canvas = document.getElementById('outreach-canvas');
+      const ctx = canvas.getContext('2d');
+
+      const DURATION = 7.5; // Total duration in seconds
+      let simTime = 0.0;
+      let isPlaying = true;
+      let playbackSpeed = 1.0;
+      let lastTimestamp = performance.now();
+
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+
+      // ======================================================================
+      // EXACT FROZEN 04.A GEOMETRY (AUTHORITY)
+      // ======================================================================
+      const SCENE_DATA = {
+        origin: { xRel: 0.18, yRel: 0.78 },
+        // 8 prospective candidate nodes (node_3 = Tokyo Tech locus)
+        nodes: [
+          { id: 'node_1', xRel: 0.38, yRel: 0.28, attempted: true, attempts: [0.32, 0.62] },
+          { id: 'node_2', xRel: 0.54, yRel: 0.18, attempted: true, attempts: [0.25, 0.48, 0.72] },
+          { id: 'node_3', xRel: 0.76, yRel: 0.25, attempted: true, attempts: [0.24, 0.46, 0.68] }, // Responding Locus (Fushinobu Lab)
+          { id: 'node_4', xRel: 0.88, yRel: 0.16, attempted: false, attempts: [] },
+          { id: 'node_5', xRel: 0.34, yRel: 0.52, attempted: true, attempts: [0.38, 0.70] },
+          { id: 'node_6', xRel: 0.62, yRel: 0.46, attempted: true, attempts: [0.26, 0.50, 0.74] },
+          { id: 'node_7', xRel: 0.84, yRel: 0.42, attempted: false, attempts: [] },
+          { id: 'node_8', xRel: 0.70, yRel: 0.68, attempted: true, attempts: [0.35, 0.68] }
+        ]
+      };
+
+      // Control points for filaments
+      function getControlPoint(ox, oy, tx, ty) {
+        const mx = (ox + tx) * 0.5;
+        const my = (oy + ty) * 0.5;
+        const dx = tx - ox;
+        const dy = ty - oy;
+        const len = Math.hypot(dx, dy);
+        const nx = -dy / len;
+        const ny = dx / len;
+        const bow = len * 0.08;
+        return { x: mx + nx * bow, y: my + ny * bow };
+      }
+
+      function evalQuad(p0, cp, p1, t) {
+        const mt = 1 - t;
+        return {
+          x: mt * mt * p0.x + 2 * mt * t * cp.x + t * t * p1.x,
+          y: mt * mt * p0.y + 2 * mt * t * cp.y + t * t * p1.y
+        };
+      }
+
+      function evalQuadTangent(p0, cp, p1, t) {
+        const mt = 1 - t;
+        const dx = 2 * mt * (cp.x - p0.x) + 2 * t * (p1.x - cp.x);
+        const dy = 2 * mt * (cp.y - p0.y) + 2 * t * (p1.y - cp.y);
+        const len = Math.hypot(dx, dy) || 1;
+        return { tx: dx / len, ty: dy / len, nx: -dy / len, ny: dx / len };
+      }
+
+      function clamp(val, min, max) {
+        return Math.max(min, Math.min(max, val));
+      }
+
+      function easeOutCubic(x) {
+        return 1 - Math.pow(1 - x, 3);
+      }
+
+      function easeInOutQuad(x) {
+        return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+      }
+
+      // ======================================================================
+      // BEAT DEFINITION & NARRATIVE CADENCE
+      // ======================================================================
+      function getBeatInfo(t) {
+        if (t < 1.0) return { id: 'B0', name: 'B0 · INHERITED DORMANCY', desc: 'Silence hold from 04.A. All nodes cold slate; Jakarta breathes quietly.' };
+        if (t < 2.4) return { id: 'B1', name: 'B1 · AWAKENING OF TOKYO ANCHOR', desc: 'Dormant node 3 stirs, inner core glows cyan, concentric ripple emits.' };
+        if (t < 4.2) return { id: 'B2', name: 'B2 · INBOUND RECIPROCAL WAVE', desc: 'First reciprocal pulse travels inward along filament toward Jakarta.' };
+        if (t < 5.2) return { id: 'B3', name: 'B3 · BILATERAL PHASE-LOCK', desc: 'Pulse arrives at Jakarta; filament splits into bilateral twin-rail corridor.' };
+        if (t < 6.4) return { id: 'B4', name: 'B4 · STRUCTURAL REGISTRATION & FADE', desc: 'Gates lock perpendicular; other unconfirmed filaments attenuate.' };
+        return { id: 'B5', name: 'B5 · POISED PRE-FLIGHT BASELINE', desc: 'Steady holding state; twin rails form runway for Scene 04.C flight.' };
+      }
+
+      // UI Control Elements
+      const btnPlayPause = document.getElementById('btn-play-pause');
+      const iconPlay = document.getElementById('icon-play');
+      const iconPause = document.getElementById('icon-pause');
+      const btnRestart = document.getElementById('btn-restart');
+      const timeSlider = document.getElementById('time-slider');
+      const beatLabel = document.getElementById('beat-label');
+      const timeDisplay = document.getElementById('time-display');
+      const speedBtns = document.querySelectorAll('.speed-btn');
+      const beatNavBtns = document.querySelectorAll('.beat-btn');
+
+      function updateUIControls() {
+        if (timeSlider && document.activeElement !== timeSlider) {
+          timeSlider.value = simTime;
+        }
+        const beat = getBeatInfo(simTime);
+        if (beatLabel) {
+          beatLabel.textContent = beat.name;
+        }
+        if (timeDisplay) {
+          timeDisplay.textContent = `${simTime.toFixed(2)}s / ${DURATION.toFixed(2)}s`;
+        }
+        if (iconPlay && iconPause) {
+          iconPlay.style.display = isPlaying ? 'none' : 'block';
+          iconPause.style.display = isPlaying ? 'block' : 'none';
+        }
+
+        // Highlight active beat nav button
+        beatNavBtns.forEach(btn => {
+          const btnT = parseFloat(btn.dataset.t);
+          const active = (btn.textContent.startsWith(beat.id));
+          btn.classList.toggle('is-active', active);
+        });
+      }
+
+      function resize() {
+        const container = document.getElementById('stage-container');
+        width = container.clientWidth || window.innerWidth;
+        height = container.clientHeight || window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        render();
+      }
+
+      // ======================================================================
+      // MAIN RENDER LOOP
+      // ======================================================================
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+
+        const isMobile = width < 640;
+        const ox = width * (isMobile ? 0.22 : SCENE_DATA.origin.xRel);
+        const oy = height * (isMobile ? 0.82 : SCENE_DATA.origin.yRel);
+        const originPt = { x: ox, y: oy };
+
+        const targetNode = SCENE_DATA.nodes.find(n => n.id === 'node_3');
+        const tx = width * (isMobile ? targetNode.xRel * 0.95 : targetNode.xRel);
+        const ty = height * (isMobile ? targetNode.yRel * 1.12 : targetNode.yRel);
+        const targetPt = { x: tx, y: ty };
+        const mainCp = getControlPoint(ox, oy, tx, ty);
+
+        const t = simTime;
+
+        // --------------------------------------------------------------------
+        // CHOREOGRAPHY PARAMETERS DERIVED FROM TIMELINE (CAUSAL BEATS)
+        // --------------------------------------------------------------------
+        // Beat B1: Awakening of Tokyo Anchor (1.0s – 2.4s)
+        const awakenProgress = clamp((t - 1.0) / 1.4, 0, 1);
+        const awakenEase = easeOutCubic(awakenProgress);
+
+        // Awakening ripple from Tokyo node (emitted at t=1.8s to 2.8s)
+        const rippleProgress = clamp((t - 1.8) / 1.0, 0, 1);
+
+        // Beat B2: Inbound Reciprocal Wave (2.4s – 4.2s)
+        // Travels from Tokyo (u=1.0) to Jakarta (u=0.0)
+        let inboundTravel = 0;
+        let isWaveTraveling = false;
+        if (t >= 2.4 && t < 4.2) {
+          isWaveTraveling = true;
+          inboundTravel = easeInOutQuad((t - 2.4) / 1.8); // 0 to 1
+        } else if (t >= 4.2) {
+          inboundTravel = 1.0;
+        }
+        const pulsePosU = 1.0 - inboundTravel; // 1.0 down to 0.0
+
+        // Beat B3: Arrival at Origin & Bilateral Split (4.2s – 5.2s)
+        const splitProgress = clamp((t - 4.2) / 1.0, 0, 1);
+        const splitEase = easeOutCubic(splitProgress);
+        const railOffset = splitEase * 2.2; // Twin rails ±2.2px
+
+        // Jakarta reception ripple upon arrival (4.2s to 5.4s)
+        const jakartaRippleProgress = clamp((t - 4.2) / 1.2, 0, 1);
+
+        // Beat B4: Registration Gate Lock & Field Fade (5.2s – 6.4s)
+        const fadeProgress = clamp((t - 5.0) / 1.4, 0, 1);
+        const fadeEase = easeOutCubic(fadeProgress);
+        // Non-responding filaments fade from 0.35 down to 0.08
+        const unconfirmedFilamentAlpha = (1 - fadeEase) * 0.35 + fadeEase * 0.08;
+        // Non-responding nodes fade from 0.35 down to 0.14
+        const unconfirmedNodeAlpha = (1 - fadeEase) * 0.35 + fadeEase * 0.14;
+
+        // --------------------------------------------------------------------
+        // 1. RENDER NON-RESPONDING FILAMENTS (QUIET CONSTELLATION FIELD)
+        // --------------------------------------------------------------------
+        SCENE_DATA.nodes.forEach(node => {
+          if (node.id === 'node_3' || !node.attempted) return;
+
+          const nx = width * (isMobile ? node.xRel * 0.95 : node.xRel);
+          const ny = height * (isMobile ? node.yRel * 1.12 : node.yRel);
+          const cp = getControlPoint(ox, oy, nx, ny);
+
+          // Filament line (fading softly in Beat B4)
+          ctx.beginPath();
+          ctx.moveTo(ox, oy);
+          ctx.quadraticCurveTo(cp.x, cp.y, nx, ny);
+          ctx.strokeStyle = `rgba(148, 163, 184, ${unconfirmedFilamentAlpha})`;
+          ctx.lineWidth = 1.0;
+          ctx.stroke();
+
+          // Transverse inquiry ticks along this filament (historical trace)
+          node.attempts.forEach(u => {
+            const pt = evalQuad(originPt, cp, { x: nx, y: ny }, u);
+            const tang = evalQuadTangent(originPt, cp, { x: nx, y: ny }, u);
+            const tickLen = 4.0;
+            ctx.beginPath();
+            ctx.moveTo(pt.x + tang.nx * tickLen, pt.y + tang.ny * tickLen);
+            ctx.lineTo(pt.x - tang.nx * tickLen, pt.y - tang.ny * tickLen);
+            ctx.strokeStyle = `rgba(251, 146, 60, ${unconfirmedFilamentAlpha * 1.2})`;
+            ctx.lineWidth = 1.0;
+            ctx.stroke();
+          });
+        });
+
+        // --------------------------------------------------------------------
+        // 2. RENDER THE SINGULAR CONNECTION FILAMENT / TWIN-RAIL CORRIDOR
+        // --------------------------------------------------------------------
+        if (splitProgress <= 0.001) {
+          // Pre-split: single filament
+          // Base unlit / illuminated segment
+          ctx.beginPath();
+          ctx.moveTo(ox, oy);
+          ctx.quadraticCurveTo(mainCp.x, mainCp.y, tx, ty);
+          ctx.strokeStyle = `rgba(148, 163, 184, ${0.35 * (1 - awakenEase) + 0.15 * awakenEase})`;
+          ctx.lineWidth = 1.1;
+          ctx.stroke();
+
+          // Trailing illumination behind inbound pulse (from pulsePosU to 1.0)
+          if (t >= 2.4) {
+            ctx.beginPath();
+            const startU = Math.max(0, pulsePosU);
+            const steps = 40;
+            for (let i = 0; i <= steps; i++) {
+              const u = startU + (1.0 - startU) * (i / steps);
+              const p = evalQuad(originPt, mainCp, targetPt, u);
+              if (i === 0) ctx.moveTo(p.x, p.y);
+              else ctx.lineTo(p.x, p.y);
+            }
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.70)';
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+          }
+        } else {
+          // Bilateral Twin-Rail Standing Wave Corridor
+          const steps = 50;
+          const leftRail = [];
+          const rightRail = [];
+
+          for (let i = 0; i <= steps; i++) {
+            const u = i / steps;
+            const p = evalQuad(originPt, mainCp, targetPt, u);
+            const tang = evalQuadTangent(originPt, mainCp, targetPt, u);
+
+            leftRail.push({
+              x: p.x + tang.nx * railOffset,
+              y: p.y + tang.ny * railOffset
+            });
+            rightRail.push({
+              x: p.x - tang.nx * railOffset,
+              y: p.y - tang.ny * railOffset
+            });
+          }
+
+          // Render Rail A
+          ctx.beginPath();
+          leftRail.forEach((p, idx) => {
+            if (idx === 0) ctx.moveTo(p.x, p.y);
+            else ctx.lineTo(p.x, p.y);
+          });
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.82)';
+          ctx.lineWidth = 1.15;
+          ctx.stroke();
+
+          // Render Rail B
+          ctx.beginPath();
+          rightRail.forEach((p, idx) => {
+            if (idx === 0) ctx.moveTo(p.x, p.y);
+            else ctx.lineTo(p.x, p.y);
+          });
+          ctx.strokeStyle = 'rgba(186, 230, 253, 0.75)';
+          ctx.lineWidth = 1.15;
+          ctx.stroke();
+
+          // Subtle inter-rail energy fill
+          if (railOffset > 1.2) {
+            ctx.beginPath();
+            leftRail.forEach((p, idx) => {
+              if (idx === 0) ctx.moveTo(p.x, p.y);
+              else ctx.lineTo(p.x, p.y);
+            });
+            for (let i = rightRail.length - 1; i >= 0; i--) {
+              ctx.lineTo(rightRail[i].x, rightRail[i].y);
+            }
+            ctx.closePath();
+            ctx.fillStyle = `rgba(56, 189, 248, ${0.04 * splitEase})`;
+            ctx.fill();
+          }
+        }
+
+        // --------------------------------------------------------------------
+        // 3. REGISTRATION GATES / INQUIRY TICKS ON TOKYO FILAMENT
+        // --------------------------------------------------------------------
+        targetNode.attempts.forEach(u => {
+          const pt = evalQuad(originPt, mainCp, targetPt, u);
+          const tang = evalQuadTangent(originPt, mainCp, targetPt, u);
+
+          // Did the inbound pulse already pass this tick?
+          const isPassedByInbound = (u >= pulsePosU);
+
+          if (splitProgress <= 0.001) {
+            // Standard single tick mark, color-shifting if passed
+            const tickLen = 4.5;
+            ctx.beginPath();
+            ctx.moveTo(pt.x + tang.nx * tickLen, pt.y + tang.ny * tickLen);
+            ctx.lineTo(pt.x - tang.nx * tickLen, pt.y - tang.ny * tickLen);
+            if (isPassedByInbound) {
+              ctx.strokeStyle = 'rgba(56, 189, 248, 0.85)';
+              ctx.lineWidth = 1.3;
+            } else {
+              ctx.strokeStyle = 'rgba(251, 146, 60, 0.55)';
+              ctx.lineWidth = 1.0;
+            }
+            ctx.stroke();
+          } else {
+            // Bilateral registration gate bridging the twin rails
+            const gateHalfWidth = Math.max(4.0, railOffset + 2.5);
+            ctx.beginPath();
+            ctx.moveTo(pt.x + tang.nx * gateHalfWidth, pt.y + tang.ny * gateHalfWidth);
+            ctx.lineTo(pt.x - tang.nx * gateHalfWidth, pt.y - tang.ny * gateHalfWidth);
+            ctx.strokeStyle = 'rgba(224, 242, 254, 0.85)';
+            ctx.lineWidth = 1.35;
+            ctx.stroke();
+
+            // Tiny central node bead on the gate
+            ctx.beginPath();
+            ctx.arc(pt.x, pt.y, 1.2, 0, Math.PI * 2);
+            ctx.fillStyle = '#38bdf8';
+            ctx.fill();
+          }
+        });
+
+        // --------------------------------------------------------------------
+        // 4. ACTIVE INBOUND SIGNAL BEAD (DURING BEAT B2)
+        // --------------------------------------------------------------------
+        if (isWaveTraveling) {
+          const pulsePt = evalQuad(originPt, mainCp, targetPt, pulsePosU);
+
+          // Outer luminous glow
+          ctx.beginPath();
+          ctx.arc(pulsePt.x, pulsePt.y, 7.0, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(56, 189, 248, 0.28)';
+          ctx.fill();
+
+          // Middle halo
+          ctx.beginPath();
+          ctx.arc(pulsePt.x, pulsePt.y, 4.0, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(186, 230, 253, 0.65)';
+          ctx.fill();
+
+          // Intense core dot
+          ctx.beginPath();
+          ctx.arc(pulsePt.x, pulsePt.y, 2.0, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+        }
+
+        // --------------------------------------------------------------------
+        // 5. CANDIDATE DESTINATION NODES (7 DORMANT + 1 RESPONDING)
+        // --------------------------------------------------------------------
+        SCENE_DATA.nodes.forEach(node => {
+          const nx = width * (isMobile ? node.xRel * 0.95 : node.xRel);
+          const ny = height * (isMobile ? node.yRel * 1.12 : node.yRel);
+
+          if (node.id === 'node_3') {
+            // RESPONDING TOKYO ANCHOR (NODE 3)
+            // Awakening ripple (t=1.8s to 2.8s)
+            if (rippleProgress > 0 && rippleProgress < 1.0) {
+              const rRadius = 5.0 + rippleProgress * 16.0;
+              ctx.beginPath();
+              ctx.arc(nx, ny, rRadius, 0, Math.PI * 2);
+              ctx.strokeStyle = `rgba(56, 189, 248, ${(1 - rippleProgress) * 0.70})`;
+              ctx.lineWidth = 1.0;
+              ctx.stroke();
+            }
+
+            // Concentric harmonic rings in mature/settled state
+            if (awakenEase > 0.3) {
+              const ringAlpha = (awakenEase - 0.3) / 0.7;
+              ctx.beginPath();
+              ctx.arc(nx, ny, 10.0, 0, Math.PI * 2);
+              ctx.strokeStyle = `rgba(56, 189, 248, ${0.45 * ringAlpha})`;
+              ctx.lineWidth = 1.0;
+              ctx.stroke();
+
+              if (splitProgress > 0.2) {
+                ctx.beginPath();
+                ctx.arc(nx, ny, 15.0, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(186, 230, 253, ${0.30 * splitEase})`;
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+              }
+            }
+
+            // Outer ring (transitions from slate to cyan)
+            ctx.beginPath();
+            ctx.arc(nx, ny, 5.5, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(${Math.round(148 + (56 - 148) * awakenEase)}, ${Math.round(163 + (189 - 163) * awakenEase)}, ${Math.round(184 + (248 - 184) * awakenEase)}, ${0.35 + 0.55 * awakenEase})`;
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+
+            // Dark inner disc
+            ctx.beginPath();
+            ctx.arc(nx, ny, 4.2, 0, Math.PI * 2);
+            ctx.fillStyle = '#060d1d';
+            ctx.fill();
+
+            // Core center dot
+            ctx.beginPath();
+            ctx.arc(nx, ny, 2.2, 0, Math.PI * 2);
+            if (awakenEase < 0.1) {
+              ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
+            } else {
+              ctx.fillStyle = `rgb(${Math.round(148 + (255 - 148) * awakenEase)}, ${Math.round(163 + (255 - 163) * awakenEase)}, ${Math.round(184 + (255 - 184) * awakenEase)})`;
+            }
+            ctx.fill();
+
+            // Soft radiant aura once awakened
+            if (awakenEase > 0) {
+              ctx.beginPath();
+              ctx.arc(nx, ny, 8.0, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(56, 189, 248, ${0.22 * awakenEase})`;
+              ctx.fill();
+            }
+          } else {
+            // UNRESPONSIVE DORMANT NODES (7 NODES)
+            const alpha = node.attempted ? unconfirmedNodeAlpha : unconfirmedNodeAlpha * 0.5;
+
+            // Outer ring
+            ctx.beginPath();
+            ctx.arc(nx, ny, 4.0, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(148, 163, 184, ${alpha})`;
+            ctx.lineWidth = 0.9;
+            ctx.stroke();
+
+            // Dark cavity
+            ctx.beginPath();
+            ctx.arc(nx, ny, 3.0, 0, Math.PI * 2);
+            ctx.fillStyle = '#0a0f1d';
+            ctx.fill();
+
+            // Silent center dot
+            ctx.beginPath();
+            ctx.arc(nx, ny, 1.2, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(148, 163, 184, ${alpha * 1.3})`;
+            ctx.fill();
+          }
+        });
+
+        // --------------------------------------------------------------------
+        // 6. JAKARTA ORIGIN ANCHOR (WARM AMBER SOURCE)
+        // --------------------------------------------------------------------
+        // Continuous respiratory breath
+        const breath = Math.sin(t * Math.PI * 0.9) * 0.5 + 0.5; // calm 0.45 Hz breath
+
+        // Inbound reception ripple at origin (t = 4.2s to 5.4s)
+        if (jakartaRippleProgress > 0 && jakartaRippleProgress < 1.0) {
+          const jRadius = 6.0 + jakartaRippleProgress * 22.0;
+          ctx.beginPath();
+          ctx.arc(ox, oy, jRadius, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(56, 189, 248, ${(1 - jakartaRippleProgress) * 0.65})`;
+          ctx.lineWidth = 1.0;
+          ctx.stroke();
+        }
+
+        // Soft outer ambient aura
+        ctx.beginPath();
+        ctx.arc(ox, oy, 14.0 + breath * 3.0, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(251, 146, 60, ${0.12 + breath * 0.08})`;
+        ctx.fill();
+
+        // Primary outer ring
+        ctx.beginPath();
+        ctx.arc(ox, oy, 6.8, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(251, 146, 60, 0.85)';
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+
+        // Dark protective socket
+        ctx.beginPath();
+        ctx.arc(ox, oy, 5.0, 0, Math.PI * 2);
+        ctx.fillStyle = '#0a0f1d';
+        ctx.fill();
+
+        // Warm luminous core dot
+        ctx.beginPath();
+        ctx.arc(ox, oy, 2.6, 0, Math.PI * 2);
+        ctx.fillStyle = '#fb923c';
+        ctx.fill();
+
+        // Center white spark
+        ctx.beginPath();
+        ctx.arc(ox, oy, 1.1, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+
+        // Update timeline UI
+        updateUIControls();
+      }
+
+      // ======================================================================
+      // ANIMATION TICK & RAF
+      // ======================================================================
+      function tick(now) {
+        const dt = (now - lastTimestamp) / 1000;
+        lastTimestamp = now;
+
+        if (isPlaying) {
+          simTime += dt * playbackSpeed;
+          if (simTime >= DURATION) {
+            simTime = DURATION;
+            isPlaying = false;
+          }
+        }
+
+        render();
+        requestAnimationFrame(tick);
+      }
+
+      // ======================================================================
+      // EVENT LISTENERS & USER INTERACTION
+      // ======================================================================
+      btnPlayPause.addEventListener('click', () => {
+        if (simTime >= DURATION) simTime = 0.0;
+        isPlaying = !isPlaying;
+        lastTimestamp = performance.now();
+      });
+
+      btnRestart.addEventListener('click', () => {
+        simTime = 0.0;
+        isPlaying = true;
+        lastTimestamp = performance.now();
+      });
+
+      timeSlider.addEventListener('input', (e) => {
+        simTime = parseFloat(e.target.value);
+        isPlaying = false;
+        render();
+      });
+
+      beatNavBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          simTime = parseFloat(btn.dataset.t);
+          isPlaying = false;
+          render();
+        });
+      });
+
+      speedBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          speedBtns.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          playbackSpeed = parseFloat(btn.dataset.speed);
+        });
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') {
+          e.preventDefault();
+          if (simTime >= DURATION) simTime = 0.0;
+          isPlaying = !isPlaying;
+          lastTimestamp = performance.now();
+        } else if (e.code === 'KeyR') {
+          simTime = 0.0;
+          isPlaying = true;
+          lastTimestamp = performance.now();
+        } else if (e.key >= '0' && e.key <= '5') {
+          const beatTimes = [0.0, 1.2, 3.2, 4.8, 5.8, 7.0];
+          const idx = parseInt(e.key, 10);
+          if (idx < beatTimes.length) {
+            simTime = beatTimes[idx];
+            isPlaying = false;
+            render();
+          }
+        }
+      });
+
+      window.addEventListener('resize', resize);
+
+      // ======================================================================
+      // GLOBAL TESTING API (FOR HEADLESS CDP & CAPTURE)
+      // ======================================================================
+      window.scene04BAnimation = {
+        seek: function (t) {
+          simTime = Math.max(0, Math.min(DURATION, t));
+          isPlaying = false;
+          render();
+        },
+        play: function () {
+          isPlaying = true;
+          lastTimestamp = performance.now();
+        },
+        pause: function () {
+          isPlaying = false;
+        },
+        restart: function () {
+          simTime = 0.0;
+          isPlaying = true;
+          lastTimestamp = performance.now();
+        },
+        getTime: function () {
+          return simTime;
+        },
+        getBeatInfo: function () {
+          return getBeatInfo(simTime);
+        }
+      };
+
+      // Initialization
+      resize();
+      lastTimestamp = performance.now();
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>

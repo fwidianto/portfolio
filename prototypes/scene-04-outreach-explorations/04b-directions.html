@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scene 04.B: Singular Connection — Static Design Explorations</title>
+  <meta name="description" content="Static design explorations for Chapter 02 Scene 04.B: First reciprocal connection established between Jakarta origin and responding Tokyo Tech laboratory.">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-space: #030712;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(56, 189, 248, 0.50);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-faint: rgba(148, 163, 184, 0.45);
+      --accent-warm: #fb923c;
+      --accent-cyan: #38bdf8;
+      --accent-cyan-dim: rgba(56, 189, 248, 0.25);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-space);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Night Sky SVG */
+    .sky-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Reviewer Toolbar */
+    .study-toolbar {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(10, 15, 26, 0.90);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+    }
+
+    .toolbar-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-right: 10px;
+      border-right: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .study-selector {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .study-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .study-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .study-btn.is-active {
+      color: #fff;
+      background: rgba(56, 189, 248, 0.16);
+      border-color: var(--border-active);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+    }
+
+    .study-btn kbd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    /* Main Exploration Canvas Stage */
+    .stage-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+
+    #outreach-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Bottom Info Card */
+    .info-bar {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: rgba(10, 15, 26, 0.88);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 8px 18px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+      width: calc(100% - 48px);
+      max-width: 680px;
+    }
+
+    .direction-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 9999px;
+      padding: 3px 10px;
+      white-space: nowrap;
+    }
+
+    .direction-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .study-toolbar {
+        top: 10px;
+        width: calc(100% - 20px);
+        padding: 6px 8px;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+      .toolbar-title {
+        display: none;
+      }
+      .study-btn {
+        font-size: 10.5px;
+        padding: 4px 8px;
+      }
+      .study-btn kbd {
+        display: none;
+      }
+      .info-bar {
+        bottom: 12px;
+        padding: 6px 12px;
+        width: calc(100% - 20px);
+      }
+      .direction-desc {
+        font-size: 9.5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Ambient Night Sky SVG background -->
+  <svg class="sky-canvas" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="120" cy="80" r="1.2" fill="#ffffff" opacity="0.65"/>
+    <circle cx="280" cy="140" r="0.9" fill="#fdf4dc" opacity="0.45"/>
+    <circle cx="450" cy="90" r="1.4" fill="#fffaf0" opacity="0.7"/>
+    <circle cx="780" cy="70" r="1.0" fill="#eaf0f8" opacity="0.5"/>
+    <circle cx="1040" cy="110" r="1.3" fill="#ffe8d0" opacity="0.6"/>
+    <circle cx="1320" cy="85" r="1.1" fill="#ffffff" opacity="0.55"/>
+    <circle cx="90" cy="320" r="0.9" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="180" cy="540" r="1.1" fill="#ffe4cc" opacity="0.5"/>
+    <circle cx="1350" cy="380" r="1.2" fill="#fffaf0" opacity="0.6"/>
+    <circle cx="1260" cy="620" r="1.0" fill="#ffffff" opacity="0.45"/>
+    <circle cx="340" cy="780" r="1.1" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="1180" cy="790" r="1.3" fill="#ffe8d0" opacity="0.55"/>
+  </svg>
+
+  <!-- Reviewer Header Toolbar -->
+  <header class="study-toolbar" role="region" aria-label="Scene 04.B Direction Switcher">
+    <span class="toolbar-title">04.B Singular Connection</span>
+    <div class="study-selector" role="tablist">
+      <button type="button" class="study-btn" id="btn-dir-0" role="tab" aria-selected="false" data-dir="0">
+        <span>04.A Inherited State</span>
+        <kbd>0</kbd>
+      </button>
+      <button type="button" class="study-btn is-active" id="btn-dir-a" role="tab" aria-selected="true" data-dir="A">
+        <span>Dir A: Reciprocal Inbound Signal</span>
+        <kbd>1</kbd>
+      </button>
+      <button type="button" class="study-btn" id="btn-dir-b" role="tab" aria-selected="false" data-dir="B">
+        <span>Dir B: Resonant Lock</span>
+        <kbd>2</kbd>
+      </button>
+      <button type="button" class="study-btn" id="btn-dir-c" role="tab" aria-selected="false" data-dir="C">
+        <span>Dir C: Harmonic Field Focus</span>
+        <kbd>3</kbd>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Canvas Stage -->
+  <main class="stage-container" id="stage-container">
+    <canvas id="outreach-canvas" role="img" aria-label="Static design exploration of reciprocal academic connection between Jakarta origin and responding Tokyo Tech laboratory"></canvas>
+  </main>
+
+  <!-- Bottom Reviewer Info Pill -->
+  <footer class="info-bar" id="info-bar" role="region" aria-label="Direction summary">
+    <span class="direction-badge" id="dir-badge">DIR A · RECIPROCAL INBOUND SIGNAL</span>
+    <span class="direction-desc" id="dir-desc">Responding node awakens and sends first counter-pulse inward toward Jakarta along existing filament.</span>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const canvas = document.getElementById('outreach-canvas');
+      const ctx = canvas.getContext('2d');
+
+      const btnDir0 = document.getElementById('btn-dir-0');
+      const btnDirA = document.getElementById('btn-dir-a');
+      const btnDirB = document.getElementById('btn-dir-b');
+      const btnDirC = document.getElementById('btn-dir-c');
+      const dirBadge = document.getElementById('dir-badge');
+      const dirDesc = document.getElementById('dir-desc');
+
+      let currentDirection = 'A'; // '0' | 'A' | 'B' | 'C'
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+
+      // ======================================================================
+      // EXACT FROZEN 04.A GEOMETRY (AUTHORITY)
+      // ======================================================================
+      const SCENE_DATA = {
+        origin: { xRel: 0.18, yRel: 0.78 },
+        // 8 prospective candidate nodes (node_3 = Tokyo Tech locus)
+        nodes: [
+          { id: 'node_1', xRel: 0.38, yRel: 0.28, attempted: true, attempts: [0.32, 0.62] },
+          { id: 'node_2', xRel: 0.54, yRel: 0.18, attempted: true, attempts: [0.25, 0.48, 0.72] },
+          { id: 'node_3', xRel: 0.76, yRel: 0.25, attempted: true, attempts: [0.24, 0.46, 0.68] }, // Tokyo Tech locus
+          { id: 'node_4', xRel: 0.88, yRel: 0.16, attempted: false, attempts: [] },
+          { id: 'node_5', xRel: 0.34, yRel: 0.52, attempted: true, attempts: [0.38, 0.70] },
+          { id: 'node_6', xRel: 0.62, yRel: 0.46, attempted: true, attempts: [0.26, 0.50, 0.74] },
+          { id: 'node_7', xRel: 0.84, yRel: 0.42, attempted: false, attempts: [] },
+          { id: 'node_8', xRel: 0.70, yRel: 0.68, attempted: true, attempts: [0.35, 0.68] }
+        ],
+        filaments: [
+          { targetId: 'node_5', attempts: [0.38, 0.70] },
+          { targetId: 'node_1', attempts: [0.32, 0.62] },
+          { targetId: 'node_6', attempts: [0.26, 0.50, 0.74] },
+          { targetId: 'node_2', attempts: [0.25, 0.48, 0.72] },
+          { targetId: 'node_8', attempts: [0.35, 0.68] },
+          { targetId: 'node_3', attempts: [0.24, 0.46, 0.68] } // Responding filament in 04.B
+        ]
+      };
+
+      const DESCRIPTIONS = {
+        '0': {
+          badge: '04.A · INHERITED BASELINE (DORMANT FIELD)',
+          desc: 'Exact final frame of frozen 04.A: all nodes cold slate, inquiry traces resting, no cyan, no response.'
+        },
+        'A': {
+          badge: 'DIR A · RECIPROCAL INBOUND SIGNAL',
+          desc: 'One dormant node awakens with soft cyan core and emits first inbound counter-pulse traveling back toward Jakarta.'
+        },
+        'B': {
+          badge: 'DIR B · RESONANT LOCK',
+          desc: 'Bilateral harmonic corridor forms between Jakarta and responding node; standing dual-wave lock without moving dots.'
+        },
+        'C': {
+          badge: 'DIR C · HARMONIC FIELD FOCUS',
+          desc: 'Conjugate dual-beacon aperture forms a soft diagonal travel corridor toward Tokyo, priming the 04.C flight handoff.'
+        }
+      };
+
+      function resize() {
+        const container = document.getElementById('stage-container');
+        width = container.clientWidth || window.innerWidth;
+        height = container.clientHeight || window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        render();
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+
+        const isMobile = width < 640;
+        const ox = width * (isMobile ? 0.22 : SCENE_DATA.origin.xRel);
+        const oy = height * (isMobile ? 0.82 : SCENE_DATA.origin.yRel);
+
+        // Render current direction
+        switch (currentDirection) {
+          case '0':
+            renderInherited04A(ox, oy, isMobile);
+            break;
+          case 'A':
+            renderDirectionA(ox, oy, isMobile);
+            break;
+          case 'B':
+            renderDirectionB(ox, oy, isMobile);
+            break;
+          case 'C':
+            renderDirectionC(ox, oy, isMobile);
+            break;
+        }
+
+        // Update footer UI
+        const info = DESCRIPTIONS[currentDirection];
+        if (dirBadge) dirBadge.textContent = info.badge;
+        if (dirDesc) dirDesc.textContent = info.desc;
+      }
+
+      // ======================================================================
+      // 0. INHERITED 04.A FINAL FRAME (Exact Frozen Authority)
+      // ======================================================================
+      function renderInherited04A(ox, oy, isMobile) {
+        // All filaments in resting 04.A state
+        renderStandardFilaments(ox, oy, isMobile, 1.0);
+
+        // All 8 nodes in cold slate state (zero cyan, zero privilege)
+        SCENE_DATA.nodes.forEach(node => {
+          const nx = width * (isMobile ? 0.15 + node.xRel * 0.75 : node.xRel);
+          const ny = height * (isMobile ? 0.12 + node.yRel * 0.72 : node.yRel);
+          drawColdNode(nx, ny, isMobile);
+        });
+
+        // Warm amber origin beacon
+        drawWarmOrigin(ox, oy, isMobile);
+      }
+
+      // ======================================================================
+      // 1. DIRECTION A: RECIPROCAL INBOUND SIGNAL (The Counter-Pulse)
+      // ======================================================================
+      function renderDirectionA(ox, oy, isMobile) {
+        // Subordinate peer filaments (slightly dimmed to 0.75 to let the reciprocal event lead)
+        renderStandardFilaments(ox, oy, isMobile, 0.75, 'node_3');
+
+        // Responding filament between Jakarta and node_3
+        const targetNode = SCENE_DATA.nodes.find(n => n.id === 'node_3');
+        const nx = width * (isMobile ? 0.15 + targetNode.xRel * 0.75 : targetNode.xRel);
+        const ny = height * (isMobile ? 0.12 + targetNode.yRel * 0.72 : targetNode.yRel);
+
+        const midX = (ox + nx) * 0.5 - (ny - oy) * 0.08;
+        const midY = (oy + ny) * 0.5 + (nx - ox) * 0.06;
+
+        // Base resting filament
+        drawFilamentCurve(ox, oy, midX, midY, nx, ny, isMobile, 1.0);
+        drawTransverseTicks(ox, oy, midX, midY, nx, ny, [0.24, 0.46, 0.68], isMobile, 1.0);
+
+        // Inbound pulse situated in transit heading back toward Jakarta (e.g. at u = 0.48 from node_3, so p = 0.52)
+        const pInbound = 0.54; // Progress from Jakarta (inbound pulse is at 54% distance from Jakarta)
+        const px = (1 - pInbound) * (1 - pInbound) * ox + 2 * (1 - pInbound) * pInbound * midX + pInbound * pInbound * nx;
+        const py = (1 - pInbound) * (1 - pInbound) * oy + 2 * (1 - pInbound) * pInbound * midY + pInbound * pInbound * ny;
+
+        // Inbound luminous trail (cyan wake trailing back to node_3)
+        const gradWake = ctx.createLinearGradient(px, py, nx, ny);
+        gradWake.addColorStop(0, 'rgba(56, 189, 248, 0.65)');
+        gradWake.addColorStop(0.5, 'rgba(56, 189, 248, 0.30)');
+        gradWake.addColorStop(1, 'rgba(56, 189, 248, 0.12)');
+
+        // Cut curve between px,py and nx,ny
+        ctx.strokeStyle = gradWake;
+        ctx.lineWidth = isMobile ? 1.6 : 2.0;
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.quadraticCurveTo((midX + nx) * 0.5, (midY + ny) * 0.5, nx, ny);
+        ctx.stroke();
+
+        // Inbound Counter-Pulse Bead (Cyan-white core + soft cyan aura)
+        const aura = ctx.createRadialGradient(px, py, 1, px, py, isMobile ? 8 : 11);
+        aura.addColorStop(0, 'rgba(56, 189, 248, 0.45)');
+        aura.addColorStop(0.6, 'rgba(56, 189, 248, 0.12)');
+        aura.addColorStop(1, 'rgba(56, 189, 248, 0)');
+        ctx.fillStyle = aura;
+        ctx.beginPath();
+        ctx.arc(px, py, isMobile ? 8 : 11, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(px, py, isMobile ? 2.0 : 2.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Subtle direction chevron pointing toward Jakarta
+        const dx = 2 * (1 - pInbound) * (midX - ox) + 2 * pInbound * (nx - midX);
+        const dy = 2 * (1 - pInbound) * (midY - oy) + 2 * pInbound * (ny - midY);
+        const angle = Math.atan2(dy, dx) + Math.PI; // Inbound: reverse direction
+
+        ctx.strokeStyle = 'rgba(224, 242, 254, 0.85)';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        const chvL = 4.5;
+        ctx.moveTo(px + Math.cos(angle - 0.55) * chvL, py + Math.sin(angle - 0.55) * chvL);
+        ctx.lineTo(px, py);
+        ctx.lineTo(px + Math.cos(angle + 0.55) * chvL, py + Math.sin(angle + 0.55) * chvL);
+        ctx.stroke();
+
+        // Render nodes: 7 cold slate + node_3 awakened as active receiver
+        SCENE_DATA.nodes.forEach(node => {
+          const x = width * (isMobile ? 0.15 + node.xRel * 0.75 : node.xRel);
+          const y = height * (isMobile ? 0.12 + node.yRel * 0.72 : node.yRel);
+          if (node.id === 'node_3') {
+            drawAwakenedCyanNode(x, y, isMobile, 'pulse');
+          } else {
+            drawColdNode(x, y, isMobile, 0.7); // Subordinate peer nodes
+          }
+        });
+
+        // Warm amber origin beacon
+        drawWarmOrigin(ox, oy, isMobile);
+      }
+
+      // ======================================================================
+      // 2. DIRECTION B: RESONANT LOCK (Bilateral Harmonic Phase)
+      // ======================================================================
+      function renderDirectionB(ox, oy, isMobile) {
+        // Subordinate peer filaments (dimmed to 0.5 to allow resonant corridor to dominate)
+        renderStandardFilaments(ox, oy, isMobile, 0.5, 'node_3');
+
+        // Responding filament between Jakarta and node_3
+        const targetNode = SCENE_DATA.nodes.find(n => n.id === 'node_3');
+        const nx = width * (isMobile ? 0.15 + targetNode.xRel * 0.75 : targetNode.xRel);
+        const ny = height * (isMobile ? 0.12 + targetNode.yRel * 0.72 : targetNode.yRel);
+
+        const midX = (ox + nx) * 0.5 - (ny - oy) * 0.08;
+        const midY = (oy + ny) * 0.5 + (nx - ox) * 0.06;
+
+        // Resonant Bilateral Twin-Filament (Standing Wave Envelope)
+        const offset = isMobile ? 1.8 : 2.5;
+
+        // Normal vector at mid
+        const ndx = -(ny - oy);
+        const ndy = (nx - ox);
+        const nlen = Math.hypot(ndx, ndy) || 1;
+        const ux = (ndx / nlen) * offset;
+        const uy = (ndy / nlen) * offset;
+
+        // Gradient 1: Top rail (Amber origin to Cyan destination)
+        const gradTop = ctx.createLinearGradient(ox, oy, nx, ny);
+        gradTop.addColorStop(0, 'rgba(251, 146, 60, 0.55)');
+        gradTop.addColorStop(0.5, 'rgba(241, 245, 249, 0.50)');
+        gradTop.addColorStop(1, 'rgba(56, 189, 248, 0.75)');
+
+        ctx.strokeStyle = gradTop;
+        ctx.lineWidth = isMobile ? 1.2 : 1.5;
+        ctx.beginPath();
+        ctx.moveTo(ox + ux * 0.5, oy + uy * 0.5);
+        ctx.quadraticCurveTo(midX + ux, midY + uy, nx + ux * 0.5, ny + uy * 0.5);
+        ctx.stroke();
+
+        // Gradient 2: Bottom rail
+        ctx.strokeStyle = gradTop;
+        ctx.lineWidth = isMobile ? 1.2 : 1.5;
+        ctx.beginPath();
+        ctx.moveTo(ox - ux * 0.5, oy - uy * 0.5);
+        ctx.quadraticCurveTo(midX - ux, midY - uy, nx - ux * 0.5, ny - uy * 0.5);
+        ctx.stroke();
+
+        // Soft core glow between rails
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+        ctx.lineWidth = isMobile ? 5 : 7;
+        ctx.beginPath();
+        ctx.moveTo(ox, oy);
+        ctx.quadraticCurveTo(midX, midY, nx, ny);
+        ctx.stroke();
+
+        // Synchronized Harmonic Standing Wave Rungs (Aligned Effort Ticks)
+        const harmonicTicks = [0.24, 0.40, 0.56, 0.72, 0.88];
+        harmonicTicks.forEach(tProbe => {
+          const tx = (1 - tProbe) * (1 - tProbe) * ox + 2 * (1 - tProbe) * tProbe * midX + tProbe * tProbe * nx;
+          const ty = (1 - tProbe) * (1 - tProbe) * oy + 2 * (1 - tProbe) * tProbe * midY + tProbe * tProbe * ny;
+
+          const dx = 2 * (1 - tProbe) * (midX - ox) + 2 * tProbe * (nx - midX);
+          const dy = 2 * (1 - tProbe) * (midY - oy) + 2 * tProbe * (ny - midY);
+          const angle = Math.atan2(dy, dx);
+          const rungL = isMobile ? 4.5 : 6.0;
+
+          // Color interpolates from amber to cyan along corridor
+          const r = Math.round(251 * (1 - tProbe) + 56 * tProbe);
+          const g = Math.round(146 * (1 - tProbe) + 189 * tProbe);
+          const b = Math.round(60 * (1 - tProbe) + 248 * tProbe);
+
+          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.75)`;
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.moveTo(tx - Math.sin(angle) * rungL, ty + Math.cos(angle) * rungL);
+          ctx.lineTo(tx + Math.sin(angle) * rungL, ty - Math.cos(angle) * rungL);
+          ctx.stroke();
+
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.95)`;
+          ctx.beginPath();
+          ctx.arc(tx, ty, 1.4, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Render nodes: 7 quiet slate + node_3 awakened in resonant phase
+        SCENE_DATA.nodes.forEach(node => {
+          const x = width * (isMobile ? 0.15 + node.xRel * 0.75 : node.xRel);
+          const y = height * (isMobile ? 0.12 + node.yRel * 0.72 : node.yRel);
+          if (node.id === 'node_3') {
+            drawAwakenedCyanNode(x, y, isMobile, 'resonance');
+          } else {
+            drawColdNode(x, y, isMobile, 0.45); // Subordinate peer nodes
+          }
+        });
+
+        // Warm amber origin beacon
+        drawWarmOrigin(ox, oy, isMobile);
+      }
+
+      // ======================================================================
+      // 3. DIRECTION C: HARMONIC FIELD FOCUS (Prime for 04.C Flight Handoff)
+      // ======================================================================
+      function renderDirectionC(ox, oy, isMobile) {
+        // Subordinate peer filaments (dimmed to 0.35 to clear visual field for flight path)
+        renderStandardFilaments(ox, oy, isMobile, 0.35, 'node_3');
+
+        const targetNode = SCENE_DATA.nodes.find(n => n.id === 'node_3');
+        const nx = width * (isMobile ? 0.15 + targetNode.xRel * 0.75 : targetNode.xRel);
+        const ny = height * (isMobile ? 0.12 + targetNode.yRel * 0.72 : targetNode.yRel);
+
+        const midX = (ox + nx) * 0.5 - (ny - oy) * 0.08;
+        const midY = (oy + ny) * 0.5 + (nx - ox) * 0.06;
+
+        // Soft Hyperbolic Field Corridor (Gentle atmospheric wash between Jakarta and Tokyo)
+        ctx.save();
+        const beamGrad = ctx.createLinearGradient(ox, oy, nx, ny);
+        beamGrad.addColorStop(0, 'rgba(251, 146, 60, 0.09)');
+        beamGrad.addColorStop(0.3, 'rgba(56, 189, 248, 0.06)');
+        beamGrad.addColorStop(0.7, 'rgba(56, 189, 248, 0.08)');
+        beamGrad.addColorStop(1, 'rgba(56, 189, 248, 0.14)');
+
+        ctx.strokeStyle = beamGrad;
+        ctx.lineWidth = isMobile ? 32 : 48;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(ox, oy);
+        ctx.quadraticCurveTo(midX, midY, nx, ny);
+        ctx.stroke();
+        ctx.restore();
+
+        // Primary Guided Flight Vector Filament
+        const guideGrad = ctx.createLinearGradient(ox, oy, nx, ny);
+        guideGrad.addColorStop(0, 'rgba(251, 146, 60, 0.60)');
+        guideGrad.addColorStop(0.35, 'rgba(251, 146, 60, 0.35)');
+        guideGrad.addColorStop(0.65, 'rgba(56, 189, 248, 0.45)');
+        guideGrad.addColorStop(1, 'rgba(56, 189, 248, 0.85)');
+
+        ctx.strokeStyle = guideGrad;
+        ctx.lineWidth = isMobile ? 1.4 : 1.8;
+        ctx.beginPath();
+        ctx.moveTo(ox, oy);
+        ctx.quadraticCurveTo(midX, midY, nx, ny);
+        ctx.stroke();
+
+        // Directional micro-dashes along corridor pointing northeast
+        ctx.save();
+        ctx.strokeStyle = 'rgba(224, 242, 254, 0.40)';
+        ctx.lineWidth = 1.0;
+        ctx.setLineDash([4, 12]);
+        ctx.beginPath();
+        ctx.moveTo(ox, oy);
+        ctx.quadraticCurveTo(midX, midY, nx, ny);
+        ctx.stroke();
+        ctx.restore();
+
+        // Transverse ticks along the path
+        drawTransverseTicks(ox, oy, midX, midY, nx, ny, [0.24, 0.46, 0.68], isMobile, 1.2);
+
+        // Destination Reception Horizon at node_3 (Pre-aligns geometry for flight arrival)
+        const angleArrival = Math.atan2(ny - midY, nx - midX);
+        const arcR = isMobile ? 14 : 18;
+
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.arc(nx, ny, arcR, angleArrival + Math.PI * 0.55, angleArrival + Math.PI * 1.45);
+        ctx.stroke();
+
+        // Render nodes: 7 quiet slate + node_3 awakened as conjugate focal beacon
+        SCENE_DATA.nodes.forEach(node => {
+          const x = width * (isMobile ? 0.15 + node.xRel * 0.75 : node.xRel);
+          const y = height * (isMobile ? 0.12 + node.yRel * 0.72 : node.yRel);
+          if (node.id === 'node_3') {
+            drawAwakenedCyanNode(x, y, isMobile, 'focus');
+          } else {
+            drawColdNode(x, y, isMobile, 0.35); // Strongly subordinate peer nodes
+          }
+        });
+
+        // Warm amber origin beacon
+        drawWarmOrigin(ox, oy, isMobile);
+      }
+
+      // ======================================================================
+      // COMMON RENDERING HELPERS
+      // ======================================================================
+      function renderStandardFilaments(ox, oy, isMobile, opacityScale = 1.0, excludeId = null) {
+        SCENE_DATA.filaments.forEach(f => {
+          if (excludeId && f.targetId === excludeId) return;
+
+          const node = SCENE_DATA.nodes.find(n => n.id === f.targetId);
+          if (!node) return;
+
+          const nx = width * (isMobile ? 0.15 + node.xRel * 0.75 : node.xRel);
+          const ny = height * (isMobile ? 0.12 + node.yRel * 0.72 : node.yRel);
+
+          const midX = (ox + nx) * 0.5 - (ny - oy) * 0.08;
+          const midY = (oy + ny) * 0.5 + (nx - ox) * 0.06;
+
+          drawFilamentCurve(ox, oy, midX, midY, nx, ny, isMobile, opacityScale);
+          drawTransverseTicks(ox, oy, midX, midY, nx, ny, f.attempts, isMobile, opacityScale);
+        });
+      }
+
+      function drawFilamentCurve(ox, oy, midX, midY, nx, ny, isMobile, opacityScale = 1.0) {
+        const grad = ctx.createLinearGradient(ox, oy, nx, ny);
+        grad.addColorStop(0, `rgba(251, 146, 60, ${0.42 * opacityScale})`);
+        grad.addColorStop(0.35, `rgba(251, 146, 60, ${0.20 * opacityScale})`);
+        grad.addColorStop(0.75, `rgba(148, 163, 184, ${0.10 * opacityScale})`);
+        grad.addColorStop(1, `rgba(148, 163, 184, ${0.03 * opacityScale})`);
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = isMobile ? 1.0 : 1.2;
+        ctx.beginPath();
+        ctx.moveTo(ox, oy);
+        ctx.quadraticCurveTo(midX, midY, nx, ny);
+        ctx.stroke();
+      }
+
+      function drawTransverseTicks(ox, oy, midX, midY, nx, ny, attempts, isMobile, opacityScale = 1.0) {
+        attempts.forEach(tProbe => {
+          const tickX = (1 - tProbe) * (1 - tProbe) * ox + 2 * (1 - tProbe) * tProbe * midX + tProbe * tProbe * nx;
+          const tickY = (1 - tProbe) * (1 - tProbe) * oy + 2 * (1 - tProbe) * tProbe * midY + tProbe * tProbe * ny;
+
+          const dx = 2 * (1 - tProbe) * (midX - ox) + 2 * tProbe * (nx - midX);
+          const dy = 2 * (1 - tProbe) * (midY - oy) + 2 * tProbe * (ny - midY);
+          const angle = Math.atan2(dy, dx);
+
+          const tickAlpha = 0.45 * opacityScale;
+          const tickLen = isMobile ? 3.0 : 4.0;
+
+          ctx.strokeStyle = `rgba(251, 146, 60, ${tickAlpha})`;
+          ctx.lineWidth = 1.0;
+          ctx.beginPath();
+          ctx.moveTo(tickX - Math.sin(angle) * tickLen, tickY + Math.cos(angle) * tickLen);
+          ctx.lineTo(tickX + Math.sin(angle) * tickLen, tickY - Math.cos(angle) * tickLen);
+          ctx.stroke();
+
+          ctx.fillStyle = `rgba(251, 146, 60, ${tickAlpha * 1.2})`;
+          ctx.beginPath();
+          ctx.arc(tickX, tickY, isMobile ? 1.0 : 1.3, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+
+      function drawColdNode(nx, ny, isMobile, alphaScale = 1.0) {
+        ctx.strokeStyle = `rgba(148, 163, 184, ${0.22 * alphaScale})`;
+        ctx.lineWidth = 1.0;
+        ctx.beginPath();
+        ctx.arc(nx, ny, isMobile ? 6.5 : 8.0, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.fillStyle = '#0a0f1d';
+        ctx.beginPath();
+        ctx.arc(nx, ny, isMobile ? 3.5 : 4.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = `rgba(148, 163, 184, ${0.55 * alphaScale})`;
+        ctx.beginPath();
+        ctx.arc(nx, ny, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function drawAwakenedCyanNode(nx, ny, isMobile, mode = 'pulse') {
+        const rOuter = isMobile ? 7.5 : 9.5;
+        const rCore = isMobile ? 4.0 : 5.0;
+
+        // Radial cyan breathing aura
+        const aura = ctx.createRadialGradient(nx, ny, 1, nx, ny, isMobile ? 20 : 26);
+        aura.addColorStop(0, 'rgba(56, 189, 248, 0.32)');
+        aura.addColorStop(0.5, 'rgba(56, 189, 248, 0.08)');
+        aura.addColorStop(1, 'rgba(56, 189, 248, 0)');
+        ctx.fillStyle = aura;
+        ctx.beginPath();
+        ctx.arc(nx, ny, isMobile ? 20 : 26, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Outer cyan ring
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.65)';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.arc(nx, ny, rOuter, 0, Math.PI * 2);
+        ctx.stroke();
+
+        if (mode === 'resonance') {
+          // Additional dilated harmonic ring
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.28)';
+          ctx.lineWidth = 1.0;
+          ctx.beginPath();
+          ctx.arc(nx, ny, rOuter + (isMobile ? 4 : 5.5), 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        // Dark celestial void core
+        ctx.fillStyle = '#081325';
+        ctx.beginPath();
+        ctx.arc(nx, ny, rCore, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Luminous cyan-white response center
+        ctx.fillStyle = '#38bdf8';
+        ctx.beginPath();
+        ctx.arc(nx, ny, isMobile ? 2.2 : 2.8, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(nx, ny, isMobile ? 1.0 : 1.3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function drawWarmOrigin(x, y, isMobile) {
+        const auraR = isMobile ? 18 : 24;
+        const aura = ctx.createRadialGradient(x, y, 1, x, y, auraR);
+        aura.addColorStop(0, 'rgba(251, 146, 60, 0.28)');
+        aura.addColorStop(0.6, 'rgba(251, 146, 60, 0.06)');
+        aura.addColorStop(1, 'rgba(251, 146, 60, 0)');
+        ctx.fillStyle = aura;
+        ctx.beginPath();
+        ctx.arc(x, y, auraR, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Concentric beacon rings
+        ctx.strokeStyle = 'rgba(251, 146, 60, 0.45)';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.arc(x, y, isMobile ? 7.5 : 9.5, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.fillStyle = '#0a0f1d';
+        ctx.beginPath();
+        ctx.arc(x, y, isMobile ? 4.5 : 5.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#fb923c';
+        ctx.beginPath();
+        ctx.arc(x, y, isMobile ? 2.2 : 2.8, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // ======================================================================
+      // CONTROLLER & EVENT LISTENERS
+      // ======================================================================
+      function setDirection(dir) {
+        if (!['0', 'A', 'B', 'C'].includes(dir)) return;
+        currentDirection = dir;
+
+        [btnDir0, btnDirA, btnDirB, btnDirC].forEach(b => {
+          if (!b) return;
+          const isActive = b.dataset.dir === dir;
+          b.classList.toggle('is-active', isActive);
+          b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        render();
+      }
+
+      btnDir0.addEventListener('click', () => setDirection('0'));
+      btnDirA.addEventListener('click', () => setDirection('A'));
+      btnDirB.addEventListener('click', () => setDirection('B'));
+      btnDirC.addEventListener('click', () => setDirection('C'));
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === '0') setDirection('0');
+        if (e.key === '1') setDirection('A');
+        if (e.key === '2') setDirection('B');
+        if (e.key === '3') setDirection('C');
+      });
+
+      window.addEventListener('resize', resize);
+
+      // Expose deterministic API for programmatic CDP verification
+      window.scene04BController = {
+        setDirection,
+        getDirection: () => currentDirection
+      };
+
+      // Initial layout
+      resize();
+    })();
+  </script>
+</body>
+</html>
