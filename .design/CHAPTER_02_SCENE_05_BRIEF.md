@@ -2,11 +2,47 @@
 
 ## Status
 - **Scene**: Chapter 02, Scene 05 (Undergraduate Thesis / Synthesis)
-- **Sub-Phase**: **05.1B-2B — Flash Vessel Phase Separation** (05.1A apparatus geometry frozen at commit `1b63681`, 05.1B-1 baseline frozen at `618c689`, 05.1B-2A baseline frozen at `f6a7dde`, current 05.1B-2B implementation approved).
-- **Current Status**: **05.1B-2B — Owner-approved / frozen** (frozen for current phase; 05.1B-3 has not started).
+- **Sub-Phase**: **05.1B-3A — Vapor Transport to Condenser Inlet** (05.1A apparatus geometry frozen at commit `1b63681`, 05.1B-1 baseline frozen at `618c689`, 05.1B-2A baseline frozen at `f6a7dde`, 05.1B-2B baseline frozen at `7838d00`, current 05.1B-3A implementation approved).
+- **Current Status**: **05.1B-3A — Owner-approved / frozen** (frozen for current phase; 05.1B-3B has not started).
 - **Approved Workspace**: `prototypes/scene-05-apparatus-explorations/index.html` (Study C — Hybrid Technical Silhouette + Selective Process Visibility).
 - **Primary Factual Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_experiment_setup.png` (Universitas Indonesia Mechanical Engineering laboratory test rig, 2018–2019).
 - **Supporting Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_system_diagram.png` (system architecture and broader cycle context).
+
+---
+
+## Approved 05.1B-3A Baseline Scope (Vapor Transport to Condenser Inlet)
+
+1. **Scope Boundary & Fixed Stop**:
+   - Covers the physical transport of separated vapor from the Flash Vessel `[8]` top outlet nozzle ($X = 645, Y = 165$) through the overhead line up to the inlet flange of Condenser `[10]` ($X = 805, Y = 200$), spanning $t = 36.0\,\text{s}$ through $46.5\,\text{s}$.
+   - Halts strictly at the condenser inlet boundary with vapor charged up to the flange interface and a soft ready wisp held.
+   - Sub-phase 05.1B-3B (condenser cooling fan, internal serpentine condensation, extraction pump `[11]`, and aquadest collection bottle `[12]`) has **not started**.
+
+2. **Transport Mechanism & Conservative Scientific Terminology**:
+   - **Pressure-Driven Pipe Flow**: Once vapor enters the connected piping, transport is governed primarily as *pressure-driven vapor flow through the overhead line* driven by the process pressure differential, rather than buoyancy (buoyancy applies to in-vessel separation).
+   - **Vapor Accumulation at Outlet**: The initial handoff state ($t = 36.0 \to 37.5\,\text{s}$, Beat 14) is framed conservatively as *Vapor Accumulation at Outlet / Vapor Outlet Readiness*, without implying unverified measured pressure-rise telemetry.
+   - Zero visible numerical pressure values, telemetry gauges, or thermodynamic equations added to the runtime.
+
+3. **Segment-by-Segment Pipe Population Rule**:
+   - The pipe-population rule is authoritative: each pipe segment stays completely dry until the continuous vapor wavefront physically reaches it.
+   - Sequence:
+     - Beat 14 ($t = 36.0 \to 37.5\,\text{s}$): Vapor accumulated at dome/outlet nozzle threshold; overhead pipe 100% dry.
+     - Beat 15 ($t = 37.5 \to 39.5\,\text{s}$): Vapor occupies the vertical routed pipe segment ($Y = 165 \to 135$) and rounds Upper Elbow 1.
+     - Beat 16 ($t = 39.5 \to 42.0\,\text{s}$): Pressure-driven flow traverses the horizontal overhead run ($X = 655 \to 755$) and rounds Upper Elbow 2.
+     - Beat 17 ($t = 42.0 \to 44.0\,\text{s}$): Vapor descends the vertical downpipe ($Y = 135 \to 190$) and rounds the bottom elbow.
+     - Beat 18 ($t = 44.0 \to 46.5\,\text{s}$): Vapor arrives at the Condenser `[10]` inlet flange ($X = 805, Y = 200$) and settles into a stable readiness hold.
+
+4. **Visual Abstraction Boundary**:
+   - The warm-white core with amber-gold halo is a visual abstraction of gaseous vapor transport, not literal visible smoke.
+   - The moving dash texture communicates directional gaseous flow along the pipe lumen and remains strictly clipped inside the pipe geometry, restrained, and continuous with the vapor state in Flash Vessel `[8]`.
+
+5. **Hard Downstream Boundary (Exact Frozen Handoff State for 05.1B-3B)**:
+   - Vapor has reached Condenser `[10]` inlet flange boundary ($X = 805, Y = 200$);
+   - Condenser `[10]` internal serpentine and fin matrix remain 100% dry and inactive;
+   - Condenser fan remains completely off;
+   - Zero condensation droplets or liquid films exist inside condenser;
+   - Extraction Pump `[11]` remains powered off and inactive;
+   - Aquadest Bottle `[12]` remains empty and dry;
+   - Brine Basin `[9]` liquid level and Flash Vessel `[8]` vapor cushion remain stable and undisturbed.
 
 ---
 

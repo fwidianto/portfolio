@@ -528,7 +528,7 @@
       .beat-steppers {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(6, 1fr);
         gap: 3px;
       }
 
@@ -572,15 +572,15 @@
 
   <header class="editorial-header">
     <div class="header-text">
-      <div class="kicker">02.05 // UNDERGRADUATE THESIS (2018–2019) · SECTION 05.1B-2B</div>
-      <h1>Flash Vessel Phase Separation</h1>
-      <p class="subtitle">Physical process flow animation through frozen 05.1A/B-2A baselines: Plume Momentum Decay → Buoyant Vapor Rise → Gravity Liquid Settling → Brine Basin Drainage → Vapor Outlet Readiness</p>
+      <div class="kicker">02.05 // UNDERGRADUATE THESIS (2018–2019) · SECTION 05.1B-3A</div>
+      <h1>Vapor Transport to Condenser Inlet</h1>
+      <p class="subtitle">Physical process flow animation through frozen 05.1A/B-1/B-2 baselines: Vapor Outlet Accumulation → Vertical Routed Segment → Pressure-Driven Overhead Flow → Downpipe Drop → Condenser Inlet Arrival</p>
     </div>
 
     <div class="study-tabs" role="tablist">
       <button class="study-btn" data-target="study-a">Study A · Orthographic</button>
       <button class="study-btn" data-target="study-b">Study B · Isometric</button>
-      <button class="study-btn is-active" data-target="study-c">Study C · Process Flow 05.1B-2B (Phase Separation)</button>
+      <button class="study-btn is-active" data-target="study-c">Study C · Process Flow 05.1B-3A (Vapor Transport)</button>
     </div>
   </header>
 
@@ -922,11 +922,11 @@
          ========================================================================= -->
     <div class="study-card is-active" id="study-c">
       <div class="study-meta">
-        <span class="study-badge">STUDY C · SECTION 05.1B-2B PROCESS FLOW (PHASE SEPARATION)</span>
+        <span class="study-badge">STUDY C · SECTION 05.1B-3A PROCESS FLOW (VAPOR TRANSPORT)</span>
         <span id="study-c-status-pill" class="status-pill">STATUS: RIG AT REST</span>
       </div>
 
-      <!-- Playback Controls HUD for Section 05.1B-2B -->
+      <!-- Playback Controls HUD for Section 05.1B-3A -->
       <div class="playback-bar" id="playback-bar">
         <div class="playback-actions">
           <button id="btn-play-pause" class="ctrl-btn is-primary" title="Toggle Play / Pause (Space)">
@@ -951,13 +951,18 @@
             <button class="beat-btn" data-beat="11" title="Beat 11: Buoyant Vapor Rise &amp; Liquid Settling">11·Vapor</button>
             <button class="beat-btn" data-beat="12" title="Beat 12: Brine Drainage to Basin [9]">12·Drain</button>
             <button class="beat-btn" data-beat="13" title="Beat 13: Vapor Outlet Readiness Hold">13·Hold</button>
+            <button class="beat-btn" data-beat="14" title="Beat 14: Vapor Accumulation at Outlet">14·Outlet</button>
+            <button class="beat-btn" data-beat="15" title="Beat 15: Vertical Routed Segment &amp; Elbow 1">15·Rise</button>
+            <button class="beat-btn" data-beat="16" title="Beat 16: Pressure-Driven Overhead Flow">16·Run</button>
+            <button class="beat-btn" data-beat="17" title="Beat 17: Downpipe Drop &amp; Approach">17·Drop</button>
+            <button class="beat-btn" data-beat="18" title="Beat 18: Condenser Inlet Ready Hold">18·Inlet</button>
           </div>
         </div>
 
         <div class="timeline-container">
-          <input type="range" id="timeline-scrubber" class="timeline-scrubber" min="0" max="36.0" step="0.05" value="0">
+          <input type="range" id="timeline-scrubber" class="timeline-scrubber" min="0" max="46.5" step="0.05" value="0">
           <div class="timeline-meta">
-            <span id="timecode-display" class="timecode">00:00.0 / 00:36.0</span>
+            <span id="timecode-display" class="timecode">00:00.0 / 00:46.5</span>
             <span id="beat-label-display" class="beat-label">RIG AT REST</span>
           </div>
         </div>
@@ -1283,13 +1288,31 @@
         <text x="645" y="448" font-family="'JetBrains Mono', monospace" font-size="8" fill="var(--text-muted)" text-anchor="middle" id="brine-basin-label">BRINE BASIN [9]</text>
 
         <!-- ==================== 5. VAPOR OVERHEAD & CONDENSER COIL CUTAWAY [10] ==================== -->
-        <!-- Overhead Vapor Duct -->
+        <!-- Overhead Vapor Duct Base -->
         <path d="M 645 165 L 645 135 Q 645 125 655 125 L 755 125 Q 765 125 765 135 L 765 190 Q 765 200 775 200 L 805 200" 
               stroke="#1a202c" stroke-width="10" stroke-linecap="round" fill="none"/>
+
+        <!-- Dynamic Animated Vapor Transport Elements (Section 05.1B-3A) -->
+        <g id="vapor-overhead-group" opacity="0">
+          <path id="vapor-overhead-glow" 
+                d="M 645 165 L 645 135 Q 645 125 655 125 L 755 125 Q 765 125 765 135 L 765 190 Q 765 200 775 200 L 805 200" 
+                stroke="rgba(245, 158, 11, 0.25)" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <path id="vapor-overhead-core" 
+                d="M 645 165 L 645 135 Q 645 125 655 125 L 755 125 Q 765 125 765 135 L 765 190 Q 765 200 775 200 L 805 200" 
+                stroke="rgba(254, 243, 199, 0.55)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+          <path id="vapor-overhead-stream" 
+                d="M 645 165 L 645 135 Q 645 125 655 125 L 755 125 Q 765 125 765 135 L 765 190 Q 765 200 775 200 L 805 200" 
+                stroke="rgba(245, 158, 11, 0.75)" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="3 4" fill="none"/>
+          <!-- Inlet boundary arrival wisp at Condenser [10] entry (X=805, Y=200) -->
+          <ellipse id="vapor-condenser-inlet-wisp" cx="805" cy="200" rx="3.5" ry="4.5" 
+                   fill="rgba(254, 243, 199, 0.75)" stroke="#f59e0b" stroke-width="0.8" opacity="0"/>
+        </g>
+
+        <!-- Overhead Vapor Duct Exterior Walls -->
         <path d="M 645 165 L 645 135 Q 645 125 655 125 L 755 125 Q 765 125 765 135 L 765 190 Q 765 200 775 200 L 805 200" 
               stroke="var(--line-crisp)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
         <path d="M 645 165 L 645 135 Q 645 125 655 125 L 755 125 Q 765 125 765 135 L 765 190 Q 765 200 775 200 L 805 200" 
-              stroke="rgba(200, 230, 255, 0.4)" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/>
+              stroke="rgba(200, 230, 255, 0.25)" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/>
 
         <!-- Bench Frame -->
         <rect x="790" y="275" width="165" height="185" fill="none" stroke="var(--line-steel)" stroke-width="1.5"/>
@@ -1402,7 +1425,7 @@
     // =========================================================================
     (function initScene05Animation() {
       // Configuration & Timeline Timestamps (seconds)
-      const DURATION = 36.0;
+      const DURATION = 46.5;
       const BEATS = [
         { id: 0, time: 0.0, name: 'RIG AT REST (INACTIVE)', pill: 'STATUS: RIG AT REST' },
         { id: 1, time: 1.2, name: 'BEAT 1 · FEED INTAKE & SIGHT GLASS ACTIVATION', pill: 'BEAT 1: INTAKE ACTIVE' },
@@ -1417,7 +1440,12 @@
         { id: 10, time: 26.5, name: 'BEAT 10 · PHASE DISENGAGEMENT (VAPOR / LIQUID)', pill: 'BEAT 10: DISENGAGEMENT' },
         { id: 11, time: 28.5, name: 'BEAT 11 · BUOYANT VAPOR RISE & LIQUID GRAVITY SETTLING', pill: 'BEAT 11: PHASE SEPARATION' },
         { id: 12, time: 31.0, name: 'BEAT 12 · RESIDUAL LIQUID DRAINAGE TO BRINE BASIN [9]', pill: 'BEAT 12: BRINE DRAINAGE' },
-        { id: 13, time: 33.5, name: 'BEAT 13 · VAPOR OUTLET READINESS & SEPARATION HOLD', pill: 'BEAT 13: READINESS HOLD' }
+        { id: 13, time: 33.5, name: 'BEAT 13 · VAPOR OUTLET READINESS & SEPARATION HOLD', pill: 'BEAT 13: READINESS HOLD' },
+        { id: 14, time: 36.0, name: 'BEAT 14 · VAPOR ACCUMULATION AT OUTLET', pill: 'BEAT 14: OUTLET READY' },
+        { id: 15, time: 37.5, name: 'BEAT 15 · VERTICAL ROUTED SEGMENT & ELBOW 1', pill: 'BEAT 15: VERTICAL RISE' },
+        { id: 16, time: 39.5, name: 'BEAT 16 · PRESSURE-DRIVEN OVERHEAD PIPE FLOW', pill: 'BEAT 16: OVERHEAD FLOW' },
+        { id: 17, time: 42.0, name: 'BEAT 17 · DOWNPIPE ROUTING DROP & INLET APPROACH', pill: 'BEAT 17: INLET APPROACH' },
+        { id: 18, time: 44.0, name: 'BEAT 18 · CONDENSER INLET ARRIVAL & READY HOLD', pill: 'BEAT 18: INLET READY' }
       ];
 
       // DOM Elements
@@ -1487,6 +1515,13 @@
       const brineBasinMeniscus = document.getElementById('brine-basin-meniscus');
       const brineImpactRipple = document.getElementById('brine-impact-ripple');
 
+      // Dynamic Vapor Transport Elements (Section 05.1B-3A, Beats 14 to 18)
+      const vaporOverheadGroup = document.getElementById('vapor-overhead-group');
+      const vaporOverheadGlow = document.getElementById('vapor-overhead-glow');
+      const vaporOverheadCore = document.getElementById('vapor-overhead-core');
+      const vaporOverheadStream = document.getElementById('vapor-overhead-stream');
+      const vaporCondenserInletWisp = document.getElementById('vapor-condenser-inlet-wisp');
+
       // Compute exact geometric path lengths
       const suctionLen = suctionCore.getTotalLength();
       const dischargeLen = dischargeCore.getTotalLength();
@@ -1499,6 +1534,7 @@
       const liquidStreamRightLen = liquidStreamRight.getTotalLength();
       const liquidStreamCenterLen = liquidStreamCenter.getTotalLength();
       const brineDrainLen = brineDrainCore.getTotalLength();
+      const vaporOverheadLen = vaporOverheadCore.getTotalLength();
 
       // Initialize path dasharrays
       suctionGlow.style.strokeDasharray = `${suctionLen} ${suctionLen}`;
@@ -1519,6 +1555,9 @@
       liquidStreamCenter.style.strokeDasharray = `${liquidStreamCenterLen} ${liquidStreamCenterLen}`;
       brineDrainGlow.style.strokeDasharray = `${brineDrainLen} ${brineDrainLen}`;
       brineDrainCore.style.strokeDasharray = `${brineDrainLen} ${brineDrainLen}`;
+      vaporOverheadGlow.style.strokeDasharray = `${vaporOverheadLen} ${vaporOverheadLen}`;
+      vaporOverheadCore.style.strokeDasharray = `${vaporOverheadLen} ${vaporOverheadLen}`;
+      vaporOverheadStream.style.strokeDasharray = `${vaporOverheadLen} ${vaporOverheadLen}`;
 
       // Animation State
       let currentTime = 0;
@@ -1919,8 +1958,16 @@
           }
 
           // -------------------------------------------------------------
-          // BEATS 9 to 13: Flash Vessel Phase Separation & Brine Drainage
+          // BEATS 9 to 18: Flash Vessel Phase Separation & Vapor Transport
           // -------------------------------------------------------------
+          if (currentTime < 36.0) {
+            vaporOverheadGroup.style.opacity = '0';
+            vaporOverheadGlow.style.strokeDashoffset = String(vaporOverheadLen);
+            vaporOverheadCore.style.strokeDashoffset = String(vaporOverheadLen);
+            vaporOverheadStream.style.strokeDashoffset = String(vaporOverheadLen);
+            vaporCondenserInletWisp.style.opacity = '0';
+          }
+
           if (currentTime < 24.5) {
             // Unresolved hold from 05.1B-2A: Separation elements remain 100% dry and inactive
             flashPlumeDecay.style.opacity = '0';
@@ -2088,7 +2135,7 @@
               brineImpactRipple.setAttribute('ry', String(rippleR * 0.25));
               brineImpactRipple.style.opacity = String(0.8 * (1 - (ripplePhase % 1)));
             }
-          } else {
+          } else if (currentTime < 36.0) {
             // Beat 13: Vapor Outlet Readiness & Separation Steady State Hold (t = 33.5s to 36.0s)
             flashPlumeDecay.style.opacity = '0.75';
 
@@ -2124,6 +2171,117 @@
             brineImpactRipple.setAttribute('rx', String(rippleR));
             brineImpactRipple.setAttribute('ry', String(rippleR * 0.25));
             brineImpactRipple.style.opacity = String(0.7 * (1 - (ripplePhase % 1)));
+          } else {
+            // =========================================================================
+            // SECTION 05.1B-3A: VAPOR TRANSPORT TO CONDENSER INLET (t >= 36.0s)
+            // =========================================================================
+            // Flash Vessel [8] and Brine Basin [9] remain at steady separated hold
+            flashPlumeDecay.style.opacity = '0.75';
+            flashVaporGroup.style.opacity = '1';
+            vaporCloudBody.style.opacity = '0.85';
+            vaporStreamline1.style.strokeDashoffset = '0';
+            vaporStreamline2.style.strokeDashoffset = '0';
+            vaporStreamlineCenter.style.strokeDashoffset = '0';
+
+            flashLiquidGroup.style.opacity = '1';
+            liquidStreamLeft.style.strokeDashoffset = '0';
+            liquidStreamRight.style.strokeDashoffset = '0';
+            liquidStreamCenter.style.strokeDashoffset = '0';
+            funnelLiquidPool.style.opacity = '0.85';
+            funnelLiquidMeniscus.style.opacity = '0.9';
+
+            brineDrainJetGroup.style.opacity = '1';
+            brineDrainGlow.style.strokeDashoffset = '0';
+            brineDrainCore.style.strokeDashoffset = '0';
+
+            brineBasinPoolGroup.style.opacity = '1';
+            brineBasinPool.setAttribute('points', '616,458 674,458 672,438 618,438');
+            brineBasinMeniscus.setAttribute('cy', '438');
+            brineBasinMeniscus.setAttribute('rx', '27');
+            brineImpactRipple.setAttribute('cy', '438');
+            const ripplePhase = (currentTime - 33.5) * 6;
+            const rippleR = 4 + 4 * (ripplePhase % 1);
+            brineImpactRipple.setAttribute('rx', String(rippleR));
+            brineImpactRipple.setAttribute('ry', String(rippleR * 0.25));
+            brineImpactRipple.style.opacity = String(0.7 * (1 - (ripplePhase % 1)));
+
+            if (currentTime < 37.5) {
+              // Beat 14: Vapor Accumulation at Outlet (t = 36.0s to 37.5s)
+              // Vapor occupies dome and nozzle threshold ready for pressure-driven pipe transport.
+              const pPress = clamp((currentTime - 36.0) / 1.5, 0, 1);
+              const ePress = easeInOutQuad(pPress);
+              vaporOutletThreshold.style.opacity = String(0.85 + 0.15 * ePress);
+
+              // Overhead line remains completely dry until vapor front reaches it
+              vaporOverheadGroup.style.opacity = '0';
+              vaporOverheadGlow.style.strokeDashoffset = String(vaporOverheadLen);
+              vaporOverheadCore.style.strokeDashoffset = String(vaporOverheadLen);
+              vaporOverheadStream.style.strokeDashoffset = String(vaporOverheadLen);
+              vaporCondenserInletWisp.style.opacity = '0';
+            } else if (currentTime < 39.5) {
+              // Beat 15: Vertical Routed Segment & Elbow 1 (t = 37.5s to 39.5s)
+              // Pressure differential carries vapor through vertical pipe (Y=165 to 135) and rounds first elbow to (655, 125)
+              vaporOutletThreshold.style.opacity = '1';
+              vaporOverheadGroup.style.opacity = '1';
+
+              const pRise = clamp((currentTime - 37.5) / 2.0, 0, 1);
+              const eRise = easeInOutQuad(pRise);
+              // Fraction 0 to 0.175 (45.7px / 262px)
+              const prog15 = 0.175 * eRise;
+              vaporOverheadGlow.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog15));
+              vaporOverheadCore.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog15));
+              vaporOverheadStream.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog15));
+              vaporCondenserInletWisp.style.opacity = '0';
+            } else if (currentTime < 42.0) {
+              // Beat 16: Pressure-Driven Overhead Pipe Flow (t = 39.5s to 42.0s)
+              // Process pressure differential drives vapor across horizontal run from X=655 to 755 and rounds downward elbow
+              vaporOutletThreshold.style.opacity = '1';
+              vaporOverheadGroup.style.opacity = '1';
+
+              const pRun = clamp((currentTime - 39.5) / 2.5, 0, 1);
+              const eRun = easeInOutQuad(pRun);
+              // Fraction 0.175 to 0.616 (161.4px / 262px)
+              const prog16 = 0.175 + (0.616 - 0.175) * eRun;
+              vaporOverheadGlow.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog16));
+              vaporOverheadCore.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog16));
+              vaporOverheadStream.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog16));
+              vaporCondenserInletWisp.style.opacity = '0';
+            } else if (currentTime < 44.0) {
+              // Beat 17: Downpipe Routing Drop & Inlet Approach (t = 42.0s to 44.0s)
+              // Vapor descends vertical downpipe (Y=135 to 190) and rounds bottom elbow (to X=775, Y=200)
+              vaporOutletThreshold.style.opacity = '1';
+              vaporOverheadGroup.style.opacity = '1';
+
+              const pDrop = clamp((currentTime - 42.0) / 2.0, 0, 1);
+              const eDrop = easeInOutQuad(pDrop);
+              // Fraction 0.616 to 0.886 (232.1px / 262px)
+              const prog17 = 0.616 + (0.886 - 0.616) * eDrop;
+              vaporOverheadGlow.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog17));
+              vaporOverheadCore.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog17));
+              vaporOverheadStream.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog17));
+              vaporCondenserInletWisp.style.opacity = '0';
+            } else {
+              // Beat 18: Condenser Inlet Arrival & Ready Hold (t = 44.0s to 46.5s)
+              vaporOutletThreshold.style.opacity = '1';
+              vaporOverheadGroup.style.opacity = '1';
+
+              if (currentTime < 44.8) {
+                // Final entry stub traversal (X = 775 to 805)
+                const pInlet = clamp((currentTime - 44.0) / 0.8, 0, 1);
+                const eInlet = easeOutCubic(pInlet);
+                const prog18 = 0.886 + (1.0 - 0.886) * eInlet;
+                vaporOverheadGlow.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog18));
+                vaporOverheadCore.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog18));
+                vaporOverheadStream.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog18));
+                vaporCondenserInletWisp.style.opacity = String(0.85 * eInlet);
+              } else {
+                // Complete steady-state hold: vapor charged to Condenser [10] inlet (X=805, Y=200)
+                vaporOverheadGlow.style.strokeDashoffset = '0';
+                vaporOverheadCore.style.strokeDashoffset = '0';
+                vaporOverheadStream.style.strokeDashoffset = '0';
+                vaporCondenserInletWisp.style.opacity = '0.85';
+              }
+            }
           }
         }
 
@@ -2133,7 +2291,7 @@
         scrubber.value = currentTime;
         const mins = Math.floor(currentTime / 60);
         const secs = (currentTime % 60).toFixed(1).padStart(4, '0');
-        timecodeDisplay.textContent = `0${mins}:${secs} / 00:36.0`;
+        timecodeDisplay.textContent = `0${mins}:${secs} / 00:46.5`;
 
         // Determine current beat
         let activeBeat = BEATS[0];
