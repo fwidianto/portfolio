@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scene 04.C: Flight Journey — Motion Choreography</title>
+  <meta name="description" content="Motion choreography for Chapter 02 Scene 04.C: Vector airliner flight along the resonant bilateral corridor from Jakarta to Tokyo with starlight geography and commute handoff.">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-space: #030712;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(56, 189, 248, 0.50);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-faint: rgba(148, 163, 184, 0.45);
+      --accent-warm: #fb923c;
+      --accent-warm-dim: rgba(251, 146, 60, 0.25);
+      --accent-cyan: #38bdf8;
+      --accent-cyan-dim: rgba(56, 189, 248, 0.25);
+      --node-cold: rgba(148, 163, 184, 0.35);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-space);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Night Sky SVG background */
+    .sky-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Top Reviewer Header Toolbar */
+    .study-toolbar {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 15, 26, 0.88);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    .toolbar-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-right: 8px;
+      border-right: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .beat-selector {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .beat-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 9px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .beat-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .beat-btn.is-active {
+      background: rgba(56, 189, 248, 0.14);
+      border-color: rgba(56, 189, 248, 0.40);
+      color: #38bdf8;
+    }
+
+    /* Main Canvas Stage */
+    .stage-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Floating Timeline Playback Controls */
+    .playback-bar {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 15, 26, 0.90);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 7px 18px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+      width: calc(100% - 48px);
+      max-width: 780px;
+    }
+
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(255, 255, 255, 0.20);
+    }
+
+    .ctrl-btn svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    .slider-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .beat-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.10);
+      border: 1px solid rgba(56, 189, 248, 0.20);
+      border-radius: 4px;
+      padding: 2px 7px;
+      white-space: nowrap;
+      min-width: 130px;
+      text-align: center;
+    }
+
+    .time-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .time-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .time-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+    }
+
+    .time-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      min-width: 86px;
+      text-align: right;
+    }
+
+    .speed-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .speed-btn.is-active {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    @media (max-width: 640px) {
+      .study-toolbar {
+        top: 10px;
+        width: calc(100% - 20px);
+        padding: 5px 8px;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+      .toolbar-title {
+        display: none;
+      }
+      .beat-btn {
+        font-size: 10px;
+        padding: 3px 7px;
+      }
+      .playback-bar {
+        bottom: 12px;
+        padding: 6px 12px;
+        width: calc(100% - 20px);
+        gap: 8px;
+      }
+      .beat-pill {
+        min-width: 80px;
+        max-width: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 9px;
+        padding: 2px 5px;
+      }
+      .time-display {
+        display: none;
+      }
+      .speed-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Ambient Night Sky SVG background -->
+  <svg class="sky-canvas" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="120" cy="80" r="1.2" fill="#ffffff" opacity="0.65"/>
+    <circle cx="280" cy="140" r="0.9" fill="#fdf4dc" opacity="0.45"/>
+    <circle cx="450" cy="90" r="1.4" fill="#fffaf0" opacity="0.7"/>
+    <circle cx="780" cy="70" r="1.0" fill="#eaf0f8" opacity="0.5"/>
+    <circle cx="1040" cy="110" r="1.3" fill="#ffe8d0" opacity="0.6"/>
+    <circle cx="1320" cy="85" r="1.1" fill="#ffffff" opacity="0.55"/>
+    <circle cx="90" cy="320" r="0.9" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="180" cy="540" r="1.1" fill="#ffe4cc" opacity="0.5"/>
+    <circle cx="1350" cy="380" r="1.2" fill="#fffaf0" opacity="0.6"/>
+    <circle cx="1260" cy="620" r="1.0" fill="#ffffff" opacity="0.45"/>
+    <circle cx="340" cy="780" r="1.1" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="1180" cy="790" r="1.3" fill="#ffe8d0" opacity="0.55"/>
+  </svg>
+
+  <!-- Top Beat Navigation Toolbar -->
+  <header class="study-toolbar" role="region" aria-label="Scene 04.C Beat Navigation">
+    <span class="toolbar-title">04.C Flight Journey</span>
+    <nav class="beat-selector" aria-label="Beat Selection">
+      <button type="button" class="beat-btn is-active" data-t="0.0">C0 · Handoff</button>
+      <button type="button" class="beat-btn" data-t="1.6">C1 · Climb</button>
+      <button type="button" class="beat-btn" data-t="3.8">C2 · Cruise</button>
+      <button type="button" class="beat-btn" data-t="5.8">C3 · Approach</button>
+      <button type="button" class="beat-btn" data-t="7.8">C4 · Touchdown</button>
+    </nav>
+  </header>
+
+  <!-- Main Canvas Stage (Strictly Text-Free) -->
+  <main class="stage-container" id="stage-container">
+    <canvas id="flight-canvas" role="img" aria-label="Motion choreography of vector airliner flight journey from Jakarta to Tokyo with starlight geography and commute aperture handoff"></canvas>
+  </main>
+
+  <!-- Floating Timeline Playback Controls -->
+  <footer class="playback-bar" id="playback-bar" role="region" aria-label="Timeline Scrubber">
+    <button type="button" class="ctrl-btn" id="btn-play-pause" aria-label="Play or Pause">
+      <svg id="icon-play" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <svg id="icon-pause" viewBox="0 0 24 24" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+    <button type="button" class="ctrl-btn" id="btn-restart" aria-label="Restart Animation">
+      <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+    </button>
+
+    <div class="slider-wrap">
+      <span class="beat-pill" id="beat-label">C0 · HANDOFF</span>
+      <input type="range" class="time-slider" id="time-slider" min="0" max="8.5" step="0.01" value="0" aria-label="Animation Timeline Scrubber">
+      <span class="time-display" id="time-display">0.00s / 8.50s</span>
+    </div>
+
+    <button type="button" class="speed-btn is-active" data-speed="1.0">1.0×</button>
+    <button type="button" class="speed-btn" data-speed="0.5">0.5×</button>
+    <button type="button" class="speed-btn" data-speed="0.25">0.25×</button>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const canvas = document.getElementById('flight-canvas');
+      const ctx = canvas.getContext('2d');
+
+      const TOTAL_DURATION = 8.5; // seconds
+      let currentTime = 0.0;
+      let isPlaying = true;
+      let playSpeed = 1.0;
+      let lastTimestamp = null;
+
+      // Frozen 04.A / 04.B Anchor Positions (Exact 04.B Authority)
+      const SCENE_DATA = {
+        origin: { xRel: 0.18, yRel: 0.78 }, // Jakarta
+        nodes: [
+          { id: 'node_1', xRel: 0.38, yRel: 0.28, attempted: true },
+          { id: 'node_2', xRel: 0.54, yRel: 0.18, attempted: true },
+          { id: 'node_3', xRel: 0.76, yRel: 0.25, isTokyo: true }, // Responding Locus (Tokyo Tech)
+          { id: 'node_4', xRel: 0.88, yRel: 0.16, attempted: false },
+          { id: 'node_5', xRel: 0.34, yRel: 0.52, attempted: true },
+          { id: 'node_6', xRel: 0.62, yRel: 0.46, attempted: true },
+          { id: 'node_7', xRel: 0.84, yRel: 0.42, attempted: false },
+          { id: 'node_8', xRel: 0.70, yRel: 0.68, attempted: true }
+        ],
+        // Metropolitan Commuter Anchors for Sequence 2 Handoff
+        commute: {
+          residence: { xRel: 0.67, yRel: 0.32 }, // Takatsu, Kawasaki
+          lab: { xRel: 0.76, yRel: 0.25 }        // Tokyo Tech, Ookayama
+        }
+      };
+
+      // Real Earth Natural Earth GeoJSON Contours
+      let geoData = null;
+      fetch('assets/real-earth-countries.json')
+        .then(r => r.json())
+        .then(data => { geoData = data; })
+        .catch(() => { /* Continues gracefully with procedural fallback */ });
+
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      let dpr = window.devicePixelRatio || 1;
+
+      function resize() {
+        const container = document.getElementById('stage-container') || document.body;
+        width = container.clientWidth || window.innerWidth;
+        height = container.clientHeight || window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      // UI Controls
+      const timeSlider = document.getElementById('time-slider');
+      const timeDisplay = document.getElementById('time-display');
+      const beatLabel = document.getElementById('beat-label');
+      const btnPlayPause = document.getElementById('btn-play-pause');
+      const iconPlay = document.getElementById('icon-play');
+      const iconPause = document.getElementById('icon-pause');
+      const btnRestart = document.getElementById('btn-restart');
+      const beatBtns = document.querySelectorAll('.beat-btn');
+      const speedBtns = document.querySelectorAll('.speed-btn');
+
+      function updatePlayPauseUI() {
+        if (isPlaying) {
+          iconPlay.style.display = 'none';
+          iconPause.style.display = 'block';
+        } else {
+          iconPlay.style.display = 'block';
+          iconPause.style.display = 'none';
+        }
+      }
+
+      btnPlayPause.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        updatePlayPauseUI();
+        if (isPlaying) lastTimestamp = null;
+      });
+
+      btnRestart.addEventListener('click', () => {
+        currentTime = 0.0;
+        isPlaying = true;
+        updatePlayPauseUI();
+        lastTimestamp = null;
+      });
+
+      timeSlider.addEventListener('input', (e) => {
+        currentTime = parseFloat(e.target.value);
+        isPlaying = false;
+        updatePlayPauseUI();
+      });
+
+      beatBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentTime = parseFloat(btn.dataset.t);
+          isPlaying = false;
+          updatePlayPauseUI();
+        });
+      });
+
+      speedBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          speedBtns.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          playSpeed = parseFloat(btn.dataset.speed);
+        });
+      });
+
+      // Quadratic Bézier Math (Identical to frozen 04.B authority)
+      function getControlPoint(x1, y1, x2, y2) {
+        const mx = (x1 + x2) * 0.5;
+        const my = (y1 + y2) * 0.5;
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const len = Math.hypot(dx, dy) || 1;
+        const nx = -dy / len;
+        const ny = dx / len;
+        const bow = len * 0.08; // Exact frozen 04.B filament bow
+        return { x: mx + nx * bow, y: my + ny * bow };
+      }
+
+      function getBezierPoint(p0, p1, p2, u) {
+        const t = Math.max(0, Math.min(1, u));
+        const mt = 1 - t;
+        return {
+          x: mt * mt * p0.x + 2 * mt * t * p1.x + t * t * p2.x,
+          y: mt * mt * p0.y + 2 * mt * t * p1.y + t * t * p2.y
+        };
+      }
+
+      function getBezierTangent(p0, p1, p2, u) {
+        const t = Math.max(0, Math.min(1, u));
+        const mt = 1 - t;
+        const dx = 2 * mt * (p1.x - p0.x) + 2 * t * (p2.x - p1.x);
+        const dy = 2 * mt * (p1.y - p0.y) + 2 * t * (p2.y - p1.y);
+        return Math.atan2(dy, dx);
+      }
+
+      // Coordinate constants & Affine-aligned projection mapping CGK to Jakarta and HND to Tokyo (Proven in 04c-directions.html)
+      const DEG2RAD = Math.PI / 180;
+      const CGK_LON = 106.8456, CGK_LAT = -6.2088;
+      const HND_LON = 139.7671, HND_LAT = 35.6895;
+
+      function projectAlignedToCorridor(lon, lat, isMobile) {
+        const ox = width * (isMobile ? SCENE_DATA.origin.xRel : SCENE_DATA.origin.xRel);
+        const oy = height * (isMobile ? SCENE_DATA.origin.yRel * 1.12 : SCENE_DATA.origin.yRel);
+        const targetNode = SCENE_DATA.nodes.find(n => n.id === 'node_3');
+        const tx = width * (isMobile ? targetNode.xRel * 0.95 : targetNode.xRel);
+        const ty = height * (isMobile ? targetNode.yRel * 1.12 : targetNode.yRel);
+
+        function toMercatorNorm(l, p) {
+          const x = l * DEG2RAD;
+          const sinLat = Math.sin(p * DEG2RAD);
+          const clampedSin = Math.max(-0.9999, Math.min(0.9999, sinLat));
+          const y = Math.log((1 + clampedSin) / (1 - clampedSin)) * 0.5;
+          return { x, y };
+        }
+
+        const mCGK = toMercatorNorm(CGK_LON, CGK_LAT);
+        const mHND = toMercatorNorm(HND_LON, HND_LAT);
+        const mCur = toMercatorNorm(lon, lat);
+
+        const u = (mCur.x - mCGK.x) / (mHND.x - mCGK.x);
+        const v = (mCur.y - mCGK.y) / (mHND.y - mCGK.y);
+
+        return {
+          x: ox + u * (tx - ox),
+          y: oy + v * (ty - oy)
+        };
+      }
+
+      function drawGeoCountry(country, strokeStyle, lineWidth, isMobile, projectFn = projectAlignedToCorridor) {
+        if (!country || !country.coordinates) return;
+
+        function renderRing(ring) {
+          if (!ring || ring.length < 3) return;
+          const p0 = projectFn(ring[0][0], ring[0][1], isMobile);
+          ctx.moveTo(p0.x, p0.y);
+          for (let i = 1; i < ring.length; i++) {
+            const pi = projectFn(ring[i][0], ring[i][1], isMobile);
+            ctx.lineTo(pi.x, pi.y);
+          }
+          ctx.closePath();
+        }
+
+        ctx.beginPath();
+        if (country.type === 'Polygon') {
+          country.coordinates.forEach(ring => renderRing(ring));
+        } else if (country.type === 'MultiPolygon') {
+          country.coordinates.forEach(poly => poly.forEach(ring => renderRing(ring)));
+        }
+
+        ctx.strokeStyle = strokeStyle;
+        ctx.lineWidth = lineWidth;
+        ctx.stroke();
+      }
+
+      // Draw Starlight Coastlines (modulated by geoAlpha)
+      function drawStarlightGeography(geoAlpha, isMobile) {
+        if (!geoData || !Array.isArray(geoData) || geoAlpha <= 0.005) return;
+
+        geoData.forEach(country => {
+          if (country.name === 'Indonesia') {
+            drawGeoCountry(country, `rgba(251, 146, 60, ${geoAlpha * 0.38})`, 0.85, isMobile, projectAlignedToCorridor);
+          } else if (country.name === 'Japan') {
+            drawGeoCountry(country, `rgba(56, 189, 248, ${geoAlpha * 0.42})`, 0.85, isMobile, projectAlignedToCorridor);
+          } else {
+            drawGeoCountry(country, `rgba(148, 163, 184, ${geoAlpha * 0.22})`, 0.65, isMobile, projectAlignedToCorridor);
+          }
+        });
+      }
+
+      // Vector Airliner Silhouette
+      function drawVectorAirliner(x, y, angle, altitudeNorm, isMobile) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+
+        const baseScale = isMobile ? 0.95 : 1.20;
+        const s = baseScale * (0.85 + altitudeNorm * 0.20);
+        ctx.scale(s, s);
+
+        // Ground shadow (displaces and softens with altitude)
+        const shadowDist = 2 + altitudeNorm * 7;
+        ctx.save();
+        ctx.translate(shadowDist * 0.35, shadowDist * 0.85);
+        ctx.fillStyle = `rgba(0, 0, 0, ${0.38 - altitudeNorm * 0.12})`;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 13, 4.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Swept wings
+        ctx.fillStyle = '#e2e8f0';
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 0.75;
+        ctx.beginPath();
+        ctx.moveTo(-1, -1);
+        ctx.lineTo(-17, 7);
+        ctx.lineTo(-17, 5);
+        ctx.lineTo(-2, -5);
+        ctx.lineTo(2, -5);
+        ctx.lineTo(17, 5);
+        ctx.lineTo(17, 7);
+        ctx.lineTo(1, -1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Winglets (warm amber tips)
+        ctx.fillStyle = '#fb923c';
+        ctx.fillRect(-18, 3, 2, 4);
+        ctx.fillRect(16, 3, 2, 4);
+
+        // Twin turbofans
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillRect(-7.5, 0, 3, 6);
+        ctx.fillRect(4.5, 0, 3, 6);
+
+        // Horizontal tail stabilizers
+        ctx.fillStyle = '#cbd5e1';
+        ctx.beginPath();
+        ctx.moveTo(-1, 9);
+        ctx.lineTo(-8, 14);
+        ctx.lineTo(-8, 16);
+        ctx.lineTo(0, 13);
+        ctx.lineTo(8, 16);
+        ctx.lineTo(8, 14);
+        ctx.lineTo(1, 9);
+        ctx.closePath();
+        ctx.fill();
+
+        // Fuselage
+        ctx.fillStyle = '#f8fafc';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.lineWidth = 0.9;
+        ctx.beginPath();
+        ctx.moveTo(0, -16);
+        ctx.bezierCurveTo(2.8, -12, 3.2, 5, 2.0, 13);
+        ctx.lineTo(0, 16);
+        ctx.lineTo(-2.0, 13);
+        ctx.bezierCurveTo(-3.2, 5, -2.8, -12, 0, -16);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Cockpit windshield
+        ctx.fillStyle = '#0f172a';
+        ctx.beginPath();
+        ctx.moveTo(0, -13);
+        ctx.lineTo(1.8, -10.5);
+        ctx.lineTo(-1.8, -10.5);
+        ctx.closePath();
+        ctx.fill();
+
+        // Navigation Strobes (Flashing based on wall clock)
+        const flashPhase = (Date.now() % 1000) / 1000;
+        const strobeOn = flashPhase < 0.20;
+
+        // Port red wingtip strobe
+        ctx.fillStyle = strobeOn ? '#ef4444' : 'rgba(239, 68, 68, 0.3)';
+        ctx.beginPath();
+        ctx.arc(-17, 5.5, strobeOn ? 2.2 : 1.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Starboard green wingtip strobe
+        ctx.fillStyle = strobeOn ? '#10b981' : 'rgba(16, 185, 129, 0.3)';
+        ctx.beginPath();
+        ctx.arc(17, 5.5, strobeOn ? 2.2 : 1.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Tail white strobe
+        ctx.fillStyle = strobeOn ? '#ffffff' : 'rgba(255, 255, 255, 0.4)';
+        ctx.beginPath();
+        ctx.arc(0, 16, strobeOn ? 2.4 : 1.6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Fuselage rotating amber beacon (pulses smoothly at 2Hz)
+        const beaconPulse = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(Date.now() * 0.007));
+        ctx.fillStyle = `rgba(245, 158, 11, ${beaconPulse})`;
+        ctx.beginPath();
+        ctx.arc(0, -2, 2.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // Draw Dual Aerodynamic Contrail Streams
+      function drawDualContrails(p0, p1, p2, uCurrent, altitudeNorm, isMobile) {
+        if (uCurrent <= 0.02 || altitudeNorm <= 0.05) return;
+
+        const maxContrailU = 0.28; // Contrail trail length in parametric space
+        const uStart = Math.max(0.0, uCurrent - maxContrailU);
+        const steps = 36;
+        const engineOffset = (isMobile ? 0.95 : 1.20) * 6.0;
+
+        // Port engine stream
+        ctx.beginPath();
+        for (let i = 0; i <= steps; i++) {
+          const uStep = uStart + (uCurrent - uStart) * (i / steps);
+          const pt = getBezierPoint(p0, p1, p2, uStep);
+          const tangent = getBezierTangent(p0, p1, p2, uStep);
+          const nx = -Math.sin(tangent);
+          const ny = Math.cos(tangent);
+          const ex = pt.x - nx * engineOffset;
+          const ey = pt.y - ny * engineOffset;
+
+          if (i === 0) ctx.moveTo(ex, ey);
+          else ctx.lineTo(ex, ey);
+        }
+        ctx.strokeStyle = `rgba(224, 242, 254, ${0.38 * altitudeNorm})`;
+        ctx.lineWidth = 1.25;
+        ctx.stroke();
+
+        // Starboard engine stream
+        ctx.beginPath();
+        for (let i = 0; i <= steps; i++) {
+          const uStep = uStart + (uCurrent - uStart) * (i / steps);
+          const pt = getBezierPoint(p0, p1, p2, uStep);
+          const tangent = getBezierTangent(p0, p1, p2, uStep);
+          const nx = -Math.sin(tangent);
+          const ny = Math.cos(tangent);
+          const ex = pt.x + nx * engineOffset;
+          const ey = pt.y + ny * engineOffset;
+
+          if (i === 0) ctx.moveTo(ex, ey);
+          else ctx.lineTo(ex, ey);
+        }
+        ctx.strokeStyle = `rgba(224, 242, 254, ${0.38 * altitudeNorm})`;
+        ctx.lineWidth = 1.25;
+        ctx.stroke();
+      }
+
+      // Draw Tokyo Bay & Tama River Local Approach Aperture (Sequence 2 Handoff)
+      function drawApproachAperture(targetPt, approachAlpha, isMobile) {
+        if (approachAlpha <= 0.01) return;
+
+        ctx.save();
+        ctx.globalAlpha = approachAlpha;
+
+        const scale = isMobile ? 0.6 : 1.0;
+        const resPt = {
+          x: width * SCENE_DATA.commute.residence.xRel,
+          y: height * SCENE_DATA.commute.residence.yRel
+        };
+        const labPt = targetPt;
+
+        // Tokyo Bay coastal aperture hairline
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.40)';
+        ctx.lineWidth = 1.0;
+        ctx.beginPath();
+        ctx.moveTo(labPt.x - 60 * scale, labPt.y + 110 * scale);
+        ctx.quadraticCurveTo(labPt.x - 20 * scale, labPt.y + 50 * scale, labPt.x + 35 * scale, labPt.y + 10 * scale);
+        ctx.quadraticCurveTo(labPt.x + 85 * scale, labPt.y - 25 * scale, labPt.x + 120 * scale, labPt.y - 70 * scale);
+        ctx.stroke();
+
+        // Tama River spine (connecting Takatsu/Kawasaki residence to bay)
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.55)';
+        ctx.setLineDash([4, 4]);
+        ctx.lineWidth = 0.9;
+        ctx.beginPath();
+        ctx.moveTo(resPt.x - 45 * scale, resPt.y + 55 * scale);
+        ctx.quadraticCurveTo(resPt.x + 15 * scale, resPt.y + 25 * scale, labPt.x - 10 * scale, labPt.y + 35 * scale);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Commuter Connection Filament (Sequence 2 Bicycle/Train Commute Path)
+        ctx.strokeStyle = 'rgba(251, 146, 60, 0.70)';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(resPt.x, resPt.y);
+        ctx.quadraticCurveTo((resPt.x + labPt.x) / 2, (resPt.y + labPt.y) / 2 - 14, labPt.x, labPt.y);
+        ctx.stroke();
+
+        // Residence Node (Takatsu, Kawasaki)
+        ctx.fillStyle = 'rgba(251, 146, 60, 0.22)';
+        ctx.beginPath();
+        ctx.arc(resPt.x, resPt.y, 8, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#fb923c';
+        ctx.beginPath();
+        ctx.arc(resPt.x, resPt.y, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Lab Node Halo (Ookayama Tokyo Tech)
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.25)';
+        ctx.beginPath();
+        ctx.arc(labPt.x, labPt.y, 10, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // ======================================================================
+      // MAIN RENDER FRAME
+      // ======================================================================
+      function render(t) {
+        ctx.clearRect(0, 0, width, height);
+
+        const isMobile = width < 768;
+
+        // Endpoints (Aligned with projectAlignedToCorridor)
+        const ox = width * (isMobile ? SCENE_DATA.origin.xRel : SCENE_DATA.origin.xRel);
+        const oy = height * (isMobile ? SCENE_DATA.origin.yRel * 1.12 : SCENE_DATA.origin.yRel);
+        const originPt = { x: ox, y: oy };
+
+        const targetNode = SCENE_DATA.nodes.find(n => n.id === 'node_3');
+        const tx = width * (isMobile ? targetNode.xRel * 0.95 : targetNode.xRel);
+        const ty = height * (isMobile ? targetNode.yRel * 1.12 : targetNode.yRel);
+        const targetPt = { x: tx, y: ty };
+
+        const mainCp = getControlPoint(originPt.x, originPt.y, targetPt.x, targetPt.y);
+
+        // Compute Motion Parameters from Timeline
+        let uFlight = 0.0;
+        let altitudeNorm = 0.0;
+        let geoAlpha = 0.0;
+        let approachAlpha = 0.0;
+        let corridorAlpha = 0.70;
+        let candidateFieldAlpha = 0.10;
+        let currentBeatText = 'C0 · HANDOFF';
+
+        if (t < 0.8) {
+          // Beat C0: Inherited Handoff (0.0s - 0.8s)
+          currentBeatText = 'C0 · HANDOFF';
+          uFlight = 0.0;
+          altitudeNorm = 0.0;
+          geoAlpha = 0.0;
+          candidateFieldAlpha = 0.10 - (t / 0.8) * 0.06;
+          corridorAlpha = 0.70;
+        } else if (t < 2.4) {
+          // Beat C1: Departure & Climb (0.8s - 2.4s)
+          currentBeatText = 'C1 · DEPARTURE & CLIMB';
+          const p = (t - 0.8) / 1.6;
+          // Smooth ease-in acceleration along quadratic curve
+          uFlight = 0.22 * Math.pow(p, 1.8);
+          altitudeNorm = Math.min(1.0, p * 1.08);
+          geoAlpha = Math.min(1.0, p * 0.75);
+          candidateFieldAlpha = 0.04;
+          corridorAlpha = 0.70;
+        } else if (t < 5.0) {
+          // Beat C2: Resonant Cruise (2.4s - 5.0s)
+          currentBeatText = 'C2 · RESONANT CRUISE';
+          const p = (t - 2.4) / 2.6;
+          // Constant cruise speed from u = 0.22 to u = 0.68
+          uFlight = 0.22 + 0.46 * p;
+          altitudeNorm = 1.0;
+          geoAlpha = 0.75 + 0.25 * Math.sin(p * Math.PI);
+          candidateFieldAlpha = 0.04;
+          corridorAlpha = 0.70;
+        } else if (t < 7.2) {
+          // Beat C3: Approach & Descent (5.0s - 7.2s)
+          currentBeatText = 'C3 · APPROACH & DESCENT';
+          const p = (t - 5.0) / 2.2;
+          // Ease-out deceleration from u = 0.68 to u = 0.98
+          const easeOut = 1 - Math.pow(1 - p, 2.2);
+          uFlight = 0.68 + (1.0 - 0.68) * easeOut * 0.98;
+          altitudeNorm = Math.max(0.15, 1.0 - p * 0.85);
+          geoAlpha = Math.max(0.0, 1.0 - p * 1.2);
+          approachAlpha = Math.min(1.0, p * 1.25);
+          candidateFieldAlpha = 0.03;
+          corridorAlpha = 0.70 - p * 0.35;
+        } else {
+          // Beat C4: Touchdown & Commuter Handoff (7.2s - 8.5s)
+          currentBeatText = 'C4 · TOUCHDOWN & HANDOFF';
+          uFlight = 1.0;
+          altitudeNorm = 0.0;
+          geoAlpha = 0.0;
+          approachAlpha = 1.0;
+          candidateFieldAlpha = 0.02;
+          corridorAlpha = 0.22;
+        }
+
+        // Update Review UI HUD
+        beatLabel.textContent = currentBeatText;
+        timeSlider.value = t.toFixed(2);
+        timeDisplay.textContent = `${t.toFixed(2)}s / ${TOTAL_DURATION.toFixed(2)}s`;
+
+        beatBtns.forEach(btn => {
+          const bt = parseFloat(btn.dataset.t);
+          if (Math.abs(t - bt) < 0.5) btn.classList.add('is-active');
+          else btn.classList.remove('is-active');
+        });
+
+        // 1. Draw Dormant Constellation Field (Exact 04.B authority)
+        SCENE_DATA.nodes.forEach(node => {
+          if (node.isTokyo) return;
+          const nx = width * node.xRel;
+          const ny = height * node.yRel;
+
+          if (node.attempted) {
+            const cp = getControlPoint(originPt.x, originPt.y, nx, ny);
+            ctx.strokeStyle = `rgba(148, 163, 184, ${candidateFieldAlpha * 0.65})`;
+            ctx.lineWidth = 0.65;
+            ctx.beginPath();
+            ctx.moveTo(originPt.x, originPt.y);
+            ctx.quadraticCurveTo(cp.x, cp.y, nx, ny);
+            ctx.stroke();
+          }
+
+          ctx.fillStyle = `rgba(148, 163, 184, ${candidateFieldAlpha})`;
+          ctx.beginPath();
+          ctx.arc(nx, ny, 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // 2. Draw Starlight Coastlines (Natural Earth GeoJSON)
+        drawStarlightGeography(geoAlpha, isMobile);
+
+        // 3. Draw Resonant Bilateral Twin-Rail Corridor
+        const railOffset = isMobile ? 3.0 : 4.0;
+        const dx = targetPt.x - originPt.x;
+        const dy = targetPt.y - originPt.y;
+        const dist = Math.hypot(dx, dy);
+        const nx = -dy / dist;
+        const ny = dx / dist;
+
+        // Left rail
+        ctx.strokeStyle = `rgba(56, 189, 248, ${corridorAlpha * 0.65})`;
+        ctx.lineWidth = 0.85;
+        ctx.beginPath();
+        ctx.moveTo(originPt.x - nx * railOffset, originPt.y - ny * railOffset);
+        ctx.quadraticCurveTo(mainCp.x - nx * railOffset, mainCp.y - ny * railOffset, targetPt.x - nx * railOffset, targetPt.y - ny * railOffset);
+        ctx.stroke();
+
+        // Right rail
+        ctx.strokeStyle = `rgba(251, 146, 60, ${corridorAlpha * 0.65})`;
+        ctx.lineWidth = 0.85;
+        ctx.beginPath();
+        ctx.moveTo(originPt.x + nx * railOffset, originPt.y + ny * railOffset);
+        ctx.quadraticCurveTo(mainCp.x + nx * railOffset, mainCp.y + ny * railOffset, targetPt.x + nx * railOffset, targetPt.y + ny * railOffset);
+        ctx.stroke();
+
+        // Registration Waypoint Ticks
+        for (let i = 1; i <= 5; i++) {
+          const uTick = i / 6;
+          const pTick = getBezierPoint(originPt, mainCp, targetPt, uTick);
+          const tan = getBezierTangent(originPt, mainCp, targetPt, uTick);
+          const tnx = -Math.sin(tan);
+          const tny = Math.cos(tan);
+          const tickLen = 6;
+
+          ctx.strokeStyle = `rgba(255, 255, 255, ${corridorAlpha * 0.35})`;
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(pTick.x - tnx * tickLen, pTick.y - tny * tickLen);
+          ctx.lineTo(pTick.x + tnx * tickLen, pTick.y + tny * tickLen);
+          ctx.stroke();
+        }
+
+        // 4. Draw Approach Aperture & Sequence 2 Commute Spine
+        drawApproachAperture(targetPt, approachAlpha, isMobile);
+
+        // 5. Draw Jakarta Origin Anchor
+        ctx.fillStyle = 'rgba(251, 146, 60, 0.20)';
+        ctx.beginPath();
+        ctx.arc(originPt.x, originPt.y, 9, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#fb923c';
+        ctx.beginPath();
+        ctx.arc(originPt.x, originPt.y, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 6. Draw Tokyo Destination Anchor
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.22)';
+        ctx.beginPath();
+        ctx.arc(targetPt.x, targetPt.y, 9, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#38bdf8';
+        ctx.beginPath();
+        ctx.arc(targetPt.x, targetPt.y, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 7. Draw Aerodynamic Dual Contrails
+        drawDualContrails(originPt, mainCp, targetPt, uFlight, altitudeNorm, isMobile);
+
+        // 8. Draw Vector Airliner
+        const planePos = getBezierPoint(originPt, mainCp, targetPt, uFlight);
+        const planeAngle = getBezierTangent(originPt, mainCp, targetPt, uFlight) + Math.PI / 2;
+        drawVectorAirliner(planePos.x, planePos.y, planeAngle, altitudeNorm, isMobile);
+      }
+
+      // Animation Tick Loop
+      function tick(now) {
+        if (!lastTimestamp) lastTimestamp = now;
+        const delta = (now - lastTimestamp) / 1000;
+        lastTimestamp = now;
+
+        if (isPlaying) {
+          currentTime += delta * playSpeed;
+          if (currentTime > TOTAL_DURATION) {
+            currentTime = 0.0;
+          }
+        }
+
+        render(currentTime);
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      // Expose Reviewer API for Headless CDP Automation
+      window.scene04CAnimation = {
+        seek: function (t) {
+          currentTime = Math.max(0, Math.min(TOTAL_DURATION, t));
+          isPlaying = false;
+          updatePlayPauseUI();
+          render(currentTime);
+        },
+        play: function () {
+          isPlaying = true;
+          lastTimestamp = null;
+          updatePlayPauseUI();
+        },
+        pause: function () {
+          isPlaying = false;
+          updatePlayPauseUI();
+        },
+        getCurrentTime: function () {
+          return currentTime;
+        },
+        setSpeed: function (s) {
+          playSpeed = s;
+        }
+      };
+      window.scene04CController = window.scene04CAnimation;
+
+    })();
+  </script>
+</body>
+</html>

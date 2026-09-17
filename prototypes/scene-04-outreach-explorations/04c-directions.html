@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scene 04.C: Flight Journey — Static Design Explorations</title>
+  <meta name="description" content="Static design explorations for Chapter 02 Scene 04.C: Transcontinental flight journey connecting Jakarta origin to Tokyo Tech destination.">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-space: #030712;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(56, 189, 248, 0.50);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-faint: rgba(148, 163, 184, 0.45);
+      --accent-warm: #fb923c;
+      --accent-cyan: #38bdf8;
+      --accent-cyan-dim: rgba(56, 189, 248, 0.25);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-space);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Night Sky SVG */
+    .sky-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Reviewer Toolbar */
+    .study-toolbar {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(10, 15, 26, 0.90);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+    }
+
+    .toolbar-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-right: 10px;
+      border-right: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .study-selector {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .study-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .study-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .study-btn.is-active {
+      color: #fff;
+      background: rgba(56, 189, 248, 0.16);
+      border-color: var(--border-active);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+    }
+
+    .study-btn kbd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    /* Main Exploration Canvas Stage */
+    .stage-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+
+    #flight-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Bottom Info Card */
+    .info-bar {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: rgba(10, 15, 26, 0.88);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 8px 18px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+      width: calc(100% - 48px);
+      max-width: 760px;
+    }
+
+    .direction-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 9999px;
+      padding: 3px 10px;
+      white-space: nowrap;
+    }
+
+    .direction-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .study-toolbar {
+        top: 10px;
+        width: calc(100% - 20px);
+        padding: 6px 8px;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+      .toolbar-title {
+        display: none;
+      }
+      .study-btn {
+        font-size: 10px;
+        padding: 4px 8px;
+      }
+      .study-btn kbd {
+        display: none;
+      }
+      .info-bar {
+        bottom: 12px;
+        padding: 6px 12px;
+        width: calc(100% - 20px);
+      }
+      .direction-desc {
+        font-size: 9.5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Ambient Night Sky SVG background -->
+  <svg class="sky-canvas" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="120" cy="80" r="1.2" fill="#ffffff" opacity="0.65"/>
+    <circle cx="280" cy="140" r="0.9" fill="#fdf4dc" opacity="0.45"/>
+    <circle cx="450" cy="90" r="1.4" fill="#fffaf0" opacity="0.7"/>
+    <circle cx="780" cy="70" r="1.0" fill="#eaf0f8" opacity="0.5"/>
+    <circle cx="1040" cy="110" r="1.3" fill="#ffe8d0" opacity="0.6"/>
+    <circle cx="1320" cy="85" r="1.1" fill="#ffffff" opacity="0.55"/>
+    <circle cx="90" cy="320" r="0.9" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="180" cy="540" r="1.1" fill="#ffe4cc" opacity="0.5"/>
+    <circle cx="1350" cy="380" r="1.2" fill="#fffaf0" opacity="0.6"/>
+    <circle cx="1260" cy="620" r="1.0" fill="#ffffff" opacity="0.45"/>
+    <circle cx="340" cy="780" r="1.1" fill="#f4efe8" opacity="0.4"/>
+    <circle cx="1180" cy="790" r="1.3" fill="#ffe8d0" opacity="0.55"/>
+  </svg>
+
+  <!-- Reviewer Header Toolbar -->
+  <header class="study-toolbar" role="region" aria-label="Scene 04.C Direction Switcher">
+    <span class="toolbar-title">04.C Flight Journey</span>
+    <div class="study-selector" role="tablist">
+      <button type="button" class="study-btn" id="btn-dir-0" role="tab" aria-selected="false" data-dir="0">
+        <span>04.B Inherited State</span>
+        <kbd>0</kbd>
+      </button>
+      <button type="button" class="study-btn is-active" id="btn-dir-a" role="tab" aria-selected="true" data-dir="A">
+        <span>Dir A: Resonant Skyway</span>
+        <kbd>1</kbd>
+      </button>
+      <button type="button" class="study-btn" id="btn-dir-b" role="tab" aria-selected="false" data-dir="B">
+        <span>Dir B: Aeronautical Corridor</span>
+        <kbd>2</kbd>
+      </button>
+      <button type="button" class="study-btn" id="btn-dir-c" role="tab" aria-selected="false" data-dir="C">
+        <span>Dir C: Approach Aperture</span>
+        <kbd>3</kbd>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Exploration Canvas Stage -->
+  <main class="stage-container" id="stage-container">
+    <canvas id="flight-canvas" role="img" aria-label="Static design exploration for Scene 04.C Flight Journey"></canvas>
+  </main>
+
+  <!-- Bottom Direction Description Card -->
+  <footer class="info-bar" role="region" aria-label="Direction Metadata">
+    <span class="direction-badge" id="info-badge">DIR A · RESONANT SKYWAY</span>
+    <span class="direction-desc" id="info-desc">Seamless continuation: 04.B twin rails become the active airway with starlight-etched coastlines and vector airliner.</span>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const canvas = document.getElementById('flight-canvas');
+      const ctx = canvas.getContext('2d');
+
+      let currentDirection = 'A';
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+
+      // Real countries data cache
+      let realCountriesData = null;
+
+      // Coordinate constants
+      const DEG2RAD = Math.PI / 180;
+      const RAD2DEG = 180 / Math.PI;
+      const CGK_LON = 106.8456, CGK_LAT = -6.2088;
+      const HND_LON = 139.7671, HND_LAT = 35.6895;
+
+      // Direction metadata
+      const DIRECTION_DETAILS = {
+        '0': {
+          badge: '04.B INHERITED BASELINE',
+          desc: 'Exact settled state from 04.B (Beat 5): Bilateral twin-rail corridor, registration gates, warm Jakarta and cyan Tokyo anchors.'
+        },
+        'A': {
+          badge: 'DIR A · RESONANT SKYWAY',
+          desc: 'Seamless continuation: 04.B twin rails become the active skyway; starlight coastlines faintly emerge; vector airliner cruises along corridor.'
+        },
+        'B': {
+          badge: 'DIR B · AERONAUTICAL CORRIDOR',
+          desc: 'Precision charting: True great-circle geodesic arc with navigation waypoint gates, oceanic range rings, and vector geography.'
+        },
+        'C': {
+          badge: 'DIR C · APPROACH APERTURE',
+          desc: 'Regional-to-metropolitan bridge: Airliner in descent posture over Tokyo Bay aperture, pre-framing the Kuji/Tama commute geometry.'
+        }
+      };
+
+      // 04.A / 04.B Frozen Coordinates
+      const SCENE_DATA = {
+        origin: { xRel: 0.18, yRel: 0.78 },
+        nodes: [
+          { id: 'node_1', xRel: 0.38, yRel: 0.28, attempted: true },
+          { id: 'node_2', xRel: 0.54, yRel: 0.18, attempted: true },
+          { id: 'node_3', xRel: 0.76, yRel: 0.25, attempted: true, attempts: [0.24, 0.46, 0.68] }, // Tokyo Tech anchor
+          { id: 'node_4', xRel: 0.88, yRel: 0.16, attempted: false },
+          { id: 'node_5', xRel: 0.34, yRel: 0.52, attempted: true },
+          { id: 'node_6', xRel: 0.62, yRel: 0.46, attempted: true },
+          { id: 'node_7', xRel: 0.84, yRel: 0.42, attempted: false },
+          { id: 'node_8', xRel: 0.70, yRel: 0.68, attempted: true }
+        ]
+      };
+
+      // Mathematical helpers
+      function clamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
+
+      function getControlPoint(ox, oy, tx, ty) {
+        const mx = (ox + tx) * 0.5;
+        const my = (oy + ty) * 0.5;
+        const dx = tx - ox;
+        const dy = ty - oy;
+        const len = Math.hypot(dx, dy) || 1;
+        const nx = -dy / len;
+        const ny = dx / len;
+        const bow = len * 0.08;
+        return { x: mx + nx * bow, y: my + ny * bow };
+      }
+
+      function evalQuad(p0, cp, p1, t) {
+        const mt = 1 - t;
+        return {
+          x: mt * mt * p0.x + 2 * mt * t * cp.x + t * t * p1.x,
+          y: mt * mt * p0.y + 2 * mt * t * cp.y + t * t * p1.y
+        };
+      }
+
+      function evalQuadTangent(p0, cp, p1, t) {
+        const mt = 1 - t;
+        const dx = 2 * mt * (cp.x - p0.x) + 2 * t * (p1.x - cp.x);
+        const dy = 2 * mt * (cp.y - p0.y) + 2 * t * (p1.y - cp.y);
+        const len = Math.hypot(dx, dy) || 1;
+        return { tx: dx / len, ty: dy / len, nx: -dy / len, ny: dx / len, angle: Math.atan2(dy, dx) };
+      }
+
+      // Great Circle Projection
+      function getGreatCirclePoint(lon1, lat1, lon2, lat2, f) {
+        const phi1 = lat1 * DEG2RAD, lam1 = lon1 * DEG2RAD;
+        const phi2 = lat2 * DEG2RAD, lam2 = lon2 * DEG2RAD;
+        const dLat = phi2 - phi1, dLon = lam2 - lam1;
+
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                  Math.cos(phi1) * Math.cos(phi2) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const delta = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        if (delta < 1e-6) return { lon: lon1, lat: lat1 };
+
+        const A = Math.sin((1 - f) * delta) / Math.sin(delta);
+        const B = Math.sin(f * delta) / Math.sin(delta);
+        const x = A * Math.cos(phi1) * Math.cos(lam1) + B * Math.cos(phi2) * Math.cos(lam2);
+        const y = A * Math.cos(phi1) * Math.sin(lam1) + B * Math.cos(phi2) * Math.sin(lam2);
+        const z = A * Math.sin(phi1) + B * Math.sin(phi2);
+
+        const latCur = Math.atan2(z, Math.sqrt(x * x + y * y)) * RAD2DEG;
+        const lonCur = Math.atan2(y, x) * RAD2DEG;
+        return { lon: lonCur, lat: latCur };
+      }
+
+      // Web Mercator for Dir B & C
+      function getMercatorParams(isMobile) {
+        const centerLon = isMobile ? 124.2 : 123.31;
+        const centerLat = isMobile ? 14.8 : 14.74;
+        const zoom = isMobile ? 3.82 : 4.15;
+        const s = 256 * Math.pow(2, zoom);
+
+        function lonToWorldX(lon) { return ((lon + 180) / 360) * s; }
+        function latToWorldY(lat) {
+          const sinLat = Math.sin(lat * DEG2RAD);
+          const clampedSin = clamp(sinLat, -0.9999, 0.9999);
+          const rad = Math.log((1 + clampedSin) / (1 - clampedSin));
+          return (0.5 - rad / (4 * Math.PI)) * s;
+        }
+
+        const centerWorldX = lonToWorldX(centerLon);
+        const centerWorldY = latToWorldY(centerLat);
+        const originX = width * 0.5 - centerWorldX;
+        const originY = height * (isMobile ? 0.49 : 0.50) - centerWorldY;
+
+        return { originX, originY, lonToWorldX, latToWorldY };
+      }
+
+      function projectGeo(lon, lat, isMobile) {
+        const { originX, originY, lonToWorldX, latToWorldY } = getMercatorParams(isMobile);
+        return {
+          x: originX + lonToWorldX(lon),
+          y: originY + latToWorldY(lat)
+        };
+      }
+
+      // Direction A: Affine-aligned projection mapping CGK directly to Jakarta origin and HND to Tokyo anchor
+      function projectAlignedToCorridor(lon, lat, isMobile) {
+        const ox = width * (isMobile ? SCENE_DATA.origin.xRel : SCENE_DATA.origin.xRel);
+        const oy = height * (isMobile ? SCENE_DATA.origin.yRel * 1.12 : SCENE_DATA.origin.yRel);
+        const targetNode = SCENE_DATA.nodes.find(n => n.id === 'node_3');
+        const tx = width * (isMobile ? targetNode.xRel * 0.95 : targetNode.xRel);
+        const ty = height * (isMobile ? targetNode.yRel * 1.12 : targetNode.yRel);
+
+        function toMercatorNorm(l, p) {
+          const x = l * DEG2RAD;
+          const sinLat = Math.sin(p * DEG2RAD);
+          const clampedSin = clamp(sinLat, -0.9999, 0.9999);
+          const y = Math.log((1 + clampedSin) / (1 - clampedSin)) * 0.5;
+          return { x, y };
+        }
+
+        const mCGK = toMercatorNorm(CGK_LON, CGK_LAT);
+        const mHND = toMercatorNorm(HND_LON, HND_LAT);
+        const mCur = toMercatorNorm(lon, lat);
+
+        const u = (mCur.x - mCGK.x) / (mHND.x - mCGK.x);
+        const v = (mCur.y - mCGK.y) / (mHND.y - mCGK.y);
+
+        return {
+          x: ox + u * (tx - ox),
+          y: oy + v * (ty - oy)
+        };
+      }
+
+      // Tokyo Metropolitan Projection for Dir C Aperture
+      function getTokyoMercatorParams(isMobile, cx, cy) {
+        const centerLon = 139.68;
+        const centerLat = 35.58;
+        const zoom = isMobile ? 9.8 : 10.6;
+        const s = 256 * Math.pow(2, zoom);
+
+        function lonToWorldX(lon) { return ((lon + 180) / 360) * s; }
+        function latToWorldY(lat) {
+          const sinLat = Math.sin(lat * DEG2RAD);
+          const clampedSin = clamp(sinLat, -0.9999, 0.9999);
+          const rad = Math.log((1 + clampedSin) / (1 - clampedSin));
+          return (0.5 - rad / (4 * Math.PI)) * s;
+        }
+
+        const centerWorldX = lonToWorldX(centerLon);
+        const centerWorldY = latToWorldY(centerLat);
+        const originX = cx - centerWorldX;
+        const originY = cy - centerWorldY;
+
+        return { originX, originY, lonToWorldX, latToWorldY };
+      }
+
+      function projectTokyoAperture(lon, lat, isMobile, cx, cy) {
+        const { originX, originY, lonToWorldX, latToWorldY } = getTokyoMercatorParams(isMobile, cx, cy);
+        return {
+          x: originX + lonToWorldX(lon),
+          y: originY + latToWorldY(lat)
+        };
+      }
+
+      // GeoJSON rendering
+      function drawGeoCountry(country, strokeStyle, lineWidth, isMobile, projectFn = projectGeo) {
+        if (!country || !country.coordinates) return;
+
+        function renderRing(ring) {
+          if (!ring || ring.length < 3) return;
+          const p0 = projectFn(ring[0][0], ring[0][1], isMobile);
+          ctx.moveTo(p0.x, p0.y);
+          for (let i = 1; i < ring.length; i++) {
+            const pi = projectFn(ring[i][0], ring[i][1], isMobile);
+            ctx.lineTo(pi.x, pi.y);
+          }
+          ctx.closePath();
+        }
+
+        ctx.beginPath();
+        if (country.type === 'Polygon') {
+          country.coordinates.forEach(ring => renderRing(ring));
+        } else if (country.type === 'MultiPolygon') {
+          country.coordinates.forEach(poly => poly.forEach(ring => renderRing(ring)));
+        }
+
+        ctx.strokeStyle = strokeStyle;
+        ctx.lineWidth = lineWidth;
+        ctx.stroke();
+      }
+
+      // ======================================================================
+      // AIRLINER VECTOR SILHOUETTE RENDERER (PRESERVED FROM SEQUENCE 1)
+      // ======================================================================
+      function drawAirplane(x, y, angle, progress, altitudeNorm = 1.0, isMobile = false) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+
+        const baseScale = isMobile ? 1.0 : 1.25;
+        const s = baseScale * (0.88 + altitudeNorm * 0.12);
+        ctx.scale(s, s);
+
+        // Ground shadow
+        const shadowDist = 3 + altitudeNorm * 6;
+        ctx.save();
+        ctx.translate(shadowDist * 0.4, shadowDist * 0.8);
+        ctx.fillStyle = `rgba(0, 0, 0, ${0.35 - altitudeNorm * 0.10})`;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 12, 4, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Swept wings
+        ctx.fillStyle = '#e2e8f0';
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(-1, -1);
+        ctx.lineTo(-17, 7);
+        ctx.lineTo(-17, 5);
+        ctx.lineTo(-2, -5);
+        ctx.lineTo(2, -5);
+        ctx.lineTo(17, 5);
+        ctx.lineTo(17, 7);
+        ctx.lineTo(1, -1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Winglets
+        ctx.fillStyle = '#ffaa70';
+        ctx.fillRect(-18, 3, 2, 4);
+        ctx.fillRect(16, 3, 2, 4);
+
+        // Twin turbofans
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillRect(-7.5, 0, 3, 6);
+        ctx.fillRect(4.5, 0, 3, 6);
+
+        // Horizontal tail stabilizers
+        ctx.fillStyle = '#cbd5e1';
+        ctx.beginPath();
+        ctx.moveTo(-1, 9);
+        ctx.lineTo(-8, 14);
+        ctx.lineTo(-8, 16);
+        ctx.lineTo(0, 13);
+        ctx.lineTo(8, 16);
+        ctx.lineTo(8, 14);
+        ctx.lineTo(1, 9);
+        ctx.closePath();
+        ctx.fill();
+
+        // Fuselage
+        ctx.fillStyle = '#f8fafc';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.lineWidth = 0.9;
+        ctx.beginPath();
+        ctx.moveTo(0, -16);
+        ctx.bezierCurveTo(2.8, -12, 3.2, 5, 2.0, 13);
+        ctx.lineTo(0, 16);
+        ctx.lineTo(-2.0, 13);
+        ctx.bezierCurveTo(-3.2, 5, -2.8, -12, 0, -16);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Cockpit windshield
+        ctx.fillStyle = '#0f172a';
+        ctx.beginPath();
+        ctx.moveTo(0, -13);
+        ctx.lineTo(1.8, -10.5);
+        ctx.lineTo(-1.8, -10.5);
+        ctx.closePath();
+        ctx.fill();
+
+        // Navigation strobes
+        ctx.fillStyle = '#ef4444'; // Port red
+        ctx.beginPath();
+        ctx.arc(-17, 5.5, 1.8, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#10b981'; // Starboard green
+        ctx.beginPath();
+        ctx.arc(17, 5.5, 1.8, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Tail strobe
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(0, 16, 2.0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Fuselage beacon
+        ctx.fillStyle = '#f59e0b';
+        ctx.beginPath();
+        ctx.arc(0, -2, 2.0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // Aerodynamic dual contrail streams
+      function drawDualContrails(pts, trailLength = 60) {
+        if (!pts || pts.length < 2) return;
+        const n = pts.length;
+        const startIdx = Math.max(0, n - trailLength);
+
+        // Port engine contrail
+        ctx.beginPath();
+        for (let i = startIdx; i < n; i++) {
+          const p = pts[i];
+          const alpha = ((i - startIdx) / (n - startIdx)) * 0.45;
+          if (i === startIdx) ctx.moveTo(p.pLeft.x, p.pLeft.y);
+          else ctx.lineTo(p.pLeft.x, p.pLeft.y);
+        }
+        ctx.strokeStyle = 'rgba(224, 242, 254, 0.35)';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        // Starboard engine contrail
+        ctx.beginPath();
+        for (let i = startIdx; i < n; i++) {
+          const p = pts[i];
+          if (i === startIdx) ctx.moveTo(p.pRight.x, p.pRight.y);
+          else ctx.lineTo(p.pRight.x, p.pRight.y);
+        }
+        ctx.strokeStyle = 'rgba(224, 242, 254, 0.35)';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+      }
+
+      // ======================================================================
+      // RENDERERS FOR EACH EXPLORATION DIRECTION
+      // ======================================================================
+
+      // --- DIRECTION 0: INHERITED 04.B STATE (BEAT B5) ---
+      function renderInherited04B(isMobile) {
+        const ox = width * (isMobile ? SCENE_DATA.origin.xRel : SCENE_DATA.origin.xRel);
+        const oy = height * (isMobile ? SCENE_DATA.origin.yRel * 1.12 : SCENE_DATA.origin.yRel);
+        const originPt = { x: ox, y: oy };
+
+        const targetNode = SCENE_DATA.nodes.find(n => n.id === 'node_3');
+        const tx = width * (isMobile ? targetNode.xRel * 0.95 : targetNode.xRel);
+        const ty = height * (isMobile ? targetNode.yRel * 1.12 : targetNode.yRel);
+        const targetPt = { x: tx, y: ty };
+
+        const mainCp = getControlPoint(originPt.x, originPt.y, targetPt.x, targetPt.y);
+
+        // 1. Dormant candidate lab filaments (faded)
+        SCENE_DATA.nodes.forEach(node => {
+          if (node.id === 'node_3') return;
+          const nx = width * (isMobile ? node.xRel * 0.95 : node.xRel);
+          const ny = height * (isMobile ? node.yRel * 1.12 : node.yRel);
+          const cp = getControlPoint(ox, oy, nx, ny);
+
+          ctx.beginPath();
+          ctx.moveTo(ox, oy);
+          ctx.quadraticCurveTo(cp.x, cp.y, nx, ny);
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.04)';
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+
+          // Dormant node socket
+          ctx.beginPath();
+          ctx.arc(nx, ny, 3.0, 0, Math.PI * 2);
+          ctx.fillStyle = '#0a0f1d';
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(nx, ny, 1.2, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(148, 163, 184, 0.12)';
+          ctx.fill();
+        });
+
+        // 2. Bilateral Twin-Rail Standing Wave Corridor (04.B frozen)
+        const railOffset = 4.8;
+        const steps = 60;
+        const leftRail = [], rightRail = [];
+        for (let i = 0; i <= steps; i++) {
+          const u = i / steps;
+          const p = evalQuad(originPt, mainCp, targetPt, u);
+          const tang = evalQuadTangent(originPt, mainCp, targetPt, u);
+          leftRail.push({ x: p.x + tang.nx * railOffset, y: p.y + tang.ny * railOffset });
+          rightRail.push({ x: p.x - tang.nx * railOffset, y: p.y - tang.ny * railOffset });
+        }
+
+        ctx.beginPath();
+        leftRail.forEach((p, idx) => { if (idx === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.85)';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        ctx.beginPath();
+        rightRail.forEach((p, idx) => { if (idx === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
+        ctx.strokeStyle = 'rgba(186, 230, 253, 0.75)';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        // Inter-rail energy fill
+        ctx.beginPath();
+        leftRail.forEach((p, idx) => { if (idx === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
+        for (let i = rightRail.length - 1; i >= 0; i--) ctx.lineTo(rightRail[i].x, rightRail[i].y);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.04)';
+        ctx.fill();
+
+        // 3. Bilateral Registration Gates
+        targetNode.attempts.forEach(u => {
+          const pt = evalQuad(originPt, mainCp, targetPt, u);
+          const tang = evalQuadTangent(originPt, mainCp, targetPt, u);
+          const gateW = railOffset + 3.0;
+
+          ctx.beginPath();
+          ctx.moveTo(pt.x + tang.nx * gateW, pt.y + tang.ny * gateW);
+          ctx.lineTo(pt.x - tang.nx * gateW, pt.y - tang.ny * gateW);
+          ctx.strokeStyle = 'rgba(224, 242, 254, 0.85)';
+          ctx.lineWidth = 1.35;
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, 1.3, 0, Math.PI * 2);
+          ctx.fillStyle = '#38bdf8';
+          ctx.fill();
+        });
+
+        // 4. Tokyo Tech Responding Anchor
+        ctx.beginPath();
+        ctx.arc(tx, ty, 15.0, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(186, 230, 253, 0.30)';
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(tx, ty, 10.0, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+        ctx.lineWidth = 1.0;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(tx, ty, 6.0, 0, Math.PI * 2);
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 1.3;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(tx, ty, 3.2, 0, Math.PI * 2);
+        ctx.fillStyle = '#38bdf8';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(tx, ty, 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+
+        // 5. Jakarta Origin Anchor
+        ctx.beginPath();
+        ctx.arc(ox, oy, 14.0, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(251, 146, 60, 0.15)';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(ox, oy, 6.8, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(251, 146, 60, 0.85)';
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(ox, oy, 5.0, 0, Math.PI * 2);
+        ctx.fillStyle = '#0a0f1d';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(ox, oy, 2.6, 0, Math.PI * 2);
+        ctx.fillStyle = '#fb923c';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(ox, oy, 1.1, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+      }
+
+      // --- DIRECTION A: RESONANT SKYWAY (CELESTIAL-GEOGRAPHIC SYNTHESIS) ---
+      function renderDirectionA(isMobile) {
+        // Inherited 04.B geometry
+        const ox = width * (isMobile ? SCENE_DATA.origin.xRel : SCENE_DATA.origin.xRel);
+        const oy = height * (isMobile ? SCENE_DATA.origin.yRel * 1.12 : SCENE_DATA.origin.yRel);
+        const originPt = { x: ox, y: oy };
+
+        const targetNode = SCENE_DATA.nodes.find(n => n.id === 'node_3');
+        const tx = width * (isMobile ? targetNode.xRel * 0.95 : targetNode.xRel);
+        const ty = height * (isMobile ? targetNode.yRel * 1.12 : targetNode.yRel);
+        const targetPt = { x: tx, y: ty };
+
+        const mainCp = getControlPoint(originPt.x, originPt.y, targetPt.x, targetPt.y);
+
+        // 1. Subtle hairline starlight coastlines projected beneath the skyway (aligned to corridor)
+        if (realCountriesData && realCountriesData.length > 0) {
+          realCountriesData.forEach(country => {
+            if (country.name === 'Indonesia') {
+              drawGeoCountry(country, 'rgba(251, 146, 60, 0.32)', 0.85, isMobile, projectAlignedToCorridor);
+            } else if (country.name === 'Japan') {
+              drawGeoCountry(country, 'rgba(56, 189, 248, 0.38)', 0.85, isMobile, projectAlignedToCorridor);
+            } else {
+              drawGeoCountry(country, 'rgba(148, 163, 184, 0.16)', 0.65, isMobile, projectAlignedToCorridor);
+            }
+          });
+        }
+
+        // 2. Dormant candidate nodes (retained as quiet celestial background)
+        SCENE_DATA.nodes.forEach(node => {
+          if (node.id === 'node_3') return;
+          const nx = width * (isMobile ? node.xRel * 0.95 : node.xRel);
+          const ny = height * (isMobile ? node.yRel * 1.12 : node.yRel);
+          const cp = getControlPoint(ox, oy, nx, ny);
+
+          ctx.beginPath();
+          ctx.moveTo(ox, oy);
+          ctx.quadraticCurveTo(cp.x, cp.y, nx, ny);
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.03)';
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(nx, ny, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = '#0a0f1d';
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(nx, ny, 1.0, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(148, 163, 184, 0.10)';
+          ctx.fill();
+        });
+
+        // 3. Bilateral Twin-Rail Corridor (Active Skyway)
+        const railOffset = 5.2;
+        const steps = 80;
+        const leftRail = [], rightRail = [];
+        const contrailPts = [];
+
+        for (let i = 0; i <= steps; i++) {
+          const u = i / steps;
+          const p = evalQuad(originPt, mainCp, targetPt, u);
+          const tang = evalQuadTangent(originPt, mainCp, targetPt, u);
+          const pl = { x: p.x + tang.nx * railOffset, y: p.y + tang.ny * railOffset };
+          const pr = { x: p.x - tang.nx * railOffset, y: p.y - tang.ny * railOffset };
+          leftRail.push(pl);
+          rightRail.push(pr);
+
+          // Build contrail history up to airplane position (u = 0.52)
+          if (u <= 0.52) {
+            const cosA = Math.cos(tang.angle);
+            const sinA = Math.sin(tang.angle);
+            contrailPts.push({
+              pLeft: { x: p.x + (-4.0 * cosA - 4.5 * sinA), y: p.y + (-4.0 * sinA + 4.5 * cosA) },
+              pRight: { x: p.x + (4.0 * cosA - 4.5 * sinA), y: p.y + (4.0 * sinA + 4.5 * cosA) }
+            });
+          }
+        }
+
+        // Left Rail
+        ctx.beginPath();
+        leftRail.forEach((p, idx) => { if (idx === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.80)';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        // Right Rail
+        ctx.beginPath();
+        rightRail.forEach((p, idx) => { if (idx === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
+        ctx.strokeStyle = 'rgba(186, 230, 253, 0.70)';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        // Inter-rail luminous wave fill
+        ctx.beginPath();
+        leftRail.forEach((p, idx) => { if (idx === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
+        for (let i = rightRail.length - 1; i >= 0; i--) ctx.lineTo(rightRail[i].x, rightRail[i].y);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.05)';
+        ctx.fill();
+
+        // Registration gates bridging rails
+        targetNode.attempts.forEach(u => {
+          const pt = evalQuad(originPt, mainCp, targetPt, u);
+          const tang = evalQuadTangent(originPt, mainCp, targetPt, u);
+          const gateW = railOffset + 3.2;
+
+          ctx.beginPath();
+          ctx.moveTo(pt.x + tang.nx * gateW, pt.y + tang.ny * gateW);
+          ctx.lineTo(pt.x - tang.nx * gateW, pt.y - tang.ny * gateW);
+          ctx.strokeStyle = 'rgba(224, 242, 254, 0.85)';
+          ctx.lineWidth = 1.3;
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, 1.3, 0, Math.PI * 2);
+          ctx.fillStyle = '#38bdf8';
+          ctx.fill();
+        });
+
+        // 4. Trailing Aerodynamic Contrail Streams
+        drawDualContrails(contrailPts, 45);
+
+        // 5. Airliner positioned mid-voyage along corridor (u = 0.52)
+        const planeU = 0.52;
+        const planePt = evalQuad(originPt, mainCp, targetPt, planeU);
+        const planeTang = evalQuadTangent(originPt, mainCp, targetPt, planeU);
+        const planeHeading = planeTang.angle + Math.PI / 2;
+        drawAirplane(planePt.x, planePt.y, planeHeading, planeU, 1.0, isMobile);
+
+        // 6. Anchors
+        // Jakarta Origin
+        ctx.beginPath();
+        ctx.arc(ox, oy, 12.0, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(251, 146, 60, 0.15)';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(ox, oy, 6.5, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(251, 146, 60, 0.85)';
+        ctx.lineWidth = 1.3;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(ox, oy, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#fb923c';
+        ctx.fill();
+
+        // Tokyo Tech Anchor
+        ctx.beginPath();
+        ctx.arc(tx, ty, 14.0, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(186, 230, 253, 0.35)';
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(tx, ty, 6.0, 0, Math.PI * 2);
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 1.3;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(tx, ty, 3.0, 0, Math.PI * 2);
+        ctx.fillStyle = '#38bdf8';
+        ctx.fill();
+      }
+
+      // --- DIRECTION B: AERONAUTICAL CORRIDOR (GREAT-CIRCLE CHARTING) ---
+      function renderDirectionB(isMobile) {
+        const jktPt = projectGeo(CGK_LON, CGK_LAT, isMobile);
+        const tokyoPt = projectGeo(HND_LON, HND_LAT, isMobile);
+
+        // 1. Geographic Coastlines (Lining edges only, strictly zero fill)
+        if (realCountriesData && realCountriesData.length > 0) {
+          realCountriesData.forEach(country => {
+            if (country.name === 'Indonesia') {
+              drawGeoCountry(country, 'rgba(251, 146, 60, 0.65)', 1.1, isMobile);
+            } else if (country.name === 'Japan') {
+              drawGeoCountry(country, 'rgba(56, 189, 248, 0.70)', 1.1, isMobile);
+            } else {
+              drawGeoCountry(country, 'rgba(241, 245, 249, 0.20)', 0.75, isMobile);
+            }
+          });
+        }
+
+        // 2. Spherical Great-Circle Trajectory (128 samples)
+        const pathSamples = 128;
+        const pathPoints = [];
+        const contrailPts = [];
+        const planeU = 0.58;
+
+        for (let s = 0; s <= pathSamples; s++) {
+          const u = s / pathSamples;
+          const gc = getGreatCirclePoint(CGK_LON, CGK_LAT, HND_LON, HND_LAT, u);
+          const pt = projectGeo(gc.lon, gc.lat, isMobile);
+          pathPoints.push(pt);
+        }
+
+        // Dashed projected airway
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([4, 5]);
+        ctx.beginPath();
+        ctx.moveTo(pathPoints[0].x, pathPoints[0].y);
+        for (let i = 1; i < pathPoints.length; i++) ctx.lineTo(pathPoints[i].x, pathPoints[i].y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Active illuminated flight track behind aircraft
+        const activeIdx = Math.floor(planeU * pathSamples);
+        ctx.strokeStyle = 'rgba(251, 146, 60, 0.85)';
+        ctx.lineWidth = 2.0;
+        ctx.shadowColor = '#fb923c';
+        ctx.shadowBlur = 6;
+        ctx.beginPath();
+        ctx.moveTo(pathPoints[0].x, pathPoints[0].y);
+        for (let i = 1; i <= activeIdx; i++) ctx.lineTo(pathPoints[i].x, pathPoints[i].y);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Waypoint Registration Crossbars along Great-Circle
+        const waypointsU = [0.25, 0.50, 0.75];
+        waypointsU.forEach(u => {
+          const gc = getGreatCirclePoint(CGK_LON, CGK_LAT, HND_LON, HND_LAT, u);
+          const pt = projectGeo(gc.lon, gc.lat, isMobile);
+          const gcNext = getGreatCirclePoint(CGK_LON, CGK_LAT, HND_LON, HND_LAT, u + 0.005);
+          const ptNext = projectGeo(gcNext.lon, gcNext.lat, isMobile);
+          const dx = ptNext.x - pt.x;
+          const dy = ptNext.y - pt.y;
+          const len = Math.hypot(dx, dy) || 1;
+          const nx = -dy / len;
+          const ny = dx / len;
+
+          // Crossbar
+          ctx.beginPath();
+          ctx.moveTo(pt.x + nx * 6, pt.y + ny * 6);
+          ctx.lineTo(pt.x - nx * 6, pt.y - ny * 6);
+          ctx.strokeStyle = (u <= planeU) ? 'rgba(56, 189, 248, 0.85)' : 'rgba(255, 255, 255, 0.25)';
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+
+          // Waypoint center dot
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, 1.2, 0, Math.PI * 2);
+          ctx.fillStyle = (u <= planeU) ? '#38bdf8' : 'rgba(255, 255, 255, 0.5)';
+          ctx.fill();
+        });
+
+        // 3. Airliner Position & Heading
+        const curGC = getGreatCirclePoint(CGK_LON, CGK_LAT, HND_LON, HND_LAT, planeU);
+        const curPt = projectGeo(curGC.lon, curGC.lat, isMobile);
+        const nextGC = getGreatCirclePoint(CGK_LON, CGK_LAT, HND_LON, HND_LAT, planeU + 0.005);
+        const nextPt = projectGeo(nextGC.lon, nextGC.lat, isMobile);
+        const dx = nextPt.x - curPt.x;
+        const dy = nextPt.y - curPt.y;
+        const forwardAngle = Math.atan2(dy, dx) + Math.PI / 2;
+
+        // Build dual contrail points along traversed track
+        for (let i = Math.max(0, activeIdx - 35); i <= activeIdx; i++) {
+          const p = pathPoints[i];
+          const pNext = pathPoints[Math.min(pathPoints.length - 1, i + 1)];
+          const tdx = pNext.x - p.x;
+          const tdy = pNext.y - p.y;
+          const tlen = Math.hypot(tdx, tdy) || 1;
+          const tnx = -tdy / tlen;
+          const tny = tdx / tlen;
+          contrailPts.push({
+            pLeft: { x: p.x + tnx * 4.5, y: p.y + tny * 4.5 },
+            pRight: { x: p.x - tnx * 4.5, y: p.y - tny * 4.5 }
+          });
+        }
+        drawDualContrails(contrailPts, 35);
+
+        drawAirplane(curPt.x, curPt.y, forwardAngle, planeU, 1.0, isMobile);
+
+        // 4. Origin & Destination Beacons (Strictly Text-Free)
+        // Jakarta Origin
+        ctx.strokeStyle = 'rgba(251, 146, 60, 0.85)';
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.arc(jktPt.x, jktPt.y, 6.5, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.fillStyle = '#ffaa70';
+        ctx.beginPath();
+        ctx.arc(jktPt.x, jktPt.y, 3.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Tokyo Destination
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.85)';
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.arc(tokyoPt.x, tokyoPt.y, 7.5, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.fillStyle = '#38bdf8';
+        ctx.beginPath();
+        ctx.arc(tokyoPt.x, tokyoPt.y, 3.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // --- DIRECTION C: DUAL-SCALE APPROACH APERTURE ---
+      function renderDirectionC(isMobile) {
+        // Render Direction B's continental great circle arc as the master background
+        const jktPt = projectGeo(CGK_LON, CGK_LAT, isMobile);
+        const tokyoPt = projectGeo(HND_LON, HND_LAT, isMobile);
+
+        // Continental coastlines (slightly dimmed to prioritize aperture focus)
+        if (realCountriesData && realCountriesData.length > 0) {
+          realCountriesData.forEach(country => {
+            if (country.name === 'Indonesia') {
+              drawGeoCountry(country, 'rgba(251, 146, 60, 0.45)', 0.9, isMobile);
+            } else if (country.name === 'Japan') {
+              drawGeoCountry(country, 'rgba(56, 189, 248, 0.50)', 0.9, isMobile);
+            } else {
+              drawGeoCountry(country, 'rgba(148, 163, 184, 0.12)', 0.65, isMobile);
+            }
+          });
+        }
+
+        // Continental flight trajectory
+        const pathSamples = 128;
+        const pathPoints = [];
+        const planeU = 0.86; // Late descent phase approaching Tokyo Bay
+
+        for (let s = 0; s <= pathSamples; s++) {
+          const u = s / pathSamples;
+          const gc = getGreatCirclePoint(CGK_LON, CGK_LAT, HND_LON, HND_LAT, u);
+          pathPoints.push(projectGeo(gc.lon, gc.lat, isMobile));
+        }
+
+        // Trajectory track
+        const activeIdx = Math.floor(planeU * pathSamples);
+        ctx.strokeStyle = 'rgba(251, 146, 60, 0.80)';
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        ctx.moveTo(pathPoints[0].x, pathPoints[0].y);
+        for (let i = 1; i <= activeIdx; i++) ctx.lineTo(pathPoints[i].x, pathPoints[i].y);
+        ctx.stroke();
+
+        // Remaining descent segment dashed
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([3, 4]);
+        ctx.beginPath();
+        ctx.moveTo(pathPoints[activeIdx].x, pathPoints[activeIdx].y);
+        for (let i = activeIdx + 1; i < pathPoints.length; i++) ctx.lineTo(pathPoints[i].x, pathPoints[i].y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Airliner in banked descent posture (u = 0.86)
+        const curGC = getGreatCirclePoint(CGK_LON, CGK_LAT, HND_LON, HND_LAT, planeU);
+        const curPt = projectGeo(curGC.lon, curGC.lat, isMobile);
+        const nextGC = getGreatCirclePoint(CGK_LON, CGK_LAT, HND_LON, HND_LAT, planeU + 0.005);
+        const nextPt = projectGeo(nextGC.lon, nextGC.lat, isMobile);
+        const dx = nextPt.x - curPt.x;
+        const dy = nextPt.y - curPt.y;
+        const forwardAngle = Math.atan2(dy, dx) + Math.PI / 2;
+
+        // Altitude decreases towards 0.4 near arrival
+        const altitudeNorm = 0.45;
+        drawAirplane(curPt.x, curPt.y, forwardAngle + 0.08, planeU, altitudeNorm, isMobile);
+
+        // ====================================================================
+        // TOKYO / KAWASAKI APPROACH APERTURE (REGIONAL-TO-METROPOLITAN BRIDGE)
+        // Solves how international flight hands off directly to commute geometry
+        // ====================================================================
+        const apW = isMobile ? 210 : 290;
+        const apH = isMobile ? 180 : 230;
+        const apX = isMobile ? Math.max(16, tokyoPt.x - 175) : tokyoPt.x - 175;
+        const apY = isMobile ? tokyoPt.y - 45 : tokyoPt.y - 55;
+
+        ctx.save();
+
+        // Glassmorphism card for Approach Aperture
+        ctx.beginPath();
+        ctx.roundRect(apX, apY, apW, apH, 12);
+        ctx.fillStyle = 'rgba(10, 15, 26, 0.88)';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.40)';
+        ctx.lineWidth = 1.0;
+        ctx.stroke();
+
+        // Clip inside aperture for detailed metropolitan coastline & Tama River
+        ctx.clip();
+
+        // Background radar range rings inside aperture
+        const apCx = apX + apW * 0.52;
+        const apCy = apY + apH * 0.52;
+
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
+        ctx.lineWidth = 0.8;
+        [32, 64, 96, 128].forEach(r => {
+          ctx.beginPath();
+          ctx.arc(apCx, apCy, r, 0, Math.PI * 2);
+          ctx.stroke();
+        });
+
+        // Detailed Tokyo Bay & Honshu coastline within aperture
+        if (realCountriesData && realCountriesData.length > 0) {
+          const japan = realCountriesData.find(c => c.name === 'Japan');
+          if (japan) {
+            drawGeoCountry(japan, 'rgba(56, 189, 248, 0.80)', 1.2, isMobile, (lon, lat) => projectTokyoAperture(lon, lat, isMobile, apCx, apCy));
+          }
+        }
+
+        // Tama River Spine (Dividing line between Kawasaki and Tokyo)
+        // Coords: Upper Tama to Tokyo Bay (139.56°E, 35.65°N -> 139.78°E, 35.53°N)
+        const tamaCoords = [
+          [139.56, 35.65], [139.60, 35.62], [139.63, 35.60], [139.67, 35.58], [139.74, 35.54], [139.78, 35.53]
+        ];
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.65)';
+        ctx.lineWidth = 2.4;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        tamaCoords.forEach((pt, idx) => {
+          const p = projectTokyoAperture(pt[0], pt[1], isMobile, apCx, apCy);
+          if (idx === 0) ctx.moveTo(p.x, p.y);
+          else ctx.lineTo(p.x, p.y);
+        });
+        ctx.stroke();
+
+        // Tokyo Tech & Residence Pre-Registration Markers inside Aperture
+        const pUniv = projectTokyoAperture(139.6845, 35.6049, isMobile, apCx, apCy); // Ookayama
+        const pHome = projectTokyoAperture(139.6052, 35.6015, isMobile, apCx, apCy); // Takatsu, Kawasaki
+
+        // Residence Token (Warm Amber)
+        ctx.beginPath();
+        ctx.arc(pHome.x, pHome.y, 4.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#fb923c';
+        ctx.fill();
+
+        // Tokyo Tech Token (Luminous Cyan)
+        ctx.beginPath();
+        ctx.arc(pUniv.x, pUniv.y, 5.2, 0, Math.PI * 2);
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(pUniv.x, pUniv.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#38bdf8';
+        ctx.fill();
+
+        // Descent vector connecting from flight into Haneda locus inside aperture
+        const pHaneda = projectTokyoAperture(HND_LON, HND_LAT, isMobile, apCx, apCy);
+        ctx.strokeStyle = 'rgba(251, 146, 60, 0.75)';
+        ctx.lineWidth = 1.4;
+        ctx.setLineDash([2, 3]);
+        ctx.beginPath();
+        ctx.moveTo(pHaneda.x - 25, pHaneda.y + 35);
+        ctx.lineTo(pHaneda.x, pHaneda.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.restore();
+      }
+
+      // ======================================================================
+      // MASTER RENDER DISPATCHER
+      // ======================================================================
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+        const isMobile = width < 640;
+
+        switch (currentDirection) {
+          case '0':
+            renderInherited04B(isMobile);
+            break;
+          case 'A':
+            renderDirectionA(isMobile);
+            break;
+          case 'B':
+            renderDirectionB(isMobile);
+            break;
+          case 'C':
+            renderDirectionC(isMobile);
+            break;
+          default:
+            renderDirectionA(isMobile);
+        }
+      }
+
+      function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        render();
+      }
+
+      // ======================================================================
+      // UI & INTERACTION CONTROLLER
+      // ======================================================================
+      const studyBtns = document.querySelectorAll('.study-btn');
+      const infoBadge = document.getElementById('info-badge');
+      const infoDesc = document.getElementById('info-desc');
+
+      function setDirection(dir) {
+        if (!DIRECTION_DETAILS[dir]) return;
+        currentDirection = dir;
+
+        studyBtns.forEach(btn => {
+          const isActive = (btn.dataset.dir === dir);
+          btn.classList.toggle('is-active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        const details = DIRECTION_DETAILS[dir];
+        if (infoBadge) infoBadge.textContent = details.badge;
+        if (infoDesc) infoDesc.textContent = details.desc;
+
+        render();
+      }
+
+      studyBtns.forEach(btn => {
+        btn.addEventListener('click', () => setDirection(btn.dataset.dir));
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === '0') setDirection('0');
+        else if (e.key === '1') setDirection('A');
+        else if (e.key === '2') setDirection('B');
+        else if (e.key === '3') setDirection('C');
+      });
+
+      window.addEventListener('resize', resize);
+
+      // Expose Controller for Headless CDP and automation
+      window.scene04CDirections = {
+        setDirection: setDirection,
+        getDirection: () => currentDirection,
+        getInfo: () => DIRECTION_DETAILS[currentDirection],
+        hasGeoData: () => !!realCountriesData
+      };
+      window.scene04CController = window.scene04CDirections;
+
+      // Load Real Countries Geographic Data
+      fetch('assets/real-earth-countries.json')
+        .then(res => res.json())
+        .then(data => {
+          realCountriesData = data;
+          render();
+        })
+        .catch(err => {
+          console.warn('[Scene 04.C] real-earth-countries.json could not be loaded; using fallback geometries.', err);
+          render();
+        });
+
+      // Initial layout
+      resize();
+    })();
+  </script>
+</body>
+</html>
