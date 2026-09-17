@@ -572,15 +572,15 @@
 
   <header class="editorial-header">
     <div class="header-text">
-      <div class="kicker">02.05 // UNDERGRADUATE THESIS (2018–2019) · SECTION 05.1B-3C-1</div>
-      <h1>Condensate Extraction &amp; Transport to Collection Inlet</h1>
-      <p class="subtitle">Physical process flow animation through frozen 05.1A/B-1/B-2/B-3A/B-3B baselines: Extraction Pump Activation → Progressive Line Fill → Continuous Pump Transport → Downpipe Transport → Bottle Inlet Ready Hold</p>
+      <div class="kicker">02.05 // UNDERGRADUATE THESIS (2018–2019) · COMPLETE PROCESS FLOW BASELINE</div>
+      <h1>Distillation Apparatus Full Process Flow &amp; Distillate Collection</h1>
+      <p class="subtitle">Physical process flow animation through frozen baselines: Feed Intake → Heating → Throttling Crossing → Flash Separation → Vapor Overhead Transport → Serpentine Condensation → Pump Extraction → Distillate Collection Hold (25.0s)</p>
     </div>
 
     <div class="study-tabs" role="tablist">
       <button class="study-btn" data-target="study-a">Study A · Orthographic</button>
       <button class="study-btn" data-target="study-b">Study B · Isometric</button>
-      <button class="study-btn is-active" data-target="study-c">Study C · Process Flow 05.1B-3C-1 (Extraction)</button>
+      <button class="study-btn is-active" data-target="study-c">Study C · Complete Process Flow (25.0s)</button>
     </div>
   </header>
 
@@ -922,11 +922,11 @@
          ========================================================================= -->
     <div class="study-card is-active" id="study-c">
       <div class="study-meta">
-        <span class="study-badge">STUDY C · SECTION 05.1B-3C-1 PROCESS FLOW (EXTRACTION)</span>
+        <span class="study-badge">STUDY C · COMPLETE PROCESS FLOW (FEED → FLASH → CONDENSATION → COLLECTION)</span>
         <span id="study-c-status-pill" class="status-pill">STATUS: RIG AT REST</span>
       </div>
 
-      <!-- Playback Controls HUD for Section 05.1B-3C-1 -->
+      <!-- Playback Controls HUD for Complete Process Flow -->
       <div class="playback-bar" id="playback-bar">
         <div class="playback-actions">
           <button id="btn-play-pause" class="ctrl-btn is-primary" title="Toggle Play / Pause (Space)">
@@ -967,13 +967,15 @@
             <button class="beat-btn" data-beat="27" title="Beat 27: Continuous transport through Pump [11]">27·PumpPass</button>
             <button class="beat-btn" data-beat="28" title="Beat 28: Downstream collection-line travel">28·Downpipe</button>
             <button class="beat-btn" data-beat="29" title="Beat 29: Liquid reaches Bottle [12] inlet and stops">29·BotInlet</button>
+            <button class="beat-btn" data-beat="30" title="Beat 30: Distillate Entry &amp; Inflow Accumulation">30·BotFill</button>
+            <button class="beat-btn" data-beat="31" title="Beat 31: Stable Operational Distillate Yield">31·Collected</button>
           </div>
         </div>
 
         <div class="timeline-container">
-          <input type="range" id="timeline-scrubber" class="timeline-scrubber" min="0" max="74.0" step="0.05" value="0">
+          <input type="range" id="timeline-scrubber" class="timeline-scrubber" min="0" max="25.0" step="0.02" value="0">
           <div class="timeline-meta">
-            <span id="timecode-display" class="timecode">00:00.0 / 01:14.0</span>
+            <span id="timecode-display" class="timecode">00:00.0 / 00:25.0</span>
             <span id="beat-label-display" class="beat-label">RIG AT REST</span>
           </div>
         </div>
@@ -981,6 +983,18 @@
 
       <svg class="apparatus-svg" id="study-c-svg" viewBox="0 0 1000 520" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
+          <!-- Bottle [12] Interior Cavity Clip Path -->
+          <clipPath id="bottle-interior-clip">
+            <path d="M 810 385 L 810 435 Q 810 443 818 443 L 826 443 Q 834 443 834 435 L 834 385 Q 834 376 826 376 L 818 376 Q 810 376 810 385 Z"/>
+          </clipPath>
+
+          <!-- Authentic Distillate Water Pool Gradient (clear, clean lab distillate) -->
+          <linearGradient id="distillate-pool-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#f1f5f9" stop-opacity="0.32"/>
+            <stop offset="50%" stop-color="#e2e8f0" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.28"/>
+          </linearGradient>
+
           <linearGradient id="distillate-glow" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="rgba(100, 181, 246, 0.6)"/>
             <stop offset="100%" stop-color="rgba(33, 150, 243, 0.25)"/>
@@ -1440,12 +1454,29 @@
                    fill="#f1f5f9" stroke="#ffffff" stroke-width="0.6" opacity="0"/>
         </g>
 
-        <!-- Distillate Collection Bottle [12] (Neutral, 100% Dry Vessel Profile) -->
-        <path d="M 808 385 L 808 435 Q 808 445 818 445 L 826 445 Q 836 445 836 435 L 836 385 Q 836 375 828 375 L 828 368 L 816 368 L 816 375 Q 808 375 808 385 Z" 
+        <!-- Distillate Collection Bottle [12] (Clean Vessel Profile, Neck Accommodates Downpipe) -->
+        <path d="M 808 385 L 808 435 Q 808 445 818 445 L 826 445 Q 836 445 836 435 L 836 385 Q 836 375 828 375 L 828 368 L 810 368 L 810 375 Q 808 375 808 385 Z" 
               fill="rgba(255, 255, 255, 0.02)" stroke="var(--line-steel)" stroke-width="1.2"/>
-        <!-- Static puddle explicitly hidden for 05.1B-3C-1 -->
+        <!-- Static puddle explicitly hidden -->
         <path id="bottle-static-fill" d="M 810 408 L 834 408 L 834 435 Q 834 443 826 443 L 818 443 Q 810 443 810 435 Z" 
               fill="url(#distillate-glow)" opacity="0"/>
+
+        <!-- Dynamic Bottle Filling & Distillate Collection (Section 05.1B-3C-2, Beats 30 & 31) -->
+        <g id="bottle-collection-group">
+          <!-- Downward inflow stream from nozzle (812, 368) into bottle cavity -->
+          <path id="bottle-inflow-stream" d="M 812 368 L 812 444" 
+                stroke="#f1f5f9" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0"/>
+          <path id="bottle-inflow-highlight" d="M 812 368 L 812 444" 
+                stroke="#ffffff" stroke-width="0.6" stroke-linecap="round" fill="none" opacity="0"/>
+          <!-- Rising Distillate Liquid Pool inside bottle interior cavity -->
+          <rect id="bottle-liquid-pool" x="808" y="444" width="30" height="0" 
+                fill="url(#distillate-pool-grad)" clip-path="url(#bottle-interior-clip)"/>
+          <!-- Dynamic Surface Meniscus at liquid pool top surface -->
+          <line id="bottle-pool-meniscus-line" x1="810" y1="444" x2="834" y2="444" 
+                stroke="#f1f5f9" stroke-width="1.0" stroke-linecap="round" opacity="0"/>
+          <line id="bottle-pool-meniscus-highlight" x1="812" y1="444" x2="832" y2="444" 
+                stroke="#ffffff" stroke-width="0.6" stroke-linecap="round" opacity="0"/>
+        </g>
 
         <text x="822" y="460" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="var(--text-primary)" text-anchor="middle">AQUADEST [12]</text>
         <text x="822" y="471" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="var(--text-muted)" text-anchor="middle">COLLECTION [12]</text>
@@ -1527,38 +1558,40 @@
     // =========================================================================
     (function initScene05Animation() {
       // Configuration & Timeline Timestamps (seconds)
-      const DURATION = 74.0;
+      const DURATION = 25.0;
       const BEATS = [
         { id: 0, time: 0.0, name: 'RIG AT REST (INACTIVE)', pill: 'STATUS: RIG AT REST' },
-        { id: 1, time: 1.2, name: 'BEAT 1 · FEED INTAKE & SIGHT GLASS ACTIVATION', pill: 'BEAT 1: INTAKE ACTIVE' },
-        { id: 2, time: 3.0, name: 'BEAT 2 · FEED PUMP ENGAGEMENT & DISCHARGE ADVANCE', pill: 'BEAT 2: PUMP ENGAGED' },
-        { id: 3, time: 5.4, name: 'BEAT 3 · HEATER VESSEL FILL & THERMAL ACCUMULATION', pill: 'BEAT 3: HEATING CORE' },
-        { id: 4, time: 9.6, name: 'BEAT 4 · TOP OUTLET CONTINUOUS TRACEABLE HANDOFF', pill: 'BEAT 4: TOP OUTLET' },
-        { id: 5, time: 11.0, name: 'BEAT 5 · OVERHEAD TRANSFER, GAUGE & SENSOR RESPONSE', pill: 'BEAT 5: OVERHEAD TRANSFER' },
-        { id: 6, time: 15.0, name: 'BEAT 6 · THROTTLING VALVE APPROACH & PRIMED HOLD', pill: 'BEAT 6: THROTTLING PRIMED' },
-        { id: 7, time: 18.3, name: 'BEAT 7 · THROTTLING RESTRICTION CROSSING & INCIPIENT FLASHING', pill: 'BEAT 7: INCIPIENT FLASHING' },
-        { id: 8, time: 21.0, name: 'BEAT 8 · FLASH VESSEL INLET ONSET', pill: 'BEAT 8: FLASH ONSET ACTIVE' },
-        { id: 9, time: 24.5, name: 'BEAT 9 · INLET PLUME MOMENTUM DECAY', pill: 'BEAT 9: MOMENTUM DECAY' },
-        { id: 10, time: 26.5, name: 'BEAT 10 · PHASE DISENGAGEMENT (VAPOR / LIQUID)', pill: 'BEAT 10: DISENGAGEMENT' },
-        { id: 11, time: 28.5, name: 'BEAT 11 · BUOYANT VAPOR RISE & LIQUID GRAVITY SETTLING', pill: 'BEAT 11: PHASE SEPARATION' },
-        { id: 12, time: 31.0, name: 'BEAT 12 · RESIDUAL LIQUID DRAINAGE TO BRINE BASIN [9]', pill: 'BEAT 12: BRINE DRAINAGE' },
-        { id: 13, time: 33.5, name: 'BEAT 13 · VAPOR OUTLET READINESS & SEPARATION HOLD', pill: 'BEAT 13: READINESS HOLD' },
-        { id: 14, time: 36.0, name: 'BEAT 14 · VAPOR ACCUMULATION AT OUTLET', pill: 'BEAT 14: OUTLET READY' },
-        { id: 15, time: 37.5, name: 'BEAT 15 · VERTICAL ROUTED SEGMENT & ELBOW 1', pill: 'BEAT 15: VERTICAL RISE' },
-        { id: 16, time: 39.5, name: 'BEAT 16 · PRESSURE-DRIVEN OVERHEAD PIPE FLOW', pill: 'BEAT 16: OVERHEAD FLOW' },
-        { id: 17, time: 42.0, name: 'BEAT 17 · DOWNPIPE ROUTING DROP & INLET APPROACH', pill: 'BEAT 17: INLET APPROACH' },
-        { id: 18, time: 44.0, name: 'BEAT 18 · CONDENSER INLET ARRIVAL & READY HOLD', pill: 'BEAT 18: INLET READY' },
-        { id: 19, time: 46.5, name: 'BEAT 19 · CONDENSER COOLING ACTIVATION & FAN STARTUP', pill: 'BEAT 19: COOLING ACTIVE' },
-        { id: 20, time: 49.0, name: 'BEAT 20 · VAPOR ENTERS ILLUSTRATIVE COOLING PATH', pill: 'BEAT 20: PATH ENTRY' },
-        { id: 21, time: 52.0, name: 'BEAT 21 · PROGRESSIVE CONDENSATION & TRANSITION', pill: 'BEAT 21: CONDENSATION' },
-        { id: 22, time: 55.5, name: 'BEAT 22 · LIQUID DISTILLATE EMERGENCE', pill: 'BEAT 22: LIQUID DISTILLATE' },
-        { id: 23, time: 58.5, name: 'BEAT 23 · CONDENSER OUTLET ARRIVAL & READY HOLD', pill: 'BEAT 23: OUTLET READY' },
-        { id: 24, time: 61.5, name: 'BEAT 24 · CONDENSATE EXTRACTION READINESS', pill: 'BEAT 24: EXTRACTION READY' },
-        { id: 25, time: 63.0, name: 'BEAT 25 · EXTRACTION PUMP BECOMES OPERATIONAL', pill: 'BEAT 25: PUMP ACTIVE' },
-        { id: 26, time: 65.0, name: 'BEAT 26 · CONDENSATE ENTERS EXTRACTION LINE', pill: 'BEAT 26: EXTRACTION LINE' },
-        { id: 27, time: 67.5, name: 'BEAT 27 · CONTINUOUS TRANSPORT THROUGH PUMP [11]', pill: 'BEAT 27: PUMP TRANSPORT' },
-        { id: 28, time: 69.5, name: 'BEAT 28 · DOWNSTREAM COLLECTION-LINE TRAVEL', pill: 'BEAT 28: DOWNPIPE' },
-        { id: 29, time: 72.0, name: 'BEAT 29 · LIQUID REACHES BOTTLE [12] INLET & STOPS', pill: 'BEAT 29: INLET READY' }
+        { id: 1, time: 0.4, name: 'BEAT 1 · FEED INTAKE & SIGHT GLASS ACTIVATION', pill: 'BEAT 1: INTAKE ACTIVE' },
+        { id: 2, time: 1.2, name: 'BEAT 2 · FEED PUMP ENGAGEMENT & DISCHARGE ADVANCE', pill: 'BEAT 2: PUMP ENGAGED' },
+        { id: 3, time: 2.0, name: 'BEAT 3 · HEATER VESSEL FILL & THERMAL ACCUMULATION', pill: 'BEAT 3: HEATING CORE' },
+        { id: 4, time: 3.4, name: 'BEAT 4 · TOP OUTLET CONTINUOUS TRACEABLE HANDOFF', pill: 'BEAT 4: TOP OUTLET' },
+        { id: 5, time: 4.0, name: 'BEAT 5 · OVERHEAD TRANSFER, GAUGE & SENSOR RESPONSE', pill: 'BEAT 5: OVERHEAD TRANSFER' },
+        { id: 6, time: 5.2, name: 'BEAT 6 · THROTTLING VALVE APPROACH & PRIMED HOLD', pill: 'BEAT 6: THROTTLING PRIMED' },
+        { id: 7, time: 6.0, name: 'BEAT 7 · THROTTLING RESTRICTION CROSSING & INCIPIENT FLASHING', pill: 'BEAT 7: INCIPIENT FLASHING' },
+        { id: 8, time: 6.8, name: 'BEAT 8 · FLASH VESSEL INLET ONSET', pill: 'BEAT 8: FLASH ONSET ACTIVE' },
+        { id: 9, time: 7.6, name: 'BEAT 9 · INLET PLUME MOMENTUM DECAY', pill: 'BEAT 9: MOMENTUM DECAY' },
+        { id: 10, time: 8.3, name: 'BEAT 10 · PHASE DISENGAGEMENT (VAPOR / LIQUID)', pill: 'BEAT 10: DISENGAGEMENT' },
+        { id: 11, time: 9.0, name: 'BEAT 11 · BUOYANT VAPOR RISE & LIQUID GRAVITY SETTLING', pill: 'BEAT 11: PHASE SEPARATION' },
+        { id: 12, time: 9.8, name: 'BEAT 12 · RESIDUAL LIQUID DRAINAGE TO BRINE BASIN [9]', pill: 'BEAT 12: BRINE DRAINAGE' },
+        { id: 13, time: 10.6, name: 'BEAT 13 · VAPOR OUTLET READINESS & SEPARATION HOLD', pill: 'BEAT 13: READINESS HOLD' },
+        { id: 14, time: 11.2, name: 'BEAT 14 · VAPOR ACCUMULATION AT OUTLET', pill: 'BEAT 14: OUTLET READY' },
+        { id: 15, time: 11.7, name: 'BEAT 15 · VERTICAL ROUTED SEGMENT & ELBOW 1', pill: 'BEAT 15: VERTICAL RISE' },
+        { id: 16, time: 12.4, name: 'BEAT 16 · PRESSURE-DRIVEN OVERHEAD PIPE FLOW', pill: 'BEAT 16: OVERHEAD FLOW' },
+        { id: 17, time: 13.2, name: 'BEAT 17 · DOWNPIPE ROUTING DROP & INLET APPROACH', pill: 'BEAT 17: INLET APPROACH' },
+        { id: 18, time: 13.9, name: 'BEAT 18 · CONDENSER INLET ARRIVAL & READY HOLD', pill: 'BEAT 18: INLET READY' },
+        { id: 19, time: 14.5, name: 'BEAT 19 · CONDENSER COOLING ACTIVATION & FAN STARTUP', pill: 'BEAT 19: COOLING ACTIVE' },
+        { id: 20, time: 15.3, name: 'BEAT 20 · VAPOR ENTERS ILLUSTRATIVE COOLING PATH', pill: 'BEAT 20: PATH ENTRY' },
+        { id: 21, time: 16.3, name: 'BEAT 21 · PROGRESSIVE CONDENSATION & TRANSITION', pill: 'BEAT 21: CONDENSATION' },
+        { id: 22, time: 17.5, name: 'BEAT 22 · LIQUID DISTILLATE EMERGENCE', pill: 'BEAT 22: LIQUID DISTILLATE' },
+        { id: 23, time: 18.5, name: 'BEAT 23 · CONDENSER OUTLET ARRIVAL & READY HOLD', pill: 'BEAT 23: OUTLET READY' },
+        { id: 24, time: 19.1, name: 'BEAT 24 · CONDENSATE EXTRACTION READINESS', pill: 'BEAT 24: EXTRACTION READY' },
+        { id: 25, time: 19.6, name: 'BEAT 25 · EXTRACTION PUMP BECOMES OPERATIONAL', pill: 'BEAT 25: PUMP ACTIVE' },
+        { id: 26, time: 20.2, name: 'BEAT 26 · CONDENSATE ENTERS EXTRACTION LINE', pill: 'BEAT 26: EXTRACTION LINE' },
+        { id: 27, time: 21.0, name: 'BEAT 27 · CONTINUOUS TRANSPORT THROUGH PUMP [11]', pill: 'BEAT 27: PUMP TRANSPORT' },
+        { id: 28, time: 21.7, name: 'BEAT 28 · DOWNSTREAM COLLECTION-LINE TRAVEL', pill: 'BEAT 28: DOWNPIPE' },
+        { id: 29, time: 22.4, name: 'BEAT 29 · LIQUID REACHES BOTTLE [12] INLET & STOPS', pill: 'BEAT 29: INLET READY' },
+        { id: 30, time: 23.0, name: 'BEAT 30 · DISTILLATE ENTRY & INFLOW ACCUMULATION', pill: 'BEAT 30: BOTTLE FILL' },
+        { id: 31, time: 24.2, name: 'BEAT 31 · STABLE OPERATIONAL DISTILLATE YIELD', pill: 'BEAT 31: COLLECTED YIELD' }
       ];
 
       // DOM Elements
@@ -1657,6 +1690,14 @@
       const bottleInletMeniscus = document.getElementById('bottle-inlet-meniscus');
       const bottleStaticFill = document.getElementById('bottle-static-fill');
 
+      // Dynamic Bottle Collection Elements (Section 05.1B-3C-2, Beats 30 & 31)
+      const bottleCollectionGroup = document.getElementById('bottle-collection-group');
+      const bottleInflowStream = document.getElementById('bottle-inflow-stream');
+      const bottleInflowHighlight = document.getElementById('bottle-inflow-highlight');
+      const bottleLiquidPool = document.getElementById('bottle-liquid-pool');
+      const bottlePoolMeniscusLine = document.getElementById('bottle-pool-meniscus-line');
+      const bottlePoolMeniscusHighlight = document.getElementById('bottle-pool-meniscus-highlight');
+
       // Compute exact geometric path lengths
       const suctionLen = suctionCore.getTotalLength();
       const dischargeLen = dischargeCore.getTotalLength();
@@ -1724,13 +1765,13 @@
         return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
       }
 
-      // Impeller angle analytical integral (smooth, deterministic acceleration from t=3.0 to 4.2)
+      // Impeller angle analytical integral (smooth, deterministic acceleration from t=1.2 to 1.6s)
       function getImpellerAngle(t) {
-        if (t <= 3.0) return 0;
-        const accelDuration = 1.2;
+        if (t <= 1.2) return 0;
+        const accelDuration = 0.4;
         const steadySpeed = 720; // degrees per second
-        if (t < 3.0 + accelDuration) {
-          const tau = (t - 3.0) / accelDuration;
+        if (t < 1.2 + accelDuration) {
+          const tau = (t - 1.2) / accelDuration;
           let intS = 0;
           if (tau < 0.5) {
             intS = (2 / 3) * Math.pow(tau, 3);
@@ -1741,17 +1782,17 @@
         } else {
           const tau1Integral = 0.5; // integral from 0 to 1 of easeInOutQuad is 0.5
           const angleAtSteady = steadySpeed * accelDuration * tau1Integral;
-          return angleAtSteady + steadySpeed * (t - (3.0 + accelDuration));
+          return angleAtSteady + steadySpeed * (t - (1.2 + accelDuration));
         }
       }
 
-      // Condenser cooling fan angle analytical integral (smooth acceleration from t=47.2 to 49.0s)
+      // Condenser cooling fan angle analytical integral (smooth acceleration from t=14.7 to 15.3s)
       function getCondenserFanAngle(t) {
-        if (t <= 47.2) return 0;
-        const accelDuration = 1.8;
+        if (t <= 14.7) return 0;
+        const accelDuration = 0.6;
         const steadySpeed = 360; // degrees per second
-        if (t < 47.2 + accelDuration) {
-          const tau = (t - 47.2) / accelDuration;
+        if (t < 14.7 + accelDuration) {
+          const tau = (t - 14.7) / accelDuration;
           let intS = 0;
           if (tau < 0.5) {
             intS = (2 / 3) * Math.pow(tau, 3);
@@ -1762,7 +1803,7 @@
         } else {
           const tau1Integral = 0.5;
           const angleAtSteady = steadySpeed * accelDuration * tau1Integral;
-          return angleAtSteady + steadySpeed * (t - (47.2 + accelDuration));
+          return angleAtSteady + steadySpeed * (t - (14.7 + accelDuration));
         }
       }
 
@@ -1770,7 +1811,7 @@
       function render(t) {
         currentTime = clamp(t, 0, DURATION);
 
-        if (currentTime < 61.5) {
+        if (currentTime < 19.1) {
           pumpExtractionCasing.setAttribute('stroke', 'var(--line-steel)');
           pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.25)');
           extractionFluidGroup.style.opacity = '0';
@@ -1778,13 +1819,18 @@
           extractionLiquidHighlight.style.strokeDashoffset = String(extractionPathLen);
           extractionLiquidDashes.style.strokeDashoffset = String(extractionPathLen);
           bottleInletMeniscus.style.opacity = '0';
+          bottleInflowStream.style.opacity = '0';
+          bottleInflowHighlight.style.opacity = '0';
+          bottleLiquidPool.setAttribute('height', '0');
+          bottlePoolMeniscusLine.style.opacity = '0';
+          bottlePoolMeniscusHighlight.style.opacity = '0';
           bottleStaticFill.style.opacity = '0';
         }
 
         // -------------------------------------------------------------
-        // BEAT 1: Feed Intake & Sight Glass Activation (t = 1.2 .. 3.0s)
+        // BEAT 1: Feed Intake & Sight Glass Activation (t = 0.4 .. 1.2s)
         // -------------------------------------------------------------
-        if (currentTime < 1.2) {
+        if (currentTime < 0.4) {
           // Cold rig at rest
           flowMeterFluid.setAttribute('height', 0);
           flowMeterFluid.setAttribute('y', 424);
@@ -1793,8 +1839,8 @@
           suctionCore.style.strokeDashoffset = suctionLen;
           suctionGlow.style.opacity = '0';
           suctionCore.style.opacity = '0';
-        } else if (currentTime <= 3.0) {
-          const p1 = clamp((currentTime - 1.2) / 1.8, 0, 1);
+        } else if (currentTime <= 1.2) {
+          const p1 = clamp((currentTime - 0.4) / 0.8, 0, 1);
           const e1 = easeInOutQuad(p1);
 
           // Flow meter sight glass fluid rise
@@ -1821,29 +1867,29 @@
         }
 
         // -------------------------------------------------------------
-        // BEAT 2: Pump Engagement & Discharge Advance (t = 3.0 .. 5.4s)
+        // BEAT 2: Pump Engagement & Discharge Advance (t = 1.2 .. 2.0s)
         // -------------------------------------------------------------
         const impellerAngle = getImpellerAngle(currentTime);
         pumpImpellerGroup.setAttribute('transform', `rotate(${impellerAngle % 360} 205 440)`);
 
-        if (currentTime < 3.0) {
+        if (currentTime < 1.2) {
           pumpHalo.style.opacity = '0';
           dischargeGlow.style.strokeDashoffset = dischargeLen;
           dischargeCore.style.strokeDashoffset = dischargeLen;
           dischargeGlow.style.opacity = '0';
           dischargeCore.style.opacity = '0';
-        } else if (currentTime <= 3.8) {
+        } else if (currentTime <= 1.5) {
           // Motor starting up, fluid waiting for operational head
-          const startupP = (currentTime - 3.0) / 0.8;
+          const startupP = (currentTime - 1.2) / 0.3;
           pumpHalo.style.opacity = String(0.45 * startupP);
           dischargeGlow.style.strokeDashoffset = dischargeLen;
           dischargeCore.style.strokeDashoffset = dischargeLen;
           dischargeGlow.style.opacity = '0';
           dischargeCore.style.opacity = '0';
-        } else if (currentTime <= 5.4) {
+        } else if (currentTime <= 2.0) {
           // Fluid advancing through discharge pipe to vessel bottom flange (230, 345)
           pumpHalo.style.opacity = '0.55';
-          const p2 = clamp((currentTime - 3.8) / 1.6, 0, 1);
+          const p2 = clamp((currentTime - 1.5) / 0.5, 0, 1);
           const e2 = easeOutCubic(p2);
           const offset2 = dischargeLen * (1 - e2);
           dischargeGlow.style.strokeDashoffset = offset2;
@@ -1859,18 +1905,18 @@
         }
 
         // -------------------------------------------------------------
-        // BEAT 3: Heater Vessel Fill & Thermal Accumulation (t = 5.4 .. 9.6s)
+        // BEAT 3: Heater Vessel Fill & Thermal Accumulation (t = 2.0 .. 3.4s)
         // -------------------------------------------------------------
-        if (currentTime < 5.4) {
+        if (currentTime < 2.0) {
           heaterFluidFill.setAttribute('height', 0);
           heaterFluidFill.setAttribute('y', 344);
           heaterFluidMeniscus.style.opacity = '0';
           heaterThermalCore.setAttribute('fill', 'rgba(245, 158, 11, 0.07)');
           heaterThermalCore.setAttribute('stroke', 'rgba(245, 158, 11, 0.22)');
           heaterThermalCross.setAttribute('stroke', 'rgba(245, 158, 11, 0.3)');
-        } else if (currentTime <= 8.4) {
+        } else if (currentTime <= 3.0) {
           // Upward fluid fill inside vessel core
-          const pFill = clamp((currentTime - 5.4) / 3.0, 0, 1);
+          const pFill = clamp((currentTime - 2.0) / 1.0, 0, 1);
           const eFill = easeInOutQuad(pFill);
           const h = 143 * eFill;
           const curY = 344 - h;
@@ -1880,9 +1926,9 @@
           heaterFluidMeniscus.setAttribute('y2', curY);
           heaterFluidMeniscus.style.opacity = (pFill > 0 && pFill < 0.98) ? '0.65' : '0';
 
-          // Thermal zone begins subtle heating as fluid reaches Y <= 330 (approx t >= 6.4s)
-          if (currentTime >= 6.4) {
-            const pHeat = clamp((currentTime - 6.4) / 3.0, 0, 1);
+          // Thermal zone begins subtle heating as fluid reaches Y <= 330 (approx t >= 2.3s)
+          if (currentTime >= 2.3) {
+            const pHeat = clamp((currentTime - 2.3) / 1.0, 0, 1);
             const eHeat = easeInOutQuad(pHeat);
             heaterThermalCore.setAttribute('fill', `rgba(245, 158, 11, ${0.07 + 0.20 * eHeat})`);
             heaterThermalCore.setAttribute('stroke', `rgba(245, 158, 11, ${0.22 + 0.40 * eHeat})`);
@@ -1892,13 +1938,13 @@
             heaterThermalCore.setAttribute('stroke', 'rgba(245, 158, 11, 0.22)');
             heaterThermalCross.setAttribute('stroke', 'rgba(245, 158, 11, 0.3)');
           }
-        } else if (currentTime <= 9.6) {
+        } else if (currentTime <= 3.4) {
           // Vessel full, thermal accumulation establishes steady hot operating condition
           heaterFluidFill.setAttribute('height', 143);
           heaterFluidFill.setAttribute('y', 201);
           heaterFluidMeniscus.style.opacity = '0';
 
-          const pHeat = clamp((currentTime - 6.4) / 3.0, 0, 1);
+          const pHeat = clamp((currentTime - 2.3) / 1.1, 0, 1);
           const eHeat = easeInOutQuad(pHeat);
           heaterThermalCore.setAttribute('fill', `rgba(245, 158, 11, ${0.07 + 0.22 * eHeat})`);
           heaterThermalCore.setAttribute('stroke', `rgba(245, 158, 11, ${0.22 + 0.48 * eHeat})`);
@@ -1916,7 +1962,7 @@
         // -------------------------------------------------------------
         // BEATS 4, 5, 6: Overhead Transfer Line & Throttling Approach
         // -------------------------------------------------------------
-        if (currentTime < 9.6) {
+        if (currentTime < 3.4) {
           // Zero fluid in overhead piping
           overheadGlow.style.strokeDashoffset = overheadLen;
           overheadCore.style.strokeDashoffset = overheadLen;
@@ -1937,19 +1983,19 @@
         } else {
           // Fluid advances along overhead line
           let overheadFraction = 0;
-          if (currentTime <= 11.0) {
+          if (currentTime <= 4.0) {
             // Beat 4: Top outlet handoff (243, 200) to apex (258, 130), ~78.6px
-            const p4 = clamp((currentTime - 9.6) / 1.4, 0, 1);
+            const p4 = clamp((currentTime - 3.4) / 0.6, 0, 1);
             overheadFraction = (78.6 / overheadLen) * easeInOutQuad(p4);
-          } else if (currentTime <= 15.0) {
+          } else if (currentTime <= 5.2) {
             // Beat 5: Overhead transfer along horizontal pipe and down vertical drop
-            const p5 = clamp((currentTime - 11.0) / 4.0, 0, 1);
+            const p5 = clamp((currentTime - 4.0) / 1.2, 0, 1);
             const apexFrac = 78.6 / overheadLen;
             const preValveFrac = (overheadLen - 24) / overheadLen;
             overheadFraction = apexFrac + (preValveFrac - apexFrac) * p5;
           } else {
             // Beat 6: Approach into throttling valve and stop right at restriction node
-            const p6 = clamp((currentTime - 15.0) / 1.8, 0, 1);
+            const p6 = clamp((currentTime - 5.2) / 0.8, 0, 1);
             const preValveFrac = (overheadLen - 24) / overheadLen;
             overheadFraction = preValveFrac + (1 - preValveFrac) * easeOutCubic(p6);
           }
@@ -1962,23 +2008,23 @@
           overheadCore.style.opacity = '1';
           overheadInner.style.opacity = '0.9';
 
-          // Bourdon Gauge Response (X = 410 passed at t approx 12.3s)
-          if (currentTime < 12.3) {
+          // Bourdon Gauge Response (X = 410 passed at t approx 4.4s)
+          if (currentTime < 4.4) {
             gaugeNeedleGroup.setAttribute('transform', 'rotate(-50 410 92)');
           } else {
-            const pGauge = clamp((currentTime - 12.3) / 1.4, 0, 1);
+            const pGauge = clamp((currentTime - 4.4) / 0.8, 0, 1);
             const eGauge = easeOutCubic(pGauge);
             const curAngle = -50 + (38 * eGauge); // -50 deg to -12 deg (~2 o'clock)
             gaugeNeedleGroup.setAttribute('transform', `rotate(${curAngle} 410 92)`);
           }
 
-          // Temperature Sensor Port Response (X = 450 passed at t approx 13.1s)
-          if (currentTime < 13.1) {
+          // Temperature Sensor Port Response (X = 450 passed at t approx 4.7s)
+          if (currentTime < 4.7) {
             tempSensorDot.setAttribute('fill', 'var(--cyan-tech)');
             tempSensorHalo.style.opacity = '0';
             tempSensorStem.setAttribute('stroke', 'var(--line-steel)');
           } else {
-            const pTemp = clamp((currentTime - 13.1) / 1.4, 0, 1);
+            const pTemp = clamp((currentTime - 4.7) / 0.5, 0, 1);
             const eTemp = easeInOutQuad(pTemp);
             tempSensorDot.setAttribute('fill', eTemp > 0.6 ? 'var(--amber-warm)' : '#60a5fa');
             tempSensorHalo.style.opacity = String(0.75 * eTemp);
@@ -1986,18 +2032,18 @@
           }
 
           // Throttling Valve Inlet Cavity & Upstream Compression
-          if (currentTime < 15.0) {
+          if (currentTime < 5.2) {
             valveInletFluid.setAttribute('fill', 'rgba(245, 158, 11, 0)');
             valveHandwheelNotch.setAttribute('stroke', 'rgba(255, 255, 255, 0.4)');
             overheadGlow.setAttribute('stroke-width', '6');
-          } else if (currentTime < 18.3) {
-            const pValve = clamp((currentTime - 15.0) / 1.8, 0, 1);
+          } else if (currentTime < 6.0) {
+            const pValve = clamp((currentTime - 5.2) / 0.5, 0, 1);
             const eValve = easeOutCubic(pValve);
             valveInletFluid.setAttribute('fill', `rgba(245, 158, 11, ${0.85 * eValve})`);
 
             // Subtle hydraulic upstream compression as fluid halts against restriction node
-            if (currentTime >= 16.2) {
-              const pComp = clamp((currentTime - 16.2) / 1.0, 0, 1);
+            if (currentTime >= 5.5) {
+              const pComp = clamp((currentTime - 5.5) / 0.5, 0, 1);
               const eComp = easeOutCubic(pComp);
               overheadGlow.setAttribute('stroke-width', String(6 + 1.2 * eComp));
               valveHandwheelNotch.setAttribute('stroke', `rgba(255, 255, 255, ${0.4 + 0.5 * eComp})`);
@@ -2017,7 +2063,7 @@
           // BEATS 7 & 8: Throttling Crossing, Incipient Spool & Flash Onset
           // Note: Valve handwheel and stem remain physically stationary (causal event is restriction crossing)
           // -------------------------------------------------------------
-          if (currentTime < 18.3) {
+          if (currentTime < 6.0) {
             // Downstream remains 100% dry and inactive
             valveOutletFluid.setAttribute('fill', 'rgba(245, 158, 11, 0)');
             valveRestrictionHalo.style.opacity = '0';
@@ -2033,25 +2079,23 @@
             flashInletPlume.style.opacity = '0';
             flashPhaseRegion.setAttribute('stroke', 'rgba(255, 255, 255, 0.18)');
             flashPhaseRegion.setAttribute('fill', 'rgba(255, 255, 255, 0.03)');
-          } else if (currentTime < 19.5) {
+          } else if (currentTime < 6.4) {
             // Beat 7A: Fluid crosses restriction throat into outlet cavity (X = 540 to 552)
-            // Valve handwheel remains completely stationary (no artificial unseating)
             valveHandwheelAssembly.removeAttribute('transform');
             valveHandwheelNotch.removeAttribute('transform');
 
             // Restriction throat pulse as fluid breaches restriction node (0, 0)
-            const pPulse = clamp((currentTime - 18.3) / 0.9, 0, 1);
+            const pPulse = clamp((currentTime - 6.0) / 0.35, 0, 1);
             const pulseOp = Math.sin(pPulse * Math.PI);
             valveRestrictionHalo.style.opacity = String(0.7 * pulseOp);
             valveRestrictionHalo.setAttribute('r', String(2.2 + 1.6 * pPulse));
 
             // Fluid fills valve outlet cavity (X = 540 to 552)
-            const pCross = clamp((currentTime - 18.3) / 1.2, 0, 1);
+            const pCross = clamp((currentTime - 6.0) / 0.4, 0, 1);
             const eCross = easeOutCubic(pCross);
             valveOutletFluid.setAttribute('fill', `rgba(245, 158, 11, ${0.85 * eCross})`);
 
             // Incipient spool entry: reveals initial 12px (fraction 12 / 80 = 0.15)
-            // Restrained incipient flashing: narrow sheath (3.6px), low opacity (0.45), clear liquid core (2.0px)
             const crossFrac = 0.15 * eCross;
             const offsetSpool = spoolLen * (1 - crossFrac);
             fluidSpoolGlow.style.strokeDashoffset = offsetSpool;
@@ -2065,7 +2109,7 @@
             flashInletPlume.style.opacity = '0';
             flashPhaseRegion.setAttribute('stroke', 'rgba(255, 255, 255, 0.18)');
             flashPhaseRegion.setAttribute('fill', 'rgba(255, 255, 255, 0.03)');
-          } else if (currentTime < 21.0) {
+          } else if (currentTime < 6.8) {
             // Beat 7B: Spool traversal (X = 552 to 620) with incipient flashing
             valveHandwheelAssembly.removeAttribute('transform');
             valveHandwheelNotch.removeAttribute('transform');
@@ -2073,7 +2117,7 @@
             valveRestrictionHalo.setAttribute('r', '2.2');
             valveOutletFluid.setAttribute('fill', 'rgba(245, 158, 11, 0.85)');
 
-            const pSpool = clamp((currentTime - 19.5) / 1.5, 0, 1);
+            const pSpool = clamp((currentTime - 6.4) / 0.4, 0, 1);
             const eSpool = easeInOutQuad(pSpool);
             const spoolFrac = 0.15 + (0.85 * eSpool);
             const offsetSpool = spoolLen * (1 - spoolFrac);
@@ -2089,7 +2133,7 @@
             flashInletPlume.style.opacity = '0';
             flashPhaseRegion.setAttribute('stroke', 'rgba(255, 255, 255, 0.18)');
             flashPhaseRegion.setAttribute('fill', 'rgba(255, 255, 255, 0.03)');
-          } else if (currentTime < 22.8) {
+          } else if (currentTime < 7.6) {
             // Beat 8A: Entry into flash vessel phase region & localized plume expansion
             valveHandwheelAssembly.removeAttribute('transform');
             valveHandwheelNotch.removeAttribute('transform');
@@ -2105,7 +2149,7 @@
             fluidSpoolVoids.style.opacity = '0.35';
 
             // Plume horizontal expansion strictly inside vessel inlet region (X = 620 to 656, 36px)
-            const pPlume = clamp((currentTime - 21.0) / 1.8, 0, 1);
+            const pPlume = clamp((currentTime - 6.8) / 0.8, 0, 1);
             const ePlume = easeOutCubic(pPlume);
             plumeClipRect.setAttribute('width', String(36 * ePlume));
             flashInletPlume.style.opacity = String(0.3 + 0.7 * ePlume);
@@ -2114,7 +2158,7 @@
             flashPhaseRegion.setAttribute('stroke', `rgba(245, 158, 11, ${0.18 + 0.18 * ePlume})`);
             flashPhaseRegion.setAttribute('fill', `rgba(245, 158, 11, ${0.03 + 0.04 * ePlume})`);
           } else {
-            // Flow through restriction is fully established (t >= 22.8s)
+            // Flow through restriction is fully established (t >= 7.6s)
             valveHandwheelAssembly.removeAttribute('transform');
             valveHandwheelNotch.removeAttribute('transform');
             valveRestrictionHalo.style.opacity = '0.25';
@@ -2137,7 +2181,7 @@
           // -------------------------------------------------------------
           // BEATS 9 to 18: Flash Vessel Phase Separation & Vapor Transport
           // -------------------------------------------------------------
-          if (currentTime < 36.0) {
+          if (currentTime < 11.2) {
             vaporOverheadGroup.style.opacity = '0';
             vaporOverheadGlow.style.strokeDashoffset = String(vaporOverheadLen);
             vaporOverheadCore.style.strokeDashoffset = String(vaporOverheadLen);
@@ -2145,8 +2189,8 @@
             vaporCondenserInletWisp.style.opacity = '0';
           }
 
-          if (currentTime < 24.5) {
-            // Unresolved hold from 05.1B-2A: Separation elements remain 100% dry and inactive
+          if (currentTime < 7.6) {
+            // Unresolved hold: Separation elements remain 100% dry and inactive
             flashPlumeDecay.style.opacity = '0';
             flashVaporGroup.style.opacity = '0';
             vaporCloudBody.style.opacity = '0';
@@ -2168,10 +2212,9 @@
 
             brineBasinPoolGroup.style.opacity = '0';
             brineImpactRipple.style.opacity = '0';
-          } else if (currentTime < 26.5) {
+          } else if (currentTime < 8.3) {
             // Beat 9: Inlet Plume Momentum Decay (X = 645 to 658)
-            // The jet momentum weakens into the chamber, broadening gently
-            const pDecay = clamp((currentTime - 24.5) / 2.0, 0, 1);
+            const pDecay = clamp((currentTime - 7.6) / 0.7, 0, 1);
             const eDecay = easeOutCubic(pDecay);
 
             flashPlumeDecay.style.opacity = String(0.75 * eDecay);
@@ -2197,11 +2240,11 @@
 
             brineBasinPoolGroup.style.opacity = '0';
             brineImpactRipple.style.opacity = '0';
-          } else if (currentTime < 28.5) {
+          } else if (currentTime < 9.0) {
             // Beat 10: Phase Disengagement (Divergence emerges visibly from the same material)
             flashPlumeDecay.style.opacity = '0.75';
 
-            const pSplit = clamp((currentTime - 26.5) / 2.0, 0, 1);
+            const pSplit = clamp((currentTime - 8.3) / 0.7, 0, 1);
             const eSplit = easeOutCubic(pSplit);
 
             // Vapor fraction begins upward drift
@@ -2228,11 +2271,11 @@
 
             brineBasinPoolGroup.style.opacity = '0';
             brineImpactRipple.style.opacity = '0';
-          } else if (currentTime < 31.0) {
+          } else if (currentTime < 9.8) {
             // Beat 11: Buoyant Vapor Rise (to outlet Y=165) & Gravity Liquid Settling (to funnel apex)
             flashPlumeDecay.style.opacity = '0.75';
 
-            const pRise = clamp((currentTime - 28.5) / 2.5, 0, 1);
+            const pRise = clamp((currentTime - 9.0) / 0.8, 0, 1);
             const eRise = easeInOutQuad(pRise);
 
             // Vapor fills upper chamber up to outlet nozzle (Y = 165)
@@ -2242,7 +2285,6 @@
             vaporStreamline1.style.strokeDashoffset = String(vaporStream1Len * (1 - vaporProg11));
             vaporStreamline2.style.strokeDashoffset = String(vaporStream2Len * (1 - vaporProg11));
             vaporStreamlineCenter.style.strokeDashoffset = String(vaporStreamCenterLen * (1 - vaporProg11));
-            // Vapor reaches outlet threshold at Y=165, but does NOT enter overhead pipe
             vaporOutletThreshold.style.opacity = String(0.85 * eRise);
 
             // Liquid descends through lower cylinder and pools in conical hopper apex (Y=345 to 365)
@@ -2254,14 +2296,13 @@
             funnelLiquidPool.style.opacity = String(0.85 * eRise);
             funnelLiquidMeniscus.style.opacity = String(0.9 * eRise);
 
-            // Bottom nozzle is primed, but drain jet has not breached yet
             brineDrainJetGroup.style.opacity = '0';
             brineDrainGlow.style.strokeDashoffset = brineDrainLen;
             brineDrainCore.style.strokeDashoffset = brineDrainLen;
 
             brineBasinPoolGroup.style.opacity = '0';
             brineImpactRipple.style.opacity = '0';
-          } else if (currentTime < 33.5) {
+          } else if (currentTime < 10.6) {
             // Beat 12: Residual Liquid Drainage to Brine Basin [9]
             flashPlumeDecay.style.opacity = '0.75';
 
@@ -2281,19 +2322,19 @@
             funnelLiquidPool.style.opacity = '0.85';
             funnelLiquidMeniscus.style.opacity = '0.9';
 
-            // Drain jet freefalls from nozzle Y=365 to Basin Y=440 (0.8s: 31.0s to 31.8s)
+            // Drain jet freefalls from nozzle Y=365 to Basin Y=440 (0.3s: 9.8s to 10.1s)
             brineDrainJetGroup.style.opacity = '1';
-            const pFall = clamp((currentTime - 31.0) / 0.8, 0, 1);
+            const pFall = clamp((currentTime - 9.8) / 0.3, 0, 1);
             const eFall = easeOutCubic(pFall);
             brineDrainGlow.style.strokeDashoffset = String(brineDrainLen * (1 - eFall));
             brineDrainCore.style.strokeDashoffset = String(brineDrainLen * (1 - eFall));
 
-            // Brine accumulation in Catchment Basin [9] (31.8s to 33.5s)
-            if (currentTime < 31.8) {
+            // Brine accumulation in Catchment Basin [9] (10.1s to 10.6s)
+            if (currentTime < 10.1) {
               brineBasinPoolGroup.style.opacity = '0';
               brineImpactRipple.style.opacity = '0';
             } else {
-              const pPool = clamp((currentTime - 31.8) / 1.7, 0, 1);
+              const pPool = clamp((currentTime - 10.1) / 0.5, 0, 1);
               const ePool = easeInOutQuad(pPool);
               brineBasinPoolGroup.style.opacity = String(ePool);
 
@@ -2306,14 +2347,14 @@
 
               // Impact ripple active at liquid surface
               brineImpactRipple.setAttribute('cy', String(curY));
-              const ripplePhase = (currentTime - 31.8) * 8;
+              const ripplePhase = (currentTime - 10.1) * 8;
               const rippleR = 4 + 4 * (ripplePhase % 1);
               brineImpactRipple.setAttribute('rx', String(rippleR));
               brineImpactRipple.setAttribute('ry', String(rippleR * 0.25));
               brineImpactRipple.style.opacity = String(0.8 * (1 - (ripplePhase % 1)));
             }
-          } else if (currentTime < 36.0) {
-            // Beat 13: Vapor Outlet Readiness & Separation Steady State Hold (t = 33.5s to 36.0s)
+          } else if (currentTime < 11.2) {
+            // Beat 13: Vapor Outlet Readiness & Separation Steady State Hold (t = 10.6s to 11.2s)
             flashPlumeDecay.style.opacity = '0.75';
 
             // Vapor ready at outlet nozzle Y=165
@@ -2343,7 +2384,7 @@
             brineBasinMeniscus.setAttribute('cy', '438');
             brineBasinMeniscus.setAttribute('rx', '27');
             brineImpactRipple.setAttribute('cy', '438');
-            const ripplePhase = (currentTime - 33.5) * 6;
+            const ripplePhase = (currentTime - 10.6) * 6;
             const rippleR = 4 + 4 * (ripplePhase % 1);
             brineImpactRipple.setAttribute('rx', String(rippleR));
             brineImpactRipple.setAttribute('ry', String(rippleR * 0.25));
@@ -2376,16 +2417,16 @@
             brineBasinMeniscus.setAttribute('cy', '438');
             brineBasinMeniscus.setAttribute('rx', '27');
             brineImpactRipple.setAttribute('cy', '438');
-            const ripplePhase = (currentTime - 33.5) * 6;
+            const ripplePhase = (currentTime - 11.2) * 6;
             const rippleR = 4 + 4 * (ripplePhase % 1);
             brineImpactRipple.setAttribute('rx', String(rippleR));
             brineImpactRipple.setAttribute('ry', String(rippleR * 0.25));
             brineImpactRipple.style.opacity = String(0.7 * (1 - (ripplePhase % 1)));
 
-            if (currentTime < 37.5) {
-              // Beat 14: Vapor Accumulation at Outlet (t = 36.0s to 37.5s)
+            if (currentTime < 11.7) {
+              // Beat 14: Vapor Accumulation at Outlet (t = 11.2s to 11.7s)
               // Vapor occupies dome and nozzle threshold ready for pressure-driven pipe transport.
-              const pPress = clamp((currentTime - 36.0) / 1.5, 0, 1);
+              const pPress = clamp((currentTime - 11.2) / 0.5, 0, 1);
               const ePress = easeInOutQuad(pPress);
               vaporOutletThreshold.style.opacity = String(0.85 + 0.15 * ePress);
 
@@ -2395,13 +2436,13 @@
               vaporOverheadCore.style.strokeDashoffset = String(vaporOverheadLen);
               vaporOverheadStream.style.strokeDashoffset = String(vaporOverheadLen);
               vaporCondenserInletWisp.style.opacity = '0';
-            } else if (currentTime < 39.5) {
-              // Beat 15: Vertical Routed Segment & Elbow 1 (t = 37.5s to 39.5s)
+            } else if (currentTime < 12.4) {
+              // Beat 15: Vertical Routed Segment & Elbow 1 (t = 11.7s to 12.4s)
               // Pressure differential carries vapor through vertical pipe (Y=165 to 135) and rounds first elbow to (655, 125)
               vaporOutletThreshold.style.opacity = '1';
               vaporOverheadGroup.style.opacity = '1';
 
-              const pRise = clamp((currentTime - 37.5) / 2.0, 0, 1);
+              const pRise = clamp((currentTime - 11.7) / 0.7, 0, 1);
               const eRise = easeInOutQuad(pRise);
               // Fraction 0 to 0.175 (45.7px / 262px)
               const prog15 = 0.175 * eRise;
@@ -2409,13 +2450,13 @@
               vaporOverheadCore.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog15));
               vaporOverheadStream.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog15));
               vaporCondenserInletWisp.style.opacity = '0';
-            } else if (currentTime < 42.0) {
-              // Beat 16: Pressure-Driven Overhead Pipe Flow (t = 39.5s to 42.0s)
+            } else if (currentTime < 13.2) {
+              // Beat 16: Pressure-Driven Overhead Pipe Flow (t = 12.4s to 13.2s)
               // Process pressure differential drives vapor across horizontal run from X=655 to 755 and rounds downward elbow
               vaporOutletThreshold.style.opacity = '1';
               vaporOverheadGroup.style.opacity = '1';
 
-              const pRun = clamp((currentTime - 39.5) / 2.5, 0, 1);
+              const pRun = clamp((currentTime - 12.4) / 0.8, 0, 1);
               const eRun = easeInOutQuad(pRun);
               // Fraction 0.175 to 0.616 (161.4px / 262px)
               const prog16 = 0.175 + (0.616 - 0.175) * eRun;
@@ -2423,13 +2464,13 @@
               vaporOverheadCore.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog16));
               vaporOverheadStream.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog16));
               vaporCondenserInletWisp.style.opacity = '0';
-            } else if (currentTime < 44.0) {
-              // Beat 17: Downpipe Routing Drop & Inlet Approach (t = 42.0s to 44.0s)
+            } else if (currentTime < 13.9) {
+              // Beat 17: Downpipe Routing Drop & Inlet Approach (t = 13.2s to 13.9s)
               // Vapor descends vertical downpipe (Y=135 to 190) and rounds bottom elbow (to X=775, Y=200)
               vaporOutletThreshold.style.opacity = '1';
               vaporOverheadGroup.style.opacity = '1';
 
-              const pDrop = clamp((currentTime - 42.0) / 2.0, 0, 1);
+              const pDrop = clamp((currentTime - 13.2) / 0.7, 0, 1);
               const eDrop = easeInOutQuad(pDrop);
               // Fraction 0.616 to 0.886 (232.1px / 262px)
               const prog17 = 0.616 + (0.886 - 0.616) * eDrop;
@@ -2437,14 +2478,14 @@
               vaporOverheadCore.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog17));
               vaporOverheadStream.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog17));
               vaporCondenserInletWisp.style.opacity = '0';
-            } else if (currentTime < 46.5) {
-              // Beat 18: Condenser Inlet Arrival & Ready Hold (t = 44.0s to 46.5s)
+            } else if (currentTime < 14.5) {
+              // Beat 18: Condenser Inlet Arrival & Ready Hold (t = 13.9s to 14.5s)
               vaporOutletThreshold.style.opacity = '1';
               vaporOverheadGroup.style.opacity = '1';
 
-              if (currentTime < 44.8) {
+              if (currentTime < 14.2) {
                 // Final entry stub traversal (X = 775 to 805)
-                const pInlet = clamp((currentTime - 44.0) / 0.8, 0, 1);
+                const pInlet = clamp((currentTime - 13.9) / 0.3, 0, 1);
                 const eInlet = easeOutCubic(pInlet);
                 const prog18 = 0.886 + (1.0 - 0.886) * eInlet;
                 vaporOverheadGlow.style.strokeDashoffset = String(vaporOverheadLen * (1 - prog18));
@@ -2472,7 +2513,7 @@
               condenserOutletMeniscus.style.opacity = '0';
             } else {
               // =========================================================================
-              // SECTION 05.1B-3B: CONDENSATION INSIDE CONDENSER (t >= 46.5s)
+              // SECTION 05.1B-3B: CONDENSATION INSIDE CONDENSER (t >= 14.5s)
               // =========================================================================
               // Upstream overhead line maintains fully charged continuous vapor stream
               vaporOutletThreshold.style.opacity = '1';
@@ -2482,21 +2523,21 @@
               vaporOverheadStream.style.strokeDashoffset = '0';
               vaporCondenserInletWisp.style.opacity = '0.85';
 
-              // Axial Cooling Fan Physics (starts at t = 47.2s, smooth acceleration to 360 deg/s)
+              // Axial Cooling Fan Physics (starts at t = 14.7s, smooth acceleration to 360 deg/s)
               const fanAngle = getCondenserFanAngle(currentTime);
               condenserFanBlades.setAttribute('transform', `rotate(${fanAngle % 360} 0 0)`);
 
               // Directional stream dash drift
-              const condDashDrift = (currentTime - 49.0) * 16;
+              const condDashDrift = (currentTime - 15.3) * 16;
 
-              if (currentTime < 49.0) {
-                // Beat 19: Condenser Cooling Activation & Fan Startup (t = 46.5s to 49.0s)
-                // Vapor remains held at inlet (805, 200). Cooling fan spins up from t = 47.2s.
-                if (currentTime < 47.2) {
+              if (currentTime < 15.3) {
+                // Beat 19: Condenser Cooling Activation & Fan Startup (t = 14.5s to 15.3s)
+                // Vapor remains held at inlet (805, 200). Cooling fan spins up from t = 14.7s.
+                if (currentTime < 14.7) {
                   condenserCoolingTint.style.opacity = '0';
                   fanFlowRing.style.opacity = '0';
                 } else {
-                  const pFan = clamp((currentTime - 47.2) / 1.8, 0, 1);
+                  const pFan = clamp((currentTime - 14.7) / 0.6, 0, 1);
                   const eFan = easeInOutQuad(pFan);
                   condenserCoolingTint.style.opacity = String(0.4 * eFan);
                   fanFlowRing.style.opacity = String(0.35 * eFan);
@@ -2510,14 +2551,14 @@
                 condenserLiquidHighlight.style.strokeDashoffset = String(condenserPathLen);
                 condenserFluidDashes.style.strokeDashoffset = String(condenserPathLen);
                 condenserOutletMeniscus.style.opacity = '0';
-              } else if (currentTime < 52.0) {
-                // Beat 20: Vapor Enters Illustrative Cooling Path (t = 49.0s to 52.0s)
+              } else if (currentTime < 16.3) {
+                // Beat 20: Vapor Enters Illustrative Cooling Path (t = 15.3s to 16.3s)
                 // Vapor enters condenser path through inlet riser and populates initial upper run
                 condenserCoolingTint.style.opacity = '0.4';
                 fanFlowRing.style.opacity = '0.35';
                 condenserFluidGroup.style.opacity = '1';
 
-                const p20 = clamp((currentTime - 49.0) / 3.0, 0, 1);
+                const p20 = clamp((currentTime - 15.3) / 1.0, 0, 1);
                 const e20 = easeInOutQuad(p20);
                 // Fraction 0 to 0.334 (reaching U-turn 1)
                 const prog20 = 0.334 * e20;
@@ -2541,14 +2582,14 @@
                 condenserFluidDashes.setAttribute('stroke', 'rgba(254, 243, 199, 0.65)');
                 condenserFluidDashes.style.opacity = '1';
                 condenserOutletMeniscus.style.opacity = '0';
-              } else if (currentTime < 55.5) {
-                // Beat 21: Progressive Condensation & Transition (t = 52.0s to 55.5s)
-                // Fluid traverses downward along the cooling path; vapor diffusion decreases and contracts
+              } else if (currentTime < 17.5) {
+                // Beat 21: Progressive Condensation & Transition (t = 16.3s to 17.5s)
+                // Fluid traverses downward along cooling path; vapor diffusion decreases and contracts
                 condenserCoolingTint.style.opacity = '0.4';
                 fanFlowRing.style.opacity = '0.35';
                 condenserFluidGroup.style.opacity = '1';
 
-                const p21 = clamp((currentTime - 52.0) / 3.5, 0, 1);
+                const p21 = clamp((currentTime - 16.3) / 1.2, 0, 1);
                 const e21 = easeInOutQuad(p21);
                 // Fraction 0.334 to 0.654
                 const prog21 = 0.334 + (0.654 - 0.334) * e21;
@@ -2581,14 +2622,14 @@
                 condenserFluidDashes.setAttribute('stroke', `rgba(254, 243, 199, ${0.65 * (1 - 0.5 * e21)})`);
                 condenserFluidDashes.style.opacity = String(1 - 0.4 * e21);
                 condenserOutletMeniscus.style.opacity = '0';
-              } else if (currentTime < 58.5) {
-                // Beat 22: Liquid Distillate Emergence (t = 55.5s to 58.5s)
+              } else if (currentTime < 18.5) {
+                // Beat 22: Liquid Distillate Emergence (t = 17.5s to 18.5s)
                 // Fluid traverses lower runs of cooling path; dense warm-neutral clear liquid dominates
                 condenserCoolingTint.style.opacity = '0.4';
                 fanFlowRing.style.opacity = '0.35';
                 condenserFluidGroup.style.opacity = '1';
 
-                const p22 = clamp((currentTime - 55.5) / 3.0, 0, 1);
+                const p22 = clamp((currentTime - 17.5) / 1.0, 0, 1);
                 const e22 = easeInOutQuad(p22);
                 // Fraction 0.654 to 0.954 (reaching outlet drop apex)
                 const prog22 = 0.654 + (0.954 - 0.654) * e22;
@@ -2615,15 +2656,15 @@
                 condenserFluidDashes.style.strokeDashoffset = String(curOff22 - (condDashDrift * 0.4 % 8));
                 condenserFluidDashes.style.opacity = String(0.25 * (1 - e22));
                 condenserOutletMeniscus.style.opacity = '0';
-              } else if (currentTime < 61.5) {
-                // Beat 23: Condenser Outlet Arrival & Ready Hold (t = 58.5s to 61.5s)
+              } else if (currentTime < 19.1) {
+                // Beat 23: Condenser Outlet Arrival & Ready Hold (t = 18.5s to 19.1s)
                 // Liquid condensate descends vertical outlet drop to bottom flange (870, 275)
                 condenserCoolingTint.style.opacity = '0.4';
                 fanFlowRing.style.opacity = '0.35';
                 condenserFluidGroup.style.opacity = '1';
 
-                if (currentTime < 59.5) {
-                  const p23 = clamp((currentTime - 58.5) / 1.0, 0, 1);
+                if (currentTime < 18.8) {
+                  const p23 = clamp((currentTime - 18.5) / 0.3, 0, 1);
                   const e23 = easeOutCubic(p23);
                   const prog23 = 0.954 + 0.046 * e23;
                   const curOff23 = condenserPathLen * (1 - prog23);
@@ -2658,10 +2699,15 @@
                 extractionLiquidHighlight.style.strokeDashoffset = String(extractionPathLen);
                 extractionLiquidDashes.style.strokeDashoffset = String(extractionPathLen);
                 bottleInletMeniscus.style.opacity = '0';
+                bottleInflowStream.style.opacity = '0';
+                bottleInflowHighlight.style.opacity = '0';
+                bottleLiquidPool.setAttribute('height', '0');
+                bottlePoolMeniscusLine.style.opacity = '0';
+                bottlePoolMeniscusHighlight.style.opacity = '0';
                 bottleStaticFill.style.opacity = '0';
               } else {
                 // =========================================================================
-                // SECTION 05.1B-3C-1: CONDENSATE EXTRACTION & TRANSPORT TO COLLECTION INLET (t >= 61.5s)
+                // SECTION 05.1B-3C-1 & 3C-2: CONDENSATE EXTRACTION & COLLECTION (t >= 19.1s)
                 // =========================================================================
                 // Upstream condenser maintained in full steady-state operation
                 condenserCoolingTint.style.opacity = '0.4';
@@ -2677,7 +2723,7 @@
                 condenserOutletMeniscus.style.opacity = '0.9';
 
                 // Fluid dash drift
-                const extDashDrift = (currentTime - 65.0) * 20;
+                const extDashDrift = (currentTime - 20.2) * 20;
 
                 // Geometric keypoint fractions along extraction path
                 // Path: M 870 275 L 818 275 Q 812 275 812 281 L 812 368 (~148.4px total)
@@ -2687,8 +2733,8 @@
                 const fracPumpInlet = 0.441;
                 const fracPumpOutlet = 0.575;
 
-                if (currentTime < 63.0) {
-                  // Beat 24: Condensate Extraction Readiness (t = 61.5s to 63.0s)
+                if (currentTime < 19.6) {
+                  // Beat 24: Condensate Extraction Readiness (t = 19.1s to 19.6s)
                   // Liquid distillate holds ready at condenser outlet (870, 275).
                   // Pump [11] is inactive. Extraction line is 100% dry.
                   pumpExtractionCasing.setAttribute('stroke', 'var(--line-steel)');
@@ -2698,12 +2744,16 @@
                   extractionLiquidHighlight.style.strokeDashoffset = String(extractionPathLen);
                   extractionLiquidDashes.style.strokeDashoffset = String(extractionPathLen);
                   bottleInletMeniscus.style.opacity = '0';
-                } else if (currentTime < 65.0) {
-                  // Beat 25: Extraction Pump Becomes Operational (t = 63.0s to 65.0s)
-                  // Restrained operational cue: indicator transitions subtly over 63.0s-64.2s.
-                  // Liquid remains held at condenser outlet to model mechanical response delay
-                  // without asserting unsupported internal priming mechanics.
-                  const p25 = clamp((currentTime - 63.0) / 1.2, 0, 1);
+                  bottleInflowStream.style.opacity = '0';
+                  bottleInflowHighlight.style.opacity = '0';
+                  bottleLiquidPool.setAttribute('height', '0');
+                  bottlePoolMeniscusLine.style.opacity = '0';
+                  bottlePoolMeniscusHighlight.style.opacity = '0';
+                } else if (currentTime < 20.2) {
+                  // Beat 25: Extraction Pump Becomes Operational (t = 19.6s to 20.2s)
+                  // Restrained operational cue: indicator transitions subtly over 19.6s-20.0s.
+                  // Liquid remains held at condenser outlet to model mechanical response delay.
+                  const p25 = clamp((currentTime - 19.6) / 0.4, 0, 1);
                   const e25 = easeInOutQuad(p25);
                   const indAlpha = (0.25 + 0.60 * e25).toFixed(2);
                   pumpExtractionIndicator.setAttribute('fill', `rgba(148, 163, 184, ${indAlpha})`);
@@ -2714,8 +2764,13 @@
                   extractionLiquidHighlight.style.strokeDashoffset = String(extractionPathLen);
                   extractionLiquidDashes.style.strokeDashoffset = String(extractionPathLen);
                   bottleInletMeniscus.style.opacity = '0';
-                } else if (currentTime < 67.5) {
-                  // Beat 26: Condensate Enters Extraction Line (t = 65.0s to 67.5s)
+                  bottleInflowStream.style.opacity = '0';
+                  bottleInflowHighlight.style.opacity = '0';
+                  bottleLiquidPool.setAttribute('height', '0');
+                  bottlePoolMeniscusLine.style.opacity = '0';
+                  bottlePoolMeniscusHighlight.style.opacity = '0';
+                } else if (currentTime < 21.0) {
+                  // Beat 26: Condensate Enters Extraction Line (t = 20.2s to 21.0s)
                   // Pump operational cue holds active. Liquid crosses outlet flange (870, 275),
                   // traverses horizontal run to (818, 275), rounds elbow to (812, 281),
                   // and arrives at pump suction port (812, 285).
@@ -2723,7 +2778,7 @@
                   pumpExtractionCasing.setAttribute('stroke', 'rgba(148, 163, 184, 0.45)');
 
                   extractionFluidGroup.style.opacity = '1';
-                  const p26 = clamp((currentTime - 65.0) / 2.5, 0, 1);
+                  const p26 = clamp((currentTime - 20.2) / 0.8, 0, 1);
                   const e26 = easeInOutQuad(p26);
                   const prog26 = fracPumpInlet * e26;
                   const curOff26 = extractionPathLen * (1 - prog26);
@@ -2732,16 +2787,20 @@
                   extractionLiquidHighlight.style.strokeDashoffset = String(curOff26);
                   extractionLiquidDashes.style.strokeDashoffset = String(curOff26 - (extDashDrift % 6));
                   bottleInletMeniscus.style.opacity = '0';
-                } else if (currentTime < 69.5) {
-                  // Beat 27: Continuous Transport Through Pump [11] (t = 67.5s to 69.5s)
+                  bottleInflowStream.style.opacity = '0';
+                  bottleInflowHighlight.style.opacity = '0';
+                  bottleLiquidPool.setAttribute('height', '0');
+                  bottlePoolMeniscusLine.style.opacity = '0';
+                  bottlePoolMeniscusHighlight.style.opacity = '0';
+                } else if (currentTime < 21.7) {
+                  // Beat 27: Continuous Transport Through Pump [11] (t = 21.0s to 21.7s)
                   // Pump remains operational. Liquid flows continuously through Pump [11] casing
-                  // from suction (812, 285) to discharge port (812, 305). Stream remains 100% visible
-                  // and traceable across the casing without speculative internal machinery.
+                  // from suction (812, 285) to discharge port (812, 305). Stream remains 100% visible.
                   pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.85)');
                   pumpExtractionCasing.setAttribute('stroke', 'rgba(148, 163, 184, 0.45)');
 
                   extractionFluidGroup.style.opacity = '1';
-                  const p27 = clamp((currentTime - 67.5) / 2.0, 0, 1);
+                  const p27 = clamp((currentTime - 21.0) / 0.7, 0, 1);
                   const e27 = easeInOutQuad(p27);
                   const prog27 = fracPumpInlet + (fracPumpOutlet - fracPumpInlet) * e27;
                   const curOff27 = extractionPathLen * (1 - prog27);
@@ -2750,15 +2809,20 @@
                   extractionLiquidHighlight.style.strokeDashoffset = String(curOff27);
                   extractionLiquidDashes.style.strokeDashoffset = String(curOff27 - (extDashDrift % 6));
                   bottleInletMeniscus.style.opacity = '0';
-                } else if (currentTime < 72.0) {
-                  // Beat 28: Collection Downpipe Transport (t = 69.5s to 72.0s)
+                  bottleInflowStream.style.opacity = '0';
+                  bottleInflowHighlight.style.opacity = '0';
+                  bottleLiquidPool.setAttribute('height', '0');
+                  bottlePoolMeniscusLine.style.opacity = '0';
+                  bottlePoolMeniscusHighlight.style.opacity = '0';
+                } else if (currentTime < 22.4) {
+                  // Beat 28: Collection Downpipe Transport (t = 21.7s to 22.4s)
                   // Pump remains operational. Liquid exits pump discharge (812, 305) and advances downward
                   // through vertical downpipe toward bottle inlet neck (812, 368). Downstream remains dry.
                   pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.85)');
                   pumpExtractionCasing.setAttribute('stroke', 'rgba(148, 163, 184, 0.45)');
 
                   extractionFluidGroup.style.opacity = '1';
-                  const p28 = clamp((currentTime - 69.5) / 2.5, 0, 1);
+                  const p28 = clamp((currentTime - 21.7) / 0.7, 0, 1);
                   const e28 = easeInOutQuad(p28);
                   const prog28 = fracPumpOutlet + (1.0 - fracPumpOutlet) * e28;
                   const curOff28 = extractionPathLen * (1 - prog28);
@@ -2767,10 +2831,14 @@
                   extractionLiquidHighlight.style.strokeDashoffset = String(curOff28);
                   extractionLiquidDashes.style.strokeDashoffset = String(curOff28 - (extDashDrift % 6));
                   bottleInletMeniscus.style.opacity = '0';
-                } else {
-                  // Beat 29: Liquid Reaches Bottle [12] Inlet & Stops (t = 72.0s to 74.0s)
+                  bottleInflowStream.style.opacity = '0';
+                  bottleInflowHighlight.style.opacity = '0';
+                  bottleLiquidPool.setAttribute('height', '0');
+                  bottlePoolMeniscusLine.style.opacity = '0';
+                  bottlePoolMeniscusHighlight.style.opacity = '0';
+                } else if (currentTime < 23.0) {
+                  // Beat 29: Liquid Reaches Bottle [12] Inlet & Stops (t = 22.4s to 23.0s)
                   // Liquid front reaches collection bottle inlet nozzle (812, 368) and forms holding meniscus.
-                  // Full extraction path remains charged. Bottle [12] interior remains 100% empty and dry.
                   pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.85)');
                   pumpExtractionCasing.setAttribute('stroke', 'rgba(148, 163, 184, 0.45)');
 
@@ -2779,16 +2847,93 @@
                   extractionLiquidHighlight.style.strokeDashoffset = '0';
                   extractionLiquidDashes.style.strokeDashoffset = String(-(extDashDrift % 6));
 
-                  if (currentTime < 72.8) {
-                    const p29 = clamp((currentTime - 72.0) / 0.8, 0, 1);
+                  if (currentTime < 22.7) {
+                    const p29 = clamp((currentTime - 22.4) / 0.3, 0, 1);
                     const e29 = easeOutCubic(p29);
                     bottleInletMeniscus.style.opacity = String(0.9 * e29);
                   } else {
                     bottleInletMeniscus.style.opacity = '0.9';
                   }
+
+                  // Bottle cavity remains empty and dry ahead of entry
+                  bottleInflowStream.style.opacity = '0';
+                  bottleInflowHighlight.style.opacity = '0';
+                  bottleLiquidPool.setAttribute('height', '0');
+                  bottlePoolMeniscusLine.style.opacity = '0';
+                  bottlePoolMeniscusHighlight.style.opacity = '0';
+                } else if (currentTime < 24.2) {
+                  // =========================================================================
+                  // BEAT 30: Distillate Entry & Inflow Accumulation (t = 23.0s to 24.2s)
+                  // =========================================================================
+                  // Liquid emerges from nozzle (812, 368) as downward inflow stream cascade.
+                  // Liquid pool accumulates inside Bottle [12] cavity and rises from Y=444 to 414.
+                  pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.85)');
+                  pumpExtractionCasing.setAttribute('stroke', 'rgba(148, 163, 184, 0.45)');
+
+                  extractionFluidGroup.style.opacity = '1';
+                  extractionLiquidStream.style.strokeDashoffset = '0';
+                  extractionLiquidHighlight.style.strokeDashoffset = '0';
+                  extractionLiquidDashes.style.strokeDashoffset = String(-(extDashDrift % 6));
+                  bottleInletMeniscus.style.opacity = '0.9';
+
+                  const p30 = clamp((currentTime - 23.0) / 1.2, 0, 1);
+                  const e30 = easeInOutQuad(p30);
+                  const poolHeight = 30 * e30;
+                  const curY = 444 - poolHeight;
+
+                  // Downward entry stream from nozzle (812, 368) down to rising pool top surface
+                  bottleInflowStream.setAttribute('d', `M 812 368 L 812 ${curY.toFixed(1)}`);
+                  bottleInflowHighlight.setAttribute('d', `M 812 368 L 812 ${curY.toFixed(1)}`);
+                  bottleInflowStream.style.opacity = '0.85';
+                  bottleInflowHighlight.style.opacity = '0.50';
+
+                  // Rising distillate liquid pool inside bottle cavity
+                  bottleLiquidPool.setAttribute('y', curY.toFixed(1));
+                  bottleLiquidPool.setAttribute('height', poolHeight.toFixed(1));
+
+                  // Surface meniscus with gentle micro-ripple while liquid enters
+                  const rippleOffset = Math.sin((currentTime - 23.0) * 16) * 0.4 * (1 - e30);
+                  const meniscusY = (curY + rippleOffset).toFixed(1);
+                  bottlePoolMeniscusLine.setAttribute('y1', meniscusY);
+                  bottlePoolMeniscusLine.setAttribute('y2', meniscusY);
+                  bottlePoolMeniscusHighlight.setAttribute('y1', meniscusY);
+                  bottlePoolMeniscusHighlight.setAttribute('y2', meniscusY);
+                  bottlePoolMeniscusLine.style.opacity = '0.95';
+                  bottlePoolMeniscusHighlight.style.opacity = '0.70';
+                } else {
+                  // =========================================================================
+                  // BEAT 31: Stable Operational Distillate Yield (t = 24.2s to 25.0s)
+                  // =========================================================================
+                  // Distillate collection reaches calm, stable final operating level (~44% capacity).
+                  // Clean, authentic laboratory water volume clearly reads as successful thesis product yield.
+                  pumpExtractionIndicator.setAttribute('fill', 'rgba(148, 163, 184, 0.85)');
+                  pumpExtractionCasing.setAttribute('stroke', 'rgba(148, 163, 184, 0.45)');
+
+                  extractionFluidGroup.style.opacity = '1';
+                  extractionLiquidStream.style.strokeDashoffset = '0';
+                  extractionLiquidHighlight.style.strokeDashoffset = '0';
+                  extractionLiquidDashes.style.strokeDashoffset = String(-(extDashDrift % 6));
+                  bottleInletMeniscus.style.opacity = '0.9';
+
+                  // Inflow stabilizes into fine steady holding filament
+                  bottleInflowStream.setAttribute('d', 'M 812 368 L 812 414');
+                  bottleInflowHighlight.setAttribute('d', 'M 812 368 L 812 414');
+                  bottleInflowStream.style.opacity = '0.70';
+                  bottleInflowHighlight.style.opacity = '0.40';
+
+                  // Settled distillate liquid pool at Y=414 (depth 30px)
+                  bottleLiquidPool.setAttribute('y', '414');
+                  bottleLiquidPool.setAttribute('height', '30');
+
+                  // Calm, flat horizontal meniscus
+                  bottlePoolMeniscusLine.setAttribute('y1', '414');
+                  bottlePoolMeniscusLine.setAttribute('y2', '414');
+                  bottlePoolMeniscusHighlight.setAttribute('y1', '414');
+                  bottlePoolMeniscusHighlight.setAttribute('y2', '414');
+                  bottlePoolMeniscusLine.style.opacity = '0.95';
+                  bottlePoolMeniscusHighlight.style.opacity = '0.75';
                 }
 
-                // Bottle [12] remains strictly empty and dry
                 bottleStaticFill.style.opacity = '0';
               }
             }
@@ -2801,7 +2946,7 @@
         scrubber.value = currentTime;
         const mins = Math.floor(currentTime / 60);
         const secs = (currentTime % 60).toFixed(1).padStart(4, '0');
-        timecodeDisplay.textContent = `0${mins}:${secs} / 01:14.0`;
+        timecodeDisplay.textContent = `0${mins}:${secs} / 00:25.0`;
 
         // Determine current beat
         let activeBeat = BEATS[0];

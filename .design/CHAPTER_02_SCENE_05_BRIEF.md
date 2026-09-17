@@ -2,10 +2,10 @@
 
 ## Status
 - **Scene**: Chapter 02, Scene 05 (Undergraduate Thesis / Synthesis)
-- **Scene 05 Status**: **APPROVED — CURRENT SCENE-LEVEL BASELINE** (frozen as current scene-level authority; includes full long-form apparatus and process flow animation $t = 0 \to 74.0\,\text{s}$, Beats 1 to 29, at commit `ec1ccdf`).
+- **Scene 05 Status**: **APPROVED — CURRENT SCENE-LEVEL BASELINE (COMPRESSED 25.0s & COMPLETED)** (reopened for bounded refinement; completed physical collection endpoint 05.1B-3C-2 bottle filling; compressed total timeline from 74.0s to 25.0s across 31 discrete beats; re-frozen as updated scene-level baseline).
 - **Chapter 02 Status**: **CHAPTER 02 — OPEN / NOT YET APPROVED** (Scene 04 returns to refinement; complete chapter review of Scenes 01–05 required before chapter-level freeze).
 - **Next Active Target**: **Chapter 02 — Scene 04 Refinement** (independent refinement until reaching comparable maturity).
-- **Deferred Scope**: Scene 05 duration compression (~30s max), 05.1B-3C-2, 05.2 Variables, 05.3 Model/Analysis, 05.4 Model vs Experiment, and 05.5 Thesis Closure are **DEFERRED / NOT CURRENT SCOPE** (governed by `.design/SCENE_05_DEFERRED_ROADMAP.md`).
+- **Deferred Scope**: 05.2 Variables, 05.3 Model/Analysis, 05.4 Model vs Experiment, and 05.5 Thesis Closure remain **DEFERRED / NOT CURRENT SCOPE** (governed by `.design/SCENE_05_DEFERRED_ROADMAP.md`).
 - **Approved Workspace**: `prototypes/scene-05-apparatus-explorations/index.html` (Study C — Hybrid Technical Silhouette + Selective Process Visibility).
 - **Primary Factual Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_experiment_setup.png` (Universitas Indonesia Mechanical Engineering laboratory test rig, 2018–2019).
 - **Supporting Authority**: `scene05-reference-pack/01_FACTUAL_ASSETS/thesis_system_diagram.png` (system architecture and broader cycle context).
@@ -15,9 +15,9 @@
 ## Scene 05 Baseline Approval & Chapter 02 Governance
 
 1. **Scene-Level Baseline Approval**:
-   - Scene 05 is approved as the current scene-level animation baseline, covering the full physical apparatus and process flow sequence ($t = 0 \to 74.0\,\text{s}$, Beats 1 to 29).
+   - Scene 05 is approved and re-frozen as the current scene-level animation baseline, covering the full physical apparatus, compressed process flow sequence ($t = 0 \to 25.0\,\text{s}$, Beats 1 to 31), and completed Distillate Collection Bottle `[12]` filling stage.
    - Scene 05 is now stable and should not be modified unless the owner explicitly reopens it.
-   - Do not compress Scene 05 yet. The current long-form sequence is accepted as the scene authority; possible duration reduction (e.g. ~30s max) belongs to the later Chapter 02 whole-sequence review.
+   - The full timeline has been compressed by ~3x from $74.0\,\text{s}$ to $25.0\,\text{s}$ while preserving causal legibility, continuous fluid tracking, and engineering maturity across desktop and mobile.
 
 2. **Chapter 02 Open Status & Development Sequence**:
    - Chapter 02 is **not** yet approved or frozen; it remains an active chapter.
@@ -27,22 +27,53 @@
    - Only that review can authorize:
      - Chapter 02 freeze;
      - scene trimming;
-     - Scene 05 compression;
      - transition changes;
      - additional Scene 05 analytical development.
 
 3. **Deferred Initiatives**:
-   - Scene 05.1B-3C-2, 05.2 (Variables), 05.3 (Model/Analysis), 05.4 (Model vs Experiment), 05.5 (Thesis Closure), and duration compression remain **DEFERRED / NOT CURRENT SCOPE** (documented in `.design/SCENE_05_DEFERRED_ROADMAP.md`).
+   - Scene 05.2 (Variables), 05.3 (Model/Analysis), 05.4 (Model vs Experiment), and 05.5 (Thesis Closure) remain strictly **DEFERRED / NOT CURRENT SCOPE** (documented in `.design/SCENE_05_DEFERRED_ROADMAP.md`).
+
+---
+
+## Approved 05.1B-3C-2 Baseline Scope (Distillate Bottle Entry, Inflow Accumulation & Stable Yield Hold)
+
+1. **Scope Boundary & Final Physical Endpoint**:
+   - Covers the physical completion of the distillate production sequence inside Aquadest Collection Bottle `[12]` ($t = 23.0 \to 25.0\,\text{s}$, compressed timeline Beats 30 and 31):
+     `condensate at bottle nozzle → downward inflow stream cascade → initial droplet accumulation at bottle base → continuous liquid pool rise (~40–45% volume) → inflow stream ceases → calm, stable operational yield hold`.
+   - Halts at $t = 25.0\,\text{s}$ with a stable, calm, horizontal distillate meniscus held at $Y = 414$ inside Bottle `[12]`.
+   - Represents the verified physical endpoint of the flash evaporation and distillation rig: pure distilled water (aquadest) is successfully produced and collected.
+   - Preserves strict academic credibility: zero neon glowing auras, zero particle bursts/confetti, zero congratulatory text overlays, and zero gaming telemetry.
+
+2. **Downpipe Alignment & Bottle Geometry**:
+   - Downpipe drop enters cleanly at $X = 812$ through the widened bottle neck mouth ($X = 810 \dots 826, Y = 368$) without intersecting the bottle glass shoulder ($X = 808 \dots 836$).
+   - Downward stream cascades straight from nozzle apex ($Y = 368$) to the rising pool surface ($Y = 444 \to 414$).
+
+3. **Material Consistency (Clear Lab Distillate)**:
+   - The collected distillate pool is rendered with pure laboratory water optics:
+     - Gradient fill `url(#distillate-pool-grad)` using translucent neutral tones (`#f1f5f9` top surface with opacity 0.32, `#e2e8f0` mid-body with opacity 0.22, `#cbd5e1` base with opacity 0.28);
+     - Surface meniscus line (`#f1f5f9`, stroke-width 1.2px) and subtle specular highlight line (`#ffffff`, stroke-width 0.8px, opacity 0.85);
+     - Zero bright blue infographic water (`#38bdf8`), cyan neon, or unnatural saturation.
+
+4. **Compressed Timeline Schedule (25.0s Across 31 Beats)**:
+   - The full apparatus process sequence is retimed from $74.0\,\text{s}$ to $25.0\,\text{s}$ across 31 discrete beats, maintaining causal sequence and continuous fluid tracing:
+     - Beats 1–3 ($0.0 \to 3.4\,\text{s}$): Feed intake, feed pump engagement, and heater core thermal buildup;
+     - Beats 4–6 ($3.4 \to 6.0\,\text{s}$): Top outlet continuity, overhead transfer line, and throttling valve approach;
+     - Beats 7–8 ($6.0 \to 7.6\,\text{s}$): Throttling restriction crossing and flash onset at spool;
+     - Beats 9–13 ($7.6 \to 11.2\,\text{s}$): Two-phase disengagement, buoyant vapor rise, and brine drainage into basin `[9]`;
+     - Beats 14–18 ($11.2 \to 14.5\,\text{s}$): Overhead vapor line run, downpipe drop, and condenser inlet arrival hold;
+     - Beats 19–23 ($14.5 \to 19.1\,\text{s}$): Condenser fan cooling, 4-pass serpentine condensation, liquid emergence, and outlet hold;
+     - Beats 24–29 ($19.1 \to 23.0\,\text{s}$): Extraction pump operational activation, extraction line transit, and bottle inlet arrival;
+     - Beat 30 ($23.0 \to 24.2\,\text{s}$): Bottle interior inflow stream cascade and rising distillate pool;
+     - Beat 31 ($24.2 \to 25.0\,\text{s}$): Stable operational distillate yield hold.
 
 ---
 
 ## Approved 05.1B-3C-1 Baseline Scope (Condensate Extraction & Transport to Collection Inlet)
 
-1. **Scope Boundary & Fixed Stop**:
-   - Covers the physical condensate extraction sequence from Condenser `[10]` outlet flange ($X = 870, Y = 275$) through Extraction Pump `[11]` to the inlet nozzle of Aquadest Collection Bottle `[12]` ($X = 812, Y = 368$) from $t = 61.5\,\text{s}$ through $74.0\,\text{s}$:
+1. **Scope Boundary**:
+   - Covers the physical condensate extraction sequence from Condenser `[10]` outlet flange ($X = 870, Y = 275$) through Extraction Pump `[11]` to the inlet nozzle of Aquadest Collection Bottle `[12]` ($X = 812, Y = 368$):
      `condensate held at condenser outlet → pump operational cue & response delay → condensate enters extraction line → continuous transport through pump casing → collection downpipe transport → liquid reaches bottle inlet & holds`.
-   - Halts strictly at the collection bottle inlet nozzle boundary ($X = 812, Y = 368$) with pure distillate liquid condensate held in an operating meniscus state.
-   - Sub-phase 05.1B-3C-2 (Bottle `[12]` filling, distillate accumulation, product reward, and thesis yield conclusion) has **not started**.
+   - Connects directly into the 05.1B-3C-2 bottle collection sequence.
 
 2. **Pump `[11]` Factual Interpretation & Abstraction Boundary**:
    - The external existence, mounting position, and casing of Extraction Pump `[11]` are factual according to the laboratory test rig reference.
