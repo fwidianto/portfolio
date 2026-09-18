@@ -219,3 +219,11 @@ Current scope and arc:
 - preferred exploration candidate: **Material Transformation**; fallback: **Technical Assembly**.
 
 Do not implement the full chapter from this summary. Read the Chapter 03 guideline and follow `.design/skills/structured-animation-development/SKILL.md`. Nothing in Chapter 03 becomes frozen without explicit owner visual approval.
+
+### Chapter 03 active exploration workspace
+
+- Brief: `.design/CHAPTER_03_SCENE_01_OPENING_EXPLORATION.md`
+- Isolated review workspace: `prototypes/chapter-03-scene-01-opening-explorations/index.html`
+- Current studies: **A — Technical Assembly** and **C — Material Transformation**.
+- Current state: **static/keyframe comparison implemented; owner visual review required before motion timing/easing work**.
+- Frozen Chapter 02 Scene 05 remains untouched.
