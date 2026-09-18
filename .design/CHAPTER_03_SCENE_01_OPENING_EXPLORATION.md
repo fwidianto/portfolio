@@ -2,7 +2,7 @@
 
 ## Status
 
-**DIRECTION SELECTED — A / TECHNICAL ASSEMBLY — MOTION EXPLORATION ACTIVE**
+**DIRECTION SELECTED — A / TECHNICAL ASSEMBLY — OPENDESIGN COMPOSITION PASS REQUIRED BEFORE MOTION**
 
 This brief governs only the bounded opening of Chapter 03 Scene 01:
 
@@ -19,6 +19,34 @@ Authority:
 Frozen upstream work must not be edited to make this transition easier.
 
 ---
+
+
+
+# OpenDesign Gate
+
+Before any further motion implementation, reproduce and refine **Direction A — Technical Assembly** in OpenDesign.
+
+OpenDesign is the design authority for this pass.
+
+The existing browser studies in:
+
+`prototypes/chapter-03-scene-01-opening-explorations/`
+
+are retained only as rough visual references / previous exploration history. They are **not approved composition authority**.
+
+OpenDesign pass must resolve:
+
+- exact thesis-handoff framing;
+- industrial machine silhouette / service context;
+- technician and component placement;
+- hierarchy and negative space;
+- Traktor Nusantara / 2019 identity treatment;
+- desktop composition;
+- mobile recomposition;
+- final A0–A4 static keyframes or equivalent storyboard states.
+
+Owner must review / annotate the OpenDesign composition before motion timing or easing work resumes.
+
 
 # Objective
 
