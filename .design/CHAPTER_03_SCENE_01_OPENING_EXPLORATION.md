@@ -2,7 +2,7 @@
 
 ## Status
 
-**ACTIVE VISUAL EXPLORATION — NOT FROZEN**
+**DIRECTION SELECTED — A / TECHNICAL ASSEMBLY — MOTION EXPLORATION ACTIVE**
 
 This brief governs only the bounded opening of Chapter 03 Scene 01:
 
@@ -187,7 +187,7 @@ Can become too atmospheric and insufficiently specific if the industrial geometr
 
 **The geometry of engineering education does not disappear; selected structural lines transform into the geometry of professional industrial work.**
 
-This is the current preferred direction.
+This was an explored alternative but is not the owner-selected direction.
 
 ## Keyframes
 
@@ -264,9 +264,9 @@ Review all three studies against the same questions:
 
 # Current Recommendation
 
-Proceed first with **Study C — Material Transformation** as the preferred exploration.
+Owner selected **Study A — Technical Assembly** as the opening visual direction.
 
-Use **Study A — Technical Assembly** as the control / fallback.
+Study C remains archived as a rejected alternative for this opening transition.
 
 Study B is valuable only if the other directions feel too diagrammatic.
 
@@ -296,9 +296,11 @@ First pass should contain:
 - no Beat 03 service animation;
 - no cost / SAP / profitability animation.
 
-After visual comparison:
+Owner selection is complete.
 
-`select -> lock opening composition -> animate only selected Beat 01–02 -> owner review`
+Current path:
+
+`A selected -> lock opening composition -> animate only Beat 01–02 -> owner review`
 
 Default stop:
 
