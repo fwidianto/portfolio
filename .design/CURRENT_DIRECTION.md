@@ -199,3 +199,23 @@ Keep these states distinct:
 - Scene 04: Active refinement (Scenes 04.A, 04.B, 04.C, 04.D & 04.E: **OWNER APPROVED BASELINES**; full end-to-end integration audit pending).
 - Scene 05: **APPROVED — CURRENT SCENE-LEVEL BASELINE (COMPRESSED 25.0s & COMPLETED)** (re-frozen; compressed physical apparatus, 25.0s process flow animation, and completed distillate collection in `prototypes/scene-05-apparatus-explorations/`).
 
+
+## Chapter 03 — provisional direction
+
+**Status: PROVISIONAL OWNER-SELECTED DIRECTION — NOT YET FROZEN**
+
+Chapter 03 conceptual work has started. The current agreed guideline lives in:
+
+`.design/CHAPTER_03_PROVISIONAL_GUIDELINE.md`
+
+Current scope and arc:
+
+- period: **2019–2024**;
+- career movement: **Engineer -> Cost Analyst -> Business Controller -> Process Improver -> Operator**;
+- five scenes: **Entering Cost Control -> Understanding Profitability -> Recorded Inventory vs Reality -> Improving the Process -> Owning the Operation**;
+- main-canvas rule: show what happened and what changed;
+- inspection-node rule: explain dates, exact figures, tools, titles, and supporting evidence;
+- first bounded animation exploration: **Scene 03.01, Beat 01–02 only** — UI departure -> Traktor arrival -> industrial environment established;
+- preferred exploration candidate: **Material Transformation**; fallback: **Technical Assembly**.
+
+Do not implement the full chapter from this summary. Read the Chapter 03 guideline and follow `.design/skills/structured-animation-development/SKILL.md`. Nothing in Chapter 03 becomes frozen without explicit owner visual approval.
