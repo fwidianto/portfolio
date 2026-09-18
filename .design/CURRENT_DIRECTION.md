@@ -226,6 +226,12 @@ Do not implement the full chapter from this summary. Read the Chapter 03 guideli
 - Isolated review workspace: `prototypes/chapter-03-scene-01-opening-explorations/index.html`
 - Current studies: **A — Technical Assembly** and **C — Material Transformation**.
 - Owner selection: **A — Technical Assembly**.
-- Selected motion workspace: `prototypes/chapter-03-scene-01-opening-explorations/a-animation.html`.
-- Current state: **Beat 01–02 motion study implemented in isolation; owner visual review required before freeze or Beat 03 work**.
+- Previous rough motion reference: `prototypes/chapter-03-scene-01-opening-explorations/a-animation.html` (not design authority).
+- Required next design step: **rebuild/refine Direction A in OpenDesign, owner review/annotation, then lock composition before any further motion work**.
+- Current state: **Direction A selected; OpenDesign composition pass pending; no Chapter 03 opening composition is frozen yet**.
 - Frozen Chapter 02 Scene 05 remains untouched.
+
+
+### Chapter 03 design-workspace rule
+
+OpenDesign is the required visual design workspace for Chapter 03 composition exploration and owner annotation. Code-based HTML/SVG/Canvas work begins only after the relevant OpenDesign composition is selected and approved. Existing Chapter 03 browser studies are retained as rough references, not design authority.
