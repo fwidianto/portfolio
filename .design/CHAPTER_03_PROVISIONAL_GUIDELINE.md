@@ -18,6 +18,23 @@ Default workflow:
 
 Do not ask an agent to invent or animate the whole chapter in one pass.
 
+## Design Workspace Rule — OpenDesign
+
+For Chapter 03 and other materially visual portfolio work, **OpenDesign is the required design exploration workspace before implementation**.
+
+Use this sequence:
+
+`narrative brief -> OpenDesign static composition exploration -> owner annotation/review -> selected composition lock -> motion implementation in isolated HTML/SVG/Canvas -> owner motion review -> freeze -> integrate`
+
+Rules:
+
+- OpenDesign is where composition, object placement, hierarchy, negative space, and visual alternatives are explored.
+- Browser/HTML prototypes created before OpenDesign approval are **rough implementation references only** and are not visual design authority.
+- Do not use code as a substitute for the design-selection stage.
+- After a composition is approved in OpenDesign, implementation should reproduce the approved design rather than redesigning it in code.
+- Owner annotations in OpenDesign are authoritative design feedback for the bounded scene being reviewed.
+
+
 ---
 
 ## Chapter Purpose
