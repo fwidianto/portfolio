@@ -216,7 +216,7 @@ Current scope and arc:
 - main-canvas rule: show what happened and what changed;
 - inspection-node rule: explain dates, exact figures, tools, titles, and supporting evidence;
 - first bounded animation exploration: **Scene 03.01, Beat 01–02 only** — UI departure -> Traktor arrival -> industrial environment established;
-- preferred exploration candidate: **Material Transformation**; fallback: **Technical Assembly**.
+- owner-selected opening direction: **A — Technical Assembly**.
 
 Do not implement the full chapter from this summary. Read the Chapter 03 guideline and follow `.design/skills/structured-animation-development/SKILL.md`. Nothing in Chapter 03 becomes frozen without explicit owner visual approval.
 
@@ -225,5 +225,7 @@ Do not implement the full chapter from this summary. Read the Chapter 03 guideli
 - Brief: `.design/CHAPTER_03_SCENE_01_OPENING_EXPLORATION.md`
 - Isolated review workspace: `prototypes/chapter-03-scene-01-opening-explorations/index.html`
 - Current studies: **A — Technical Assembly** and **C — Material Transformation**.
-- Current state: **static/keyframe comparison implemented; owner visual review required before motion timing/easing work**.
+- Owner selection: **A — Technical Assembly**.
+- Selected motion workspace: `prototypes/chapter-03-scene-01-opening-explorations/a-animation.html`.
+- Current state: **Beat 01–02 motion study implemented in isolation; owner visual review required before freeze or Beat 03 work**.
 - Frozen Chapter 02 Scene 05 remains untouched.
