@@ -19,6 +19,23 @@
   --ch02-border-subtle: rgba(255, 255, 255, 0.08);
   --ch02-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --ch02-font-mono: 'JetBrains Mono', monospace;
+
+  /* Scene 05 Apparatus Palette (Preserved from frozen baseline) */
+  --bg-space: #07090e;
+  --bg-surface: #0c1017;
+  --bg-elevated: #111722;
+  --line-crisp: #f1f5f9;
+  --line-steel: #334155;
+  --line-faint: rgba(148, 163, 184, 0.18);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --amber-warm: #f59e0b;
+  --amber-deep: #d97706;
+  --orange-accent: #ea580c;
+  --valve-red: #ef4444;
+  --cyan-tech: #64b5f6;
+  --cyan-deep: #1e88e5;
 }
 
 /* Base Chapter 02 Canvas Surface - Atmospheric dark night sky matching Hero continuity */
@@ -1602,3 +1619,288 @@
   }
 }
 
+
+
+/* ==========================================================================
+   UNIFIED CHAPTER 02 FIXED VIEWPORT ARCHITECTURE
+   Single 100vh stage, persistent HUD controller, seamless crossfade layers.
+   Eliminates vertical scrolling between Chapter 02 scenes.
+   ========================================================================== */
+
+/* Screen reader only utility (Guaranteed visual hidden) */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.chapter-02 {
+  position: relative;
+  background-color: var(--ch02-bg);
+  background-image: var(--ch02-bg-vignette);
+  color: var(--ch02-text-primary);
+  font-family: var(--ch02-font-sans);
+  height: 100vh !important;
+  min-height: 600px !important;
+  max-height: 100vh !important;
+  padding-top: 64px !important;
+  padding-bottom: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Atmospheric Night Sky Layer */
+.ch02-night-sky {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Minimal Chapter 02 Scene Navigation Controls */
+.ch02-nav {
+  position: absolute;
+  top: 76px;
+  right: 28px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(10, 14, 23, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 3px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ch02-nav:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(10, 14, 23, 0.8);
+}
+
+.ch02-nav-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ch02-text-secondary, rgba(255, 255, 255, 0.6));
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+}
+
+.ch02-nav-btn:hover:not(:disabled) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.ch02-nav-btn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.ch02-nav-btn:focus-visible {
+  outline: 2px solid var(--ch02-signal-amber, #ff6b35);
+  outline-offset: 1px;
+}
+
+.ch02-nav-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Single Viewport Fixed Stage (Fills viewport below fixed portfolio header) */
+.ch02-stage {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Individual Scene Layers (Seamless Crossfade Stack) */
+.ch02-scene-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.ch02-scene-layer.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+/* Override historical stacked margins for unified fixed viewport */
+.scene-01-stage,
+.scene-02-stage,
+.scene-02-stage--constellation,
+.scene-03-stage,
+.scene-04-stage,
+.scene-05-stage {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+}
+
+.scene-01__stage-wrapper,
+.scene-04__stage-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Scene 02 Constellation Stage Wrapper (Preserves 1240x860 native composition with stage-level scale fitting) */
+.scene-02__constellation-wrapper {
+  position: relative;
+  width: 1240px;
+  height: 860px;
+  transform: scale(var(--s2-scale, 1));
+  transform-origin: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .scene-02__constellation-wrapper {
+    width: 360px;
+    height: 1180px;
+  }
+}
+
+/* Scene 03 Palm Oil Mill Stage Wrapper (Preserves 1240x940 native composition with stage-level scale fitting) */
+.scene-03__stage-wrapper {
+  position: relative;
+  width: 1240px;
+  height: 940px;
+  transform: scale(var(--s3-scale, 1));
+  transform-origin: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .scene-03__stage-wrapper {
+    width: 360px;
+    height: 1480px;
+  }
+}
+
+/* Scene 04 Canvas sizing */
+.scene-04__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Scene 05 Apparatus Rig Framing & SVG Styling (100% Parity with Frozen Baseline) */
+.scene-05__stage-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1140px;
+  background: radial-gradient(circle at 50% 30%, #0d121c 0%, #07090e 85%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.apparatus-svg {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  max-width: 1000px;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .scene-05__stage-wrapper {
+    padding: 16px 12px 20px;
+    border-radius: 6px;
+  }
+}
+
+/* Mobile Responsive Overrides */
+@media (max-width: 768px) {
+  .chapter-02 {
+    padding-top: 56px !important;
+  }
+  .ch02-nav {
+    top: 66px;
+    right: 14px;
+    gap: 4px;
+    padding: 2px;
+  }
+  .ch02-nav-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .ch02-stage {
+    height: calc(100vh - 56px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ch02-scene-layer {
+    transition: opacity 0.01s ease, visibility 0.01s ease;
+  }
+}
