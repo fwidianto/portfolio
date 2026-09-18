@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 03 Scene 01 — Technical Assembly Motion Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,300;400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090e;--steel:#7f8a9a;--muted:#8b93a0;--text:#f3efe5;--amber:#f59e0b}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:"Plus Jakarta Sans",sans-serif;min-height:100%}
+body{padding:24px;background:radial-gradient(circle at 68% 36%,rgba(51,65,85,.16),transparent 34%),#07090e}
+.shell{max-width:1260px;margin:auto}.header{display:flex;justify-content:space-between;gap:20px;align-items:end;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:14px}
+.kicker{font:500 10px/1 "JetBrains Mono",monospace;letter-spacing:.17em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+h1{margin:0;font:300 28px/1.1 "Newsreader",serif}.sub{margin-top:7px;color:var(--muted);font-size:12px}.controls{display:flex;gap:8px}
+button{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.1);color:var(--text);font:500 10px/1 "JetBrains Mono",monospace;padding:9px 12px;cursor:pointer}
+.stage{border:1px solid rgba(255,255,255,.08);overflow:hidden;background:linear-gradient(180deg,#0a0e15,#06080d 78%);box-shadow:0 28px 70px rgba(0,0,0,.38)}
+svg{display:block;width:100%;height:auto;min-height:650px}.meta{display:flex;justify-content:space-between;gap:18px;padding-top:10px;color:var(--muted);font:400 9px/1.5 "JetBrains Mono",monospace;letter-spacing:.05em;text-transform:uppercase}
+.machine-line{stroke-dasharray:520;stroke-dashoffset:520}.wheel-line{stroke-dasharray:200;stroke-dashoffset:200}
+@media(max-width:760px){body{padding:12px}.header{align-items:start;flex-direction:column}svg{min-height:520px}.meta{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="header"><div><div class="kicker">Chapter 03 · Scene 01 · Selected Direction A</div><h1>Technical Assembly — Beat 01–02 Motion Study</h1><div class="sub">University handoff → professional arrival → industrial service environment. Stops before service work begins.</div></div><div class="controls"><button id="play">Replay</button></div></div>
+<div class="stage">
+<svg id="scene" viewBox="0 0 1200 650" aria-label="Technical Assembly opening motion study">
+<defs>
+<radialGradient id="signalGlow"><stop offset="0" stop-color="#f59e0b" stop-opacity=".62"/><stop offset=".58" stop-color="#f59e0b" stop-opacity=".13"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/></radialGradient>
+<linearGradient id="machineFill"><stop offset="0" stop-color="#18212d"/><stop offset="1" stop-color="#101720"/></linearGradient>
+</defs>
+<g opacity=".24" fill="#d8dee8"><circle cx="74" cy="92" r="1"/><circle cx="188" cy="64" r=".8"/><circle cx="344" cy="111" r="1.2"/><circle cx="522" cy="72" r=".8"/><circle cx="672" cy="118" r="1"/><circle cx="836" cy="74" r=".9"/><circle cx="1012" cy="126" r="1.1"/><circle cx="1132" cy="86" r=".8"/><circle cx="96" cy="542" r=".9"/><circle cx="286" cy="584" r="1.1"/><circle cx="548" cy="546" r=".8"/><circle cx="758" cy="598" r="1"/></g>
+
+<g id="origin">
+<text x="144" y="170" fill="#f3efe5" font-family="Newsreader,serif" font-size="18">Universitas Indonesia</text>
+<text x="145" y="191" fill="#7d8795" font-family="JetBrains Mono,monospace" font-size="8.5" letter-spacing="1.5">THESIS APPARATUS · FINAL HOLD</text>
+<g id="rig" fill="none" stroke="#7f8a9a" stroke-width="1.5">
+<path d="M150 424 H468" opacity=".42"/><rect x="176" y="278" width="92" height="142" rx="45" fill="#101720"/><path d="M222 278 V236 H356 V262"/><circle cx="136" cy="374" r="28" fill="#101720"/><path d="M164 374 H176"/><path d="M356 236 V196 H422 V256"/><rect x="398" y="256" width="66" height="118" rx="6" fill="#101720"/><path d="M431 374 V414 H502"/><circle cx="520" cy="414" r="18" fill="#101720"/><path d="M538 414 H570 V452"/><path d="M556 452 H586 L580 500 H562 Z" fill="#0e151e"/>
+</g></g>
+
+<path id="travelPath" d="M356 236 C430 228 486 246 540 286 C610 338 662 344 714 356" fill="none" stroke="#f59e0b" stroke-width="1.15" opacity="0"/>
+<g id="signal"><circle r="23" fill="url(#signalGlow)"/><circle r="4.5" fill="#f59e0b"/></g>
+
+<g id="guides" opacity="0" fill="none" stroke="#526172" stroke-width="1" stroke-dasharray="4 7"><path d="M706 424 H1065"/><path d="M806 238 V452"/><path d="M958 292 V452"/><circle cx="806" cy="402" r="42"/><circle cx="958" cy="402" r="42"/><path d="M744 386 H1020"/></g>
+
+<g id="machine" opacity="0">
+<path class="machine-line" d="M708 424 H1058" fill="none" stroke="#596779" stroke-width="1.4"/>
+<path class="machine-line" d="M760 386 L802 316 H912 L968 352 L1004 386" fill="url(#machineFill)" stroke="#8a96a7" stroke-width="1.6"/>
+<path class="machine-line" d="M814 316 V266 H906 V386" fill="none" stroke="#8a96a7" stroke-width="1.5"/>
+<rect id="cab" x="834" y="287" width="44" height="54" rx="3" fill="#0b1119" stroke="#526172" opacity="0"/>
+<circle class="wheel-line" cx="806" cy="402" r="31" fill="#090d13" stroke="#8a96a7" stroke-width="1.6"/>
+<circle class="wheel-line" cx="958" cy="402" r="31" fill="#090d13" stroke="#8a96a7" stroke-width="1.6"/>
+<circle cx="806" cy="402" r="11" fill="#151e28" stroke="#64748b" opacity="0" class="hub"/>
+<circle cx="958" cy="402" r="11" fill="#151e28" stroke="#64748b" opacity="0" class="hub"/>
+<path class="machine-line" d="M1004 386 H1044 V354" fill="none" stroke="#8a96a7" stroke-width="1.5"/>
+<circle cx="1044" cy="344" r="5" fill="#f59e0b" opacity="0" id="servicePoint"/>
+</g>
+
+<g id="technician" opacity="0" fill="none" stroke="#a5afbd" stroke-width="1.5"><circle cx="700" cy="337" r="9"/><path d="M700 346 V380 M700 356 L684 370 M700 358 L716 369 M700 380 L688 409 M700 380 L714 409 M684 370 L676 360"/></g>
+<g id="component" opacity="0"><rect x="650" y="412" width="48" height="32" rx="3" fill="#111923" stroke="#596778" stroke-width="1.2"/><path d="M660 426 H687" stroke="#8b96a6" stroke-width="1.2"/><circle cx="674" cy="426" r="5" fill="none" stroke="#8b96a6" stroke-width="1.2"/></g>
+
+<g id="identity" opacity="0"><text x="760" y="176" fill="#f3efe5" font-family="Newsreader,serif" font-size="23">Traktor Nusantara</text><text x="762" y="198" fill="#8b93a0" font-family="JetBrains Mono,monospace" font-size="9" letter-spacing="1.8">2019 · PROFESSIONAL ENTRY</text></g>
+<text x="46" y="606" fill="#626d7b" font-family="JetBrains Mono,monospace" font-size="8" letter-spacing="1.2">MOTION STUDY · OWNER-SELECTED DIRECTION A</text>
+<text x="1154" y="606" fill="#626d7b" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="8" letter-spacing="1.2">STOPS BEFORE SERVICE ACTION</text>
+</svg>
+</div>
+<div class="meta"><span>Approx. 7.4 s · calm technical assembly</span><span>Review tooling only · not production UI</span></div>
+</div>
+
+<script>
+const signal=document.getElementById("signal"),travelPath=document.getElementById("travelPath"),origin=document.getElementById("origin"),rig=document.getElementById("rig"),guides=document.getElementById("guides"),machine=document.getElementById("machine"),tech=document.getElementById("technician"),component=document.getElementById("component"),identity=document.getElementById("identity"),servicePoint=document.getElementById("servicePoint"),cab=document.getElementById("cab");
+const hubs=[...document.querySelectorAll(".hub")],machineLines=[...document.querySelectorAll(".machine-line")],wheelLines=[...document.querySelectorAll(".wheel-line")];
+let raf=null,start=null;const D=7400;
+const clamp=v=>Math.max(0,Math.min(1,v));const smooth=t=>t*t*(3-2*t);const range=(t,a,b)=>smooth(clamp((t-a)/(b-a)));const mix=(a,b,t)=>a+(b-a)*t;
+function pointOnPath(p){const len=travelPath.getTotalLength();return travelPath.getPointAtLength(len*clamp(p));}
+function reset(){start=null;origin.style.opacity=1;rig.style.opacity=1;travelPath.style.opacity=0;guides.style.opacity=0;machine.style.opacity=0;tech.style.opacity=0;component.style.opacity=0;identity.style.opacity=0;servicePoint.style.opacity=0;cab.style.opacity=0;hubs.forEach(x=>x.style.opacity=0);machineLines.forEach(x=>x.style.strokeDashoffset=520);wheelLines.forEach(x=>x.style.strokeDashoffset=200);signal.setAttribute("transform","translate(356 236)");signal.setAttribute("opacity","1");}
+function render(ms){
+ const t=Math.min(ms/D,1);
+ origin.style.opacity=String(mix(1,.12,range(t,.14,.50)));rig.style.opacity=String(mix(1,.18,range(t,.14,.50)));
+ const travel=range(t,.16,.48);const p=pointOnPath(travel);let sx=p.x,sy=p.y;
+ travelPath.style.opacity=String(.16*range(t,.18,.36)*(1-range(t,.46,.58)));
+ guides.style.opacity=String(.46*range(t,.34,.56)*(1-.35*range(t,.70,.90)));
+ const assemble=range(t,.45,.75);machine.style.opacity=String(assemble);
+ machineLines.forEach((x,i)=>{const local=range(t,.45+i*.018,.69+i*.018);x.style.strokeDashoffset=String(520*(1-local));});
+ wheelLines.forEach((x,i)=>{const local=range(t,.52+i*.025,.74+i*.025);x.style.strokeDashoffset=String(200*(1-local));});
+ cab.style.opacity=String(range(t,.61,.76));hubs.forEach(x=>x.style.opacity=String(range(t,.64,.78)));
+ tech.style.opacity=String(.92*range(t,.62,.80));component.style.opacity=String(.90*range(t,.65,.82));
+ if(t>.48){const settle=range(t,.48,.78);sx=mix(p.x,1044,settle);sy=mix(p.y,344,settle);}
+ signal.setAttribute("transform","translate("+sx+" "+sy+")");
+ servicePoint.style.opacity=String(range(t,.72,.84));identity.style.opacity=String(range(t,.72,.88));
+ signal.setAttribute("opacity",String(mix(1,.82,range(t,.86,1))));
+}
+function tick(now){if(start===null)start=now;const elapsed=now-start;render(elapsed);if(elapsed<D)raf=requestAnimationFrame(tick);}
+function play(){if(raf)cancelAnimationFrame(raf);reset();raf=requestAnimationFrame(tick);}
+document.getElementById("play").addEventListener("click",play);reset();raf=requestAnimationFrame(tick);
+</script>
+</body>
+</html>
