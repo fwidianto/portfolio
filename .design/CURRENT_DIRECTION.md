@@ -235,3 +235,26 @@ Do not implement the full chapter from this summary. Read the Chapter 03 guideli
 ### Chapter 03 design-workspace rule
 
 OpenDesign is the required visual design workspace for Chapter 03 composition exploration and owner annotation. Code-based HTML/SVG/Canvas work begins only after the relevant OpenDesign composition is selected and approved. Existing Chapter 03 browser studies are retained as rough references, not design authority.
+
+
+## Chapter 04 — approved Operating Spine baseline
+
+**Status: OWNER APPROVED — FROZEN FOR INTEGRATION**
+
+Authority:
+
+`.design/CHAPTER_04_APPROVED_BASELINE.md`
+
+Chapter IV covers the PT Cibuni Teknik Sejahtera period and remains a separate chapter.
+
+Approved core:
+
+`PT Cibuni Teknik Sejahtera identity -> amber signal -> Customer Need -> Quote -> Procure -> Make -> Deliver -> Bill -> Collect`
+
+The earlier Chapter III-convergence opening is rejected. Chapter IV now begins directly with the restrained PT Cibuni Teknik Sejahtera identity animation, which causally resolves into the operating spine.
+
+Preserve the isolated approved implementation and integrate it into:
+
+`prototypes/new-portfolio-animation-first/`
+
+Do not redesign frozen earlier chapters during integration. Keep implementation / technical validation / owner approval states distinct.
