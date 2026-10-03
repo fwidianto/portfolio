@@ -1,0 +1,647 @@
+/* ==========================================================================
+   PORTFOLIO MODERN LEFT NAVIGATION SYSTEM
+   Authority: Near-black glass, restrained amber accent, compact mono typography
+   States: [data-nav-state="hidden" | "rail" | "expanded"]
+   Utility style: Claude Code / Codex-style modern precision navigation
+   ========================================================================== */
+
+:root {
+  --nav-bg: rgba(6, 8, 12, 0.58);
+  --nav-bg-expanded: rgba(7, 9, 14, 0.84);
+  --nav-bg-solid: #06080c;
+  --nav-border: rgba(244, 239, 232, 0.08);
+  --nav-border-hover: rgba(244, 239, 232, 0.18);
+  --nav-text: rgba(244, 239, 232, 0.80);
+  --nav-text-hover: #ffffff;
+  --nav-text-active: #ffffff;
+  --nav-amber: #ffaa40;
+  --nav-amber-light: #ffc278;
+  --nav-amber-subtle: rgba(255, 170, 64, 0.11);
+  --nav-amber-glow: rgba(255, 170, 64, 0.45);
+  --nav-blur: 20px;
+  --nav-rail-w: 52px;
+  --nav-expanded-w: 224px;
+  --nav-transition: 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Container Navigation Shell */
+.portfolio-left-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  background: var(--nav-bg);
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
+  border-right: 1px solid var(--nav-border);
+  box-sizing: border-box;
+  user-select: none;
+  contain: layout style;
+  transition: width var(--nav-transition), transform var(--nav-transition), border-color var(--nav-transition);
+}
+
+/* Glass Highlight Line at Right Edge */
+.portfolio-left-nav::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255, 170, 64, 0.25) 0%, rgba(244, 239, 232, 0.05) 30%, transparent 100%);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   THE THREE STATES: hidden | rail | expanded
+   -------------------------------------------------------------------------- */
+
+/* State 1: Hidden */
+.portfolio-left-nav[data-nav-state="hidden"] {
+  width: var(--nav-rail-w);
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+/* State 2: Logo-only Rail */
+.portfolio-left-nav[data-nav-state="rail"] {
+  width: var(--nav-rail-w);
+  transform: translateX(0);
+}
+
+/* State 3: Expanded */
+.portfolio-left-nav[data-nav-state="expanded"] {
+  width: var(--nav-expanded-w);
+  background: var(--nav-bg-expanded);
+  transform: translateX(0);
+  box-shadow: 14px 0 40px rgba(0, 0, 0, 0.58), 0 0 0 1px rgba(244, 239, 232, 0.04);
+}
+
+/* --------------------------------------------------------------------------
+   DISCRETE EDGE TRIGGER (Active when Hidden)
+   -------------------------------------------------------------------------- */
+.portfolio-left-nav__edge-trigger {
+  position: fixed;
+  top: 18px;
+  left: 0;
+  z-index: 125;
+  width: 22px;
+  height: 34px;
+  border-radius: 0 6px 6px 0;
+  background: rgba(10, 14, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--nav-border);
+  border-left: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nav-text);
+  padding: 0;
+  margin: 0;
+  outline: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-100%);
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.portfolio-left-nav[data-nav-state="hidden"] + .portfolio-left-nav__edge-trigger,
+body.nav-is-hidden .portfolio-left-nav__edge-trigger {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.portfolio-left-nav__edge-trigger:hover,
+.portfolio-left-nav__edge-trigger:focus-visible {
+  color: var(--nav-amber);
+  border-color: rgba(255, 170, 64, 0.35);
+  background: rgba(16, 22, 32, 0.95);
+}
+
+.edge-trigger__dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--nav-amber);
+  box-shadow: 0 0 6px var(--nav-amber);
+}
+
+/* --------------------------------------------------------------------------
+   NAV HEADER / LOGO
+   -------------------------------------------------------------------------- */
+.portfolio-left-nav__header {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(244, 239, 232, 0.05);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.portfolio-left-nav__logo-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nav-text-active);
+  text-decoration: none;
+  outline: none;
+  height: 32px;
+  width: 100%;
+}
+
+.left-nav__logo-mark {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 16px;
+}
+
+.left-nav__logo-mark .fw-logo-svg {
+  height: 16px;
+  width: auto;
+  display: block;
+}
+
+.fw-logo-dot {
+  filter: drop-shadow(0 0 6px rgba(254, 138, 47, 0.8));
+}
+
+.left-nav__state-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: #8a94a6;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+
+.portfolio-left-nav[data-nav-state="expanded"] .left-nav__state-badge {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   PRIMARY NAVIGATION LIST
+   -------------------------------------------------------------------------- */
+.portfolio-left-nav__list {
+  list-style: none;
+  margin: 16px 0 0 0;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.portfolio-left-nav__list::-webkit-scrollbar {
+  display: none;
+}
+
+.portfolio-left-nav__item {
+  position: relative;
+  margin: 0 6px;
+}
+
+.portfolio-left-nav__link-row {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.portfolio-left-nav__link-row:hover,
+.portfolio-left-nav__item:not(.portfolio-left-nav__item--expandable) .portfolio-left-nav__link:hover {
+  background: rgba(244, 239, 232, 0.06);
+}
+
+.portfolio-left-nav__link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  color: var(--nav-text);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  text-transform: none;
+  position: relative;
+  border-radius: 6px;
+  outline: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.portfolio-left-nav__link:hover,
+.portfolio-left-nav__link:focus-visible {
+  color: var(--nav-text-hover);
+}
+
+/* Active Indicator Line (Restrained Amber) */
+.left-nav__indicator {
+  position: absolute;
+  left: 0;
+  top: 7px;
+  bottom: 7px;
+  width: 2.5px;
+  border-radius: 1.5px;
+  background: var(--nav-amber);
+  opacity: 0;
+  box-shadow: 0 0 8px var(--nav-amber), 0 0 12px rgba(255, 170, 64, 0.5);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: scaleY(0.4);
+}
+
+.portfolio-left-nav__item.is-active > .portfolio-left-nav__link .left-nav__indicator,
+.portfolio-left-nav__item.is-active > .portfolio-left-nav__link-row .left-nav__indicator {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.portfolio-left-nav__item.is-active > .portfolio-left-nav__link,
+.portfolio-left-nav__item.is-active > .portfolio-left-nav__link-row {
+  color: var(--nav-text-active);
+  background: var(--nav-amber-subtle);
+  box-shadow: inset 0 0 0 1px rgba(255, 170, 64, 0.22), 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Nav Item Icon */
+.left-nav__icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 12px;
+  color: inherit;
+  transition: transform 0.15s ease, color 0.15s ease, filter 0.15s ease;
+}
+
+.portfolio-left-nav__item.is-active .left-nav__icon {
+  color: var(--nav-amber);
+  filter: drop-shadow(0 0 4px rgba(255, 170, 64, 0.5));
+}
+
+/* Nav Item Label */
+.left-nav__label {
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-6px);
+  pointer-events: none;
+  flex: 1;
+  transition: opacity 0.18s ease, transform 0.18s ease, text-shadow 0.15s ease;
+}
+
+.portfolio-left-nav[data-nav-state="expanded"] .left-nav__label {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.portfolio-left-nav__item.is-active .left-nav__label {
+  color: #ffffff;
+  font-weight: 550;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.28);
+}
+
+/* Nav Item Meta (01, 02, 03) */
+.left-nav__meta {
+  font-size: 9px;
+  color: rgba(244, 239, 232, 0.28);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  margin-left: 8px;
+  margin-right: 4px;
+  transition: opacity 0.18s ease;
+}
+
+.portfolio-left-nav[data-nav-state="expanded"] .left-nav__meta {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   EXPANDABLE ITEM: EDUCATION & CHEVRON
+   -------------------------------------------------------------------------- */
+.left-nav__expand-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0 8px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nav-text);
+  outline: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: color 0.15s ease, transform 0.2s ease, opacity 0.18s ease;
+}
+
+.portfolio-left-nav[data-nav-state="expanded"] .left-nav__expand-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.left-nav__expand-btn:hover {
+  color: var(--nav-amber);
+}
+
+.expand-btn__chevron {
+  transition: transform 0.2s ease;
+}
+
+.portfolio-left-nav__item--expandable.is-expanded .expand-btn__chevron {
+  transform: rotate(180deg);
+}
+
+/* --------------------------------------------------------------------------
+   NESTED CHILD DESTINATIONS (THE 5 CHAPTER II SCENES)
+   -------------------------------------------------------------------------- */
+.portfolio-left-nav__sublist {
+  list-style: none;
+  margin: 3px 0 6px 14px;
+  padding: 0 0 0 10px;
+  border-left: 1px solid rgba(244, 239, 232, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+/* Revealed only when navigation is expanded AND item is expanded */
+.portfolio-left-nav[data-nav-state="expanded"] .portfolio-left-nav__item--expandable.is-expanded .portfolio-left-nav__sublist {
+  max-height: 240px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.portfolio-left-nav__subitem {
+  margin: 0;
+}
+
+.portfolio-left-nav__sublink {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 9px;
+  color: rgba(244, 239, 232, 0.74);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  border-radius: 5px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: color 0.15s ease, background 0.15s ease, text-shadow 0.15s ease, box-shadow 0.15s ease;
+}
+
+.portfolio-left-nav__sublink:hover,
+.portfolio-left-nav__sublink:focus-visible {
+  color: #ffffff;
+  background: rgba(244, 239, 232, 0.06);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.sublink__pip {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(244, 239, 232, 0.40);
+  flex-shrink: 0;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.portfolio-left-nav__sublink:hover .sublink__pip {
+  background: #ffffff;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.sublink__code {
+  color: rgba(244, 239, 232, 0.38);
+  font-size: 9.5px;
+  font-weight: 500;
+}
+
+.sublink__text {
+  flex: 1;
+}
+
+/* Active Child Destination */
+.portfolio-left-nav__sublink.is-child-active {
+  color: var(--nav-amber-light);
+  font-weight: 550;
+  background: rgba(255, 170, 64, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 170, 64, 0.25);
+  text-shadow: 0 0 10px rgba(255, 170, 64, 0.45);
+}
+
+.portfolio-left-nav__sublink.is-child-active .sublink__pip {
+  background: var(--nav-amber);
+  box-shadow: 0 0 6px var(--nav-amber), 0 0 10px rgba(255, 170, 64, 0.7);
+}
+
+.portfolio-left-nav__sublink.is-child-active .sublink__code {
+  color: rgba(255, 170, 64, 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   BOTTOM UTILITY CONTROLS / CYCLE BUTTON
+   -------------------------------------------------------------------------- */
+.portfolio-left-nav__footer {
+  padding: 10px 8px;
+  border-top: 1px solid rgba(244, 239, 232, 0.05);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.left-nav__state-cycle-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0 2px;
+  color: var(--nav-text);
+  outline: none;
+  box-sizing: border-box;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.left-nav__state-cycle-btn:hover,
+.left-nav__state-cycle-btn:focus-visible {
+  color: var(--nav-text-hover);
+  background: rgba(244, 239, 232, 0.04);
+  border-color: rgba(244, 239, 232, 0.1);
+}
+
+.cycle-btn__icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* Center alignment in Rail state */
+.portfolio-left-nav[data-nav-state="rail"] .portfolio-left-nav__header {
+  justify-content: center;
+  padding: 0;
+  width: var(--nav-rail-w);
+}
+
+.portfolio-left-nav[data-nav-state="rail"] .portfolio-left-nav__logo-btn {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  gap: 0;
+}
+
+.portfolio-left-nav[data-nav-state="rail"] .left-nav__logo-mark {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.portfolio-left-nav[data-nav-state="rail"] .portfolio-left-nav__item {
+  margin: 0 4px;
+}
+
+.portfolio-left-nav[data-nav-state="rail"] .portfolio-left-nav__link-row {
+  justify-content: center;
+  width: 100%;
+}
+
+.portfolio-left-nav[data-nav-state="rail"] .portfolio-left-nav__link {
+  justify-content: center;
+  padding: 0;
+  width: 100%;
+}
+
+.portfolio-left-nav[data-nav-state="rail"] .left-nav__icon {
+  margin-right: 0;
+}
+
+.portfolio-left-nav[data-nav-state="rail"] .left-nav__label,
+.portfolio-left-nav[data-nav-state="rail"] .left-nav__expand-btn,
+.portfolio-left-nav[data-nav-state="rail"] .left-nav__meta,
+.portfolio-left-nav[data-nav-state="rail"] .left-nav__state-badge {
+  display: none !important;
+}
+
+.portfolio-left-nav[data-nav-state="rail"] .portfolio-left-nav__footer {
+  justify-content: center;
+  padding: 10px 4px;
+  width: var(--nav-rail-w);
+}
+
+.portfolio-left-nav[data-nav-state="rail"] .left-nav__state-cycle-btn {
+  justify-content: center;
+  padding: 0;
+  width: 36px;
+  margin: 0 auto;
+}
+
+.portfolio-left-nav[data-nav-state="rail"] .cycle-btn__icon {
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   INTEGRATION COEXISTENCE: Top Header Coordination
+   -------------------------------------------------------------------------- */
+/* When left nav is visible (rail or expanded), suppress redundant top header logo */
+body.has-left-nav:not(.nav-is-hidden) .portfolio-header__logo {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+body.has-left-nav.nav-is-hidden .portfolio-header__logo {
+  display: inline-flex !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+}
+
+body.has-left-nav .portfolio-header {
+  border-bottom: none !important;
+  transition: padding-left var(--nav-transition);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN (MOBILE & TABLET)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --nav-rail-w: 46px;
+    --nav-expanded-w: min(220px, 72vw);
+  }
+
+  .portfolio-left-nav__header {
+    height: 52px;
+    padding: 0 10px;
+  }
+
+  .portfolio-left-nav__link {
+    height: 38px;
+    padding: 0 8px;
+  }
+
+  .left-nav__icon {
+    margin-right: 10px;
+  }
+
+  .portfolio-left-nav__edge-trigger {
+    top: 14px;
+    height: 30px;
+  }
+}
