@@ -1418,7 +1418,55 @@
         })
       };
 
-            // Standard Chapter 02 Scene 05 Adapter interface
+      // Dossier inspection panel handling for Scene 05 (Undergraduate Thesis Rig & Graduation)
+      const infoBtn = document.getElementById('scene-05-inspect-btn');
+      const dossierModal = document.getElementById('scene-05-dossier');
+
+      function openDossier() {
+        if (!dossierModal) return;
+        dossierModal.hidden = false;
+        document.body.style.overflow = 'hidden';
+        if (infoBtn) infoBtn.setAttribute('aria-expanded', 'true');
+        const closeBtn = dossierModal.querySelector('.archival-dossier__close');
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeDossier() {
+        if (!dossierModal) return;
+        dossierModal.hidden = true;
+        document.body.style.overflow = '';
+        if (infoBtn) {
+          infoBtn.setAttribute('aria-expanded', 'false');
+          infoBtn.focus();
+        }
+      }
+
+      if (infoBtn) {
+        infoBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (dossierModal && dossierModal.hidden) {
+            openDossier();
+          } else {
+            closeDossier();
+          }
+        });
+      }
+
+      if (dossierModal) {
+        dossierModal.addEventListener('click', (e) => {
+          if (e.target.dataset && e.target.dataset.close === 'true') {
+            closeDossier();
+          }
+        });
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && dossierModal && !dossierModal.hidden) {
+          closeDossier();
+        }
+      });
+
+      // Standard Chapter 02 Scene 05 Adapter interface
       window.Ch02Scene05 = {
         id: 'scene-05',
         name: '05 // THESIS RIG',

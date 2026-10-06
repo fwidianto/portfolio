@@ -181,6 +181,13 @@
       });
     }
 
+    function collapseExpandedOnMobile() {
+      if (window.innerWidth <= 768 && STATES[currentStateIndex] === 'expanded') {
+        currentStateIndex = 1; // collapse to rail
+        applyState('rail');
+      }
+    }
+
     // 5. Main Chapter Links
     // Item 1: Home
     const homeItem = navEl ? navEl.querySelector('.portfolio-left-nav__item[data-chapter="chapter-01"] .portfolio-left-nav__link') : null;
@@ -189,6 +196,7 @@
         e.preventDefault();
         lockScrollTracking('chapter-01');
         scrollToSection('hero');
+        collapseExpandedOnMobile();
       });
     }
 
@@ -228,6 +236,7 @@
         e.preventDefault();
         lockScrollTracking('chapter-03');
         scrollToSection('chapter-03');
+        collapseExpandedOnMobile();
       });
     }
 
@@ -245,6 +254,7 @@
           if (window.Chapter02Controller && typeof window.Chapter02Controller.goToScene === 'function') {
             window.Chapter02Controller.goToScene(sceneIndex, true);
           }
+          collapseExpandedOnMobile();
         }
       });
     });

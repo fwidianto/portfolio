@@ -13,6 +13,7 @@
   const makaraArtifact = document.getElementById('makara-artifact');
   const archivalMarkerBtn = document.getElementById('archival-marker-btn');
   const archivalDossier = document.getElementById('archival-dossier');
+  const nextSignBtn = document.getElementById('ch02-nav-pointer') || document.getElementById('scene-01-next-sign');
 
   if (!canvas || !stageWrapper) return;
 
@@ -418,12 +419,15 @@
     if (!startTime) startTime = timestamp;
     currentTime = (timestamp - startTime) / 1000;
 
-    // Narrative milestones for centered Makara artifact
+    // Narrative milestones for centered Makara artifact & next scene sign
     if (currentTime >= 4.2 && makaraArtifact) {
       makaraArtifact.classList.add('is-visible');
     }
     if (currentTime >= 6.2 && makaraArtifact) {
       makaraArtifact.classList.add('is-settled');
+    }
+    if (currentTime >= 7.2 && nextSignBtn) {
+      nextSignBtn.classList.add('is-visible');
     }
 
     // Clear frame
@@ -485,6 +489,29 @@
     if (makaraArtifact) {
       makaraArtifact.classList.add('is-visible', 'is-settled');
     }
+    if (nextSignBtn) {
+      nextSignBtn.classList.add('is-visible');
+    }
+  }
+
+  // Reset to initial clean resting state before scroll trigger
+  function resetToInitial() {
+    cancelAnimationFrame(animId);
+    startTime = 0;
+    currentTime = 0;
+    isPlaying = false;
+    hasTriggered = false;
+    if (makaraArtifact) {
+      makaraArtifact.classList.remove('is-visible', 'is-settled');
+    }
+    if (nextSignBtn) {
+      nextSignBtn.classList.remove('is-visible');
+    }
+    closeDossier();
+    setupSimulation();
+    if (ctx && width && height) {
+      ctx.clearRect(0, 0, width, height);
+    }
   }
 
   // Dossier dialog interaction
@@ -516,6 +543,9 @@
     isPlaying = true;
     if (makaraArtifact) {
       makaraArtifact.classList.remove('is-visible', 'is-settled');
+    }
+    if (nextSignBtn) {
+      nextSignBtn.classList.remove('is-visible');
     }
     closeDossier();
     setupSimulation();
@@ -595,8 +625,21 @@
       }
     });
 
-    // Pre-render static resting state; playback lifecycle is delegated to Chapter02Controller
-    renderStaticSettled();
+    if (nextSignBtn) {
+      nextSignBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (window.Chapter02Controller) {
+          window.Chapter02Controller.goToScene(1, true);
+        }
+      });
+    }
+
+    // Initial resting state; animation starts only when user scrolls down to Chapter 02
+    if (isReducedMotion) {
+      renderStaticSettled();
+    } else {
+      resetToInitial();
+    }
   }
 
   function play() {
@@ -619,7 +662,11 @@
     isPlaying = false;
     cancelAnimationFrame(animId);
     currentTime = 0;
-    renderStaticSettled();
+    if (isReducedMotion) {
+      renderStaticSettled();
+    } else {
+      resetToInitial();
+    }
   }
 
   init();
@@ -635,6 +682,7 @@
       pause: pause,
       replay: replay,
       stop: stop,
+      resetToInitial: resetToInitial,
       resize: resize,
       getCurrentTime: function () { return Math.min(currentTime, TIMELINE_DURATION); },
       onComplete: null

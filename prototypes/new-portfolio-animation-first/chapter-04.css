@@ -1,0 +1,421 @@
+/* ==========================================================================
+   CHAPTER 04: OPERATING SPINE — PT CIBUNI TEKNIK SEJAHTERA
+   Theme: Dark Astronomical / Industrial Editorial Systems
+   Story: End-to-End Operating Ownership: Customer Need -> Make -> Collect
+   Frozen Visual & Motion Authority: prototypes/chapter-04-operating-spine/index.html
+   ========================================================================== */
+
+:root {
+  --ch04-bg: #040508;
+  --ch04-amber: #f59e0b;
+  --ch04-amber-bright: #fbbf24;
+  --ch04-amber-dim: rgba(245, 158, 11, 0.25);
+  --ch04-amber-faint: rgba(245, 158, 11, 0.08);
+  --ch04-text: #f8fafc;
+  --ch04-text-muted: #94a3b8;
+  --ch04-text-dim: #64748b;
+  --ch04-border: #1e293b;
+  --ch04-card-bg: #070b14;
+  --ch04-blueprint: #38bdf8;
+  --ch04-blueprint-dim: rgba(56, 189, 248, 0.25);
+}
+
+/* Continuity Carrier Vector from Chapter 03 to Chapter 04 */
+.ch03-to-ch04-carrier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 60px auto 32px;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 20;
+}
+
+.ch03-to-ch04-carrier__line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.8), rgba(245, 158, 11, 0.2));
+  transition: opacity 0.2s ease;
+}
+
+.ch03-to-ch04-carrier:hover .ch03-to-ch04-carrier__line {
+  background: linear-gradient(180deg, rgba(251, 191, 36, 1.0), rgba(245, 158, 11, 0.4));
+}
+
+/* Base Chapter 04 Section Surface */
+.chapter-04 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--hero-bg, #040508);
+  background-image: var(--ch02-bg-vignette);
+  color: var(--ch04-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Full-Screen Chapter Stage Layer */
+.ch04-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+/* Chapter 04 SVG */
+.ch04-svg,
+#svg-ch04 {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  background: transparent;
+}
+
+/* Starfield Twinkle Animations */
+.ch04-stage .star {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.ch04-stage .star--twinkle-1 { animation: ch04-star-blink-1 2.8s ease-in-out infinite; }
+.ch04-stage .star--twinkle-2 { animation: ch04-star-blink-2 4.1s ease-in-out infinite 0.75s; }
+.ch04-stage .star--twinkle-3 { animation: ch04-star-blink-3 3.4s ease-in-out infinite 1.4s; }
+.ch04-stage .star--twinkle-4 { animation: ch04-star-blink-4 5.2s ease-in-out infinite 2.2s; }
+.ch04-stage .star--beacon { animation: ch04-star-beacon-pulse 4.6s ease-in-out infinite; }
+
+@keyframes ch04-star-blink-1 {
+  0%, 100% { opacity: 0.20; transform: scale(0.75); }
+  35% { opacity: 0.95; transform: scale(1.18); }
+  52% { opacity: 0.32; transform: scale(0.85); }
+  72% { opacity: 0.88; transform: scale(1.06); }
+}
+
+@keyframes ch04-star-blink-2 {
+  0%, 100% { opacity: 0.78; transform: scale(1.02); }
+  28% { opacity: 0.16; transform: scale(0.72); }
+  62% { opacity: 1.0; transform: scale(1.22); }
+  82% { opacity: 0.38; transform: scale(0.85); }
+}
+
+@keyframes ch04-star-blink-3 {
+  0%, 100% { opacity: 0.22; transform: scale(0.8); }
+  45% { opacity: 0.92; transform: scale(1.12); }
+  60% { opacity: 0.28; transform: scale(0.82); }
+  85% { opacity: 0.82; transform: scale(1.04); }
+}
+
+@keyframes ch04-star-blink-4 {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  22% { opacity: 0.96; transform: scale(1.16); }
+  42% { opacity: 0.22; transform: scale(0.78); }
+  68% { opacity: 0.88; transform: scale(1.08); }
+  84% { opacity: 0.18; transform: scale(0.72); }
+}
+
+@keyframes ch04-star-beacon-pulse {
+  0%, 100% { opacity: 0.42; filter: drop-shadow(0 0 2px rgba(255, 240, 220, 0.45)); transform: scale(0.88); }
+  50% { opacity: 1.0; filter: drop-shadow(0 0 5px rgba(255, 240, 220, 0.95)) drop-shadow(0 0 11px rgba(255, 185, 130, 0.5)); transform: scale(1.18); }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .ch04-stage .star,
+  .ch04-stage .star--beacon {
+    animation: none !important;
+    opacity: 0.65;
+  }
+}
+
+/* Top Editorial Header Overlay */
+.ch04-editorial-header {
+  position: absolute;
+  top: 76px;
+  left: clamp(20px, 4vw, 64px);
+  z-index: 40;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ch04-editorial-header__eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--ch04-amber-bright);
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.ch04-editorial-header__title {
+  font-family: 'Newsreader', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--ch04-text);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Status HUD Bar (Upper Right) */
+.ch04-status-hud {
+  position: absolute;
+  top: 76px;
+  right: clamp(20px, 4vw, 64px);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ch04-text-muted);
+  background: rgba(7, 11, 20, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  padding: 6px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.ch04-status-hud__indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ch04-amber);
+  box-shadow: 0 0 6px var(--ch04-amber);
+  animation: ch04-status-blink 2s ease-in-out infinite;
+}
+
+@keyframes ch04-status-blink {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Interactive Stage Inspector Drawer / Overlay */
+.ch04-inspector-panel {
+  position: absolute;
+  bottom: 46px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  min-width: 440px;
+  max-width: 620px;
+  background: rgba(7, 11, 20, 0.92);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 8px;
+  padding: 10px 18px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 16px rgba(245, 158, 11, 0.15);
+}
+
+.ch04-inspector-panel.is-active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.ch04-inspector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.ch04-inspector-stage-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--ch04-amber-bright);
+  text-transform: uppercase;
+}
+
+.ch04-inspector-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ch04-text);
+}
+
+.ch04-inspector-ownership {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ch04-text-dim);
+}
+
+.ch04-inspector-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--ch04-text-muted);
+  margin-top: 4px;
+}
+
+.ch04-inspector-chips {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.ch04-inspector-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  padding: 2px 8px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 4px;
+  color: var(--ch04-amber-bright);
+}
+
+/* Bottom Control Bar & Timeline */
+.ch04-controls-bar {
+  position: absolute;
+  bottom: 12px;
+  left: 36px;
+  right: 36px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 50;
+}
+
+.ch04-play-btn,
+.ch04-replay-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(9, 14, 24, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: var(--ch04-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.ch04-play-btn:hover,
+.ch04-replay-btn:hover {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: var(--ch04-amber);
+  color: var(--ch04-amber-bright);
+  transform: scale(1.05);
+}
+
+.ch04-timeline-container {
+  flex: 1;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.ch04-timeline-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 2px;
+  position: relative;
+  overflow: visible;
+  transition: height 0.15s ease;
+}
+
+.ch04-timeline-container:hover .ch04-timeline-track {
+  height: 5px;
+}
+
+.ch04-timeline-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #d97706, #fbbf24);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+}
+
+.ch04-timeline-scrubber {
+  position: absolute;
+  left: 0%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--ch04-amber-bright);
+  box-shadow: 0 0 6px var(--ch04-amber);
+  pointer-events: none;
+  transition: transform 0.1s ease;
+}
+
+.ch04-timeline-container:hover .ch04-timeline-scrubber {
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+.ch04-timeline-stage-marker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 3px;
+  height: 7px;
+  background: rgba(148, 163, 184, 0.35);
+  pointer-events: none;
+  transition: background 0.2s ease;
+}
+
+.ch04-timeline-stage-marker.is-passed {
+  background: var(--ch04-amber-bright);
+}
+
+.ch04-time-readout {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ch04-text-dim);
+  min-width: 68px;
+  text-align: right;
+}
+
+/* Node & Interactive Pointer States */
+.interactive-stage-hitbox {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.interactive-stage-hitbox:hover + .stage-node-circle {
+  filter: url(#ch04-pulseGlow);
+}
+
+#svg-ch04 text {
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  user-select: none;
+  -webkit-user-select: none;
+}

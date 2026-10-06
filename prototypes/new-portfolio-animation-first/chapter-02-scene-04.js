@@ -2,7 +2,8 @@
     (function () {
       'use strict';
 
-      const assetBase = new URL('assets/', document.currentScript.src);
+      const scriptSrc = (document.currentScript && document.currentScript.src) || window.location.href;
+      const assetBase = new URL('assets/', scriptSrc);
 
       const canvas = document.getElementById('commute-canvas');
       const ctx = canvas.getContext('2d');
@@ -100,7 +101,7 @@
       let transitWalkDest = TRANSIT_WALK_DEST_COORDS.map(p => ({ lon: p[0], lat: p[1] }));
 
       // External Datasets
-      let realCountriesData = null;
+      let realCountriesData = (typeof window !== 'undefined' && window.REAL_EARTH_COUNTRIES) ? window.REAL_EARTH_COUNTRIES : null;
       let tokyoRoadsData = null;
       let tokyoBoundariesData = null;
       let cachedRoadsCanvas = null;
@@ -111,14 +112,32 @@
       tokyoTechLogoImg.src = new URL('tokyo-tech-logo.png', assetBase).href;
 
       async function loadDatasets() {
+        // 1. Immediately adopt preloaded global countries if ready
+        if (!realCountriesData && typeof window !== 'undefined' && window.REAL_EARTH_COUNTRIES) {
+          realCountriesData = window.REAL_EARTH_COUNTRIES;
+          render(currentTime);
+        }
+
+        // 2. Fetch countries asynchronously and independently so flight background is never blocked
+        if (!realCountriesData) {
+          fetch(new URL('real-earth-countries.json', assetBase).href)
+            .then(r => r.ok ? r.json() : null)
+            .then(data => {
+              if (data) {
+                realCountriesData = data;
+                render(currentTime);
+              }
+            })
+            .catch(e => console.warn('Countries data fetch error', e));
+        }
+
+        // 3. Fetch Tokyo commute roads, boundaries, and transit routes safely
         try {
-          const [countries, roads, boundaries, transit] = await Promise.all([
-            fetch(new URL('real-earth-countries.json', assetBase).href).then(r => r.ok ? r.json() : null),
-            fetch(new URL('tokyo-commute-roads.json', assetBase).href).then(r => r.ok ? r.json() : null),
-            fetch(new URL('tokyo-commute-boundaries.json', assetBase).href).then(r => r.ok ? r.json() : null),
-            fetch(new URL('tokyo-transit-routes.json', assetBase).href).then(r => r.ok ? r.json() : null)
+          const [roads, boundaries, transit] = await Promise.all([
+            fetch(new URL('tokyo-commute-roads.json', assetBase).href).then(r => r.ok ? r.json() : null).catch(() => null),
+            fetch(new URL('tokyo-commute-boundaries.json', assetBase).href).then(r => r.ok ? r.json() : null).catch(() => null),
+            fetch(new URL('tokyo-transit-routes.json', assetBase).href).then(r => r.ok ? r.json() : null).catch(() => null)
           ]);
-          realCountriesData = countries;
           tokyoRoadsData = roads;
           tokyoBoundariesData = boundaries;
           if (roads) {
@@ -138,6 +157,7 @@
           }
           window.datasetsReady = true;
           invalidateRoadsCache();
+          render(currentTime);
         } catch (e) {
           console.warn('Dataset load error', e);
         }

@@ -57,14 +57,14 @@
 
   const DOSSIER_ENTRIES = {
     global: {
-      year: '2015–2017',
+      year: '2014 - 2017',
       text: SCENE_02_REFLECTION
     },
-    1: { year: '2015–2017', text: SCENE_02_REFLECTION },
-    2: { year: '2015–2017', text: SCENE_02_REFLECTION },
-    3: { year: '2015–2017', text: SCENE_02_REFLECTION },
-    4: { year: '2015–2017', text: SCENE_02_REFLECTION },
-    5: { year: '2015–2017', text: SCENE_02_REFLECTION }
+    1: { year: '2014 - 2017', text: SCENE_02_REFLECTION },
+    2: { year: '2014 - 2017', text: SCENE_02_REFLECTION },
+    3: { year: '2014 - 2017', text: SCENE_02_REFLECTION },
+    4: { year: '2014 - 2017', text: SCENE_02_REFLECTION },
+    5: { year: '2014 - 2017', text: SCENE_02_REFLECTION }
   };
 
   // Canvas size and DPR management
@@ -1365,7 +1365,7 @@
     const data = DOSSIER_ENTRIES[key] || DOSSIER_ENTRIES.global;
     if (!scene02Dossier) return;
 
-    if (dossierYear) dossierYear.textContent = data.year || '2015–2017';
+    if (dossierYear) dossierYear.textContent = data.year || '2014 - 2017';
     if (dossierTitle) dossierTitle.textContent = data.title;
     if (dossierTag) dossierTag.textContent = data.tag;
     if (dossierSubtitle) dossierSubtitle.textContent = data.subtitle;

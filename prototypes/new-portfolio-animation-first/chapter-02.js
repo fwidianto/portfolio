@@ -195,6 +195,11 @@
     currentSceneIndex = targetIndex;
     updatePlaybackUI();
 
+    const navPointer = document.getElementById('ch02-nav-pointer');
+    if (navPointer && targetIndex !== 0) {
+      navPointer.classList.remove('is-visible');
+    }
+
     const carrier = document.querySelector('.ch02-to-ch03-carrier');
     if (carrier && targetIndex !== SCENE_DEFS.length - 1) {
       carrier.classList.remove('is-ready');
@@ -360,32 +365,46 @@
     }
   }
 
-  // Viewport trigger when Chapter 02 enters view
+  // Viewport trigger when user scrolls down to Chapter 02
   function setupViewportTrigger() {
     const chapterSection = document.getElementById('chapter-02');
     if (!chapterSection) return;
+
+    function checkAndTrigger() {
+      if (hasTriggeredEntry) return;
+      const rect = chapterSection.getBoundingClientRect();
+      // Only start the animation when user scrolls down to Chapter 02:
+      // when Chapter 02 enters substantial viewport area and scrollY has advanced
+      const scrolledDown = (window.scrollY > 80 && rect.top <= window.innerHeight * 0.65) || (rect.top <= window.innerHeight * 0.4);
+      if (scrolledDown) {
+        hasTriggeredEntry = true;
+        window.removeEventListener('scroll', checkAndTrigger);
+        if (currentSceneIndex <= 0) {
+          goToScene(0, !isReducedMotion);
+        } else {
+          const curAdapter = getSceneAdapter(currentSceneIndex);
+          if (curAdapter && !isReducedMotion) {
+            curAdapter.play();
+            isPlaying = true;
+            updatePlaybackUI();
+          }
+        }
+      }
+    }
 
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting && !hasTriggeredEntry) {
-            hasTriggeredEntry = true;
-            if (currentSceneIndex <= 0) {
-              goToScene(0, !isReducedMotion);
-            } else {
-              const curAdapter = getSceneAdapter(currentSceneIndex);
-              if (curAdapter && !isReducedMotion) {
-                curAdapter.play();
-                isPlaying = true;
-                updatePlaybackUI();
-              }
-            }
+            checkAndTrigger();
           }
         });
-      }, { threshold: 0.1 });
+      }, { threshold: [0.1, 0.25, 0.4, 0.6] });
 
       observer.observe(chapterSection);
     }
+
+    window.addEventListener('scroll', checkAndTrigger, { passive: true });
   }
 
   // Bootstrap Orchestrator
@@ -396,15 +415,33 @@
 
     // Check if already scrolled to Chapter 02 on boot
     const ch02El = document.getElementById('chapter-02');
-    const isCh02Visible = ch02El ? (ch02El.getBoundingClientRect().top < window.innerHeight && ch02El.getBoundingClientRect().bottom > 0) : false;
+    const isDeepLinked = window.location.hash === '#chapter-02';
+    const isAlreadyScrolled = window.scrollY > 200 && ch02El && (ch02El.getBoundingClientRect().top <= window.innerHeight * 0.5 && ch02El.getBoundingClientRect().bottom > 0);
 
-    if (isCh02Visible) {
+    if (isDeepLinked || isAlreadyScrolled) {
       hasTriggeredEntry = true;
       currentSceneIndex = -1;
       goToScene(0, !isReducedMotion);
     } else {
-      currentSceneIndex = -1;
-      goToScene(0, false);
+      // User is at top of page (Hero section). Do NOT start animation yet.
+      hasTriggeredEntry = false;
+      currentSceneIndex = 0;
+      layers.forEach((layer, i) => {
+        if (i === 0) layer.classList.add('is-active');
+        else layer.classList.remove('is-active');
+      });
+      const s01 = getSceneAdapter(0);
+      if (s01) {
+        if (isReducedMotion) {
+          s01.pause();
+        } else if (typeof s01.resetToInitial === 'function') {
+          s01.resetToInitial();
+        } else {
+          s01.pause();
+        }
+      }
+      isPlaying = false;
+      updatePlaybackUI();
     }
 
     // If loaded with #chapter-02 or if navigating to it, ensure alignment

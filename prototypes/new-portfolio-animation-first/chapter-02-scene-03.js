@@ -692,18 +692,32 @@
 
     if (evidencePanel) {
       evidencePanel.addEventListener('click', (e) => {
-        if (e.target.dataset && e.target.dataset.close === 'true') {
+        if (e.target.closest('[data-close="true"]')) {
           closeEvidencePanel();
         }
       });
+      const closeBtn = evidencePanel.querySelector('.archival-dossier__close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          closeEvidencePanel();
+        });
+      }
     }
 
     if (processPanel) {
       processPanel.addEventListener('click', (e) => {
-        if (e.target.dataset && e.target.dataset.close === 'true') {
+        if (e.target.closest('[data-close="true"]')) {
           closeProcessPanel();
         }
       });
+      const closeBtn = processPanel.querySelector('.archival-dossier__close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          closeProcessPanel();
+        });
+      }
     }
 
     window.addEventListener('keydown', (e) => {

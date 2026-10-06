@@ -372,6 +372,90 @@
   box-shadow: 0 0 8px #fe8a2f, 0 0 16px rgba(254, 138, 47, 0.6);
 }
 
+/* Chapter 02 Navigation Pointer (Scrambled dotted arrow pointing to nav controls) */
+.ch02-nav__pointer {
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 4px 6px;
+  cursor: pointer;
+  color: #ffaa70;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.ch02-nav__pointer.is-visible {
+  opacity: 0.85;
+  pointer-events: auto;
+}
+
+.ch02-nav__pointer:hover {
+  opacity: 1 !important;
+  color: #ffb885;
+  filter: drop-shadow(0 0 12px rgba(255, 170, 112, 0.55));
+  transform: translateY(-50%) translateX(3px);
+}
+
+.ch02-nav__pointer:active {
+  transform: translateY(-50%) translateX(4px) scale(0.97);
+}
+
+.ch02-nav__pointer:focus-visible {
+  outline: 2px solid #ffaa70;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.ch02-nav__pointer-label {
+  font-family: var(--ch02-font-mono, monospace);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244, 239, 232, 0.7);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.ch02-nav__pointer:hover .ch02-nav__pointer-label {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 170, 112, 0.6);
+}
+
+.ch02-nav__pointer-arrow {
+  width: 72px;
+  height: 46px;
+  overflow: visible;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+  display: block;
+}
+
+.ch02-nav__pointer-path {
+  animation: navPointerDashCrawl 12s linear infinite;
+}
+
+@keyframes navPointerDashCrawl {
+  to {
+    stroke-dashoffset: -116;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ch02-nav__pointer-path {
+    animation: none;
+  }
+}
+
 /* Scene Controls */
 .scene-01__controls {
   position: absolute;
@@ -521,6 +605,11 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+}
+
+.archival-dossier__close svg,
+.archival-dossier__close line {
+  pointer-events: none;
 }
 
 .archival-dossier__close:hover,
@@ -681,6 +770,22 @@
   .scene-01__controls {
     right: 12px;
     bottom: 16px;
+  }
+
+  .scene-01__next-sign {
+    right: 20px;
+    top: auto;
+    bottom: 24px;
+    transform: none;
+  }
+
+  .scene-01__next-sign-arrow {
+    width: 64px;
+    height: 42px;
+  }
+
+  .scene-01__next-sign-label {
+    font-size: 0.60rem;
   }
 
   .scene-01__replay-btn span,
@@ -1199,88 +1304,164 @@
   z-index: 2;
 }
 
-/* Process Control / Inspect Beacon */
-.scene-03__control-node {
+/* Scene 03 Unified Information Nodes Cluster (Bottom Right) */
+.scene-03__node-cluster {
   position: absolute;
   right: 48px;
   bottom: 38px;
   z-index: 10;
-}
-
-.scene-03__inspect-btn {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  border-radius: 50%;
-  background: rgba(14, 18, 26, 0.85);
-  border: 1px solid rgba(254, 138, 47, 0.45);
+  gap: 12px;
+  pointer-events: auto;
+}
+
+/* Backward compatibility positioning wrappers if referenced */
+.scene-03__control-node,
+.scene-03__process-node {
+  display: inline-flex;
+  position: static;
+}
+
+/* General Scene 03 Information Button (Unified with Scenes 01, 02, 04, 05) */
+.scene-03__inspect-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 18, 28, 0.76);
+  border: 1px solid rgba(254, 138, 47, 0.38);
+  padding: 6px 14px 6px 10px;
+  border-radius: 20px;
   cursor: pointer;
+  user-select: none;
+  font: inherit;
+  color: inherit;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 12px rgba(254, 138, 47, 0.2), 0 2px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 16px rgba(254, 138, 47, 0.18), 0 4px 14px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  outline: none;
+  pointer-events: auto;
 }
 
-.scene-03__inspect-btn::before {
-  content: '';
-  position: absolute;
-  inset: -8px;
-  border-radius: 50%;
+.scene-03__inspect-btn:hover {
+  background: rgba(254, 138, 47, 0.16);
+  border-color: rgba(254, 138, 47, 0.85);
+  box-shadow: 0 0 24px rgba(254, 138, 47, 0.45), 0 4px 18px rgba(0, 0, 0, 0.6);
+  transform: translateY(-1px) scale(1.04);
 }
 
-.scene-03__inspect-btn:hover,
 .scene-03__inspect-btn:focus-visible {
   border-color: rgba(254, 138, 47, 0.85);
-  background: rgba(254, 138, 47, 0.15);
-  box-shadow: 0 0 20px rgba(254, 138, 47, 0.55), 0 0 32px rgba(254, 138, 47, 0.25);
-  transform: scale(1.15);
+  box-shadow: 0 0 0 2px rgba(254, 138, 47, 0.4);
   outline: none;
 }
 
-/* Process Explainer Node (How It Works - Unified from Chapter 01) */
-.scene-03__process-node {
-  position: absolute;
-  right: 48px;
-  top: 76px;
-  z-index: 10;
+.scene-03__inspect-btn:hover .hero-red-dwarf__info-label {
+  color: #ffffff;
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(254, 138, 47, 0.6), 0 0 18px rgba(254, 138, 47, 0.35);
 }
 
+.scene-03__inspect-btn:hover .hero-red-dwarf__info-core {
+  box-shadow: 0 0 8px #fe8a2f, 0 0 16px rgba(254, 138, 47, 0.6);
+}
+
+/* Technical Specific Information Button (Blue Node Explainer) */
 .scene-03__process-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 20, 32, 0.82);
+  border: 1px solid rgba(56, 189, 248, 0.42);
+  padding: 6px 14px 6px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  user-select: none;
+  font: inherit;
+  color: inherit;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.2), 0 4px 14px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  outline: none;
+  pointer-events: auto;
+}
+
+.scene-03__process-btn:hover {
+  background: rgba(56, 189, 248, 0.16);
+  border-color: rgba(56, 189, 248, 0.85);
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.45), 0 4px 18px rgba(0, 0, 0, 0.6);
+  transform: translateY(-1px) scale(1.04);
+}
+
+.scene-03__process-btn:focus-visible {
+  border-color: rgba(56, 189, 248, 0.85);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4);
+  outline: none;
+}
+
+/* Technical Blue Node Indicator Elements */
+.tech-node__indicator {
   position: relative;
+  width: 14px;
+  height: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border-radius: 50%;
-  background: rgba(14, 18, 26, 0.85);
-  border: 1px solid rgba(254, 138, 47, 0.45);
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 12px rgba(254, 138, 47, 0.2), 0 2px 8px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
-.scene-03__process-btn::before {
-  content: '';
+.tech-node__core {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 6px #38bdf8, 0 0 12px rgba(56, 189, 248, 0.85);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.tech-node__ring {
   position: absolute;
-  inset: -8px;
+  inset: 0;
   border-radius: 50%;
+  border: 1px solid rgba(56, 189, 248, 0.65);
+  animation: techRingPulse 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
 }
 
-.scene-03__process-btn:hover,
-.scene-03__process-btn:focus-visible {
-  border-color: rgba(254, 138, 47, 0.85);
-  background: rgba(254, 138, 47, 0.15);
-  box-shadow: 0 0 20px rgba(254, 138, 47, 0.55), 0 0 32px rgba(254, 138, 47, 0.25);
+@keyframes techRingPulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+  65% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.tech-node__label {
+  font-family: var(--ch02-font-mono, monospace);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: none;
+  color: rgba(224, 242, 254, 0.85);
+  line-height: 1;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.scene-03__process-btn:hover .tech-node__label {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 18px rgba(56, 189, 248, 0.35);
+}
+
+.scene-03__process-btn:hover .tech-node__core {
+  box-shadow: 0 0 8px #38bdf8, 0 0 18px rgba(56, 189, 248, 1);
   transform: scale(1.15);
-  outline: none;
 }
 
 /* Scene 03 Replay Controls */
@@ -1555,14 +1736,10 @@
     height: 1480px;
   }
 
-  .scene-03__control-node {
-    right: 16px;
-    bottom: 16px;
-  }
-
-  .scene-03__process-node {
-    right: 16px;
-    top: 16px;
+  .scene-03__node-cluster {
+    right: 14px;
+    bottom: 14px;
+    gap: 8px;
   }
 
   .scene-03__controls {
@@ -1684,7 +1861,7 @@
   overflow: hidden;
 }
 
-/* Minimal Chapter 02 Scene Navigation Controls */
+/* Minimal Chapter 02 Scene Navigation Controls (Unboxed, single yellowish right arrow) */
 .ch02-nav {
   position: absolute;
   top: 76px;
@@ -1692,57 +1869,74 @@
   z-index: 50;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(8, 11, 18, 0.42);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(244, 239, 232, 0.10);
-  border-radius: 8px;
-  padding: 3px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28);
-  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-}
-
-.ch02-nav:hover {
-  border-color: rgba(244, 239, 232, 0.18);
-  background: rgba(8, 11, 18, 0.60);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.38);
+  gap: 4px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .ch02-nav-btn {
   background: transparent;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  width: 32px;
-  height: 32px;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--ch02-text-secondary, rgba(255, 255, 255, 0.6));
+  color: var(--ch02-signal-glow, #ffaa70);
   cursor: pointer;
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   padding: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ch02-nav-btn svg {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 0 6px rgba(255, 170, 112, 0.45));
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease, color 0.2s ease;
 }
 
 .ch02-nav-btn:hover:not(:disabled) {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.12);
+  color: #ffc28d;
+  background: rgba(255, 170, 112, 0.12);
 }
 
-.ch02-nav-btn:active:not(:disabled) {
-  transform: scale(0.94);
+.ch02-nav-btn--prev:hover:not(:disabled) {
+  transform: translateX(-3px);
+}
+
+.ch02-nav-btn--next:hover:not(:disabled) {
+  transform: translateX(3px);
+}
+
+.ch02-nav-btn:hover:not(:disabled) svg {
+  filter: drop-shadow(0 0 12px rgba(255, 170, 112, 0.85));
+}
+
+.ch02-nav-btn--prev:active:not(:disabled) {
+  transform: translateX(-4px) scale(0.94);
+}
+
+.ch02-nav-btn--next:active:not(:disabled) {
+  transform: translateX(4px) scale(0.94);
 }
 
 .ch02-nav-btn:focus-visible {
   outline: 2px solid var(--ch02-signal-amber, #ff6b35);
-  outline-offset: 1px;
+  outline-offset: 3px;
 }
 
 .ch02-nav-btn:disabled {
-  opacity: 0.2;
+  opacity: 0.15;
   cursor: not-allowed;
   pointer-events: none;
+  transform: none;
 }
 
 /* Single Viewport Fixed Stage (Fills viewport below fixed portfolio header) */
@@ -1863,13 +2057,10 @@
     max-height: none;
     border-radius: 4px;
   }
-  .scene-03__control-node {
-    right: 16px;
-    bottom: 16px;
-  }
-  .scene-03__process-node {
-    right: 16px;
-    top: 16px;
+  .scene-03__node-cluster {
+    right: 14px;
+    bottom: 14px;
+    gap: 8px;
   }
 }
 
@@ -1940,6 +2131,285 @@
   box-shadow: 0 0 8px #fe8a2f, 0 0 16px rgba(254, 138, 47, 0.6);
 }
 
+/* Scene 04 Dossier Dialog Styles (Tokyo Institute of Technology) */
+.scene-04-dossier__card {
+  max-width: 620px;
+  width: 92%;
+  padding: 22px 26px;
+}
+
+.scene-04-dossier__narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.94rem;
+  line-height: 1.58;
+  color: #f4efe8;
+  margin-top: 14px;
+  margin-bottom: 18px;
+}
+
+.scene-04-dossier__narrative p {
+  margin: 0;
+}
+
+.scene-04-dossier__gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.scene-04-dossier__tile {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.scene-04-dossier__img-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 170, 112, 0.22);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 16px rgba(255, 107, 53, 0.05);
+  background: #0b0e14;
+}
+
+.scene-04-dossier__img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.02) brightness(0.98);
+  transition: transform 0.35s ease;
+}
+
+.scene-04-dossier__tile:hover .scene-04-dossier__img-wrap img {
+  transform: scale(1.03);
+}
+
+.scene-04-dossier__caption {
+  font-family: var(--ch02-font-mono);
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--ch02-text-muted);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 640px) {
+  .scene-04-dossier__card {
+    padding: 18px 16px;
+    max-height: calc(100vh - 28px);
+  }
+
+  .scene-04-dossier__narrative {
+    font-size: 0.88rem;
+    line-height: 1.52;
+    gap: 9px;
+    margin-top: 10px;
+    margin-bottom: 14px;
+  }
+
+  .scene-04-dossier__gallery {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .scene-04-dossier__caption {
+    font-size: 0.68rem;
+  }
+}
+
+/* Scene 05 Information Node Trigger */
+.scene-05__info-node {
+  position: absolute;
+  top: 22px;
+  right: 28px;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+  .scene-05__info-node {
+    top: 14px;
+    right: 14px;
+  }
+}
+
+.scene-05__inspect-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 18, 28, 0.76);
+  border: 1px solid rgba(254, 138, 47, 0.38);
+  padding: 6px 14px 6px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  user-select: none;
+  font: inherit;
+  color: inherit;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 16px rgba(254, 138, 47, 0.18), 0 4px 14px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  outline: none;
+  pointer-events: auto;
+}
+
+.scene-05__inspect-btn:hover {
+  background: rgba(254, 138, 47, 0.16);
+  border-color: rgba(254, 138, 47, 0.85);
+  box-shadow: 0 0 24px rgba(254, 138, 47, 0.45), 0 4px 18px rgba(0, 0, 0, 0.6);
+  transform: translateY(-1px) scale(1.04);
+}
+
+.scene-05__inspect-btn:focus-visible {
+  border-color: rgba(254, 138, 47, 0.85);
+  box-shadow: 0 0 0 2px rgba(254, 138, 47, 0.4);
+  outline: none;
+}
+
+.scene-05__inspect-btn:hover .hero-red-dwarf__info-label {
+  color: #ffffff;
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(254, 138, 47, 0.6), 0 0 18px rgba(254, 138, 47, 0.35);
+}
+
+.scene-05__inspect-btn:hover .hero-red-dwarf__info-core {
+  box-shadow: 0 0 8px #fe8a2f, 0 0 16px rgba(254, 138, 47, 0.6);
+}
+
+/* Scene 05 Dossier Dialog Styles */
+.scene-05-dossier__card {
+  max-width: 620px;
+  width: 92%;
+  padding: 22px 26px;
+}
+
+.scene-05-dossier__primary-figure {
+  margin: 0 0 14px 0;
+}
+
+.scene-05-dossier__primary-img-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 170, 112, 0.22);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 107, 53, 0.06);
+  background: #0b0e14;
+}
+
+.scene-05-dossier__primary-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: contrast(1.03) brightness(0.97);
+  transition: transform 0.4s ease;
+}
+
+.scene-05-dossier__primary-figure:hover .scene-05-dossier__primary-img-wrap img {
+  transform: scale(1.02);
+}
+
+.scene-05-dossier__narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.94rem;
+  line-height: 1.58;
+  color: #f4efe8;
+  margin-bottom: 16px;
+}
+
+.scene-05-dossier__narrative p {
+  margin: 0;
+}
+
+.scene-05-dossier__closing {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 14px;
+  background: rgba(255, 170, 112, 0.05);
+  border: 1px solid rgba(255, 170, 112, 0.2);
+  border-radius: 8px;
+}
+
+.scene-05-dossier__grad-thumb {
+  width: 54px;
+  height: 68px;
+  border-radius: 5px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 170, 112, 0.32);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  background: #090c12;
+}
+
+.scene-05-dossier__grad-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  display: block;
+}
+
+.scene-05-dossier__grad-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.scene-05-dossier__grad-badge {
+  font-family: var(--ch02-font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #ffaa70;
+}
+
+.scene-05-dossier__grad-label {
+  font-family: var(--ch02-font-mono);
+  font-size: 0.72rem;
+  color: var(--ch02-text-muted);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 640px) {
+  .scene-05-dossier__card {
+    padding: 18px 16px;
+    max-height: calc(100vh - 28px);
+  }
+
+  .scene-05-dossier__narrative {
+    font-size: 0.88rem;
+    line-height: 1.52;
+    gap: 9px;
+    margin-bottom: 14px;
+  }
+
+  .scene-05-dossier__closing {
+    padding: 7px 11px;
+    gap: 11px;
+  }
+
+  .scene-05-dossier__grad-thumb {
+    width: 48px;
+    height: 60px;
+  }
+
+  .scene-05-dossier__grad-badge {
+    font-size: 0.76rem;
+  }
+
+  .scene-05-dossier__grad-label {
+    font-size: 0.66rem;
+  }
+}
+
 /* Scene 05 Apparatus Rig Framing & SVG Styling (Semi-Transparent Glass Container) */
 .scene-05__stage-wrapper {
   position: relative;
@@ -1984,12 +2454,28 @@
   .ch02-nav {
     top: 66px;
     right: 14px;
-    gap: 4px;
-    padding: 2px;
+    gap: 2px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
   }
   .ch02-nav-btn {
     width: 34px;
     height: 34px;
+  }
+  .ch02-nav__pointer {
+    right: calc(100% + 6px);
+    gap: 5px;
+    padding: 2px 4px;
+  }
+  .ch02-nav__pointer-arrow {
+    width: 58px;
+    height: 38px;
+  }
+  .ch02-nav__pointer-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
   }
   .ch02-stage {
     height: calc(100vh - 56px);

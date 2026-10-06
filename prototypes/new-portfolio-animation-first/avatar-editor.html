@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avatar Framing & Centering Studio — Fauzan Widianto</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #040508;
+      --bg-card: rgba(13, 17, 26, 0.88);
+      --bg-card-hover: rgba(19, 24, 38, 0.95);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-amber: rgba(240, 168, 78, 0.35);
+      --amber-glow: rgba(240, 168, 78, 0.22);
+      --amber-solid: #f0a84e;
+      --amber-bright: #ffba66;
+      --text-main: #f0ede8;
+      --text-muted: rgba(240, 237, 232, 0.65);
+      --text-dim: rgba(240, 237, 232, 0.4);
+      --font-mono: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', monospace;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(20, 26, 42, 0.4) 0%, transparent 60%),
+        radial-gradient(circle at 85% 60%, rgba(55, 24, 14, 0.25) 0%, transparent 65%);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 32px 48px;
+    }
+
+    /* Top Navigation Bar */
+    .studio-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .studio-header__left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .studio-header__tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber-solid);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .studio-header__tag-pulse {
+      width: 6px;
+      height: 6px;
+      background: var(--amber-solid);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--amber-solid);
+      animation: pulse-dot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .studio-header__title {
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+    }
+
+    .studio-header__right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-return {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-return:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Main Grid Layout */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 560px 1fr;
+      gap: 32px;
+      align-items: start;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    @media (max-width: 1120px) {
+      .studio-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Column: Canvas & Controls */
+    .editor-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .canvas-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .canvas-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .canvas-header__title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .canvas-header__hint {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--amber-solid);
+      opacity: 0.85;
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 520px;
+      height: 520px;
+      max-width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #020305;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      user-select: none;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .canvas-container:active {
+      cursor: grabbing;
+    }
+
+    #stage-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Canvas Floating HUD */
+    .canvas-hud {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 12px;
+      background: rgba(4, 5, 8, 0.82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .canvas-hud span b {
+      color: var(--amber-solid);
+      font-weight: 500;
+    }
+
+    /* Overlay Toggles */
+    .overlay-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .toggle-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-label input[type="checkbox"] {
+      accent-color: var(--amber-solid);
+      cursor: pointer;
+    }
+
+    /* Controls Deck Card */
+    .controls-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .controls-section-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    /* Slider Row */
+    .slider-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 60px auto;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .slider-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .slider-input {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      outline: none;
+      transition: background 0.2s;
+    }
+
+    .slider-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--amber-solid);
+      cursor: pointer;
+      box-shadow: 0 0 6px var(--amber-glow);
+      transition: transform 0.1s;
+    }
+
+    .slider-input::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .slider-val {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--amber-bright);
+      text-align: right;
+    }
+
+    .nudge-buttons {
+      display: flex;
+      gap: 4px;
+    }
+
+    .btn-nudge {
+      padding: 4px 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-nudge:hover {
+      background: rgba(240, 168, 78, 0.15);
+      color: var(--amber-solid);
+      border-color: var(--border-amber);
+    }
+
+    /* Presets Strip */
+    .presets-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .btn-preset {
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .btn-preset b {
+      color: var(--text-main);
+      font-size: 12px;
+    }
+
+    .btn-preset:hover {
+      background: rgba(240, 168, 78, 0.08);
+      border-color: var(--border-amber);
+      color: var(--amber-bright);
+    }
+
+    .btn-preset:active {
+      transform: scale(0.98);
+    }
+
+    /* Source Selector */
+    .source-selector {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-source {
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-source.active {
+      background: rgba(240, 168, 78, 0.15);
+      border-color: var(--amber-solid);
+      color: var(--amber-bright);
+    }
+
+    /* Right Column: Previews & Actions */
+    .preview-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Action Deck */
+    .action-deck {
+      background: linear-gradient(135deg, rgba(240, 168, 78, 0.08) 0%, rgba(13, 17, 26, 0.9) 100%);
+      border: 1px solid var(--border-amber);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    .action-deck__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .action-deck__status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--amber-solid);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-save-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 24px;
+      background: linear-gradient(180deg, #f5b766 0%, #e69335 100%);
+      color: #120902;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(240, 168, 78, 0.4);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-save-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(240, 168, 78, 0.6);
+      background: linear-gradient(180deg, #ffc47d 0%, #f0a042 100%);
+    }
+
+    .btn-save-primary:active {
+      transform: translateY(0);
+    }
+
+    .action-secondary-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Toast Notification */
+    .toast {
+      padding: 10px 14px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      border-radius: 6px;
+      color: #86efac;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Simulation Drawer Preview */
+    .preview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .preview-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .preview-card__title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .preview-card__scale-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--amber-solid);
+      background: rgba(240, 168, 78, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(240, 168, 78, 0.2);
+    }
+
+    /* Drawer Mockup Container (1:1 Accurate) */
+    .drawer-mockup {
+      background: #040508;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+
+    .drawer-mockup__esc-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+
+    /* Circular Canvas Frame in Drawer */
+    .drawer-photo-frame {
+      width: 144px;
+      height: 144px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid rgba(240, 168, 78, 0.45);
+      box-shadow: 0 0 24px rgba(240, 168, 78, 0.22);
+      background: #000;
+      position: relative;
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+
+    #drawer-preview-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 50%;
+    }
+
+    .drawer-mockup__name {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #f7f3ee;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .drawer-mockup__divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(240, 168, 78, 0.35);
+      margin-bottom: 18px;
+    }
+
+    .drawer-mockup__narrative {
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: rgba(240, 237, 232, 0.78);
+      text-align: justify;
+      text-justify: inter-word;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: 440px;
+    }
+
+    .drawer-mockup__narrative p {
+      margin: 0;
+    }
+
+    /* Additional Size Comparisons */
+    .comparison-strip {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 20px;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .circle-240-frame {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid rgba(240, 168, 78, 0.4);
+      box-shadow: 0 0 16px rgba(240, 168, 78, 0.15);
+      background: #000;
+    }
+
+    #comp-preview-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .comparison-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Studio Header -->
+  <header class="studio-header">
+    <div class="studio-header__left">
+      <div class="studio-header__tag">
+        <div class="studio-header__tag-pulse"></div>
+        <span>Interactive Alignment Studio // Phase 01 Identity</span>
+      </div>
+      <h1 class="studio-header__title">Profile Avatar Framing &amp; Centering Tool</h1>
+    </div>
+    <div class="studio-header__right">
+      <a href="index.html?open-info=1" class="btn-return" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        <span>View in Portfolio Drawer</span>
+      </a>
+      <a href="index.html" class="btn-return">
+        <span>← Return to Home</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Studio Grid -->
+  <div class="studio-grid">
+
+    <!-- Left Column: Interactive Canvas & Controls -->
+    <div class="editor-column">
+      
+      <!-- Canvas Card -->
+      <div class="canvas-card">
+        <div class="canvas-header">
+          <div class="canvas-header__title">Framing Canvas (Drag to Pan &bull; Wheel to Zoom)</div>
+          <div class="canvas-header__hint">Touch &amp; Mouse Drag Supported</div>
+        </div>
+
+        <div class="canvas-container" id="canvas-container">
+          <canvas id="stage-canvas" width="1040" height="1040"></canvas>
+          <div class="canvas-hud">
+            <span>Center: <b id="hud-pos">X: 390, Y: 245</b></span>
+            <span>Zoom: <b id="hud-zoom">1.00x</b></span>
+            <span>Angle: <b id="hud-rot">0.0°</b></span>
+            <span>Crop Radius: <b id="hud-radius">220px</b></span>
+          </div>
+        </div>
+
+        <!-- Overlays Bar -->
+        <div class="overlay-bar">
+          <label class="toggle-label">
+            <input type="checkbox" id="toggle-crosshairs" checked>
+            <span>Center Crosshairs (Golden)</span>
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" id="toggle-thirds">
+            <span>Rule of Thirds</span>
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" id="toggle-head-oval" checked>
+            <span>Anatomical Oval Guide</span>
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" id="toggle-dark-mask" checked>
+            <span>Outer Vignette Mask</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Controls Deck Card -->
+      <div class="controls-card">
+        
+        <!-- Quick Alignment Presets -->
+        <div class="controls-section-title">Quick Centering Presets</div>
+        <div class="presets-strip">
+          <button type="button" class="btn-preset" id="preset-head">
+            <b>🎯 Cranial Head Center</b>
+            <span>Aligned with skull &amp; hair crown balance</span>
+          </button>
+          <button type="button" class="btn-preset" id="preset-face">
+            <b>👁️ Face &amp; Eye Center</b>
+            <span>Directly centered on facial features</span>
+          </button>
+          <button type="button" class="btn-preset" id="preset-torso">
+            <b>👔 Chest &amp; Head Balanced</b>
+            <span>Generous headroom with batik motif</span>
+          </button>
+          <button type="button" class="btn-preset" id="preset-gaze">
+            <b>📐 Rightward Gaze Balance</b>
+            <span>Lead-room for head orientation</span>
+          </button>
+        </div>
+
+        <!-- Fine Position Sliders -->
+        <div class="controls-section-title">Manual Coordinate Adjustments</div>
+        
+        <!-- Pan X -->
+        <div class="slider-row">
+          <span class="slider-label">Center X</span>
+          <input type="range" class="slider-input" id="range-cx" min="200" max="520" step="1" value="390">
+          <span class="slider-val" id="val-cx">390 px</span>
+          <div class="nudge-buttons">
+            <button type="button" class="btn-nudge" data-nudge-cx="-10">-10</button>
+            <button type="button" class="btn-nudge" data-nudge-cx="-1">-1</button>
+            <button type="button" class="btn-nudge" data-nudge-cx="1">+1</button>
+            <button type="button" class="btn-nudge" data-nudge-cx="10">+10</button>
+          </div>
+        </div>
+
+        <!-- Pan Y -->
+        <div class="slider-row">
+          <span class="slider-label">Center Y</span>
+          <input type="range" class="slider-input" id="range-cy" min="150" max="420" step="1" value="245">
+          <span class="slider-val" id="val-cy">245 px</span>
+          <div class="nudge-buttons">
+            <button type="button" class="btn-nudge" data-nudge-cy="-10">-10</button>
+            <button type="button" class="btn-nudge" data-nudge-cy="-1">-1</button>
+            <button type="button" class="btn-nudge" data-nudge-cy="1">+1</button>
+            <button type="button" class="btn-nudge" data-nudge-cy="10">+10</button>
+          </div>
+        </div>
+
+        <!-- Crop Radius / Zoom -->
+        <div class="slider-row">
+          <span class="slider-label">Crop Size</span>
+          <input type="range" class="slider-input" id="range-radius" min="150" max="320" step="2" value="220">
+          <span class="slider-val" id="val-radius">440 px</span>
+          <div class="nudge-buttons">
+            <button type="button" class="btn-nudge" data-nudge-r="-10">Tighter</button>
+            <button type="button" class="btn-nudge" data-nudge-r="10">Wider</button>
+          </div>
+        </div>
+
+        <!-- Fine Rotation -->
+        <div class="slider-row">
+          <span class="slider-label">Rotation</span>
+          <input type="range" class="slider-input" id="range-rot" min="-15" max="15" step="0.2" value="0">
+          <span class="slider-val" id="val-rot">0.0°</span>
+          <div class="nudge-buttons">
+            <button type="button" class="btn-nudge" id="btn-reset-rot">0° Reset</button>
+          </div>
+        </div>
+
+        <!-- Source Image Selection -->
+        <div class="controls-section-title">Source Image</div>
+        <div class="source-selector">
+          <button type="button" class="btn-source active" id="src-cleaned">Seamless Wood (Cleaned)</button>
+          <button type="button" class="btn-source" id="src-original">Raw Original Photo</button>
+          <label class="btn-source" style="cursor: pointer;">
+            <span>Upload New File...</span>
+            <input type="file" id="file-upload" accept="image/*" style="display: none;">
+          </label>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Right Column: Live Previews & Apply Actions -->
+    <div class="preview-column">
+      
+      <!-- Primary Save / Action Deck -->
+      <div class="action-deck">
+        <div class="action-deck__top">
+          <div class="action-deck__status">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"></circle></svg>
+            <span>LIVE SERVER CONNECTED</span>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">Auto-syncs to portfolio</span>
+        </div>
+
+        <button type="button" class="btn-save-primary" id="btn-save">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+          <span>Save &amp; Apply Directly to Portfolio</span>
+        </button>
+
+        <div class="toast" id="toast-msg">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span id="toast-text">Avatar successfully saved and updated in your portfolio!</span>
+        </div>
+
+        <div class="action-secondary-group">
+          <button type="button" class="btn-secondary" id="btn-download">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Download Crop (JPG)</span>
+          </button>
+          <a href="index.html?open-info=1" target="_blank" class="btn-secondary" id="btn-open-portfolio">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <span>Open Portfolio Drawer</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Exact Hero Drawer Simulation -->
+      <div class="preview-card">
+        <div class="preview-card__header">
+          <div class="preview-card__title">1:1 Hero Drawer Simulation</div>
+          <div class="preview-card__scale-tag">144 &times; 144 px (Live Sync)</div>
+        </div>
+
+        <div class="drawer-mockup">
+          <div class="drawer-mockup__esc-btn">
+            <span style="border: 1px solid rgba(255,255,255,0.2); padding: 1px 3px; border-radius: 2px;">ESC</span>
+            <span>&times;</span>
+          </div>
+
+          <!-- Circular Canvas Frame matching exact portfolio style -->
+          <div class="drawer-photo-frame">
+            <canvas id="drawer-preview-canvas" width="288" height="288"></canvas>
+          </div>
+
+          <div class="drawer-mockup__name">Fauzan Widianto</div>
+          <div class="drawer-mockup__divider"></div>
+
+          <div class="drawer-mockup__narrative">
+            <p>Hello, my name is Fauzan Widianto, and this is my portfolio.</p>
+            <p>I earned my Bachelor of Engineering from Universitas Indonesia in 2019.</p>
+            <p>I have worked for seven years across several industries, with most of my experience focused on analytical operations and system improvement.</p>
+            <p>You can explore more of my story, experience, and work throughout this portfolio, or view my latest CV below.</p>
+            <p>For your curiosity, the star I’m showing is a red dwarf. I like it because it represents resilience and longevity.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detail Scale Comparison -->
+      <div class="comparison-strip">
+        <div class="circle-240-frame">
+          <canvas id="comp-preview-canvas" width="240" height="240"></canvas>
+        </div>
+        <div class="comparison-meta">
+          <b style="color: var(--text-main);">HiDPI Retina Preview (240&times;240)</b>
+          <span>Crisp edge fidelity, wood grain texture, and facial sharpness preview.</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Client-side Interactive Framing Engine Script -->
+  <script>
+    (function () {
+      // Configuration & State
+      const state = {
+        cx: 390,        // center X in image pixel space
+        cy: 245,        // center Y in image pixel space
+        radius: 220,    // crop radius in image pixel space (diameter = radius * 2)
+        rotation: 0.0,  // rotation in degrees
+        showCrosshairs: true,
+        showThirds: false,
+        showHeadOval: true,
+        showDarkMask: true,
+        currentSrc: 'assets/fauzan-profile-cleaned-full.jpg',
+        isDragging: false,
+        dragStartX: 0,
+        dragStartY: 0,
+        dragStartCx: 390,
+        dragStartCy: 245
+      };
+
+      // Elements
+      const stageCanvas = document.getElementById('stage-canvas');
+      const stageCtx = stageCanvas.getContext('2d');
+      const drawerCanvas = document.getElementById('drawer-preview-canvas');
+      const drawerCtx = drawerCanvas.getContext('2d');
+      const compCanvas = document.getElementById('comp-preview-canvas');
+      const compCtx = compCanvas.getContext('2d');
+      const container = document.getElementById('canvas-container');
+
+      // Sliders & Values
+      const rangeCx = document.getElementById('range-cx');
+      const valCx = document.getElementById('val-cx');
+      const rangeCy = document.getElementById('range-cy');
+      const valCy = document.getElementById('val-cy');
+      const rangeRadius = document.getElementById('range-radius');
+      const valRadius = document.getElementById('val-radius');
+      const rangeRot = document.getElementById('range-rot');
+      const valRot = document.getElementById('val-rot');
+
+      // HUD elements
+      const hudPos = document.getElementById('hud-pos');
+      const hudZoom = document.getElementById('hud-zoom');
+      const hudRot = document.getElementById('hud-rot');
+      const hudRadius = document.getElementById('hud-radius');
+
+      // Toggles
+      const toggleCrosshairs = document.getElementById('toggle-crosshairs');
+      const toggleThirds = document.getElementById('toggle-thirds');
+      const toggleHeadOval = document.getElementById('toggle-head-oval');
+      const toggleDarkMask = document.getElementById('toggle-dark-mask');
+
+      // Buttons
+      const btnSave = document.getElementById('btn-save');
+      const btnDownload = document.getElementById('btn-download');
+      const toastMsg = document.getElementById('toast-msg');
+      const toastText = document.getElementById('toast-text');
+
+      // Load Image
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+
+      function loadImage(src) {
+        state.currentSrc = src;
+        img.onload = () => {
+          renderAll();
+        };
+        img.src = src;
+      }
+
+      loadImage(state.currentSrc);
+
+      // Render Stage Canvas
+      function renderStage() {
+        const w = stageCanvas.width;
+        const h = stageCanvas.height;
+        stageCtx.clearRect(0, 0, w, h);
+
+        if (!img.complete || !img.naturalWidth) return;
+
+        // Visual mapping: The circle on stage canvas is centered at (w/2, h/2) with display radius R_stage
+        const centerX = w / 2;
+        const centerY = h / 2;
+        const R_stage = w * 0.38; // fixed display circle radius on canvas (approx 395px)
+        const scale = R_stage / state.radius; // screen pixels per image pixel
+
+        stageCtx.save();
+
+        // 1. Draw Image with translation & rotation
+        stageCtx.translate(centerX, centerY);
+        stageCtx.rotate((state.rotation * Math.PI) / 180);
+        stageCtx.scale(scale, scale);
+        stageCtx.translate(-state.cx, -state.cy);
+
+        stageCtx.imageSmoothingEnabled = true;
+        stageCtx.imageSmoothingQuality = 'high';
+        stageCtx.drawImage(img, 0, 0);
+
+        stageCtx.restore();
+
+        // 2. Draw Outer Vignette Mask (Dark outside circle)
+        if (state.showDarkMask) {
+          stageCtx.save();
+          stageCtx.fillStyle = 'rgba(4, 5, 8, 0.78)';
+          stageCtx.beginPath();
+          stageCtx.rect(0, 0, w, h);
+          stageCtx.arc(centerX, centerY, R_stage, 0, Math.PI * 2, true);
+          stageCtx.closePath();
+          stageCtx.fill();
+          stageCtx.restore();
+        }
+
+        // 3. Draw Circular Border Ring (Portfolio Amber Tone)
+        stageCtx.save();
+        stageCtx.beginPath();
+        stageCtx.arc(centerX, centerY, R_stage, 0, Math.PI * 2);
+        stageCtx.strokeStyle = 'rgba(240, 168, 78, 0.75)';
+        stageCtx.lineWidth = 3;
+        stageCtx.stroke();
+        stageCtx.restore();
+
+        // 4. Overlays: Rule of Thirds
+        if (state.showThirds) {
+          stageCtx.save();
+          stageCtx.beginPath();
+          stageCtx.arc(centerX, centerY, R_stage, 0, Math.PI * 2);
+          stageCtx.clip();
+
+          stageCtx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+          stageCtx.lineWidth = 1;
+          stageCtx.setLineDash([4, 4]);
+
+          const d = R_stage * 2;
+          const leftX = centerX - R_stage + d / 3;
+          const rightX = centerX - R_stage + (2 * d) / 3;
+          const topY = centerY - R_stage + d / 3;
+          const bottomY = centerY - R_stage + (2 * d) / 3;
+
+          stageCtx.beginPath();
+          stageCtx.moveTo(leftX, centerY - R_stage);
+          stageCtx.lineTo(leftX, centerY + R_stage);
+          stageCtx.moveTo(rightX, centerY - R_stage);
+          stageCtx.lineTo(rightX, centerY + R_stage);
+          stageCtx.moveTo(centerX - R_stage, topY);
+          stageCtx.lineTo(centerX + R_stage, topY);
+          stageCtx.moveTo(centerX - R_stage, bottomY);
+          stageCtx.lineTo(centerX + R_stage, bottomY);
+          stageCtx.stroke();
+
+          stageCtx.restore();
+        }
+
+        // 5. Overlays: Anatomical Head Oval Reference
+        if (state.showHeadOval) {
+          stageCtx.save();
+          stageCtx.beginPath();
+          stageCtx.arc(centerX, centerY, R_stage, 0, Math.PI * 2);
+          stageCtx.clip();
+
+          stageCtx.strokeStyle = 'rgba(240, 168, 78, 0.35)';
+          stageCtx.lineWidth = 1.5;
+          stageCtx.setLineDash([6, 6]);
+
+          // Reference oval for balanced portrait head position
+          stageCtx.beginPath();
+          stageCtx.ellipse(centerX, centerY - R_stage * 0.05, R_stage * 0.45, R_stage * 0.62, 0, 0, Math.PI * 2);
+          stageCtx.stroke();
+
+          // Eye level indicator line
+          stageCtx.beginPath();
+          stageCtx.moveTo(centerX - R_stage * 0.35, centerY - R_stage * 0.08);
+          stageCtx.lineTo(centerX + R_stage * 0.35, centerY - R_stage * 0.08);
+          stageCtx.strokeStyle = 'rgba(240, 168, 78, 0.25)';
+          stageCtx.stroke();
+
+          stageCtx.restore();
+        }
+
+        // 6. Overlays: Golden Center Crosshairs
+        if (state.showCrosshairs) {
+          stageCtx.save();
+          stageCtx.beginPath();
+          stageCtx.arc(centerX, centerY, R_stage, 0, Math.PI * 2);
+          stageCtx.clip();
+
+          stageCtx.strokeStyle = 'rgba(240, 168, 78, 0.85)';
+          stageCtx.lineWidth = 1.2;
+          stageCtx.setLineDash([5, 5]);
+
+          // Horizontal centerline
+          stageCtx.beginPath();
+          stageCtx.moveTo(centerX - R_stage, centerY);
+          stageCtx.lineTo(centerX + R_stage, centerY);
+          stageCtx.stroke();
+
+          // Vertical centerline
+          stageCtx.beginPath();
+          stageCtx.moveTo(centerX, centerY - R_stage);
+          stageCtx.lineTo(centerX, centerY + R_stage);
+          stageCtx.stroke();
+
+          // Center target dot
+          stageCtx.setLineDash([]);
+          stageCtx.beginPath();
+          stageCtx.arc(centerX, centerY, 4, 0, Math.PI * 2);
+          stageCtx.fillStyle = '#ffba66';
+          stageCtx.fill();
+          stageCtx.strokeStyle = '#040508';
+          stageCtx.lineWidth = 1.5;
+          stageCtx.stroke();
+
+          stageCtx.restore();
+        }
+      }
+
+      // Render Clean Cropped Avatar into target canvas
+      function renderCropToCanvas(targetCanvas, targetCtx) {
+        const w = targetCanvas.width;
+        const h = targetCanvas.height;
+        targetCtx.clearRect(0, 0, w, h);
+
+        if (!img.complete || !img.naturalWidth) return;
+
+        targetCtx.save();
+
+        // Clip to circle
+        targetCtx.beginPath();
+        targetCtx.arc(w / 2, h / 2, w / 2, 0, Math.PI * 2);
+        targetCtx.clip();
+
+        // Translate & Draw
+        const scale = (w / 2) / state.radius;
+        targetCtx.translate(w / 2, h / 2);
+        targetCtx.rotate((state.rotation * Math.PI) / 180);
+        targetCtx.scale(scale, scale);
+        targetCtx.translate(-state.cx, -state.cy);
+
+        targetCtx.imageSmoothingEnabled = true;
+        targetCtx.imageSmoothingQuality = 'high';
+        targetCtx.drawImage(img, 0, 0);
+
+        targetCtx.restore();
+      }
+
+      // Render All Canvases & Update HUD/Inputs
+      function renderAll() {
+        renderStage();
+        renderCropToCanvas(drawerCanvas, drawerCtx);
+        renderCropToCanvas(compCanvas, compCtx);
+
+        // Update Slider UI
+        rangeCx.value = state.cx;
+        valCx.textContent = `${Math.round(state.cx)} px`;
+        rangeCy.value = state.cy;
+        valCy.textContent = `${Math.round(state.cy)} px`;
+        rangeRadius.value = state.radius;
+        valRadius.textContent = `${Math.round(state.radius * 2)} px`;
+        rangeRot.value = state.rotation;
+        valRot.textContent = `${state.rotation.toFixed(1)}°`;
+
+        // Update HUD
+        hudPos.innerHTML = `X: <b>${Math.round(state.cx)}</b>, Y: <b>${Math.round(state.cy)}</b>`;
+        hudZoom.innerHTML = `<b>${(220 / state.radius).toFixed(2)}x</b>`;
+        hudRot.innerHTML = `<b>${state.rotation.toFixed(1)}°</b>`;
+        hudRadius.innerHTML = `<b>${Math.round(state.radius * 2)}px</b>`;
+      }
+
+      // Mouse & Touch Drag Interaction
+      container.addEventListener('pointerdown', (e) => {
+        state.isDragging = true;
+        state.dragStartX = e.clientX;
+        state.dragStartY = e.clientY;
+        state.dragStartCx = state.cx;
+        state.dragStartCy = state.cy;
+        container.setPointerCapture(e.pointerId);
+      });
+
+      container.addEventListener('pointermove', (e) => {
+        if (!state.isDragging) return;
+        const dx = e.clientX - state.dragStartX;
+        const dy = e.clientY - state.dragStartY;
+
+        // Ratio of image pixels to container pixels
+        const rect = container.getBoundingClientRect();
+        const displayCircleR = rect.width * 0.38;
+        const imgPxPerScreenPx = state.radius / displayCircleR;
+
+        // Invert dx/dy so dragging moves the image under the lens
+        const rotRad = (state.rotation * Math.PI) / 180;
+        const rotDx = dx * Math.cos(-rotRad) - dy * Math.sin(-rotRad);
+        const rotDy = dx * Math.sin(-rotRad) + dy * Math.cos(-rotRad);
+
+        state.cx = Math.max(100, Math.min(620, state.dragStartCx - rotDx * imgPxPerScreenPx));
+        state.cy = Math.max(100, Math.min(620, state.dragStartCy - rotDy * imgPxPerScreenPx));
+
+        renderAll();
+      });
+
+      container.addEventListener('pointerup', (e) => {
+        state.isDragging = false;
+        try { container.releasePointerCapture(e.pointerId); } catch (_) {}
+      });
+
+      container.addEventListener('pointercancel', (e) => {
+        state.isDragging = false;
+      });
+
+      // Mouse Wheel Zoom
+      container.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY;
+        const zoomFactor = delta > 0 ? 1.05 : 0.95;
+        state.radius = Math.max(120, Math.min(360, state.radius * zoomFactor));
+        renderAll();
+      }, { passive: false });
+
+      // Slider Listeners
+      rangeCx.addEventListener('input', (e) => {
+        state.cx = parseFloat(e.target.value);
+        renderAll();
+      });
+
+      rangeCy.addEventListener('input', (e) => {
+        state.cy = parseFloat(e.target.value);
+        renderAll();
+      });
+
+      rangeRadius.addEventListener('input', (e) => {
+        state.radius = parseFloat(e.target.value);
+        renderAll();
+      });
+
+      rangeRot.addEventListener('input', (e) => {
+        state.rotation = parseFloat(e.target.value);
+        renderAll();
+      });
+
+      // Nudge Buttons
+      document.querySelectorAll('[data-nudge-cx]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.cx = Math.max(100, Math.min(620, state.cx + parseFloat(btn.dataset.nudgeCx)));
+          renderAll();
+        });
+      });
+
+      document.querySelectorAll('[data-nudge-cy]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.cy = Math.max(100, Math.min(620, state.cy + parseFloat(btn.dataset.nudgeCy)));
+          renderAll();
+        });
+      });
+
+      document.querySelectorAll('[data-nudge-r]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.radius = Math.max(120, Math.min(360, state.radius + parseFloat(btn.dataset.nudgeR)));
+          renderAll();
+        });
+      });
+
+      document.getElementById('btn-reset-rot').addEventListener('click', () => {
+        state.rotation = 0.0;
+        renderAll();
+      });
+
+      // Overlay Toggles
+      toggleCrosshairs.addEventListener('change', (e) => {
+        state.showCrosshairs = e.target.checked;
+        renderStage();
+      });
+
+      toggleThirds.addEventListener('change', (e) => {
+        state.showThirds = e.target.checked;
+        renderStage();
+      });
+
+      toggleHeadOval.addEventListener('change', (e) => {
+        state.showHeadOval = e.target.checked;
+        renderStage();
+      });
+
+      toggleDarkMask.addEventListener('change', (e) => {
+        state.showDarkMask = e.target.checked;
+        renderStage();
+      });
+
+      // Presets
+      document.getElementById('preset-head').addEventListener('click', () => {
+        state.cx = 390;
+        state.cy = 245;
+        state.radius = 220;
+        state.rotation = 0.0;
+        renderAll();
+      });
+
+      document.getElementById('preset-face').addEventListener('click', () => {
+        state.cx = 405;
+        state.cy = 275;
+        state.radius = 205;
+        state.rotation = 0.0;
+        renderAll();
+      });
+
+      document.getElementById('preset-torso').addEventListener('click', () => {
+        state.cx = 395;
+        state.cy = 295;
+        state.radius = 245;
+        state.rotation = 0.0;
+        renderAll();
+      });
+
+      document.getElementById('preset-gaze').addEventListener('click', () => {
+        state.cx = 375;
+        state.cy = 245;
+        state.radius = 220;
+        state.rotation = 0.0;
+        renderAll();
+      });
+
+      // Source Switcher
+      const srcCleaned = document.getElementById('src-cleaned');
+      const srcOriginal = document.getElementById('src-original');
+      const fileUpload = document.getElementById('file-upload');
+
+      srcCleaned.addEventListener('click', () => {
+        srcCleaned.classList.add('active');
+        srcOriginal.classList.remove('active');
+        loadImage('assets/fauzan-profile-cleaned-full.jpg');
+      });
+
+      srcOriginal.addEventListener('click', () => {
+        srcOriginal.classList.add('active');
+        srcCleaned.classList.remove('active');
+        loadImage('assets/fauzan-profile-original.jpg');
+      });
+
+      fileUpload.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          srcCleaned.classList.remove('active');
+          srcOriginal.classList.remove('active');
+          loadImage(evt.target.result);
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // Generate Final Square/Circular Image for Export
+      function generateFinalImage(outputSize = 440) {
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = outputSize;
+        offCanvas.height = outputSize;
+        const ctx = offCanvas.getContext('2d');
+
+        // Draw cropped image into offCanvas
+        const scale = (outputSize / 2) / state.radius;
+        ctx.translate(outputSize / 2, outputSize / 2);
+        ctx.rotate((state.rotation * Math.PI) / 180);
+        ctx.scale(scale, scale);
+        ctx.translate(-state.cx, -state.cy);
+
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0);
+
+        return offCanvas.toDataURL('image/jpeg', 0.96);
+      }
+
+      // Show Toast Notification
+      function showToast(text, isError = false) {
+        toastText.textContent = text;
+        toastMsg.style.borderColor = isError ? 'rgba(239, 68, 68, 0.5)' : 'rgba(34, 197, 94, 0.4)';
+        toastMsg.style.background = isError ? 'rgba(239, 68, 68, 0.15)' : 'rgba(34, 197, 94, 0.15)';
+        toastMsg.style.color = isError ? '#fca5a5' : '#86efac';
+        toastMsg.classList.add('show');
+        setTimeout(() => toastMsg.classList.remove('show'), 5000);
+      }
+
+      // Save Directly to Portfolio via Server API
+      btnSave.addEventListener('click', async () => {
+        btnSave.disabled = true;
+        btnSave.style.opacity = '0.7';
+        btnSave.querySelector('span').textContent = 'Saving to Portfolio...';
+
+        try {
+          const dataUrl = generateFinalImage(440);
+          const res = await fetch('/api/save-avatar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ imageBase64: dataUrl })
+          });
+
+          const result = await res.json();
+          if (result.ok) {
+            showToast('✓ Successfully saved! Profile avatar updated on disk.');
+          } else {
+            showToast(`Error: ${result.error || 'Failed to save'}`, true);
+          }
+        } catch (err) {
+          console.error(err);
+          showToast(`Server communication error: ${err.message}`, true);
+        } finally {
+          btnSave.disabled = false;
+          btnSave.style.opacity = '1';
+          btnSave.querySelector('span').textContent = 'Save & Apply Directly to Portfolio';
+        }
+      });
+
+      // Download Cropped JPEG
+      btnDownload.addEventListener('click', () => {
+        const dataUrl = generateFinalImage(440);
+        const a = document.createElement('a');
+        a.href = dataUrl;
+        a.download = 'fauzan-profile.jpg';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Downloaded fauzan-profile.jpg to your device.');
+      });
+
+      // Keyboard Arrow Key Navigation
+      window.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT') return;
+        const step = e.shiftKey ? 10 : 1;
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          state.cx = Math.max(100, state.cx - step);
+          renderAll();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          state.cx = Math.min(620, state.cx + step);
+          renderAll();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          state.cy = Math.max(100, state.cy - step);
+          renderAll();
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          state.cy = Math.min(620, state.cy + step);
+          renderAll();
+        } else if (e.key === '+' || e.key === '=') {
+          e.preventDefault();
+          state.radius = Math.max(120, state.radius - 5);
+          renderAll();
+        } else if (e.key === '-' || e.key === '_') {
+          e.preventDefault();
+          state.radius = Math.min(360, state.radius + 5);
+          renderAll();
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>

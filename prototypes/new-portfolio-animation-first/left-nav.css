@@ -617,6 +617,11 @@ body.has-left-nav .portfolio-header {
   transition: padding-left var(--nav-transition);
 }
 
+/* When left nav is hidden, provide safe left clearance so discrete edge trigger does not collide with FW logo */
+body.has-left-nav.nav-is-hidden .portfolio-header {
+  padding-left: clamp(38px, 6vw, 64px);
+}
+
 /* --------------------------------------------------------------------------
    RESPONSIVE DESIGN (MOBILE & TABLET)
    -------------------------------------------------------------------------- */

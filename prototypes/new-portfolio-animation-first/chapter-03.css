@@ -1,0 +1,253 @@
+/* ==========================================================================
+   CHAPTER 03: PROFESSIONAL SYSTEMS — SCENE 01 (TECHNICAL ASSEMBLY)
+   Theme: Dark Astronomical / Technical Editorial
+   Story: Entering Cost Control -> Upgrade to Service Profitability & Business Control
+   Frozen Visual & Motion Authority: ch03-scene01-technical-assembly
+   ========================================================================== */
+
+:root {
+  --ch03-bg: #040508;
+  --ch03-border: #1e293b;
+  --ch03-amber: #f59e0b;
+  --ch03-amber-bright: #fbbf24;
+  --ch03-text: #f8fafc;
+  --ch03-text-muted: #94a3b8;
+  --ch03-text-dim: #64748b;
+}
+
+/* Base Chapter 03 Section Surface - Full-Screen Chapter Layer */
+.chapter-03 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--hero-bg, #040508);
+  background-image: var(--ch02-bg-vignette);
+  color: var(--ch03-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Continuity Carrier Vector from Chapter 02 to Chapter 03 */
+.ch02-to-ch03-carrier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 60px auto 32px;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 20;
+}
+
+.ch02-to-ch03-carrier__line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.8), rgba(245, 158, 11, 0.2));
+  transition: opacity 0.2s ease;
+}
+
+.ch02-to-ch03-carrier:hover .ch02-to-ch03-carrier__line,
+.ch02-to-ch03-carrier.is-ready .ch02-to-ch03-carrier__line {
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.9), rgba(56, 189, 248, 0.25));
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+}
+
+/* Full-Screen Chapter Stage Layer occupying full section width and height */
+.ch03-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+/* Chapter 03 SVG expanding to page, preserving composition */
+.ch03-svg,
+#svg-ch03 {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  background: transparent;
+}
+
+/* Subtle Icon-Only Replay Button for Chapter 03 */
+.ch03-replay-btn {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  width: 32px;
+  height: 32px;
+  background: rgba(9, 14, 24, 0.4);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0;
+  border-radius: 50%;
+  color: var(--ch03-text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: all 0.25s ease;
+  z-index: 20;
+}
+
+.ch03-replay-btn:hover {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: var(--ch03-amber);
+  color: var(--ch03-amber-bright);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Accessible Screen Reader Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Stars Animation */
+.ch03-stage .star,
+.ch03-svg .star {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.ch03-stage .star--twinkle-1,
+.ch03-svg .star--twinkle-1 {
+  animation: ch03-star-blink-1 2.8s ease-in-out infinite;
+}
+
+.ch03-stage .star--twinkle-2,
+.ch03-svg .star--twinkle-2 {
+  animation: ch03-star-blink-2 4.1s ease-in-out infinite 0.75s;
+}
+
+.ch03-stage .star--twinkle-3,
+.ch03-svg .star--twinkle-3 {
+  animation: ch03-star-blink-3 3.4s ease-in-out infinite 1.4s;
+}
+
+.ch03-stage .star--twinkle-4,
+.ch03-svg .star--twinkle-4 {
+  animation: ch03-star-blink-4 5.2s ease-in-out infinite 2.2s;
+}
+
+.ch03-stage .star--beacon,
+.ch03-svg .star--beacon {
+  animation: ch03-star-beacon-pulse 4.6s ease-in-out infinite;
+}
+
+@keyframes ch03-star-blink-1 {
+  0%, 100% { opacity: 0.20; transform: scale(0.75); }
+  35% { opacity: 0.95; transform: scale(1.18); }
+  52% { opacity: 0.32; transform: scale(0.85); }
+  72% { opacity: 0.88; transform: scale(1.06); }
+}
+
+@keyframes ch03-star-blink-2 {
+  0%, 100% { opacity: 0.78; transform: scale(1.02); }
+  28% { opacity: 0.16; transform: scale(0.72); }
+  62% { opacity: 1.0; transform: scale(1.22); }
+  82% { opacity: 0.38; transform: scale(0.85); }
+}
+
+@keyframes ch03-star-blink-3 {
+  0%, 100% { opacity: 0.22; transform: scale(0.8); }
+  45% { opacity: 0.92; transform: scale(1.12); }
+  60% { opacity: 0.28; transform: scale(0.82); }
+  85% { opacity: 0.82; transform: scale(1.04); }
+}
+
+@keyframes ch03-star-blink-4 {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  22% { opacity: 0.96; transform: scale(1.16); }
+  42% { opacity: 0.22; transform: scale(0.78); }
+  68% { opacity: 0.88; transform: scale(1.08); }
+  84% { opacity: 0.18; transform: scale(0.72); }
+}
+
+@keyframes ch03-star-beacon-pulse {
+  0%, 100% { opacity: 0.42; transform: scale(0.88); }
+  50% { opacity: 1.0; transform: scale(1.18); }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .ch03-stage .star,
+  .ch03-stage .star--beacon,
+  .ch03-svg .star,
+  .ch03-svg .star--beacon {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   REFERENCE-ALIGNED VECTOR STYLING
+   ========================================================================== */
+
+#svg-ch03 text {
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Circular Disc Badges */
+circle[id^="disc-"] {
+  transition: stroke 0.25s ease, filter 0.25s ease;
+  cursor: default;
+}
+
+circle[id^="disc-"]:hover {
+  stroke: #fbbf24;
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));
+}
+
+/* Operational Outputs Scroll Rail & Chevrons */
+#output-scroll-rail path {
+  transition: stroke 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+#output-scroll-rail path:hover {
+  stroke: #fbbf24;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.7));
+}
+
+#reel-rail-thumb {
+  transition: cy 0.32s cubic-bezier(0.16, 1, 0.3, 1), fill 0.2s ease;
+}
+
+#output-reel-items text {
+  transition: fill 0.25s ease;
+}
+
+#output-reel-items g:hover text {
+  fill: #ffffff;
+}
+
+#output-reel-items g:hover circle[id^="disc-"] {
+  stroke: #fbbf24;
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));
+}
+
