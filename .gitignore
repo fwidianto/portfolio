@@ -9,7 +9,7 @@ venv/
 .venv/
 ENV/
 
-# IDE
+# IDE & Editors
 .vscode/
 .idea/
 *.swp
@@ -19,19 +19,45 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Logs
+# Logs & Debug Outputs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Environment
 .env
 .env.local
 
-# Build outputs
+# Build outputs & Dependencies
 node_modules/
 dist/
 build/
+.opencode/node_modules/
 
 # Generated data
 database/
 output/
 *.db
+
+# Browser Automation, Temporary Profiles & Test Reports
+.playwright-mcp/
+playwright-report/
+test-results/
+blob-report/
+chrome-dbg-*/
+chrome-live-qa-*/
+
+# Generated visual review artifacts & video captures
+hero-animation.mp4
+prototypes/editorial-systems/*.mp4
+
+# Local Agent & Tool Configurations
+.agents/
+.od-frames/
+.od-skills/
+
+# Temporary Scratch Experiments & QA Artifacts
+# Preserves tracked Chapter 05 verification scripts
+scratch/*
+!scratch/verify_ch05_*.mjs

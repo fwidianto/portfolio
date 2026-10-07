@@ -13,7 +13,6 @@
   const makaraArtifact = document.getElementById('makara-artifact');
   const archivalMarkerBtn = document.getElementById('archival-marker-btn');
   const archivalDossier = document.getElementById('archival-dossier');
-  const nextSignBtn = document.getElementById('ch02-nav-pointer') || document.getElementById('scene-01-next-sign');
 
   if (!canvas || !stageWrapper) return;
 
@@ -426,9 +425,6 @@
     if (currentTime >= 6.2 && makaraArtifact) {
       makaraArtifact.classList.add('is-settled');
     }
-    if (currentTime >= 7.2 && nextSignBtn) {
-      nextSignBtn.classList.add('is-visible');
-    }
 
     // Clear frame
     ctx.clearRect(0, 0, width, height);
@@ -489,9 +485,6 @@
     if (makaraArtifact) {
       makaraArtifact.classList.add('is-visible', 'is-settled');
     }
-    if (nextSignBtn) {
-      nextSignBtn.classList.add('is-visible');
-    }
   }
 
   // Reset to initial clean resting state before scroll trigger
@@ -503,9 +496,6 @@
     hasTriggered = false;
     if (makaraArtifact) {
       makaraArtifact.classList.remove('is-visible', 'is-settled');
-    }
-    if (nextSignBtn) {
-      nextSignBtn.classList.remove('is-visible');
     }
     closeDossier();
     setupSimulation();
@@ -543,9 +533,6 @@
     isPlaying = true;
     if (makaraArtifact) {
       makaraArtifact.classList.remove('is-visible', 'is-settled');
-    }
-    if (nextSignBtn) {
-      nextSignBtn.classList.remove('is-visible');
     }
     closeDossier();
     setupSimulation();
@@ -624,15 +611,6 @@
         closeDossier();
       }
     });
-
-    if (nextSignBtn) {
-      nextSignBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (window.Chapter02Controller) {
-          window.Chapter02Controller.goToScene(1, true);
-        }
-      });
-    }
 
     // Initial resting state; animation starts only when user scrolls down to Chapter 02
     if (isReducedMotion) {

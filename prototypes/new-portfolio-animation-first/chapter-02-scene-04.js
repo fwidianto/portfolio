@@ -35,17 +35,23 @@
       let lastTimestamp = null;
       let currentMode = 'continuous'; // 'continuous' | 'bike' | 'train'
 
-      // Reviewer UI Elements
-      const timeSlider = document.getElementById('time-slider');
-      const timeDisplay = document.getElementById('time-display');
-      const beatLabel = document.getElementById('beat-label');
-      const btnPlayPause = document.getElementById('btn-play-pause');
-      const iconPlay = document.getElementById('icon-play');
-      const iconPause = document.getElementById('icon-pause');
-      const btnRestart = document.getElementById('btn-restart');
-      const beatBtns = document.querySelectorAll('.beat-btn');
-      const speedBtns = document.querySelectorAll('.speed-btn');
-      const modeBtns = document.querySelectorAll('.mode-btn');
+      // Reviewer UI Elements (Isolated behind explicit harness detection)
+      const hasHarness = !!(document.getElementById('time-slider') || document.getElementById('btn-play-pause') || document.querySelector('.beat-btn'));
+      let timeSlider = null, timeDisplay = null, beatLabel = null, btnPlayPause = null;
+      let iconPlay = null, iconPause = null, btnRestart = null, beatBtns = null, speedBtns = null, modeBtns = null;
+
+      if (hasHarness) {
+        timeSlider = document.getElementById('time-slider');
+        timeDisplay = document.getElementById('time-display');
+        beatLabel = document.getElementById('beat-label');
+        btnPlayPause = document.getElementById('btn-play-pause');
+        iconPlay = document.getElementById('icon-play');
+        iconPause = document.getElementById('icon-pause');
+        btnRestart = document.getElementById('btn-restart');
+        beatBtns = document.querySelectorAll('.beat-btn');
+        speedBtns = document.querySelectorAll('.speed-btn');
+        modeBtns = document.querySelectorAll('.mode-btn');
+      }
 
       // Frozen Geographic & Anchor Constants
       const DEG2RAD = Math.PI / 180;
@@ -112,23 +118,10 @@
       tokyoTechLogoImg.src = new URL('tokyo-tech-logo.png', assetBase).href;
 
       async function loadDatasets() {
-        // 1. Immediately adopt preloaded global countries if ready
+        // Adopt preloaded global countries from chapter-02-real-earth-countries.js
         if (!realCountriesData && typeof window !== 'undefined' && window.REAL_EARTH_COUNTRIES) {
           realCountriesData = window.REAL_EARTH_COUNTRIES;
           render(currentTime);
-        }
-
-        // 2. Fetch countries asynchronously and independently so flight background is never blocked
-        if (!realCountriesData) {
-          fetch(new URL('real-earth-countries.json', assetBase).href)
-            .then(r => r.ok ? r.json() : null)
-            .then(data => {
-              if (data) {
-                realCountriesData = data;
-                render(currentTime);
-              }
-            })
-            .catch(e => console.warn('Countries data fetch error', e));
         }
 
         // 3. Fetch Tokyo commute roads, boundaries, and transit routes safely
@@ -191,98 +184,101 @@
       window.addEventListener('resize', resize);
       resize();
 
-      // UI Controls Event Listeners
+      // UI Controls Event Listeners (Reviewer Harness)
       function updatePlayPauseUI() {
+        if (!hasHarness) return;
         if (isPlaying) {
-          iconPlay.style.display = 'none';
-          iconPause.style.display = 'block';
+          if (iconPlay) iconPlay.style.display = 'none';
+          if (iconPause) iconPause.style.display = 'block';
         } else {
-          iconPlay.style.display = 'block';
-          iconPause.style.display = 'none';
+          if (iconPlay) iconPlay.style.display = 'block';
+          if (iconPause) iconPause.style.display = 'none';
         }
       }
 
-      if (btnPlayPause) {
-        btnPlayPause.addEventListener('click', () => {
-          isPlaying = !isPlaying;
-          updatePlayPauseUI();
-          if (isPlaying) lastTimestamp = null;
-        });
-      }
+      if (hasHarness) {
+        if (btnPlayPause) {
+          btnPlayPause.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            updatePlayPauseUI();
+            if (isPlaying) lastTimestamp = null;
+          });
+        }
 
-      if (btnRestart) {
-        btnRestart.addEventListener('click', () => {
-          if (currentMode === 'return') currentTime = T_COMMUTE_END;
-          else if (currentMode === 'commute') currentTime = T_BIKE_START;
-          else if (currentMode === 'bike') currentTime = T_BIKE_START;
-          else if (currentMode === 'train') currentTime = T_TRAIN_START;
-          else currentTime = 0.0;
-          isPlaying = true;
-          updatePlayPauseUI();
-          lastTimestamp = null;
-        });
-      }
+        if (btnRestart) {
+          btnRestart.addEventListener('click', () => {
+            if (currentMode === 'return') currentTime = T_COMMUTE_END;
+            else if (currentMode === 'commute') currentTime = T_BIKE_START;
+            else if (currentMode === 'bike') currentTime = T_BIKE_START;
+            else if (currentMode === 'train') currentTime = T_TRAIN_START;
+            else currentTime = 0.0;
+            isPlaying = true;
+            updatePlayPauseUI();
+            lastTimestamp = null;
+          });
+        }
 
-      if (timeSlider) {
-        timeSlider.addEventListener('input', (e) => {
-          currentTime = parseFloat(e.target.value);
-          isPlaying = false;
-          updatePlayPauseUI();
-        });
-      }
-
-      if (beatBtns && beatBtns.length) {
-        beatBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            currentTime = parseFloat(btn.dataset.t);
+        if (timeSlider) {
+          timeSlider.addEventListener('input', (e) => {
+            currentTime = parseFloat(e.target.value);
             isPlaying = false;
             updatePlayPauseUI();
           });
-        });
-      }
+        }
 
-      if (speedBtns && speedBtns.length) {
-        speedBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            speedBtns.forEach(b => b.classList.remove('is-active'));
-            btn.classList.add('is-active');
-            playSpeed = parseFloat(btn.dataset.speed);
+        if (beatBtns && beatBtns.length) {
+          beatBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              currentTime = parseFloat(btn.dataset.t);
+              isPlaying = false;
+              updatePlayPauseUI();
+            });
           });
-        });
-      }
+        }
 
-      if (modeBtns && modeBtns.length) {
-        modeBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            modeBtns.forEach(b => b.classList.remove('is-active'));
-            btn.classList.add('is-active');
-            currentMode = btn.dataset.mode;
-            if (timeSlider) {
-              if (currentMode === 'bike') {
-                currentTime = T_BIKE_START;
-                timeSlider.min = T_BIKE_START;
-                timeSlider.max = T_BIKE_END;
-              } else if (currentMode === 'commute') {
-                currentTime = T_BIKE_START;
-                timeSlider.min = T_BIKE_START;
-                timeSlider.max = T_COMMUTE_END;
-              } else if (currentMode === 'return') {
-                currentTime = T_COMMUTE_END;
-                timeSlider.min = T_COMMUTE_END;
-                timeSlider.max = TOTAL_DURATION;
-              } else if (currentMode === 'flight') {
-                currentTime = 0.0;
-                timeSlider.min = 0.0;
-                timeSlider.max = T_FLIGHT_END;
-              } else {
-                timeSlider.min = 0.0;
-                timeSlider.max = TOTAL_DURATION;
+        if (speedBtns && speedBtns.length) {
+          speedBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              speedBtns.forEach(b => b.classList.remove('is-active'));
+              btn.classList.add('is-active');
+              playSpeed = parseFloat(btn.dataset.speed);
+            });
+          });
+        }
+
+        if (modeBtns && modeBtns.length) {
+          modeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              modeBtns.forEach(b => b.classList.remove('is-active'));
+              btn.classList.add('is-active');
+              currentMode = btn.dataset.mode;
+              if (timeSlider) {
+                if (currentMode === 'bike') {
+                  currentTime = T_BIKE_START;
+                  timeSlider.min = T_BIKE_START;
+                  timeSlider.max = T_BIKE_END;
+                } else if (currentMode === 'commute') {
+                  currentTime = T_BIKE_START;
+                  timeSlider.min = T_BIKE_START;
+                  timeSlider.max = T_COMMUTE_END;
+                } else if (currentMode === 'return') {
+                  currentTime = T_COMMUTE_END;
+                  timeSlider.min = T_COMMUTE_END;
+                  timeSlider.max = TOTAL_DURATION;
+                } else if (currentMode === 'flight') {
+                  currentTime = 0.0;
+                  timeSlider.min = 0.0;
+                  timeSlider.max = T_FLIGHT_END;
+                } else {
+                  timeSlider.min = 0.0;
+                  timeSlider.max = TOTAL_DURATION;
+                }
               }
-            }
-            isPlaying = false;
-            updatePlayPauseUI();
+              isPlaying = false;
+              updatePlayPauseUI();
+            });
           });
-        });
+        }
       }
 
       // ======================================================================
@@ -2549,17 +2545,19 @@
           ctx.restore();
         }
 
-        // Update Review UI HUD
-        if (beatLabel) beatLabel.textContent = currentBeatText;
-        if (timeSlider) timeSlider.value = t.toFixed(2);
-        if (timeDisplay) timeDisplay.textContent = `${t.toFixed(2)}s / ${TOTAL_DURATION.toFixed(2)}s`;
+        // Update Review UI HUD (Reviewer Harness)
+        if (hasHarness) {
+          if (beatLabel) beatLabel.textContent = currentBeatText;
+          if (timeSlider) timeSlider.value = t.toFixed(2);
+          if (timeDisplay) timeDisplay.textContent = `${t.toFixed(2)}s / ${TOTAL_DURATION.toFixed(2)}s`;
 
-        if (beatBtns) {
-          beatBtns.forEach(btn => {
-            const bt = parseFloat(btn.dataset.t);
-            if (Math.abs(t - bt) < 0.6) btn.classList.add('is-active');
-            else btn.classList.remove('is-active');
-          });
+          if (beatBtns) {
+            beatBtns.forEach(btn => {
+              const bt = parseFloat(btn.dataset.t);
+              if (Math.abs(t - bt) < 0.6) btn.classList.add('is-active');
+              else btn.classList.remove('is-active');
+            });
+          }
         }
       }
 

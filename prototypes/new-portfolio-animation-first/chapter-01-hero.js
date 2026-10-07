@@ -9,12 +9,14 @@
   const formationCanvas = document.querySelector('.hero-red-dwarf__formation-canvas');
   const field = document.querySelector('.hero-red-dwarf__star-field');
   const replayBtn = document.querySelector('.hero-red-dwarf__replay-btn');
+  const heroSection = document.getElementById('hero') || canvas;
   if (!canvas || !field) return;
 
   let gl = null;
   let program = null;
   let positionBuffer = null;
   let raf = 0;
+  let isHeroVisible = true;
   const loc = {};
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -662,6 +664,7 @@
       if (fCtx) fCtx.clearRect(0, 0, formationCanvas.width, formationCanvas.height);
     }
     initFormationModel();
+    startHeroRenderLoop();
   }
 
   // Canonical Vertex Shader
@@ -914,6 +917,7 @@
   }
 
   function render(currentTime) {
+    raf = 0;
     const dt = Math.min(0.05, (currentTime - lastTime) * 0.001);
     lastTime = currentTime;
 
@@ -964,8 +968,22 @@
       renderFormation();
     }
 
-    if (!isReduced || state.isDragging || isForming) {
+    if (isHeroVisible && (!isReduced || state.isDragging || isForming)) {
       raf = requestAnimationFrame(render);
+    }
+  }
+
+  function startHeroRenderLoop() {
+    if (!raf && isHeroVisible) {
+      lastTime = performance.now();
+      raf = requestAnimationFrame(render);
+    }
+  }
+
+  function stopHeroRenderLoop() {
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = 0;
     }
   }
 
@@ -1028,13 +1046,12 @@
       state.granSpeed = CANONICAL_GRAN_SPEED;
       state.flareBurst = 0.0;
       startSentenceCycle();
-      cancelAnimationFrame(raf);
-      requestAnimationFrame(render);
+      stopHeroRenderLoop();
+      startHeroRenderLoop();
     } else {
-      cancelAnimationFrame(raf);
+      stopHeroRenderLoop();
       lastTime = performance.now();
       restartFormation();
-      raf = requestAnimationFrame(render);
     }
   }
 
@@ -1192,7 +1209,7 @@
 
       canvas.addEventListener('webglcontextlost', function (e) {
         e.preventDefault();
-        cancelAnimationFrame(raf);
+        stopHeroRenderLoop();
         document.body.classList.add('no-webgl');
       }, false);
 
@@ -1205,7 +1222,21 @@
         startSentenceCycle();
       }
 
-      raf = requestAnimationFrame(render);
+      if ('IntersectionObserver' in window && canvas) {
+        const heroObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            isHeroVisible = entry.isIntersecting;
+            if (isHeroVisible) {
+              startHeroRenderLoop();
+            } else {
+              stopHeroRenderLoop();
+            }
+          });
+        }, { threshold: 0 });
+        heroObserver.observe(canvas);
+      }
+
+      startHeroRenderLoop();
     } catch (e) {
       document.body.classList.add('no-webgl');
     }
@@ -1214,7 +1245,6 @@
   // Self initialize
   init();
 
-  const heroSection = document.getElementById('hero');
   const chapterSection = document.getElementById('chapter-02');
   const globalStatusText = document.querySelector('.portfolio-header__status-text');
   function syncHeroHeader() {

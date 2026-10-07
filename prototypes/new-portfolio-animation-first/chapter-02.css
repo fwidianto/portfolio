@@ -36,6 +36,14 @@
   --valve-red: #ef4444;
   --cyan-tech: #64b5f6;
   --cyan-deep: #1e88e5;
+
+  /* Scene 02 Constellation Palette */
+  --const-line-primary: rgba(245, 242, 235, 0.72);
+  --const-line-secondary: rgba(245, 242, 235, 0.35);
+  --const-line-faint: rgba(255, 255, 255, 0.08);
+  --const-amber: #ff6b35;
+  --const-amber-glow: #ffaa70;
+  --const-amber-deep: #c23b18;
 }
 
 /* ==========================================================================
@@ -829,15 +837,6 @@
    SCENE 02: ENGINEERING FOUNDATIONS — THE CONSTELLATION
    Five Core Disciplines Traversal & Convergence to Astra
    ========================================================================== */
-
-:root {
-  --const-line-primary: rgba(245, 242, 235, 0.72);
-  --const-line-secondary: rgba(245, 242, 235, 0.35);
-  --const-line-faint: rgba(255, 255, 255, 0.08);
-  --const-amber: #ff6b35;
-  --const-amber-glow: #ffaa70;
-  --const-amber-deep: #c23b18;
-}
 
 .scene-02-stage--constellation {
   position: relative;

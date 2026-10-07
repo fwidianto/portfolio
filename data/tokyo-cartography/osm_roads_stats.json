@@ -1,0 +1,11 @@
+{
+  "bbox": "35.570,139.580,35.635,139.695",
+  "counts": {
+    "primary": 663,
+    "secondary": 72,
+    "tertiary": 988,
+    "residential": 8273,
+    "railways": 557,
+    "waterways": 113
+  }
+}

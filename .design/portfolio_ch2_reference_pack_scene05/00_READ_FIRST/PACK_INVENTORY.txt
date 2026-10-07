@@ -1,0 +1,15 @@
+﻿
+RelativePath                                                                 SizeKB
+------------                                                                 ------
+00_READ_FIRST\SCENE_05_REFERENCE_README.md                                      2.8
+01_FACTUAL_ASSETS\thesis_experiment_setup.png                                 901.3
+01_FACTUAL_ASSETS\thesis_system_diagram.png                                    13.5
+02_GOVERNANCE\AGENTS.md                                                           3
+02_GOVERNANCE\CHAPTER_02_REFERENCE_GUIDE.md                                     1.4
+02_GOVERNANCE\CURRENT_DIRECTION.md                                              6.2
+03_MOTION_REFERENCE_ONLY\06_ENGINEERING_THESIS_FROM_SYSTEM_TO_CLOSURE.png    1551.9
+03_MOTION_REFERENCE_ONLY\ANIMATION_REFERENCE_GUIDE.md                           7.7
+04_CONCEPT_REFERENCE_ONLY\undergraduate_thesis_energy_efficiency_journey.png 1470.7
+
+
+

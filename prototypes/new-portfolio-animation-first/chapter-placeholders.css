@@ -342,3 +342,16 @@ canvas.working-experience__canvas {
   }
 }
 
+/* ==========================================================================
+   VISUAL EDITOR DURABLE OVERRIDES (Merged from visual-editor-overrides.css)
+   ========================================================================== */
+
+#chapter-03 .chapter-placeholder__title {
+  font-size: 38px;
+  text-align: center;
+}
+
+#chapter-03 .chapter-placeholder__subtitle {
+  letter-spacing: 0.04em;
+  text-align: center;
+}

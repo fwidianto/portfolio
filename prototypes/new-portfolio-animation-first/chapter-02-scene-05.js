@@ -42,14 +42,22 @@
 
       // DOM Elements
       const stageSvg = document.getElementById('study-c-svg');
-      const btnPlayPause = document.getElementById('btn-play-pause');
-      const playText = document.getElementById('play-text');
-      const btnRestart = document.getElementById('btn-restart');
-      const scrubber = document.getElementById('timeline-scrubber');
-      const timecodeDisplay = document.getElementById('timecode-display');
-      const beatLabelDisplay = document.getElementById('beat-label-display');
-      const statusPill = document.getElementById('study-c-status-pill');
-      const beatBtns = document.querySelectorAll('.beat-btn');
+
+      // Reviewer UI Elements (Isolated behind explicit harness detection)
+      const hasHarness = !!(document.getElementById('timeline-scrubber') || document.getElementById('btn-play-pause') || document.getElementById('study-c-status-pill') || document.querySelector('.beat-btn'));
+      let btnPlayPause = null, playText = null, btnRestart = null, scrubber = null;
+      let timecodeDisplay = null, beatLabelDisplay = null, statusPill = null, beatBtns = null;
+
+      if (hasHarness) {
+        btnPlayPause = document.getElementById('btn-play-pause');
+        playText = document.getElementById('play-text');
+        btnRestart = document.getElementById('btn-restart');
+        scrubber = document.getElementById('timeline-scrubber');
+        timecodeDisplay = document.getElementById('timecode-display');
+        beatLabelDisplay = document.getElementById('beat-label-display');
+        statusPill = document.getElementById('study-c-status-pill');
+        beatBtns = document.querySelectorAll('.beat-btn');
+      }
 
       // SVG Animated Elements
       const flowMeterFluid = document.getElementById('flow-meter-fluid');
@@ -1266,34 +1274,36 @@
         }
 
         // -------------------------------------------------------------
-        // UI & Meta Displays Update
+        // UI & Meta Displays Update (Reviewer Harness)
         // -------------------------------------------------------------
-        if (scrubber) scrubber.value = currentTime;
-        const mins = Math.floor(currentTime / 60);
-        const secs = (currentTime % 60).toFixed(1).padStart(4, '0');
-        if (timecodeDisplay) timecodeDisplay.textContent = `0${mins}:${secs} / 00:25.0`;
+        if (hasHarness) {
+          if (scrubber) scrubber.value = currentTime;
+          const mins = Math.floor(currentTime / 60);
+          const secs = (currentTime % 60).toFixed(1).padStart(4, '0');
+          if (timecodeDisplay) timecodeDisplay.textContent = `0${mins}:${secs} / 00:25.0`;
 
-        // Determine current beat
-        let activeBeat = BEATS[0];
-        for (let i = BEATS.length - 1; i >= 0; i--) {
-          if (currentTime >= BEATS[i].time) {
-            activeBeat = BEATS[i];
-            break;
-          }
-        }
-        if (beatLabelDisplay) beatLabelDisplay.textContent = activeBeat.name;
-        if (statusPill) statusPill.textContent = activeBeat.pill;
-
-        // Active state for beat stepper buttons
-        if (beatBtns && beatBtns.length) {
-          beatBtns.forEach(btn => {
-            const bNum = parseInt(btn.dataset.beat, 10);
-            if (activeBeat.id === bNum) {
-              btn.classList.add('is-active');
-            } else {
-              btn.classList.remove('is-active');
+          // Determine current beat
+          let activeBeat = BEATS[0];
+          for (let i = BEATS.length - 1; i >= 0; i--) {
+            if (currentTime >= BEATS[i].time) {
+              activeBeat = BEATS[i];
+              break;
             }
-          });
+          }
+          if (beatLabelDisplay) beatLabelDisplay.textContent = activeBeat.name;
+          if (statusPill) statusPill.textContent = activeBeat.pill;
+
+          // Active state for beat stepper buttons
+          if (beatBtns && beatBtns.length) {
+            beatBtns.forEach(btn => {
+              const bNum = parseInt(btn.dataset.beat, 10);
+              if (activeBeat.id === bNum) {
+                btn.classList.add('is-active');
+              } else {
+                btn.classList.remove('is-active');
+              }
+            });
+          }
         }
       }
 
@@ -1361,33 +1371,35 @@
         }
       }
 
-      // Event Listeners (Guarded for standalone or embedded modes)
-      if (btnPlayPause) {
-        btnPlayPause.addEventListener('click', () => {
-          if (isPlaying) pause();
-          else play();
-        });
-      }
-
-      if (btnRestart) {
-        btnRestart.addEventListener('click', () => {
-          restart();
-        });
-      }
-
-      if (scrubber) {
-        scrubber.addEventListener('input', (e) => {
-          seek(parseFloat(e.target.value));
-        });
-      }
-
-      if (beatBtns && beatBtns.length) {
-        beatBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            const bNum = parseInt(btn.dataset.beat, 10);
-            goToBeat(bNum);
+      // Event Listeners (Reviewer Harness)
+      if (hasHarness) {
+        if (btnPlayPause) {
+          btnPlayPause.addEventListener('click', () => {
+            if (isPlaying) pause();
+            else play();
           });
-        });
+        }
+
+        if (btnRestart) {
+          btnRestart.addEventListener('click', () => {
+            restart();
+          });
+        }
+
+        if (scrubber) {
+          scrubber.addEventListener('input', (e) => {
+            seek(parseFloat(e.target.value));
+          });
+        }
+
+        if (beatBtns && beatBtns.length) {
+          beatBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              const bNum = parseInt(btn.dataset.beat, 10);
+              goToBeat(bNum);
+            });
+          });
+        }
       }
 
       // Stage Click Interaction (toggle play/pause or restart if settled)

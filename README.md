@@ -8,42 +8,42 @@ Public portfolio website for business systems, operational analytics, ERP proces
 
 The portfolio presents an **Analytical Systems Builder** profile: understand the business problem, structure the process and data, turn the logic into a useful system, and communicate the evidence clearly.
 
-Target roles include Data Analyst, Business Analyst, BI Analyst, Operations Analyst, Commercial Analyst, Digital Transformation Analyst, and analytics-adjacent AI workflow roles.
+## Current state
 
-## Current public direction
+- `main` is the current production baseline.
+- `design/editorial-systems-prototype` is the active implementation path for the approved Red Dwarf portfolio direction.
+- `.design/CURRENT_DIRECTION.md` is the current visual/design authority for that work.
+- `prototypes/red-dwarf-animation/index.html` is the existing approximately 14-second Red Dwarf formation animation, frozen and owner-approved as-is. Production integration is a separate decision.
+- `AGENTS.md` contains repository-specific AI working rules.
+- `docs/README.md` is the minimal routing guide.
 
-The live homepage remains the approved v1 implementation until a later change is explicitly reviewed and approved.
+Current public/runtime files include:
 
-Current public project direction is intentionally narrow:
+- `index.html` — homepage and current Hero implementation
+- `CSS/` — site styles
+- `Assets/` — public-safe site assets and CV
+- `Projects/Odoo-ERP-Analytics.html` — current flagship case study
+- `website-updates.html` — public changelog
+- `CNAME`, `robots.txt`, `sitemap.xml` — GitHub Pages/discovery files
 
-- **Odoo Process Control Tower** — the evolved form of the Odoo ERP Analytics work;
-- **Telegram Codex Controller** — a bounded AI-workflow control and observability system when/where explicitly published.
+The older `prototypes/editorial-systems/` material documents previous animation work. It is not current Red Dwarf Hero design authority unless a task explicitly targets that prototype.
 
-Older project pages may remain accessible for continuity, but they are not automatically part of the current featured portfolio.
-
-## Repository responsibility
-
-This repository contains the live static site, recruiter-facing case-study material, public-safe assets, and the minimum documentation required to maintain them.
-
-Historical design experiments, refresh phases, audits, and superseded implementation plans belong in Git history rather than the active working tree.
-
-## Structure
-
-- `index.html` — live homepage
-- `Projects/` — public project/case-study pages and supporting assets
-- `CSS/` — shared styles
-- `Assets/` — public site assets and CV
-- `AGENTS.md` — concise operating rules for AI-assisted changes
-- `docs/README.md` — current documentation index
+Historical experiments, superseded plans, rejected design directions, and review artifacts belong in Git history rather than being reconstructed as active context.
 
 ## Working rule
 
-For any change, start with `AGENTS.md`, then read only the documentation directly relevant to the requested page or content. Do not reconstruct old experiments unless explicitly asked.
+Start with `AGENTS.md`. For visual/design work, read `.design/CURRENT_DIRECTION.md`, then inspect only the implementation files directly required by the task.
 
-## Local preview
+Continue accepted work rather than restarting from an older prototype or creating a competing implementation path.
 
-The site is static HTML/CSS/JavaScript. Open `index.html` directly or serve the repository root with a simple local static server.
+The approved formation prototype must be preserved exactly. The older 8–10-second animation brief, any missing visual-board reference, and the incomplete standalone `red-dwarf-animation.html` artifact are not current implementation authority.
+
+## Architecture
+
+The public site and active Hero implementation use static HTML, CSS, and JavaScript. No application build step is required.
+
+For materially new animation architecture, validate the rendering approach before adding dependencies or committing to a full implementation.
 
 ## Deployment
 
-The site is deployed through GitHub Pages with the custom domain in `CNAME`. No application build step is required.
+The public site is deployed through GitHub Pages using the custom domain in `CNAME`.
