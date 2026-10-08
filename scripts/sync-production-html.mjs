@@ -135,6 +135,7 @@ function generateProductionHtml(sourceHtml) {
   // Modular Scripts
   output = output.replace(/src="(chapter-[^"]+\.js(?:\?[^"]*)?)"/g, 'src="prototypes/new-portfolio-animation-first/$1"');
   output = output.replace('src="left-nav.js"', 'src="prototypes/new-portfolio-animation-first/left-nav.js"');
+  output = output.replace('src="analytics-optout.js"', 'src="prototypes/new-portfolio-animation-first/analytics-optout.js"');
 
   // Static Assets / Images
   output = output.replace(/src="assets\/([^"]+)"/g, 'src="prototypes/new-portfolio-animation-first/assets/$1"');

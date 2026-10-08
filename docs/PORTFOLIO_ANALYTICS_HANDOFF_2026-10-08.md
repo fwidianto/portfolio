@@ -30,9 +30,7 @@ These are client-side public tracking identifiers, not account credentials. Noth
 - Two resulting commits:
   - `aded126fac5af579be9c06a58c8f73f83d5f261c` — restore snippets to authoritative source.
   - `45fab549b4b3f8eafc68bbbf3e7cc7a6d623e123` — synchronize tracking in root production HTML.
-- **Unexpected current remote state:** Subsequent direct GitHub branch queries returned **the same HEAD `45fab549b4b3f8eafc68bbbf3e7cc7a6d623e123` for both `main` and `maintenance/restore-portfolio-analytics-20261008`.** The homepage `index.html` fetched from `main` contains both snippets. Do not assume the change is awaiting promotion; determine actual HEAD/deployment state before any further writes.
-- At authoring time there has been **no independent live-site/browser GA4/Clarity request verification, no Realtime GA4 event confirmation, and no completed full local Node regression test** for this analytics change. Do not claim these passed.
-- A JavaScript in-memory replication of the existing production HTML generator's transformations showed the edited prototype and root HTML match. Still run the real `node scripts/sync-production-html.mjs --check` in the checked-out repo.
+- At handoff authoring time there had been no independent live-site/browser request verification or GA4 Realtime confirmation. Later verification and deployment status are recorded below; check the current Pages build before claiming production is updated.
 
 ## 4. Portfolio architecture and boundaries
 
@@ -47,25 +45,30 @@ These are client-side public tracking identifiers, not account credentials. Noth
 - Do not hand-edit generated root `index.html` independently of the source/generator. Keep tracking snippets to one instance per page; do not duplicate the existing Odoo case study tags.
 - Do not force-push/rebase/rewrite accepted history.
 
-## 5. MCP / recurring reporting investigation
+## 5. MCP / recurring reporting
 
-- Plugin discovery found **Windsor.ai**, which advertises GA4 and Google Search Console data access through ChatGPT, with a free plan listed. It was **suggested to the user but NOT connected or verified**.
+- Windsor.ai is the reporting source for GA4 property `543592411` (“Fauzan Portfolio”). A connected Windsor.ai account was visible in Codex, but report queries for 2026-10-01–2026-10-07 and the last seven days returned no rows; successful ingestion has not been confirmed by report data.
 - Alternative found: **Supermetrics** (GA4 query capability), also not connected.
 - No directly suitable Microsoft Clarity connector was confirmed. Clarity can still be viewed in its own dashboard; direct automated reporting from it needs a compatible connection.
-- Analytics accounts are not accessible just because tracking code exists on GitHub. The user must connect the GA4 data source through a supported plugin or authorized integration.
-- Useful future report cadence: **weekly** is a recommendation, not a user-confirmed setting. There is **no scheduled analytics report/automation created yet**. Ask for timing/cadence if needed to set it up.
-- Suggested weekly contents: visits/users/sessions and trend vs previous week; referral sources (LinkedIn, Google, direct); geography/device; engaged sessions/engagement rate; important page views; CV-link clicks/downloads; chapter progression/scroll reach if instrumented; unusual changes; 2–3 prioritized improvements. Differentiate visitor behavior facts from inferences, and distinguish measurement gaps from zero activity.
+- The owner reports that an existing ChatGPT weekly task is enabled for Mondays at 08:00 WIB through Windsor.ai. Do not duplicate or modify it. Codex does not inherit that ChatGPT task's connection or execution history.
+- Each report should compare the last seven complete calendar days in Asia/Jakarta with the previous seven: traffic, engagement, session source/medium, channel, device, pages, daily trends, and up to three recommendations grounded in observed data. State ranges, counts, and changes; mark small samples and distinguish missing data from zero activity. If the GA4 query returns no rows, report the data-access/ingestion gap instead of inventing findings.
 - Note: Homepage is a long, animated one-page site; GA4 default page_view alone cannot say which chapter was seen. Consider minimal, non-PII custom events for chapter reach, CV clicks, dossier opens only **after base tracking has been verified** and with owner's approval. Avoid raw personal-data capture.
 
 ## 6. Immediate continuation checklist
 
-1. Read this handoff and inspect current `main` and maintenance-branch HEADs; do not assume they diverge.
-2. Verify GA4 and Clarity scripts appear **once** in the public homepage source and the generator `--check` passes.
-3. Verify GitHub Pages has deployed the expected commit, then inspect `https://www.fwidianto.com/` in a browser: no errors, tracking scripts fetched (subject to consent/ad blockers), GA4 Realtime test visit if the owner can access the property, and Clarity data ingestion.
-4. Report exactly what is verified and any remaining setup step; do not fabricate traffic.
-5. Once Windsor.ai or another GA4 connector is authorized, query historical/current analytics, establish a baseline, and propose a useful weekly report. Ask the owner for preferred schedule before creating the automation.
-6. Only then consider custom engagement events, keeping their costs, consent/privacy implications, and maintenance minimal.
+1. Check the current GitHub Pages build and test the owner opt-out on both homepage and Odoo case study with an isolated browser profile.
+2. Keep the analytics loader in the authoritative prototype and let `node scripts/sync-production-html.mjs` generate root `index.html`; run its `--check` before deployment.
+3. Confirm `?analytics=off` suppresses both GA4 and Clarity requests, and `?analytics=on` restores them. Report dispatch evidence separately from processed GA4/Clarity dashboard ingestion.
+4. Leave the existing Monday 08:00 WIB ChatGPT task unchanged; verify its output in that task's own connected environment when available.
 
 ## 7. Next-session start prompt
 
-> Read `docs/PORTFOLIO_ANALYTICS_HANDOFF_2026-10-08.md` in `fwidianto/portfolio`. Check whether GA4 `G-FL42QH3WV0` and Microsoft Clarity `xefdu66wh2` are actually deployed on `www.fwidianto.com` and verify current GitHub branch state. Continue with live validation and setting up real GA4-based weekly portfolio traffic reporting through a connected analytics app. Preserve the existing portfolio design. Do not assume we have verified live events or connected an analytics account.
+> Read `docs/PORTFOLIO_ANALYTICS_HANDOFF_2026-10-08.md` in `fwidianto/portfolio`. Verify the current Pages deployment, then use a fresh browser profile to check `?analytics=off` and `?analytics=on` on the homepage and Odoo case-study page. Preserve the portfolio design and existing Monday 08:00 WIB ChatGPT analytics task. Distinguish browser request delivery from analytics dashboard ingestion.
+
+## 8. Owner browser opt-out
+
+- `https://www.fwidianto.com/?analytics=off` opts the current browser profile out of both GA4 (`G-FL42QH3WV0`) and Clarity (`xefdu66wh2`); the command is removed from the address bar.
+- `https://www.fwidianto.com/?analytics=on` clears the preference and restores tracking; the command is removed from the address bar. With no saved preference, tracking is enabled by default.
+- The preference is localStorage scoped to this site and browser profile, shared by the homepage and Odoo case study. Clearing site storage resets to enabled. This is not authentication: other people using the same browser profile can change the setting.
+- Verify in DevTools Network with filters `googletagmanager`, `google-analytics`, and `clarity.ms`. Opt-out should produce no matching script or collection requests; opt-in should produce GA4 `page_view` and Clarity `/collect` requests. No request is not equivalent to confirming GA4 processed data.
+- Local isolated browser checks passed before deployment on both pages: opt-out persisted across page navigation with no tracker requests; opt-in sent both types of collection requests. Re-run on production after each Pages deployment.
