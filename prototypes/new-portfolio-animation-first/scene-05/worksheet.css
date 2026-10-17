@@ -1,0 +1,290 @@
+.calculator-view{color-scheme:light}
+.calculator-view body{background:#ecefec;color:#24372c;font-family:Calibri,'Segoe UI',Arial,sans-serif;font-size:14px}
+.calculator-view body:before{display:none}
+.calculator-view main{max-width:1260px;padding:0 28px}
+.calculator-view .masthead{background:#217346;color:#fff;margin:0 -28px;padding:0 28px;min-height:54px;border:0;font:11px Calibri,'Segoe UI',sans-serif;letter-spacing:.025em}
+.calculator-view .masthead{display:none}
+.calculator-view .monogram{color:#fff;font-size:24px}.calculator-view .monogram span{color:#aacfb9}.calculator-view .chapter-mark b{color:#d8eddf}
+.calculator-view .intro{padding:23px 0 17px;display:block}
+.calculator-view .intro h1{font:400 24px/1.25 Calibri,'Segoe UI',sans-serif;letter-spacing:0;color:#365945}
+.calculator-view .intro .eyebrow{font:11px Calibri,'Segoe UI',sans-serif;letter-spacing:.04em;margin-bottom:6px;color:#617269}
+.calculator-view .intro-aside,.calculator-view .simulation,.calculator-view .scenario-controls{display:none}
+.calculator-view .change-note{display:none}
+.calculator-view .workbench{background:#fff;border:1px solid #b9c5bc;box-shadow:0 3px 12px #3659450c}
+.calculator-view .workbench-heading{padding:15px 22px 10px;margin:0;display:block;background:#f7f9f6;border-bottom:1px solid #d6ded7}
+.calculator-view .workbench-heading h2{font-size:20px;font-weight:500;letter-spacing:0}.calculator-view .workbench-heading .eyebrow{font:10px Calibri,sans-serif;letter-spacing:.04em;margin:0 0 3px;color:#65796b}
+.calculator-view .selection-bar{background:#f2f5f1;border:0;border-bottom:1px solid #d3ded3;padding:10px 22px;align-items:center;gap:20px;color:#506854}
+.calculator-view .selection-bar label{font-size:11px;color:#637b68}
+.calculator-view .selection-bar label:first-child{display:none}
+.calculator-view .selection-bar select{min-width:140px;min-height:32px;padding:5px 8px;background:#fff;border:1px solid #becbbf;color:#36583f;font-size:12px}
+.calculator-view .selection-bar>span{font:11px Calibri,sans-serif;margin-left:0;padding:0}
+.calculator-view .selection-bar button{margin-left:auto;min-height:32px;border:0;font-size:11px;color:#526e5c}
+.calculator-view #panel{padding:20px 22px;background:#fff;border:0;min-height:350px;color:#273c2f}
+.calculator-view #panel p{font:13px/1.6 Calibri,'Segoe UI',sans-serif;color:#607063}
+.calculator-view #panel button{font:12px Calibri,'Segoe UI',sans-serif;padding:8px 12px;min-height:36px;border:1px solid #c0cebf;background:#fafcf8;color:#385d42;border-radius:2px}
+.calculator-view #panel button.primary{background:#217346;border-color:#217346;color:#fff;padding:10px 18px;font-size:14px;min-height:42px}
+.calculator-view #panel button:hover{background:#e8f0e5}.calculator-view #panel button.primary:hover{background:#1a613b}
+.calculator-view .module-tabs{background:#f3f5f1;border:0;border-top:1px solid #c1cec0;display:flex;padding:0 16px;flex-wrap:wrap}
+.calculator-view .module-tabs button{flex:0 1 auto;min-height:40px;border:0;border-right:1px solid #e1e7dc;border-bottom:3px solid transparent;font:12px Calibri,'Segoe UI',sans-serif;padding:10px 19px;color:#556d5a;background:transparent}
+.calculator-view .module-tabs button.active{background:#fff;border-bottom-color:#217346;color:#217346;font-weight:600}
+.calculator-view .module-tabs button b{display:none}
+.calculator-view label{font:12px Calibri,'Segoe UI',sans-serif;letter-spacing:0;color:#59705f;gap:5px}
+.calculator-view input,.calculator-view select{font:14px Calibri,'Segoe UI',sans-serif;color:#273e2f;background:#fff;border:1px solid #b9c8ba;border-radius:0;padding:7px 9px;min-height:36px}
+.calculator-view input:focus-visible,.calculator-view select:focus-visible,.calculator-view button:focus-visible{outline:2px solid #217346;outline-offset:1px}
+.calculator-view input[aria-invalid=true]{border-color:#bf6b56;background:#fff7f0}
+.calculator-view .fields{gap:14px 18px;margin-bottom:20px}
+.calculator-view .fields>label{min-width:0}
+.calculator-view .fields input,.calculator-view .fields select{width:100%;min-width:0;box-sizing:border-box}
+.calculator-view .worksheet-travel-estimate{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;margin:-4px 0 18px;padding:10px 0;border-top:1px solid #e2e9df;color:#617362;font-size:12px}
+.calculator-view .worksheet-travel-estimate strong{font-size:13px;color:#355b3f;margin-left:6px}
+.calculator-view .worksheet-travel-estimate button{margin-left:auto}
+.calculator-view .worksheet-toolbar{display:flex;justify-content:space-between;gap:18px;align-items:start;margin-bottom:16px}
+.calculator-view .worksheet-experience-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:12px;padding:8px 0}
+.calculator-view .worksheet-experience-links a{color:#286b43}
+.calculator-view .worksheet-toolbar strong{font-size:17px;font-weight:600;display:block;color:#355b3f}
+.calculator-view .worksheet-toolbar span{display:block;font-size:12px;color:#7a897d;margin-top:3px}
+.calculator-view .worksheet-toolbar>div:last-child{display:flex;justify-content:flex-end;gap:8px}
+.calculator-view .worksheet-sheet-heading{display:flex;align-items:center;gap:9px;margin:19px 0 10px;border-bottom:1px solid #dce5d8;padding-bottom:7px}
+.calculator-view .worksheet-sheet-heading>span:first-child{font:12px Calibri,sans-serif;color:#fff;background:#628566;display:inline-grid;place-items:center;width:22px;height:22px}
+.calculator-view .worksheet-sheet-heading .worksheet-section-title{font-size:15px;font-weight:600}
+.calculator-view .worksheet-sheet-heading h3{font-size:15px;font-weight:600;margin:0}
+.calculator-view .worksheet-sheet-heading small{margin-left:auto;font-size:11px;color:#7d8d7e}
+.calculator-view .worksheet-section{margin:0 0 14px}
+.calculator-view .worksheet-section>summary{list-style:none;cursor:pointer}
+.calculator-view .worksheet-section>summary::-webkit-details-marker{display:none}
+.calculator-view .worksheet-section>summary::after{content:'▾';margin-left:10px;font-size:14px;color:#628566}
+.calculator-view .worksheet-section:not([open])>summary::after{content:'▸'}
+.calculator-view .worksheet-section>summary:focus-visible{outline:2px solid #217346;outline-offset:2px}
+.calculator-view .worksheet-section-body{padding:1px 0 0}
+.calculator-view .worksheet-fleet-wrap{overflow-x:auto;border:1px solid #a7baa8}
+.calculator-view table.worksheet-fleet{font:14px Calibri,'Segoe UI',sans-serif;table-layout:fixed;width:100%;min-width:760px;text-align:left}
+.calculator-view .worksheet-fleet thead th{position:static;background:#dfeadb;color:#385c3e;font-size:13px;font-weight:600;padding:8px 10px;height:34px;border:1px solid #b6c8b2}
+.calculator-view .worksheet-fleet thead th{height:auto;min-height:52px;white-space:normal;line-height:1.2;overflow-wrap:anywhere;vertical-align:middle}
+.calculator-view .worksheet-fleet th:first-child{width:42px;text-align:center}
+.calculator-view .worksheet-fleet th:nth-child(2){width:270px}
+.calculator-view .worksheet-fleet th:nth-child(3){width:100px}
+.calculator-view .worksheet-fleet th:nth-child(4){width:120px}
+.calculator-view .worksheet-fleet th:nth-child(5){width:140px}
+.calculator-view .worksheet-fleet th:nth-child(6){width:140px;text-align:right}
+.calculator-view .worksheet-fleet td,.calculator-view .worksheet-fleet tbody th{border:1px solid #d0dccb;padding:0;background:#fff;font-weight:400}
+.calculator-view .worksheet-fleet tbody th{background:#f1f5ed;color:#6b836b;font-size:12px;vertical-align:middle;text-align:center}
+.calculator-view .worksheet-fleet select{width:100%;min-width:0;border:0;margin:0;border-radius:0;padding:7px 12px;min-height:34px;background:#fff;color:#274330;font-size:14px}
+.calculator-view .worksheet-fleet input{width:100%;min-width:0;border:0;margin:0;border-radius:0;text-align:center;padding:7px;min-height:34px;background:#fff;font-size:14px}
+.calculator-view .worksheet-fleet select:focus,.calculator-view .worksheet-fleet input:focus{outline:2px solid #217346;outline-offset:-2px;background:#f8fcf3}
+.calculator-view .worksheet-fleet tfoot th,.calculator-view .worksheet-fleet tfoot td{background:#e8f1df;font-size:13px;font-weight:600;padding:9px 12px;text-align:center}
+.calculator-view .worksheet-fleet tfoot th{text-align:left}
+.calculator-view .worksheet-fleet .workload-explain-trigger{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:28px;padding:3px 4px;border:0;background:transparent;color:#345638;font-size:12px;font-weight:600;white-space:nowrap}
+.calculator-view .worksheet-fleet .workload-explain-trigger:hover{background:#dce8d8}
+.calculator-view #panel .workload-explain-trigger{border:0;background:transparent;min-height:28px;padding:3px 4px}
+.calculator-view .workload-pulse-node{width:8px;height:8px;flex:none;border-radius:50%;background:#217346;animation:workload-node-pulse 1.8s ease-out infinite}
+@keyframes workload-node-pulse{0%{box-shadow:0 0 0 0 rgba(33,115,70,.35)}70%{box-shadow:0 0 0 7px rgba(33,115,70,0)}100%{box-shadow:0 0 0 0 rgba(33,115,70,0)}}
+@media(prefers-reduced-motion:reduce){.calculator-view .workload-pulse-node{animation:none}}
+.calculator-view .worksheet-fleet td.worksheet-formula-cell{text-align:right;padding:0 12px;background:#f3f8ed;color:#345638;font-size:13px}
+.calculator-view .unit-schedule-trigger{display:block;width:100%;min-height:30px;padding:5px 7px;background:#f5f8f1;border-color:#c3d0bf;color:#416846;font-size:11px;white-space:nowrap}
+.calculator-view .unit-schedule-trigger:hover{background:#e8f0e4}
+.calculator-view .worksheet-help{margin:7px 0 18px!important;padding:9px 12px;background:#f5f8f1;border-left:3px solid #89a579;font-size:12px!important;line-height:1.6!important;color:#586e59!important}
+.calculator-view .worksheet-package-selectors{display:flex;align-items:end;gap:18px;flex-wrap:wrap;margin:12px 0 14px}
+.calculator-view .worksheet-package-selectors label{min-width:220px}
+.calculator-view .worksheet-package-count{margin-left:auto;padding-bottom:9px;color:#59725c;font-size:12px}
+.calculator-view .worksheet-package-count strong{font-size:17px;color:#3f683e}
+.calculator-view .worksheet-package-table{min-width:620px}
+.calculator-view .worksheet-package-table td:nth-child(2){text-align:left}
+.calculator-view .worksheet-package-table td:nth-child(n+3),.calculator-view .worksheet-package-table th:nth-child(n+3){text-align:right}
+.calculator-view .worksheet-package-table tfoot th,.calculator-view .worksheet-package-table tfoot td{background:#e6efdf;font-weight:600}
+.calculator-view .worksheet-assumptions{border-top:1px solid #d5e0d0;border-bottom:1px solid #d5e0d0;padding:12px 0;margin:6px 0 19px}
+.calculator-view .worksheet-assumptions summary{font-size:13px;cursor:pointer;min-height:27px;color:#55755b}
+.calculator-view .worksheet-assumptions>p{margin:7px 0 12px;font-size:12px!important}
+.calculator-view .worksheet-revenue-row{display:grid;grid-template-columns:minmax(0,2fr) minmax(180px,1fr);gap:18px;align-items:end;margin:0 0 18px}
+.calculator-view .worksheet-revenue-row.worksheet-revenue-monthly{grid-template-columns:1fr}
+.calculator-view .worksheet-revenue-control>span:first-child{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.calculator-view .worksheet-revenue-control output{font-weight:600;color:#355b3f}
+.calculator-view .worksheet-revenue-control input[type=range]{width:100%;min-height:28px;padding:0;border:0;background:transparent;accent-color:#217346}
+.calculator-view .worksheet-revenue-control .field-help{display:block;margin-top:0}
+.calculator-view .worksheet-revenue-total{display:block;margin-top:2px;font-size:12px;font-weight:600;color:#355b3f}
+.calculator-view .worksheet-revenue-control input[type=range]:focus-visible{outline:2px solid #217346;outline-offset:3px}
+.calculator-view .worksheet-range-limits{display:flex;justify-content:space-between;font-size:11px;color:#7b897b}
+.calculator-view .worksheet-quick-staff{display:flex;align-items:center;gap:20px;padding:13px 16px;margin:14px 0 20px;background:#f2f6ee;border-left:3px solid #628566;min-width:0}
+.calculator-view .worksheet-quick-staff>span{font-size:12px;color:#5a725e;max-width:62px}
+.calculator-view .worksheet-quick-staff dl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin:0;flex:1}
+.calculator-view .worksheet-quick-staff dt{font-size:11px;color:#697c69}
+.calculator-view .worksheet-quick-staff dd{margin:2px 0 0;font-size:23px;color:#305b3b;font-weight:600}
+.calculator-view .worksheet-empty{font-size:12px;color:#758575;min-height:50px}
+.calculator-view .worksheet-settings{margin-top:24px;border-top:1px solid #d3dfce}
+.calculator-view .worksheet-settings>summary>.worksheet-section-title{width:auto;height:auto;background:none;color:#385c3e;display:block;font:600 14px Calibri,'Segoe UI',sans-serif}
+.calculator-view .worksheet-settings .fields{margin:14px 0 4px}
+.calculator-view .worksheet-settings .worksheet-assumptions{border-bottom:0;margin-bottom:8px}
+.calculator-view .settings-note{font-size:11px!important;color:#748371!important;margin:10px 0!important}
+.calculator-view .worksheet-usage-table{min-width:540px}
+.calculator-view .worksheet-usage-table input{width:100%;max-width:110px}
+.calculator-view .worksheet-plan-table{min-width:570px}
+.calculator-view .worksheet-plan-table td:nth-child(2),.calculator-view .worksheet-plan-table td:nth-child(3){text-align:right;white-space:nowrap}
+.calculator-view .worksheet-plan-table td:first-child small{display:inline-block;margin-left:9px;font-size:10px;color:#628566}
+.calculator-view .worksheet-plan-table td:last-child{text-align:right}
+.calculator-view .money-short,.calculator-view .mobile-constraint{display:none}
+.calculator-view .worksheet-forecast-exact{min-width:760px}
+.calculator-view #panel button:disabled{opacity:1;color:#6c7e6d;background:#edf3e9;cursor:default}
+.calculator-view .worksheet-revenue-row+.worksheet-assumptions{margin-top:0}
+.calculator-view .worksheet-mechanic-estimate{display:grid;grid-template-columns:1fr auto;gap:3px 16px;align-items:center;margin:12px 0;padding:12px 16px;background:#f0f5ec;border-left:4px solid #628566;color:#385c3e}
+.calculator-view .worksheet-mechanic-estimate span{font-size:13px}
+.calculator-view .worksheet-mechanic-estimate strong{grid-column:2;grid-row:1 / span 2;font-size:24px;font-weight:600}
+.calculator-view .worksheet-mechanic-estimate small{font-size:12px;color:#637765}
+.calculator-view .worksheet-mechanic-estimate .worksheet-overtime-comparison{grid-column:1/-1;border-top:1px solid #d6e1d0;padding-top:7px;color:#405f45}
+.calculator-view .package-editor-table{min-width:760px}
+.calculator-view .package-editor-table th:first-child{width:110px;text-align:left}
+.calculator-view .package-editor-table th:nth-child(2){width:220px;text-align:left}
+.calculator-view .package-editor-table th:nth-child(3){width:90px;text-align:right}
+.calculator-view .package-editor-table th:nth-child(4){width:140px;text-align:right}
+.calculator-view .package-editor-table th:nth-child(5){width:150px;text-align:right}
+.calculator-view .package-editor-table td:first-child,.calculator-view .package-editor-table td:nth-child(2){text-align:left}
+.calculator-view .package-editor-table td.package-line-total{font:12px Calibri,'Segoe UI',sans-serif;text-align:right;white-space:nowrap;color:#486847}
+.calculator-view .package-editor-table input{width:100%;min-width:0;min-height:36px;padding:6px 8px}
+.calculator-view .package-editor-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.calculator-view .package-editor-table tfoot th,.calculator-view .package-editor-table tfoot td{background:#e6efdf;font-weight:600}
+.calculator-view .worksheet-action-row{display:flex;gap:16px;align-items:center;margin:14px 0 24px}
+.calculator-view .worksheet-action-row>span{font-size:12px;color:#7b897b}
+.calculator-view .worksheet-suggestion{background:#eff6e8;border-left:3px solid #75946a;padding:12px 15px;line-height:1.7;margin-top:17px;color:#506449!important}
+.calculator-view .worksheet-suggestion strong{color:#416638;font-weight:600}
+.calculator-view .finance-overview{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 12px;color:#697e70;font-size:12px}
+.calculator-view .worksheet-profit-status{margin:0!important;padding:4px 10px;border-radius:20px;background:#eff3ee;font-size:11px!important;line-height:1.5!important;color:#617366!important}
+.calculator-view .worksheet-profit-status.is-positive{background:#e8f3eb;color:#24613f!important}
+.calculator-view .worksheet-profit-status.is-negative{background:#faeee8;color:#994d3b!important}
+.calculator-view .worksheet-profit-status.is-even{background:#f6f1dd;color:#77622f!important}
+.calculator-view .worksheet-finance-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 18px}
+.calculator-view .worksheet-finance-summary>div{display:flex;flex-direction:column;gap:7px;padding:17px 18px;border:1px solid #e0e8de;border-radius:12px;background:#fafcf8;min-width:0}
+.calculator-view .worksheet-finance-summary span{font-size:12px;color:#697e70}
+.calculator-view .worksheet-finance-summary strong{font-size:26px;letter-spacing:-.6px;font-weight:600;color:#2e4c3b;white-space:nowrap;font-variant-numeric:tabular-nums}
+.calculator-view .worksheet-finance-summary .finance-profit{background:#eaf4ed;border-color:#d3e6d8}
+.calculator-view .worksheet-finance-summary .finance-profit.is-loss{background:#fbf0eb;border-color:#eddbd1}
+.calculator-view .worksheet-finance-summary strong.positive,.calculator-view .finance-year-readout .positive{color:#217346}
+.calculator-view .worksheet-finance-summary strong.negative,.calculator-view .finance-year-readout .negative{color:#a45740}
+.calculator-view .finance-forecast{margin:0;padding:22px 24px 0;background:#fcfdfb;border:1px solid #dfe7dc;border-radius:14px}
+.calculator-view .finance-dashboard{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(260px,1fr);gap:16px}
+.calculator-view .finance-dashboard>figure{min-width:0}
+.calculator-view .finance-chart-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 12px;margin-bottom:16px}
+.calculator-view .finance-basis-control{display:flex;align-items:center;gap:7px;min-width:0}
+.calculator-view .finance-basis-control small{font-size:11px;color:#7d8b7b;white-space:nowrap}
+.calculator-view .finance-chart-heading>.finance-view-selector{margin-left:auto}
+.calculator-view .finance-chart-heading>strong{font-size:14px;color:#365640;font-weight:600}
+.calculator-view .finance-chart-heading small{font-size:11px;color:#7e8b7e;font-weight:400;margin-left:5px}
+.calculator-view .worksheet-finance-legend{display:flex;gap:17px;font-size:11px}
+.calculator-view .worksheet-finance-legend span{display:inline-flex;align-items:center;gap:6px}
+.calculator-view .worksheet-finance-legend i{display:inline-block;width:17px;height:3px;border-radius:3px;background:#27815c}
+.calculator-view .worksheet-finance-legend i.cost{background:#bd795c}
+.calculator-view .finance-forecast>.worksheet-finance-legend{justify-content:flex-end;margin-bottom:22px}
+.calculator-view .finance-view-selector{display:flex;padding:3px;gap:2px;background:#edf2e9;border-radius:7px}
+.calculator-view #panel .finance-view-selector button{padding:5px 9px;min-height:30px;min-width:42px;border:1px solid transparent;border-radius:5px;background:transparent;font:11px Calibri,'Segoe UI',sans-serif;color:#6b7f6d}
+.calculator-view #panel .finance-view-selector button[aria-pressed=true]{background:#fff;border-color:#dbe6d8;color:#24613f;font-weight:600;box-shadow:0 1px 3px #344f3c0a}
+.calculator-view #panel .finance-view-selector button:hover{color:#24613f}
+.calculator-view #panel .finance-view-selector button:focus-visible{outline:2px solid #27815c;outline-offset:2px}
+.calculator-view .finance-chart{display:grid;grid-template-columns:48px minmax(0,1fr);padding-right:7px}
+.calculator-view .finance-axis{position:relative;height:230px;color:#839080;font-size:11px;font-variant-numeric:tabular-nums}
+.calculator-view .finance-axis span{position:absolute;right:13px;transform:translateY(-50%);white-space:nowrap}
+.calculator-view .finance-plot{position:relative;height:230px;min-width:0}
+.calculator-view .finance-plot svg{display:block;width:100%;height:100%;overflow:visible}
+.calculator-view .finance-grid{stroke:#e6ece3;stroke-width:1;vector-effect:non-scaling-stroke}
+.calculator-view .finance-area{fill:#27815c;opacity:.13}
+.calculator-view .finance-cost-area{fill:#bd795c;opacity:.18}
+.calculator-view .finance-areas,.calculator-view .finance-bars{display:none}
+.calculator-view [data-chart-type=area] .finance-areas,.calculator-view [data-chart-type=bars] .finance-bars{display:block}
+.calculator-view [data-chart-type=bars] .finance-line,.calculator-view [data-chart-type=bars] .finance-guide,.calculator-view [data-chart-type=bars] .finance-dot{display:none}
+.calculator-view [data-chart-basis=monthly] .finance-guide,.calculator-view [data-chart-basis=monthly] .finance-dot{display:none}
+.calculator-view .finance-bar{fill:#27815c}
+.calculator-view .finance-bar.cost{fill:#bd795c}
+.calculator-view .finance-bars>g{opacity:.58;transition:opacity .2s}
+.calculator-view .finance-bars>g[data-selected=true]{opacity:1}
+.calculator-view [data-chart-type=bars] .finance-dates,.calculator-view [data-chart-basis=monthly] .finance-dates{position:relative;height:28px;display:block}
+.calculator-view [data-chart-type=bars] .finance-dates span,.calculator-view [data-chart-basis=monthly] .finance-dates span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.calculator-view .finance-line{fill:none;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.calculator-view .finance-revenue-line{stroke:#27815c}
+.calculator-view .finance-cost-line{stroke:#bd795c;stroke-width:2.5}
+.calculator-view .finance-guide{position:absolute;top:0;bottom:0;left:var(--finance-x);border-left:1px dashed #b6c7b6;pointer-events:none;transition:left .3s ease}
+.calculator-view .finance-dot{position:absolute;display:block;width:10px;height:10px;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px #27815c;transform:translate(-50%,-50%);left:var(--finance-x);pointer-events:none;transition:left .3s ease,top .3s ease;background:#27815c;top:var(--finance-revenue-y)}
+.calculator-view .finance-dot.cost{top:var(--finance-cost-y);background:#bd795c;box-shadow:0 0 0 1px #bd795c}
+.calculator-view .finance-dates{grid-column:2;display:flex;justify-content:space-between;gap:8px;padding-top:13px;color:#7d8b7b;font-size:11px}
+.calculator-view .finance-year-selector{display:flex;gap:6px;margin:22px 0 0;padding:4px;background:#eff3eb;border-radius:9px}
+.calculator-view #panel .finance-year-selector button{flex:1;min-width:0;border:1px solid transparent;border-radius:6px;background:transparent;padding:8px 4px;color:#6b7f6d;font:12px Calibri,'Segoe UI',sans-serif;transition:background .2s,color .2s}
+.calculator-view #panel .finance-year-selector button[aria-pressed=true]{background:#fff;color:#24613f;border-color:#dbe6d8;box-shadow:0 1px 3px #344f3c0a;font-weight:600}
+.calculator-view #panel .finance-year-selector button:hover{color:#24613f;background:#f8fbf5}
+.calculator-view #panel .finance-year-selector button:focus-visible{outline:2px solid #27815c;outline-offset:2px}
+.calculator-view .finance-year-readout{display:flex;justify-content:space-between;align-items:start;flex-direction:column;gap:16px;min-width:0;padding:20px 0}
+.calculator-view .finance-year-label{display:flex;flex-direction:column;gap:5px;color:#3e6048;font-size:13px}
+.calculator-view .finance-year-label span{font-size:11px;color:#7d8b7b}
+.calculator-view .finance-year-readout dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0;min-width:0;width:100%}
+.calculator-view .finance-dashboard .finance-year-label{width:100%;flex-direction:row;align-items:center;justify-content:space-between}
+.calculator-view .finance-year-readout dt{font-size:11px;color:#7d8b7b}
+.calculator-view .finance-year-readout dd{margin:4px 0 0;font-size:18px;font-weight:600;color:#385740;white-space:nowrap;font-variant-numeric:tabular-nums}
+.calculator-view .worksheet-monthly-exact{min-width:600px}
+.calculator-view .worksheet-monthly-exact th:nth-child(n+2),.calculator-view .worksheet-monthly-exact td:nth-child(n+2){text-align:right;white-space:nowrap}
+.calculator-view .finance-forecast.can-animate .finance-line{clip-path:inset(-6px 100% -6px -6px)}
+.calculator-view .finance-forecast.can-animate .finance-dot{opacity:0}
+.calculator-view .finance-forecast.can-animate.is-visible .finance-line{animation:finance-draw 1s cubic-bezier(.2,.65,.35,1) forwards}
+.calculator-view .finance-forecast.can-animate.is-visible .finance-area{animation:finance-area-in .7s .3s both}
+.calculator-view .finance-forecast.can-animate.is-visible .finance-dot{animation:finance-points-in .3s .8s both}
+.calculator-view .finance-forecast.can-animate.is-visible .finance-bar{transform-box:fill-box;transform-origin:center bottom;animation:finance-bar-rise .65s ease both}
+@keyframes finance-draw{to{clip-path:inset(-6px)}}
+@keyframes finance-area-in{from{opacity:0}}
+@keyframes finance-points-in{to{opacity:1}}
+@keyframes finance-bar-rise{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.calculator-view .finance-cost-mix{border:1px solid #dfe7dc;border-radius:14px;background:#fcfdfb;padding:22px 24px;min-width:0}
+.calculator-view .finance-mix-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#365640;font-size:14px}
+.calculator-view .finance-mix-heading small{font-size:11px;color:#7d8b7b}
+.calculator-view .finance-mix-body{display:flex;flex-direction:column;align-items:center;gap:22px;padding-top:25px}
+.calculator-view .finance-donut{position:relative;width:168px;aspect-ratio:1;border-radius:50%;flex:none;display:grid;place-items:center}
+.calculator-view .finance-donut>div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;position:absolute;inset:18px;background:#fcfdfb;border-radius:50%}
+.calculator-view .finance-donut span{font-size:11px;color:#7d8b7b}
+.calculator-view .finance-donut strong{font-size:21px;color:#365640;letter-spacing:-.5px}
+.calculator-view .finance-mix-list{margin:0;width:100%;min-width:0}
+.calculator-view .finance-mix-list>div{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #e7ede3}
+.calculator-view .finance-mix-list>div:last-child{border-bottom:0;padding-bottom:0}
+.calculator-view .finance-mix-list dt{display:flex;align-items:center;gap:7px;font-size:12px;color:#59705e}
+.calculator-view .finance-mix-list i{width:8px;height:8px;border-radius:2px;display:block;flex:none}
+.calculator-view .finance-mix-list dd{display:flex;flex-direction:column;align-items:flex-end;gap:4px;margin:0;font-variant-numeric:tabular-nums;white-space:nowrap}
+.calculator-view .finance-mix-list strong{font-size:16px;color:#365640;font-weight:600}
+.calculator-view .finance-mix-list dd>span{font-size:11px;color:#7d8b7b}
+@media(max-width:1100px){.calculator-view .finance-dashboard{grid-template-columns:minmax(0,1fr)}.calculator-view .finance-mix-body{flex-direction:row;gap:36px;padding-top:18px}.calculator-view .finance-mix-list{flex:1}.calculator-view .finance-mix-list>div:first-child{padding-top:0}}
+@media(max-width:760px){.calculator-view .worksheet-finance-summary strong{font-size:23px}.calculator-view .finance-forecast{padding:20px 16px 0}.calculator-view .finance-year-readout{align-items:start;flex-direction:column;gap:16px}.calculator-view .finance-year-readout dl{width:100%;gap:10px}.calculator-view .finance-year-label{width:100%;flex-direction:row;align-items:center;justify-content:space-between}.calculator-view .finance-year-readout dd{font-size:17px}}
+@media(max-width:480px){.calculator-view .worksheet-finance-summary>div{padding:14px}.calculator-view .finance-forecast{padding:18px 12px 0}.calculator-view .finance-chart-heading{gap:8px;margin-bottom:22px}.calculator-view .finance-chart-heading>strong{font-size:13px}.calculator-view .worksheet-finance-legend{gap:11px;font-size:10px}.calculator-view .finance-chart{grid-template-columns:37px minmax(0,1fr)}.calculator-view .finance-axis,.calculator-view .finance-plot{height:205px}.calculator-view .finance-axis span{right:9px;font-size:10px}.calculator-view .finance-dates{font-size:10px}.calculator-view .finance-year-readout dd{font-size:14px}.calculator-view .finance-year-label span{font-size:10px}}
+@media(max-width:600px){.calculator-view .finance-cost-mix{padding:18px 16px}.calculator-view .finance-mix-body{flex-direction:column;gap:18px}.calculator-view .finance-donut{width:146px}.calculator-view .finance-donut>div{inset:16px}.calculator-view .finance-donut strong{font-size:19px}.calculator-view .finance-mix-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}.calculator-view .finance-mix-list>div{flex-direction:column;align-items:start;gap:7px;padding:0;border:0}.calculator-view .finance-mix-list dd{align-items:start}.calculator-view .finance-mix-list strong{font-size:15px}}
+@media(prefers-reduced-motion:reduce){.calculator-view .finance-forecast .finance-line{animation:none!important;clip-path:none!important}.calculator-view .finance-forecast .finance-area{animation:none!important;opacity:.13!important}.calculator-view .finance-forecast .finance-cost-area{opacity:.18!important}.calculator-view .finance-forecast .finance-dot{animation:none!important;opacity:1!important}.calculator-view .finance-forecast .finance-bar{animation:none!important;transform:none!important}.calculator-view .finance-guide,.calculator-view .finance-dot,.calculator-view .finance-bars>g,.calculator-view #panel .finance-year-selector button{transition:none}}
+.calculator-view .worksheet-plan-actions{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap}
+.calculator-view .worksheet-pending{padding:30px 0;max-width:520px;color:#6c7d6c}
+.calculator-view .worksheet-pending h3{font-size:18px;color:#48654b}
+.calculator-view table:not(.worksheet-fleet){font:12px Calibri,'Segoe UI',sans-serif}
+.calculator-view th,.calculator-view td{border-color:#d3dfce;padding:9px 11px}
+.calculator-view th{background:#e2ecda;color:#506847}
+.calculator-view table:not(.worksheet-fleet) tbody tr:nth-child(even){background:#f6f9f1}
+.calculator-view .calendar button{background:#f4f8ed}.calculator-view .calendar button.active{background:#e7f0dc;border-color:#73926c}
+.calculator-view .note{background:#f1f6e8;border-color:#89a579;font-size:12px!important}
+.calculator-view .source-stamp{font:11px Calibri,'Segoe UI',sans-serif!important;color:#8b9587!important}
+.calculator-view footer{padding:20px 0 30px;color:#7b8b7b}.calculator-view footer a{color:#54785a}.calculator-view footer>span{font:10px Calibri,sans-serif}.calculator-view footer p{font:11px/1.6 Calibri,sans-serif}
+.calculator-view dialog{color:#334a36;background:#f6f9f0;border-color:#aebfab}
+.calculator-view dialog .dialog-head~p{color:#61715e}.calculator-view dialog .stat span{color:#677d60}
+.calculator-view #detail-dialog{width:min(1120px,calc(100% - 30px))}
+.calculator-view #detail-dialog .stats{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:14px 0}
+.calculator-view #detail-dialog .stat{padding:5px 9px}
+.calculator-view #detail-dialog .stat strong{font-size:20px;color:#305b3b}
+.calculator-view #detail-dialog .stat small{color:#667b65}
+.calculator-view #detail-dialog td{background:#fff}
+.calculator-view #detail-dialog tbody tr:nth-child(even) td{background:#f3f7ee}
+.calculator-view #detail-dialog .stat{color:#334a36}
+.calculator-view .unit-schedule-wrap{max-height:58vh;overflow:auto}
+.calculator-view .unit-schedule-table{min-width:980px}
+.calculator-view .unit-schedule-table th:nth-child(n+4),.calculator-view .unit-schedule-table td:nth-child(n+4){text-align:right;white-space:nowrap}
+.calculator-view .unit-schedule-table th:nth-child(3),.calculator-view .unit-schedule-table td:nth-child(3){text-align:left}
+.calculator-view .unit-schedule-table tfoot th,.calculator-view .unit-schedule-table tfoot td{background:#e6efdf;font-weight:600;white-space:nowrap}
+.calculator-view .workload-unit-trigger,.calculator-view .unit-service-detail{border:0;background:transparent;color:#245f3f;text-align:left;padding:3px 5px;text-decoration:underline;text-underline-offset:2px;cursor:pointer;font:inherit}
+.calculator-view .workload-unit-trigger{font-weight:600}
+.calculator-view .workload-unit-trigger:hover,.calculator-view .unit-service-detail:hover{color:#123c28;background:#eaf2e5}
+.calculator-view .detail-back{margin:0 0 10px;padding:7px 10px;border:1px solid #b8c9b4;background:#f8faf5;color:#245f3f;cursor:pointer}
+.calculator-view .detail-back:hover{background:#eaf2e5}
+.calculator-view .profit-summary .big{color:#517947}.calculator-view .cost-ledger tr.profit{background:#5f7f54;color:#fff}.calculator-view .cost-ledger tr.total{background:#e3edda}
+@media(max-width:760px){.calculator-view .fields{grid-template-columns:1fr 1fr}.calculator-view .worksheet-toolbar{display:block}.calculator-view .worksheet-toolbar>div:last-child{margin-top:0}.calculator-view .worksheet-action-row{align-items:start;flex-direction:column;gap:8px}.calculator-view .worksheet-finance-summary{grid-template-columns:1fr 1fr}.calculator-view main{padding:0 16px}.calculator-view .masthead{margin:0 -16px;padding:0 16px}.calculator-view #panel{padding:17px 15px}.calculator-view .workbench-heading{padding:12px 15px}}
+@media(max-width:600px){.calculator-view .worksheet-travel-estimate{grid-template-columns:1fr}.calculator-view .worksheet-travel-estimate span{text-align:left}.calculator-view .worksheet-travel-estimate small{grid-column:auto}}
+@media(max-width:600px){.calculator-view #detail-dialog .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.calculator-view .worksheet-mechanic-estimate{grid-template-columns:1fr auto;gap:5px 10px}.calculator-view .worksheet-mechanic-estimate strong{font-size:20px}}
+@media(max-width:480px){.calculator-view .masthead{font-size:8px;gap:8px;min-height:48px}.calculator-view .intro{padding:19px 0 13px}.calculator-view .intro h1{font-size:22px}.calculator-view .change-note{font-size:11px}.calculator-view .worksheet-fleet{min-width:760px}.calculator-view .worksheet-fleet select{font-size:12px;padding:8px 5px;min-height:42px}.calculator-view .worksheet-fleet input{font-size:14px;min-height:42px}.calculator-view .worksheet-toolbar strong{font-size:16px}.calculator-view .worksheet-toolbar span{font-size:11px}.calculator-view .worksheet-sheet-heading h3{font-size:14px}.calculator-view .worksheet-sheet-heading small{font-size:10px}.calculator-view .fields{gap:12px}.calculator-view label{font-size:11px}.calculator-view input,.calculator-view select{min-height:42px;font-size:14px}.calculator-view footer{display:block}.calculator-view footer p{margin:9px 0}.calculator-view #panel button{min-height:40px}}
+@media(max-width:760px){.calculator-view .worksheet-revenue-row{grid-template-columns:1fr}}
+@media(max-width:600px){.calculator-view .worksheet-quick-staff{flex-wrap:wrap;gap:12px}.calculator-view .worksheet-quick-staff>span{max-width:none;flex:1}.calculator-view .worksheet-quick-staff dl{order:2;flex-basis:100%;gap:8px}.calculator-view .worksheet-quick-staff dd{font-size:21px}.calculator-view .worksheet-travel-estimate{gap:10px 16px}.calculator-view .worksheet-sheet-heading .worksheet-section-title{font-size:14px}.calculator-view .worksheet-sheet-heading small{font-size:10px}}
+@media(max-width:760px){.calculator-view .fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.calculator-view .worksheet-travel-estimate{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px 10px}.calculator-view .worksheet-travel-estimate>span{grid-column:1}.calculator-view .worksheet-travel-estimate button{grid-column:2;grid-row:1/span 2}}
+@media(max-width:600px){.calculator-view #worksheet-section-site .fields>label:nth-child(n+3){grid-column:1/-1}}
+@media(max-width:600px){.calculator-view .worksheet-plan-table{min-width:0;table-layout:fixed;width:100%}.calculator-view .worksheet-plan-table th,.calculator-view .worksheet-plan-table td{padding:8px 5px;font-size:11px;white-space:normal!important}.calculator-view .worksheet-plan-table th:nth-child(1){width:25%}.calculator-view .worksheet-plan-table th:nth-child(2){width:20%}.calculator-view .worksheet-plan-table th:nth-child(3){width:30%}.calculator-view .worksheet-plan-table th:nth-child(5){width:25%}.calculator-view .worksheet-plan-table th:nth-child(4),.calculator-view .worksheet-plan-table td:nth-child(4){display:none}.calculator-view .worksheet-plan-table .money-full{display:none}.calculator-view .worksheet-plan-table .money-short{display:inline;white-space:nowrap}.calculator-view .worksheet-plan-table .mobile-constraint{display:block}.calculator-view .worksheet-plan-table td:first-child small{margin:3px 0 0;display:block;font-size:9px}.calculator-view #panel .worksheet-plan-table button{padding:5px;min-width:34px;font-size:11px;width:100%}}

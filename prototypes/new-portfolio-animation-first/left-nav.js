@@ -319,7 +319,8 @@
     const sections = [
       { id: 'hero', key: 'chapter-01' },
       { id: 'chapter-02', key: 'chapter-02' },
-      { id: 'chapter-03', key: 'chapter-03' }
+      { id: 'chapter-03', key: 'chapter-03' },
+      { id: 'chapter-04', key: 'chapter-03' }
     ];
 
     // Primary focal anchor: 45% of viewport height

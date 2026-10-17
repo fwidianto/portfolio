@@ -89,10 +89,18 @@
       return; // Preserve Chapter 01 or Chapter 02 header status
     }
 
-    const sharedSection = document.getElementById('chapter-03') || document.querySelector('.chapter-working-experience');
+    const ch03El = document.getElementById('chapter-03');
+    const sharedSection = document.getElementById('chapter-04') || document.querySelector('.chapter-working-experience');
+    const ch03Ratio = getVisibleRatio(ch03El);
+    const scene03Ratio = getVisibleRatio(document.getElementById('chapter-03-scene-03'));
     const sharedRatio = getVisibleRatio(sharedSection);
 
-    if (sharedRatio > 0.20) {
+    if(ch03Ratio > 0.20 && window.Chapter03Controller){
+      globalStatusText.textContent=`03.${String(window.Chapter03Controller.getCurrentSceneIndex()+1).padStart(2,'0')} // EXPERIENCE`;
+      return;
+    }
+
+    if (ch03Ratio > 0.20 || scene03Ratio > 0.20 || sharedRatio > 0.20) {
       if (globalStatusText.textContent !== SHARED_STATUS) {
         globalStatusText.textContent = SHARED_STATUS;
       }
@@ -106,9 +114,10 @@
         const href = link.getAttribute('href');
         if (href && href.startsWith('#')) {
           let target = document.querySelector(href);
-          // If targeting ch03, ch04, ch05 or working-experience, resolve to shared placeholder
-          if (href === '#chapter-03' || href === '#chapter-04' || href === '#chapter-05' || href === '#working-experience') {
-            target = document.getElementById('chapter-03') || document.querySelector('.chapter-working-experience') || target;
+          if (href === '#chapter-03' || href === '#working-experience') {
+            target = document.getElementById('chapter-03') || target;
+          } else if (href === '#chapter-04' || href === '#chapter-05') {
+            target = document.getElementById('chapter-04') || document.querySelector('.chapter-working-experience') || target;
           }
           if (target) {
             e.preventDefault();
@@ -123,8 +132,14 @@
   // Handle direct hash navigation on initial load or dynamic hashchange
   function handleHashNavigation() {
     const hash = window.location.hash;
-    if (['#chapter-03', '#chapter-04', '#chapter-05', '#working-experience'].includes(hash)) {
-      const target = document.getElementById('chapter-03') || document.querySelector('.chapter-working-experience');
+    if(window.Chapter03Controller && /^#chapter-03(?:-scene-0[2-5])?$/.test(hash)) return;
+    if (hash === '#chapter-03' || hash === '#chapter-03-scene-03' || hash === '#working-experience') {
+      const target = document.getElementById(hash === '#working-experience' ? 'chapter-03' : hash.slice(1));
+      if (target) {
+        setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 120);
+      }
+    } else if (['#chapter-04', '#chapter-05', '#working-experience'].includes(hash)) {
+      const target = document.getElementById('chapter-04') || document.querySelector('.chapter-working-experience');
       if (target) {
         setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 120);
       }
@@ -142,7 +157,7 @@
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const section = document.getElementById('chapter-03') || document.querySelector('.chapter-working-experience');
+    const section = document.querySelector('.chapter-working-experience') || document.getElementById('chapter-04');
     const cfg = STAR_FORMATION_CONFIG;
 
     // Check reduced motion preference

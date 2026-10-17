@@ -1,0 +1,33 @@
+/* One inspection surface in the inline page and the full-viewport embedded documents. */
+html:has(dialog.ch03-inspection[open]){overflow:hidden!important}
+dialog.ch03-inspection{box-sizing:border-box!important;color-scheme:dark;width:min(1040px,calc(100vw - 48px))!important;max-width:none!important;height:auto;max-height:calc(100svh - 64px)!important;margin:auto!important;padding:32px!important;overflow:auto!important;overscroll-behavior:contain;background:#10141a!important;color:#f1e9df!important;border:1px solid #41434a!important;border-radius:5px!important;box-shadow:0 24px 100px #000a!important;font:14px/1.65 Inter,GameInter,system-ui,sans-serif!important;scrollbar-width:thin;scrollbar-color:#55504a #10141a}
+dialog.ch03-inspection::backdrop{background:#040508eb!important;backdrop-filter:blur(6px)}
+dialog.ch03-inspection{transform:none!important;opacity:1!important;transition:none!important;pointer-events:auto!important}
+dialog.ch03-inspection *{box-sizing:border-box}
+dialog.ch03-inspection :is(.dialog-head,.inspection-header){position:sticky!important;top:-32px!important;margin:-1px -1px 22px!important;padding:12px 54px 14px 0!important;z-index:8!important;background:#10141a!important;border-bottom:1px solid #32353c!important}
+dialog.ch03-inspection .dialog-head::before{background:#10141a!important;inset:-33px -33px 0!important}
+dialog.ch03-inspection h2{font:400 27px/1.2 Inter,GameInter,system-ui,sans-serif!important;letter-spacing:-.035em!important;color:#f1e9df!important;margin:12px 54px 22px 0!important}
+dialog.ch03-inspection :is(.dialog-head,.inspection-header) h2{margin-bottom:0!important}
+dialog.ch03-inspection h3{font:500 14px/1.5 Inter,GameInter,system-ui,sans-serif!important;color:#d8b18c!important;margin:24px 0 10px!important}
+dialog.ch03-inspection :is(p,li){font-size:13px!important;line-height:1.75!important;color:#b8bac0!important}
+dialog.ch03-inspection :is(.eyebrow,.ch03-info-kicker){font:10px/1.5 'JetBrains Mono',monospace!important;letter-spacing:.08em!important;color:#cba27c!important}
+dialog.ch03-inspection strong{color:#eee0cc}
+dialog.ch03-inspection a{color:#e2af80!important}
+dialog.ch03-inspection .ch03-inspection-close{position:sticky!important;float:right!important;top:0!important;right:0!important;z-index:15!important;width:44px!important;height:44px!important;min-height:44px!important;margin:0 0 0 10px!important;padding:0!important;flex:none!important;background:#191e25!important;color:#e9dfd1!important;border:1px solid #4b4541!important;border-radius:50%!important;font:24px/1 system-ui!important;cursor:pointer!important}
+dialog.ch03-inspection :is(.dialog-head,.inspection-header) .ch03-inspection-close{position:absolute!important;top:10px!important;right:0!important}
+dialog.ch03-inspection button:not(.ch03-inspection-close){min-height:44px!important;cursor:pointer}
+dialog.ch03-inspection :is(button,input,select,summary,[tabindex]):focus-visible{outline:2px solid #e9b17d!important;outline-offset:3px!important}
+dialog.ch03-inspection :is(select,input){color-scheme:dark;background:#1b252c!important;color:#f1e9df!important;border:1px solid #4b5359!important;min-height:44px!important;padding:8px!important;font:13px Inter,GameInter,system-ui!important;max-width:100%}
+dialog.ch03-inspection :is(.report-tabs,.calculation-tabs,.workbook-tabs){background:#10141a!important;border-color:#3c4147!important;gap:8px;flex-wrap:nowrap;overflow:auto;scrollbar-width:thin}
+dialog.ch03-inspection :is(.report-tabs,.calculation-tabs,.workbook-tabs) button{white-space:nowrap;color:#b8bac0!important;border-color:transparent!important;background:transparent!important;font:12px Inter,GameInter,system-ui!important}
+dialog.ch03-inspection :is(.report-tabs,.calculation-tabs,.workbook-tabs) :is([aria-selected=true],[aria-pressed=true]){color:#efc29a!important;border-bottom:2px solid #c58859!important}
+dialog.ch03-inspection :is(.inspection-table,.workbook-grid){max-width:100%;overflow:auto;scrollbar-width:thin}
+dialog.ch03-inspection :is(.dialog-note,.provenance,.inspection-note){font-size:11px!important;color:#909ba5!important;border-color:#3c4147!important}
+dialog.ch03-inspection :is(.review-note,.note,.inspection-note){background:#182029!important;border-color:#3f515b!important;color:#c4c9ce!important}
+dialog.ch03-inspection :is(dt,th){color:#9fb1bb}
+dialog.ch03-inspection :is(dd,td){color:#dfdfd8}
+dialog.ch03-inspection :is(td,th){border-color:#303d45!important}
+dialog.ch03-inspection .primary-button{background:#bb865d!important;color:#0a0e13!important;border-color:#d8a475!important}
+#ch03-info-dialog #ch03-info-example{background:#24303a;border:1px solid #58616b;color:#f1dac0;padding:10px 16px;margin-top:16px;min-height:44px}
+@media(max-width:600px){dialog.ch03-inspection{width:calc(100vw - 24px)!important;max-height:calc(100svh - 24px)!important;padding:20px!important}dialog.ch03-inspection h2{font-size:23px!important}dialog.ch03-inspection :is(.dialog-head,.inspection-header){top:-20px!important;padding-top:8px!important}dialog.ch03-inspection .dialog-head::before{inset:-21px -21px 0!important}dialog.ch03-inspection :is(p,li){font-size:12px!important}}
+@media(prefers-reduced-motion:reduce){dialog.ch03-inspection,dialog.ch03-inspection *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

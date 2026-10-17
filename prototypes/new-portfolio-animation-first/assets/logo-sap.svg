@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+  <defs>
+    <linearGradient id="sapBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#008fd3" />
+      <stop offset="100%" stop-color="#005085" />
+    </linearGradient>
+    <filter id="sapDrop" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <!-- SAP Official Trapezoid Shape -->
+  <polygon points="6,6 142,6 194,94 6,94" fill="url(#sapBlueGrad)" rx="4" filter="url(#sapDrop)"/>
+  <!-- SAP Bold White Wordmark -->
+  <text x="76" y="68" fill="#ffffff" font-family="'Arial Black', 'Helvetica Black', sans-serif" font-weight="900" font-size="54" text-anchor="middle" letter-spacing="4">SAP</text>
+</svg>

@@ -1,0 +1,102 @@
+/* Chapter mode only: the original game artwork and model retain their own colours. */
+.game-view,.game-view body{height:100%;background:transparent!important;overflow:hidden!important;color:#e9e2d7;color-scheme:dark;font-family:GameInter,Inter,system-ui,sans-serif}
+.game-view .warehouse-app{height:100%;width:min(1400px,100%);padding:0 28px!important;max-width:1400px!important;display:grid;grid-template-rows:44px minmax(0,1fr) 54px;gap:8px}
+.game-view .game-header{min-height:44px!important;margin:0!important;gap:10px}
+.game-view .warehouse-app .game-header{flex-wrap:nowrap}
+.game-view .warehouse-app .game-context{width:auto;flex:none}
+.game-view .game-wordmark,.game-view .game-context>span:first-child,.game-view .mission-heading,.game-view .game-footer,.game-view #game-feedback,.game-view .game-skip{display:none!important}
+.game-view .game-header .quiet-button{display:none}
+.game-view .game-context{display:flex!important;gap:0;order:-1}
+.game-view .synthetic-badge{font-size:9px;padding:5px 8px;color:#b8afa3;border-color:#3b3d40;background:#13171d}
+.game-view :is(.quiet-button,.chapter-management,.chapter-close-management){border:1px solid #42464c;background:#151c23;color:#debf9e;min-height:44px;border-radius:3px;font:11px GameInter,Inter,sans-serif;padding:8px 12px;cursor:pointer}
+.game-view .chapter-management{margin-left:auto}
+.game-view .warehouse-layout{display:grid!important;grid-template-columns:minmax(0,1fr);gap:16px;min-height:0}
+.game-view .warehouse-app[data-management=open] .warehouse-layout{grid-template-columns:minmax(0,1fr) 320px}
+.game-view .warehouse-app[data-management=closed] .ops-panel{display:none}
+.game-view .warehouse-stage{position:relative!important;top:auto!important;height:100%!important;min-height:0!important;background:#080c11;border:1px solid #2b333b;border-radius:3px;container-type:size}
+.game-view .living-world{inset:50px 0 62px;background:transparent}
+.game-view .site-exterior{width:min(100%,calc((100cqh - 112px)*1.6));left:50%;transform:translate(-50%,-50%)}
+.game-view .exterior-image{border-radius:2px;filter:saturate(.88) brightness(.88)}
+.game-view .living-svg{filter:saturate(.9)}
+.game-view .exterior-pin{background:#131e26ed;border:1px solid #6f705d;border-radius:3px;color:#f3e3c8;min-height:44px;font-size:10px;padding:7px 10px}
+.game-view .exterior-pin span{color:#bcc2b5;font-size:8px}
+.game-view .exterior-operation{display:none}
+.game-view .live-strip{left:14px;right:14px;top:12px;font-size:8px;letter-spacing:.06em;color:#c3b9ab}
+.game-view .live-strip span:first-child:before{background:#bf9669}
+.game-view .warehouse-tools{top:34px;left:12px;gap:6px}
+.game-view :is(.warehouse-tools button,.clock-controls button,.clock-controls select){background:#131c24e8;color:#d6c8b6;border:1px solid #41464b;border-radius:3px;min-height:44px;font-size:10px;padding:7px 10px}
+.game-view .warehouse-tools button[aria-pressed=true]{background:#293039;color:#efc29b;border-color:#795e46}
+.game-view .clock-controls{padding:8px 12px;gap:8px;background:#10161cf5;border-color:#343b42;display:flex;flex-wrap:nowrap}
+.game-view .clock-controls label{color:#a8a5a0;font-size:9px;flex-direction:row!important}
+.game-view .clock-controls select{min-width:52px;padding:6px}
+.game-view .clock-controls #play-mission{background:#a8734d;border-color:#cb9469;color:#080d13;min-width:130px}
+.game-view .selected-caption{bottom:74px;background:#101b24ed;color:#d7d5c8;border-color:#49535a;font-size:9px}
+.game-view .ops-panel{position:relative!important;min-height:0;height:100%;max-height:none!important;background:#111820;border:1px solid #3a4148;border-radius:3px;box-shadow:none;overflow:hidden}
+.game-view .ops-tabs{position:relative!important;top:auto;padding:0 8px;gap:0;border-color:#353d45;background:#111820;flex-shrink:0}
+.game-view .ops-tabs button{font-size:11px;color:#a9afb4;min-height:44px}
+.game-view .ops-tabs button[aria-pressed=true]{color:#e6bd96;border-color:#c1895e}
+.game-view .ops-tabs .chapter-close-management{width:44px;flex:none;border:0;margin:0;padding:0;font-size:20px}
+.game-view .ops-panel #decision{min-height:0;max-height:none;overflow:auto!important;padding:20px;scrollbar-width:thin;overscroll-behavior:contain;scroll-padding:16px;outline-offset:-3px}
+.game-view #operations #game-feedback:not(:empty){display:block!important;flex-shrink:0;max-height:48px;overflow:auto;margin:6px 14px 0;padding:6px 8px;border-left:1px solid #bb885f;background:#1b2830;color:#cbd0cc;font-size:10px;line-height:1.5}
+.game-view .ops-panel :is(button,input,select){scroll-margin:16px!important}
+.game-view .ops-panel h2{font-size:23px;font-weight:400;color:#eee3d4;line-height:1.2}
+.game-view .ops-panel :is(p,label,.microcopy){color:#acb2b7}
+.game-view .ops-panel .eyebrow{color:#c49a75;letter-spacing:.1em;font-size:9px}
+.game-view .ops-panel :is(input,select){background:#1b2730;border:1px solid #4a535a;color:#ede2d3;min-height:44px;font-size:12px;border-radius:2px}
+.game-view .ops-panel .primary-button{background:#b98156;border-color:#ca996f;color:#0e131a;border-radius:3px}
+.game-view .ops-panel .ticket-link{color:#deb68e}
+.game-view .ops-panel :is(.unit-status,.improvement-options button){background:#1b2730;border-color:#465059;color:#d9d8ca}
+.game-view .ops-panel :is(.unit-status b,.workshop-summary){color:#e7d9c4}
+.game-view .warehouse-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0!important;gap:12px;padding:4px 12px;border:0}
+.game-view .warehouse-stats>div{padding:0 8px 0 0;border-color:#2b333a}
+.game-view .warehouse-stats span{font-size:9px;color:#9b9e9f;margin-bottom:4px}
+.game-view .warehouse-stats strong{font-size:15px;color:#e1c7a6;font-weight:450}
+.game-view :is(button,input,select,summary):focus-visible{outline:2px solid #dfaa78;outline-offset:3px}
+.game-view #driving-controls{background:#14232ded;border-color:#68706c;color:#e8dcc5}
+/* Calculation tables keep their live sources and bounded horizontal scrolling. */
+.game-view #game-calculations .inspection-table{border-color:#3a4953;border-radius:3px}
+.game-view #game-calculations .inspection-table table{background:#14212a;color:#d8e1e2}
+.game-view #game-calculations .inspection-table th{background:#24343d;color:#bccfd5;font-weight:500}
+.game-view #game-calculations .inspection-table td{background:#14212a;color:#dfdfd6;border-color:#35444f}
+.game-view #game-calculations .inspection-table tr:nth-child(even) td{background:#192832}
+.game-view #game-calculations .inspection-table table:has(thead th:nth-child(2):last-child){min-width:0;table-layout:auto}
+.game-view #game-calculations .inspection-table table:has(thead th:nth-child(2):last-child) :is(td,th){white-space:normal;overflow-wrap:anywhere}
+.game-view #game-calculations :is(.offer-price,.inspection-stats strong){color:#e6bd91}
+.game-view #game-calculations :is(label,.inspection-selectors>label,.monthly-inspection summary){color:#b7c4c9}
+.game-view #game-calculations .inspection-stats>div{background:#192832;border:1px solid #3d4c53;border-radius:3px}
+.game-view #game-calculations .inspection-stats span{color:#a7bbc4}
+.game-view #game-calculations .game-profit-chart{background:#182a2b;border:1px solid #3d5155;border-radius:3px}
+.game-view #game-calculations .inspection-table button{color:#b6d4c6}
+@media(max-width:760px) and (orientation:portrait){
+ .game-view .warehouse-app{padding:0 12px!important;gap:6px;grid-template-rows:44px minmax(0,1fr) 48px}
+ .game-view .warehouse-app[data-management=open] .warehouse-layout{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(220px,1.25fr) minmax(180px,1fr);gap:8px}
+ .game-view .warehouse-layout{min-height:0;gap:8px}
+ .game-view .warehouse-tools{left:8px;right:8px;top:32px;gap:4px}
+ .game-view .warehouse-tools button{font-size:9px;padding:6px;flex:1;white-space:nowrap}
+ .game-view .live-strip{left:10px;right:10px;font-size:7px;letter-spacing:0}
+ .game-view .living-world{inset:68px 0 58px}
+ .game-view .site-exterior{width:min(100%,calc((100cqh - 126px)*1.6))}
+ .game-view .clock-controls{padding:5px;gap:4px;display:flex}
+ .game-view .clock-controls button{font-size:9px;padding:5px;flex:1;white-space:nowrap}
+ .game-view .clock-controls #play-mission{min-width:95px;flex:1.7}
+ .game-view .clock-controls label{font-size:0;gap:0}.game-view .clock-controls select{font-size:10px;min-width:48px;min-height:44px}
+ .game-view .ops-panel #decision{padding:16px;scroll-padding:12px}
+ .game-view .ops-panel h2{font-size:21px}.game-view .ops-panel input{font-size:16px}
+ .game-view .warehouse-stats{gap:8px;padding:2px}.game-view .warehouse-stats span{font-size:7px}.game-view .warehouse-stats strong{font-size:11px}
+ .game-view .selected-caption{bottom:60px;font-size:8px;padding:5px}
+ .game-view .exterior-pin{font-size:8px;padding:5px;max-width:120px;gap:2px}.game-view .exterior-pin span{font-size:6px}
+ .game-view .warehouse-app[data-management=open] .exterior-pin{max-width:104px;padding:4px 5px}
+ .game-view .warehouse-app[data-management=open] .exterior-pin span{display:none}
+ .game-view .chapter-management,.game-view .quiet-button{font-size:10px;padding:6px 9px}
+ .game-view #driving-controls{bottom:64px;right:7px;width:175px;padding:6px}
+}
+@media(max-height:420px) and (orientation:landscape){
+ .game-view .warehouse-app{padding:0 18px!important;gap:2px;grid-template-rows:44px minmax(0,1fr)}
+ .game-view .warehouse-stats{display:none}.game-view .living-world{inset:0 0 50px}
+ .game-view .site-exterior{width:min(100%,calc((100cqh - 50px)*1.6))}
+ .game-view .warehouse-tools{top:5px;left:5px}.game-view .live-strip{display:none}
+ .game-view .clock-controls{padding:3px 8px}.game-view .warehouse-app[data-management=open] .warehouse-layout{grid-template-columns:minmax(0,1fr) 280px}
+ .game-view .exterior-warehouse{left:-165px;top:65px;width:145px}
+ .game-view .exterior-office{left:calc(100% + 15px);right:auto;top:5px;width:170px}
+ .game-view .exterior-workshop{left:calc(100% + 15px);top:65px;width:170px}
+}

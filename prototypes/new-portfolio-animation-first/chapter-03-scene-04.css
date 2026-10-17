@@ -1,0 +1,50 @@
+/* Embedded-only presentation. The reporting model and workbook UI remain shared. */
+html,body{height:100%;overflow:hidden!important;background:transparent!important;margin:0!important}
+.page{height:100%;width:100%;padding:0!important;max-width:none!important}.masthead,.intro,.world-top,.status-line,footer,.skip,#sky-mount,.world-legend{display:none!important}
+.simulation{height:100%;width:100%;position:relative;background:transparent!important}.world,.world.dashboard-active{position:absolute;inset:0;height:100%!important;background:transparent!important}
+.world>canvas,.world.dashboard-active>canvas{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0!important;width:min(100vw,calc((100vh - 70px)*1.666667))!important;height:min(calc(100vh - 70px),60vw)!important;max-width:none!important}
+.world-controls{position:absolute;bottom:7px;left:20px;right:20px;padding:0!important;border:0!important;justify-content:center;background:transparent!important;z-index:4}.world-controls .control-group:first-child,#saved-count{display:none!important}.world-controls .control-group:last-child{justify-content:center;gap:25px;width:auto}.world-controls button{font:10px Inter,sans-serif;min-height:36px;color:#cbb78f}
+#hq-presentation{top:34px;width:calc(100% - 80px);max-width:1080px}.hq-screen{max-height:calc(100vh - 180px)}.hq-monitor-top button{min-height:36px}.dashboard-active+.world-controls{display:none}.simulation:has(.dashboard-active)>.world-controls{display:none}
+dialog{max-height:calc(100vh - 20px)!important}#workbook-body{max-height:calc(100vh - 370px);min-height:120px}.workbook-menu{gap:16px}
+@media(max-width:600px){.world>canvas,.world.dashboard-active>canvas{width:min(100vw,calc((100vh - 64px)*.631579))!important;height:min(calc(100vh - 64px),158.333333vw)!important}.computer-hit:after{font-size:6px}.world-controls{left:8px;right:8px;bottom:4px}.world-controls button{min-height:44px;font-size:9px}#hq-presentation{top:38px;width:calc(100% - 14px)}.hq-screen{max-height:calc(100vh - 175px)}.hq-dashboard-toolbar{gap:4px}.hq-monitor-bottom:after{font-size:7px}.hq-bezel{border-width:2px}.hq-monitor-top{padding:5px}.hq-monitor-top button{min-height:40px}.hq-monitor-stand{height:15px}#workbook-dialog{width:calc(100% - 12px)}#workbook-body{min-height:110px;max-height:calc(100vh - 430px)}.workbook-foot{padding:5px 12px}.transfer-view canvas{height:55px}}
+
+.computer-hit .pc-name{visibility:hidden}
+#view-dashboard{display:none!important}
+@media(max-width:600px){.world-controls{bottom:44px}.world>canvas,.world.dashboard-active>canvas{width:min(100vw,calc((100vh - 110px)*.631579))!important;height:min(calc(100vh - 110px),158.333333vw)!important;top:calc(50% - 20px)}}
+
+/* Existing dashboard and drilldowns use the same inspection bounds as every other scene. */
+#ch03-dashboard-dialog #hq-presentation{position:relative!important;inset:auto!important;width:100%!important;max-width:none!important;transform:none!important;margin:0!important}
+#ch03-dashboard-dialog .hq-bezel{border:0!important;background:transparent!important;padding:0!important;border-radius:0!important;box-shadow:none!important}
+#ch03-dashboard-dialog .hq-monitor-top{background:#10141a;border-bottom:1px solid #3c4147;padding:0 54px 15px 0;min-height:56px;position:sticky;top:-32px;z-index:8}
+#ch03-dashboard-dialog #dashboard-back{position:absolute!important;top:0!important;right:0!important;font-size:0!important}
+#ch03-dashboard-dialog #dashboard-back:after{content:'×';font:24px system-ui}
+#ch03-dashboard-dialog .hq-screen{max-height:none!important;overflow:visible!important;background:transparent!important;border:0!important;padding:0!important}
+#ch03-dashboard-dialog :is(.hq-monitor-bottom,.hq-monitor-stand){display:none}
+#ch03-dashboard-dialog .hq-dashboard-toolbar{flex-wrap:wrap;background:#10141a;color:#c7c4bd;padding:12px 0;gap:10px}
+#ch03-dashboard-dialog #dashboard-charts{padding:0!important}
+#ch03-dashboard-dialog :is(.db-chart,.db-summary>div){background:#151f28;border-color:#344450}
+#ch03-dashboard-dialog .db-heading h3{color:#e9dfce!important}
+#workbook-dialog.ch03-inspection{display:flex;flex-direction:column}
+#workbook-dialog.ch03-inspection:not([open]){display:none}
+#workbook-dialog.ch03-inspection #workbook-body{flex:1;max-height:min(46svh,430px);min-height:110px}
+#workbook-dialog.ch03-inspection :is(.workbook-head,.workbook-menu,.workbook-tabs,.workbook-formula,.workbook-foot){background:#101820;color:#c2c4c1;border-color:#3b4953;flex-shrink:0}
+#workbook-dialog.ch03-inspection .workbook-head{padding-right:54px;position:relative}
+#workbook-dialog.ch03-inspection #close-workbook{position:absolute!important;right:0!important;top:0!important}
+#workbook-dialog.ch03-inspection :is(.workbook-title,.workbook-toolbar,.sheet-actions,.workbook-foot,.table-hint,.overview-note,.hq-source-list){background:#131d26!important;border-color:#3b4953!important;color:#a9bac3!important;flex-shrink:0}
+#workbook-dialog.ch03-inspection .workbook-title{position:relative;padding:0 52px 14px 0;gap:12px}
+#workbook-dialog.ch03-inspection .workbook-title h2{font-size:22px!important;margin:8px 0!important}
+#workbook-dialog.ch03-inspection .workbook-title p{margin:0}
+#workbook-dialog.ch03-inspection #workbook-body{background:#101820!important}
+#workbook-dialog.ch03-inspection .data-table{color:#d4dce0;background:#14212b}
+#workbook-dialog.ch03-inspection .data-table :is(td,.row-number){background:#15212b;color:#c7d4db}
+#workbook-dialog.ch03-inspection .data-table .letters th{background:#182630;color:#92a9b5}
+#workbook-dialog.ch03-inspection .data-table .field-head th{background:#24343e;color:#c2d2d8}
+#workbook-dialog.ch03-inspection .data-table caption{background:#1a2933;color:#aabdc8}
+#workbook-dialog.ch03-inspection .data-table .draft-row td{background:#1d2b34}
+#workbook-dialog.ch03-inspection .data-table tr.recent td{background:#243c32}
+#workbook-dialog.ch03-inspection .data-table :is(.calculated,.record-state){color:#9fc6ae}
+#workbook-dialog.ch03-inspection .sheet-actions button{background:#253a35;color:#c5dac6;border-color:#536759}
+#workbook-dialog.ch03-inspection .local-chip{background:#25372e;color:#a6c4ae}
+#workbook-dialog.ch03-inspection .workbook-menu{padding-left:0}
+#workbook-dialog.ch03-inspection .table-hint{padding:8px 12px}
+@media(max-width:600px){#ch03-dashboard-dialog .hq-monitor-top{top:-20px}#workbook-dialog.ch03-inspection{padding:16px!important}#workbook-dialog.ch03-inspection #workbook-body{max-height:40svh;min-height:100px}.workbook-menu{gap:6px;flex-wrap:wrap}.transfer-view canvas{height:40px}.world-controls{bottom:0}}

@@ -55,8 +55,16 @@ function generateProductionHtml(sourceHtml) {
     '<section id="scene-03"',
     '<section id="scene-04"',
     '<section id="scene-05"',
-    '<section id="chapter-03" class="chapter-working-experience"'
+    '<section id="chapter-03" class="chapter-03-unified"',
+    '<section id="chapter-04" class="chapter-working-experience"',
+    'id="ch03-stage"',
+    'id="ch03-information"',
+    'id="ch03-info-dialog"',
+    '<script type="module" src="film.js"></script>',
+    '<script src="chapter-03.js"></script>'
   ];
+  for (let scene = 1; scene <= 5; scene++) requiredSections.push(`id="ch03-layer-${scene}"`);
+  for (let scene = 2; scene <= 5; scene++) requiredSections.push(`id="ch03-scene0${scene}-frame"`);
 
   for (const section of requiredSections) {
     const count = (output.split(section).length - 1);
@@ -71,8 +79,6 @@ function generateProductionHtml(sourceHtml) {
     'dormant-chapter-03-content',
     'dormant-chapter-04-content',
     'dormant-chapter-05-content',
-    'chapter-03.css',
-    'chapter-03.js',
     'chapter-04.css',
     'chapter-04.js',
     'chapter-05.css',
@@ -134,11 +140,14 @@ function generateProductionHtml(sourceHtml) {
 
   // Modular Scripts
   output = output.replace(/src="(chapter-[^"]+\.js(?:\?[^"]*)?)"/g, 'src="prototypes/new-portfolio-animation-first/$1"');
-  output = output.replace('src="left-nav.js"', 'src="prototypes/new-portfolio-animation-first/left-nav.js"');
+  output = output.replace(/src="(left-nav\.js(?:\?[^"]*)?)"/g, 'src="prototypes/new-portfolio-animation-first/$1"');
   output = output.replace('src="analytics-optout.js"', 'src="prototypes/new-portfolio-animation-first/analytics-optout.js"');
+  output = output.replace('src="film.js"', 'src="prototypes/new-portfolio-animation-first/film.js"');
+  output = output.replace(/src="(scene-0[2-5]\/index\.html(?:\?[^"]*)?)"/g, 'src="prototypes/new-portfolio-animation-first/$1"');
 
   // Static Assets / Images
   output = output.replace(/src="assets\/([^"]+)"/g, 'src="prototypes/new-portfolio-animation-first/assets/$1"');
+  output = output.replace(/((?:xlink:)?href)="assets\/([^"]+)"/g, '$1="prototypes/new-portfolio-animation-first/assets/$2"');
 
   // --------------------------------------------------------------------------
   // 5. Fail-Closed Post-Transformation Checks

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="From reimbursement to control. An interactive account of Fauzan Widianto's fuel-card process improvement at PT Traktor Nusantara, 2019–2022.">
+  <meta name="theme-color" content="#07090e">
+  <title>From reimbursement to control — Chapter III, Scene 02</title>
+  <link rel="icon" href="assets/fw-monogram.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <script src="assets/pixel-scene.js" defer></script>
+  <script src="animation.js" defer></script>
+  <script src="../chapter-03-embedded.js" defer></script>
+</head>
+<body>
+  <a href="#player" class="skip">Skip to film controls</a>
+  <main class="viewer">
+    <section class="film" aria-label="From reimbursement to control: interactive 36-second film">
+      <div id="stage" class="stage" tabindex="0" aria-label="Animation. Space plays or pauses. Left and right arrows seek. Home and End jump to the beginning and end.">
+        <canvas id="scene" width="640" height="400" role="img" aria-label="Mechanics’ fuel receipts and reimbursement claims.">A mechanic’s fuel receipts become claims, then a centrally funded vehicle-card process.</canvas>
+      </div>
+      <div class="player" id="player">
+        <input id="timeline" type="range" min="0" max="36" value="0" step="0.01" aria-label="Film timeline in seconds">
+        <div class="control-row">
+          <div class="primary-controls"><button id="play" class="play-button" aria-label="Play film"><span id="play-icon" aria-hidden="true">▶</span><span id="play-label">Play film</span></button><button id="replay" class="icon-button" aria-label="Replay film" title="Replay">↺</button><output id="time" for="timeline">00:00 <span>/ 00:36</span></output></div>
+          <div class="secondary-controls"><label class="speed"><span class="sr-only">Playback speed</span><select id="speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option></select></label><button id="inspect" class="icon-button" aria-label="Explore a transaction" title="Explore a transaction">⌕</button><button id="about" class="icon-button" aria-label="Project details and attribution" title="Project details">i</button><button id="motion" class="icon-button" aria-label="Enable reduced motion" aria-pressed="false" title="Motion preference">◒</button></div>
+        </div>
+        <nav class="act-nav" aria-label="Film acts"><button data-act="0" aria-label="Go to act 1: Receipts" aria-current="step"><span>01</span>Receipts</button><button data-act="1" aria-label="Go to act 2: Research"><span>02</span>Research</button><button data-act="2" aria-label="Go to act 3: Fleet"><span>03</span>Fleet</button><button data-act="3" aria-label="Go to act 4: Fuel"><span>04</span>Fuel</button><button data-act="4" aria-label="Go to act 5: Records"><span>05</span>Records</button><button data-act="5" aria-label="Go to act 6: Outcome"><span>06</span>Outcome</button></nav>
+      </div>
+    </section>
+    <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+    <noscript><p>This film requires JavaScript. The project replaced personal fuel payments and reimbursement claims with centrally funded vehicle cards and vendor records for manual cost control.</p></noscript>
+  </main>
+  <dialog id="about-dialog" aria-labelledby="about-title">
+    <form method="dialog"><button class="close" aria-label="Close project details">×</button></form><p class="eyebrow">THE PROJECT / 2019—2022</p><h2 id="about-title">A practical improvement<br>to everyday operations.</h2>
+    <p>As a Cost Control Analyst at PT Traktor Nusantara, I was assigned to help improve the fuel payment process for our service fleet. Mechanics had been advancing personal money, collecting receipts, and submitting reimbursement claims.</p>
+    <h3>My contribution</h3><p>I researched vendors, evaluated options, contacted Pertamina Retail, and helped establish the arrangement. I then monitored vehicle fuel usage, reviewed balance requirements, and recommended top-ups.</p>
+    <div class="facts"><div><strong>≈40</strong><span>operational vehicles</span></div><div><strong>≈IDR 50m</strong><span>monthly funding / top-ups</span></div></div>
+    <h3>Technology & attribution</h3><p>Pertamina Retail supplied the RFID cards and transaction reporting system. This project involved process improvement and implementation coordination. It did not include a custom real-time API, GPS tracking, or automatic account replenishment.</p>
+    <p class="dialog-note">All vehicles, amounts, odometer readings, dates, interfaces, station geometry, and card artwork in the demonstration are illustrative. The approximate fleet size and monthly funding above are owner-supplied historical facts. No savings or fraud prevention results are claimed.</p>
+    <a class="source-link" href="https://pertaminaretail.com/bussines/bahan-bakar" target="_blank" rel="noreferrer">Pertamina Retail product reference ↗</a>
+  </dialog>
+  <dialog id="transaction-dialog" aria-labelledby="transaction-title">
+    <form method="dialog"><button class="close" aria-label="Close transaction details">×</button></form><p class="eyebrow">ILLUSTRATIVE VENDOR RECORD</p><h2 id="transaction-title">A vehicle. A purchase.<br>A usable record.</h2>
+    <label class="vehicle-selector">Choose a vehicle<select id="vehicle-select"><option value="0">DEMO VH-017 · Service pickup</option><option value="1">DEMO VH-024 · Service pickup</option><option value="2">DEMO VH-031 · Service pickup</option></select></label>
+    <dl id="transaction-detail"></dl><p class="review-note" id="review-note"></p><p class="dialog-note">Synthetic examples, not company records or a live vendor interface. Distance is the difference between two odometer readings. The illustrative km/L comparison assumes comparable fill levels; it is a review prompt, not a finding.</p>
+  </dialog>
+</body>
+</html>

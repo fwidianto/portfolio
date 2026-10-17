@@ -26,7 +26,8 @@ Do not reconstruct historical design explorations or animation authorities unles
     - **Scene 03**: Astra Agro Lestari Palm Oil Mill Internship (Owner-approved baseline; clean industrial canvas with duplicate headers and slogans hidden via `layer-text-zones` `display="none"`, causal 6-stage batch flow, and inspectable dossier modal).
     - **Scene 04**: Journey to Tokyo / Tokyo Tech (Integrated 04.A–04.E sequence complete).
     - **Scene 05**: Undergraduate Thesis / Synthesis (25.0s apparatus and phase separation sequence).
-  - **Chapters III–V**: Intentionally represented in the public prototype by the shared **Working Experience / Under Development** placeholder (`#chapter-03` / `#working-experience`) with interactive star/dust canvas, while unfinished implementations remain preserved and dormant in standalone prototype workspaces and dormant templates.
+  - **Chapter III / Working Experience**: Owner-authorized five-scene integration: service profitability, fuel-card cost control, purchase request control, multi-site operations reporting, and maintenance-contract economics. Shared presentation/inspection keeps synthetic data and project boundaries explicit. `#working-experience` remains a Chapter III alias.
+  - **Chapters IV–V**: Remaining **Under Development** placeholder at `#chapter-04` / `#chapter-05`.
   - **Visual Editor**: Isolated development-only workflow (`dev-editor.js` / `dev-editor.css` loaded strictly on demand via `?edit=1`, `#edit`, or local shortcut; zero runtime in normal public viewing).
 - `../Projects/Odoo-ERP-Analytics.html` is the current flagship case-study page.
 - `../prototypes/editorial-systems/` is older animation work and is not Red Dwarf Hero authority by default.
@@ -37,3 +38,5 @@ The previously referenced `../prototypes/red-dwarf-animation/red-dwarf-animation
 For materially visual work, rendered evidence is required. For unfamiliar or architecture-sensitive animation work, validate the rendering approach with a bounded proof before committing to the full implementation.
 
 Current Chapter 02 work must preserve owner-approved Hero and Scene 01 decisions, maintain the shared night-sky background language, and stop at the explicit scene boundary defined by the active brief.
+
+Chapter III publication details and validation commands are in `chapter-03-publication.md`. Run `node --test tests/chapter03-publication.test.mjs` for production-generation regression checks, and `node scripts/sync-production-html.mjs --check` for source/output synchronization.

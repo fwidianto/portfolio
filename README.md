@@ -11,9 +11,9 @@ The portfolio presents an **Analytical Systems Builder** profile: understand the
 ## Current state
 
 - `main` is the current production baseline.
-- `design/editorial-systems-prototype` is the active implementation path for the approved Red Dwarf portfolio direction.
+- `prototypes/new-portfolio-animation-first/index.html` is the authoritative homepage source; `scripts/sync-production-html.mjs` generates root `index.html`.
 - `.design/CURRENT_DIRECTION.md` is the current visual/design authority for that work.
-- `prototypes/red-dwarf-animation/index.html` is the existing approximately 14-second Red Dwarf formation animation, frozen and owner-approved as-is. Production integration is a separate decision.
+- The Red Dwarf Hero and complete Chapter II sequence are accepted public baselines. Chapter III contains five owner-authorized working-experience scenes with shared presentation and inspection; displayed financial/operational examples are explicitly synthetic.
 - `AGENTS.md` contains repository-specific AI working rules.
 - `docs/README.md` is the minimal routing guide.
 

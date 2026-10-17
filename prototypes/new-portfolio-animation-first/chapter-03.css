@@ -1,0 +1,89 @@
+/* Shared Chapter III presentation; scene renderers retain their own physical objects. */
+#chapter-03.chapter-03-unified{height:100svh;min-height:500px;padding:64px 0 0;background-color:#040508;background-image:var(--ch02-bg-vignette);position:relative;isolation:isolate;overflow:clip}
+#chapter-03.chapter-03-unified::before{display:none}
+.ch03-night-sky{position:absolute;inset:0;z-index:0;pointer-events:none}.ch03-night-sky svg{width:100%;height:100%}
+#ch03-stage{position:relative;z-index:1;width:100%;height:100%;overflow:clip;outline-offset:-4px;touch-action:pan-y}
+.ch03-track{position:absolute;inset:0;height:100%}
+.ch03-scene-layer{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;opacity:1;visibility:hidden}.ch03-scene-layer.is-active{visibility:visible;z-index:2}.ch03-scene-layer.is-leaving{visibility:visible;z-index:3;opacity:0;transition:opacity .22s cubic-bezier(.25,.8,.25,1)}.ch03-scene-layer[inert]{pointer-events:none}
+.ch03-route-anchor{position:absolute;left:0;top:0;width:0;height:0}
+#chapter-03 #ch03-scene-01,#chapter-03 #ch03-scene-01>.film{width:100%;height:100%;min-height:0;max-height:none;padding:0;background:transparent}
+#chapter-03 #stage{width:100%;height:100%;min-height:0;max-height:none;background:transparent}
+#chapter-03 #ch03-scene-01 #stage{mask-image:linear-gradient(to bottom,transparent,#000 6%,#000 93%,transparent)}
+#chapter-03 #ch03-scene-01 .masthead,#chapter-03 #ch03-scene-01 .caption,#chapter-03 #ch03-scene-01 .transport,#chapter-03 #ch03-scene-01 .quiet-note,#chapter-03 .shot-heading,#chapter-03 .study-note,#chapter-03 .final-cue,#chapter-03 .static-intro,#chapter-03 .readable-story{display:none!important}
+#chapter-03 .light-fall{background:radial-gradient(ellipse at center,#0000 50%,#04050866 100%)}
+#chapter-03 #ch03-scene02-frame,#chapter-03 #ch03-scene03-frame{position:absolute;inset:0;width:100%;height:100%;min-height:0;border:0;background:transparent}
+#chapter-03 #ch03-info-node{font-family:var(--ch02-font-sans);color:var(--ch02-text-primary)}
+#chapter-03 .ch02-nav-btn{min-height:auto;color:var(--ch02-signal-glow,#ffaa70)}
+#chapter-03 .ch02-nav-btn:hover:not(:disabled){color:#ffc28d;background:rgba(255,170,112,.12)}
+#chapter-03 .ch02-nav-btn:disabled{opacity:.15;cursor:not-allowed}
+#chapter-03 .ch02-nav-btn:focus-visible{outline-offset:3px}
+.ch03-tabs{display:none;gap:12px}
+#chapter-03 .ch03-tabs button{position:relative;min-width:40px;min-height:40px;font:10px 'JetBrains Mono',monospace;color:#75808d;letter-spacing:.12em}
+#chapter-03 .ch03-tabs [aria-selected=true]{color:#dca176}.ch03-tabs [aria-selected=true]::after{content:'';position:absolute;left:15px;right:15px;bottom:3px;height:1px;background:#dca176}
+#chapter-03 .ch03-dev-controls{position:absolute;z-index:8;bottom:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;width:min(760px,90%);padding:8px 14px;border:1px solid #36414e;border-radius:3px;background:#0c131bee;font:10px 'JetBrains Mono',monospace}
+#chapter-03 .ch03-dev-controls[hidden]{display:none}#chapter-03 .ch03-dev-controls button{white-space:nowrap;font-size:10px;min-height:30px}#ch03-dev-timeline{flex:1;min-width:50px;accent-color:#ce976d}#ch03-dev-time{min-width:36px}#ch03-dev-speed{background:#192631;border:1px solid #344553;font-size:10px}
+#ch03-info-dialog{width:min(680px,92vw);max-height:85svh;padding:38px;background:#0c141e;color:#eee6dc;border:1px solid #364752;border-radius:4px;font-family:Inter,sans-serif;box-shadow:0 30px 100px #0009;line-height:1.7}
+#ch03-info-dialog::backdrop{background:#02050bd6;backdrop-filter:blur(6px)}#ch03-info-dialog .ch03-info-close{position:absolute;top:10px;right:14px;width:40px;height:40px;font-size:27px;color:#b1bfc6;border:0;background:none;cursor:pointer}
+#ch03-info-dialog h2{font:400 27px/1.2 Inter,sans-serif;letter-spacing:-.035em;margin:16px 0 24px}#ch03-info-dialog h3{font-size:12px;color:#d4ae8d;margin:22px 0 9px}#ch03-info-dialog p,#ch03-info-dialog li{font-size:12px;color:#acbcc7}#ch03-info-dialog strong{color:#e7d5bc}#ch03-info-dialog a{color:#d4ae8d;font-size:11px}
+.ch03-info-kicker{font:9px 'JetBrains Mono',monospace!important;letter-spacing:.08em;color:#8396a4!important}#ch03-info-example{font:11px Inter,sans-serif;background:#1a303e;border:1px solid #3f5c6a;padding:11px 16px;color:#e0dbce;border-radius:2px;cursor:pointer;margin-top:20px}#ch03-info-dialog button:focus-visible{outline:2px solid #d7aa78;outline-offset:3px}#ch03-info-dialog .facts{display:flex;gap:25px;padding:18px 0;border-block:1px solid #293945;margin:18px 0}#ch03-info-dialog .facts>div{display:flex;flex-direction:column;gap:5px}#ch03-info-dialog .facts strong{font-size:22px;font-weight:400}#ch03-info-dialog .facts span{font-size:10px;color:#8fa7b7}#ch03-info-dialog .dialog-note{font-size:10px;color:#8399a9}#ch03-info-dialog ol{padding-left:20px}#ch03-info-dialog ol strong{display:block;font-size:12px}#ch03-info-dialog [class=provenance]{font-size:10px;color:#8399a9}
+@media(max-width:700px){#chapter-03.chapter-03-unified{padding-top:56px;min-height:460px}#ch03-info-dialog{padding:30px 23px}#ch03-info-dialog h2{font-size:24px}#chapter-03 .ch03-dev-controls{gap:6px;padding:6px;font-size:9px}#chapter-03 .ch03-dev-controls button{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.ch03-track{transition:none}.ch03-information .hero-red-dwarf__info-core,.ch03-information .hero-red-dwarf__info-ring{animation:none}}
+
+#ch03-scene04-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
+
+#chapter-03:has(#ch03-layer-4.is-active) .ch03-dev-controls{bottom:auto;top:110px;width:auto;max-width:90%}
+
+/* Safe areas and identity belong to the chapter, independently of each renderer. */
+#chapter-03{--ch03-safe-top:82px;--ch03-safe-bottom:72px;--ch03-gutter:clamp(22px,4.2vw,64px);--ch03-surface:#10141a;--ch03-border:#34383e;--ch03-warm:#dba477}
+#chapter-03 .ch03-scene-layer>iframe{position:absolute!important;inset:var(--ch03-safe-top) 0 var(--ch03-safe-bottom)!important;width:100%!important;height:calc(100% - var(--ch03-safe-top) - var(--ch03-safe-bottom))!important;border:0;background:transparent;border-radius:0}
+#chapter-03 #ch03-scene-01{position:absolute;inset:var(--ch03-safe-top) 0 var(--ch03-safe-bottom);height:auto!important}
+.ch03-scene-identity{position:absolute;z-index:5;top:16px;left:var(--ch03-gutter);max-width:calc(100% - 170px);pointer-events:none}
+.ch03-scene-identity h3{margin:0;font:400 15px/1.5 'JetBrains Mono',monospace;color:#eee5da;letter-spacing:-.035em}
+#ch03-scene-number{color:var(--ch03-warm);white-space:nowrap}
+#chapter-03 .ch03-scene-identity p{margin:7px 0 0;color:#a5a7ac;font:12px/1.6 Inter,sans-serif;max-width:460px}
+.ch03-continuity{display:block;width:42px;height:1px;margin-top:14px;background:linear-gradient(90deg,#c68e5f,#c68e5f00);transform-origin:left}
+.is-connecting .ch03-continuity{animation:ch03-connect .28s ease-out}
+@keyframes ch03-connect{from{transform:scaleX(.3);opacity:.3}to{transform:scaleX(1);opacity:1}}
+.ch02-to-ch03-carrier{min-width:44px}
+.ch02-to-ch03-carrier__line{background:linear-gradient(180deg,#82a5a04d,#dba477b0 55%,#dba47700)}
+.ch03-night-sky::after{content:'';position:absolute;left:50%;top:0;width:2px;height:32px;opacity:0;background:linear-gradient(#dba47700,#dba47790,#dba47700);pointer-events:none}
+.is-in-view .ch03-night-sky::after{animation:ch03-arrive .34s ease-out both}
+@keyframes ch03-arrive{0%{opacity:.6;transform:translateY(-20px)}100%{opacity:0;transform:translateY(35px)}}
+.ch03-explore{position:absolute;left:var(--ch03-gutter);bottom:24px;z-index:7;display:flex;align-items:center;gap:18px;color:#8b919a;font:10px 'JetBrains Mono',monospace}
+#chapter-03 #ch03-primary-inspect{font:11px Inter,sans-serif;color:#d6b492;min-height:44px;padding:8px 0}
+#chapter-03 #ch03-info-node{right:var(--ch03-gutter);bottom:24px}
+#chapter-03 #ch03-information{min-height:44px}
+#chapter-03 .ch03-navigation{right:var(--ch03-gutter);top:76px}
+#chapter-03 .ch02-nav-btn{width:44px;height:44px;min-height:44px}
+#chapter-03 .ch03-dev-controls,#chapter-03:has(#ch03-layer-4.is-active) .ch03-dev-controls,#chapter-03:has(#ch03-layer-5.is-active) .ch03-dev-controls{top:auto;bottom:70px;left:50%;transform:translateX(-50%);width:min(760px,90%);max-width:90%;z-index:9}
+#chapter-03.ch03-has-controls{--ch03-safe-bottom:120px}
+/* Full viewport for an existing embedded inspector; no iframe or interactive node is recreated. */
+html.ch03-inspecting{overflow:hidden!important}
+#chapter-03.ch03-embedded-inspection{z-index:10000;overflow:visible!important}
+.ch03-embedded-inspection #ch03-stage,.ch03-embedded-inspection .ch03-track,.ch03-embedded-inspection .ch03-scene-layer{overflow:visible!important}
+.ch03-embedded-inspection .ch03-scene-layer.is-active{position:fixed!important;inset:0!important;width:100vw!important;height:100svh!important;z-index:10001;transition:none!important}
+#chapter-03.ch03-embedded-inspection .ch03-scene-layer.is-active>iframe{inset:0!important;height:100%!important}
+.ch03-embedded-inspection :is(.ch03-scene-identity,.ch03-explore,#ch03-info-node,.ch03-navigation,.ch03-dev-controls){visibility:hidden!important}
+#chapter-03.ch03-embedded-inspection :is(.ch03-navigation,.ch03-navigation *){visibility:hidden!important;pointer-events:none!important;transition:none!important;animation:none!important}
+@media(max-width:700px){
+ #chapter-03{--ch03-safe-top:100px;--ch03-safe-bottom:66px;--ch03-gutter:20px}
+ .ch03-scene-identity{top:15px;max-width:calc(100% - 120px)}
+ .ch03-scene-identity h3{font-size:11px;line-height:1.65}
+ #chapter-03 .ch03-scene-identity p{font-size:11px;line-height:1.55;max-width:265px}
+ .ch03-continuity{margin-top:10px;width:32px}
+ #chapter-03 .ch03-navigation{top:64px;right:12px;gap:0}
+ .ch03-explore{bottom:12px;gap:10px;flex-direction:column;align-items:flex-start;font-size:8px}
+ #chapter-03 #ch03-primary-inspect{font-size:10px;padding:0;min-height:44px}
+ #chapter-03 #ch03-info-node{right:16px;bottom:16px}
+ .ch03-explore #ch03-position{position:absolute;bottom:39px;white-space:nowrap}
+}
+@media(max-height:500px) and (orientation:landscape){
+ #chapter-03.chapter-03-unified{min-height:0;--ch03-safe-top:58px;--ch03-safe-bottom:52px}
+ #chapter-03 .ch03-scene-identity{top:6px}.ch03-continuity{display:none}
+ #chapter-03 .ch03-scene-identity p{margin-top:2px;font-size:10px}
+ #chapter-03 .ch03-explore,#chapter-03 #ch03-info-node{bottom:4px}
+ #chapter-03 .ch03-navigation{top:58px}
+ #chapter-03.ch03-has-controls{--ch03-safe-bottom:96px}
+ #chapter-03 .ch03-dev-controls{bottom:50px!important}
+}
+@media(prefers-reduced-motion:reduce){.ch03-scene-layer,.ch03-scene-layer.is-leaving{transition:none}.ch03-continuity,.ch03-night-sky::after{animation:none!important}}

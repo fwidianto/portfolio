@@ -1,0 +1,77 @@
+<svg class="hero-red-dwarf__night-sky" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="star-beacon-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fffaf0" stop-opacity="1"/>
+            <stop offset="40%" stop-color="#ffdcb4" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#ffaa70" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="star star--twinkle-3" cx="445.6" cy="55.8" r="1.4" fill="#f4efe8"/>
+        <circle class="star star--twinkle-1" cx="508.7" cy="596.7" r="1.6" fill="#ffffff"/>
+        <circle class="star star--twinkle-1" cx="49.4" cy="216.5" r="1.5" fill="#fff4e6"/>
+        <circle class="star star--twinkle-2" cx="452.4" cy="487.3" r="1.3" fill="#ffe8d0"/>
+        <circle class="star star--twinkle-2" cx="556.1" cy="40.4" r="1.4" fill="#ffe8d0"/>
+        <circle class="star star--twinkle-4" cx="210.6" cy="213.7" r="1.1" fill="#ffffff"/>
+        <circle class="star star--twinkle-3" cx="92.9" cy="738.4" r="1.8" fill="#fffaf0"/>
+        <circle class="star star--static" cx="328.6" cy="138.6" r="0.8" fill="rgba(235,214,196,0.4)"/>
+        <circle class="star star--twinkle-4" cx="569.1" cy="548.4" r="1.3" fill="#eaf0f8"/>
+        <circle class="star star--twinkle-3" cx="75.2" cy="583.8" r="1.9" fill="#f4efe8"/>
+        <circle class="star star--static" cx="593.2" cy="350.5" r="1.0" fill="rgba(235,214,196,0.4)"/>
+        <circle class="star star--twinkle-3" cx="135.7" cy="329.9" r="1.7" fill="#fffaf0"/>
+        <circle class="star star--twinkle-2" cx="451.2" cy="540.6" r="1.3" fill="#fdf4dc"/>
+        <circle class="star star--twinkle-2" cx="136.2" cy="349.9" r="1.4" fill="#fdf4dc"/>
+        <circle class="star star--twinkle-4" cx="178.9" cy="61.6" r="1.2" fill="#ffe4cc"/>
+        <circle class="star star--twinkle-4" cx="167.1" cy="817.6" r="1.1" fill="#ffffff"/>
+        <circle class="star star--static" cx="287.2" cy="794.1" r="0.8" fill="rgba(244,239,232,0.45)"/>
+        <circle class="star star--twinkle-3" cx="190.3" cy="500.9" r="1.7" fill="#e6f0fa"/>
+        <circle class="star star--twinkle-2" cx="613.6" cy="366.5" r="1.6" fill="#fdf4dc"/>
+        <circle class="star star--twinkle-1" cx="361.2" cy="110.5" r="1.7" fill="#ffffff"/>
+        <circle class="star star--static" cx="437.8" cy="692.4" r="1.0" fill="rgba(235,214,196,0.4)"/>
+        <circle class="star star--twinkle-3" cx="278.1" cy="861.8" r="1.9" fill="#f4efe8"/>
+        <circle class="star star--twinkle-3" cx="472.2" cy="130.1" r="1.7" fill="#e6f0fa"/>
+        <circle class="star star--static" cx="102.5" cy="395.9" r="0.8" fill="rgba(220,235,255,0.4)"/>
+        <circle class="star star--twinkle-2" cx="599.3" cy="253.6" r="1.3" fill="#fdf4dc"/>
+        <circle class="star star--twinkle-2" cx="595.8" cy="282.7" r="1.1" fill="#fdf4dc"/>
+        <circle class="star star--twinkle-1" cx="380.6" cy="681.3" r="1.6" fill="#f0f5ff"/>
+        <circle class="star star--twinkle-3" cx="42.7" cy="806.2" r="1.4" fill="#f4efe8"/>
+        <circle class="star star--twinkle-1" cx="600.7" cy="821.0" r="1.6" fill="#ffffff"/>
+        <circle class="star star--twinkle-2" cx="665.7" cy="477.1" r="1.1" fill="#ffe8d0"/>
+        <circle class="star star--static" cx="645.5" cy="172.1" r="1.1" fill="rgba(220,235,255,0.4)"/>
+        <circle class="star star--twinkle-3" cx="520.9" cy="607.6" r="1.5" fill="#fffaf0"/>
+        <circle class="star star--static" cx="452.4" cy="398.6" r="0.8" fill="rgba(244,239,232,0.45)"/>
+        <circle class="star star--twinkle-2" cx="71.6" cy="52.5" r="1.4" fill="#fdf4dc"/>
+        <circle class="star star--twinkle-2" cx="76.1" cy="558.8" r="1.0" fill="#fdf4dc"/>
+        <circle class="star star--twinkle-2" cx="588.8" cy="93.8" r="1.2" fill="#ffe8d0"/>
+        <circle class="star star--static" cx="169.3" cy="144.8" r="0.9" fill="rgba(235,214,196,0.4)"/>
+        <circle class="star star--twinkle-1" cx="554.9" cy="193.0" r="1.6" fill="#f0f5ff"/>
+        <circle class="star star--twinkle-1" cx="305.3" cy="422.6" r="1.6" fill="#fff4e6"/>
+        <circle class="star star--twinkle-4" cx="94.0" cy="369.2" r="1.4" fill="#ffe4cc"/>
+        <circle class="star star--static" cx="191.6" cy="192.9" r="0.8" fill="rgba(244,239,232,0.45)"/>
+        <circle class="star star--twinkle-1" cx="211.1" cy="242.3" r="1.5" fill="#fff4e6"/>
+        <circle class="star star--twinkle-1" cx="93.6" cy="576.3" r="1.8" fill="#ffffff"/>
+        <circle class="star star--twinkle-2" cx="138.1" cy="438.1" r="1.5" fill="#fdf4dc"/>
+        <circle class="star star--static" cx="137.0" cy="36.8" r="0.9" fill="rgba(235,214,196,0.4)"/>
+        <circle class="star star--static" cx="215.4" cy="613.2" r="0.8" fill="rgba(235,214,196,0.4)"/>
+        <circle class="star star--twinkle-1" cx="171.5" cy="83.5" r="1.6" fill="#ffffff"/>
+        <circle class="star star--twinkle-2" cx="62.6" cy="430.7" r="1.0" fill="#ffffff"/>
+        <circle class="star star--twinkle-1" cx="692.8" cy="195.5" r="1.6" fill="#ffffff"/>
+        <circle class="star star--twinkle-2" cx="744.6" cy="807.7" r="1.3" fill="#fdf4dc"/>
+        <circle class="star star--twinkle-4" cx="779.1" cy="384.6" r="1.5" fill="#ffe4cc"/>
+        <circle class="star star--twinkle-3" cx="787.2" cy="299.5" r="1.5" fill="#fffaf0"/>
+        <circle class="star star--twinkle-1" cx="783.3" cy="415.4" r="1.2" fill="#fff4e6"/>
+        <circle class="star star--twinkle-1" cx="839.8" cy="851.8" r="1.5" fill="#fff4e6"/>
+        <circle class="star star--twinkle-1" cx="722.4" cy="800.9" r="1.7" fill="#f0f5ff"/>
+        <circle class="star star--twinkle-3" cx="725.6" cy="399.9" r="1.6" fill="#fffaf0"/>
+        <g class="star star--beacon">
+          <circle cx="1370" cy="480" r="8.0" fill="url(#star-beacon-glow)" opacity="0.6"/>
+          <circle cx="1370" cy="480" r="2.5" fill="#eaf2ff"/>
+        </g>
+        <g class="star star--beacon">
+          <circle cx="960" cy="760" r="7.4" fill="url(#star-beacon-glow)" opacity="0.6"/>
+          <circle cx="960" cy="760" r="2.3" fill="#fff0dc"/>
+        </g>
+        <g class="star star--beacon">
+          <circle cx="1280" cy="810" r="6.7" fill="url(#star-beacon-glow)" opacity="0.6"/>
+          <circle cx="1280" cy="810" r="2.1" fill="#ffffff"/>
+        </g>
+      </svg>

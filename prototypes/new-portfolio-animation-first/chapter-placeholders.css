@@ -178,20 +178,30 @@ canvas.working-experience__canvas {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 32px auto 0;
+  justify-content: center;
+  width: 28px;
+  margin: -56px auto -24px;
+  height: 80px;
   text-decoration: none;
   cursor: pointer;
   position: relative;
-  z-index: 20;
+  z-index: 30;
   outline: none;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
+  opacity: 0.44;
+  pointer-events: auto;
+  transition: opacity 0.45s ease;
+}
+
+.ch03-to-ch04-carrier {
+  margin: -12px auto -40px;
+  height: 52px;
+  opacity: 0.62;
 }
 
 .chapter-carrier.is-ready,
+.ch02-to-ch03-carrier.is-scene-05,
 .ch02-to-ch03-carrier.is-ready {
-  opacity: 0.7;
+  opacity: 0.85;
   pointer-events: auto;
 }
 
@@ -199,17 +209,28 @@ canvas.working-experience__canvas {
 .ch02-to-ch03-carrier__line {
   width: 1px;
   height: 52px;
-  background: linear-gradient(180deg, rgba(245, 158, 11, 0.75) 0%, rgba(245, 158, 11, 0.15) 100%);
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.55) 0%, rgba(217, 174, 112, 0.85) 55%, rgba(217, 174, 112, 0.15) 100%);
   transition: background 0.3s ease, box-shadow 0.3s ease, height 0.3s ease;
+}
+
+.ch03-to-ch04-carrier .chapter-carrier__line {
+  background: linear-gradient(180deg, rgba(217, 174, 112, 0.80) 0%, rgba(245, 158, 11, 0.15) 100%);
+}
+
+.chapter-carrier:hover,
+.ch02-to-ch03-carrier:hover,
+.chapter-carrier:focus-visible,
+.ch02-to-ch03-carrier:focus-visible {
+  opacity: 1;
 }
 
 .chapter-carrier:hover .chapter-carrier__line,
 .ch02-to-ch03-carrier:hover .ch02-to-ch03-carrier__line,
 .chapter-carrier:focus-visible .chapter-carrier__line,
 .ch02-to-ch03-carrier:focus-visible .ch02-to-ch03-carrier__line {
-  background: linear-gradient(180deg, rgba(251, 191, 36, 1.0) 0%, rgba(56, 189, 248, 0.4) 100%);
+  background: linear-gradient(180deg, rgba(251, 191, 36, 1.0) 0%, rgba(56, 189, 248, 0.5) 100%);
   box-shadow: 0 0 10px rgba(245, 158, 11, 0.45);
-  height: 58px;
+  height: 60px;
 }
 
 /* Portfolio Closing Colophon */

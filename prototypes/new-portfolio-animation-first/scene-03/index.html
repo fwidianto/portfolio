@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An illustrative account of Fauzan Widianto's work centralizing purchase request control at PT Traktor Nusantara with Google Forms, Google Sheets, and Apps Script.">
+  <meta name="theme-color" content="#07090e">
+  <meta name="robots" content="noindex, nofollow">
+  <title>From Branch Requests to HQ Approval — Scene 03</title>
+  <link rel="icon" href="assets/fw-monogram.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <script src="assets/scene-art.js" defer></script>
+  <script src="animation.js" defer></script>
+  <script src="../chapter-03-embedded.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#player">Skip to film controls</a>
+  <div class="page">
+    <header class="masthead">
+      <div class="identity"><img src="assets/fw-monogram.svg" width="47" height="25" alt="Fauzan Widianto"><span class="divider"></span><span class="mono">CHAPTER III <i>/</i> SCENE 03</span></div>
+      <span class="masthead-end mono">OPERATIONS, RECONSIDERED <span class="tiny-dot"></span></span>
+    </header>
+    <main>
+      <div class="intro">
+        <div><p class="eyebrow">PT TRAKTOR NUSANTARA <span>SERVICE DIVISION</span></p><h1>From branch requests<br>to <em>HQ approval.</em></h1></div>
+        <div class="intro-aside"><p>Built with Google Forms, Google Sheets,<br>and Apps Script.</p><button id="about" class="text-button">The project &amp; my role <span aria-hidden="true">↗</span></button></div>
+      </div>
+      <section class="film" aria-label="Interactive seven-act purchase request film">
+        <div class="film-top mono"><span><span class="status-dot"></span><span id="current-act">01 / BRANCH REQUESTS</span></span><span id="mode-label">INTERACTIVE CASE STUDY</span></div>
+        <div id="stage" class="stage" tabindex="0" aria-label="Film stage. Space plays or pauses; arrows seek; Home and End jump; R replays.">
+          <div class="art-window"><svg id="scene" viewBox="0 0 1040 650" role="group" aria-labelledby="scene-title scene-desc"><title id="scene-title">From scattered branch requests to a controlled workflow</title><desc id="scene-desc">An illustrative purchase request journey using Forms, Sheets and Apps Script, with human review and approval.</desc></svg></div>
+          <div class="stage-bottom"><p id="beat">The request is there. The full context is elsewhere.</p><span class="sample-tag mono">ILLUSTRATIVE BRANCH ISSUES &amp; REQUESTS</span></div>
+        </div>
+        <div class="player" id="player">
+          <div class="progress-track"><input id="timeline" type="range" min="0" max="20" value="0" step="0.01" aria-label="Film timeline in seconds"><div class="ticks" aria-hidden="true"><span style="left:0%"></span><span style="left:13.333%"></span><span style="left:26.667%"></span><span style="left:43.333%"></span><span style="left:60%"></span><span style="left:76.667%"></span><span style="left:90%"></span><span style="left:100%"></span></div></div>
+          <div class="control-row">
+            <div class="primary-controls"><button id="play" class="play-button" aria-label="Play film"><span id="play-icon" aria-hidden="true">▶</span><span id="play-label">Play film</span></button><button id="replay" class="replay" aria-label="Replay film" title="Replay film (R)">↺</button><output id="time" class="mono" for="timeline">00:00 <span>/ 00:20</span></output></div>
+            <div class="secondary-controls"><span class="key-hint mono">SPACE TO PLAY / PAUSE</span><label class="speed"><span class="sr-only">Playback speed</span><select id="speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option></select></label><button class="text-button" id="inspect">Inspect a request <span aria-hidden="true">↗</span></button></div>
+          </div>
+          <nav class="act-nav" aria-label="Film acts">
+            <button data-act="0" aria-current="step"><span>01</span>Branches</button><button data-act="1"><span>02</span>Forms intake</button><button data-act="2"><span>03</span>Sheets control</button><button data-act="3"><span>04</span>Apps Script</button><button data-act="4"><span>05</span>HQ review</button><button data-act="5"><span>06</span>Approval gates</button><button data-act="6"><span>07</span>One workflow</button>
+          </nav>
+        </div>
+      </section>
+      <footer><p>FAUZAN WIDIANTO <span>Analytical Systems Builder</span></p><p>Standardized intake <i>·</i> Practical automation <i>·</i> Human judgment</p><button id="motion" class="text-button" aria-pressed="false">Motion: full</button></footer>
+      <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+      <noscript><p class="no-script">Fauzan helped build an internal workflow at PT Traktor Nusantara using Google Forms to standardize branch submissions, Google Sheets and formulas to centralize tracking, and Apps Script to support checks and status updates. HQ reviewed the records before manager and general manager approval. The workflow supported human judgment. Enable JavaScript to play or explore the seven-act demonstration.</p></noscript>
+    </main>
+  </div>
+  <dialog id="about-dialog" aria-labelledby="about-title">
+    <form method="dialog"><button class="close" aria-label="Close project details">×</button></form><p class="eyebrow">THE PROJECT / SERVICE DIVISION</p><h2 id="about-title">I did not just process requests.<br>I helped build a better process.</h2>
+    <p>At PT Traktor Nusantara, I helped centralize purchase request and purchase proposal processing for the Service Division. Branch submissions needed a consistent path into headquarters review and management approval.</p>
+    <h3>My contribution</h3><p>I helped build a lightweight internal workflow with Google Forms for structured intake, Google Sheets and formulas for centralized tracking and control, and Apps Script for automation support. It supported request IDs, document checks, status updates and review preparation.</p>
+    <h3>Where judgment remained</h3><p>HQ still checked supporting documents, business reasons and the related customer or job context. Manager review and general manager approval remained human decisions. Automation supported administration and visibility.</p>
+    <p class="dialog-note">This is an illustrative reconstruction based on the owner-provided account. All 15 branch names follow the Chapter III Scene 01 network; Jakarta is Head Office. The issue assigned to each branch is illustrative, not a historical finding about that office. Request IDs, amounts, rows, field layouts and timing are synthetic. The interface is not a copy of the historical system. No confidential records are used. This was not a full ERP replacement, automatic purchase approval or automatic SAP PO generation. No quantified savings are claimed.</p>
+  </dialog>
+  <dialog id="request-dialog" aria-labelledby="request-title">
+    <form method="dialog"><button class="close" aria-label="Close request details">×</button></form><p class="eyebrow">INSPECT THE WORKFLOW / SYNTHETIC EXAMPLE</p><h2 id="request-title">One request.<br>A traceable path.</h2>
+    <label class="request-selector">Choose an illustrative request<select id="request-select"><option value="0">DEMO-024 · Medan · Service parts</option><option value="1">DEMO-025 · Surabaya · Workshop tools</option><option value="2">DEMO-026 · Makassar · Field service</option><option value="3">DEMO-027 · Jayapura · Consumables</option></select></label>
+    <dl id="request-details"></dl><p class="review-note" id="review-note"></p><p class="dialog-note">End-state examples for inspection, independent of the playhead. Automation checks completeness and organizes the queue; business justification and approvals are human decisions. All records are illustrative.</p>
+  </dialog>
+</body>
+</html>

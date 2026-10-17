@@ -1,0 +1,1173 @@
+/* ==========================================================================
+   CHAPTER 03 · SCENE 01 — PT TRAKTOR NUSANTARA SERVICE PROFITABILITY
+   Source Authority: prototypes/ch03-scene-01-professional-rebuild/style.css
+   Scoped for seamless integration into the full portfolio preview.
+   ========================================================================== */
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('assets/inter-latin.woff2') format('woff2');
+}
+
+/* Portrait keeps the analytical action readable without putting the full table on the stage. */
+.ch03-work-focus{display:none}
+@media(max-width:699px) and (orientation:portrait){
+ #chapter-03 .ch03-work-focus:not([hidden]){display:flex;position:absolute;z-index:6;left:24px;right:24px;top:calc(50% + 140px);padding:13px 0 0 14px;border-left:1px solid #9f734e;flex-direction:column;gap:9px;pointer-events:none;background:linear-gradient(90deg,#0a0e14d9,#0a0e1400)}
+ .ch03-work-source{font:10px/1.5 'JetBrains Mono',monospace;color:#c0aa91}
+ #chapter-03 .ch03-work-focus strong{font:400 23px/1.3 'JetBrains Mono',monospace;color:#e9dfcf;letter-spacing:-.04em}
+ .ch03-work-detail{font:12px/1.5 Inter,sans-serif;color:#b7c4c3}
+ .ch03-work-focus small{font:9px/1.5 'JetBrains Mono',monospace;color:#9e9b93}
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('assets/jetbrains-mono-latin.woff2') format('woff2');
+}
+
+#chapter-03,
+#report-dialog,
+#story-dialog {
+  color-scheme: dark;
+  --bg: #040508;
+  --ink: #f4efe8;
+  --muted: #9ca3af;
+  --line: rgba(255, 255, 255, .08);
+  --amber: #ff6b35;
+  --blue: #6ebfe4;
+  --green: #90cfad;
+  --font-mono: 'JetBrains Mono', monospace;
+  font-family: Inter, "Segoe UI", sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+#chapter-03 {
+  position: relative;
+  width: 100%;
+  background: var(--bg);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Soft atmospheric entry transition from Chapter II Scene 05 */
+#chapter-03::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(180deg, #040508 0%, rgba(4, 5, 8, 0.72) 55px, transparent 140px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+#chapter-03 *,
+#chapter-03 *::before,
+#chapter-03 *::after,
+#report-dialog *,
+#story-dialog * {
+  box-sizing: border-box;
+}
+
+#chapter-03 button:where(:not(.scene-04__inspect-btn)),
+#chapter-03 input,
+#chapter-03 select,
+#report-dialog button,
+#report-dialog select,
+#story-dialog button {
+  font: inherit;
+}
+
+#chapter-03 button:where(:not(.scene-04__inspect-btn)),
+#chapter-03 select,
+#report-dialog button,
+#report-dialog select,
+#story-dialog button {
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#chapter-03 button:where(:not(.scene-04__inspect-btn)),
+#report-dialog button,
+#story-dialog button {
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  min-height: 38px;
+}
+
+#chapter-03 button:where(:not(.scene-04__inspect-btn)):disabled {
+  opacity: .4;
+  cursor: default;
+}
+
+#chapter-03 button:where(:not(.scene-04__inspect-btn)):hover,
+#report-dialog button:hover,
+#story-dialog button:hover {
+  color: var(--amber);
+}
+
+#chapter-03 button:where(:not(.scene-04__inspect-btn)):focus-visible,
+#chapter-03 select:focus-visible,
+#chapter-03 input:focus-visible,
+#chapter-03 [tabindex]:focus-visible,
+#report-dialog button:focus-visible,
+#report-dialog select:focus-visible,
+#report-dialog [tabindex]:focus-visible,
+#story-dialog button:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+}
+
+#chapter-03 button:where(:not(.scene-04__inspect-btn)) span[aria-hidden] {
+  font-size: 18px;
+}
+
+#chapter-03 p,
+#chapter-03 h1,
+#chapter-03 h2,
+#report-dialog p,
+#report-dialog h2,
+#story-dialog p,
+#story-dialog h2 {
+  margin: 0;
+}
+
+#chapter-03 .film {
+  position: relative;
+  z-index: 2;
+  max-width: 1920px;
+  margin: auto;
+  min-height: 100svh;
+  padding-top: 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+#chapter-03 .masthead {
+  height: 54px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4.2%;
+  border: 0;
+  background: linear-gradient(180deg, #040508e0, #04050800);
+}
+
+#chapter-03 .identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Portfolio fixed header already displays the FW monogram at top-left */
+#chapter-03 .owner-mark {
+  display: none;
+}
+
+#chapter-03 .eyebrow,
+#report-dialog .eyebrow,
+#story-dialog .eyebrow {
+  font: 10px "Cascadia Code", Consolas, monospace;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+#chapter-03 .identity .eyebrow {
+  font: 10px var(--font-mono);
+  letter-spacing: .08em;
+  color: #7b8599;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#chapter-03 .identity .eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber);
+}
+
+#chapter-03 .company-logo {
+  width: 102px;
+  height: 51px;
+  display: block;
+  background: transparent;
+  border: 0;
+}
+
+#chapter-03 .stage {
+  position: relative;
+  height: calc(100svh - 354px);
+  min-height: 390px;
+  max-height: 900px;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 600px 240px at 82% 0, rgba(60, 20, 12, .15), transparent),
+    radial-gradient(ellipse 500px 200px at 18% 0, rgba(20, 26, 42, .08), transparent),
+    radial-gradient(ellipse 650px 380px at 50% 50%, rgba(255, 107, 53, .03), transparent);
+}
+
+#chapter-03 canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  pointer-events: none;
+}
+
+#chapter-03 #geography { z-index: 1; }
+#chapter-03 #building  { z-index: 2; }
+#chapter-03 #details   { z-index: 3; }
+
+#chapter-03 .light-fall {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, #040508 0%, rgba(4, 5, 8, 0.45) 18px, #04050800 44px, #04050800 58%, #04050866 88%, #040508 100%),
+    radial-gradient(ellipse at 50% 40%, #0000 40%, #04050880 100%);
+}
+
+#chapter-03 .shot-heading {
+  position: absolute;
+  left: 4.2%;
+  top: 26px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  transform: translateZ(0);
+}
+
+#chapter-03 .shot-heading span:first-child {
+  font: 10px var(--font-mono);
+  letter-spacing: .16em;
+  color: #ff6b35;
+}
+
+#chapter-03 .shot-heading span + span {
+  font: 300 16px var(--font-mono);
+  letter-spacing: -.02em;
+  color: #f5f2eb;
+}
+
+#chapter-03 .study-note {
+  position: absolute;
+  right: 4.2%;
+  top: auto;
+  bottom: 12px;
+  color: #7b8599;
+  font: 10px var(--font-mono);
+  z-index: 6;
+}
+
+#chapter-03 .caption {
+  padding: 18px 4.2% 16px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-height: 96px;
+  border: 0;
+}
+
+#chapter-03 .beat-number {
+  font: 11px var(--font-mono);
+  color: #ffaa70;
+  white-space: nowrap;
+}
+
+#chapter-03 .caption h2 {
+  font: 300 22px/1.35 var(--font-mono);
+  letter-spacing: -.035em;
+}
+
+#chapter-03 .caption p {
+  color: #9ca3af;
+  font-size: 12px;
+  margin-top: 7px;
+  line-height: 1.5;
+}
+
+#chapter-03 .caption-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  margin-left: 30px;
+}
+
+#chapter-03 .transport {
+  padding: 0 4.2% 16px;
+}
+
+#chapter-03 .sequence-nav {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+}
+
+#chapter-03 .sequence-nav button {
+  border-top: 1px solid var(--line);
+  color: #8f9da9;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  padding: 10px 0;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+#chapter-03 .sequence-nav button .num {
+  font: 10px var(--font-mono);
+  color: #60717e;
+}
+
+#chapter-03 .sequence-nav button[aria-current="step"] {
+  border-color: #ff6b35;
+  color: var(--ink);
+}
+
+#chapter-03 .sequence-nav button[aria-current="step"] .num {
+  color: var(--amber);
+}
+
+#chapter-03 .time-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 28px;
+  font: 10px var(--font-mono);
+  color: var(--muted);
+}
+
+#chapter-03 input[type=range] {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--amber);
+  cursor: pointer;
+  height: 22px;
+  background: none;
+}
+
+#chapter-03 .control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#chapter-03 .playback,
+#chapter-03 .inspection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#chapter-03 .control-row button {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 0 6px;
+}
+
+#chapter-03 .playback #play {
+  color: var(--amber);
+  min-width: 83px;
+  text-align: left;
+}
+
+#chapter-03 .playback button span {
+  margin-right: 6px;
+}
+
+#chapter-03 .speed select {
+  font: 11px var(--font-mono);
+  border: 1px solid var(--line);
+  background: #0c1017;
+  padding: 7px 5px;
+  border-radius: 3px;
+}
+
+#chapter-03 .inspection button {
+  color: var(--muted);
+}
+
+#chapter-03 .inspection button[aria-pressed=true] {
+  color: var(--amber);
+}
+
+#chapter-03 .quiet-note {
+  display: flex;
+  justify-content: space-between;
+  color: #7b8599;
+  font: 9px var(--font-mono);
+  margin-top: 7px;
+  letter-spacing: .03em;
+}
+
+/* The physical monitor retains a 16:9 surface at every viewport. All 16 rows fit. */
+#chapter-03 #monitor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1000px;
+  height: 562px;
+  transform-origin: 0 0;
+  z-index: 5;
+  pointer-events: none;
+  background: #10151b;
+  overflow: hidden;
+  border-radius: 2px;
+  border: 1px solid #415260;
+  box-shadow: 0 0 0 2px #050a10;
+  will-change: transform;
+}
+
+#chapter-03 .screen-page {
+  position: absolute;
+  inset: 0;
+}
+
+#chapter-03 #monitor .app-bar {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  border-bottom: 1px solid #395368;
+  font: 16px Inter, sans-serif;
+}
+
+#chapter-03 #monitor .app-bar img {
+  width: 30px;
+  max-height: 24px;
+}
+
+#chapter-03 .sap-bar {
+  background: #102e44;
+}
+
+#chapter-03 .excel-bar {
+  background: #13372d;
+  border-color: #34604a;
+}
+
+#chapter-03 .excel-bar img {
+  width: 28px;
+}
+
+#chapter-03 #monitor .sample-label {
+  margin-left: auto;
+  font: 10px var(--font-mono);
+  color: #b0c1c6;
+  max-width: none;
+}
+
+#chapter-03 #monitor .sap-content {
+  padding: 25px 28px;
+}
+
+#chapter-03 #monitor .sap-content h2 {
+  font: 400 25px Inter, sans-serif;
+  margin-top: 10px;
+}
+
+#chapter-03 #monitor .record-meta {
+  display: flex;
+  gap: 30px;
+  font: 13px/1.8 Inter, sans-serif;
+  color: #91a5b4;
+  margin: 18px 0;
+}
+
+#chapter-03 #monitor .record-meta span {
+  display: inline;
+}
+
+#chapter-03 .record-meta b {
+  font-weight: 400;
+  color: #d0dce3;
+  margin-left: 8px;
+}
+
+#chapter-03 .sap-content table,
+#chapter-03 table,
+#report-dialog table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+}
+
+#chapter-03 th,
+#report-dialog th {
+  font-weight: 400;
+  color: #9fb1bd;
+}
+
+#chapter-03 th,
+#chapter-03 td,
+#report-dialog th,
+#report-dialog td {
+  padding: 9px 15px;
+  border-bottom: 1px solid #263641;
+  font-size: 12px;
+}
+
+#chapter-03 th:not(:first-child),
+#chapter-03 td:not(:first-child),
+#report-dialog th:not(:first-child),
+#report-dialog td:not(:first-child) {
+  text-align: right;
+}
+
+#chapter-03 .raw-table th:nth-child(2),
+#chapter-03 .raw-table td:nth-child(2),
+#chapter-03 .raw-table th:nth-child(3),
+#chapter-03 .raw-table td:nth-child(3) {
+  text-align: left;
+}
+
+#chapter-03 #monitor .raw-table {
+  height: 285px;
+  overflow: hidden;
+}
+
+#chapter-03 #monitor .raw-table th {
+  background: #192a38;
+  font: 12px var(--font-mono);
+  padding: 10px 14px;
+  text-align: left;
+}
+
+#chapter-03 #monitor .raw-table td {
+  font: 15px Inter, sans-serif;
+  padding: 12px 14px;
+}
+
+#chapter-03 .raw-table tr {
+  color: #d5e0e6;
+}
+
+#chapter-03 .raw-table .record-cost {
+  color: #b1bfc8;
+}
+
+#chapter-03 #monitor .export-line {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #2c495e;
+  padding-top: 15px;
+  color: #9dafbd;
+  font: 12px Inter, sans-serif;
+}
+
+#chapter-03 .export-line strong {
+  color: var(--blue);
+  font-weight: 500;
+}
+
+#chapter-03 #monitor .workflow {
+  display: flex;
+  height: 25px;
+  padding: 6px 20px;
+  gap: 16px;
+  border-bottom: 1px solid #263a35;
+  color: #667d75;
+  font: 10px var(--font-mono);
+}
+
+#chapter-03 #monitor .workflow span:not(:last-child)::after {
+  content: '›';
+  display: inline;
+  padding-left: 15px;
+  color: #496558;
+}
+
+#chapter-03 .workflow .done {
+  color: #b4cabc;
+}
+
+#chapter-03 .workflow .active {
+  color: var(--green);
+}
+
+#chapter-03 #monitor .calculation {
+  height: 68px;
+  padding: 11px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #15271f;
+  gap: 15px;
+}
+
+#chapter-03 #monitor .calculation .eyebrow {
+  font: 10px var(--font-mono);
+  color: #99b5a5;
+}
+
+#chapter-03 #monitor .calculation strong {
+  display: block;
+  font: 23px var(--font-mono);
+  color: #d1e5d6;
+  margin-top: 5px;
+}
+
+#chapter-03 #monitor .calculation > span {
+  font: 12px/1.4 Inter, sans-serif;
+  color: #98b6a5;
+  max-width: 230px;
+  margin: 0;
+}
+
+#chapter-03 #monitor .report-table {
+  padding: 0 12px;
+}
+
+#chapter-03 #monitor .report-table th {
+  font: 11px/15px var(--font-mono);
+  padding: 5px 12px;
+}
+
+#chapter-03 #monitor .report-table td {
+  font: 14px/17px Inter, sans-serif;
+  height: 21px;
+  padding: 2px 12px;
+}
+
+#chapter-03 #monitor .report-table td:first-child {
+  font-weight: 450;
+  font-size: 14px;
+}
+
+#chapter-03 .report-table td.profit {
+  color: var(--green);
+}
+
+#chapter-03 .report-table td span {
+  display: inline-block;
+  min-width: 30px;
+}
+
+#chapter-03 .report-table tr:first-child {
+  background: #18372c66;
+}
+
+#chapter-03 .report-table .lit {
+  background: #35674c70;
+  color: #c0ead0;
+}
+
+#chapter-03 .report-table tfoot {
+  background: #1c352d;
+  color: #d9eadf;
+}
+
+#chapter-03 #monitor .report-table tfoot th,
+#chapter-03 #monitor .report-table tfoot td {
+  border-top: 1px solid #4e7962;
+  border-bottom: none;
+  font: 600 14px/18px Inter, sans-serif;
+  padding: 4px 12px;
+  height: 27px;
+  color: inherit;
+}
+
+#chapter-03 #monitor .report-foot {
+  display: flex;
+  justify-content: space-between;
+  color: #8caaa1;
+  font: 9px/1.3 var(--font-mono);
+  padding: 6px 20px;
+}
+
+#chapter-03 .final-cue {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  z-index: 7;
+  font-size: 11px;
+  color: #a5b5bc;
+  pointer-events: none;
+}
+
+#chapter-03 .final-cue button {
+  pointer-events: auto;
+  color: var(--amber);
+  font-size: 11px;
+}
+
+#chapter-03 .final-cue[hidden] {
+  display: none;
+}
+
+#chapter-03 #transfer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#chapter-03 #transfer i {
+  display: block;
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  height: 24px;
+  top: 170px;
+  border-left: 3px solid var(--blue);
+  background: linear-gradient(90deg, #62b7dd50, #91ceaa40);
+  opacity: 0;
+}
+
+/* Inspection Dialogs (Report & Story) */
+#report-dialog,
+#story-dialog {
+  color: var(--ink);
+  background: #0c1017;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 5px;
+  max-width: 900px;
+  width: calc(100% - 40px);
+  max-height: 90svh;
+  padding: 32px;
+  box-shadow: 0 35px 120px #0008;
+}
+
+#report-dialog::backdrop,
+#story-dialog::backdrop {
+  background: #020509d9;
+  backdrop-filter: blur(6px);
+}
+
+#report-dialog .dialog-head,
+#story-dialog .dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: -1px;
+  background: #0c1017;
+  z-index: 2;
+}
+
+#report-dialog .dialog-head::before,
+#story-dialog .dialog-head::before {
+  content: '';
+  position: absolute;
+  inset: -33px -33px 0;
+  background: #0c1017;
+  z-index: -1;
+}
+
+#report-dialog .dialog-head h2,
+#story-dialog .dialog-head h2 {
+  font: 300 26px var(--font-mono);
+  margin-top: 10px;
+  letter-spacing: -.035em;
+}
+
+#report-dialog .dialog-head button,
+#story-dialog .dialog-head button {
+  font-size: 30px;
+  padding: 0 12px;
+}
+
+#report-dialog .dialog-intro,
+#story-dialog .dialog-intro {
+  font-size: 13px;
+  color: #aebbc5;
+  line-height: 1.6;
+  margin: 20px 0;
+}
+
+#report-dialog .report-tabs {
+  display: flex;
+  border-bottom: 1px solid #3c4a55;
+  margin-bottom: 23px;
+}
+
+#report-dialog .report-tabs button {
+  padding: 10px 18px;
+  color: var(--muted);
+}
+
+#report-dialog .report-tabs button[aria-selected=true] {
+  color: var(--green);
+  border-bottom: 2px solid var(--green);
+}
+
+#report-dialog .inspection-table {
+  overflow: auto;
+}
+
+#report-dialog .inspection-table caption {
+  text-align: left;
+  color: #a7b4bd;
+  font: 10px Consolas, monospace;
+  margin-bottom: 14px;
+}
+
+#report-dialog .inspection-table th,
+#report-dialog .inspection-table td {
+  white-space: nowrap;
+  padding: 13px 12px;
+}
+
+#report-dialog .inspection-table th[scope=row] {
+  position: sticky;
+  left: 0;
+  background: #0c1017;
+  z-index: 1;
+}
+
+#report-dialog .inspection-table tfoot {
+  color: var(--green);
+  background: #193129;
+}
+
+#report-dialog .inspection-table tfoot th[scope=row] {
+  background: #193129;
+}
+
+#report-dialog .branch-explainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  border-top: 1px solid #394d47;
+  margin-top: 24px;
+  padding-top: 20px;
+}
+
+#report-dialog .branch-explainer select {
+  background: #18282b;
+  border: 1px solid #4f656a;
+  padding: 8px;
+}
+
+#report-dialog .branch-explainer p {
+  width: 100%;
+  font: 13px/1.8 Consolas, monospace;
+  color: #b5d4c3;
+}
+
+#report-dialog .provenance,
+#story-dialog .provenance {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #92a1ad;
+  border-top: 1px solid #2f3e48;
+  padding-top: 18px;
+  margin-top: 25px;
+}
+
+#report-dialog .division-numbers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 28px 0;
+  gap: 16px;
+}
+
+#report-dialog .division-numbers div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 11px;
+  color: #a9b9be;
+}
+
+#report-dialog .division-numbers strong {
+  font-size: 32px;
+  font-weight: 350;
+  color: #d7ecde;
+}
+
+#report-dialog .weighted-note {
+  color: #a8b9be;
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: 16px;
+}
+
+#report-dialog #division-formula {
+  font: 13px/1.8 Consolas, monospace;
+  color: var(--green);
+}
+
+#story-dialog .story-steps,
+#chapter-03 .readable-story ol {
+  padding: 0;
+  list-style: none;
+  counter-reset: steps;
+}
+
+#story-dialog .story-steps li,
+#chapter-03 .readable-story li {
+  counter-increment: steps;
+  position: relative;
+  margin: 24px 0;
+  padding-left: 40px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #b2bfc8;
+}
+
+#story-dialog .story-steps li::before,
+#chapter-03 .readable-story li::before {
+  content: counter(steps, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+  font: 12px Consolas, monospace;
+}
+
+#story-dialog .story-steps strong,
+#chapter-03 .readable-story strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 450;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+
+#chapter-03 .readable-story {
+  max-width: 900px;
+  padding: 32px 4.2%;
+  margin: auto;
+}
+
+#chapter-03 .readable-story h2 {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+#chapter-03 .readable-story button {
+  color: var(--green);
+  border-bottom: 1px solid var(--green);
+}
+
+#chapter-03 .static-intro {
+  position: absolute;
+  left: 4.2%;
+  bottom: 18px;
+  z-index: 8;
+  font-size: 11px;
+  color: var(--green);
+}
+
+/* Left Navigation Rail Clearance when visible */
+body.has-left-nav:not(.nav-is-hidden) #chapter-03 .masthead,
+body.has-left-nav:not(.nav-is-hidden) #chapter-03 .caption,
+body.has-left-nav:not(.nav-is-hidden) #chapter-03 .transport {
+  padding-left: max(4.2%, calc(var(--nav-rail-w, 52px) + 20px));
+}
+
+body.has-left-nav:not(.nav-is-hidden) #chapter-03 .shot-heading,
+body.has-left-nav:not(.nav-is-hidden) #chapter-03 .static-intro {
+  left: max(4.2%, calc(var(--nav-rail-w, 52px) + 20px));
+}
+
+@media (min-width: 1700px) {
+  #chapter-03 .stage {
+    height: calc(100svh - 375px);
+  }
+  #chapter-03 .caption {
+    min-height: 110px;
+  }
+  #chapter-03 .masthead {
+    height: 64px;
+  }
+}
+
+@media (max-width: 700px) {
+  #chapter-03 .film {
+    padding-top: 60px;
+  }
+  #chapter-03 .masthead {
+    height: 48px;
+    padding: 0 20px;
+  }
+  #chapter-03 .identity {
+    gap: 10px;
+  }
+  #chapter-03 .identity .eyebrow {
+    font-size: 8px;
+  }
+  #chapter-03 .company-logo {
+    width: 76px;
+    height: 39px;
+  }
+  #chapter-03 .stage {
+    height: calc(100svh - 380px);
+    min-height: 430px;
+  }
+  #chapter-03 .shot-heading {
+    top: 20px;
+    left: 20px;
+  }
+  #chapter-03 .shot-heading span + span {
+    font-size: 13px;
+  }
+  #chapter-03 .shot-heading span:first-child {
+    font-size: 9px;
+  }
+  #chapter-03 .study-note {
+    top: auto;
+    bottom: 9px;
+    right: 20px;
+    font-size: 9px;
+  }
+  #chapter-03 .study-note > span {
+    display: none;
+  }
+  #chapter-03 .caption {
+    padding: 16px 20px;
+    gap: 13px;
+    min-height: 104px;
+    align-items: flex-start;
+  }
+  #chapter-03 .beat-number {
+    font-size: 9px;
+    margin-top: 5px;
+  }
+  #chapter-03 .caption h2 {
+    font-size: 17px;
+    line-height: 1.3;
+  }
+  #chapter-03 .caption p {
+    font-size: 11px;
+    line-height: 1.65;
+  }
+  #chapter-03 .caption-rule {
+    display: none;
+  }
+  #chapter-03 .transport {
+    padding: 0 20px 15px;
+  }
+  #chapter-03 .sequence-nav {
+    gap: 7px;
+  }
+  #chapter-03 .sequence-nav button {
+    display: block;
+    font-size: 8px;
+    line-height: 1.7;
+    min-height: 47px;
+  }
+  #chapter-03 .sequence-nav .num {
+    display: block;
+    font-size: 8px !important;
+  }
+  #chapter-03 .time-row {
+    gap: 9px;
+  }
+  #chapter-03 .control-row {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    row-gap: 2px;
+  }
+  #chapter-03 .playback {
+    gap: 5px;
+  }
+  #chapter-03 .playback #play {
+    min-width: 69px;
+  }
+  #chapter-03 .control-row button {
+    font-size: 10px;
+    padding: 0 3px;
+  }
+  #chapter-03 .inspection {
+    gap: 10px;
+  }
+  #chapter-03 .inspection #story {
+    display: block;
+  }
+  #chapter-03 .speed select {
+    font-size: 10px;
+  }
+  #chapter-03 .quiet-note {
+    font-size: 8px;
+    margin-top: 3px;
+  }
+  #chapter-03 .quiet-note span + span {
+    display: none;
+  }
+  #chapter-03 .final-cue {
+    bottom: 12px;
+    font-size: 9px;
+    gap: 8px;
+  }
+  #chapter-03 .final-cue > span {
+    display: none;
+  }
+  #chapter-03 .final-cue button {
+    font-size: 10px;
+    min-height: 30px;
+    background: #09120fc9;
+    padding: 0 12px;
+    border: 1px solid #3b5247;
+  }
+  #report-dialog,
+  #story-dialog {
+    padding: 22px;
+    width: calc(100% - 24px);
+  }
+  #report-dialog .dialog-head h2,
+  #story-dialog .dialog-head h2 {
+    font-size: 25px;
+  }
+  #report-dialog .dialog-intro,
+  #story-dialog .dialog-intro {
+    font-size: 12px;
+  }
+  #report-dialog .report-tabs button {
+    font-size: 12px;
+  }
+  #report-dialog .division-numbers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #report-dialog .division-numbers strong {
+    font-size: 28px;
+  }
+  #report-dialog .inspection-table td,
+  #report-dialog .inspection-table th {
+    font-size: 12px;
+  }
+  #chapter-03 .static-intro {
+    bottom: 8px;
+    font-size: 9px;
+  }
+  #chapter-03 .readable-story {
+    padding: 25px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #chapter-03 .quiet-note span:first-child {
+    color: var(--green);
+  }
+}

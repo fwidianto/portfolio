@@ -201,8 +201,12 @@
     }
 
     const carrier = document.querySelector('.ch02-to-ch03-carrier');
-    if (carrier && targetIndex !== SCENE_DEFS.length - 1) {
-      carrier.classList.remove('is-ready');
+    if (carrier) {
+      if (targetIndex === SCENE_DEFS.length - 1) {
+        carrier.classList.add('is-scene-05');
+      } else {
+        carrier.classList.remove('is-ready', 'is-scene-05');
+      }
     }
 
     // Start new scene
@@ -312,12 +316,16 @@
 
     // Keyboard Shortcuts
     window.addEventListener('keydown', (e) => {
-      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) return;
+      if (document.querySelector('dialog[open]')) return;
       const chapterRect = document.getElementById('chapter-02').getBoundingClientRect();
       const heroRect = document.getElementById('hero').getBoundingClientRect();
+      const ch03El = document.getElementById('chapter-03');
+      const ch03Rect = ch03El ? ch03El.getBoundingClientRect() : { top: Infinity, bottom: Infinity };
       const chapterVisible = Math.max(0, Math.min(chapterRect.bottom, innerHeight) - Math.max(chapterRect.top, 0));
       const heroVisible = Math.max(0, Math.min(heroRect.bottom, innerHeight) - Math.max(heroRect.top, 0));
-      if (chapterVisible <= heroVisible) return;
+      const ch03Visible = Math.max(0, Math.min(ch03Rect.bottom, innerHeight) - Math.max(ch03Rect.top, 0));
+      if (chapterVisible <= heroVisible || chapterVisible <= ch03Visible) return;
 
       if (e.code === 'Space') {
         e.preventDefault();
@@ -397,9 +405,16 @@
         entries.forEach(entry => {
           if (entry.isIntersecting && !hasTriggeredEntry) {
             checkAndTrigger();
+          } else if (!entry.isIntersecting && entry.intersectionRatio < 0.05 && isPlaying) {
+            const curAdapter = getSceneAdapter(currentSceneIndex);
+            if (curAdapter && typeof curAdapter.pause === 'function') {
+              curAdapter.pause();
+              isPlaying = false;
+              updatePlaybackUI();
+            }
           }
         });
-      }, { threshold: [0.1, 0.25, 0.4, 0.6] });
+      }, { threshold: [0, 0.05, 0.1, 0.25, 0.4, 0.6] });
 
       observer.observe(chapterSection);
     }
