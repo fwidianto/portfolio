@@ -29,7 +29,8 @@ test('production generation is deterministic and keeps all five chapter scenes',
  assert.equal(generate(source,true).status,0);
  for(const n of [1,2,3,4,5])assert.ok(built.html.includes(`id="ch03-layer-${n}"`));
  for(const n of [2,3,4,5])assert.ok(built.html.includes(`src="prototypes/new-portfolio-animation-first/scene-0${n}/index.html?`));
- for(const filename of ['film.js','chapter-03.js'])assert.ok(built.html.includes(`src="prototypes/new-portfolio-animation-first/${filename}"`));
+ assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/film.js"'));
+ assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/chapter-03.js?v=ch03-20261017-2"'));
  assert.ok(built.html.includes('href="prototypes/new-portfolio-animation-first/assets/logo-traknus.png"'));
  assert.ok(built.html.includes('download="Fauzan_Widianto_CV.pdf"'));
  assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/left-nav.js?v=ch03-20261017"'));
@@ -39,6 +40,7 @@ test('missing and duplicated scene markers fail closed',()=>{
  for(const html of [source.replace('id="ch03-layer-5"','id="missing-scene"'),source.replace('id="ch03-layer-5"','id="ch03-layer-5" data-duplicate=\'id="ch03-layer-5"\'')]){
   const result=generate(html);assert.notEqual(result.status,0);assert.match(result.stderr,/section marker.*ch03-layer-5/);
  }
+ assert.notEqual(generate(source.replace('<script src="chapter-03.js?v=ch03-20261017-2"></script>','')).status,0);
 });
 test('obsolete dormant chapters and obsolete chapter scripts remain rejected',()=>{
  for(const marker of ['id="dormant-chapter-03"','chapter-04.js']){

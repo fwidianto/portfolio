@@ -10,6 +10,7 @@
   const questions=['How does service activity become comparable performance?','How does a fuel purchase become a vehicle-level record?','How does a branch request reach a human approval?','How do site records become a shared operating picture?','What does keeping the fleet available cost the contract?'];
   const actions=['Inspect sample report','Inspect fuel transaction','Inspect purchase request','Explore HQ dashboard','Inspect calculations'];
   const hashes=['#chapter-03','#chapter-03-scene-02','#chapter-03-scene-03','#chapter-03-scene-04','#chapter-03-scene-05'];
+  function sceneIndexForHash(hash){return hashes.indexOf(hash==='#working-experience'?'#chapter-03':hash);}
   const details=[
    ['Service activity across the national office network needed a common view of branch and division profitability.','I consolidated SAP service records and prepared branch and division profitability analysis for management review.','Extract transactions, group by branch, aggregate revenue and cost, then calculate profit and revenue-weighted division margin.','SAP records and Excel reporting. The office is a stylized reconstruction.','Inspect the live sample report, switch branch and division views, and trace the calculations.','The 16-office network is owner-confirmed. Every financial figure is synthetic; no company performance or live ERP connection is represented.'],
    ['Mechanics advanced personal money for fuel, collected receipts and submitted reimbursement claims.','I researched vendors, contacted Pertamina Retail, helped establish the corporate arrangement, and reviewed usage, balances and top-up requirements.','Company funding supports vehicle-specific cards. Purchase and odometer records support manual usage review; top-ups remain company decisions.','Pertamina Retail supplied the RFID cards and transaction reporting system. My work was process improvement and coordination.','Inspect three illustrative fuel transactions and their odometer comparisons. Approximately 40 vehicles and IDR 50 million in monthly funding are owner-supplied context.','Vehicles, purchase amounts, odometers and interfaces are synthetic. No quantified savings or fraud-prevention result is claimed.'],
@@ -19,7 +20,7 @@
   ];
   const dev=['dev','edit','controls'].some(k=>new URLSearchParams(location.search).get(k)==='1'),motion=matchMedia('(prefers-reduced-motion:reduce)');
   const states=names.map(()=>({entered:false,resume:false,userPaused:false}));
-  let current=Math.max(0,hashes.indexOf(location.hash)),visible=false,scheduled=false,inspection=null,pendingInspection=null,pendingScene=null,transition=0,parentReady=false;
+  let current=Math.max(0,sceneIndexForHash(location.hash)),visible=false,scheduled=false,inspection=null,pendingInspection=null,pendingScene=null,transition=0,parentReady=false;
   const blocked=new Map();
   function adapter(i=current){return i===0?window.Ch03Scene01:frames[i-1].contentWindow[['FuelFilm','Scene03','ReportingScene04','WarehouseScene05'][i-1]];}
   function read(i=current){const a=adapter(i);if(!a||!parentReady||(i>0&&frames[i-1].contentDocument?.documentElement.dataset.ch03Ready!=='true'))return {ready:false};const s=a.state();return {...s,ready:true,duration:i===0?a.data.TIMES.duration:s.duration,reduced:!!(s.reduced??s.staticMode)};}
@@ -43,7 +44,7 @@
    if(visible){window.PortfolioLeftNav?.setActiveChapter('chapter-03');const status=document.querySelector('.portfolio-header__status-text');if(status)status.textContent=`03.${String(current+1).padStart(2,'0')} // EXPERIENCE`;}
   }
   function goToScene(index,{updateHash=true,scroll=false}={}){
-   if(typeof index==='string')index=hashes.indexOf(index.startsWith('#')?index:'#'+index);
+   if(typeof index==='string')index=sceneIndexForHash(index.startsWith('#')?index:'#'+index);
    if(inspection||!Number.isInteger(index)||index<0||index>=names.length)return;
    if(!read(index).ready){pendingScene={index,updateHash,scroll};return;}
    pendingScene=null;
@@ -126,8 +127,8 @@
    else if(event.key===' '&&!event.target.closest('button,a')){event.preventDefault();event.stopImmediatePropagation();toggle();}
    else if(dev&&event.key.toLowerCase()==='r'){event.preventDefault();event.stopImmediatePropagation();replay();}
   },true);
-  document.addEventListener('click',event=>{const link=event.target.closest('a[href^="#"]');if(!link)return;const idx=hashes.indexOf(link.getAttribute('href'));if(idx<0)return;event.preventDefault();event.stopImmediatePropagation();goToScene(idx,{scroll:true});},true);
-  window.addEventListener('hashchange',()=>{const idx=hashes.indexOf(location.hash);if(idx<0)return;if(inspection){history.replaceState(null,'',hashes[current]);return;}goToScene(idx,{updateHash:false,scroll:true});});
+  document.addEventListener('click',event=>{const link=event.target.closest('a[href^="#"]');if(!link)return;const idx=sceneIndexForHash(link.getAttribute('href'));if(idx<0)return;event.preventDefault();event.stopImmediatePropagation();goToScene(idx,{scroll:true});},true);
+  window.addEventListener('hashchange',()=>{const idx=sceneIndexForHash(location.hash);if(idx<0)return;if(inspection){history.replaceState(null,'',hashes[current]);return;}goToScene(idx,{updateHash:location.hash==='#working-experience',scroll:true});});
   window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule,{passive:true});document.addEventListener('visibilitychange',viewport,true);
   motion.addEventListener('change',()=>{pause();states[current].resume=false;schedule();});new IntersectionObserver(schedule,{threshold:[0,.06,.2,.35,.6,1]}).observe(stage);
   frames.forEach((frame,n)=>frame.addEventListener('load',()=>{pause(n+1);adapter(n+1)?.setActive?.(false);ready();}));
@@ -139,7 +140,7 @@
   await (await import('./chapter-03-inspection.js')).installInspection(window);parentReady=true;
   if(dev)requestAnimationFrame(tick);
   updateUI();names.forEach((_,i)=>{pause(i);adapter(i)?.setActive?.(false);});
-  if(hashes.includes(location.hash))window.scrollTo({top:scrollY+chapter.getBoundingClientRect().top,behavior:'instant'});
+  if(sceneIndexForHash(location.hash)>=0)window.scrollTo({top:scrollY+chapter.getBoundingClientRect().top,behavior:'instant'});
   schedule();ready();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
