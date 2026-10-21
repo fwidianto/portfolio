@@ -1,0 +1,13 @@
+body.source-3d.physical-operation [data-action="control"]{display:flex!important}
+body.source-3d.physical-operation.source-expanded #driving-controls:not([hidden]){display:flex!important;position:fixed;left:0;right:0;bottom:72px;width:auto;max-width:none;height:155px;background:#1d3428;padding:8px;gap:6px;align-items:stretch;flex-direction:column;border-top:1px solid #65806a;z-index:3}
+body.source-3d.physical-operation #driving-controls>span{font-size:10px;line-height:15px;margin:0;flex:0 0 30px}
+body.source-3d.physical-operation #driving-controls .drive-pad{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;flex:0 0 44px}
+body.source-3d.physical-operation #driving-controls .drive-pad button{grid-column:auto;grid-row:auto}
+body.source-3d.physical-operation #driving-controls .physical-drive-actions{display:grid;grid-template-columns:1fr 1fr;gap:5px;flex:0 0 44px}
+body.source-3d.physical-operation #driving-controls .physical-drive-actions button{display:flex;align-items:center;justify-content:center;background:#dce6c7;color:#254736;border:1px solid #b6c58a70;border-radius:5px;text-align:center}
+body.source-3d.physical-operation #driving-controls button{min-height:44px;margin:0;font-size:10px;padding:5px}
+body.source-3d.physical-operation.source-expanded:has(#driving-controls:not([hidden])) .ops-panel{bottom:227px}
+body.source-3d.physical-operation.source-expanded:has(#driving-controls:not([hidden])) #decision [data-action="control"]{display:none!important}
+
+/* Compact driving keeps the toolbar reachable; Return to automatic restores management. */
+@media(max-height:350px){body.source-3d.physical-operation.source-expanded:has(#driving-controls:not([hidden])) .ops-panel{display:none!important}}

@@ -76,21 +76,22 @@ export function createWarehouse(scenario,config={}) {
 }
 const spotById=(s,id)=>s.spots.find(p=>p.id===id);
 const jobById=(s,id)=>s.jobs.find(j=>j.id===id);
-function arrive(s){
+function arrive(s,operations=null){
   for(const p of s.pallets.filter(p=>p.stage===3&&p.location!=='dispatched'&&p.departure<=s.time)){
     const slot=spotById(s,p.location);slot.pallet=null;s.transfers.push({tick:s.tick,pallet:p.id,from:p.location,to:'dispatched'});p.location='dispatched';
   }
   for(const p of s.pallets){
     if(p.location!=='offsite'||p.arrival>s.time)continue;
-    const slot=s.spots.find(x=>x.type==='inbound'&&!x.pallet&&!x.reserved);
+    const slot=s.spots.find(x=>x.type==='inbound'&&!x.pallet&&!x.reserved&&!operations?.portReserved?.(s,x));
     if(!slot)break;
     slot.pallet=p.id;p.location=slot.id;
     s.transfers.push({tick:s.tick,pallet:p.id,from:'offsite',to:slot.id});
   }
 }
-function createJobs(s){
+function createJobs(s,operations=null){
   for(const p of s.pallets){
     if(p.stage>=3||p.location==='offsite'||p.location.startsWith('unit:')||s.jobs.some(j=>j.pallet===p.id&&j.status!=='completed'))continue;
+    if(operations?.jobAllowed&&!operations.jobAllowed(s,p))continue;
     const type=['receive','replenish','dispatch'][p.stage],target=['storage','staging','outbound'][p.stage];
     const choices=s.spots.filter(x=>x.type===target&&!x.pallet&&!x.reserved);
     if(!choices.length)continue;
@@ -156,22 +157,28 @@ function operate(s,u){
     if(u.mode==='auto'||u.manualHandling){u.handling+=s.config.stepSeconds;if(u.handling+1e-9>=s.config.handlingSeconds)handleLoad(s,u);}
   }else if(u.mode==='auto')move(s,u,target);
 }
-export function stepWarehouse(s,count=1){
+export function stepWarehouse(s,count=1,operations=null){
   for(let i=0;i<count&&!s.finished;i++){
-    s.started=true;s.tick++;s.time=Math.min(s.config.monthSeconds,s.tick*s.config.stepSeconds);
-    arrive(s);createJobs(s);serviceQueues(s);
-    for(const u of s.units)expose(s,u);
-    for(let k=0;k<s.units.length;k++)operate(s,s.units[(k+s.tick)%s.units.length]);
-    workServices(s);
-    if(s.time>=s.config.monthSeconds)s.finished=true;
+    s.started=true;s.tick++;s.time=s.config.continuous?s.tick*s.config.stepSeconds:Math.min(s.config.monthSeconds,s.tick*s.config.stepSeconds);
+    if(s.config.continuous){const period=Math.floor((s.time+1e-8)/s.config.monthSeconds)+1;if(period>(s.contractPeriods||1))renewContract(s,period);}
+    operations?.beforeStep?.(s);
+    arrive(s,operations);createJobs(s,operations);serviceQueues(s,operations);
+    for(const u of s.units)expose(s,u,operations);
+    for(let k=0;k<s.units.length;k++){
+      const u=s.units[(k+s.tick)%s.units.length];
+      if(operations)operations.operate(s,u,{assign,handleLoad});else operate(s,u);
+    }
+    workServices(s,operations);
+    operations?.afterStep?.(s);
+    if(!s.config.continuous&&s.time>=s.config.monthSeconds)s.finished=true;
   }
   return s;
 }
-export function assertWarehouse(s){
+export function assertWarehouse(s,{physicalOccupancy=false}={}){
   const used=new Map();
   for(const u of s.units){
     if(!isFloor(u.x,u.y))throw new Error('Unit crossed a solid obstacle: '+u.id);
-    for(const p of [u,...(u.edge?[u.edge.to]:[])]){const k=cellKey(p);if(used.has(k)&&used.get(k)!==u.id)throw new Error('Conflicting occupancy '+k);used.set(k,u.id);}
+    if(!physicalOccupancy)for(const p of [u,...(u.edge?[u.edge.to]:[])]){const k=cellKey(p);if(used.has(k)&&used.get(k)!==u.id)throw new Error('Conflicting occupancy '+k);used.set(k,u.id);}
     if(u.load&&!s.pallets.some(p=>p.id===u.load&&p.location==='unit:'+u.id))throw new Error('Unaccounted load');
   }
   for(const p of s.pallets){
@@ -187,7 +194,7 @@ export function assertWarehouse(s){
   if(new Set(s.events.map(e=>e.id)).size!==s.events.length)throw new Error('Duplicate service obligation');
   for(const m of s.mechanics){if(m.used+m.travelUsed>m.reserved+1e-6)throw new Error('Mechanic exceeded paid capacity');if(m.event&&!s.events.some(e=>e.id===m.event&&e.status==='in-progress'&&e.mechanics.includes(m.id)))throw new Error('Orphan mechanic reservation');}
   for(const e of s.events)if(e.status==='in-progress'&&(e.mechanics.length!==e.crew||e.mechanics.some(id=>s.mechanics.find(m=>m.id===id)?.event!==e.id)))throw new Error('Conflicting service crew');
-  for(const b of s.bays)if(b.unit&&!s.units.some(u=>u.id===b.unit&&eventById(s,u.service)?.bay===b.id))throw new Error('Orphan bay reservation');
+  for(const b of s.bays)if(b.unit&&!s.units.some(u=>u.id===b.unit&&(eventById(s,u.service)?.bay===b.id||physicalOccupancy&&b.departing===u.id&&u.physical?.egress)))throw new Error('Orphan bay reservation');
   return true;
 }
 
@@ -197,12 +204,18 @@ function book(s,entry){
   s.ledger.push({tick:s.tick,unit:null,event:null,items:[],...entry});
 }
 function addMechanic(s,additional){
-  const id='M'+String(s.mechanics.length+1).padStart(2,'0'),fraction=1-s.time/s.config.monthSeconds;
+  const id='M'+String(s.mechanics.length+1).padStart(2,'0'),fraction=1-(s.config.continuous?s.time%s.config.monthSeconds:s.time)/s.config.monthSeconds;
   const route=logistics({location:s.scenario.worksheet.placement==='dedicated'?'site':'satellite',homeSite:'A',dedicatedAccommodation:s.scenario.worksheet.dedicatedAccommodation},s.scenario.sites[0]);
-  s.mechanics.push({id,event:null,start:s.time,reserved:REGULAR_HOURS*fraction,used:0,travelUsed:0,travel:false,available:0,travelBudget:route.hours*fraction});
+  s.mechanics.push({id,event:null,start:s.time,reserved:REGULAR_HOURS*fraction,used:0,travelUsed:0,travel:false,available:0,travelBudget:route.hours*(s.config.continuous?1:fraction)});
   for(const [category,amount] of Object.entries({[additional?'additionalPayroll':'regularPayroll']:s.scenario.worksheet.salary,travel:route.travel,accommodation:route.accommodation,allowance:route.allowance})){
     book(s,{id:id+':'+category,category,amount:Math.round(amount*fraction),label:(additional?'Additional':'Reserved')+' '+id+' · remaining month'});
   }
+}
+function renewContract(s,period){
+  s.contractPeriods=period;
+  for(const [category,amount] of Object.entries({revenue:s.plan.revenue,other:s.scenario.sites[0].other,overhead:s.scenario.sites[0].overhead,...(s.bays.length===2?{bayLease:s.config.bayLease}:{})}))book(s,{id:'period:'+period+':'+category,category:category==='bayLease'?'other':category,amount,label:'Month '+period+' · '+category});
+  const route=logistics({location:s.scenario.worksheet.placement==='dedicated'?'site':'satellite',homeSite:'A',dedicatedAccommodation:s.scenario.worksheet.dedicatedAccommodation},s.scenario.sites[0]);
+  for(const m of s.mechanics){m.reserved+=REGULAR_HOURS;for(const [category,amount] of Object.entries({regularPayroll:s.scenario.worksheet.salary,travel:route.travel,accommodation:route.accommodation,allowance:route.allowance}))book(s,{id:m.id+':period:'+period+':'+category,category,amount:Math.round(amount),label:'Month '+period+' · '+m.id+' · '+category});}
 }
 function obligation(s,u,threshold){
   const model=s.scenario.models[u.model],packageKey=packageAt(threshold,model),p=model.packages[packageKey],duration=jobDuration(p.wrench,p.crew,p.efficiency,p.minDuration);
@@ -218,8 +231,8 @@ function repairEvent(s,u,kind,id){
     parts:[{name:spec.name+' · synthetic parts',qty:1,price:spec.parts,total:spec.parts}],consumables:[],recovery:spec.recovery};
   s.events.push(e);return e;
 }
-function expose(s,u){
-  const running=!u.fault&&(!u.service||u.edge||eventById(s,u.service)?.bay!==null&&cellKey(u)!==cellKey(s.bays[eventById(s,u.service).bay].position))&&(u.job||u.edge||u.service);
+function expose(s,u,operations=null){
+  const physicalRunning=operations?.running?.(s,u),running=physicalRunning??(!u.fault&&(!u.service||u.edge||eventById(s,u.service)?.bay!==null&&cellKey(u)!==cellKey(s.bays[eventById(s,u.service).bay].position))&&(u.job||u.edge||u.service));
   const hours=s.config.stepSeconds*s.scenario.fleets[u.index].hours/s.config.monthSeconds;
   if(!running){if(u.fault||u.service)u.downtime+=hours;return;}
   u.exposure+=hours;u.meter=u.opening+u.exposure;u.condition=Math.max(.1,u.condition-hours*s.config.wearPerHour);
@@ -236,9 +249,9 @@ function expose(s,u){
     }
   }
 }
-function serviceQueues(s){
+function serviceQueues(s,operations=null){
   for(const u of s.units){
-    if(u.service||u.fault)continue;
+    if(u.service||u.fault||operations?.leavingBay?.(s,u))continue;
     const e=s.events.find(e=>e.unit===u.id&&['service','component'].includes(e.kind)&&['due','queued'].includes(e.status));
     if(!e||e.kind==='service'&&(s.policy==='defer'||s.policy==='after-job'&&u.job))continue;
     u.service=e.id;e.status='queued';
@@ -251,13 +264,13 @@ function serviceQueues(s){
   }
 }
 function travelOverlap(s,m){
-  const duration=s.config.monthSeconds-m.start,interval=duration/22,rate=REGULAR_HOURS/s.config.monthSeconds;
+  const duration=s.config.continuous?s.config.monthSeconds:s.config.monthSeconds-m.start,interval=duration/22,rate=REGULAR_HOURS/s.config.monthSeconds;
   const travelDuration=Math.min(interval,m.travelBudget/22/rate),t0=Math.max(0,s.time-s.config.stepSeconds-m.start),t1=Math.max(0,s.time-m.start);
   let seconds=0;
-  for(let i=Math.floor(t0/interval);i<=Math.floor(t1/interval)&&i<22;i++)seconds+=Math.max(0,Math.min(t1,i*interval+travelDuration)-Math.max(t0,i*interval));
+  for(let i=Math.floor(t0/interval);i<=Math.floor(t1/interval)&&(s.config.continuous||i<22);i++)seconds+=Math.max(0,Math.min(t1,i*interval+travelDuration)-Math.max(t0,i*interval));
   return seconds*rate;
 }
-function workServices(s){
+function workServices(s,operations=null){
   const paid=s.config.stepSeconds*REGULAR_HOURS/s.config.monthSeconds;
   for(const m of s.mechanics){const travel=travelOverlap(s,m);m.travelUsed+=travel;m.travel=travel>1e-8;m.available=paid-travel;}
   const queue=s.events.filter(e=>e.status!=='completed').sort((a,b)=>(a.kind==='minor'||a.kind==='major'?0:1)-(b.kind==='minor'||b.kind==='major'?0:1)||a.created-b.created);
@@ -265,6 +278,7 @@ function workServices(s){
     const u=s.units.find(u=>u.id===e.unit),repair=['minor','major'].includes(e.kind);
     if(!repair&&(u.fault||u.service!==e.id||e.bay===null||u.edge||cellKey(u)!==cellKey(s.bays[e.bay].position)))continue;
     if(e.status!=='in-progress'){
+      if(operations?.canStartWork&&!operations.canStartWork(s,e,u))continue;
       const free=s.mechanics.filter(m=>!m.event&&m.available>1e-8).slice(0,e.crew);
       if(free.length!==e.crew)continue;
       e.mechanics=free.map(m=>m.id);free.forEach(m=>m.event=e.id);e.status='in-progress';e.started=s.tick;
@@ -274,7 +288,7 @@ function workServices(s){
     e.progress+=work;e.personHours+=work*e.crew;for(const m of crew){m.used+=work;m.available-=work;}
     if(e.progress+1e-8<e.duration)continue;
     e.status='completed';e.completed=s.tick;crew.forEach(m=>m.event=null);u.condition=e.kind==='component'?1:Math.min(1,u.condition+e.recovery);
-    if(repair)u.fault=null;else{if(e.bay!==null)s.bays[e.bay].unit=null;u.service=null;}u.reason=e.name+' complete · ready';
+    if(repair)u.fault=null;else{if(e.bay!==null){if(operations?.holdBayUntilClear?.(s,e,u))s.bays[e.bay].departing=u.id;else s.bays[e.bay].unit=null;}u.service=null;}u.reason=e.name+' complete · ready';
   }
 }
 export function warehouseRisk(s,u){
@@ -283,11 +297,11 @@ export function warehouseRisk(s,u){
   return {overdueHours,risk:1+(1-u.condition)*s.config.wearRisk+overdueHours/s.scenario.models[u.model].step*s.config.overdueRisk};
 }
 export function improvementQuote(s,kind,unit=0){
-  const fraction=Math.max(0,1-s.time/s.config.monthSeconds);
+  const fraction=Math.max(0,1-(s.config.continuous?s.time%s.config.monthSeconds:s.time)/s.config.monthSeconds);
   if(kind==='mechanic'){
     const route=logistics({location:s.scenario.worksheet.placement==='dedicated'?'site':'satellite',homeSite:'A'},s.scenario.sites[0]);
     const cost=Math.round(s.scenario.worksheet.salary*fraction)+Math.round(route.travel*fraction)+Math.round(route.accommodation*fraction)+Math.round(route.allowance*fraction);
-    return {cost,disabled:s.improvements.mechanic!==undefined||s.finished,timing:'Available immediately for the remaining month',benefit:'Adds '+(176*fraction).toFixed(1)+' paid hours before placement travel',tradeoff:'Prorated extra payroll and placement costs; existing payroll stays reserved.'};
+    return {cost,disabled:(s.config.continuous?s.mechanics.length>=8:s.improvements.mechanic!==undefined)||s.finished,timing:'Available immediately for the remaining month',benefit:'Adds '+(176*fraction).toFixed(1)+' paid hours before placement travel',tradeoff:'Prorated extra payroll and placement costs; existing payroll stays reserved.'};
   }
   if(kind==='bay')return {cost:s.config.bayLease,disabled:s.bays.length>=2||s.finished,timing:'Opens immediately',benefit:'Two services may occupy separate bays',tradeoff:'One-month temporary lease, booked as operating expense. Adds no mechanics.'};
   if(kind==='component')return {cost:s.config.component.parts,disabled:s.units[unit].componentRequested||s.finished,timing:s.config.component.minimumHours+' mechanic hours after reaching a bay',benefit:'Restores drive condition to 100% on completion',tradeoff:'Parts booked when work starts; existing crew and bay are occupied. Lifetime meter continues.'};
@@ -318,15 +332,15 @@ export function warehouseAction(s,type,value,unit=0){
   if(applied)s.actions.push({tick:s.tick,type,value,unit});return applied;
 }
 export function warehouseActuals(s){
-  const costs={};for(const e of s.ledger)if(e.category!=='revenue')costs[e.category]=(costs[e.category]||0)+e.amount;
-  const revenue=s.ledger.filter(e=>e.category==='revenue').reduce((a,e)=>a+e.amount,0),cost=Object.values(costs).reduce((a,b)=>a+b,0),overhead=costs.overhead||0;
-  const completed=s.jobs.filter(j=>j.status==='completed').length,waiting=s.jobs.filter(j=>j.status!=='completed').length;
+  const archive=s.archive||{},costs={...archive.costs};for(const e of s.ledger)if(e.category!=='revenue')costs[e.category]=(costs[e.category]||0)+e.amount;
+  const revenue=(archive.revenue||0)+s.ledger.filter(e=>e.category==='revenue').reduce((a,e)=>a+e.amount,0),cost=Object.values(costs).reduce((a,b)=>a+b,0),overhead=costs.overhead||0;
+  const completed=(archive.moves||0)+s.jobs.filter(j=>j.status==='completed').length,waiting=s.jobs.filter(j=>j.status!=='completed').length;
   const planned=s.scenario.fleets.reduce((a,f)=>a+f.hours,0),elapsedPotential=planned*s.time/s.config.monthSeconds,downtime=s.units.reduce((a,u)=>a+u.downtime,0);
   return {revenue,cost,contribution:revenue-(cost-overhead),profit:revenue-cost,margin:revenue?100*(revenue-cost)/revenue:null,costs,
-    variance:cost-s.plan.direct-s.plan.overhead,completed,waiting,remaining:s.config.pallets*3-completed,
-    dispatched:s.pallets.filter(p=>p.location==='dispatched').length,exposure:s.units.reduce((a,u)=>a+u.exposure,0),downtime,
+    variance:s.config.continuous?cost-(s.plan.direct+s.plan.overhead)*(s.contractPeriods||1):cost-s.plan.direct-s.plan.overhead,completed,waiting,remaining:s.config.continuous?s.pallets.reduce((n,p)=>n+3-p.stage,0):s.config.pallets*3-completed,
+    dispatched:(archive.dispatched||0)+s.pallets.filter(p=>p.location==='dispatched').length,exposure:s.units.reduce((a,u)=>a+u.exposure,0),downtime,
     availability:elapsedPotential?Math.max(0,100*(1-downtime/elapsedPotential)):null,
-    services:s.events.filter(e=>e.kind==='service'&&e.status==='completed').length,
-    faults:s.events.filter(e=>['minor','major'].includes(e.kind)).length,backlog:s.events.filter(e=>e.status!=='completed').length,
+    services:(archive.services||0)+s.events.filter(e=>e.kind==='service'&&e.status==='completed').length,
+    faults:(archive.faults||0)+s.events.filter(e=>['minor','major'].includes(e.kind)).length,backlog:s.events.filter(e=>e.status!=='completed').length,
     personnel:s.mechanics.reduce((a,m)=>a+m.used,0),travel:s.mechanics.reduce((a,m)=>a+m.travelUsed,0)};
 }

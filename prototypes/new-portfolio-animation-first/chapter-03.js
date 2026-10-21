@@ -29,7 +29,7 @@
    const s=read(),a=adapter();if(!s.ready||!visible||inspection)return;
    a.setActive?.(true);if(s.reduced)return;
    if(!states[current].entered){states[current].entered=true;a.play();}
-   else if(states[current].resume&&s.time<s.duration)a.play();
+   else if(states[current].resume&&(s.continuous||s.time<s.duration))a.play();
    states[current].resume=false;
   }
   function updateUI(){
@@ -131,13 +131,17 @@
   window.addEventListener('hashchange',()=>{const idx=sceneIndexForHash(location.hash);if(idx<0)return;if(inspection){history.replaceState(null,'',hashes[current]);return;}goToScene(idx,{updateHash:location.hash==='#working-experience',scroll:true});});
   window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule,{passive:true});document.addEventListener('visibilitychange',viewport,true);
   motion.addEventListener('change',()=>{pause();states[current].resume=false;schedule();});new IntersectionObserver(schedule,{threshold:[0,.06,.2,.35,.6,1]}).observe(stage);
-  frames.forEach((frame,n)=>frame.addEventListener('load',()=>{pause(n+1);adapter(n+1)?.setActive?.(false);ready();}));
+  frames.forEach((frame,n)=>frame.addEventListener('load',()=>{
+   const index=n+1;
+   if(index===current&&visible&&!inspection&&read(index).playing)states[index].resume=true;
+   pause(index);adapter(index)?.setActive?.(false);ready();
+  }));
   $('ch03-dev-controls').hidden=!dev;chapter.classList.toggle('ch03-has-controls',dev);
   $('ch03-dev-play').addEventListener('click',toggle);$('ch03-dev-replay').addEventListener('click',replay);$('ch03-dev-timeline').addEventListener('input',e=>seek(Number(e.target.value)));
   $('ch03-dev-speed').addEventListener('change',e=>{if(adapter()?.setSpeed){adapter().setSpeed(Number(e.target.value));return;}const select=current===0?$('speed'):frames[current-1].contentDocument.getElementById('speed');if(!select)return;if(![...select.options].some(o=>o.value===e.target.value))select.add(new Option(e.target.value+'×',e.target.value));select.value=e.target.value;select.dispatchEvent(new Event('change',{bubbles:true}));});
   function tick(){const s=read();if(s.ready){$('ch03-dev-timeline').hidden=s.seekable===false;$('ch03-dev-timeline').disabled=s.seekable===false;$('ch03-dev-timeline').max=s.duration;$('ch03-dev-timeline').value=s.time;$('ch03-dev-time').textContent=s.time.toFixed(1);$('ch03-dev-play').textContent=s.playing?'Pause':'Play';$('ch03-dev-speed').value=String(s.speed);}requestAnimationFrame(tick);}
   window.Chapter03Controller={goToScene,play:()=>{if(visible&&!inspection){states[current].entered=true;states[current].userPaused=false;adapter()?.play();}},pause:()=>{states[current].userPaused=true;states[current].resume=false;pause();},seek,replay,openInfo,openPrimary,inspectionOpened,inspectionClosed,getCurrentSceneIndex:()=>current,state:()=>({sceneIndex:current,visible,dev,inspecting:!!inspection,scenes:names.map((_,i)=>({...read(i),...states[i]}))})};
-  await (await import('./chapter-03-inspection.js')).installInspection(window);parentReady=true;
+  await (await import('./chapter-03-inspection.js?v=ch03-20261021-a12')).installInspection(window);parentReady=true;
   if(dev)requestAnimationFrame(tick);
   updateUI();names.forEach((_,i)=>{pause(i);adapter(i)?.setActive?.(false);});
   if(sceneIndexForHash(location.hash)>=0)window.scrollTo({top:scrollY+chapter.getBoundingClientRect().top,behavior:'instant'});

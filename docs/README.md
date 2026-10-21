@@ -26,7 +26,7 @@ Do not reconstruct historical design explorations or animation authorities unles
     - **Scene 03**: Astra Agro Lestari Palm Oil Mill Internship (Owner-approved baseline; clean industrial canvas with duplicate headers and slogans hidden via `layer-text-zones` `display="none"`, causal 6-stage batch flow, and inspectable dossier modal).
     - **Scene 04**: Journey to Tokyo / Tokyo Tech (Integrated 04.A–04.E sequence complete).
     - **Scene 05**: Undergraduate Thesis / Synthesis (25.0s apparatus and phase separation sequence).
-  - **Chapter III / Working Experience**: Owner-authorized five-scene integration: service profitability, fuel-card cost control, purchase request control, multi-site operations reporting, and maintenance-contract economics. Shared presentation/inspection keeps synthetic data and project boundaries explicit. `#working-experience` remains a Chapter III alias.
+  - **Chapter III / Working Experience**: Owner-authorized five-scene integration: service profitability, fuel-card cost control, purchase request control, multi-site operations reporting, and maintenance-contract economics. Scene 05 now uses the question-first physical warehouse promoted through [A12](chapter-03-scene-05-release.md). Shared presentation/inspection keeps synthetic data and project boundaries explicit. `#working-experience` remains a Chapter III alias.
   - **Chapters IV–V**: Remaining **Under Development** placeholder at `#chapter-04` / `#chapter-05`.
   - **Visual Editor**: Isolated development-only workflow (`dev-editor.js` / `dev-editor.css` loaded strictly on demand via `?edit=1`, `#edit`, or local shortcut; zero runtime in normal public viewing).
 - `../Projects/Odoo-ERP-Analytics.html` is the current flagship case-study page.

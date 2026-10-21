@@ -28,9 +28,10 @@ test('production generation is deterministic and keeps all five chapter scenes',
  const built=generate(source);assert.equal(built.status,0,built.stderr);assert.equal(built.html,production);
  assert.equal(generate(source,true).status,0);
  for(const n of [1,2,3,4,5])assert.ok(built.html.includes(`id="ch03-layer-${n}"`));
- for(const n of [2,3,4,5])assert.ok(built.html.includes(`src="prototypes/new-portfolio-animation-first/scene-0${n}/index.html?`));
+ for(const n of [2,3,4])assert.ok(built.html.includes(`src="prototypes/new-portfolio-animation-first/scene-0${n}/index.html?`));
+ assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/scene-05/warehouse/index.html?chapter=1"'));
  assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/film.js"'));
- assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/chapter-03.js?v=ch03-20261017-2"'));
+ assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/chapter-03.js?v=ch03-20261021-a12"'));
  assert.ok(built.html.includes('href="prototypes/new-portfolio-animation-first/assets/logo-traknus.png"'));
  assert.ok(built.html.includes('download="Fauzan_Widianto_CV.pdf"'));
  assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/left-nav.js?v=ch03-20261017"'));
@@ -40,12 +41,16 @@ test('missing and duplicated scene markers fail closed',()=>{
  for(const html of [source.replace('id="ch03-layer-5"','id="missing-scene"'),source.replace('id="ch03-layer-5"','id="ch03-layer-5" data-duplicate=\'id="ch03-layer-5"\'')]){
   const result=generate(html);assert.notEqual(result.status,0);assert.match(result.stderr,/section marker.*ch03-layer-5/);
  }
- assert.notEqual(generate(source.replace('<script src="chapter-03.js?v=ch03-20261017-2"></script>','')).status,0);
+ assert.notEqual(generate(source.replace('<script src="chapter-03.js?v=ch03-20261021-a12"></script>','')).status,0);
 });
 test('obsolete dormant chapters and obsolete chapter scripts remain rejected',()=>{
  for(const marker of ['id="dormant-chapter-03"','chapter-04.js']){
   const result=generate(source.replace('</head>',`<!-- ${marker} -->\n</head>`));assert.notEqual(result.status,0);assert.match(result.stderr,/obsolete/);
  }
+});
+test('replacing the accepted warehouse entry with the former game fails closed',()=>{
+ const result=generate(source.replace('scene-05/warehouse/index.html?chapter=1','scene-05/index.html?view=game&amp;chapter=1'));
+ assert.notEqual(result.status,0);assert.match(result.stderr,/scene-05\/warehouse\/index/);
 });
 test('duplicate canonical metadata and missing editor boundary fail closed',()=>{
  assert.notEqual(generate(source.replace('</head>','<link rel="canonical" href="https://example.invalid/">\n</head>')).status,0);

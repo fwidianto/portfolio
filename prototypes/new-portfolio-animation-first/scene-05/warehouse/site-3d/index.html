@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#101918">
+ <title>Scene 05 · Live 3D operation</title><link rel="icon" href="data:,"><link rel="stylesheet" href="site.css">
+ <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+</head>
+<body>
+ <canvas id="site-canvas" tabindex="0" aria-label="Interactive three-dimensional warehouse site. Drag to orbit, scroll to zoom, right-drag or arrow keys to pan. Use the view controls for camera projection, focus and roof cutaway."></canvas>
+ <header><span class="back" aria-hidden="true">FW<span>.</span></span><div><p class="eyebrow">03.05 / MAINTENANCE-CONTRACT ECONOMICS</p><h1>One connected operation.</h1><p class="subline">Synthetic management game · ten forklifts</p><p id="unit-status" class="unit-status" aria-live="off">Connecting the existing operation…</p></div></header>
+ <details id="view-controls" class="controls"><summary>View controls</summary><div class="control-body">
+  <label>Focus<select id="focus"><option value="site">Whole site</option><option value="warehouse">Warehouse</option><option value="unit">Selected forklift · frame once</option><option value="workshop">Workshop</option><option value="doorway">Service doorway</option><option value="loading">Loading area</option></select></label>
+  <label>Projection<select id="projection"><option value="orthographic">Orthographic · compare scale</option><option value="perspective">Perspective · natural depth</option></select></label>
+  <label>Selected unit<select id="selected-unit" disabled><option>Connecting…</option></select></label>
+  <label class="check"><input id="cutaway" type="checkbox"> Open warehouse roof</label>
+  <label class="check"><input id="dimensions" type="checkbox" checked> Dimensions and 1m grid</label>
+  <button id="reset" type="button">Reset view <span aria-hidden="true">↺</span></button>
+ </div></details>
+ <section id="operation-panel" class="operation-panel" aria-label="Existing operation and clock">
+  <div class="operation-heading"><span id="operation-summary">Loading the source operation…</span><div><button id="operation-inspect" type="button" disabled>Inspect</button><button id="operation-toggle" type="button" aria-expanded="false" aria-controls="operation-source" disabled>Manage</button></div></div>
+  <iframe id="operation-source" title="Existing warehouse game clock, decisions and calculation inspection" aria-busy="true"></iframe>
+ </section>
+ <footer><p id="map-status" role="status" aria-live="off">Opening the 3D map…</p><p class="help">Drag to rotate · scroll / pinch to zoom · right-drag / two fingers to pan</p><a href="../layout/site-plan.svg">Open the 2D plan ↗</a></footer>
+ <section id="fallback" hidden><h2>The 3D view could not open.</h2><p id="fallback-message"></p><a href="../layout/site-plan.svg">View the measured 2D plan ↗</a></section>
+ <script type="module">try{await import('./scene.js');}catch(error){console.error(error);document.getElementById('fallback').hidden=false;document.getElementById('fallback-message').textContent=error.message;document.getElementById('map-status').textContent='3D unavailable. The measured 2D plan remains available.';}</script>
+</body>
+</html>

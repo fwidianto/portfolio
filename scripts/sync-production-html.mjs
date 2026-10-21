@@ -60,6 +60,7 @@ function generateProductionHtml(sourceHtml) {
     'id="ch03-stage"',
     'id="ch03-information"',
     'id="ch03-info-dialog"',
+    'src="scene-05/warehouse/index.html?chapter=1"',
     '<script type="module" src="film.js"></script>'
   ];
   for (let scene = 1; scene <= 5; scene++) requiredSections.push(`id="ch03-layer-${scene}"`);
@@ -145,7 +146,7 @@ function generateProductionHtml(sourceHtml) {
   output = output.replace(/src="(left-nav\.js(?:\?[^"]*)?)"/g, 'src="prototypes/new-portfolio-animation-first/$1"');
   output = output.replace('src="analytics-optout.js"', 'src="prototypes/new-portfolio-animation-first/analytics-optout.js"');
   output = output.replace('src="film.js"', 'src="prototypes/new-portfolio-animation-first/film.js"');
-  output = output.replace(/src="(scene-0[2-5]\/index\.html(?:\?[^"]*)?)"/g, 'src="prototypes/new-portfolio-animation-first/$1"');
+  output = output.replace(/src="(scene-0[2-4]\/index\.html(?:\?[^"]*)?|scene-05\/(?:warehouse\/)?index\.html(?:\?[^"]*)?)"/g, 'src="prototypes/new-portfolio-animation-first/$1"');
 
   // Static Assets / Images
   output = output.replace(/src="assets\/([^"]+)"/g, 'src="prototypes/new-portfolio-animation-first/assets/$1"');

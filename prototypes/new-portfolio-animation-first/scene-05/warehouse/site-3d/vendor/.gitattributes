@@ -1,0 +1,2 @@
+# Preserve the licensed upstream source bytes, including its indentation.
+three.core.js whitespace=-space-before-tab

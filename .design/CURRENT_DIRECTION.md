@@ -9,7 +9,8 @@ This file is the current design authority for active portfolio development.
 - Current accepted state:
   - **Chapter I (Red Dwarf Hero)**: Operational and frozen as accepted desktop/mobile baseline with responsive offset positioning and zero clipping.
   - **Chapter II (Foundations to Real World)**: Accepted for publication with its complete five-scene sequence intact (01 UI Entry, 02 Foundations, 03 Astra Mill, 04 Tokyo Journey, 05 Thesis Rig).
-  - **Chapters III–V**: Chapter III / Working Experience is intentionally pending a complete redesign from first principles. The current public Working Experience placeholder is the only accepted implementation. No previous Chapter III–V prototype, scene structure, visual concept, or narrative plan is authoritative.
+  - **Chapter III / Working Experience**: The owner-authorized five-scene implementation is active. On 21 October 2026 the owner authorized A12 promotion and release of the reviewed question-first, continuous physical warehouse for Scene 05. Preserve the accepted Chapters I–II and Chapter III Scenes 01–04. Release scope and validation are recorded in `docs/chapter-03-scene-05-release.md`.
+  - **Chapters IV–V**: Retain the remaining Under Development placeholder.
   - **Visual Editor**: Development-only tool isolated on-demand via `?edit=1`, `#edit`, or local shortcut, completely excluded from normal public viewing.
 - Verified prototype authority: `prototypes/new-portfolio-animation-first/index.html`.
 

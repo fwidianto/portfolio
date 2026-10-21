@@ -5,7 +5,10 @@ export async function installInspection(win){
  doc.documentElement.dataset.ch03Inspection='loading';
  const sheet=doc.createElement('link');sheet.rel='stylesheet';sheet.href=new URL('./chapter-03-inspection.css',import.meta.url).href;
  await new Promise((resolve,reject)=>{sheet.onload=resolve;sheet.onerror=reject;doc.head.append(sheet);});
- const controller=()=>win.parent.Chapter03Controller||win.Chapter03Controller;
+ const controller=()=>{
+  try{for(let host=win;;host=host.parent){if(host.Chapter03Controller)return host.Chapter03Controller;if(host.parent===host)return null;}}
+  catch{return null;}
+ };
  let current=null,intent=null;
  const suspended=[],returns=new WeakMap(),native=new WeakMap();
  function remember(event){

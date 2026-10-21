@@ -1,0 +1,48 @@
+@import '../setup-guide.css';
+html.game-view,body.source-3d{height:100%;margin:0;background:#14251f;color:#e7dfcd;overflow:hidden}
+body.source-3d .warehouse-app{display:block;position:fixed;inset:0;min-height:0;height:100%;max-width:none;margin:0;padding:0;background:#14251f}
+body.source-3d :is(.game-header,.mission-heading,.warehouse-stats,.game-footer,.game-skip,.live-strip,#game-world,.warehouse-tools,.selected-caption,#driving-controls){display:none!important}
+body.source-3d .warehouse-layout{display:block;margin:0;padding:0}
+body.source-3d .warehouse-stage{position:fixed;inset:auto 0 0;height:72px;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:#14251f;overflow:visible}
+body.source-3d .clock-controls{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:7px;padding:7px 9px;margin:0;background:#14251f;border:0;border-radius:0;box-shadow:none}
+body.source-3d .clock-controls button{min-height:44px;padding:8px 10px;font-size:11px;white-space:nowrap;border:1px solid #65806a;background:#2c4233;color:#efcf9f;border-radius:4px;cursor:pointer}
+body.source-3d #play-mission{min-width:100px;background:#be9163;color:#13241d;border-color:#d5aa7a}
+body.source-3d .clock-controls label{display:flex;flex-direction:column;align-items:center;gap:1px;font-size:9px;line-height:11px;color:#b5c7b4}
+body.source-3d .clock-controls select{width:54px;min-height:44px;margin:0;padding:6px;background:#253c2d;color:#ebd8b6;border:1px solid #65806a;border-radius:4px;font-size:11px}
+body.source-3d .ops-panel{display:none!important}
+/* shortcut: manual driving stays in the comparison preview until A09 integrates its inputs. */
+body.source-3d [data-action="control"]{display:none!important}
+body.source-3d.source-expanded .ops-panel{display:block!important;position:fixed;inset:0 0 72px;width:auto;height:auto;max-height:none;overflow:auto;border:0;border-radius:0;background:#14251f;opacity:1;visibility:visible;transform:none;margin:0;padding:0}
+body.source-3d .ops-tabs{position:sticky;top:0;background:#203b2c;z-index:2;display:flex;gap:4px;padding:6px}
+body.source-3d .ops-tabs button{min-height:44px;flex:1;font-size:11px}
+body.source-3d #decision{padding:14px 16px;overflow:visible}
+body.source-3d #decision h2{font-size:25px;line-height:1.15}
+body.source-3d #decision :is(select,input){min-height:44px;font-size:13px;max-width:100%}
+body.source-3d #decision button{min-height:44px}
+body.source-3d .game-dialog{width:100%;max-width:100%;height:100%;max-height:100%;margin:0;border:0;border-radius:0;padding:16px;background:#14251f;color:#e6dcc5}
+body.source-3d .game-dialog .inspection-table{overflow:auto;max-width:100%}
+body.source-3d .game-dialog button{min-height:44px}
+body.source-3d .inspection-header h2,body.source-3d #calculation-content h3{color:#e6dcc5}
+body.source-3d #calculation-content p,body.source-3d .game-dialog label{color:#c7d2ba}
+body.source-3d .inspection-header .eyebrow{color:#d4be91}
+body.source-3d .calculation-tabs button{color:#c9d3bc;border-color:#648069}
+body.source-3d .calculation-tabs button[aria-pressed="true"]{background:#36523b;color:#f3e2bc}
+body.source-3d #calculation-content .inspection-note{background:#233e2c;border-color:#97ac79;color:#d4d9c7}
+body.source-3d :focus-visible{outline:2px solid #e8bd86;outline-offset:2px}
+
+body.source-3d .warehouse-app[data-guided=true] #operations{bottom:0;display:flex!important;flex-direction:column;overflow:hidden}
+body.source-3d .warehouse-app[data-guided=true] #operations .ops-tabs{display:none}
+body.source-3d .warehouse-app[data-guided=true] #decision{flex:1;min-height:0;overflow:auto;padding:14px 18px}
+body.source-3d .setup-guide{padding:16px 18px 0;flex-shrink:0}
+body.source-3d .setup-guide h2{font-size:24px;margin:8px 0}
+body.source-3d .setup-guide p{font-size:12px;line-height:1.6}
+body.source-3d .guide-actions{position:static;background:#14251f;padding:12px 18px;flex-shrink:0}
+body.source-3d #fleet-table select{min-width:85px}
+body.source-3d #decision #game-hours,body.source-3d #decision .revenue-slider{min-height:44px}
+@media(max-height:240px) and (min-width:701px){
+ body.source-3d .setup-guide{padding:8px 12px 0}
+ body.source-3d .setup-guide h2{font-size:18px;margin:4px 0}
+ body.source-3d .setup-guide p{font-size:11px;line-height:1.4}
+ body.source-3d .guide-actions{padding:6px 12px}
+}
+@media(max-height:90px){body.source-3d .warehouse-stage{height:100svh}}

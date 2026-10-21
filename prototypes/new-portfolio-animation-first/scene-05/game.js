@@ -12,15 +12,26 @@ const short=v=>Math.abs(v)>=1e6?'Rp '+n(v/1e6,2)+'m':rp(v);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const stat=(name,value)=>`<div><span>${name}</span><strong>${value}</strong></div>`;
 const table=(headers,rows)=>`<div class="inspection-table"><table><thead><tr>${headers.map(h=>`<th scope="col">${h}</th>`).join('')}</tr></thead><tbody>${rows.map(row=>`<tr>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-let scenario=gameBaseline(),derived=evaluateGame(scenario),config=structuredClone(WAREHOUSE_DEFAULTS),mission=createWarehouse(scenario,config);
-let selected=0,tab='operation',view='overview',zoom=1,playing=false,speed=1,last=0,accumulator=0,frame=0,lastPanel=0,detail='actuals',inspectMonth=1,inspectEvent=null;
-let held=null,pressAt=0;
+const presentation=window.FMC_PRESENTATION||{};
+const playbackSpeeds=presentation.speeds||[1,2,4],maximumSpeed=Math.max(...playbackSpeeds);
+let scenario=gameBaseline(),derived=evaluateGame(scenario),config=structuredClone({...WAREHOUSE_DEFAULTS,...presentation.config}),mission=createWarehouse(scenario,config),runtime=null;
+let selected=0,tab='operation',view='overview',zoom=1,playing=false,speed=presentation.speed||1,last=0,accumulator=0,frame=0,lastPanel=0,detail='actuals',inspectMonth=1,inspectEvent=null;
+let held=null,pressAt=0,lastRuntimeStep=0,lastRuntimePaint=0,runtimeError=null;
 let presentationActive=new URLSearchParams(location.search).get('chapter')!=='1';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const metrics={updates:0,updateMs:0,maxUpdateMs:0,renders:0,renderMs:0,maxRenderMs:0,frames:0,frameMs:0,maxFrameMs:0};
 document.documentElement.className='game-view';document.title='FIELDWORK · A living forklift warehouse';
-document.body.innerHTML=`<a class="game-skip" href="#operations">Skip to warehouse controls</a><main class="game-shell warehouse-app"><header class="game-header"><a class="game-wordmark" href="?view=game">FIELDWORK<span>A LIVING FORKLIFT OPERATION</span></a><div class="game-context"><span>10 units · one month</span><span class="synthetic-badge">Synthetic scenario</span></div><button class="quiet-button" data-inspect="actuals">Inspect ↗</button></header><div class="mission-heading"><div><span class="eyebrow">THE MAINTENANCE CONTRACT</span><h1>Keep the work moving.</h1></div><div class="mission-time"><span id="mission-clock">Day 1 / 30</span><progress id="mission-progress" max="240" value="0" aria-label="Mission month elapsed"></progress><small>One month ≈ 4 minutes at 1×</small></div></div><div class="warehouse-layout"><section class="warehouse-stage" aria-label="Live warehouse"><div class="live-strip"><span id="live-state">READY TO OPEN</span><span id="live-work">72 pallets · 216 moves</span></div><div id="game-world"></div><div class="warehouse-tools" role="group" aria-label="Warehouse camera"><button data-view="overview" aria-pressed="true">Back to site</button><button data-view="interior" aria-pressed="false">Enter warehouse</button><button data-action="zoom" aria-label="Move closer to the selected forklift">Zoom +</button></div><div id="world-selected" class="selected-caption"></div><div id="driving-controls" hidden></div><div class="clock-controls"><button id="play-mission" data-action="play">Start month →</button><button data-action="advance" aria-label="Advance ten simulation seconds">+10s</button><label>Speed<select id="mission-speed" aria-label="Playback speed"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option></select></label><button data-action="restart" aria-label="Restart the same seeded mission">↺ Replay</button></div></section><aside class="ops-panel" id="operations" aria-label="Warehouse decisions"><nav class="ops-tabs" aria-label="Management panels"><button data-panel="operation" aria-pressed="true">Fleet</button><button data-panel="workshop" aria-pressed="false">Workshop</button><button data-panel="result" aria-pressed="false">Result</button></nav><div id="decision"></div></aside></div><div class="warehouse-stats" id="warehouse-stats"></div><footer class="game-footer"><span>OPERATIONS → BUSINESS LOGIC → EVIDENCE</span><p>Synthetic maintenance-contract economics. Ownership costs are outside this model.</p><a href="./" target="_blank" rel="noopener">Open worksheet ↗</a></footer><p id="game-feedback" role="status" aria-live="polite"></p></main><dialog class="game-dialog" id="game-calculations" aria-labelledby="calculation-title"><header class="inspection-header"><div><span class="eyebrow">FOLLOW THE EVIDENCE</span><h2 id="calculation-title">Behind the operation</h2></div><button data-action="close-details" aria-label="Close inspection">×</button></header><nav class="calculation-tabs" id="calculation-tabs" aria-label="Inspection sections"></nav><div id="calculation-content"></div></dialog>`;
-const world=mountLivingWorld($('#game-world'),{onUnit:i=>selectUnit(i),onEnter:()=>changeView('interior'),onInspect:section=>{if(section==='workshop'){tab='workshop';renderPanel();}else openDetails(section);}});
+document.body.innerHTML=`<a class="game-skip" href="#operations">Skip to warehouse controls</a><main class="game-shell warehouse-app"><header class="game-header"><a class="game-wordmark" href="?view=game">FIELDWORK<span>A LIVING FORKLIFT OPERATION</span></a><div class="game-context"><span>10 units · one month</span><span class="synthetic-badge">Synthetic scenario</span></div><button class="quiet-button" data-inspect="actuals">Inspect ↗</button></header><div class="mission-heading"><div><span class="eyebrow">THE MAINTENANCE CONTRACT</span><h1>Keep the work moving.</h1></div><div class="mission-time"><span id="mission-clock">Day 1 / 30</span><progress id="mission-progress" max="240" value="0" aria-label="Mission month elapsed"></progress><small>One month ≈ ${n(config.monthSeconds/60,1)} minutes at 1×</small></div></div><div class="warehouse-layout"><section class="warehouse-stage" aria-label="Live warehouse"><div class="live-strip"><span id="live-state">READY TO OPEN</span><span id="live-work">72 pallets · 216 moves</span></div><div id="game-world"></div><div class="warehouse-tools" role="group" aria-label="Warehouse camera"><button data-view="overview" aria-pressed="true">Back to site</button><button data-view="interior" aria-pressed="false">Enter warehouse</button><button data-action="zoom" aria-label="Move closer to the selected forklift">Zoom +</button></div><div id="world-selected" class="selected-caption"></div><div id="driving-controls" hidden></div><div class="clock-controls"><button id="play-mission" data-action="play">Start month →</button><button data-action="advance" aria-label="Advance ten simulation seconds">+10s</button><label>Speed<select id="mission-speed" aria-label="Playback speed">${playbackSpeeds.map(value=>`<option value="${value}">${value}×</option>`).join('')}</select></label><button data-action="restart" aria-label="Restart the same seeded mission">↺ Replay</button></div></section><aside class="ops-panel" id="operations" aria-label="Warehouse decisions"><nav class="ops-tabs" aria-label="Management panels"><button data-panel="operation" aria-pressed="true">Fleet</button><button data-panel="workshop" aria-pressed="false">Workshop</button><button data-panel="result" aria-pressed="false">Result</button></nav><div id="decision"></div></aside></div><div class="warehouse-stats" id="warehouse-stats"></div><footer class="game-footer"><span>OPERATIONS → BUSINESS LOGIC → EVIDENCE</span><p>Synthetic maintenance-contract economics. Ownership costs are outside this model.</p><a href="./" target="_blank" rel="noopener">Open worksheet ↗</a></footer><p id="game-feedback" role="status" aria-live="polite"></p></main><dialog class="game-dialog" id="game-calculations" aria-labelledby="calculation-title"><header class="inspection-header"><div><span class="eyebrow">FOLLOW THE EVIDENCE</span><h2 id="calculation-title">Behind the operation</h2></div><button data-action="close-details" aria-label="Close inspection">×</button></header><nav class="calculation-tabs" id="calculation-tabs" aria-label="Inspection sections"></nav><div id="calculation-content"></div></dialog>`;
+const world=presentation.only3D?{render(){},setView(){},metrics:{renderer:'external-3d'}}:mountLivingWorld($('#game-world'),{onUnit:i=>selectUnit(i),onEnter:()=>changeView('interior'),onInspect:section=>{if(section==='workshop'){tab='workshop';renderPanel();}else openDetails(section);}});
+function runtimeFailure(error){if(error.name==='AbortError')return;runtimeError=error.message;const failed=runtime;runtime=null;failed?.dispose();pause('Simulation paused · '+error.message+'. Resume to retry.');}
+function watch(promise){promise.catch(runtimeFailure);return promise;}
+function ensureRuntime(){
+ if(runtime||!window.fmcRuntimeFactory)return true;
+ try{runtimeError=null;
+ runtime=window.fmcRuntimeFactory({onState(next,work){mission=next;metrics.updateThread='worker';metrics.updates+=work.count;metrics.updateMs+=work.computeMs;metrics.maxUpdateMs=Math.max(metrics.maxUpdateMs,work.computeMs);metrics.routeCache=work.routeCache;const now=performance.now();if(!playing||now-lastRuntimePaint>=75){lastRuntimePaint=now;renderWorld();}document.dispatchEvent(new Event('fmc-state'));if(!work.count)renderPanel();if(mission.finished){pause();tab='result';renderPanel();feedback('Month complete. Inspect the financial and operational result.');}},onError:runtimeFailure});watch(runtime.reset(mission));return true;
+ }catch(error){runtimeFailure(error);return false;}
+}
+function act(type,value,index=selected){if(!runtime)return warehouseAction(mission,type,value,index);watch(runtime.reset(mission));watch(runtime.action(type,value,index));return true;}
 function unitSelect(id='game-unit'){return `<label class="unit-selector" for="${id}">Selected unit<select id="${id}">${mission.units.map((u,i)=>`<option value="${i}" ${i===selected?'selected':''}>${String(i+1).padStart(2,'0')} · ${u.model}</option>`).join('')}</select></label>`;}
 function setup(){
   const u=mission.units[selected];
@@ -38,7 +49,7 @@ function workshopPanel(){
 }
 function resultPanel(){
   const a=warehouseActuals(mission),status=a.revenue===0?'REVENUE UNSET':a.profit<0?'NEGATIVE RESULT':a.remaining>0?'CONTRIBUTION · WORK REMAINS':'MONTH COMPLETE';
-  return `<span class="eyebrow">${mission.finished?'YOUR MONTH, CLOSED':'BOOKED THIS MONTH'}</span><h2>${a.profit<0?'The contract<br>needs a rethink.':'Did the plan<br>hold up?'}</h2><div class="verdict ${a.profit<0?'verdict-loss':''}">${status}</div><p>Maintenance-contract scope. Revenue is fixed; incomplete work creates no invented penalty.</p><div class="result-numbers">${stat('Revenue',short(a.revenue))}${stat('Booked cost',short(a.cost))}${stat('Contribution',short(a.contribution))}${stat('After overhead',short(a.profit))}${stat('Margin',a.margin===null?'Undefined':n(a.margin,2)+'%')}${stat('Cost vs plan',(a.variance>=0?'+':'')+short(a.variance))}</div><div class="outcome-note">${a.remaining} / ${config.pallets*3} moves unfinished · ${a.backlog} service / repair obligations open.<br>${a.dispatched} / ${config.pallets} pallets dispatched · ${(a.availability===null?'—':n(a.availability,1))}% availability.</div><button class="primary-button" data-inspect="actuals">Trace the result ↗</button><button class="ticket-link" data-inspect="forecast">Open the 60-month forecast ↗</button><button class="ticket-link" data-action="new-plan">Change inputs & replay →</button>`;
+  return `<span class="eyebrow">${config.continuous?'RUNNING CONTRACT · MONTH '+(mission.contractPeriods||1):mission.finished?'YOUR MONTH, CLOSED':'BOOKED THIS MONTH'}</span><h2>${a.profit<0?'The contract<br>needs a rethink.':'Did the plan<br>hold up?'}</h2><div class="verdict ${a.profit<0?'verdict-loss':''}">${status}</div><p>Maintenance-contract scope. Revenue is fixed; incomplete work creates no invented penalty.</p><div class="result-numbers">${stat('Revenue',short(a.revenue))}${stat('Booked cost',short(a.cost))}${stat('Contribution',short(a.contribution))}${stat('After overhead',short(a.profit))}${stat('Margin',a.margin===null?'Undefined':n(a.margin,2)+'%')}${config.continuous?'':stat('Cost vs plan',(a.variance>=0?'+':'')+short(a.variance))}</div><div class="outcome-note">${a.remaining}${config.continuous?'':' / '+config.pallets*3} moves unfinished · ${a.backlog} service / repair obligations open.<br>${a.dispatched}${config.continuous?'':' / '+config.pallets} pallets dispatched · ${(a.availability===null?'—':n(a.availability,1))}% availability.</div><button class="primary-button" data-inspect="actuals">Trace the result ↗</button><button class="ticket-link" data-inspect="forecast">Open the 60-month forecast ↗</button><button class="ticket-link" data-action="new-plan">Change inputs & replay →</button>`;
 }
 function renderPanel(){
   const focus=document.activeElement?.id;
@@ -49,15 +60,15 @@ function renderPanel(){
 function renderWorld(){
   const t=performance.now();world.render(mission,selected,{reduced:reduced.matches});const elapsed=performance.now()-t;
   metrics.renders++;metrics.renderMs+=elapsed;metrics.maxRenderMs=Math.max(metrics.maxRenderMs,elapsed);
-  const a=warehouseActuals(mission),u=mission.units[selected];
-  $('#mission-clock').textContent=mission.finished?'Month complete':`Day ${Math.min(30,Math.floor(mission.time/config.monthSeconds*30)+1)} / 30 · ${n(mission.time)}s`;
-  $('#mission-progress').value=mission.time;$('#mission-progress').max=config.monthSeconds;
+  const a=warehouseActuals(mission),u=mission.units[selected],month=mission.contractPeriods||1,monthTime=mission.time%config.monthSeconds,day=Math.min(30,Math.floor(monthTime/config.monthSeconds*30)+1);
+  $('#mission-clock').textContent=config.continuous?`Month ${month} · Day ${day} / 30 · ${n(mission.time)}s`:mission.finished?'Month complete':`Day ${Math.min(30,Math.floor(mission.time/config.monthSeconds*30)+1)} / 30 · ${n(mission.time)}s`;
+  $('#mission-progress').value=config.continuous?monthTime:mission.time;$('#mission-progress').max=config.monthSeconds;
   $('#live-state').textContent=mission.finished?'MONTH CLOSED':!mission.started?'READY TO OPEN':playing?'OPERATION LIVE':'PAUSED';
-  if(mission.started&&!mission.finished)$('#live-state').textContent=(playing?'LIVE':'PAUSED')+' · DAY '+Math.min(30,Math.floor(mission.time/config.monthSeconds*30)+1)+'/30';
+  if(mission.started&&!mission.finished)$('#live-state').textContent=(playing?'LIVE':'PAUSED')+(config.continuous?' · MONTH '+month+' · DAY '+day+'/30':' · DAY '+Math.min(30,Math.floor(mission.time/config.monthSeconds*30)+1)+'/30');
   $('#live-work').textContent=a.completed+' moves · '+a.dispatched+' dispatched';
   $('#world-selected').textContent=`${String(selected+1).padStart(2,'0')} / ${u.model} · ${u.reason}${u.load?' · '+u.load:''}`;
-  $('#warehouse-stats').innerHTML=stat('Moves completed',a.completed+' / '+config.pallets*3)+stat('Operating hours',n(a.exposure,1)+' h')+stat('Service / faults',a.services+' / '+a.faults)+stat('Booked contribution',short(a.contribution));
-  $('#play-mission').textContent=mission.finished?'Month complete':!mission.started?'Start month →':playing?'Ⅱ Pause':'▶ Resume';$('#play-mission').disabled=mission.finished;
+  $('#warehouse-stats').innerHTML=stat('Moves completed',config.continuous?a.completed:a.completed+' / '+config.pallets*3)+stat('Operating hours',n(a.exposure,1)+' h')+stat('Service / faults',a.services+' / '+a.faults)+stat('Booked contribution',short(a.contribution));
+  $('#play-mission').textContent=mission.finished?'Month complete':!mission.started?config.continuous?'Start operation →':'Start month →':playing?'Ⅱ Pause':'▶ Resume';$('#play-mission').disabled=mission.finished;
   renderDriving();
   for(const button of document.querySelectorAll('[data-view]'))button.setAttribute('aria-pressed',String(button.dataset.view===view));
 }
@@ -73,9 +84,10 @@ function renderDriving(){
 }
 function render(){renderPanel();renderWorld();}
 function selectUnit(i){selected=i;$('#driving-controls').innerHTML='';render();}
-function pause(message){playing=false;last=0;accumulator=0;held=null;cancelAnimationFrame(frame);frame=0;if(message)feedback(message);renderWorld();}
+function pause(message){playing=false;last=0;accumulator=0;held=null;cancelAnimationFrame(frame);frame=0;if(runtime?.busy)watch(runtime.reset(mission));if(message)feedback(message);renderWorld();}
 function feedback(message){$('#game-feedback').textContent=message;}
-function simulate(count){
+function simulate(count,manual=false){
+  if(window.fmcRuntimeFactory){if(!ensureRuntime())return false;if(!manual&&runtime.busy)return false;watch(runtime.step(count,{drive:held,unit:selected,stream:!manual}));return true;}
   const start=performance.now();stepWarehouse(mission,count);const elapsed=performance.now()-start;
   metrics.updates+=count;metrics.updateMs+=elapsed;metrics.maxUpdateMs=Math.max(metrics.maxUpdateMs,elapsed/count);
   if(mission.finished){pause();tab='result';renderPanel();feedback('Month complete. Inspect the financial and operational result.');}
@@ -85,22 +97,24 @@ function tick(now){
   const delta=last?Math.max(0,(now-last)/1000):0;last=now;
   accumulator+=delta*speed;
   if(delta){metrics.frames++;metrics.frameMs+=delta*1000;metrics.maxFrameMs=Math.max(metrics.maxFrameMs,delta*1000);}
-  while(accumulator+1e-9>=config.stepSeconds&&playing){
-    if(held&&mission.tick>=pressAt){warehouseAction(mission,'move',held,selected);pressAt=mission.tick+1;}
+  // Accelerated playback needs catch-up headroom while preserving the fixed physical step.
+  if(runtime){const count=Math.min(Math.min(32,Math.max(8,Math.ceil(speed*4))),Math.floor((accumulator+1e-9)/config.stepSeconds));if(count&&now-lastRuntimeStep>=50&&simulate(count)){accumulator-=count*config.stepSeconds;lastRuntimeStep=now;}accumulator=Math.min(accumulator,2*speed);}
+  else while(accumulator+1e-9>=config.stepSeconds&&playing){
+    if(held&&mission.tick>=pressAt){act('move',held,selected);pressAt=mission.tick+1;}
     simulate(1);accumulator-=config.stepSeconds;
   }
-  renderWorld();if(now-lastPanel>750&&!document.activeElement?.matches('#decision select,#decision input')){renderPanel();lastPanel=now;}
+  if(!runtime)renderWorld();if(now-lastPanel>750&&!document.activeElement?.matches('#decision select,#decision input')){renderPanel();lastPanel=now;}
   if(playing)frame=requestAnimationFrame(tick);
 }
 function play(){
   if(!presentationActive||document.hidden||mission.finished)return;if(playing){pause();renderPanel();return;}
   if(!mission.started){mission.started=true;renderPanel();}
   if(reduced.matches){pause('Reduced motion: use +10s to advance the same simulation.');renderPanel();return;}
-  playing=true;last=0;frame=requestAnimationFrame(tick);renderWorld();
+  if(!ensureRuntime())return;playing=true;last=0;frame=requestAnimationFrame(tick);renderWorld();
 }
-function restart(changeInputs=false){pause();mission=createWarehouse(scenario,config);selected=0;tab='operation';$('#driving-controls').innerHTML='';if(!changeInputs){mission.started=true;feedback('Same seed and assumptions restored. Press Resume or +10s.');}else feedback('Edit the inputs, then open a fresh month.');render();}
+function restart(changeInputs=false){pause();runtimeError=null;mission=createWarehouse(scenario,config);selected=0;tab='operation';$('#driving-controls').innerHTML='';if(!changeInputs){mission.started=true;feedback('Same seed and assumptions restored. Press Resume or +10s.');}else feedback('Edit the inputs, then open a fresh month.');if(runtime)watch(runtime.reset(mission));render();}
 function commit(change){
-  try{const next=changeGame(scenario,change);const fresh=createWarehouse(next.scenario,config);scenario=next.scenario;derived=next;mission=fresh;render();feedback('Plan updated.');}
+  try{const next=changeGame(scenario,change);const fresh=createWarehouse(next.scenario,config);scenario=next.scenario;derived=next;mission=fresh;if(runtime)watch(runtime.reset(mission));render();feedback('Plan updated.');}
   catch(e){feedback(e.message);}
 }
 function chart(){const c=financeChart(financeTimeline(derived.financial.months));return `<figure class="game-profit-chart"><figcaption>Cumulative 60-month forecast · Rp</figcaption><svg viewBox="0 0 ${c.width} ${c.height}" role="img" aria-label="Source-calculated cumulative revenue and cost"><path class="chart-revenue-area" d="${c.revenueArea}"/><path class="chart-revenue" d="${c.revenuePath}"/><path class="chart-cost" d="${c.costPath}"/></svg><div class="game-chart-legend"><span>Revenue</span><span>Cost</span></div></figure>`;}
@@ -111,11 +125,11 @@ function renderDetails(){
   const a=warehouseActuals(mission);let html='';
   if(detail==='actuals'){
     const categories={...COST_LABELS,repairParts:'Incident / component parts',overhead:'Allocated overhead'};
-    html=`<h3>One-month plan → mission actuals</h3><p>${mission.finished?'Closed month.':'Live booked totals: the full month’s fixed revenue, reserved payroll and placement allocations are booked at opening.'} Materials are booked once when a service or repair starts. Queued work is uncharged.</p>`+table(['Item','Month 1 plan','Mission actual'],[['Revenue',rp(mission.plan.revenue),rp(a.revenue)],...Object.entries({...Object.fromEntries(Object.keys(categories).map(k=>[k,0])),...a.costs}).map(([key,cost])=>[categories[key]||key,rp(key==='overhead'?mission.plan.overhead:mission.plan.costs[key]||0),`<button data-category="${key}">${rp(cost)} ↗</button>`]),['Total cost',rp(mission.plan.direct+mission.plan.overhead),rp(a.cost)],['Contribution',rp(mission.plan.contribution),rp(a.contribution)],['After overhead',rp(mission.plan.profit),rp(a.profit)],['Margin',mission.plan.margin===null?'Undefined':n(mission.plan.margin,2)+'%',a.margin===null?'Undefined at zero revenue':n(a.margin,2)+'%']]);
-    html+=`<p class="inspection-note">${a.remaining} moves unfinished; ${a.backlog} obligations open. Lower cost can reflect work not yet performed. Fixed maintenance revenue is unchanged by downtime. Purchase, finance, depreciation, insurance and rental ownership returns are outside this result.</p><h3>Operational result</h3>`+table(['Measure','Actual'],[['Completed / still required moves',a.completed+' / '+a.remaining],['Waiting or active generated jobs',a.waiting],['Dispatched pallets',a.dispatched+' / '+config.pallets],['Operating exposure',n(a.exposure,3)+' h'],['Potential operating hours lost to service / faults',n(a.downtime,3)+' h'],['Availability',a.availability===null?'Not yet measurable':n(a.availability,2)+'%'],['Completed services / faults observed',a.services+' / '+a.faults],['Consumed crew person-hours',n(a.personnel,3)],['Paid mechanic travel',n(a.travel,3)+' h']]);
-    html+='<details><summary>All booked entries · unit → event → items</summary>'+ledgerTable(mission.ledger)+'</details><button class="quiet-button" data-action="export">Export mission evidence JSON</button>';
+    html=`<h3>${config.continuous?'Opening monthly plan → running actuals':'One-month plan → mission actuals'}</h3><p>${config.continuous?'Running totals cover '+(mission.contractPeriods||1)+' opened months. Each month books its fixed revenue, payroll and placement allocations. The plan column is the opening month reference.':mission.finished?'Closed month.':'Live booked totals: the full month’s fixed revenue, reserved payroll and placement allocations are booked at opening.'} Materials are booked once when a service or repair starts. Queued work is uncharged.</p>`+table(['Item','Month 1 plan',config.continuous?'Running actual':'Mission actual'],[['Revenue',rp(mission.plan.revenue),rp(a.revenue)],...Object.entries({...Object.fromEntries(Object.keys(categories).map(k=>[k,0])),...a.costs}).map(([key,cost])=>[categories[key]||key,rp(key==='overhead'?mission.plan.overhead:mission.plan.costs[key]||0),`<button data-category="${key}">${rp(cost)} ↗</button>`]),['Total cost',rp(mission.plan.direct+mission.plan.overhead),rp(a.cost)],['Contribution',rp(mission.plan.contribution),rp(a.contribution)],['After overhead',rp(mission.plan.profit),rp(a.profit)],['Margin',mission.plan.margin===null?'Undefined':n(mission.plan.margin,2)+'%',a.margin===null?'Undefined at zero revenue':n(a.margin,2)+'%']]);
+    html+=`<p class="inspection-note">${a.remaining} moves unfinished; ${a.backlog} obligations open. Lower cost can reflect work not yet performed. Fixed maintenance revenue is unchanged by downtime. Purchase, finance, depreciation, insurance and rental ownership returns are outside this result.</p><h3>Operational result</h3>`+table(['Measure','Actual'],[['Completed / still required moves',a.completed+' / '+a.remaining],['Waiting or active generated jobs',a.waiting],['Dispatched pallets',config.continuous?a.dispatched+' cumulative':a.dispatched+' / '+config.pallets],['Operating exposure',n(a.exposure,3)+' h'],['Potential operating hours lost to service / faults',n(a.downtime,3)+' h'],['Availability',a.availability===null?'Not yet measurable':n(a.availability,2)+'%'],['Completed services / faults observed',a.services+' / '+a.faults],['Consumed crew person-hours',n(a.personnel,3)],['Paid mechanic travel',n(a.travel,3)+' h']]);
+    html+=(mission.archive?.ledgerCount?'<p>'+mission.archive.ledgerCount+' earlier bookings are summarized in the exported archive totals.</p>':'')+'<details><summary>Recent booked entries · unit → event → items</summary>'+ledgerTable(mission.ledger)+'</details><button class="quiet-button" data-action="export">Export mission evidence JSON</button>';
   }else if(detail==='inventory'){
-    html=`<h3>Shared inventory · ${mission.pallets.length} traceable pallets</h3><p>Each pallet occupies one slot, one unit, the arrival pool or dispatch. Three jobs per pallet: receiving → replenishment → dispatch. Reservations survive view changes and faults.</p>`+table(['Unit','Model','State','Job','Load','Lifetime h'],mission.units.map(u=>[u.id,u.model,esc(u.reason),u.job||'—',u.load||'—',n(u.meter,3)]))+`<details open><summary>Jobs</summary>${table(['Job','Unit','State','Source → destination'],mission.jobs.map(j=>[j.id,j.owner||'Waiting',j.status,j.source+' → '+j.destination]))}</details><details><summary>Every pallet</summary>${table(['Pallet','Location','Stage'],mission.pallets.map(p=>[p.id,p.location,p.stage+' / 3']))}</details>`;
+    html=`<h3>Shared inventory · ${mission.pallets.length} active pallet records</h3>${config.continuous?'<p>Completed deliveries replenish the arrival pool with new IDs. Earlier completed work is summarized; current reservations and loads retain their IDs.</p>':''}<p>Each pallet occupies one slot, one unit, the arrival pool or dispatch. Three jobs per pallet: receiving → replenishment → dispatch. Reservations survive view changes and faults.</p>`+table(['Unit','Model','State','Job','Load','Lifetime h'],mission.units.map(u=>[u.id,u.model,esc(u.reason),u.job||'—',u.load||'—',n(u.meter,3)]))+`<details open><summary>Jobs</summary>${table(['Job','Unit','State','Source → destination'],mission.jobs.map(j=>[j.id,j.owner||'Waiting',j.status,j.source+' → '+j.destination]))}</details><details><summary>Every pallet</summary>${table(['Pallet','Location','Stage'],mission.pallets.map(p=>[p.id,p.location,p.stage+' / 3']))}</details>`;
   }else if(detail==='events'){
     const e=mission.events.find(e=>e.id===inspectEvent);
     html='<h3>Actual obligations & incidents</h3>'+table(['Event','Unit','Status','Crew','Elapsed / standard h','Person h'],mission.events.map(e=>[`<button data-event="${e.id}">${e.id} ↗</button>`,e.unit,e.status,e.crew,n(e.progress,2)+' / '+e.duration,n(e.personHours,2)]));
@@ -141,7 +155,7 @@ function offer(kind){
 }
 document.addEventListener('click',event=>{
   const b=event.target.closest('button');if(!b)return;
-  if(b.dataset.drive){warehouseAction(mission,'move',b.dataset.drive,selected);return;}
+  if(b.dataset.drive){act('move',b.dataset.drive,selected);return;}
   if(b.dataset.panel){tab=b.dataset.panel;renderPanel();return;}
   if(b.dataset.select!==undefined){selectUnit(Number(b.dataset.select));return;}
   if(b.dataset.view){changeView(b.dataset.view);return;}
@@ -151,23 +165,23 @@ document.addEventListener('click',event=>{
   if(b.dataset.forecastEvent){inspectEvent=b.dataset.forecastEvent;renderDetails();return;}
   if(b.dataset.category){$('#calculation-content').innerHTML='<h3>'+esc(b.dataset.category)+' · booked entries</h3>'+ledgerTable(mission.ledger.filter(e=>e.category===b.dataset.category));return;}
   if(b.dataset.offer){offer(b.dataset.offer);return;}
-  if(b.dataset.buy){warehouseAction(mission,'improve',b.dataset.buy,selected);$('#game-calculations').close();render();feedback('Decision applied once. Inspect the queue and ledger for its effect.');return;}
+  if(b.dataset.buy){act('improve',b.dataset.buy,selected);$('#game-calculations').close();render();feedback('Decision applied once. Inspect the queue and ledger for its effect.');return;}
   const action=b.dataset.action;
   if(action==='play')play();
-  if(action==='advance'){pause();simulate(200);render();if($('#game-calculations').open)renderDetails();}
+  if(action==='advance'){pause();simulate(200,true);render();if($('#game-calculations').open)renderDetails();}
   if(action==='restart')restart();
   if(action==='new-plan')restart(true);
   if(action==='zoom'){if(view==='overview')changeView('interior');zoom=zoom>=2.2?1:zoom+.6;world.setView(view,zoom,zoom>1?mission.units[selected]:null);b.textContent=zoom===1?'Zoom +':'Zoom '+n(zoom,1)+'×';}
-  if(action==='control'){const value=mission.units[selected].mode==='manual'?'auto':'manual';warehouseAction(mission,'control',value,selected);if(value==='manual'){view='interior';zoom=1.4;world.setView(view,zoom,mission.units[selected]);if(reduced.matches)feedback('Reduced motion: use arrow buttons then +10s, or return to automatic control.');}render();}
-  if(action==='handle'){warehouseAction(mission,'handle',null,selected);if(!playing&&reduced.matches){simulate(12);render();}}
+  if(action==='control'){const value=mission.units[selected].mode==='manual'?'auto':'manual';act('control',value,selected);if(value==='manual'){view='interior';zoom=1.4;world.setView(view,zoom,mission.units[selected]);if(reduced.matches)feedback('Reduced motion: use arrow buttons then +10s, or return to automatic control.');}render();}
+  if(action==='handle'){act('handle',null,selected);if(!playing&&reduced.matches){simulate(12);render();}}
   if(action==='close-details')$('#game-calculations').close();
   if(action==='export'){const blob=new Blob([JSON.stringify({scenario,config,mission,actuals:warehouseActuals(mission)},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='fieldwork-mission-'+config.seed+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 });
 document.addEventListener('change',event=>{
   const e=event.target;
   if(e.id==='game-unit'||e.id==='inspect-unit'){selected=Number(e.value);render();if($('#game-calculations').open){inspectEvent=null;renderDetails();}return;}
-  if(e.id==='mission-speed'){speed=Number(e.value);return;}
-  if(e.id==='service-policy'){warehouseAction(mission,'policy',e.value,selected);feedback('Preventive policy updated. Existing obligations remain.');return;}
+  if(e.id==='mission-speed'){window.fmcGame.setSpeed(Number(e.value));return;}
+  if(e.id==='service-policy'){act('policy',e.value,selected);feedback('Preventive policy updated. Existing obligations remain.');return;}
   if(e.id==='inspect-month'){inspectMonth=Number(e.value);inspectEvent=null;renderDetails();return;}
   if(mission.started)return;
   if(e.id==='game-model')commit(s=>s.fleets[selected].model=e.value);
@@ -176,27 +190,33 @@ document.addEventListener('change',event=>{
   if(e.id==='game-distance')commit(s=>s.worksheet.distanceKm=e.valueAsNumber);
   if(e.id==='game-placement')commit(s=>s.worksheet.placement=e.value);
   const configKey={'game-mechanics':'mechanics','game-seed':'seed','minor-rate':'minorRate','major-rate':'majorRate'}[e.id];
-  if(configKey){try{const next={...config,[configKey]:e.valueAsNumber},fresh=createWarehouse(scenario,next);config=next;mission=fresh;render();}catch(error){feedback(error.message);e.setAttribute('aria-invalid','true');}}
+  if(configKey){try{const next={...config,[configKey]:e.valueAsNumber},fresh=createWarehouse(scenario,next);config=next;mission=fresh;if(runtime)watch(runtime.reset(mission));render();}catch(error){feedback(error.message);e.setAttribute('aria-invalid','true');}}
 });
 const keys={w:'up',ArrowUp:'up',s:'down',ArrowDown:'down',a:'left',ArrowLeft:'left',d:'right',ArrowRight:'right'};
 document.addEventListener('keydown',event=>{
   if(/INPUT|SELECT|TEXTAREA/.test(event.target.tagName)||$('#game-calculations').open)return;
   if(mission.units[selected].mode!=='manual'||view!=='interior')return;
   const direction=keys[event.key]||keys[event.key.toLowerCase()];
-  if(direction){event.preventDefault();warehouseAction(mission,'move',direction,selected);held=direction;pressAt=mission.tick+1;if(!playing)renderWorld();}
-  if(event.code==='Space'){event.preventDefault();warehouseAction(mission,'handle',null,selected);}
+  if(direction){event.preventDefault();act('move',direction,selected);held=direction;pressAt=mission.tick+1;if(!playing)renderWorld();}
+  if(event.code==='Space'){event.preventDefault();act('handle',null,selected);}
 });
 document.addEventListener('keyup',()=>held=null);
-document.addEventListener('pointerdown',event=>{const b=event.target.closest('[data-drive]');if(!b||b.disabled)return;event.preventDefault();held=b.dataset.drive;warehouseAction(mission,'move',held,selected);pressAt=mission.tick+1;if(!playing)renderWorld();});
+document.addEventListener('pointerdown',event=>{const b=event.target.closest('[data-drive]');if(!b||b.disabled)return;event.preventDefault();held=b.dataset.drive;act('move',held,selected);pressAt=mission.tick+1;if(!playing)renderWorld();});
 document.addEventListener('pointerup',()=>held=null);document.addEventListener('pointercancel',()=>held=null);
 window.addEventListener('blur',()=>held=null);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pause('Paused while this tab is hidden. Resume when ready.');last=0;accumulator=0;});
 reduced.addEventListener('change',()=>{pause();zoom=1;world.setView(view,zoom);render();});
 window.fmcGame={
-  snapshot:()=>structuredClone({scenario,result:derived.result,advice:derived.advice,mission,actuals:warehouseActuals(mission),unit:selected,playing,speed,reduced:reduced.matches,metrics,world:world.metrics}),verify:()=>assertWarehouse(mission),
-  state:()=>({time:mission.time,duration:config.monthSeconds,playing,speed,reduced:reduced.matches,started:mission.started,finished:mission.finished,manual:mission.units.some(u=>u.mode==='manual'),seekable:false,active:presentationActive}),
+  metrics:()=>({...metrics}),
+  controlState:()=>{const u=mission.units[selected],j=mission.jobs.find(j=>j.id===u.job);return {unit:{job:u.job,load:u.load,fault:u.fault,service:u.service,phase:u.physical?.phase??u.phase},job:j?{source:j.source,destination:j.destination}:null};},
+  // Scene updates need current facts, not a copy of forecast history and every planned route node.
+  snapshot:({presentation:lean=false}={})=>structuredClone(lean?{mission:presentation.projectMission?presentation.projectMission(mission):{...mission,units:mission.units.map(u=>u.physical?{...u,physical:{pose:u.physical.pose,phase:u.physical.phase,fork:u.physical.fork,tilt:u.physical.tilt}}:u)},actuals:warehouseActuals(mission),unit:selected,playing,speed,reduced:reduced.matches}:{scenario,result:derived.result,advice:derived.advice,mission,actuals:warehouseActuals(mission),unit:selected,playing,speed,reduced:reduced.matches,metrics,world:world.metrics}),verify:()=>assertWarehouse(mission),
+  state:()=>({time:mission.time,duration:config.monthSeconds,playing,speed,reduced:reduced.matches,started:mission.started,finished:mission.finished,continuous:!!config.continuous,error:runtimeError,manual:mission.units.some(u=>u.mode==='manual'),seekable:false,active:presentationActive}),
   play:()=>{if(!playing)play();},pause:()=>pause(),restart:()=>restart(),inspect:openDetails,enter:()=>changeView('interior'),
+  selectUnit:index=>{if(Number.isInteger(index)&&index>=0&&index<mission.units.length)selectUnit(index);},
   setActive:active=>{if(presentationActive===!!active)return;presentationActive=!!active;if(!active)pause();},
-  setSpeed:value=>{if(!Number.isFinite(value)||value<.25||value>4)return;speed=value;const select=$('#mission-speed');if(![...select.options].some(o=>Number(o.value)===value))select.add(new Option(value+'×',String(value)));select.value=String(value);}
+  setSpeed:value=>{if(!Number.isFinite(value)||value<.25||value>maximumSpeed)return;speed=value;const select=$('#mission-speed');if(![...select.options].some(o=>Number(o.value)===value))select.add(new Option(value+'×',String(value)));select.value=String(value);}
 };
 render();
+if(presentation.speed)window.fmcGame.setSpeed(presentation.speed);
+addEventListener('pagehide',()=>runtime?.dispose());

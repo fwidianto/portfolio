@@ -1,0 +1,40 @@
+.game-view .setup-guide{padding:22px 22px 0}
+.game-view .setup-guide .eyebrow{color:#d5a77f;font-size:10px;letter-spacing:.12em}
+.game-view .setup-guide h2{font-size:27px;margin:16px 0 12px}
+.game-view .setup-guide p{font-size:13px;line-height:1.7;margin:0;color:#b9c0c5}
+.game-view .guide-actions{display:flex;justify-content:space-between;gap:12px;padding:16px 22px 22px}
+.game-view .guide-actions button{min-height:44px;border:1px solid #52606a;border-radius:4px;background:transparent;color:#dec4ab;padding:10px 16px;cursor:pointer}
+.game-view .guide-actions #guide-next{background:#c18c63;color:#101820;border-color:#d0a17b}
+.game-view .warehouse-app[data-guided=true] .ops-tabs button[data-panel],.game-view .warehouse-app[data-guided=true] .clock-controls,.game-view .warehouse-app[data-guided=true] .selected-caption,.game-view .warehouse-app[data-guided=true] .extra-controls,.game-view .warehouse-app[data-guided=true] .warehouse-tools{display:none!important}
+.game-view .warehouse-app[data-guided=true] .ops-tabs{justify-content:flex-end;min-height:40px}
+.game-view .warehouse-app[data-guided=true] #decision{flex:1;padding:20px 22px 4px}
+.game-view .warehouse-app[data-guided=true] #decision>*{display:none!important}
+.game-view .warehouse-app[data-guided=true] #decision .setup-pair{display:contents!important}
+.game-view .warehouse-app[data-guided=true] #decision label{display:none!important}
+.game-view .warehouse-app[data-guided=true] #decision label.guide-current{display:flex!important;flex-direction:column;gap:12px;font-size:12px}
+.game-view .warehouse-app[data-guided=true] #decision details.guide-current{display:block!important;margin-top:18px}
+.game-view .warehouse-app[data-guided=true] #decision details.guide-current label{display:flex!important;margin-top:12px}
+.game-view .warehouse-app[data-guided=true] #decision #guide-review{display:grid!important;gap:12px;font-size:13px;line-height:1.6;color:#e2d6c6}
+.game-view #guide-review small{color:#aeb9be}
+.game-view .warehouse-app[data-guided=true] #operations #game-feedback{max-height:64px}
+.game-view .warehouse-app[data-guided=true] #decision :is(#fleet-table,#crew-suggestion){display:block!important}
+.game-view #fleet-table{overflow:auto;max-width:100%;scrollbar-width:thin}
+.game-view #fleet-table table{width:100%;border-collapse:collapse;font-size:11px}
+.game-view #fleet-table :is(th,td){padding:8px 3px;text-align:left;border-bottom:1px solid #ffffff18}
+.game-view #fleet-table caption{text-align:left;color:#dcbd9c;padding-bottom:10px}
+.game-view #fleet-table select{width:100%;min-width:95px;font-size:12px}
+.game-view #fleet-table :is(table,th,td){background:#172128;color:#d5d9cd;border-color:#3e4c52}
+.game-view #fleet-table tbody tr:nth-child(even) td{background:#1d2a31}
+.game-view #fleet-table th{color:#b7c8bb;font-weight:500;background:#25352f}
+.game-view .fleet-status-table{width:100%;border-collapse:collapse;font-size:10px}
+.game-view .fleet-status-table :is(th,td){background:#172128;color:#c9d5c9;padding:6px 4px;text-align:left;border-bottom:1px solid #3e4c52;line-height:1.6}
+.game-view .fleet-status-table td button{min-height:44px;color:#e2bd94;background:#23342e;border:1px solid #506459;border-radius:3px;padding:6px;cursor:pointer}
+.game-view .slider-value{display:block;color:#edc09a;font-size:18px;font-weight:450;line-height:1.5}
+.game-view #decision input[type=range]{appearance:auto;accent-color:#d29e74;padding:0;border:0;background:transparent;width:100%;cursor:pointer;min-height:44px}
+.game-view #game-placement{display:none!important}
+.game-view #placement-toggle{display:flex;gap:4px;background:#0c1319;border:1px solid #46535c;padding:4px;border-radius:7px}
+.game-view #placement-toggle button{flex:1;min-height:48px;border:0;border-radius:4px;background:transparent;color:#c7c7bd;cursor:pointer}
+.game-view #placement-toggle button[aria-pressed=true]{background:#be8c64;color:#101820}
+.game-view #crew-suggestion{margin-top:18px;border-left:2px solid #b88b64;padding-left:12px;font-size:12px;line-height:1.65;color:#d9b895}
+.game-view #crew-suggestion p{font-size:11px;line-height:1.7;color:#abb9be}
+.game-view #crew-suggestion button{background:#24332f;border:1px solid #6b8270;color:#e7d6b6;min-height:44px;padding:8px 12px;border-radius:4px;cursor:pointer}
