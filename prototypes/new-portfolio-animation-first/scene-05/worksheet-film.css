@@ -1,0 +1,143 @@
+.film-page main{max-width:1480px}
+.film-page .masthead,.film-page #change-note,.film-page footer{display:none}
+.film-page #workbench{margin:18px 0;border:0;background:transparent}
+.worksheet-film{color:#314e3d;font:14px/1.5 Calibri,'Segoe UI',sans-serif}
+.film-controls{display:flex;align-items:center;gap:14px;padding:10px 0}
+.film-brand{font-weight:600;display:flex;align-items:center;gap:12px}
+.film-brand small{font-size:11px;font-weight:400;color:#697e70}
+#film-phase{margin-left:auto;font-size:14px}
+.film-controls button{font:inherit;border:1px solid #bccfbd;padding:7px 13px;background:#fff;color:#28613f;min-height:40px}
+.film-controls button:focus-visible{outline:2px solid #217346;outline-offset:3px}
+.film-scrubber{display:flex;align-items:center;gap:18px;margin-bottom:16px}
+.film-scrubber input{flex:1;min-width:0;accent-color:#217346}
+.film-scrubber output{font-size:12px;font-variant-numeric:tabular-nums}
+.film-viewport{position:relative;height:clamp(560px,calc(100svh - 150px),820px);overflow:hidden;background:#f4f7f1;border:1px solid #c9d7c6}
+.film-camera{transform-origin:0 0;will-change:transform}
+.film-sheet{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;padding:22px!important;box-sizing:border-box;background:linear-gradient(#dce6d533 1px,transparent 1px),linear-gradient(90deg,#dce6d533 1px,transparent 1px),#fff;background-size:24px 24px}
+.film-sheet>*{min-width:0}
+.film-sheet .worksheet-toolbar{grid-column:1/-1;grid-row:1;justify-content:space-between}
+.film-sheet #worksheet-section-fleet{grid-column:1;grid-row:2}
+.film-sheet #worksheet-section-site{grid-column:2;grid-row:2}
+.film-sheet .film-meter{grid-column:1;grid-row:3}
+.film-sheet #worksheet-section-package{grid-column:2;grid-row:3/span 2}
+.film-sheet #rough-mechanic-estimate{grid-column:1;grid-row:4}
+.film-sheet .film-workload{grid-column:1;grid-row:5}
+.film-sheet #worksheet-section-results{grid-column:2;grid-row:5}
+.film-sheet #worksheet-section-financial{grid-column:1/-1;grid-row:6}
+.film-sheet #calculator-settings{grid-column:1/-1;grid-row:7}
+.film-sheet .worksheet-action-row{display:none}
+.film-sheet .worksheet-fleet-wrap{min-width:0}
+.film-sheet .worksheet-fleet{min-width:0!important;font-size:12px!important}
+.film-sheet .worksheet-fleet th{width:auto!important;font-size:11px!important;padding:6px!important}
+.film-sheet .worksheet-fleet th:nth-child(2){width:28%!important}
+.film-sheet .worksheet-fleet select,.film-sheet .worksheet-fleet input{font-size:12px!important;padding:5px!important}
+.film-sheet .worksheet-fleet th:nth-child(5),.film-sheet .worksheet-fleet td:nth-child(5){display:none}
+.film-sheet .worksheet-fleet tfoot th{width:auto!important}
+.film-sheet .worksheet-fleet .worksheet-formula-cell{padding:4px!important}
+.film-model-code{display:none}
+.film-sheet .worksheet-package-table{min-width:0!important;font-size:12px!important}
+.film-sheet .worksheet-package-table th,.film-sheet .worksheet-package-table td{padding:6px!important;white-space:normal!important}
+.film-sheet .worksheet-package-table th:nth-child(4),.film-sheet .worksheet-package-table td:nth-child(4){display:none}
+.film-sheet .worksheet-plan-table{min-width:0!important;font-size:12px!important}
+.film-sheet .worksheet-plan-table th,.film-sheet .worksheet-plan-table td{padding:6px!important;white-space:normal!important}
+.film-sheet .worksheet-plan-table .money-full{display:none}
+.film-sheet .worksheet-plan-table .money-short{display:inline}
+.film-sheet .worksheet-plan-table th:nth-child(4),.film-sheet .worksheet-plan-table td:nth-child(4){display:none}
+.film-sheet .worksheet-package-selectors{gap:10px}
+.film-sheet .worksheet-package-selectors label{min-width:0;flex:1}
+.film-sheet .worksheet-package-count{flex-basis:100%;font-size:11px}
+.film-sheet .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+.film-sheet .worksheet-section{margin:0}
+.film-sheet #rough-mechanic-estimate .worksheet-quick-staff{margin:0;gap:10px;flex-wrap:wrap}
+.film-sheet .worksheet-quick-staff dl{gap:8px}
+.film-sheet .worksheet-quick-staff dd{font-size:20px}
+.film-sheet .finance-dashboard{grid-template-columns:minmax(0,1.7fr) minmax(230px,1fr)}
+.film-sheet .finance-mix-body{flex-direction:column;gap:12px}
+.film-sheet .finance-donut{width:120px}
+.film-sheet .finance-donut>div{inset:14px}
+.film-sheet .finance-donut strong{font-size:17px}
+.film-sheet .finance-plot,.film-sheet .finance-axis{height:190px}
+.film-sheet .finance-forecast,.film-sheet .finance-cost-mix{padding:16px!important}
+.film-sheet .worksheet-finance-summary strong{font-size:24px}
+.film-sheet .film-node-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0 10px;border-bottom:1px solid #d0decc;font-weight:600}
+.film-node-heading small{font-size:11px;font-weight:400;color:#73816f}
+.film-meter,.film-workload{padding:14px 16px;background:#f8faf5;border:1px solid #cbdac7;position:relative}
+.film-meter-values{display:flex;justify-content:space-between;gap:12px;align-items:end;margin:16px 0}
+.film-meter-values span{font-size:20px;font-variant-numeric:tabular-nums}
+.film-meter-values strong{font-size:30px;font-weight:500;white-space:nowrap;color:#217346}
+.film-meter-values small,.film-package-labour small,.film-workload-values small{display:block;font-size:11px;color:#6d7e68}
+.film-meter-track{height:6px;background:#dfe8da;position:relative;margin:20px 0}
+.film-meter-track>i{display:block;width:0;height:100%;background:#217346}
+.film-meter-track>b{position:absolute;top:-4px;width:2px;height:14px;background:#c1cebc}
+.film-meter-track>b.is-due{background:#217346}
+.film-service-nodes{display:flex;gap:8px;justify-content:space-between}
+.film-sheet .film-service-nodes button{flex:1;border:1px solid #c8d7c3;background:#f0f4ec;padding:8px;font-size:15px;min-height:50px;color:#70806c}
+.film-service-nodes small{display:block;font-size:11px}
+.film-sheet .film-service-nodes .is-due{border-color:#217346;background:#e4efdc;color:#285d3b}
+.film-meter-foot,.film-travel-values{display:flex;justify-content:space-between;gap:12px;margin:12px 0 0;font-size:11px;color:#6c8069;flex-wrap:wrap}
+.film-package-labour{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.film-package-labour strong{display:block;font-size:18px;font-weight:500;overflow-wrap:anywhere}
+.film-package-labour>div{padding:8px;border-bottom:2px solid #b5c9ac}
+.film-workload-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}
+.film-workload-values strong{font-size:23px;font-weight:500;white-space:nowrap}
+.film-route{display:flex;align-items:center;gap:10px;margin:18px 0 8px;font-size:12px}
+.film-route i{flex:1;height:1px;background:#c1d0ba;position:relative}
+.film-route i::after{content:'';position:absolute;left:50%;top:-3px;width:7px;height:7px;border-radius:50%;background:#b28d59}
+.film-capacity-bar{display:flex;height:28px;background:#b28d59;margin-top:15px}
+.film-capacity-bar span{box-sizing:border-box;background:#217346;color:white;padding-left:10px;display:flex;align-items:center;font-size:12px}
+.film-plan-note{font-size:12px!important;margin:14px 0 0!important;color:#385e40!important}
+.film-connections{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.film-connections path{fill:none;stroke:#b5c8af;stroke-width:1;opacity:0}
+.film-connections path.is-traced{opacity:1;stroke:#719868;stroke-dasharray:9 5;animation:film-flow 2s linear infinite}
+.film-paused .film-connections path,.film-paused .workload-pulse-node{animation-play-state:paused}
+.film-playing .film-sheet{pointer-events:none}
+.film-playing .worksheet-toolbar,.film-playing #calculator-settings{visibility:hidden}
+.film-playing [data-film-revealed=false]{opacity:.04;filter:grayscale(1);transform:translateY(10px)}
+.film-playing [data-film-step]{transition:opacity .8s,transform .9s,box-shadow .7s}
+.film-playing .film-focus{box-shadow:0 0 0 2px #63915355;background-color:#f5faee}
+.film-playing .worksheet-fleet tbody tr{animation:film-row-in .55s calc(var(--film-row)*.2s) both}
+.film-playing[data-phase="0"] .worksheet-formula-cell,.film-playing[data-phase="0"] .worksheet-fleet tfoot{opacity:.08}
+.film-playing .finance-forecast .finance-line{animation:none!important;clip-path:inset(-6px calc((1 - var(--film-chart-reveal,0))*100%) -6px -6px)!important}
+.film-playing [data-film-factor=labour] .film-package-labour>div:first-child,.film-playing [data-film-factor=parts] .film-package-labour>div:nth-child(2),.film-playing [data-film-factor=consumables] .film-package-labour>div:nth-child(3){background:#e2eed9;transform:scale(1.06)}
+.film-playing [data-film-factor=parts] [data-film-item=parts],.film-playing [data-film-factor=consumables] [data-film-item=consumables]{background:#eaf3e2}
+.film-playing [data-film-factor=travel] .film-capacity-bar{animation:film-budget-in 1.2s both}
+.film-playing .worksheet-finance-summary>div{transition:transform .7s,background .7s}
+.film-playing [data-film-factor=revenue] .worksheet-finance-summary>div:first-child,.film-playing [data-film-factor=cost] .worksheet-finance-summary>div:nth-child(2),.film-playing [data-film-factor=profit] .finance-profit{transform:scale(1.04);background:#e3efdc}
+.film-finished .film-camera{will-change:auto}
+.film-finished .film-connections{display:none}
+.film-finished .film-sheet{width:100%!important}
+.film-finished .film-model-code{display:none}
+.film-finished .film-sheet .worksheet-fleet select{display:block}
+.film-finished .film-sheet .worksheet-fleet{min-width:760px!important}
+.film-finished .film-sheet .worksheet-fleet th:nth-child(5),.film-finished .film-sheet .worksheet-fleet td:nth-child(5),.film-finished .film-sheet .worksheet-fleet th:nth-child(6),.film-finished .film-sheet .worksheet-fleet td:nth-child(6){display:table-cell}
+.film-finished .film-sheet .worksheet-package-table{min-width:620px!important}
+.film-finished .film-sheet .worksheet-package-table th:nth-child(4),.film-finished .film-sheet .worksheet-package-table td:nth-child(4){display:table-cell}
+.film-finished .film-sheet .film-focus{box-shadow:none}
+.film-finished #film-phase{color:#217346}
+.film-finished .film-viewport{overflow:visible}
+.calculator-view .worksheet-toolbar>a{font-size:12px;color:#286b43;align-self:center}
+@keyframes film-row-in{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:none}}
+@keyframes film-flow{to{stroke-dashoffset:-28}}
+@keyframes film-budget-in{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@media(max-width:760px){
+  .film-page main{padding:0 10px!important}.film-page #workbench{margin:8px 0}
+  .film-controls{gap:8px;flex-wrap:wrap}.film-brand{gap:8px}.film-brand small{font-size:11px}
+  .film-controls button{padding:6px 10px}#film-phase{font-size:12px}.film-controls #film-finish{margin-left:auto}
+  .film-scrubber{gap:10px;margin-bottom:10px}
+  .film-sheet{grid-template-columns:1fr;padding:12px!important;gap:16px}
+  .film-sheet #worksheet-section-fleet,.film-sheet #worksheet-section-site,.film-sheet .film-meter,.film-sheet #worksheet-section-package,.film-sheet .film-workload,.film-sheet #worksheet-section-results,.film-sheet #rough-mechanic-estimate,.film-sheet #worksheet-section-financial,.film-sheet #calculator-settings{grid-column:1;grid-row:auto}
+  .film-sheet #worksheet-section-fleet{order:0}.film-sheet #worksheet-section-site{order:1}.film-sheet .film-meter{order:2}.film-sheet #worksheet-section-package{order:3}.film-sheet #rough-mechanic-estimate{order:4}.film-sheet .film-workload{order:5}.film-sheet #worksheet-section-results{order:6}.film-sheet #worksheet-section-financial{order:7}.film-sheet #calculator-settings{order:8}
+  .film-sheet .worksheet-toolbar{display:none}
+  .film-sheet .worksheet-fleet th:nth-child(6),.film-sheet .worksheet-fleet td:nth-child(6){display:none}
+  .film-sheet .worksheet-fleet th:nth-child(2){width:38%!important}
+  .film-playing .film-sheet .worksheet-fleet select{display:none}.film-playing .film-model-code{display:block;padding:8px;font-size:13px;color:#315d3b}
+  .film-sheet .worksheet-fleet tfoot td{white-space:normal;font-size:11px;padding:8px 4px}
+  .film-meter,.film-workload{padding:12px}.film-meter-values{gap:8px}.film-meter-values span{font-size:17px}.film-meter-values strong{font-size:23px}
+  .film-package-labour{grid-template-columns:1fr 1fr}.film-package-labour>div:first-child{grid-column:1/-1}.film-package-labour strong{font-size:18px}
+  .film-workload-values{gap:6px}.film-workload-values strong{font-size:18px}
+  .film-service-nodes{gap:5px}.film-sheet .film-service-nodes button{padding:7px 4px;font-size:13px}
+  .film-sheet .finance-dashboard{grid-template-columns:1fr}.film-sheet .worksheet-finance-summary strong{font-size:23px}
+  .film-sheet .finance-mix-body{flex-direction:row}.film-sheet .finance-mix-list{display:block}.film-sheet .finance-mix-list>div{padding:6px 0;flex-direction:row}
+  .film-sheet .finance-donut{width:110px}.film-sheet .finance-donut strong{font-size:15px}.film-sheet .finance-mix-list strong{font-size:13px}.film-sheet .finance-mix-list dd>span{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){.worksheet-film *,.worksheet-film *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.film-camera{transform:none!important}}

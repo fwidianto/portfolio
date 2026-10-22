@@ -17,7 +17,7 @@ Do not reconstruct historical design explorations or animation authorities unles
 ## Current implementation
 
 - `../index.html` is the root production homepage served by GitHub Pages. It is deterministically generated from `../prototypes/new-portfolio-animation-first/index.html` using `node scripts/sync-production-html.mjs` (verify with `node scripts/sync-production-html.mjs --check`). Do not edit root `index.html` manually.
-- `../prototypes/red-dwarf-animation/index.html` contains the frozen, owner-approved Hero animation authority.
+- `../prototypes/red-dwarf-animation/index.html` is retained as the frozen standalone Hero reference; the integrated Hero authority is the active homepage source and `.design/CHAPTER_01_APPROVED_BASELINE.md`.
 - `../prototypes/new-portfolio-animation-first/index.html` is the verified accepted prototype workspace:
   - **Chapter I (Red Dwarf Hero)**: Operational and frozen baseline with responsive offset positioning and zero clipping at standard desktop and mobile viewports.
   - **Chapter II**: Accepted for publication with its complete five-scene sequence intact:
@@ -30,10 +30,9 @@ Do not reconstruct historical design explorations or animation authorities unles
   - **Chapters IV–V**: Remaining **Under Development** placeholder at `#chapter-04` / `#chapter-05`.
   - **Visual Editor**: Isolated development-only workflow (`dev-editor.js` / `dev-editor.css` loaded strictly on demand via `?edit=1`, `#edit`, or local shortcut; zero runtime in normal public viewing).
 - `../Projects/Odoo-ERP-Analytics.html` is the current flagship case-study page.
-- `../prototypes/editorial-systems/` is older animation work and is not Red Dwarf Hero authority by default.
-- `../red-dwarf-animation.html` is an obsolete, incomplete standalone artifact. Its artifact metadata must not be treated as proof of a usable or authoritative Hero implementation. Do not repair or replace it as part of this governance scope.
+- `../scripts/serve-preview.py` serves the static site locally with caching disabled. No npm dependencies are required.
 
-The previously referenced `../prototypes/red-dwarf-animation/red-dwarf-animation-visual-board.html` is not present and is not a dependency or authority for the approved prototype. Do not recreate it merely to satisfy stale documentation.
+Superseded Chapter III workspaces and local review evidence were moved into an external recovery checkpoint on 22 October 2026. Their promoted runtime lives in the authoritative homepage source directory; they are not required to serve or verify the published site.
 
 For materially visual work, rendered evidence is required. For unfamiliar or architecture-sensitive animation work, validate the rendering approach with a bounded proof before committing to the full implementation.
 

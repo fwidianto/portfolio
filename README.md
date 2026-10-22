@@ -26,7 +26,7 @@ Current public/runtime files include:
 - `website-updates.html` — public changelog
 - `CNAME`, `robots.txt`, `sitemap.xml` — GitHub Pages/discovery files
 
-The older `prototypes/editorial-systems/` material documents previous animation work. It is not current Red Dwarf Hero design authority unless a task explicitly targets that prototype.
+`prototypes/red-dwarf-animation/` is retained as the frozen standalone Hero reference. The integrated homepage source remains `prototypes/new-portfolio-animation-first/`.
 
 Historical experiments, superseded plans, rejected design directions, and review artifacts belong in Git history rather than being reconstructed as active context.
 
@@ -47,3 +47,16 @@ For materially new animation architecture, validate the rendering approach befor
 ## Deployment
 
 The public site is deployed through GitHub Pages using the custom domain in `CNAME`.
+
+## Maintenance checkpoint
+
+The working repository keeps the published site, its authoritative source, the frozen Hero reference, current governance, asset licenses, and verification tools. Superseded Chapter III development copies, generated review evidence, unused assets, and local dependency folders were moved into an external recovery checkpoint on 22 October 2026. They are not runtime dependencies.
+
+The site and publication checks need no npm packages. Preview with `python scripts/serve-preview.py`, then verify with:
+
+```sh
+node scripts/sync-production-html.mjs --check
+node --test tests/chapter03-publication.test.mjs
+```
+
+Keep future captures and one-off experiments outside the repository or in ignored `scratch/`. Preserve factual source material outside the public site when retiring it; check references before removing any asset.

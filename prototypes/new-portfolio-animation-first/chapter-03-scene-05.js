@@ -1,5 +1,5 @@
-import './scene-05/game.js';
 if(new URLSearchParams(location.search).get('chapter')==='1'){
+ await import('./scene-05/game.js');
  const style=document.createElement('link');style.rel='stylesheet';style.href=new URL('./chapter-03-scene-05.css',import.meta.url).href;
  await new Promise((resolve,reject)=>{style.onload=resolve;style.onerror=reject;document.head.append(style);});
  const game=window.fmcGame;

@@ -58,6 +58,5 @@ prototypes/editorial-systems/*.mp4
 .od-skills/
 
 # Temporary Scratch Experiments & QA Artifacts
-# Preserves tracked Chapter 05 verification scripts
-scratch/*
-!scratch/verify_ch05_*.mjs
+scratch/
+/test_t*.png
