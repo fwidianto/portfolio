@@ -1,9 +1,11 @@
-import {box,plane,range,mix,roundedBox,cylinderBetween,ellipsoid} from './space.js';
+import {box,plane,range,mix,clamp,roundedBox,cylinderBetween,ellipsoid} from './space.js';
 
 export const SCREEN = [[.415,6.695,-2.103],[3.585,6.695,-2.103],[3.585,4.915,-2.103],[.415,4.915,-2.103]];
-export const FACADE_LOGO = [[-9.35,7.15,4.092],[-3.25,7.15,4.092],[-3.25,4.25,4.092],[-9.35,4.25,4.092]];
+export const FACADE_LOGO = [[-9.35,7.13,4.092],[-3.25,7.13,4.092],[-3.25,4.27,4.092],[-9.35,4.27,4.092]];
 export const WORKSTATION_CAMERA = {eye:[-2.6,6.85,3.5],target:[1.65,5.45,-1.65]};
 export const CONTACT_SHADOWS=[
+  {x:2,y:.29,z:-4,rx:15,rz:13},
+  ...[-20,-15,20,25].map(x=>({x:x+1,y:.27,z:12,rx:1.4,rz:2.6})),
   ...[-4,0,5,9].map(x=>({x:x+1.6,y:4.036,z:.48,rx:.9,rz:.7})),
   ...[-13,17].map(x=>({x:x+.6,y:.27,z:4.4,rx:1.05,rz:.9}))
 ].map(s=>[[s.x-s.rx,s.y,s.z-s.rz],[s.x+s.rx,s.y,s.z-s.rz],[s.x+s.rx,s.y,s.z+s.rz],[s.x-s.rx,s.y,s.z+s.rz]]);
@@ -18,32 +20,15 @@ export function buildScene() {
   const tube=(...args)=>faces.push(...cylinderBetween(...args));
   const oval=(...args)=>faces.push(...ellipsoid(...args));
   faces.push({...plane([[-50000,-.08,50000],[50000,-.08,50000],[50000,-.08,-50000],[-50000,-.08,-50000]], '#142028'),background:true});
-  // Stylized district volumes resolve in perspective as the geographic map recedes.
-  for(let x=-8;x<=8;x++) for(let z=-8;z<=8;z++) {
-    if(Math.abs(x)<=1&&Math.abs(z)<=1)continue;
-    const seed=Math.abs(x*23+z*37)%7,xx=x*140,zz=z*140;
-    add(xx,0,zz,62+seed*4,8+seed*4,66+seed*3,['#23333e','#192730','#34424b']);
-    faces.push(plane([[xx+8,.06,zz+5],[xx+83,.06,zz+5],[xx+83,.06,zz+3],[xx+8,.06,zz+3]],'#26343d'));
-  }
-  // Road, sidewalks, courtyard and neighbouring warehouse blocks.
+  // One isolated office, with a quiet arrival road and forecourt.
   add(-100,.01,34,200,.025,14,dark);
   add(-100,.04,19,200,.08,1.4,concrete);
   for(let x=-100;x<100;x+=7) add(x,.05,27,.13,.02,3,['#657070','#657070','#657070']);
   add(-28,.1,17,64,.15,43,['#202a30','#202a30','#283239']);
+  faces.push(plane([[-7,.258,17],[5,.258,17],[3.5,.258,8.5],[-5.5,.258,8.5]],'#47535a'));
+  faces.push(plane([[-7,.260,17],[-6.92,.260,17],[-5.42,.260,8.5],[-5.5,.260,8.5]],'#758087'));
+  faces.push(plane([[4.92,.260,17],[5,.260,17],[3.5,.260,8.5],[3.42,.260,8.5]],'#758087'));
   faces.push(plane([[-10,.28,4],[14,.28,4],[20,.28,-20],[-5,.28,-23]],'#101921'));
-  add(-29,.3,-3,18,5.3,18,concrete);
-  faces.push(plane([[-29,5.6,-3],[-11,5.6,-3],[-11,6.8,-12],[-29,6.8,-12]],'#52616b'));
-  faces.push(plane([[-29,6.8,-12],[-11,6.8,-12],[-11,5.6,-21],[-29,5.6,-21]],'#42505a'));
-  for(const x of [-29,-11])faces.push(plane([[x,5.6,-3],[x,6.8,-12],[x,5.6,-21]],'#4e5b64'));
-  for(let x=-28;x<-11;x+=1.3){
-    faces.push(plane([[x,5.614,-3],[x+.06,5.614,-3],[x+.06,6.814,-12],[x,6.814,-12]],'#687680'));
-    faces.push(plane([[x,6.814,-12],[x+.06,6.814,-12],[x+.06,5.614,-21],[x,5.614,-21]],'#58656e'));
-  }
-  for(let x=-26;x<-13;x+=5){add(x,.5,-2.97,3.8,3.1,.1,dark);for(let y=.7;y<3.5;y+=.35)add(x+.08,y,-2.83,3.64,.025,.04,pale);}
-  [[-55,-28,22,15,24],[27,-18,22,11,32],[-37,-58,28,13,23],[4,-68,32,15,25],[48,7,19,7,23]].forEach(([x,z,w,h,d])=> {
-    add(x,0,z,w,h,d,concrete);
-    for(let zz=z-d+2;zz<z;zz+=2.6) add(x+.6,h+.03,zz,w-1.2,.08,.1,pale);
-  });
   // Main facility: a real roof, wings, back, and open framed second-floor facade.
   add(-10,0,4,24,4,17,concrete);
   add(-10,4,-12.6,24,4,.4,concrete);
@@ -56,12 +41,15 @@ export function buildScene() {
   add(13.8,8.15,4.18,.2,.2,17.3,concrete);
   add(-10,.1,4.1,24,.24,.22,dark);
   // One continuous plaster facade receives the brand decal; no separate signboard.
-  faces.push(plane([[-9.76,4.05,4.089],[-2.02,4.05,4.089],[-2.02,7.44,4.089],[-9.76,7.44,4.089]],'#a1a39d'));
+  faces.push(plane([[-9.76,4.05,4.089],[-2.02,4.05,4.089],[-2.02,7.44,4.089],[-9.76,7.44,4.089]],'#d3d5d0'));
+  add(-9.90,4.12,4.16,.10,3.22,.06,['#9a2d35','#70232a','#b33d43']);
+  add(-2.05,4.12,4.16,.08,3.22,.06,pale);
   for (let x=-10; x<14; x+=4) {
-    if(x!==-6) add(x,4.4,4.08,.25,3.05,.25,pale);
+    if(x!==-6&&x!==2) add(x,4.4,4.08,.25,3.05,.25,pale);
     if(x>2) faces.push(plane([[x+.26,4.45,4],[x+3.97,4.45,4],[x+3.97,7.45,4],[x+.26,7.45,4]], '#1e3542'));
     add(x,1.0,4.05,3.4,2.2,.06,['#172d39','#172d39','#172d39']);
     add(x+1.65,1.02,4.13,.06,2.16,.07,pale);
+    add(x+.10,2.08,4.14,3.18,.045,.05,concrete);
     if(x>2) add(x+1.96,4.45,4.12,.05,3,.07,concrete);
     if(x>2)faces.push(plane([[x+.45,4.57,4.018],[x+.9,4.57,4.018],[x+2.75,7.3,4.018],[x+2.3,7.3,4.018]],'#334b58'));
   }
@@ -75,6 +63,7 @@ export function buildScene() {
   }
   // Exterior entry canopy and columns; asymmetry makes the changing angle visible.
   rounded(-5,3.2,8,8,.25,4,.10,pale);
+  add(-4.8,3.16,7.92,7.6,.045,.06,['#c4b296','#948b79','#d8c5a3']);
   add(-5,.1,7.8,.25,3.1,.25,pale); add(2.7,.1,7.8,.25,3.1,.25,pale);
   add(-4.5,.25,7.6,7,.16,2,concrete);
   add(-4.7,.15,8.2,7.4,.10,1.2,concrete);add(-4.6,.25,7.7,7.2,.10,1.2,pale);
@@ -155,19 +144,19 @@ function descentCamera(t,width,height){
   const altitude = 5400000*focal/(width*.87);
   const national = [1240000,0,-420000];
   if(t<=3.2) return {eye:[national[0],altitude,national[2]+altitude*.025], target:national};
-  const p=range(t,3.2,6.5), h=Math.exp(mix(Math.log(altitude),Math.log(90),p));
+  const p=range(t,3.2,6.0), h=Math.exp(mix(Math.log(altitude),Math.log(90),p));
   const drift=1-range(t,3.2,4.8);
   return {eye:[national[0]*drift-30*p,h,national[2]*drift+h*(.025+.9*p)],target:[national[0]*drift,3*p,national[2]*drift]};
 }
 
-// Interpolate viewing distance, heading and elevation together. Interpolating
-// world-space height stopped at 6.5s, then rushed the last metres to the facade.
+// Keep the descent and approach continuous as the camera enters the office.
 const approachKeys=[
-    [6.5,[-30,90,83.25],[0,3,0]],
-    [7.5,[-20,22,36],[2,5.8,0]],
-    [8.45,[-3,10,19],[2,5.8,1]],
-    [9.15,[1.1,6.55,6.5],[2,5.8,-2]],
-    [9.75,[.05,6.65,3.8],[1.8,5.6,-1.8]],
+    [6.5,[-32,58,70],[0,3.8,0]],
+    [7.35,[-20,23,38],[2,5.2,0]],
+    [8.2,[-8,11.2,23],[2,5.8,1]],
+    [8.95,[-1.8,7.5,10],[1.6,5.8,-1.2]],
+    [9.55,[-.5,6.6,5.1],[1.8,5.6,-1.8]],
+    [9.90,[-.8,6.72,3.6],[1.7,5.5,-1.7]],
     [10.4,WORKSTATION_CAMERA.eye,WORKSTATION_CAMERA.target]
 ];
 const polarCamera=({eye,target})=>{
@@ -195,10 +184,26 @@ export function cameraAt(t,width,height){
     return {eye:WORKSTATION_CAMERA.eye.map((v,i)=>mix(v,[1.55,6.02,1.15][i],focus)),target};
   }
   if(t<6)return descentCamera(t,width,height);
-  if(t>=10.4)return {eye:WORKSTATION_CAMERA.eye,target:WORKSTATION_CAMERA.target};
+  if(t>=10.4){
+    const focus=range(t,10.8,17.3);
+    return {
+      eye:WORKSTATION_CAMERA.eye.map((v,i)=>mix(v,[-1.85,6.64,2.4][i],focus)),
+      target:WORKSTATION_CAMERA.target.map((v,i)=>mix(v,[1.8,5.6,-1.9][i],focus))
+    };
+  }
   const {frames,tangents}=trackFor(width,height),i=frames.findIndex(f=>f[0]>t);
   const a=frames[i-1],b=frames[i],dt=b[0]-a[0],u=(t-a[0])/dt;
   const value=a[1].map((v,j)=>(2*u**3-3*u*u+1)*v+(u**3-2*u*u+u)*dt*tangents[i-1][j]+(-2*u**3+3*u*u)*b[1][j]+(u**3-u*u)*dt*tangents[i][j]);
   const [logRadius,heading,elevation,...target]=value,radius=Math.exp(logRadius),horizontal=radius*Math.cos(elevation);
   return {eye:[target[0]+horizontal*Math.sin(heading),target[1]+radius*Math.sin(elevation),target[2]+horizontal*Math.cos(heading)],target};
+}
+
+export function monitorTransitionCamera(t,width,height,progress){
+  const start=cameraAt(t,width,height),p=clamp(progress)**2.4;
+  const center=SCREEN[0].map((v,i)=>(v+SCREEN[2][i])/2);
+  const destination=[center[0],center[1],center[2]+.623];
+  return {
+    eye:start.eye.map((v,i)=>mix(v,destination[i],p)),
+    target:start.target.map((v,i)=>mix(v,center[i],p))
+  };
 }

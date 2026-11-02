@@ -30,8 +30,8 @@ test('production generation is deterministic and keeps all five chapter scenes',
  for(const n of [1,2,3,4,5])assert.ok(built.html.includes(`id="ch03-layer-${n}"`));
  for(const n of [2,3,4])assert.ok(built.html.includes(`src="prototypes/new-portfolio-animation-first/scene-0${n}/index.html?`));
  assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/scene-05/warehouse/index.html?chapter=1"'));
- assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/film.js"'));
- assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/chapter-03.js?v=ch03-20261021-a12"'));
+ assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/film.js?v=ch03-20261027-warp"'));
+ assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/chapter-03.js?v=ch03-20261027-world"'));
  assert.ok(built.html.includes('href="prototypes/new-portfolio-animation-first/assets/logo-traknus.png"'));
  assert.ok(built.html.includes('download="Fauzan_Widianto_CV.pdf"'));
  assert.ok(built.html.includes('src="prototypes/new-portfolio-animation-first/left-nav.js?v=ch03-20261017"'));
@@ -41,7 +41,9 @@ test('missing and duplicated scene markers fail closed',()=>{
  for(const html of [source.replace('id="ch03-layer-5"','id="missing-scene"'),source.replace('id="ch03-layer-5"','id="ch03-layer-5" data-duplicate=\'id="ch03-layer-5"\'')]){
   const result=generate(html);assert.notEqual(result.status,0);assert.match(result.stderr,/section marker.*ch03-layer-5/);
  }
- assert.notEqual(generate(source.replace('<script src="chapter-03.js?v=ch03-20261021-a12"></script>','')).status,0);
+ assert.notEqual(generate(source.replace('<script src="chapter-03.js?v=ch03-20261027-world"></script>','')).status,0);
+ const film='<script type="module" src="film.js?v=ch03-20261027-warp"></script>';
+ for(const replacement of ['',`${film}\n${film}`])assert.notEqual(generate(source.replace(film,replacement)).status,0);
 });
 test('obsolete dormant chapters and obsolete chapter scripts remain rejected',()=>{
  for(const marker of ['id="dormant-chapter-03"','chapter-04.js']){

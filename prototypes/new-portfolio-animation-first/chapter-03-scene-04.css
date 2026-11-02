@@ -24,6 +24,21 @@ dialog{max-height:calc(100vh - 20px)!important}#workbook-body{max-height:calc(10
 #ch03-dashboard-dialog #dashboard-charts{padding:0!important}
 #ch03-dashboard-dialog :is(.db-chart,.db-summary>div){background:#151f28;border-color:#344450}
 #ch03-dashboard-dialog .db-heading h3{color:#e9dfce!important}
+#ch03-dashboard-dialog .dashboard-content{background:#10141a;color:#d8e1da}
+#ch03-dashboard-dialog :is(.db-chart h4,.db-row,.db-issue){color:#d0ded6}
+#ch03-dashboard-dialog :is(.db-summary span,.db-chart header>span,.db-chart header label,.db-row small,.db-issue small,.db-empty){color:#afc1b7}
+#ch03-dashboard-dialog .db-legend span{color:#a7d4b6}
+#ch03-dashboard-dialog .db-legend span+span{color:#dec08b}
+#ch03-dashboard-dialog .db-issue strong{color:#e0bc8d}
+#ch03-dashboard-dialog .db-row:hover{background:#293d35;color:#edf2eb}
+#ch03-dashboard-dialog .db-recent{background:#293d35}
+#ch03-dashboard-dialog .db-track{background:#374b43}
+#ch03-dashboard-dialog #dashboard-inspect{color:#b8d8c2}
+#ch03-dashboard-dialog #dashboard-evidence{color:#d0ded6}
+#ch03-dashboard-dialog .db-arrival-label{color:#afc1b7}
+#ch03-dashboard-dialog .db-received-rows>div{background:#1c3029;border-color:#486559;color:#d0ded6}
+#ch03-dashboard-dialog .db-received-rows span{color:#b7c9bd}
+#ch03-dashboard-dialog .hq-screen:after{background:#18222b;border-color:#344450;color:#b9c9bf}
 #workbook-dialog.ch03-inspection{display:flex;flex-direction:column}
 #workbook-dialog.ch03-inspection:not([open]){display:none}
 #workbook-dialog.ch03-inspection #workbook-body{flex:1;max-height:min(46svh,430px);min-height:110px}

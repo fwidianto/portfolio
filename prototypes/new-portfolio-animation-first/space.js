@@ -51,8 +51,11 @@ export function createBuildingRenderer(canvas, faces) {
       float windowLight=exp(-length((vWorld-vec3(2.0,6.8,3.5))*vec3(.2,.7,.35)));
       vec3 light=vec3(.025,.05,.065)*taskLight+vec3(.11,.055,.025)*windowLight;
       float distanceTone=clamp(length(vWorld.xz)/1600.0,0.0,.32);
-      float diffuse=max(dot(normalize(vNormal),normalize(vec3(-.35,.8,.45))),0.0);
-      vec3 color=mix(vColor*(.55+.30*diffuse)+light,vec3(.025,.03,.045),distanceTone);
+      vec3 n=normalize(vNormal);
+      float diffuse=max(dot(n,normalize(vec3(-.35,.8,.45))),0.0);
+      float fill=max(dot(n,normalize(vec3(.50,.40,-.55))),0.0);
+      float sky=max(n.y,0.0);
+      vec3 color=mix(vColor*(.53+.32*diffuse+.09*fill+.07*sky)+light,vec3(.025,.03,.045),distanceTone);
       gl_FragColor=vec4(mix(color,vec3(.20,.23,.26),fog),1.0);
     }`));
   gl.bindAttribLocation(program,0,'position');gl.bindAttribLocation(program,1,'color');gl.bindAttribLocation(program,2,'normal');gl.linkProgram(program);

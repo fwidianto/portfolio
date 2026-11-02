@@ -60,13 +60,15 @@ function generateProductionHtml(sourceHtml) {
     'id="ch03-stage"',
     'id="ch03-information"',
     'id="ch03-info-dialog"',
-    'src="scene-05/warehouse/index.html?chapter=1"',
-    '<script type="module" src="film.js"></script>'
+    'src="scene-05/warehouse/index.html?chapter=1"'
   ];
   for (let scene = 1; scene <= 5; scene++) requiredSections.push(`id="ch03-layer-${scene}"`);
   for (let scene = 2; scene <= 5; scene++) requiredSections.push(`id="ch03-scene0${scene}-frame"`);
   if ((output.match(/<script src="chapter-03\.js(?:\?[^"]*)?"><\/script>/g) || []).length !== 1) {
     fail('Source validation failed: Chapter III controller script must appear exactly once');
+  }
+  if ((output.match(/<script type="module" src="film\.js(?:\?[^"]*)?"><\/script>/g) || []).length !== 1) {
+    fail('Source validation failed: Chapter III scene 01 film script must appear exactly once');
   }
 
   for (const section of requiredSections) {
@@ -145,7 +147,7 @@ function generateProductionHtml(sourceHtml) {
   output = output.replace(/src="(chapter-[^"]+\.js(?:\?[^"]*)?)"/g, 'src="prototypes/new-portfolio-animation-first/$1"');
   output = output.replace(/src="(left-nav\.js(?:\?[^"]*)?)"/g, 'src="prototypes/new-portfolio-animation-first/$1"');
   output = output.replace('src="analytics-optout.js"', 'src="prototypes/new-portfolio-animation-first/analytics-optout.js"');
-  output = output.replace('src="film.js"', 'src="prototypes/new-portfolio-animation-first/film.js"');
+  output = output.replace(/src="(film\.js(?:\?[^"]*)?)"/g, 'src="prototypes/new-portfolio-animation-first/$1"');
   output = output.replace(/src="(scene-0[2-4]\/index\.html(?:\?[^"]*)?|scene-05\/(?:warehouse\/)?index\.html(?:\?[^"]*)?)"/g, 'src="prototypes/new-portfolio-animation-first/$1"');
 
   // Static Assets / Images

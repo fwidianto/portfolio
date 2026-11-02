@@ -1,5 +1,5 @@
-import {mix,clamp,range,perspective,quadMatrix,createBuildingRenderer} from './space.js';
-import {buildScene,cameraAt,SCREEN,FACADE_LOGO,CONTACT_SHADOWS} from './scene.js';
+import {mix,clamp,range,perspective,quadMatrix,createBuildingRenderer} from './space.js?v=ch03-20261027-office';
+import {buildScene,cameraAt,monitorTransitionCamera,SCREEN,FACADE_LOGO,CONTACT_SHADOWS} from './scene.js?v=ch03-20261027-warp';
 import {LOCATIONS,BRANCHES,RECORDS,TOTAL,TIMES,BEATS,REPORT_STEPS,number,percent} from './data.js';
 import {createMonitorDisplay} from './monitor-display.js';
 import {createAtmosphere} from './atmosphere.js';
@@ -29,8 +29,15 @@ function buildingRenderer(){
 let drawGL=buildingRenderer();
 let staticMode=motion.matches||!drawGL;
 const metrics={renders:0,renderMs:[],frameMs:[],webgl:!!drawGL};
-const companyLogo=new Image();companyLogo.src=new URL('./assets/logo-traknus.png',import.meta.url).href;
-companyLogo.addEventListener('load',()=>render());
+// Original Traknus logo from https://www.astra.co.id/business/heavy-equipment-mining-construction-and-energy/traktor-nusantara
+const companyLogo=new Image(),logoTexture=document.createElement('canvas');logoTexture.width=0;logoTexture.height=0;
+companyLogo.addEventListener('load',()=>{
+  const scale=Math.min(1,1024/companyLogo.naturalWidth);
+  logoTexture.width=Math.max(1,Math.round(companyLogo.naturalWidth*scale));logoTexture.height=Math.max(1,Math.round(companyLogo.naturalHeight*scale));
+  const context=logoTexture.getContext('2d');if(!context){logoTexture.width=0;return;}
+  context.imageSmoothingQuality='high';context.drawImage(companyLogo,0,0,logoTexture.width,logoTexture.height);render();
+});
+companyLogo.src=new URL('./assets/logo-traknus-official.png',import.meta.url).href;
 document.fonts.ready.then(()=>render());
 const monitorDisplay=createMonitorDisplay(()=>render());
 const atmosphere=createAtmosphere();
@@ -38,7 +45,7 @@ const contactShadow=document.createElement('canvas');contactShadow.width=128;con
 const shadowContext=contactShadow.getContext('2d'),shadowGradient=shadowContext.createRadialGradient(64,64,8,64,64,62);
 shadowGradient.addColorStop(0,'rgba(0,0,0,.36)');shadowGradient.addColorStop(.5,'rgba(0,0,0,.18)');shadowGradient.addColorStop(1,'rgba(0,0,0,0)');
 shadowContext.fillStyle=shadowGradient;shadowContext.fillRect(0,0,128,128);
-let nativeScreenWidth=0,cloudLayerCount=0,monitorPoints=[],hoverScreen=false;
+let nativeScreenWidth=0,cloudLayerCount=0,monitorPoints=[],hoverScreen=false,exitProgress=0;
 
 // Real geography is cached in metres around the Jakarta anchor; all later shots
 // use this same origin. The local district and building are stylized geometry.
@@ -105,7 +112,6 @@ function drawMap(t,p,camera) {
     if(t<4.8){label(gc,'HEAD OFFICE',hub[0],hub[1]+32,'#f4efe8',width<700?10:12,'center');label(gc,'JAKARTA',hub[0],hub[1]+48,'#9e968f',8,'center');}
   }
   gc.restore();
-  if(t<3.5){label(gc,`${LOCATIONS.length} offices · Jakarta Head Office`,width*.042,height-26,'#9e968f',width<700?8:10);}
 }
 
 function drawDetails(t,p) {
@@ -197,7 +203,7 @@ function setBeat(t){
 
 function render(){
   const started=performance.now();
-  const cam=cameraAt(time,width,height);
+  const cam=exitProgress?monitorTransitionCamera(time,width,height,exitProgress):cameraAt(time,width,height);
   const p=perspective(cam.eye,cam.target,width,height);
   const screenPoints=SCREEN.map(p.point);
   monitorPoints=screenPoints;
@@ -207,7 +213,7 @@ function render(){
   cloudLayerCount=0;
   if(drawGL&&time>4.2&&!(staticMode&&time>=TIMES.finish)){
     const surfaces=[{...monitorDisplay.update(time),quad:SCREEN,kind:1,active:hoverScreen}];
-    if(companyLogo.complete&&companyLogo.naturalWidth)surfaces.push({source:companyLogo,quad:FACADE_LOGO,uv:[[.12,.28],[.8775,.28],[.8775,.64],[.12,.64]],kind:0});
+    if(logoTexture.width)surfaces.push({source:logoTexture,quad:FACADE_LOGO,kind:0});
     surfaces.push(...CONTACT_SHADOWS.map(quad=>({source:contactShadow,quad,kind:3})));
     const clouds=atmosphere.layers(time,p);cloudLayerCount=clouds.length;surfaces.push(...clouds);
     drawGL(p,width,height,dpr,surfaces,atmosphere.haze(time,cam.eye[1]));
@@ -215,11 +221,13 @@ function render(){
   // The HTML report is only painted by drawMonitor when explicitly inspected.
   // Automatic playback uses the native LCD texture, without hidden DOM updates.
   drawDetails(time,p);drawMonitor(time,p);setBeat(time);
-  focusStatus.hidden=!(managed&&width<700&&height>width&&time>=10.4);
+  focusStatus.hidden=!(managed&&width<700&&height>width&&time>=10.4&&time<TIMES.duration&&!exitProgress);
   if(!focusStatus.hidden){
     const step=time<TIMES.import?['','EXTRACT SERVICE TRANSACTIONS',`${Math.round(TOTAL.records*range(time,10.4,11.55))} / ${TOTAL.records} records`,'Preparing a common reporting structure']:steps[Math.max(0,steps.findLastIndex(s=>time>=s[0]))];
     focusStatus.querySelector('strong').textContent=step[2];focusStatus.querySelector('.ch03-work-detail').textContent=step[3];
   }
+  const continueButton=$('ch03-continue');
+  if(continueButton)continueButton.hidden=!(managed&&time>=TIMES.duration&&!office);
   scrub.value=time;$('time').textContent=time.toFixed(1).padStart(4,'0');
   scrub.setAttribute('aria-valuetext',`${time.toFixed(1)} seconds, ${BEATS[Math.max(0,beat)].nav}`);
   $('view').setAttribute('aria-pressed',String(office));$('view').textContent=office?'Desk view':'Monitor detail';
@@ -239,7 +247,7 @@ function play(){
   if(playing)return;playing=true;last=null;syncPlay();raf=requestAnimationFrame(tick);
 }
 function seek(t){
-  pauseInternal();office=false;hoverScreen=false;stage.style.cursor='';
+  pauseInternal();office=false;hoverScreen=false;exitProgress=0;stage.style.cursor='';
   time=Math.max(0,Math.min(TIMES.duration,Number(t)||0));render();
 }
 function tick(now){
@@ -265,7 +273,7 @@ $('speed').addEventListener('change',e=>{speed=Number(e.target.value);last=null;
 $('view').addEventListener('click',()=>{pause();if(!drawGL)return;staticMode=false;office=!office;time=Math.max(time,9.75);render();});
 
 function monitorHit(x,y){
-  if(time<10.4||office||staticMode||!drawGL)return false;
+  if(time<10.4||office||staticMode||exitProgress||!drawGL)return false;
   let sign=0;
   for(let i=0;i<4;i++){
     const a=monitorPoints[i],b=monitorPoints[(i+1)%4];if(a[2]<=0||b[2]<=0)return false;
@@ -393,6 +401,7 @@ window.Rebuild={
   pause,
   play,
   replay:()=>{seek(0);play();},
+  setExitProgress:value=>{exitProgress=clamp(value);hoverScreen=false;stage.style.cursor='';render();},
   state:()=>({time,playing,office,speed,staticMode,beat,width,height,nativeScreenWidth,cloudLayerCount,screenSurface:drawGL?'webgl':'static',lensZoom:1,monitorPoints,hoverScreen,inViewport,hasEnteredOnce,pausedByOffscreen,userPaused}),
   data:{BRANCHES,RECORDS,TOTAL,TIMES},
   metrics,

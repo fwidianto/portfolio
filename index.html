@@ -17,8 +17,8 @@
   <!-- Chapter Styles -->
   <link rel="stylesheet" href="prototypes/new-portfolio-animation-first/chapter-01-hero.css">
   <link rel="stylesheet" href="prototypes/new-portfolio-animation-first/chapter-02.css?v=student_learning_v3">
-  <link rel="stylesheet" href="prototypes/new-portfolio-animation-first/chapter-03-scene-01.css">
-  <link rel="stylesheet" href="prototypes/new-portfolio-animation-first/chapter-03.css">
+  <link rel="stylesheet" href="prototypes/new-portfolio-animation-first/chapter-03-scene-01.css?v=ch03-monitor-init">
+  <link rel="stylesheet" href="prototypes/new-portfolio-animation-first/chapter-03.css?v=ch03-20261027-world">
   <link rel="stylesheet" href="prototypes/new-portfolio-animation-first/chapter-placeholders.css?v=ch03-20261017">
   <link rel="stylesheet" href="prototypes/new-portfolio-animation-first/left-nav.css">
   <link rel="canonical" href="https://www.fwidianto.com/">
@@ -4281,9 +4281,8 @@
       <span id="chapter-03-scene-05" class="ch03-route-anchor" aria-hidden="true"></span>
       <div class="ch03-night-sky" aria-hidden="true"><svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice"><circle cx="100" cy="175" r="1.1" fill="#e5d7c7" opacity="0.23"/><circle cx="225" cy="330" r="0.7" fill="#e5d7c7" opacity="0.11"/><circle cx="1140" cy="180" r="0.7" fill="#e5d7c7" opacity="0.23"/><circle cx="1250" cy="610" r="1.1" fill="#e5d7c7" opacity="0.11"/><circle cx="390" cy="745" r="0.7" fill="#e5d7c7" opacity="0.23"/><circle cx="1040" cy="770" r="0.7" fill="#e5d7c7" opacity="0.11"/><circle cx="80" cy="720" r="1.1" fill="#e5d7c7" opacity="0.23"/><circle cx="1360" cy="370" r="0.7" fill="#e5d7c7" opacity="0.11"/><circle cx="705" cy="116" r="0.7" fill="#e5d7c7" opacity="0.23"/><circle cx="920" cy="470" r="1.1" fill="#e5d7c7" opacity="0.11"/><circle cx="250" cy="105" r="0.7" fill="#e5d7c7" opacity="0.23"/></svg></div>
       <h2 class="sr-only">Working experience</h2>
-      <div id="ch03-stage" class="ch03-stage" tabindex="0" aria-label="Chapter III. Left and right arrows switch scenes. Space pauses or resumes the selected animation.">
-        <div class="ch03-scene-identity"><h3><span id="ch03-scene-number">03.01</span><span aria-hidden="true"> // </span><span id="ch03-scene-title">Service profitability</span></h3><p id="ch03-question">How does service activity become comparable performance?</p><span class="ch03-continuity" aria-hidden="true"></span></div>
-        <div class="ch03-explore"><span id="ch03-position" aria-label="Scene position">01 / 05</span><button id="ch03-primary-inspect" type="button" aria-haspopup="dialog">Inspect sample report ↗</button></div>
+      <div id="ch03-stage" class="ch03-stage" tabindex="0" aria-label="Chapter III. Left and right arrows switch scenes. Space pauses or resumes the selected animation. R resets the current scene.">
+        <div id="ch03-film-controls" class="ch03-film-controls" role="group" aria-label="Animation playback" hidden><button id="ch03-film-toggle" type="button">Pause</button><button id="ch03-film-replay" type="button">Replay</button></div>
         <div id="ch03-track" class="ch03-track">
           <div id="ch03-layer-1" class="ch03-scene-layer is-active" role="tabpanel" aria-labelledby="ch03-tab-1" data-ch03-managed="true">
     <section id="ch03-scene-01" class="chapter-03-scene-01" aria-label="Chapter 03 Scene 01: PT Traktor Nusantara — Service Profitability">
@@ -4339,13 +4338,18 @@
             <iframe id="ch03-scene03-frame" src="prototypes/new-portfolio-animation-first/scene-03/index.html?t=0&amp;embed=1&amp;chapter=1" title="Purchase request control animation" loading="eager"></iframe>
           </div>
           <div id="ch03-layer-4" class="ch03-scene-layer" role="tabpanel" aria-labelledby="ch03-tab-4" data-ch03-managed="true" inert aria-hidden="true">
-            <iframe id="ch03-scene04-frame" src="prototypes/new-portfolio-animation-first/scene-04/index.html?chapter=1" title="Multi-site operations reporting and HQ dashboard" loading="eager"></iframe>
+            <iframe id="ch03-scene04-frame" src="prototypes/new-portfolio-animation-first/scene-04/index.html?chapter=1&amp;v=ch03-20261027" title="Multi-site operations reporting and HQ dashboard" loading="eager"></iframe>
           </div>
           <div id="ch03-layer-5" class="ch03-scene-layer" role="tabpanel" aria-labelledby="ch03-tab-5" data-ch03-managed="true" inert aria-hidden="true">
             <iframe id="ch03-scene05-frame" src="prototypes/new-portfolio-animation-first/scene-05/warehouse/index.html?chapter=1" title="Interactive forklift warehouse and maintenance-contract economics" loading="eager"></iframe>
           </div>
         </div>
+        <div id="ch03-passage" class="ch03-passage" aria-hidden="true" hidden>
+          <div class="ch03-passage__glow"></div>
+          <svg class="ch03-passage__rays" viewBox="-500 -500 1000 1000" preserveAspectRatio="xMidYMid slice"></svg>
+        </div>
         <div class="scene-04__info-node" id="ch03-info-node">
+                <button id="ch03-continue" class="scene-04__inspect-btn ch03-continue" type="button" aria-label="Continue to Scene 2: fuel-card cost control" disabled hidden><span class="ch03-continue__signal" aria-hidden="true"></span><span class="hero-red-dwarf__info-label">Continue</span><span class="ch03-continue__arrow" aria-hidden="true">→</span></button>
                 <button type="button" class="scene-04__inspect-btn ch03-information" id="ch03-information" aria-haspopup="dialog" aria-expanded="false" aria-controls="ch03-info-dialog" aria-label="Project information" title="Project information">
                   <span class="hero-red-dwarf__info-indicator" aria-hidden="true">
                     <span class="hero-red-dwarf__info-core"></span>
@@ -4413,8 +4417,8 @@
   <script src="prototypes/new-portfolio-animation-first/chapter-02-scene-05.js"></script>
   <script src="prototypes/new-portfolio-animation-first/chapter-02.js?v=ch03-20261017"></script>
   <script src="prototypes/new-portfolio-animation-first/assets/indonesia-cartography.js"></script>
-  <script type="module" src="prototypes/new-portfolio-animation-first/film.js"></script>
-  <script src="prototypes/new-portfolio-animation-first/chapter-03.js?v=ch03-20261021-a12"></script>
+  <script type="module" src="prototypes/new-portfolio-animation-first/film.js?v=ch03-20261027-warp"></script>
+  <script src="prototypes/new-portfolio-animation-first/chapter-03.js?v=ch03-20261027-world"></script>
   <script src="prototypes/new-portfolio-animation-first/chapter-placeholders.js?v=ch03-20261017"></script>
   <script src="prototypes/new-portfolio-animation-first/left-nav.js?v=ch03-20261017"></script>
 </body>
