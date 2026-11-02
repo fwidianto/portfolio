@@ -33,7 +33,7 @@ function keyboard(event){
 document.addEventListener('keydown',keyboard,true);
 button.addEventListener('click',()=>{
  if(loading||entered)return;
- loading=true;button.disabled=true;button.setAttribute('aria-busy','true');status.textContent='Opening the warehouse…';
+ loading=true;button.disabled=true;button.setAttribute('aria-busy','true');status.textContent='';
  frame.hidden=false;frame.inert=true;frame.style.opacity='0';frame.src='./site-3d/?entry=guided';timeout=setTimeout(failed,20000);
 });
 addEventListener('message',async event=>{
