@@ -82,9 +82,11 @@
     code {
       background: rgba(31, 77, 90, 0.07);
       border-radius: 4px;
+      display: inline-block;
       font-size: 13px;
+      max-width: 100%;
+      overflow-wrap: anywhere;
       padding: 1px 5px;
-      word-break: break-all;
     }
 
     a { color: var(--accent); }
@@ -120,7 +122,9 @@
     <p>
       With the owner&rsquo;s explicit consent, the application requests a single Google
       permission:
-      <code>https://www.googleapis.com/auth/gmail.readonly</code>.
+    </p>
+    <p><code>https://www.googleapis.com/auth/gmail.readonly</code></p>
+    <p>
       This grants read-only access to Gmail messages. The application cannot send,
       delete, modify, or label mail.
     </p>
