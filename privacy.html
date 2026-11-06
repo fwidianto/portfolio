@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy - Gmail Reader - Fauzan Widianto</title>
+  <meta name="description" content="Privacy policy for the personal Gmail reader application operated by Fauzan Widianto." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/svg+xml" href="Assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f5ef;
+      --surface: #ffffff;
+      --text: #1f2933;
+      --muted: #5f6b76;
+      --accent: #1f4d5a;
+      --border: rgba(31, 41, 51, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      margin: 0;
+      padding: 56px 20px 88px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 18px 45px rgba(31, 41, 51, 0.07);
+      margin: 0 auto;
+      max-width: 720px;
+      padding: 44px 44px 48px;
+    }
+
+    .back {
+      color: var(--accent);
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin-bottom: 28px;
+      text-decoration: none;
+    }
+
+    h1 {
+      font-size: 30px;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin: 0 0 6px;
+    }
+
+    .updated {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 30px;
+    }
+
+    h2 {
+      font-size: 16px;
+      letter-spacing: 0.01em;
+      margin: 32px 0 10px;
+    }
+
+    p, li { font-size: 15px; }
+
+    p { margin: 0 0 12px; }
+
+    ul { margin: 0 0 12px; padding-left: 20px; }
+
+    li { margin-bottom: 6px; }
+
+    code {
+      background: rgba(31, 77, 90, 0.07);
+      border-radius: 4px;
+      font-size: 13px;
+      padding: 1px 5px;
+      word-break: break-all;
+    }
+
+    a { color: var(--accent); }
+
+    .contact {
+      border-top: 1px solid var(--border);
+      margin-top: 36px;
+      padding-top: 18px;
+    }
+
+    @media (max-width: 620px) {
+      body { padding: 24px 14px 56px; }
+      main { padding: 28px 22px 32px; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="/">&larr; fwidianto.com</a>
+
+    <h1>Privacy Policy</h1>
+    <p class="updated">Personal Gmail reader &middot; last updated 6 November 2026</p>
+
+    <p>
+      This policy covers a private Gmail reader operated by Fauzan Widianto. It is
+      registered with Google as the OAuth application
+      &ldquo;OpenCode Google Sheets&rdquo; and is used by its owner only. It is not
+      offered as a public service and has no other users.
+    </p>
+
+    <h2>What the application accesses</h2>
+    <p>
+      With the owner&rsquo;s explicit consent, the application requests a single Google
+      permission:
+      <code>https://www.googleapis.com/auth/gmail.readonly</code>.
+      This grants read-only access to Gmail messages. The application cannot send,
+      delete, modify, or label mail.
+    </p>
+
+    <h2>How the data is used</h2>
+    <p>
+      Message content is read in order to summarise incoming mail, identify items that
+      need a reply, and prepare draft text for the owner to review. Processing runs on
+      equipment the owner controls. Summaries and alerts may be delivered to messaging
+      channels the owner configures, such as WhatsApp or Telegram.
+    </p>
+
+    <h2>What is not done with the data</h2>
+    <ul>
+      <li>Gmail data is not sold or rented.</li>
+      <li>Gmail data is not used for advertising or profiling.</li>
+      <li>
+        Gmail data is not shared beyond the processing providers required to operate
+        the workflow, and those providers are bound by their own API data-use terms.
+      </li>
+    </ul>
+
+    <h2>Storage and retention</h2>
+    <p>
+      Retrieved message records and generated summaries are kept in the owner&rsquo;s
+      local files so the workflow can resume without re-reading the mailbox. The owner
+      can delete them at any time; deleting them does not affect the mailbox itself.
+    </p>
+
+    <h2>Revoking access</h2>
+    <p>
+      Access can be revoked at any time at
+      <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.
+      Revoking the grant, or deleting the stored OAuth credentials on the owner&rsquo;s
+      machine, ends all access immediately.
+    </p>
+
+    <h2>Limited Use</h2>
+    <p>
+      The use of information received from Google APIs adheres to the
+      <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+      including the Limited Use requirements.
+    </p>
+
+    <div class="contact">
+      <h2>Contact</h2>
+      <p><a href="mailto:fauzan.widianto41@gmail.com">fauzan.widianto41@gmail.com</a></p>
+    </div>
+  </main>
+</body>
+</html>
